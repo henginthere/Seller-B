@@ -1,7 +1,23 @@
 import "./App.css";
+import { Routes, Route } from 'react-router-dom';
+
+// import Main from './pages/Main/Main';
+import { 
+  Main,
+  ManagerMain,
+  ConsultantMain
+} from './pages/index'
 
 function App() {
-  return <div className='App'>APP</div>;
+  return(
+  <>
+    <Routes>
+      <Route path="/" element={<Main /> } />
+      <Route path="/manager/main" element={<ManagerMain /> } />
+      <Route path="/consultant/main" element={<ConsultantMain />} />
+    </Routes>
+  </>
+  )
 }
 
 export default App;
