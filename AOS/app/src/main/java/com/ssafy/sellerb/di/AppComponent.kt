@@ -4,15 +4,19 @@ import android.app.Application
 import com.ssafy.sellerb.SellerB
 import dagger.BindsInstance
 import dagger.Component
+import dagger.android.AndroidInjector
+import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
 @Singleton
 @Component(
     modules = [
-        FragmentBuildersModule::class,
-        MainActivityModule::class]
+        AndroidSupportInjectionModule::class,
+        AppModule::class
+    ]
 )
-interface AppComponent {
+interface AppComponent : AndroidInjector<SellerB> {
+
     @Component.Builder
     interface Builder{
         @BindsInstance
@@ -21,5 +25,5 @@ interface AppComponent {
         fun build(): AppComponent
     }
 
-    fun inject(sellerB: SellerB)
+    //fun inject(sellerB: SellerB)
 }

@@ -1,14 +1,13 @@
 package com.ssafy.sellerb
 
-import android.app.Activity
-import android.app.Application
+import com.ssafy.sellerb.di.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
-import dagger.android.DispatchingAndroidInjector
-import javax.inject.Inject
+import dagger.android.HasAndroidInjector
 
-class SellerB : DaggerApplication() {
-    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-        TODO("Not yet implemented")
-    }
+
+class SellerB : DaggerApplication(), HasAndroidInjector {
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> =
+        DaggerAppComponent.builder().application(this).build()
+
 }
