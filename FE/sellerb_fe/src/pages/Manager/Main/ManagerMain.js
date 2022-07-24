@@ -7,6 +7,7 @@ import React from "react";
 import ManagerMainLeft from "../../../components/Manager/ManagerMainLeft";
 import ManagerMainRight from "../../../components/Manager/ManagerMainRight";
 import NavBar from "../../../components/Common/NavBar/NavBar";
+import Footer from "../../../components/Common/footer";
 
 function ManagerMain() {
   const makeCenter = {
@@ -34,7 +35,9 @@ function ManagerMain() {
         <ManagerMainRight />
       </div>
       {/* footer */}
-      <div style={makeCenter}>footer</div>
+      <div style={makeCenter}>
+        <Footer />
+      </div>
     </div>
   );
 }

@@ -19,7 +19,7 @@ function ManagerMainRight() {
   const styleObj_right = {
     display: "flex",
     justifyContent: "flex-end",
-    marginRight: "100px",
+    margin: "50px",
   };
   const dummy_data = [
     {
@@ -61,12 +61,12 @@ function ManagerMainRight() {
 
   return (
     <div style={styleObj}>
-      <div style={styleObj_center}>ManagerMainRight</div>
       <div style={styleObj_right}>
         <Button variant='contained'>상담사 관리</Button>
       </div>
       <div style={styleObj_center}>
         {/* 상담사 리스트 */}
+        {/* Dummy Data 출력 */}
         <List sx={{ width: "100%" }}>{consultantList}</List>
       </div>
     </div>
