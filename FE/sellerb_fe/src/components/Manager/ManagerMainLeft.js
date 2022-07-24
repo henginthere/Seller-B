@@ -27,7 +27,6 @@ function ManagerMainLeft() {
 
   return (
     <div style={styleObj_WrapDiv}>
-      <div style={styleObj_Button}>ManagerMainLeft</div>
       <div style={welcome_text}>
         <h2 style={blue}>OOO</h2>
         <h2>님 환영합니다!</h2>
