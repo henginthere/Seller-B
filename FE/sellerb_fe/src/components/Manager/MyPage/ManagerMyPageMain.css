@@ -1,0 +1,10 @@
+#wrapper{
+    display:flex
+}
+
+#left{
+    width:35%
+}
+#right{
+    width:65%
+}

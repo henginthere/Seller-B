@@ -4,28 +4,20 @@
  *
  *  */
 import React from "react";
-import ManagerMainLeft from "../../../components/Manager/ManagerMainLeft";
-import ManagerMainRight from "../../../components/Manager/ManagerMainRight";
+import ManagerMainLeft from "../../../components/Manager/Main/ManagerMainLeft";
+import ManagerMainRight from "../../../components/Manager/Main/ManagerMainRight";
 import NavBar from "../../../components/Common/NavBar/NavBar";
 import Footer from "../../../components/Common/footer";
 
 function ManagerMain() {
-  const makeCenter = {
-    textAlign: "center",
-  };
-  const styleObj = {
-    width: "100%",
-    display: "flex",
-    flexDirection: "row",
-  };
 
   return (
-    <div style={makeCenter}>
+    <div className="center">
       {/* HeaderNavBar */}
       <nav>
         <NavBar></NavBar>
       </nav>
-      <div style={styleObj}>
+      <div id="wrapper">
         {/* 좌측 환영인사 및 달력, 회의생성 */}
 
         <ManagerMainLeft />
@@ -35,7 +27,7 @@ function ManagerMain() {
         <ManagerMainRight />
       </div>
       {/* footer */}
-      <div style={makeCenter}>
+      <div className="center">
         <Footer />
       </div>
     </div>
