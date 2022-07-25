@@ -6,7 +6,9 @@ import {
   Main,
   ManagerMain,
   ConsultantMain,
-  ManagerMyPage
+  ManagerMyPage,
+  ManagerRegister,
+  ManageRegister,
 } from './pages/index'
 
 function App() {
@@ -17,6 +19,7 @@ function App() {
       <Route path="/manager/main" element={<ManagerMain /> } />
       <Route path="/consultant/main" element={<ConsultantMain />} />
       <Route path="/manager/mypage" element={<ManagerMyPage />} />
+      <Route path="/manager/register" element={<ManageRegister />} />
     </Routes>
   </>
   )
