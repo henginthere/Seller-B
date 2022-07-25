@@ -55,11 +55,13 @@
     display: flex;
     margin-left: 100px;
     font-size: 12px;
+    text-decoration: none;
 }
 
 .manager-register {
     margin-right: 25px;
     text-shadow: grey 1px 0 10px;
+    text-decoration: none;
 }
 
 .reset-pssword {
