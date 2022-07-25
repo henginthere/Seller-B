@@ -5,7 +5,8 @@ import { Routes, Route } from 'react-router-dom';
 import { 
   Main,
   ManagerMain,
-  ConsultantMain
+  ConsultantMain,
+  ManagerMyPage
 } from './pages/index'
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
       <Route path="/" element={<Main /> } />
       <Route path="/manager/main" element={<ManagerMain /> } />
       <Route path="/consultant/main" element={<ConsultantMain />} />
+      <Route path="/manager/mypage" element={<ManagerMyPage />} />
     </Routes>
   </>
   )
