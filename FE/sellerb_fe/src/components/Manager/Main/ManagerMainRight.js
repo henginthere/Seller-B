@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import { ListItemText } from "@mui/material";
-
+import { Divider } from "@mui/material";
 
 function ManagerMainRight() {
   const styleObj = {
@@ -54,9 +54,12 @@ function ManagerMainRight() {
     },
   ];
   const consultantList = dummy_data.map((data) => (
+    <div>
     <ListItem alignItems='center'>
       <ListItemText primary={data.id} secondary={data.name} />
     </ListItem>
+    <Divider />
+    </div>
   ));
 
   return (

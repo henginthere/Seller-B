@@ -9,6 +9,7 @@ import ManagerMainRight from "../../../components/Manager/Main/ManagerMainRight"
 import NavBar from "../../../components/Common/NavBar/NavBar";
 import Footer from "../../../components/Common/Footer/footer";
 
+
 function ManagerMain() {
 
   return (
