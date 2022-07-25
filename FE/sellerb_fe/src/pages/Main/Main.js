@@ -69,7 +69,7 @@ function Main() {
                 marginLeft: 13,
                 width: 200,
               }}
-              > <Link to={'/manager/main'}>Login</Link>
+              > <Link to={'/manager/main'} className="link-to">Login</Link>
               </Button>
     
               <div className='FormControlLabel-wrapper'>
@@ -81,13 +81,13 @@ function Main() {
               관리자 로그인
               </div>
               <div className='register-resetPassword'>
-              <Link to="/manager/register">
+              <Link to="/manager/register" className="link-to">
                 <div className='manager-register'>
                   관리자 회원가입
                 </div>
                 </Link>
                 <div className='reset-pssword'>
-                  <Link to="#">
+                  <Link to="#" className="link-to">
                   비밀번호 재설정
                   </Link>
                   </div>

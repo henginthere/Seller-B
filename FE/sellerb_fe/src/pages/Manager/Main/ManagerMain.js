@@ -7,7 +7,7 @@ import React from "react";
 import ManagerMainLeft from "../../../components/Manager/Main/ManagerMainLeft";
 import ManagerMainRight from "../../../components/Manager/Main/ManagerMainRight";
 import NavBar from "../../../components/Common/NavBar/NavBar";
-import Footer from "../../../components/Common/Footer/footer";
+import Footer from "../../../components/Common/Footer/Footer";
 
 
 function ManagerMain() {
