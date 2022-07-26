@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -61,5 +62,11 @@ public class NoticeService {
         return seq;
 
 
+    }
+    public NoticeDto deleteNotice(Integer seq) {
+        Optional<Notice> noticeOptional = noticeRepository.findById(seq);
+        Notice notice = noticeOptional.get();
+        notice.setNoticeDelYn("Y");
+        return NoticeDto.from(notice);
     }
 }
