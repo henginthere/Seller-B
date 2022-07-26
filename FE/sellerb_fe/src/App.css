@@ -6,6 +6,8 @@
   font-weight: normal;
   font-style: normal;
 }
+@import '~antd/dist/antd.css';
+
 
 .App {
   text-align: center;
@@ -48,5 +50,6 @@
 
 .link-to {
   text-decoration: none;
+  font-family: twayair;
 }
 
