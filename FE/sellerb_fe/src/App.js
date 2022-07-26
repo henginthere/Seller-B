@@ -9,7 +9,10 @@ import {
   ManagerMyPage,
   ManageRegister,
   NoticeList,
-  NoticeWrite
+  NoticeWrite,
+  NoticeDetail,
+  NoticeEdit,
+  ConsultantList,
 } from './pages/index'
 
 function App() {
@@ -23,6 +26,9 @@ function App() {
       <Route path="/manager/register" element={<ManageRegister />} />
       <Route path="/manager/noticeList" element={<NoticeList /> } />
       <Route path="/manager/noticeWrite" element={<NoticeWrite/>} />
+      <Route path="/noticeDetail/:id" element={<NoticeDetail />} />
+      <Route path="/manager/consultantList" element={<ConsultantList/>} />
+      <Route path="/manager/noticeEdit" element={<NoticeEdit />} />
     </Routes>
   </>
   )

@@ -1,11 +1,12 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import styled from "styled-components";
 // import Axios from 'axios'
+// import { listNoticeApi } from "../../api/noticeApi";
 
-// 1. navbar, footer import
-import "./Notice.css";
+import "./NoticeList.css";
 import { Footer, NavBar } from "../../components/index";
-// calculate Date Util
+import customButton from '../../components/Common/customButton'
 import getStringDate from "../../utils/date";
 
 const dummyNoticeList = [
@@ -27,7 +28,9 @@ const dummyNoticeList = [
 ];
 
 function NoticeList() {
-  // search title
+  const navigate = useNavigate();  
+
+  const [noticeList, setNoticeList] = useState(""); // -> api res.data 로 값 갱신해주기
   const [searchTitle, setSearchTitle] = useState("");
 
   const onSearchByTitleHandler = (e) => {
@@ -39,6 +42,18 @@ function NoticeList() {
     console.log(searchTitle);
     // Axios
   };
+
+  // useEffect
+  // useEffect(()=>{
+  //   listNoticeApi()
+  //   .then((res)=>{
+  //     noticeList = res.data; 
+  //     console.log(res.data)
+  //   })
+  //   .catch((err)=>{
+  //     console.log(err);
+  //   })
+  // })
 
   return (
     <>
@@ -69,7 +84,7 @@ function NoticeList() {
                 return (
                   <tr>
                     <td>{ele.notice_seq}</td>
-                    <td>{ele.notice_title}</td>
+                    <td  onClick={() => navigate(`/noticeDetail/${ele.notice_seq}`)}>{ele.notice_title}</td>
                     <td>{ele.notice_reg_date}</td>
                   </tr>
                 );
@@ -79,8 +94,16 @@ function NoticeList() {
         </div>
         <div className="notice-write-wrapper">
           <Link to="/manager/noticeWrite">
+           
+          
             <button className="write-btn">글작성</button>
           </Link>
+              <customButton
+                name="글작성"
+                width="7rem"
+              height="2rem"
+              />
+            
         </div>
       </div>
       <Footer />
