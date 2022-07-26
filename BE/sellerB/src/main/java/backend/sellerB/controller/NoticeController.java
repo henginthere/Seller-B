@@ -52,9 +52,10 @@ public class NoticeController {
 //        return ResponseEntity.ok(noticeService.delete(seq));
 //    }
 
+    //soft delete
     @DeleteMapping("/{seq}")
-    public ResponseEntity<Integer> deleteOrder(@PathVariable Integer seq) {
+    public ResponseEntity<NoticeDto> deleteOrder(@PathVariable Integer seq) {
         // Access the DB and delete the order
-        return ResponseEntity.ok(noticeService.delete(seq));
+        return ResponseEntity.ok(noticeService.deleteNotice(seq));
     }
 }

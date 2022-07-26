@@ -1,9 +1,17 @@
 package backend.sellerB.entity;
 
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -11,6 +19,8 @@ import java.util.Objects;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@DynamicInsert
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "t_notice", schema = "sellerb", catalog = "")
 public class Notice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,19 +35,26 @@ public class Notice {
     private String noticeContent;
     @Basic
     @Column(name = "notice_del_yn")
-    private Byte noticeDelYn;
+    private String noticeDelYn;
+
+    @CreatedBy
     @Basic
     @Column(name = "notice_reg_user_seq")
-    private Integer noticeRegUserSeq;
+    private String noticeRegUserSeq;
+    @CreatedDate
     @Basic
     @Column(name = "notice_reg_date")
-    private Timestamp noticeRegDate;
+    private LocalDateTime noticeRegDate;
+
+    @LastModifiedBy
     @Basic
     @Column(name = "notice_mod_user_seq")
-    private Integer noticeModUserSeq;
+    private String noticeModUserSeq;
+
+    @LastModifiedDate
     @Basic
     @Column(name = "notice_mod_date")
-    private Timestamp noticeModDate;
+    private LocalDateTime noticeModDate;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "brand_seq")
     private Brand brandSeq;
