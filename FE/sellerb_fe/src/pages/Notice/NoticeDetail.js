@@ -17,6 +17,9 @@ const NoticeWrapper = styled.div`
 
 const NoticeDetail = () => {
   const params = useParams();
+ 
+  console.log(params.notice_seq);
+
   const navigate = useNavigate();
 
   const [readOnly, setReadOnly] = useState(true)

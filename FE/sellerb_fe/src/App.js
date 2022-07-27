@@ -13,6 +13,7 @@ import {
   NoticeDetail,
   NoticeEdit,
   ConsultantList,
+  ConsultantDetail,
 } from './pages/index'
 
 function App() {
@@ -27,8 +28,9 @@ function App() {
       <Route path="/manager/noticeList" element={<NoticeList /> } />
       <Route path="/manager/noticeWrite" element={<NoticeWrite/>} />
       <Route path="/noticeDetail/:id" element={<NoticeDetail />} />
-      <Route path="/manager/consultantList" element={<ConsultantList/>} />
       <Route path="/manager/noticeEdit" element={<NoticeEdit />} />
+      <Route path="/manager/consultantList" element={<ConsultantList />} />
+      <Route path="/manager/consultantDetail/:id" element={<ConsultantDetail />} />
     </Routes>
   </>
   )
