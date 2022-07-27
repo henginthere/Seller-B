@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import Axiso from "axios";
+import Axios from "axios";
 
 
 
@@ -22,13 +22,14 @@ const dummyData = [
   },
 ];
 
-function ConsultingLog() {
-//   const params = useParams();
-//   const [data, setData] = useState("");
+function ConsultingLog({consultant_id}) {
+  console.log(consultant_id)
+  const params = useParams();
+  const [data, setData] = useState("");
 
   // axios : 상담사 출결이력 표시
   // useEffect(() => {
-  //   listConsultingApi(params.consultant_id)
+  //   listConsultingApi({consultant_id})
   //     .then((res) => {
   //       console.log(res.data);
 
@@ -46,9 +47,9 @@ function ConsultingLog() {
         <table className="table-wrapper">
           <thead className="table-header-wrapper">
             <tr>
-              <th>출근날짜</th>
-              <th>출근시간</th>
-              <th>퇴근시간</th>
+              <th>{consultant_id}상담날짜</th>
+              <th>상담 시작시각 </th>
+              <th>상담 종료시각</th>
             </tr>
           </thead>
           <tbody>
