@@ -6,7 +6,7 @@ import styled from "styled-components";
 
 import "./NoticeList.css";
 import { Footer, NavBar } from "../../components/index";
-import customButton from '../../components/Common/customButton'
+
 import getStringDate from "../../utils/date";
 
 const dummyNoticeList = [
@@ -98,12 +98,7 @@ function NoticeList() {
           
             <button className="write-btn">글작성</button>
           </Link>
-              <customButton
-                name="글작성"
-                width="7rem"
-              height="2rem"
-              />
-            
+        
         </div>
       </div>
       <Footer />

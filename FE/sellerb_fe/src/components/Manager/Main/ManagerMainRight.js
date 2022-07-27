@@ -4,8 +4,13 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import { ListItemText } from "@mui/material";
 import { Divider } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
+
+import './ManagerMain.css'
 
 function ManagerMainRight() {
+  const navigate = useNavigate();
+
   const styleObj = {
     width: "75%",
     border: "solid 2px black",
@@ -21,56 +26,72 @@ function ManagerMainRight() {
     justifyContent: "flex-end",
     margin: "50px",
   };
-  const dummy_data = [
+
+  const tableHeader = {
+    display: "flex",
+    // textAlign: "center",
+    // justifyContent: "center",
+    backgroundColor: "grey",
+  }
+
+  const tableRow = {
+    
+  }
+
+  const tableData = {
+    justifyContent: "start"
+  }
+
+  // Name, 사번, 담당 제품군
+  const dummyNoticeList = [
     {
-      id: 1,
-      name: "김상담",
-      tel: "010-0000-0000",
+      consultant_name: "김상담",
+      consultant_id: "SPA123AA",
+      product_group_name: "에어컨",
     },
     {
-      id: 2,
-      name: "박상담",
-      tel: "010-0000-0000",
+      consultant_name: "박상담",
+      consultant_id: "SPA1CCC",
+      product_group_name: "전자레인지",
     },
     {
-      id: 3,
-      name: "배상담",
-      tel: "010-0000-0000",
-    },
-    {
-      id: 4,
-      name: "이상담",
-      tel: "010-0000-0000",
-    },
-    {
-      id: 5,
-      name: "신상담",
-      tel: "010-0000-0000",
-    },
-    {
-      id: 6,
-      name: "임상담",
-      tel: "010-0000-0000",
+      consultant_name: "임상담",
+      consultant_id: "SPMK332",
+      product_group_name: "냉장고",
     },
   ];
-  const consultantList = dummy_data.map((data) => (
-    <div>
-    <ListItem alignItems='center'>
-      <ListItemText primary={data.id} secondary={data.name} />
-    </ListItem>
-    <Divider />
-    </div>
-  ));
 
   return (
     <div style={styleObj}>
       <div style={styleObj_right}>
-        <Button variant='contained'>상담사 관리</Button>
+        <Link to="/manager/consultantList">
+          <Button variant="contained">상담사 관리</Button>
+        </Link>
       </div>
       <div style={styleObj_center}>
-        {/* 상담사 리스트 */}
-        {/* Dummy Data 출력 */}
-        <List sx={{ width: "100%" }}>{consultantList}</List>
+        <table className="table-wrapper">
+          <thead className="table-header-wrapper">
+            <tr>
+              <th>상담사 이름</th>
+              <th>사번</th>
+              <th>담당 제품군</th>
+            </tr>
+          </thead>
+          <tbody>
+            {dummyNoticeList.map(function (ele, i) {
+              return (
+                <>
+                  <tr>
+                  {/* <td  onClick={() => navigate(`/noticeDetail/${ele.notice_seq}`)}>{ele.notice_title}</td> */}
+                    <td onClick={()=> navigate(`/manager/consultantDetail/${ele.consultant_id}`)}>{ele.consultant_name}</td>
+                    <td>{ele.consultant_id}</td>
+                    <td>{ele.product_group_name}</td>
+                  </tr>
+                </>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
     </div>
   );

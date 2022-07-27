@@ -3,6 +3,7 @@ import React from "react";
 
 function Footer() {
   const styleObj = {
+    marginTop: "100px",
     width: "100%",
     height: "200px",
     textAlign: "center",
