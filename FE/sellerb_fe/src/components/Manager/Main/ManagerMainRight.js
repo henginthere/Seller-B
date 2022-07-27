@@ -61,6 +61,10 @@ function ManagerMainRight() {
     },
   ];
 
+  const goDetail = (id)=>{
+    navigate(`/manager/consultantDetail/${id}`);
+  }
+
   return (
     <div style={styleObj}>
       <div style={styleObj_right}>
@@ -83,7 +87,8 @@ function ManagerMainRight() {
                 <>
                   <tr>
                   {/* <td  onClick={() => navigate(`/noticeDetail/${ele.notice_seq}`)}>{ele.notice_title}</td> */}
-                    <td onClick={()=> navigate(`/manager/consultantDetail/${ele.consultant_id}`)}>{ele.consultant_name}</td>
+                    {/* <td onClick={()=> navigate(`/manager/consultantDetail/${ele.consultant_id}`)}>{ele.consultant_name}</td> */}
+                    <td onClick={goDetail(ele.consultant_id)}>{ele.consultant_name}</td>
                     <td>{ele.consultant_id}</td>
                     <td>{ele.product_group_name}</td>
                   </tr>

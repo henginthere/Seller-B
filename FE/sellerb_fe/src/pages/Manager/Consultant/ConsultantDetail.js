@@ -7,14 +7,16 @@ import "./ConsultantDetail.css";
 import { Footer, NavBar } from "../../../components/index";
 import AttendanceLog from "../../../components/Log/AttendanceLog";
 import ConsultingLog from "../../../components/Log/ConsultingLog";
-import Test from '../../../components/Log/Test'
+// import Test from '../../../components/Log/Test'
 
 import {
   detailConsultantApi,
 } from "../../../api/consultantApi";
 
 function ConsultantDetail() {
-  const params = useParams();
+  const { id } = useParams();
+  console.log(id)
+
   const navigate = useNavigate();
 
   // useEffect - 상담사 프로필 정보 / 상담사 출결이력 정보
@@ -30,28 +32,27 @@ function ConsultantDetail() {
  
   const dummyData = [];
   // useEffect : axios 상담사 프로필에 넣을 정보
-//   useEffect(() => {
-//     detailConsultantApi(params.consultant_id)
-//     .then((res)=>{
-//         console.log(res.data);
-        
-//         // consultant = res.data;
-//         setConsultant(res.data); 
-        
-//     })
-//     .catch((err)=>{
-//         console.log(err);
-//     })
-//   }, []);
+  //   useEffect(() => {
+  //     detailConsultantApi(id)
+  //     .then((res)=>{
+  //         console.log(res.data);
+          
+  //         // consultant = res.data;
+  //         setConsultant(res.data); 
+          
+  //     })
+  //     .catch((err)=>{
+  //         console.log(err);
+  //     })
+  //   }, []);
 
  function ConsultantLog (props) {
     if(logOption === '출결이력'){
-        console.log(params.consultant_id);
-        console.log(props.consultant_id)
-        return <AttendanceLog consultant_id = {props.consultant_id} />
+        // console.log(params.consultants
+        return <AttendanceLog consultant_id = {id} />
     }
     else{
-        return <Test consultant_id = {props.consultant_id}/>
+        return <ConsultingLog consultant_id = {id} />
     }
  }
 
@@ -92,8 +93,7 @@ function ConsultantDetail() {
             </select>
           </div>
           <div className="attendance-log">
-            {/* <Attendance /> */}
-            <ConsultantLog consultant_id = {params.consultant_id} />
+            <ConsultantLog consultant_id = {id} />
           </div>
         </div>
       </div>
