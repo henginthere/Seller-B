@@ -4,7 +4,7 @@ import NavBar from "../../../components/Common/NavBar/NavBar";
 import Footer from "../../../components/Common/Footer/Footer";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import Input from "@mui/material/Input";
+
 function ManagerMyPage() {
   // 초기 더미 데이터
   const dummy_data = {
@@ -19,7 +19,7 @@ function ManagerMyPage() {
   // 비동기로 처리하기 위함. useState로 바로바로 적용!
   const [isModify, setModify] = useState(false);
   // 수정된 데이터  --> data
-  const [data, setData] = useState(dummy_data);
+  var data = { ...dummy_data };
   // 수정 페이지 인지 아닌지 바꿔주는 함수
   const ChangeToModify = () => {
     setModify(!isModify);
@@ -27,7 +27,7 @@ function ManagerMyPage() {
   };
 
   const cancelModify = () => {
-    setData({ ...dummy_data });
+    data = { ...dummy_data };
     ChangeToModify();
   };
   // 최종적으로 수정 완료 버튼을 누르면 api로 DB에 반영하기 위한 함수
@@ -35,20 +35,18 @@ function ManagerMyPage() {
     e.preventDefault();
 
     alert("수정하시겠습니까?");
-    console.log("id" + e.id);
-    console.log("pw" + e.pw);
-    console.log("tel" + e.tel);
-    console.log("email" + e.email);
+
     // 임시로 메인으로 돌아가게 함
-    console.log(data);
-    console.log(dummy_data);
+    console.log("이전 데이터 : " + dummy_data);
+    console.log("바뀐 데이터 : " + data);
     ChangeToModify();
   };
   // 바뀔때마다 setData로 수정된 데이터로 바꿔줌
   const handleChange = (e) => {
     e.preventDefault();
-    const { name, value } = e.target;
-    setData({ ...data, [name]: value });
+    // console.log("handleChange!");
+    data[e.target.name] = e.target.value;
+    // console.log(e.target.name + " : " + e.target.value);
   };
 
   // 그냥 My Page 컴포넌트
@@ -83,7 +81,7 @@ function ManagerMyPage() {
           <div className="InfoTextField">
             <TextField
               label="PW"
-              defaultValue={dummy_data.pw}
+              value={dummy_data.pw}
               InputProps={{
                 readOnly: true,
               }}
@@ -94,7 +92,7 @@ function ManagerMyPage() {
           <div className="InfoTextField">
             <TextField
               label="Tel."
-              defaultValue={dummy_data.tel}
+              value={dummy_data.tel}
               InputProps={{
                 readOnly: true,
               }}
@@ -105,7 +103,7 @@ function ManagerMyPage() {
           <div className="InfoTextField">
             <TextField
               label="Email"
-              defaultValue={dummy_data.email}
+              value={dummy_data.email}
               InputProps={{
                 readOnly: true,
               }}
@@ -163,11 +161,9 @@ function ManagerMyPage() {
               label="PW"
               defaultValue={data.pw}
               type="password"
-              InputProps={{
-                readOnly: !{ isModify },
-              }}
               fullWidth="true"
               name="pw"
+              onChange={handleChange}
             />
           </div>
           <div className="InfoTextField">
@@ -175,12 +171,9 @@ function ManagerMyPage() {
               required
               label="Tel."
               defaultValue={data.tel}
-              InputProps={{
-                readOnly: !{ isModify },
-              }}
               fullWidth="true"
               name="tel"
-              //   onChange={handleChange}
+              onChange={handleChange}
             />
           </div>
 
@@ -194,7 +187,7 @@ function ManagerMyPage() {
               }}
               fullWidth="true"
               name="email"
-              //   onChange={handleChange}
+              onChange={handleChange}
             />
           </div>
           <div className="Button">
