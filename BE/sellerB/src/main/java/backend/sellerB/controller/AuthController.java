@@ -24,11 +24,9 @@ public class AuthController {
     private final ManagerRepository managerRepository;
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
      //로그인을 했을때 토큰(AccessToken, RefreshToken)을 주는 메서드
-    @PostMapping("/authenticate")
+    @PostMapping("/login")
     public ResponseEntity<TokenDto> login(@Valid @RequestBody LoginDto loginDto) {
-        logger.info(loginDto.getId()+"###################");
         TokenDto tokenDto = authService.authorize(loginDto.getId(), loginDto.getPass());
-        logger.info(loginDto.getId()+"#############");
         return ResponseEntity.ok(tokenDto);
     }
 

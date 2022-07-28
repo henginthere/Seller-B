@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -30,7 +31,7 @@ public class TokenProvider implements InitializingBean {
 
     private final Logger logger = LoggerFactory.getLogger(TokenProvider.class);
     private final ManagerRepository managerRepository;
-    private static final String AUTHORITIES_KEY = "role";
+    private static final String AUTHORITIES_KEY = "auth";
 
     private final String secret;
     private final long accessTokenValidityInMilliseconds ;
@@ -60,17 +61,21 @@ public class TokenProvider implements InitializingBean {
 
         Manager manager = managerRepository.findBymanagerId(id).orElseThrow(()->new ManagerNotFoundException("가입되지 않은 정보입니다."));
 
-        //claim에 id정보 추가
+        //claim에 managerSeq정보 추가
         String accessToken = Jwts.builder()
-                .claim("id", manager.getManagerId())
+                .claim("managerSeq", manager.getManagerSeq())
                 .claim(AUTHORITIES_KEY, authorities)
                 .setExpiration(new Date(now + accessTokenValidityInMilliseconds))
                 .signWith(key, SignatureAlgorithm.HS512)
                 .compact();
 
+        HttpHeaders httpHeaders = new HttpHeaders();
+        // jwt를 response header에 넣어줌
+        httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + accessToken);
+
         String refreshToken = Jwts.builder()
                 .claim(AUTHORITIES_KEY, authorities)
-                .claim("id", manager.getManagerId())
+                .claim("managerSeq", manager.getManagerSeq())
                 .setExpiration(new Date(now + refreshTokenValidityInMilliseconds))
                 .signWith(key, SignatureAlgorithm.HS512)
                 .compact();
@@ -95,7 +100,7 @@ public class TokenProvider implements InitializingBean {
                 Arrays.stream(claims.get(AUTHORITIES_KEY).toString().split(","))
                         .map(SimpleGrantedAuthority::new)
                         .collect(Collectors.toList());
-        return new UsernamePasswordAuthenticationToken(claims.get("id"), token, authorities);
+        return new UsernamePasswordAuthenticationToken(claims.get("managerSeq"), token, authorities);
     }
     /*
      * 토큰 유효성 검사하는 메서드
@@ -121,6 +126,19 @@ public class TokenProvider implements InitializingBean {
 //            logger.info("이미 탈퇴한 회원입니다.");
 //        }
         return false;
+    }
+
+    public Claims getClaims(String token) {
+        try {
+            return Jwts
+                    .parserBuilder()
+                    .setSigningKey(key)
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+        } catch (ExpiredJwtException e) {
+            return e.getClaims();
+        }
     }
 
 }
