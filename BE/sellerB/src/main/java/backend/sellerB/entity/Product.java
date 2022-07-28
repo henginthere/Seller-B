@@ -1,5 +1,6 @@
 package backend.sellerB.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.springframework.data.annotation.CreatedBy;
@@ -27,8 +28,9 @@ public class Product {
     @Id
     @Column(name = "product_seq")
     private int productSeq;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "product_group_seq", nullable = false)
+    @JsonBackReference
     private ProductGroup productGroup;
     @Basic
     @Column(name = "product_id")
