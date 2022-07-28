@@ -1,8 +1,8 @@
 import "./App.css";
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route } from "react-router-dom";
 
 // import Main from './pages/Main/Main';
-import { 
+import {
   Main,
   ManagerMain,
   ConsultantMain,
@@ -14,26 +14,31 @@ import {
   NoticeEdit,
   ConsultantList,
   ConsultantDetail,
-} from './pages/index'
+  ConsultantMyPage,
+} from "./pages/index";
 
 function App() {
-  return(
-  <>
-    <Routes>
-      <Route path="/" element={<Main /> } />
-      <Route path="/manager/main" element={<ManagerMain /> } />
-      <Route path="/consultant/main" element={<ConsultantMain />} />
-      <Route path="/manager/mypage" element={<ManagerMyPage />} />
-      <Route path="/manager/register" element={<ManageRegister />} />
-      <Route path="/manager/noticeList" element={<NoticeList /> } />
-      <Route path="/manager/noticeWrite" element={<NoticeWrite/>} />
-      <Route path="/noticeDetail/:id" element={<NoticeDetail />} />
-      <Route path="/manager/noticeEdit" element={<NoticeEdit />} />
-      <Route path="/manager/consultantList" element={<ConsultantList />} />
-      <Route path="/manager/consultantDetail/:id" element={<ConsultantDetail />} />
-    </Routes>
-  </>
-  )
+  return (
+    <>
+      <Routes>
+        <Route path='/' element={<Main />} />
+        <Route path='/manager/main' element={<ManagerMain />} />
+        <Route path='/consultant/main' element={<ConsultantMain />} />
+        <Route path='/manager/mypage' element={<ManagerMyPage />} />
+        <Route path='/manager/register' element={<ManageRegister />} />
+        <Route path='/manager/noticeList' element={<NoticeList />} />
+        <Route path='/manager/noticeWrite' element={<NoticeWrite />} />
+        <Route path='/noticeDetail/:id' element={<NoticeDetail />} />
+        <Route path='/manager/noticeEdit' element={<NoticeEdit />} />
+        <Route path='/manager/consultantList' element={<ConsultantList />} />
+        <Route
+          path='/manager/consultantDetail/:id'
+          element={<ConsultantDetail />}
+        />
+        <Route path='/consultant/mypage' element={<ConsultantMyPage />} />
+      </Routes>
+    </>
+  );
 }
 
 export default App;
