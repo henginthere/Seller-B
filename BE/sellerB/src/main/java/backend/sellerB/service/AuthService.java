@@ -29,19 +29,17 @@ public class AuthService {
     // 로그인 관련 메서드
     public TokenDto authorize(String id, String password) {
 
-        logger.info(id+"############");
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(id, password);
-        logger.info(authenticationToken.getName()+"여기까지############");
         //실제 검증이 일어나는 부분
         //authenticate 메서드가 실행될 때
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        logger.info(authentication.getName()+"왜 여기는,,,############");
         String authorities = getAuthorities(authentication);
 
         TokenDto tokenDto = tokenProvider.createToken(authentication.getName(), authorities);
 
+        logger.info("권한 : "+authorities);
         logger.info("토큰 발급 :"+tokenDto.getAccessToken());
         return tokenProvider.createToken(authentication.getName(), authorities);
     }
