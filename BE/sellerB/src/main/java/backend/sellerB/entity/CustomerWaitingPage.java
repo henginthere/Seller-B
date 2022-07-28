@@ -1,7 +1,7 @@
 package backend.sellerB.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -9,14 +9,18 @@ import java.util.Objects;
 @Entity
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "t_customer_waiting_page", schema = "sellerb", catalog = "")
 public class CustomerWaitingPage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "customer_waiting_page_seq")
     private int customerWaitingPageSeq;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "product_seq")
+    @JsonBackReference
     private Product product;
     @Basic
     @Column(name = "customer_waiting_page_ment")
