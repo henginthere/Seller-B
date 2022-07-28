@@ -58,7 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
 
                 .exceptionHandling()//예외처리 기능 수행
-                .authenticationEntryPoint((AuthenticationEntryPoint) jwtAuthenticationEntryPoint)//인증 실패 진입점
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint)//인증 실패 진입점
                 .accessDeniedHandler(jwtAccessDeniedHandler)//인가 실패 진입점
 
                 //세션 사용하지 않기때문에 STATELESS사용
@@ -69,9 +69,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/manager/register").permitAll()
-                .antMatchers("/login").permitAll()
-                .antMatchers("/reissue").permitAll()
-                .antMatchers("/**").permitAll()
+                .antMatchers("/manager/login").permitAll()
+                .antMatchers("/api/**").permitAll()
+                .antMatchers("/admin/**").hasRole("ADMIN") //ADMIN 권한만 접근 가능(나중에 manager/consultant 권한 나눌때 사용)
+                .antMatchers("/notice/**").hasRole("ADMIN")
 
                 .anyRequest().authenticated()
 
