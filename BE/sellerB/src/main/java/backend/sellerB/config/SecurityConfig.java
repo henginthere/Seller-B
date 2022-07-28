@@ -69,9 +69,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/manager/register").permitAll()
-                .antMatchers("/login").permitAll()
-                .antMatchers("/reissue").permitAll()
-                .antMatchers("/**").permitAll()
+                .antMatchers("/manager/login").permitAll()
+                .antMatchers("/api/**").permitAll()
+                .antMatchers("/admin/**").hasRole("ADMIN") //ADMIN 권한만 접근 가능(나중에 manager/consultant 권한 나눌때 사용)
 
                 .anyRequest().authenticated()
 
