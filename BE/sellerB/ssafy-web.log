@@ -1,0 +1,47 @@
+2022-07-26 11:20:51.511  INFO 16492 --- [restartedMain] backend.sellerB.SellerBApplication       : Starting SellerBApplication using Java 11.0.16 on DESKTOP-KVCQHCD with PID 16492 (C:\Users\multicampus\Desktop\ljh\공통\backend\sellerB\build\classes\java\main started by multicampus in C:\Users\multicampus\Desktop\ljh\공통\backend\sellerB)
+2022-07-26 11:20:51.516  INFO 16492 --- [restartedMain] backend.sellerB.SellerBApplication       : No active profile set, falling back to 1 default profile: "default"
+2022-07-26 11:20:51.574  INFO 16492 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-07-26 11:20:51.575  INFO 16492 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-07-26 11:20:52.291  INFO 16492 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-07-26 11:20:52.344  INFO 16492 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 44 ms. Found 2 JPA repository interfaces.
+2022-07-26 11:20:52.937  INFO 16492 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-07-26 11:20:52.947  INFO 16492 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-07-26 11:20:52.947  INFO 16492 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2022-07-26 11:20:53.026  INFO 16492 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-07-26 11:20:53.026  INFO 16492 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1451 ms
+2022-07-26 11:20:53.146  INFO 16492 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-07-26 11:20:53.199  INFO 16492 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.10.Final
+2022-07-26 11:20:53.347  INFO 16492 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-07-26 11:20:53.440  INFO 16492 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-07-26 11:20:53.701  INFO 16492 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-07-26 11:20:53.714  INFO 16492 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL57Dialect
+2022-07-26 11:20:54.876  INFO 16492 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-07-26 11:20:54.888  INFO 16492 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-07-26 11:20:55.482  WARN 16492 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-07-26 11:20:55.838 DEBUG 16492 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2022-07-26 11:20:55.978 DEBUG 16492 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 3 mappings in 'requestMappingHandlerMapping'
+2022-07-26 11:20:56.016 DEBUG 16492 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2022-07-26 11:20:56.028 DEBUG 16492 --- [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2022-07-26 11:20:56.211  WARN 16492 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 49b3ef8f-2c3d-478b-b02a-f2dd97d747c9
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2022-07-26 11:20:56.631  INFO 16492 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@3c67603, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@73a373f6, org.springframework.security.web.context.SecurityContextPersistenceFilter@25f81290, org.springframework.security.web.header.HeaderWriterFilter@5ec3720, org.springframework.security.web.csrf.CsrfFilter@60d4995a, org.springframework.security.web.authentication.logout.LogoutFilter@1d7f4e1f, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@6038da03, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@5b65fece, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@5fdc3a22, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@1c44647b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2cad5920, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@75f9a97, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@ae5cd94, org.springframework.security.web.session.SessionManagementFilter@22fdf6be, org.springframework.security.web.access.ExceptionTranslationFilter@7757e67b, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@9f5c6d0]
+2022-07-26 11:20:56.763  INFO 16492 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-07-26 11:20:56.854  INFO 16492 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-07-26 11:20:56.886  INFO 16492 --- [restartedMain] backend.sellerB.SellerBApplication       : Started SellerBApplication in 5.822 seconds (JVM running for 7.198)
+2022-07-26 11:24:28.735  INFO 16492 --- [http-nio-127.0.0.1-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-07-26 11:24:28.736  INFO 16492 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-07-26 11:24:28.736 DEBUG 16492 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2022-07-26 11:24:28.736 DEBUG 16492 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+2022-07-26 11:24:28.737 DEBUG 16492 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected FixedThemeResolver
+2022-07-26 11:24:28.738 DEBUG 16492 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@64d09edd
+2022-07-26 11:24:28.738 DEBUG 16492 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@6fbcfc7
+2022-07-26 11:24:28.738 DEBUG 16492 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2022-07-26 11:24:28.738  INFO 16492 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2022-07-26 11:24:29.221  WARN 16492 --- [http-nio-127.0.0.1-8080-exec-1] o.a.c.util.SessionIdGeneratorBase        : Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [445] milliseconds.
+2022-07-26 11:26:11.995  INFO 16492 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-07-26 11:26:12.000  INFO 16492 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-07-26 11:26:12.013  INFO 16492 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
