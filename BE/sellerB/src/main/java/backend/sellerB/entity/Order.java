@@ -1,5 +1,6 @@
 package backend.sellerB.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,8 +17,9 @@ public class Order {
     @Id
     @Column(name = "order_seq")
     private int orderSeq;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "addr_seq")
+    @JsonBackReference
     private Address addr;
     @Basic
     @Column(name = "order_date")

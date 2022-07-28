@@ -1,5 +1,6 @@
 package backend.sellerB.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.springframework.data.annotation.CreatedBy;
@@ -10,6 +11,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -55,6 +58,9 @@ public class Brand {
     @Column(name = "brand_mod_date")
     private Timestamp brandModDate;
 
+    @OneToMany(mappedBy = "brand")
+    @JsonManagedReference
+    private List<ProductGroup> productGroups = new ArrayList<ProductGroup>();
 
     @Override
     public boolean equals(Object o) {
