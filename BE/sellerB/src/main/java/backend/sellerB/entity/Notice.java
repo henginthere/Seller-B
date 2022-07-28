@@ -1,5 +1,6 @@
 package backend.sellerB.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
@@ -55,8 +56,9 @@ public class Notice {
     @Basic
     @Column(name = "notice_mod_date")
     private LocalDateTime noticeModDate;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "brand_seq")
+    @JsonBackReference
     private Brand brandSeq;
 
 
