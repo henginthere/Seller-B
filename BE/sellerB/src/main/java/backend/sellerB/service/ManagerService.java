@@ -9,6 +9,7 @@ import backend.sellerB.repository.ManagerRepository;import backend.sellerB.repos
 import backend.sellerB.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +21,8 @@ import java.util.Collections;
 public class ManagerService {
 
     private final ManagerRepository managerRepository;
+
+    private final PasswordEncoder passwordEncoder;
 
     private final AuthorityRepository authorityRepository;
 
@@ -41,7 +44,7 @@ public class ManagerService {
         Manager manager = Manager.builder()
                 .managerId(managerDto.getManagerId())
                 .managerName(managerDto.getManagerName())
-                .managerPass(managerDto.getManagerPass())
+                .managerPass(passwordEncoder.encode(managerDto.getManagerPass()))
                 .managerTel(managerDto.getManagerTel())
                 .managerEmail(managerDto.getManagerEmail())
                 .authorities(Collections.singleton(authority))

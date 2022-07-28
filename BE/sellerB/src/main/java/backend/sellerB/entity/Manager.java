@@ -62,6 +62,8 @@ public class Manager implements Serializable {
     @Column(name = "manager_mod_date")
     private Timestamp managerModDate;
 
+
+
     public <T> Manager(String valueOf, String managerPass, Set<T> singleton) {
     }
 
