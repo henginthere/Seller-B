@@ -1,0 +1,48 @@
+.notice-write-header {
+    font-size: 25px;
+    font-family: twayair;
+    color: #324E66;
+    padding: 1.5rem;
+
+    text-align: center;
+    /* margin-right: 300px; */
+}
+
+.write-form-wrapper {
+   align-items: center;
+  
+   display: flex;
+   flex-direction: column;
+}
+
+.write-input-title{
+    /* width: 600px; */
+    max-width: 700px;
+}
+
+.write-title {
+    width: 500px;
+    
+}
+
+.write-input-content {
+
+}
+
+.write-content {
+    width: 500px;
+    height: 250px;
+
+    
+}
+
+.btns-wrapper {
+    display: flex;
+    
+}
+
+/* .btns-wrapper .back-btn {
+    align-items: flex-start;
+    width: 10%;
+} */
+
