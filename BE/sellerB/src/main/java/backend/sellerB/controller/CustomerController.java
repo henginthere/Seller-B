@@ -40,7 +40,6 @@ public class CustomerController {
 
     @DeleteMapping("/{seq}")
     public ResponseEntity<CustomerDto> deleteCustomer(@PathVariable Integer seq) {
-        // Access the DB and delete the order
         return ResponseEntity.ok(customerService.deleteCustomer(seq));
     }
 }
