@@ -65,7 +65,7 @@ public class Product {
     @LastModifiedDate
     @Basic
     @Column(name = "product_mod_date")
-    private Timestamp productModDate;
+    private LocalDateTime productModDate;
 
 
     @Override
