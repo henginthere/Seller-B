@@ -1,0 +1,34 @@
+.body-wrapper {
+    display: flex;
+    /* background-color: brown; */
+    /* border: 2px solid brown; */
+    /* border-color: brown; */
+}
+
+.element-wrapper {
+    width: 20%;
+    border: 2px solid brown;
+    margin-left: 40px;
+    margin-right: 40px;
+    /* display: flex; */
+
+    /* width: 100%; */
+    /* height: 200px; */
+}
+
+.element-wrapper > img {
+    width: 80%;
+    /* height: 2; */
+    /* margin-left: 150px;
+    margin-right: 150px; */
+    margin-left: 10%;
+    margin-bottom: 15px;
+    /* padding-left: 30px; */
+}
+
+.element-wrapper .product-info {
+    display: flex;
+
+    margin-top: 10px;
+
+}

@@ -44,6 +44,9 @@
     margin-right: 100px;
 
     background-color:beige;
-    height: 300px; 
+    max-width: 100%;
+    flex-wrap: nowrap;
+    align-content: stretch;
+    height: auto; 
     background-color: yello;
 }
