@@ -18,7 +18,7 @@ import java.util.Optional;
 public class CustomerService {
     private final CustomerRepository customerRepository;
 
-    public CustomerDto create(CustomerDto customerDto) {
+    public CustomerDto createCustomer(CustomerDto customerDto) {
         Customer customer = Customer.builder()
                 .customerId(customerDto.getCustomerId())
                 .customerName(customerDto.getCustomerName())
@@ -42,7 +42,7 @@ public class CustomerService {
         return CustomerDto.from(customer);
     }
 
-    public CustomerDto update(Integer seq, CustomerDto customerDto) {
+    public CustomerDto updateCustomer(Integer seq, CustomerDto customerDto) {
         Optional<Customer> customerOptional = customerRepository.findById(seq);
         Customer customer = customerOptional.get();
         customer.setCustomerId(customerDto.getCustomerId());
