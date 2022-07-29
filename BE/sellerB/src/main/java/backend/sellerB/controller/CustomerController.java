@@ -20,7 +20,7 @@ public class CustomerController {
 
     @PostMapping
     public ResponseEntity<CustomerDto> saveCustomer(@Valid @RequestBody CustomerDto customerDto) {
-        return ResponseEntity.ok(customerService.create(customerDto));
+        return ResponseEntity.ok(customerService.createCustomer(customerDto));
     }
 
     @GetMapping("/{seq}")
@@ -35,7 +35,7 @@ public class CustomerController {
 
     @PutMapping("/{seq}")
     public ResponseEntity<CustomerDto> updateCustomer(@Valid @RequestBody CustomerDto customerDto, @PathVariable Integer seq) {
-        return ResponseEntity.ok(customerService.update(seq, customerDto));
+        return ResponseEntity.ok(customerService.updateCustomer(seq, customerDto));
     }
 
     @DeleteMapping("/{seq}")
