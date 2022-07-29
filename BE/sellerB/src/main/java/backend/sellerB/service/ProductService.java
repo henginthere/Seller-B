@@ -44,7 +44,7 @@ public class ProductService {
         product.setProductGroup(productDto.getProductGroup());
         product.setProductPrice(productDto.getProductPrice());
         product.setProductManual(productDto.getProductManual());
-        product.setProductThumbnail(product.getProductThumbnail());
+        product.setProductThumbnail(productDto.getProductThumbnail());
         return ProductDto.from(product);
     }
 
