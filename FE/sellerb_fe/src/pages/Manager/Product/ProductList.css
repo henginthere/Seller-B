@@ -1,0 +1,49 @@
+
+.page-title {
+    font-size: 25px;
+    font-family: twayair;
+    color: #324E66;
+    padding: 1.5rem;
+}
+
+.product-list {
+
+}
+
+.page-navi-wrapper{
+    height: 30%;
+    background-color: grey;
+
+    display: flex;
+}
+
+.navi-left {
+    justify-content: start;
+    width: 50%;
+
+    margin-left: 10%;
+}
+
+.navi-right {
+    justify-content: end;
+    display: flex;
+    width: 50%;
+
+    margin-right: 10%;
+}
+
+.navi-right > input {
+    border-radius: 10px;
+    border: none;
+    background-color: antiquewhite;
+}
+
+
+.product-list-wrapper {
+    margin-left: 100px;
+    margin-right: 100px;
+
+    background-color:beige;
+    height: 300px; 
+    background-color: yello;
+}

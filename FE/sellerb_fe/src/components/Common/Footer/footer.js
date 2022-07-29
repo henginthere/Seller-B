@@ -9,9 +9,9 @@ function Footer() {
     textAlign: "center",
     backgroundColor: "lightgray",
     display: "flex",
-    // Footer 하단 고정 
-    position: "absolute",
-    bottom: "0",
+    // // Footer 하단 고정 
+    // position: "absolute",
+    // bottom: "0",
  
   };
   const styleObj_content = {
