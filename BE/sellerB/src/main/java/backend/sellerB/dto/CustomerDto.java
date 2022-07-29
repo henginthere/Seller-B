@@ -15,28 +15,28 @@ import java.util.List;
 @AllArgsConstructor
 public class CustomerDto {
     //token이랑 password 따로 처리 필요
-    private String CustomerId;
-    private String CustomerName;
-    private String CustomerPass;
-    private String CustomerEmail;
-    private String CustomerGender;
-    private String CustomerTel;
-    private String CustomerAddr;
-    private Timestamp CustomerBirth;
-    private String CustomerToken;
+    private String customerId;
+    private String customerName;
+    private String customerPass;
+    private String customerEmail;
+    private String customerGender;
+    private String customerTel;
+    private String customerAddr;
+    private Timestamp customerBirth;
+    private String customerToken;
 
     public static CustomerDto from(Customer customer) {
         if(customer == null) return null;
         return CustomerDto.builder()
-                .CustomerId(customer.getCustomerId())
-                .CustomerName(customer.getCustomerName())
-                .CustomerPass(customer.getCustomerPass())
-                .CustomerEmail(customer.getCustomerEmail())
-                .CustomerGender(customer.getCustomerGender())
-                .CustomerTel(customer.getCustomerTel())
-                .CustomerAddr(customer.getCustomerAddr())
-                .CustomerBirth(customer.getCustomerBirth())
-                .CustomerToken(customer.getCustomerToken())
+                .customerId(customer.getCustomerId())
+                .customerName(customer.getCustomerName())
+                .customerPass(customer.getCustomerPass())
+                .customerEmail(customer.getCustomerEmail())
+                .customerGender(customer.getCustomerGender())
+                .customerTel(customer.getCustomerTel())
+                .customerAddr(customer.getCustomerAddr())
+                .customerBirth(customer.getCustomerBirth())
+                .customerToken(customer.getCustomerToken())
                 .build();
     }
 
@@ -46,15 +46,15 @@ public class CustomerDto {
         int i = 0;
         while (i < customerList.size()) {
             CustomerDto customerDto = CustomerDto.builder()
-                    .CustomerId(customerList.get(i).getCustomerId())
-                    .CustomerName(customerList.get(i).getCustomerName())
-                    .CustomerPass(customerList.get(i).getCustomerPass())
-                    .CustomerEmail(customerList.get(i).getCustomerEmail())
-                    .CustomerGender(customerList.get(i).getCustomerGender())
-                    .CustomerTel(customerList.get(i).getCustomerTel())
-                    .CustomerAddr(customerList.get(i).getCustomerAddr())
-                    .CustomerBirth(customerList.get(i).getCustomerBirth())
-                    .CustomerToken(customerList.get(i).getCustomerToken())
+                    .customerId(customerList.get(i).getCustomerId())
+                    .customerName(customerList.get(i).getCustomerName())
+                    .customerPass(customerList.get(i).getCustomerPass())
+                    .customerEmail(customerList.get(i).getCustomerEmail())
+                    .customerGender(customerList.get(i).getCustomerGender())
+                    .customerTel(customerList.get(i).getCustomerTel())
+                    .customerAddr(customerList.get(i).getCustomerAddr())
+                    .customerBirth(customerList.get(i).getCustomerBirth())
+                    .customerToken(customerList.get(i).getCustomerToken())
                     .build();
             listCustomerDto.add(customerDto);
             i++;
