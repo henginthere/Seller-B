@@ -1,16 +1,29 @@
 package backend.sellerB.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@DynamicInsert
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "t_customer", schema = "sellerb", catalog = "")
 public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +37,9 @@ public class Customer {
     @Column(nullable = false, name = "customer_name")
     private String customerName;
     @Basic
+    @JsonIgnore
+    // 쓰기 전용 및 조회 불가
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(nullable = false, name = "customer_pass")
     private String customerPass;
     @Basic
@@ -47,19 +63,23 @@ public class Customer {
     private String customerToken;
     @Basic
     @Column(name = "customer_del_yn")
-    private Byte customerDelYn;
+    private String customerDelYn;
+    @CreatedBy
     @Basic
     @Column(name = "customer_reg_user_seq")
     private Integer customerRegUserSeq;
+    @CreatedDate
     @Basic
     @Column(name = "customer_reg_date")
-    private Timestamp customerRegDate;
+    private LocalDateTime customerRegDate;
+    @LastModifiedBy
     @Basic
     @Column(name = "customer_mod_user_seq")
     private Integer customerModUserSeq;
+    @LastModifiedDate
     @Basic
     @Column(name = "customer_mod_date")
-    private Timestamp customerModDate;
+    private LocalDateTime customerModDate;
 
 
     @Override
