@@ -1,7 +1,6 @@
 package backend.sellerB.controller;
 
 import backend.sellerB.dto.AddressDto;
-import backend.sellerB.dto.CustomerDto;
 import backend.sellerB.service.AddressService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
