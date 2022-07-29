@@ -1,7 +1,6 @@
 package backend.sellerB.dto;
 
 import backend.sellerB.entity.Brand;
-import backend.sellerB.entity.Product;
 import backend.sellerB.entity.ProductGroup;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
