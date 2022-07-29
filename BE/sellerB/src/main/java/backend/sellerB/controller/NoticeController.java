@@ -54,7 +54,7 @@ public class NoticeController {
 
     //soft delete
     @DeleteMapping("/{seq}")
-    public ResponseEntity<NoticeDto> deleteOrder(@PathVariable Integer seq) {
+    public ResponseEntity<NoticeDto> deleteNotice(@PathVariable Integer seq) {
         // Access the DB and delete the order
         return ResponseEntity.ok(noticeService.deleteNotice(seq));
     }
