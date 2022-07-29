@@ -12,3 +12,4 @@ export { default as ConsultantDetail } from './Manager/Consultant/ConsultantDeta
 export { default as ProductList } from './Manager/Product/ProductList'
 export { default as ProductItem } from './Manager/Product/ProductItem'
 export { default as ProductRegister} from './Manager/Product/ProductRegister'
+export { default as ProductDetail } from './Manager/Product/ProductDetail'

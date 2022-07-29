@@ -15,8 +15,10 @@ export const productLineItemsApi = async (line_name, success, fail) =>{
     return await api.get(`/product-line/${line_name}`).then(success).catch(fail);
 }
 
+// GET : ProductDetail.js : 제품 상세 정보 조회
+export const productDetailApi = async(product_id, success, fail) => {
+    return await api.get(`/`)
+}
+
 // PUT : ProductEdit.js
 // export const productEditApi = async ( )
-
-// POST : ProductRegister.js
-// export cont productRegisterApi = async ( )
