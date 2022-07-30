@@ -15,6 +15,8 @@ import {
   ConsultantList,
   ConsultantDetail,
   ConsultantMyPage,
+  ConsultantRegister,
+  ConsultantModify,
 } from "./pages/index";
 
 function App() {
@@ -34,6 +36,14 @@ function App() {
         <Route
           path='/manager/consultantDetail/:id'
           element={<ConsultantDetail />}
+        />
+        <Route
+          path='/manager/consultantRegister'
+          element={<ConsultantRegister />}
+        />
+        <Route
+          path='/manager/consultantModify'
+          element={<ConsultantModify />}
         />
         <Route path='/consultant/mypage' element={<ConsultantMyPage />} />
       </Routes>

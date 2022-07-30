@@ -26,29 +26,31 @@ function ManagerMainLeft() {
   };
 
   return (
-    <div style={styleObj_WrapDiv}>
-      <div style={welcome_text}>
-        <h2 style={blue}>OOO</h2>
-        <h2>님 환영합니다!</h2>
+    <>
+      <div style={styleObj_WrapDiv}>
+        <div style={welcome_text}>
+          <h2 style={blue}>OOO</h2>
+          <h2>님 환영합니다!</h2>
+        </div>
+        {/* 달력 */}
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <StaticDatePicker
+            displayStaticWrapperAs='desktop'
+            openTo='day'
+            value={value}
+            shouldDisableDate={isWeekend}
+            onChange={(newValue) => {
+              setValue(newValue);
+            }}
+            renderInput={(params) => <TextField {...params} />}
+          />
+        </LocalizationProvider>
+        {/* 달력 END */}
+        <div style={styleObj_Button}>
+          <Button variant='contained'>회의 생성</Button>
+        </div>
       </div>
-      {/* 달력 */}
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <StaticDatePicker
-          displayStaticWrapperAs='desktop'
-          openTo='day'
-          value={value}
-          shouldDisableDate={isWeekend}
-          onChange={(newValue) => {
-            setValue(newValue);
-          }}
-          renderInput={(params) => <TextField {...params} />}
-        />
-      </LocalizationProvider>
-      {/* 달력 END */}
-      <div style={styleObj_Button}>
-        <Button variant='contained'>회의 생성</Button>
-      </div>
-    </div>
+    </>
   );
 }
 export default ManagerMainLeft;
