@@ -10,3 +10,5 @@ export { default as ConsultantList } from "./Manager/Consultant/ConsultantList";
 export { default as NoticeEdit } from "./Notice/NoticeEdit";
 export { default as ConsultantDetail } from "./Manager/Consultant/ConsultantDetail";
 export { default as ConsultantMyPage } from "./Consultant/MyPage/ConsultantMyPage";
+export { default as ConsultantRegister } from "./Manager/Consultant/ConsultantRegister";
+export { default as ConsultantModify } from "./Manager/Consultant/ConsultantModify";
