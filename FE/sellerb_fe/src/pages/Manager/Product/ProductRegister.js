@@ -9,15 +9,15 @@ import axios from "axios";
 
 function ProductRegister() {
   const [product, setProduct] = useState({
-    productId: "",
-    productName: "",
-    productPrice: "",
-    productLine: "",
+    product_id: "",
+    product_name: "",
+    product_price: "",
+    product_line: "",
     // 사진 파일 부분 필드 추가 
     formData: "",
   });
 
-  const { productId, productName, productPrice, productLine } = product;
+  const { product_id, product_name, product_price, product_line } = product;
 
   const onChange = (e) => {
     const { value, name } = e.target;
@@ -26,7 +26,7 @@ function ProductRegister() {
       [name]: value,
     });
 
-    console.log(productId);
+    console.log(product_id);
   };
 
   // 서버에 파일 & 제품정보 전송 : FormData()
@@ -120,36 +120,36 @@ function ProductRegister() {
           <div className="input-ele">
             <p>품번</p>
             <input
-              name="productId"
+              name="product_id"
               onChange={onChange}
-              value={productId}
+              value={product_id}
               variant="outlined"
             />
           </div>
           <div className="input-ele">
             <p>제품명</p>
             <input
-              name="productName"
+              name="product_name"
               onChange={onChange}
-              value={productName}
+              value={product_name}
               variant="outlined"
             />
           </div>
           <div className="input-ele">
             <p>가격</p>
             <input
-              name="productPrice"
+              name="product_price"
               onChange={onChange}
-              value={productPrice}
+              value={product_price}
               variant="outlined"
             />
           </div>
           <div className="input-ele">
             <p>제품군</p>
             <input
-              name="productLine"
+              name="product_line"
               onChange={onChange}
-              value={productLine}
+              value={product_line}
               variant="outlined"
             />
           </div>
@@ -165,7 +165,7 @@ function ProductRegister() {
           onChange={handleChangeFile}
         />
         {/* <button onClick={deleteImage}>이미지 삭제</button> */}
-        <button className="upload-btn" onClick={onProductSubmitBtn}>
+        <button className="bottom-btn" onClick={onProductSubmitBtn}>
           업로드하기
         </button>
       </div>
