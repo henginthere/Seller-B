@@ -17,11 +17,13 @@ import {
   ProductList,
   ProductRegister,
   ProductDetail,
+  WaitingPage,
 } from './pages/index'
 
 function App() {
   return(
   <>
+    <body>
     <Routes>
       <Route path="/" element={<Main /> } />
       <Route path="/manager/main" element={<ManagerMain /> } />
@@ -36,8 +38,10 @@ function App() {
       <Route path="/manager/consultantDetail/:id" element={<ConsultantDetail />} />
       <Route path="/manager/productList" element={<ProductList />} />
       <Route path="/manager/productRegister" element={<ProductRegister />} />
-      <Route path="/manager/productDetail" element={<ProductDetail />} />
+      <Route path="/manager/productDetail/:seq" element={<ProductDetail />} />
+      <Route path="/manager/waitingPage/:seq" element={<WaitingPage />} />
     </Routes>
+    </body>
   </>
   )
 }

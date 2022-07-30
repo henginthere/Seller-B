@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // init base API 
 export const api = axios.create({
-    baseURL : "https://localhost:8080/", 
+    baseURL : "https://i7d105t.p.ssafy.io/", 
     headers : {
         "Content-Type" : `application/json`, 
         // Authorization: `Bearer ${
