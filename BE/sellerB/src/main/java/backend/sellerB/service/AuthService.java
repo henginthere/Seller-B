@@ -6,6 +6,7 @@ import backend.sellerB.dto.TokenDto;
 import backend.sellerB.exception.UnauthorizedException;
 import backend.sellerB.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
+import net.bytebuddy.implementation.bind.MethodDelegationBinder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -33,15 +34,25 @@ public class AuthService {
                 new UsernamePasswordAuthenticationToken(id, password);
         //실제 검증이 일어나는 부분
         //authenticate 메서드가 실행될 때
+
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String authorities = getAuthorities(authentication);
 
-        TokenDto tokenDto = tokenProvider.createToken(authentication.getName(), authorities);
+        //TokenDto tokenDto = tokenProvider.createManagerToken(authentication.getName(), authorities);
 
         logger.info("권한 : "+authorities);
-        logger.info("토큰 발급 :"+tokenDto.getAccessToken());
-        return tokenProvider.createToken(authentication.getName(), authorities);
+        //logger.info("토큰 발급 :"+tokenDto.getAccessToken());
+
+        if(authorities.equals("ROLE_ADMIN")){
+            return tokenProvider.createManagerToken(authentication.getName(), authorities);
+        }
+        else{
+            return tokenProvider.createConsultantToken(authentication.getName(),authorities);
+        }
+       // return tokenProvider.createManagerToken(authentication.getName(), authorities);
+
+
     }
 
     // 토큰 재발급 관련 메서드
@@ -51,13 +62,13 @@ public class AuthService {
 
         }
         Authentication authentication = tokenProvider.getAuthentication(requestAccessToken);
-
+        logger.info("이건뭘까?"+authentication.getPrincipal());
         ManagerDto principal = (ManagerDto) authentication.getPrincipal();
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String authorities = getAuthorities(authentication);
 
-        return tokenProvider.createToken(principal.getManagerId(), authorities);
+        return tokenProvider.createManagerToken(principal.getManagerId(), authorities);
     }
 
     // 권한 가져오기
