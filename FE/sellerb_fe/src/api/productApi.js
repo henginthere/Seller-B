@@ -26,4 +26,8 @@ export const waitingPageApi = async(product_seq, success, fail)=>{
 }
 
 // PUT : ProductEdit.js
-// export const productEditApi = async ( )
+export const productEditApi = async (product_seq, success, fail) =>{
+    return await api.put(`/product/${product_seq}`).then(success).catch(fail);
+}
+
+

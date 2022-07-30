@@ -7,6 +7,7 @@ import { productDetailApi } from "../../../api/productApi";
 
 function ProductDetail() {
   const { seq } = useParams();
+  const [readOnly, setReadOnly] = useState(true)
   const [product, setProduct] = useState({
     // 가져왔다고 하고, 더미데이터로 테스트
     product_seq: "3",
@@ -38,6 +39,10 @@ function ProductDetail() {
     navigate(`/manager/waitingPage/${product.product_seq}`); // 제품대기화면 페이지로 이동
   }
 
+  const onEdit = ()=>{
+    navigate(`/manager/productEdit/${product.product_seq}`);
+  }
+
   return (
     <>
       <NavBar />
@@ -56,6 +61,7 @@ function ProductDetail() {
               name="product_id"
               value={product.product_id}
               variant="outlined"
+              readOnly={readOnly ? false : true}
             />
           </div>
           <div className="input-ele">
@@ -64,6 +70,7 @@ function ProductDetail() {
               name="product_name"
               value={product.product_name}
               variant="outlined"
+              readOnly={readOnly ? false : true}
             />
           </div>
           <div className="input-ele">
@@ -72,6 +79,7 @@ function ProductDetail() {
               name="product_price"
               value={product.product_price}
               variant="outlined"
+              readOnly={readOnly ? false : true}
             />
           </div>
           <div className="input-ele">
@@ -80,6 +88,7 @@ function ProductDetail() {
               name="product_line"
               value={product.product_line}
               variant="outlined"
+              readOnly={readOnly ? false : true}
             />
           </div>
         </div>
@@ -87,6 +96,9 @@ function ProductDetail() {
 
       {/* Btn */}
     <div className="bottomContent-wrapper">
+    <button className="bottom-btn" onClick={onEdit}>
+            수정하기
+        </button>
         <button className="bottom-btn" onClick={goWaitingPage}>
             제품 대기화면 보기
         </button>

@@ -17,6 +17,7 @@ import {
   ProductList,
   ProductRegister,
   ProductDetail,
+  ProductEdit,
   WaitingPage,
 } from './pages/index'
 
@@ -39,6 +40,7 @@ function App() {
       <Route path="/manager/productList" element={<ProductList />} />
       <Route path="/manager/productRegister" element={<ProductRegister />} />
       <Route path="/manager/productDetail/:seq" element={<ProductDetail />} />
+      <Route path="/manager/productEdit/:seq" element={<ProductEdit />} />
       <Route path="/manager/waitingPage/:seq" element={<WaitingPage />} />
     </Routes>
     </body>
