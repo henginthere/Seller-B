@@ -1,9 +1,12 @@
 package backend.sellerB.controller;
 
 import backend.sellerB.dto.NoticeDto;
+import backend.sellerB.service.AuthService;
 import backend.sellerB.service.NoticeService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +19,7 @@ import java.util.List;
 //@RequiredArgsConstructor
 @RequestMapping("/notice")
 public class NoticeController {
-
+    private static final Logger logger = LoggerFactory.getLogger(NoticeController.class);
 
     public NoticeController(NoticeService noticeService) {
         this.noticeService = noticeService;
@@ -39,6 +42,12 @@ public class NoticeController {
     public ResponseEntity<NoticeDto> getNoticeDetail(@PathVariable Integer seq) {
         return ResponseEntity.ok(noticeService.getNoticeDetail(seq));
     }
+
+    @GetMapping("/search/{noticeTitle}")
+    public ResponseEntity<List<NoticeDto>> findByNoticeTitle(@PathVariable String noticeTitle) {
+        return ResponseEntity.ok(noticeService.search(noticeTitle));
+    }
+
 
     @PutMapping("/{seq}")
     public ResponseEntity<NoticeDto> putNoticeDetail(@Valid @RequestBody NoticeDto noticeDto, @PathVariable Integer seq) {
