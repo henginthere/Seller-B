@@ -5,15 +5,19 @@ import backend.sellerB.dto.ManagerDto;
 import backend.sellerB.dto.TokenDto;
 import backend.sellerB.exception.UnauthorizedException;
 import backend.sellerB.jwt.TokenProvider;
+import backend.sellerB.repository.ConsultantRepository;
+import backend.sellerB.repository.ManagerRepository;
 import lombok.RequiredArgsConstructor;
 import net.bytebuddy.implementation.bind.MethodDelegationBinder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +27,12 @@ import java.util.stream.Collectors;
 @Transactional
 @RequiredArgsConstructor
 public class AuthService {
+
+    @Autowired
+    ManagerRepository managerRepository;
+
+    @Autowired
+    ConsultantRepository consultantRepository;
 
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
@@ -59,16 +69,26 @@ public class AuthService {
     public TokenDto reissue(String requestAccessToken, String requestRefreshToken) {
         if (!tokenProvider.validateToken(requestRefreshToken)) {
 //            throw new UnauthorizedException("유효하지 않은 RefreshToken 입니다");
+            //재로그인 요청반환
 
         }
-        Authentication authentication = tokenProvider.getAuthentication(requestAccessToken);
-        logger.info("이건뭘까?"+authentication.getPrincipal());
-        ManagerDto principal = (ManagerDto) authentication.getPrincipal();
+
+        Authentication authentication = tokenProvider.getAuthentication(requestRefreshToken);
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String authorities = getAuthorities(authentication);
+        String memberId;
 
-        return tokenProvider.createManagerToken(principal.getManagerId(), authorities);
+        if(authorities.equals("ROLE_ADMIN")){
+            memberId = managerRepository.findByManagerSeq(Integer.parseInt(authentication.getName())).getManagerId();
+            return tokenProvider.createManagerToken(memberId, authorities);
+        }
+        else{
+            memberId = consultantRepository.findByConsultantSeq(Integer.parseInt(authentication.getName())).getConsultantId();
+            return tokenProvider.createConsultantToken(memberId, authorities);
+        }
+
+
     }
 
     // 권한 가져오기
