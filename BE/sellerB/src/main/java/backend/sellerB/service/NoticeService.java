@@ -42,6 +42,8 @@ public class NoticeService {
         return NoticeDto.from(notice);
     }
 
+
+
     public NoticeDto update(Integer seq, NoticeDto noticeDto) {
         Optional<Notice> noticeOptional = noticeRepository.findById(seq);
         Notice notice = noticeOptional.get();
@@ -69,4 +71,10 @@ public class NoticeService {
         notice.setNoticeDelYn("Y");
         return NoticeDto.from(notice);
     }
+
+    public List<NoticeDto> search(String noticeTitle) {
+
+       return NoticeDto.fromList(noticeRepository.findByNoticeTitleContaining(noticeTitle));
+    }
+
 }
