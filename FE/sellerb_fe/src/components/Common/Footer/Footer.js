@@ -10,7 +10,7 @@ function Footer() {
     backgroundColor: "lightgray",
     display: "flex",
 
-    // // Footer 하단 고정 
+    // // Footer 하단 고정
     // position: "absolute",
     // bottom: "0",
   };
