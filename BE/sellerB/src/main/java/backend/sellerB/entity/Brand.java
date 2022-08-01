@@ -41,6 +41,16 @@ public class Brand {
     @Column(name = "brand_mod_date")
     private Timestamp brandModDate;
 
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+=======
+>>>>>>> Stashed changes
+    @Builder.Default
+    @OneToMany(mappedBy = "brand")
+    @JsonManagedReference
+    private List<ProductGroup> productGroups = new ArrayList<ProductGroup>();
+>>>>>>> Stashed changes
 
     @Override
     public boolean equals(Object o) {
