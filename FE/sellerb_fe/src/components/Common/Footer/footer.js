@@ -9,10 +9,10 @@ function Footer() {
     textAlign: "center",
     backgroundColor: "lightgray",
     display: "flex",
+
     // // Footer 하단 고정 
     // position: "absolute",
     // bottom: "0",
- 
   };
   const styleObj_content = {
     width: "25%",
@@ -24,7 +24,7 @@ function Footer() {
     fontSize: "10px",
   };
   return (
-    <footer className="footer-wrapper">
+    <footer className='footer-wrapper'>
       <div style={styleObj}>
         <div style={styleObj_content}>
           <h4>고객센터</h4>
