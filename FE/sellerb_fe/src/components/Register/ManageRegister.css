@@ -1,0 +1,108 @@
+
+.manage-register-page {
+    margin:0 auto;
+}
+
+
+.login{
+    width:500px;
+    height: 600px;
+    margin:0 auto;
+    /* position: relative; */
+    /* background:#ddd; */
+}
+
+.login-form{
+
+    /* background: #FDFDFD;  */
+    background-color: #FBF9F4;
+    padding: 20px;
+
+}
+
+hr{
+    margin-top:20px;
+    width: 450px;
+    
+}
+
+.login-form .login-form-label {
+    
+}
+
+.login-title{
+    font-size:25px;
+    font-weight: 900;
+    color:#324E66;
+
+    letter-spacing: -1px;
+
+    text-align: center;
+}
+
+/* input {
+    background-color: #217Af0;
+} */
+
+
+p {
+    text-align: left;
+    font-size: 12px;
+    color: #666;
+}
+
+.size{
+    width:300px;
+    height:30px;
+    padding-left:10px;
+    background-color: #f4f4f4;
+    /* margin-left:10px; */
+    border:none;
+    border-radius: 5px;
+}
+
+.btn{
+    width:310px;
+    height: 40px;
+    font-size:15px;
+    background-color: #324E66;
+    color:#fff;
+    border:none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.btn:hover{
+    background:#E1EAFF;
+}
+
+.find{
+    color:#ddd;
+    font-size:12px;
+}
+.find span{
+    padding-left:10px;
+}
+.find span::before{
+    content:'|';
+    color:#333;
+    padding-right: 10px;
+}
+.find span:nth-child(1):before{
+    content:none;
+}
+
+.find span:nth-child(1){
+    padding-left:0px;
+}
+
+.find a:hover{
+    color:#707070;
+}
+.num1{
+    width:60px;
+    text-align: left;
+}
+.num2{
+    width:235px;
+}
+

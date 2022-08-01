@@ -1,0 +1,10 @@
+
+#wrapper{
+    width:100%;
+    display:flex;
+    flex-direction: row;
+}
+
+.center{
+    text-align: center;
+}
