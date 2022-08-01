@@ -5,19 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import com.ssafy.sellerb.R
-import com.ssafy.sellerb.di.Injectable
-import javax.inject.Inject
 
-class HomeFragment : Fragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-
-    val homeViewModel : HomeViewModel by viewModels {
-        viewModelFactory
-    }
+class HomeFragment : Fragment() {
+//    @Inject
+//    lateinit var viewModelFactory: ViewModelProvider.Factory
+//
+//    val homeViewModel : HomeViewModel by viewModels {
+//        viewModelFactory
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
