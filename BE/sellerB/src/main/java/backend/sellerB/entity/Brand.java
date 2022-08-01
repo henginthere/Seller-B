@@ -45,7 +45,6 @@ public class Brand {
     @Column(name = "brand_mod_date")
     private Timestamp brandModDate;
 
-
     @OneToMany(mappedBy = "brand")
     @JsonManagedReference
     private List<ProductGroup> productGroups = new ArrayList<ProductGroup>();
