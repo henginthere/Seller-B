@@ -12,12 +12,12 @@ import javax.inject.Inject
 
 
 class MyPageFragment : Fragment() {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-
-    val myPageViewModel : MyPageViewModel by viewModels {
-        viewModelFactory
-    }
+//    @Inject
+//    lateinit var viewModelFactory: ViewModelProvider.Factory
+//
+//    val myPageViewModel : MyPageViewModel by viewModels {
+//        viewModelFactory
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
