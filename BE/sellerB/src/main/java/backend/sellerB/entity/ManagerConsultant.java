@@ -2,6 +2,7 @@ package backend.sellerB.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -15,11 +16,13 @@ public class ManagerConsultant {
     @Column(name = "manager_consultant_seq")
     private int managerConsultantSeq;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "manager_seq")
+    @JsonIgnore
     private Manager manager;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "consultant_seq")
     private Consultant consultant;
 
