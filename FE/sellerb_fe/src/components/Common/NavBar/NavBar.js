@@ -21,6 +21,9 @@ function NavBar() {
                     <Link to="#" className='link-to'>
                         <h4>회의 참여</h4>
                     </Link>
+                    <Link to="/manager/productList" className='link-to'>
+                        <h4>제품관리</h4>
+                    </Link>
                     <Link to="/manager/mypage" className='link-to'>
                         <h4>마이페이지</h4>
                     </Link>
