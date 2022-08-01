@@ -27,17 +27,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-	runtimeOnly 'mysql:mysql-connector-java'
-=======
-//	runtimeOnly 'mysql:mysql-connector-java'
+
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client' // MariaDB
->>>>>>> Stashed changes
-=======
-//	runtimeOnly 'mysql:mysql-connector-java'
-	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client' // MariaDB
->>>>>>> Stashed changes
+
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'

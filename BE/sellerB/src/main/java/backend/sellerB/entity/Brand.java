@@ -1,10 +1,14 @@
 package backend.sellerB.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -41,16 +45,11 @@ public class Brand {
     @Column(name = "brand_mod_date")
     private Timestamp brandModDate;
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> Stashed changes
     @Builder.Default
     @OneToMany(mappedBy = "brand")
     @JsonManagedReference
     private List<ProductGroup> productGroups = new ArrayList<ProductGroup>();
->>>>>>> Stashed changes
+
 
     @Override
     public boolean equals(Object o) {

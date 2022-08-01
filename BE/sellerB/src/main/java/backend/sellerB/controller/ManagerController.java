@@ -20,16 +20,12 @@ public class ManagerController {
     public ManagerController(ManagerService managerService) {
         this.managerService = managerService;
     }
-
     private final ManagerService managerService;
-
 
     @PostMapping
     public ResponseEntity<ManagerDto> registerManager(@Valid @RequestBody ManagerDto managerDto) {
         return ResponseEntity.ok(managerService.signup(managerDto));
     }
-
-
 
 
 }
