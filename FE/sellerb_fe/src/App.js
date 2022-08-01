@@ -14,11 +14,17 @@ import {
   NoticeEdit,
   ConsultantList,
   ConsultantDetail,
+  ProductList,
+  ProductRegister,
+  ProductDetail,
+  ProductEdit,
+  WaitingPage,
 } from './pages/index'
 
 function App() {
   return(
   <>
+    <body>
     <Routes>
       <Route path="/" element={<Main /> } />
       <Route path="/manager/main" element={<ManagerMain /> } />
@@ -31,7 +37,13 @@ function App() {
       <Route path="/manager/noticeEdit" element={<NoticeEdit />} />
       <Route path="/manager/consultantList" element={<ConsultantList />} />
       <Route path="/manager/consultantDetail/:id" element={<ConsultantDetail />} />
+      <Route path="/manager/productList" element={<ProductList />} />
+      <Route path="/manager/productRegister" element={<ProductRegister />} />
+      <Route path="/manager/productDetail/:seq" element={<ProductDetail />} />
+      <Route path="/manager/productEdit/:seq" element={<ProductEdit />} />
+      <Route path="/manager/waitingPage/:seq" element={<WaitingPage />} />
     </Routes>
+    </body>
   </>
   )
 }
