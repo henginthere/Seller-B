@@ -1,30 +1,37 @@
 package com.ssafy.sellerb.ui.mypage
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import com.ssafy.sellerb.R
-import javax.inject.Inject
+import com.ssafy.sellerb.databinding.FragmentMyPageBinding
+import com.ssafy.sellerb.di.component.FragmentComponent
+import com.ssafy.sellerb.ui.base.BaseFragment
 
 
-class MyPageFragment : Fragment() {
-//    @Inject
-//    lateinit var viewModelFactory: ViewModelProvider.Factory
-//
-//    val myPageViewModel : MyPageViewModel by viewModels {
-//        viewModelFactory
-//    }
+class MyPageFragment : BaseFragment<MyPageViewModel>() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+    companion object{
+        const val TAG = "MyPageFragment"
+    }
+
+    private var _binding: FragmentMyPageBinding? =null
+
+    private val binding get() = _binding!!
+
+    override fun provideLayoutId(): Int = R.layout.fragment_my_page
+
+    override fun injectDependencies(fragmentComponent: FragmentComponent) =
+        fragmentComponent.inject(this)
+
+
+    override fun setupView(view: View) {
+
+        _binding = FragmentMyPageBinding.bind(view)
+
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }
