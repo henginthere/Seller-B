@@ -7020,3 +7020,136 @@ java.lang.NoSuchMethodError: 'void io.jsonwebtoken.impl.DefaultJwtParser.<init>(
 2022-07-28 17:44:26.184  INFO 8152 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2022-07-28 17:44:26.185  INFO 8152 --- [SpringApplicationShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
 2022-07-28 17:44:26.196  INFO 8152 --- [SpringApplicationShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
+2022-08-02 22:30:55.481  INFO 7924 --- [main] b.s.SellerBApplication                   : Starting SellerBApplication using Java 11.0.16 on DESKTOP-KVCQHCD with PID 7924 (C:\SSAFY\SellerB\BE\sellerB\build\classes\java\main started by multicampus in C:\SSAFY\SellerB\BE\sellerB)
+2022-08-02 22:30:55.489  INFO 7924 --- [main] b.s.SellerBApplication                   : No active profile set, falling back to 1 default profile: "default"
+2022-08-02 22:30:56.074  INFO 7924 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-08-02 22:30:56.161  INFO 7924 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 81 ms. Found 13 JPA repository interfaces.
+2022-08-02 22:30:56.588  INFO 7924 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port(s): 5000 (http)
+2022-08-02 22:30:56.602  INFO 7924 --- [main] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2022-08-02 22:30:56.603  INFO 7924 --- [main] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2022-08-02 22:30:56.696  INFO 7924 --- [main] o.a.c.c.C.[.[.[/api]                     : Initializing Spring embedded WebApplicationContext
+2022-08-02 22:30:56.696  INFO 7924 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1165 ms
+2022-08-02 22:30:56.832  INFO 7924 --- [main] o.h.j.i.u.LogHelper                      : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-08-02 22:30:56.869  INFO 7924 --- [main] o.h.Version                              : HHH000412: Hibernate ORM core version 5.6.10.Final
+2022-08-02 22:30:56.980  INFO 7924 --- [main] o.h.a.c.Version                          : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-08-02 22:30:57.070  INFO 7924 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2022-08-02 22:30:57.225  INFO 7924 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2022-08-02 22:30:57.246  INFO 7924 --- [main] o.h.d.Dialect                            : HHH000400: Using dialect: org.hibernate.dialect.MariaDB106Dialect
+2022-08-02 22:30:58.841  INFO 7924 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-08-02 22:30:58.863  INFO 7924 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-08-02 22:30:59.185  WARN 7924 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-08-02 22:30:59.507  WARN 7924 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'springSecurityFilterChain' defined in class path resource [org/springframework/security/config/annotation/web/configuration/WebSecurityConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [javax.servlet.Filter]: Factory method 'springSecurityFilterChain' threw exception; nested exception is java.lang.ClassCastException: class org.springframework.web.filter.CorsFilter cannot be cast to class org.springframework.web.cors.CorsConfigurationSource (org.springframework.web.filter.CorsFilter and org.springframework.web.cors.CorsConfigurationSource are in unnamed module of loader 'app')
+2022-08-02 22:30:59.509  INFO 7924 --- [main] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-08-02 22:30:59.510  INFO 7924 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2022-08-02 22:30:59.665  INFO 7924 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
+2022-08-02 22:30:59.667  INFO 7924 --- [main] o.a.c.c.StandardService                  : Stopping service [Tomcat]
+2022-08-02 22:30:59.676  INFO 7924 --- [main] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2022-08-02 22:30:59.696 ERROR 7924 --- [main] o.s.b.SpringApplication                  : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'springSecurityFilterChain' defined in class path resource [org/springframework/security/config/annotation/web/configuration/WebSecurityConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [javax.servlet.Filter]: Factory method 'springSecurityFilterChain' threw exception; nested exception is java.lang.ClassCastException: class org.springframework.web.filter.CorsFilter cannot be cast to class org.springframework.web.cors.CorsConfigurationSource (org.springframework.web.filter.CorsFilter and org.springframework.web.cors.CorsConfigurationSource are in unnamed module of loader 'app')
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:658) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:486) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1352) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1195) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:918) ~[spring-context-5.3.22.jar:5.3.22]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583) ~[spring-context-5.3.22.jar:5.3.22]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:147) ~[spring-boot-2.7.2.jar:2.7.2]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:734) ~[spring-boot-2.7.2.jar:2.7.2]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:408) ~[spring-boot-2.7.2.jar:2.7.2]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308) ~[spring-boot-2.7.2.jar:2.7.2]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306) ~[spring-boot-2.7.2.jar:2.7.2]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295) ~[spring-boot-2.7.2.jar:2.7.2]
+	at backend.sellerB.SellerBApplication.main(SellerBApplication.java:16) ~[main/:?]
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [javax.servlet.Filter]: Factory method 'springSecurityFilterChain' threw exception; nested exception is java.lang.ClassCastException: class org.springframework.web.filter.CorsFilter cannot be cast to class org.springframework.web.cors.CorsConfigurationSource (org.springframework.web.filter.CorsFilter and org.springframework.web.cors.CorsConfigurationSource are in unnamed module of loader 'app')
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:185) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:653) ~[spring-beans-5.3.22.jar:5.3.22]
+	... 21 more
+Caused by: java.lang.ClassCastException: class org.springframework.web.filter.CorsFilter cannot be cast to class org.springframework.web.cors.CorsConfigurationSource (org.springframework.web.filter.CorsFilter and org.springframework.web.cors.CorsConfigurationSource are in unnamed module of loader 'app')
+	at backend.sellerB.config.SecurityConfig.configure(SecurityConfig.java:58) ~[main/:?]
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter.getHttp(WebSecurityConfigurerAdapter.java:221) ~[spring-security-config-5.7.2.jar:5.7.2]
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter.init(WebSecurityConfigurerAdapter.java:319) ~[spring-security-config-5.7.2.jar:5.7.2]
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter.init(WebSecurityConfigurerAdapter.java:96) ~[spring-security-config-5.7.2.jar:5.7.2]
+	at backend.sellerB.config.SecurityConfig$$EnhancerBySpringCGLIB$$1adb7a.init(<generated>) ~[main/:?]
+	at org.springframework.security.config.annotation.AbstractConfiguredSecurityBuilder.init(AbstractConfiguredSecurityBuilder.java:338) ~[spring-security-config-5.7.2.jar:5.7.2]
+	at org.springframework.security.config.annotation.AbstractConfiguredSecurityBuilder.doBuild(AbstractConfiguredSecurityBuilder.java:300) ~[spring-security-config-5.7.2.jar:5.7.2]
+	at org.springframework.security.config.annotation.AbstractSecurityBuilder.build(AbstractSecurityBuilder.java:38) ~[spring-security-config-5.7.2.jar:5.7.2]
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration.springSecurityFilterChain(WebSecurityConfiguration.java:126) ~[spring-security-config-5.7.2.jar:5.7.2]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:566) ~[?:?]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:154) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:653) ~[spring-beans-5.3.22.jar:5.3.22]
+	... 21 more
+
+2022-08-02 22:37:17.616  INFO 21028 --- [main] b.s.SellerBApplication                   : Starting SellerBApplication using Java 11.0.16 on DESKTOP-KVCQHCD with PID 21028 (C:\SSAFY\SellerB\BE\sellerB\build\classes\java\main started by multicampus in C:\SSAFY\SellerB\BE\sellerB)
+2022-08-02 22:37:17.622  INFO 21028 --- [main] b.s.SellerBApplication                   : No active profile set, falling back to 1 default profile: "default"
+2022-08-02 22:37:18.199  INFO 21028 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-08-02 22:37:18.268  INFO 21028 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 63 ms. Found 13 JPA repository interfaces.
+2022-08-02 22:37:18.692  INFO 21028 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port(s): 5000 (http)
+2022-08-02 22:37:18.706  INFO 21028 --- [main] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2022-08-02 22:37:18.706  INFO 21028 --- [main] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2022-08-02 22:37:18.799  INFO 21028 --- [main] o.a.c.c.C.[.[.[/api]                     : Initializing Spring embedded WebApplicationContext
+2022-08-02 22:37:18.799  INFO 21028 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1144 ms
+2022-08-02 22:37:18.937  INFO 21028 --- [main] o.h.j.i.u.LogHelper                      : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-08-02 22:37:18.974  INFO 21028 --- [main] o.h.Version                              : HHH000412: Hibernate ORM core version 5.6.10.Final
+2022-08-02 22:37:19.087  INFO 21028 --- [main] o.h.a.c.Version                          : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-08-02 22:37:19.171  INFO 21028 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2022-08-02 22:37:19.311  INFO 21028 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2022-08-02 22:37:19.331  INFO 21028 --- [main] o.h.d.Dialect                            : HHH000400: Using dialect: org.hibernate.dialect.MariaDB106Dialect
+2022-08-02 22:37:20.902  INFO 21028 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-08-02 22:37:20.912  INFO 21028 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-08-02 22:37:21.219  WARN 21028 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-08-02 22:37:21.535  WARN 21028 --- [main] o.s.s.c.a.w.b.WebSecurity                : You are asking Spring Security to ignore Ant [pattern='/favicon.ico']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2022-08-02 22:37:21.536  INFO 21028 --- [main] o.s.s.w.DefaultSecurityFilterChain       : Will not secure Ant [pattern='/favicon.ico']
+2022-08-02 22:37:21.536  WARN 21028 --- [main] o.s.s.c.a.w.b.WebSecurity                : You are asking Spring Security to ignore Ant [pattern='/error']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2022-08-02 22:37:21.536  INFO 21028 --- [main] o.s.s.w.DefaultSecurityFilterChain       : Will not secure Ant [pattern='/error']
+2022-08-02 22:37:21.536  WARN 21028 --- [main] o.s.s.c.a.w.b.WebSecurity                : You are asking Spring Security to ignore Ant [pattern='/configuration/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2022-08-02 22:37:21.536  INFO 21028 --- [main] o.s.s.w.DefaultSecurityFilterChain       : Will not secure Ant [pattern='/configuration/**']
+2022-08-02 22:37:21.568  INFO 21028 --- [main] o.s.s.w.DefaultSecurityFilterChain       : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@52b7c1d9, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@451f3f66, org.springframework.security.web.context.SecurityContextPersistenceFilter@5c6be812, org.springframework.security.web.header.HeaderWriterFilter@6b60d99c, org.springframework.web.filter.CorsFilter@5d1eb214, org.springframework.security.web.authentication.logout.LogoutFilter@4131261, org.springframework.web.filter.CorsFilter@31a136a6, backend.sellerB.jwt.JwtFilter@2784145d, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@28796d0e, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7c816f46, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4bd1b07d, org.springframework.security.web.session.SessionManagementFilter@22cce199, org.springframework.security.web.access.ExceptionTranslationFilter@75b25ec3, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@71842e18]
+2022-08-02 22:37:21.893  INFO 21028 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port(s): 5000 (http) with context path '/api'
+2022-08-02 22:37:21.902  INFO 21028 --- [main] b.s.SellerBApplication                   : Started SellerBApplication in 4.908 seconds (JVM running for 6.837)
+2022-08-02 22:37:53.326  INFO 21028 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-08-02 22:37:53.327  INFO 21028 --- [SpringApplicationShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2022-08-02 22:37:53.461  INFO 21028 --- [SpringApplicationShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
+2022-08-02 22:42:28.338  INFO 5116 --- [main] b.s.SellerBApplication                   : Starting SellerBApplication using Java 11.0.16 on DESKTOP-KVCQHCD with PID 5116 (C:\SSAFY\SellerB\BE\sellerB\build\classes\java\main started by multicampus in C:\SSAFY\SellerB\BE\sellerB)
+2022-08-02 22:42:28.345  INFO 5116 --- [main] b.s.SellerBApplication                   : No active profile set, falling back to 1 default profile: "default"
+2022-08-02 22:42:28.937  INFO 5116 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-08-02 22:42:29.007  INFO 5116 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 64 ms. Found 13 JPA repository interfaces.
+2022-08-02 22:42:29.435  INFO 5116 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port(s): 5000 (http)
+2022-08-02 22:42:29.448  INFO 5116 --- [main] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2022-08-02 22:42:29.448  INFO 5116 --- [main] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2022-08-02 22:42:29.539  INFO 5116 --- [main] o.a.c.c.C.[.[.[/api]                     : Initializing Spring embedded WebApplicationContext
+2022-08-02 22:42:29.540  INFO 5116 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1162 ms
+2022-08-02 22:42:29.676  INFO 5116 --- [main] o.h.j.i.u.LogHelper                      : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-08-02 22:42:29.717  INFO 5116 --- [main] o.h.Version                              : HHH000412: Hibernate ORM core version 5.6.10.Final
+2022-08-02 22:42:29.840  INFO 5116 --- [main] o.h.a.c.Version                          : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-08-02 22:42:29.922  INFO 5116 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2022-08-02 22:42:30.097  INFO 5116 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2022-08-02 22:42:30.122  INFO 5116 --- [main] o.h.d.Dialect                            : HHH000400: Using dialect: org.hibernate.dialect.MariaDB106Dialect
+2022-08-02 22:42:31.760  INFO 5116 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-08-02 22:42:31.780  INFO 5116 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-08-02 22:42:32.097  WARN 5116 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-08-02 22:42:32.438  WARN 5116 --- [main] o.s.s.c.a.w.b.WebSecurity                : You are asking Spring Security to ignore Ant [pattern='/favicon.ico']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2022-08-02 22:42:32.439  INFO 5116 --- [main] o.s.s.w.DefaultSecurityFilterChain       : Will not secure Ant [pattern='/favicon.ico']
+2022-08-02 22:42:32.439  WARN 5116 --- [main] o.s.s.c.a.w.b.WebSecurity                : You are asking Spring Security to ignore Ant [pattern='/error']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2022-08-02 22:42:32.439  INFO 5116 --- [main] o.s.s.w.DefaultSecurityFilterChain       : Will not secure Ant [pattern='/error']
+2022-08-02 22:42:32.439  WARN 5116 --- [main] o.s.s.c.a.w.b.WebSecurity                : You are asking Spring Security to ignore Ant [pattern='/configuration/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2022-08-02 22:42:32.440  INFO 5116 --- [main] o.s.s.w.DefaultSecurityFilterChain       : Will not secure Ant [pattern='/configuration/**']
+2022-08-02 22:42:32.477  INFO 5116 --- [main] o.s.s.w.DefaultSecurityFilterChain       : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@318a81a0, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@f73a7cf, org.springframework.security.web.context.SecurityContextPersistenceFilter@24fb8317, org.springframework.security.web.header.HeaderWriterFilter@5aa5b3af, org.springframework.web.filter.CorsFilter@4198921f, org.springframework.security.web.authentication.logout.LogoutFilter@20fdaf3e, org.springframework.web.filter.CorsFilter@7c7e73c5, backend.sellerB.jwt.JwtFilter@44181746, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@f451970, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@89ff043, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@21fa19e4, org.springframework.security.web.session.SessionManagementFilter@43414b88, org.springframework.security.web.access.ExceptionTranslationFilter@3f3a529f, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@38ae69f7]
+2022-08-02 22:42:32.840  INFO 5116 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port(s): 5000 (http) with context path '/api'
+2022-08-02 22:42:32.849  INFO 5116 --- [main] b.s.SellerBApplication                   : Started SellerBApplication in 4.912 seconds (JVM running for 5.987)
+2022-08-02 22:42:44.054  INFO 5116 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-08-02 22:42:44.055  INFO 5116 --- [SpringApplicationShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2022-08-02 22:42:44.176  INFO 5116 --- [SpringApplicationShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
