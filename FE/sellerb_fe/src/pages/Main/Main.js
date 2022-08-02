@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { LOGIN } from '../../slices/userSlice'
 
 // import { loginUser }
+import { loginUser } from '../../api/userApi'
 import { setRefreshToken } from '../../storage/Cookie';
 import { SET_TOKEN } from '../../slices/authSlice';
 
@@ -36,30 +37,35 @@ function Main() {
   }
 
   // 로그인 처리 //
-  const onLoginBtn = () =>{
-    // id, password 입력값 유효성 확인하기
-    if( id === "" || pass === ""){
-      alert("아이디와 비밀번호를 입력해주세요");
-      return;
-    }
+    const onLoginBtn = async({id, pass}) =>{
+      
+      const res = await loginUser({id, pass});
 
-    const data = {
-      id, 
-      pass,
+      if(res.status) {
+        // AT, RT
+        setRefreshToken(res.json.refreshToken);
+        dispatch(SET_TOKEN(res.json.accessToken));
+
+        return navigate('/');
+      }else {
+        console.log(res.json);
+      }
+
     };
 
-    console.log(data);
-
-    axios.post('https://i7d105.p.ssafy.io/api/auth/login', data)
-    .then((res) => {
-      const { accessToken } = res.data.accessToken; 
-      const { refreshToken } = res.data.refreshToken;
-      console.log(accessToken);
-      console.log(refreshToken);
 
 
 
-    })
+    // axios.post('https://i7d105.p.ssafy.io/api/auth/login', data)
+    // .then((res) => {
+    //   if(res === 500){
+    //     console.log("500Error")
+    //   }
+    //   const { accessToken } = res.data.accessToken; 
+    //   const { refreshToken } = res.data.refreshToken;
+    //   console.log(accessToken);
+    //   console.log(refreshToken);
+    // })
 
     
     
