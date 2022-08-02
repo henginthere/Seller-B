@@ -14,6 +14,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 @EnableWebSecurity
@@ -51,6 +54,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
+
+                .cors().configurationSource((CorsConfigurationSource) corsFilter)
+                .and()
                 // token을 사용하는 방식이기 때문에 csrf를 disable합니다.
                 .csrf().disable()
 
@@ -68,12 +74,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .authorizeRequests()
-                .antMatchers("/manager/register").permitAll() //관리자 가입
-                .antMatchers("/auth/**").permitAll() //로그인 및 토큰재발급
-                .antMatchers("/consultant/register").hasRole("ADMIN") // 상담사 가입 페이지는 관리자만 접근 가능
-                .antMatchers("/admin/**").hasRole("ADMIN") //ADMIN 권한만 접근 가능(나중에 manager/consultant 권한 나눌때 사용)
-                //.antMatchers("/notice/**").hasRole("USER")
-                .antMatchers("/notice/**").permitAll()
+//                .antMatchers("/manager/register").permitAll() //관리자 가입
+//                .antMatchers("/auth/**").permitAll() //로그인 및 토큰재발급
+//                .antMatchers("/consultant/register").hasRole("ADMIN") // 상담사 가입 페이지는 관리자만 접근 가능
+//                .antMatchers("/admin/**").hasRole("ADMIN") //ADMIN 권한만 접근 가능(나중에 manager/consultant 권한 나눌때 사용)
+//                //.antMatchers("/notice/**").hasRole("USER")
+//                .antMatchers("/notice/**").permitAll()
+                .antMatchers("/**").permitAll()
 
                 .anyRequest().authenticated()
 
@@ -82,11 +89,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     }
 
+
 //    @Bean
 //    public CorsConfigurationSource corsConfigurationSource() {
 //        CorsConfiguration configuration = new CorsConfiguration();
 //
-//        configuration.addAllowedOrigin("{hostURL:frontEndPort}");
+//        configuration.addAllowedOrigin("*");
 //        configuration.addAllowedHeader("*");
 //        configuration.addAllowedMethod("*");
 //        configuration.setAllowCredentials(true);
