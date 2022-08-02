@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:ignore="MergeRootFrame">
+    android:layout_height="match_parent">
 
     <fragment
         android:id="@+id/container"
@@ -15,12 +14,11 @@
         app:navGraph="@navigation/nav_graph" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_Nav"
+        android:id="@+id/bottom_nav"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         app:labelVisibilityMode="unlabeled"
         app:menu="@menu/bottom_navigation_menu"
-        app:elevation="8dp"
         android:layout_gravity="bottom"
         />
 </FrameLayout>

@@ -1,6 +1,5 @@
 package com.ssafy.sellerb.ui.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.NavController
@@ -20,11 +19,6 @@ class MainActivity : BaseActivity<MainViewModel>(){
         const val TAG = "MainActivity"
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-    }
-
     lateinit var navController: NavController
 
     override fun provideLayoutId(): View {
@@ -37,12 +31,12 @@ class MainActivity : BaseActivity<MainViewModel>(){
 
     override fun setUpView(savedInstanceState: Bundle?) {
         navController = findNavController(R.id.container)
+
         binding.bottomNav.setupWithNavController(navController)
 
         navController.addOnDestinationChangedListener{ _, destination, _ ->
             onDestinationChanged(destination)
         }
-
     }
     private fun onDestinationChanged(destination: NavDestination){
         when(destination.id){
@@ -55,5 +49,9 @@ class MainActivity : BaseActivity<MainViewModel>(){
             }
 
         }
+    }
+
+    override fun onNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onNavigateUp()
     }
 }

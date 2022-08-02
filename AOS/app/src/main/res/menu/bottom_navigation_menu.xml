@@ -2,14 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/item_home"
-        android:title="@string/menu_home"
-        android:icon="@drawable/selector_home"
-        app:showAsAction="always"/>
-
     <item android:id="@+id/item_my_page"
         android:title="@string/menu_my_page"
+        android:titleCondensed="@string/menu_my_page"
         android:icon="@drawable/selector_my_page"
+        app:showAsAction="always"/>
+
+    <item android:id="@+id/item_home"
+        android:title="@string/menu_home"
+        android:titleCondensed="@string/menu_home"
+        android:icon="@drawable/selector_home"
         app:showAsAction="always"/>
 
 </menu>
