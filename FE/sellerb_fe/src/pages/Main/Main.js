@@ -1,7 +1,14 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
 import './Main.css'
+
+import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
+import { LOGIN } from '../../slices/userSlice'
+
+// import { loginUser }
+import { setRefreshToken } from '../../storage/Cookie';
+import { SET_TOKEN } from '../../slices/authSlice';
 
 // import material ui
 import { styled } from "@mui/material/styles"
@@ -12,16 +19,49 @@ import FormControlLabel from '@mui/material/Checkbox';
 
 
 function Main() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // const MyTextField = style
   let [id, setId] = useState("");
+  let [pass, setPass] = useState("");
 
   const onIdHandler = (e)=>{
-    console.log(e.target.value)
-    setId(e.target.value)
+    setId(e.target.value);
   }
 
-  const onLoginButtonHandler = () =>{
+  const onPasswordHandler = (e) => {
+    // console.log(e.target.value);
+    setPass(e.target.value);
+  }
+
+  // 로그인 처리 //
+  const onLoginBtn = () =>{
+    // id, password 입력값 유효성 확인하기
+    if( id === "" || pass === ""){
+      alert("아이디와 비밀번호를 입력해주세요");
+      return;
+    }
+
+    const data = {
+      id, 
+      pass,
+    };
+
+    console.log(data);
+
+    axios.post('https://i7d105.p.ssafy.io/api/auth/login', data)
+    .then(res => {
+      const { accessToken } = res.data; 
+      const { refreshToken } = res.data;
+      console.log(accessToken);
+      console.log(refreshToken);
+
+
+
+    })
+
+    
     
   }
 
@@ -59,6 +99,8 @@ function Main() {
               marginLeft: 13,
             }}
             style={{marginBottom : '10px', display: 'block'}}
+            onChange={onPasswordHandler}
+            type="password"
             label='PASSWORD'
             />
      
@@ -69,17 +111,17 @@ function Main() {
                 marginLeft: 13,
                 width: 200,
               }}
-              > <Link to={'/manager/main'} className="link-to">Login</Link>
+              onClick={onLoginBtn}
+              > Login
               </Button>
     
-              <div className='FormControlLabel-wrapper'>
+              {/* <div className='FormControlLabel-wrapper'>
               <FormControlLabel 
                 style={{ marginLeft: '90px'}} 
                 label="checkManagerLogin" 
-                
               />
               관리자 로그인
-              </div>
+              </div> */}
               <div className='register-resetPassword'>
               <Link to="/manager/register" className="link-to">
                 <div className='manager-register'>
