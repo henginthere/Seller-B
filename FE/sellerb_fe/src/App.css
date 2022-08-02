@@ -1,5 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Edu+QLD+Beginner&display=swap');
+@font-face {
+  font-family: 'twayair';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_tway@1.0/twayair.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@import '~antd/dist/antd.css';
+
+
 .App {
   text-align: center;
+}
+
+body {
+  width: 100%;
 }
 
 .App-logo {
@@ -36,3 +51,9 @@
     transform: rotate(360deg);
   }
 }
+
+.link-to {
+  text-decoration: none;
+  font-family: twayair;
+}
+

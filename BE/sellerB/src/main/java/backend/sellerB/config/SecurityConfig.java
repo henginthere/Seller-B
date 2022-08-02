@@ -68,10 +68,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .authorizeRequests()
+<<<<<<< HEAD
                 .antMatchers("/manager/register").permitAll()
                 .antMatchers("/manager/login").permitAll()
                 .antMatchers("/api/**").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN") //ADMIN 권한만 접근 가능(나중에 manager/consultant 권한 나눌때 사용)
+=======
+                .antMatchers("/manager/register").permitAll() //관리자 가입
+                .antMatchers("/api/**").permitAll() //로그인 및 토큰재발급
+                .antMatchers("/consultant/register").hasRole("ADMIN") // 상담사 가입 페이지는 관리자만 접근 가능
+                .antMatchers("/admin/**").hasRole("ADMIN") //ADMIN 권한만 접근 가능(나중에 manager/consultant 권한 나눌때 사용)
+                //.antMatchers("/notice/**").hasRole("USER")
+                .antMatchers("/notice/**").permitAll()
+>>>>>>> 720ba5db349fc8d76c4fa5a7da843029a6ebe84f
 
                 .anyRequest().authenticated()
 
