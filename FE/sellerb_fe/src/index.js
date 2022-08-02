@@ -8,6 +8,11 @@ import { Provider } from "react-redux";
 import { CookiesProvider } from "react-cookie";
 import { store } from "./store/configureStore";
 
+import axios from 'axios';
+
+// axios.defaults.baseURL = "https://i7d105.p.ssafy.io";
+
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
 <CookiesProvider>
