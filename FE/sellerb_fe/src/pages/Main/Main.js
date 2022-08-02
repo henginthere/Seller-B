@@ -51,9 +51,9 @@ function Main() {
     console.log(data);
 
     axios.post('https://i7d105.p.ssafy.io/api/auth/login', data)
-    .then(res => {
-      const { accessToken } = res.data; 
-      const { refreshToken } = res.data;
+    .then((res) => {
+      const { accessToken } = res.data.accessToken; 
+      const { refreshToken } = res.data.refreshToken;
       console.log(accessToken);
       console.log(refreshToken);
 
