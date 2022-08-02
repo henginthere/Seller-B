@@ -1,30 +1,43 @@
 package backend.sellerB.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@DynamicInsert
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "t_order", schema = "sellerb", catalog = "")
 public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "order_seq")
     private int orderSeq;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "addr_seq")
+    @JsonBackReference
     private Address addr;
+    @CreatedDate
     @Basic
     @Column(name = "order_date")
-    private Timestamp orderDate;
+    private LocalDateTime orderDate;
+    @LastModifiedDate
     @Basic
     @Column(name = "order_mod_date")
-    private Timestamp orderModDate;
+    private LocalDateTime orderModDate;
     @Basic
     @Column(name = "order_state")
     private String orderState;
