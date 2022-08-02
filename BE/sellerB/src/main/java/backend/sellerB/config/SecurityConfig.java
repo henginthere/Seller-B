@@ -3,6 +3,7 @@ package backend.sellerB.config;
 import backend.sellerB.jwt.JwtAccessDeniedHandler;
 import backend.sellerB.jwt.JwtAuthenticationEntryPoint;
 import backend.sellerB.jwt.TokenProvider;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -54,8 +55,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-
-                .cors().configurationSource((CorsConfigurationSource) corsFilter)
+                .cors().configurationSource(request -> {
+                    var cors = new CorsConfiguration();
+                    cors.addAllowedOrigin("*");
+                    cors.addAllowedHeader("*");
+                    cors.addAllowedMethod("*");
+                    return cors;
+                })
                 .and()
                 // token을 사용하는 방식이기 때문에 csrf를 disable합니다.
                 .csrf().disable()
