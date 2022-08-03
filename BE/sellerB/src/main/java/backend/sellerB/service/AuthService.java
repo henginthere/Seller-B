@@ -1,14 +1,11 @@
 package backend.sellerB.service;
 
-import backend.sellerB.controller.AuthController;
-import backend.sellerB.dto.ManagerDto;
 import backend.sellerB.dto.TokenDto;
-import backend.sellerB.exception.UnauthorizedException;
+import backend.sellerB.dto.LoginResponseDto;
 import backend.sellerB.jwt.TokenProvider;
 import backend.sellerB.repository.ConsultantRepository;
 import backend.sellerB.repository.ManagerRepository;
 import lombok.RequiredArgsConstructor;
-import net.bytebuddy.implementation.bind.MethodDelegationBinder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +14,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,7 +34,8 @@ public class AuthService {
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private static final Logger logger = LoggerFactory.getLogger(AuthService.class);
     // 로그인 관련 메서드
-    public TokenDto authorize(String id, String password) {
+    public LoginResponseDto authorize(String id, String password) {
+
 
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(id, password);
@@ -53,15 +50,16 @@ public class AuthService {
 
         logger.info("권한 : "+authorities);
         //logger.info("토큰 발급 :"+tokenDto.getAccessToken());
-
+        TokenDto tokenDto;
         if(authorities.equals("ROLE_ADMIN")){
-            return tokenProvider.createManagerToken(authentication.getName(), authorities);
+            tokenDto = tokenProvider.createManagerToken(authentication.getName(), authorities);
         }
         else{
-            return tokenProvider.createConsultantToken(authentication.getName(),authorities);
+            tokenDto = tokenProvider.createConsultantToken(authentication.getName(),authorities);
         }
        // return tokenProvider.createManagerToken(authentication.getName(), authorities);
 
+        return new LoginResponseDto(tokenDto,authorities);
 
     }
 
