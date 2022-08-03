@@ -50,18 +50,14 @@ function Main() {
     axios.post("/api/auth/login", data)
     .then((res) => {
       // 데이터 자체만 뽑기
-      console.log(res.data);
       const accessToken  = res.data.tokenDto.accessToken;
       const refreshToken = res.data.tokenDto.refreshToken;
       const adminCheck = res.data.authority;
-      console.log("{accessToken } : " + accessToken);
 
-      // authSlice state 에 accessToken 저장 
-      dispatch(SET_TOKEN(accessToken));
+      // localstorage에 저장
+      localStorage.setItem("accessToken", res.data.tokenDto.accessToken);
+      localStorage.setItem("refreshToken", res.data.tokenDto.refreshToken);
 
-      // cookie에 refreshToken 저장 & 확인 
-      setRefreshToken(refreshToken);
-      console.log("getCookieToken: " + getCookieToken());
 
       // isAdmin이라면, Redux isAdmin 값 true로 전환
       dispatch(CHECK_ADMIN());
