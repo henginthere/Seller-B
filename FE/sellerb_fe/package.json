@@ -19,6 +19,7 @@
     "bootstrap": "^5.2.0",
     "date-fns": "^2.29.1",
     "formik": "^2.2.9",
+    "jwt-decode": "^3.1.2",
     "openvidu-react": "^2.22.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.4.0",
@@ -56,5 +57,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy":"https://i7d105.p.ssafy.io"
 }

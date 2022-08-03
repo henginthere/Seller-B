@@ -12,5 +12,9 @@ export const detailNoticeApi= async ( noticeId, success, fail) => {
 
 // get : List : NoticeList.js
 export const listNoticeApi = async (success, fail) => {
-    return await api.get(`/notice`).then(success).catch(fail);
+    return await api.get(`/notice/list`).then(success).catch(fail);
+}
+
+export const searchNoticeApi = async(noticeTitle, success, fail) => {
+    return await api.get(`/notice/search/${noticeTitle}`).then(success).catch(fail);
 }

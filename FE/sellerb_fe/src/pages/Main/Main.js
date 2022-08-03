@@ -7,9 +7,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { LOGIN } from "../../slices/userSlice";
 
 // import { loginUser }
-import { loginUser } from "../../api/userApi";
-import { setRefreshToken } from "../../storage/Cookie";
-import { SET_TOKEN } from "../../slices/authSlice";
+
+import { LoginApi } from "../../api/userApi";
+import { setRefreshToken, getCookieToken } from "../../storage/Cookie";
+import { SET_TOKEN, CHECK_ADMIN } from "../../slices/authSlice";
 
 // import material ui
 import { styled } from "@mui/material/styles";
@@ -18,9 +19,13 @@ import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/Checkbox";
 
+
+
 function Main() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  // const URL = '/api/auth/login'
 
   // const MyTextField = style
   let [id, setId] = useState("");
@@ -31,35 +36,45 @@ function Main() {
   };
 
   const onPasswordHandler = (e) => {
-    // console.log(e.target.value);
     setPass(e.target.value);
   };
 
-  // 로그인 처리 //
-  const onLoginBtn = async ({ id, pass }) => {
-    const res = await loginUser({ id, pass });
+  const isAdmin = useSelector((state) => state.authToken.isAdmin);
+  console.log("(1) isAdmin :" + isAdmin);
+  // 로그인 버튼 클릭 후
+  const onLoginBtn = () => {
+    const data = {
+      id,
+      pass,
+    };
+    axios
+      .post("/api/auth/login", data)
+      .then((res) => {
+        // 데이터 자체만 뽑기
+        const { accessToken } = res.data;
+        const { refreshToken } = res.data;
 
-    if (res.status) {
-      // AT, RT
-      setRefreshToken(res.json.refreshToken);
-      dispatch(SET_TOKEN(res.json.accessToken));
+        // authSlice state 에 accessToken 저장
+        dispatch(SET_TOKEN(accessToken));
 
-      return navigate("/");
-    } else {
-      console.log(res.json);
-    }
+        // cookie에 refreshToken 저장 & 확인
+        setRefreshToken(refreshToken);
+        console.log("getCookieToken: " + getCookieToken());
+
+        // isAdmin이라면, Redux isAdmin 값 true로 전환
+        dispatch(CHECK_ADMIN());
+
+        if (isAdmin) {
+          console.log("(2) isAdmin: " + isAdmin);
+          navigate("/manager/main");
+        }
+        console.log(accessToken);
+        console.log(refreshToken);
+      })
+      .catch((err) => {
+        console.log(err.data);
+      });
   };
-
-  // axios.post('https://i7d105.p.ssafy.io/api/auth/login', data)
-  // .then((res) => {
-  //   if(res === 500){
-  //     console.log("500Error")
-  //   }
-  //   const { accessToken } = res.data.accessToken;
-  //   const { refreshToken } = res.data.refreshToken;
-  //   console.log(accessToken);
-  //   console.log(refreshToken);
-  // })
 
   return (
     <>
@@ -81,7 +96,11 @@ function Main() {
                   marginLeft: 13,
                   fontSize: 15,
                 }}
-                style={{ marginTop: "15px", marginBottom: "10px", display: "block" }}
+                style={{
+                  marginTop: "15px",
+                  marginBottom: "10px",
+                  display: "block",
+                }}
                 value={id}
                 onChange={onIdHandler}
                 label="ID"
@@ -109,7 +128,6 @@ function Main() {
                 }}
                 onClick={onLoginBtn}
               >
-                {" "}
                 Login
               </Button>
 
