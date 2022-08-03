@@ -46,7 +46,7 @@ public class Consultant implements Serializable {
     private String consultantEmail;
     @Basic
     @Column(name = "consultant_del_yn")
-    private Byte consultantDelYn;
+    private String consultantDelYn;
     @Basic
     @Column(name = "consultant_reg_user_seq")
     private Integer consultantRegUserSeq;
