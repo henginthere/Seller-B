@@ -1,9 +1,11 @@
 package backend.sellerB.repository;
 
 import backend.sellerB.entity.Consultant;
+import backend.sellerB.entity.Notice;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface ConsultantRepository extends JpaRepository<Consultant, Integer> {
@@ -12,4 +14,10 @@ public interface ConsultantRepository extends JpaRepository<Consultant, Integer>
 
     Consultant findByConsultantSeq(int consultantSeq);
 
+    List<Consultant> findByConsultantNameContaining(String consultantName);
+
+//    List<Consultant> findByConsultantIdContaining(String consultantId);
+
+
+    List<Consultant> findByProductGroup(Integer productGroup);
 }
