@@ -1,7 +1,9 @@
 package backend.sellerB.service;
 
+import backend.sellerB.dto.ConsultantDto;
 import backend.sellerB.dto.ManagerDto;
 import backend.sellerB.entity.Authority;
+import backend.sellerB.entity.Consultant;
 import backend.sellerB.entity.Manager;
 import backend.sellerB.exception.DuplicateUserException;
 import backend.sellerB.repository.AuthorityRepository;
@@ -9,16 +11,16 @@ import backend.sellerB.repository.ManagerRepository;import backend.sellerB.repos
 import backend.sellerB.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 
-<<<<<<< HEAD
-=======
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
->>>>>>> 720ba5db349fc8d76c4fa5a7da843029a6ebe84f
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -26,13 +28,8 @@ import java.util.Collections;
 public class ManagerService {
     private static final Logger logger = LoggerFactory.getLogger(ManagerService.class);
     private final ManagerRepository managerRepository;
-<<<<<<< HEAD
-
     private final PasswordEncoder passwordEncoder;
 
-=======
-    private final PasswordEncoder passwordEncoder;
->>>>>>> 720ba5db349fc8d76c4fa5a7da843029a6ebe84f
     private final AuthorityRepository authorityRepository;
 
     @Transactional
@@ -62,6 +59,13 @@ public class ManagerService {
         logger.info(manager.getManagerId());
         return ManagerDto.from(managerRepository.save(manager));
 
+    }
+
+    public ManagerDto delete(Integer managerSeq) {
+        Optional<Manager> managerOptional = managerRepository.findById(managerSeq);
+        Manager manager = managerOptional.get();
+        manager.setManagerDelYn(true);
+        return ManagerDto.from(manager);
     }
 
     // SecurityContext에 저장된 username의 정보만 가져옴옴

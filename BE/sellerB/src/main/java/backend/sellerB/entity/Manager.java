@@ -1,7 +1,9 @@
 package backend.sellerB.entity;
 
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.type.descriptor.sql.TinyIntTypeDescriptor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -13,7 +15,8 @@ import java.util.Optional;
 import java.util.Set;
 
 @Entity
-@Getter @Setter
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -47,8 +50,8 @@ public class Manager implements Serializable {
     @Column(name = "manager_image_url")
     private String managerImageUrl;
     @Basic
-    @Column(name = "manager_del_yn")
-    private Byte managerDelYn;
+    @Column(name = "manager_del_yn",columnDefinition = "boolean default false")
+    private Boolean managerDelYn;
     @Basic
     @Column(name = "manager_reg_user_seq")
     private Integer managerRegUserSeq;
@@ -66,8 +69,7 @@ public class Manager implements Serializable {
 
     public <T> Manager(String valueOf, String managerPass, Set<T> singleton) {
     }
-
-
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -88,4 +90,6 @@ public class Manager implements Serializable {
             joinColumns = {@JoinColumn(name = "id", referencedColumnName = "manager_id")},
             inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "authority_name")})
     private Set<Authority> authorities;
+
+
 }
