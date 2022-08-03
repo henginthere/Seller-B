@@ -28,20 +28,20 @@ const NoticeDetail = () => {
     content: "", 
   })
 
-//   const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
 // mount시점에서, 공지사항 id에 해당하는 게시글 받아오기 
-//   useEffect(()=>{
-//     detailNoticeApi(params.id)
-//     .then((res)=>{
-//         // response에 대해 비구조화 할당
-//         setNoticeData(res.data);
-//         console.log(noticeData);
-//     })
-//     .catch((e)=>{
-//         console.log("err")
-//     })
-//   })
+  useEffect(()=>{
+    detailNoticeApi(params.id)
+    .then((res)=>{
+        // response에 대해 비구조화 할당
+        setNoticeData(res.data);
+        console.log(noticeData);
+    })
+    .catch((e)=>{
+        console.log("err")
+    })
+  }, [])
 
   return (
     <>
