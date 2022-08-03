@@ -1,10 +1,10 @@
 FROM node:lts-alpine3.15
 
-WORKDIR /workspace
+WORKDIR /workspace/sellerB/FE/sellerb_fe
 
 # copy dependencies
-COPY package.json /workspace/
-COPY package-lock.json /workspace/
+COPY package.json /workspace/sellerB/FE/sellerb_fe
+COPY package-lock.json /workspace/sellerB/FE/sellerb_fe
 
 RUN npm install
 
