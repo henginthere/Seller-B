@@ -56,7 +56,6 @@ const NoticeDetail = () => {
               placeholder="DetailPage : 수정불가"
             />
           </div>
-
           <div className="write-input-content">
             <input
               readOnly={readOnly}
