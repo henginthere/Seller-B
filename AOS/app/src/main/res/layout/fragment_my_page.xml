@@ -4,9 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="!!!!!!" />
+
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="300dp"
+        android:layout_height="55dp"
+        android:text="로그아웃"
+        android:textSize="19sp"
+        android:layout_gravity="center|top"
+        />
 
 </FrameLayout>

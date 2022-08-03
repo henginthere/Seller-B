@@ -6,6 +6,7 @@ import com.ssafy.sellerb.ViewModelProviderFactory
 import com.ssafy.sellerb.data.repository.UserRepository
 import com.ssafy.sellerb.ui.base.BaseFragment
 import com.ssafy.sellerb.ui.home.HomeViewModel
+import com.ssafy.sellerb.ui.login.LoginViewModel
 import com.ssafy.sellerb.ui.mypage.MyPageViewModel
 import com.ssafy.sellerb.util.CoroutineDispatchers
 import dagger.Module
@@ -34,5 +35,14 @@ class FragmentModule(private val fragment: BaseFragment<*>) {
         fragment, ViewModelProviderFactory(MyPageViewModel::class){
             MyPageViewModel(coroutineDispatchers,userRepository)
         })[MyPageViewModel::class.java]
+
+    @Provides
+    fun provideLoginViewModel(
+        coroutineDispatchers: CoroutineDispatchers,
+        userRepository: UserRepository
+    ): LoginViewModel = ViewModelProvider(
+        fragment, ViewModelProviderFactory(LoginViewModel::class){
+            LoginViewModel(coroutineDispatchers,userRepository)
+        })[LoginViewModel::class.java]
 
 }
