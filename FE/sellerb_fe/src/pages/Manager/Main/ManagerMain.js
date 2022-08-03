@@ -9,14 +9,16 @@ import ManagerMainRight from "../../../components/Manager/Main/ManagerMainRight"
 import NavBar from "../../../components/Common/NavBar/NavBar";
 import Footer from "../../../components/Common/Footer/Footer";
 
+
 function ManagerMain() {
+
   return (
-    <div className='center'>
+    <div className="center">
       {/* HeaderNavBar */}
       <nav>
         <NavBar></NavBar>
       </nav>
-      <div id='wrapper'>
+      <div id="wrapper">
         {/* 좌측 환영인사 및 달력, 회의생성 */}
 
         <ManagerMainLeft />
@@ -26,7 +28,7 @@ function ManagerMain() {
         <ManagerMainRight />
       </div>
       {/* footer */}
-      <div className='center'>
+      <div className="center">
         <Footer />
       </div>
     </div>

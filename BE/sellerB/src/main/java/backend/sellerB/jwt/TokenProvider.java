@@ -32,7 +32,10 @@ public class TokenProvider implements InitializingBean {
 
     private final Logger logger = LoggerFactory.getLogger(TokenProvider.class);
     private final ManagerRepository managerRepository;
+<<<<<<< HEAD
+=======
     private final ConsultantRepository consultantRepository;
+>>>>>>> 720ba5db349fc8d76c4fa5a7da843029a6ebe84f
     private static final String AUTHORITIES_KEY = "auth";
 
     private final String secret;
@@ -65,7 +68,10 @@ public class TokenProvider implements InitializingBean {
         logger.info("매니저토큰권한?:"+authorities);
         Manager manager = managerRepository.findBymanagerId(id).orElseThrow(()->new ManagerNotFoundException("가입되지 않은 정보입니다."));
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 720ba5db349fc8d76c4fa5a7da843029a6ebe84f
         //claim에 managerSeq정보 추가
         String accessToken = Jwts.builder()
                 .claim("managerSeq", manager.getManagerSeq())
@@ -138,6 +144,9 @@ public class TokenProvider implements InitializingBean {
                 Arrays.stream(claims.get(AUTHORITIES_KEY).toString().split(","))
                         .map(SimpleGrantedAuthority::new)
                         .collect(Collectors.toList());
+<<<<<<< HEAD
+        return new UsernamePasswordAuthenticationToken(claims.get("managerSeq"), token, authorities);
+=======
 
         if(claims.get(AUTHORITIES_KEY).toString().equals("ROLE_ADMIN")) {
             return new UsernamePasswordAuthenticationToken(claims.get("managerSeq"), token, authorities);
@@ -146,6 +155,7 @@ public class TokenProvider implements InitializingBean {
             return new UsernamePasswordAuthenticationToken(claims.get("consultantSeq"), token, authorities);
         }
 
+>>>>>>> 720ba5db349fc8d76c4fa5a7da843029a6ebe84f
     }
     /*
      * 토큰 유효성 검사하는 메서드
