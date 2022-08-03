@@ -3,6 +3,7 @@ package backend.sellerB.config;
 import backend.sellerB.jwt.JwtAccessDeniedHandler;
 import backend.sellerB.jwt.JwtAuthenticationEntryPoint;
 import backend.sellerB.jwt.TokenProvider;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -14,6 +15,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 @EnableWebSecurity
@@ -51,6 +55,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
+                .cors().configurationSource(request -> {
+                    var cors = new CorsConfiguration();
+                    cors.addAllowedOrigin("*");
+                    cors.addAllowedHeader("*");
+                    cors.addAllowedMethod("*");
+                    return cors;
+                })
+                .and()
                 // token을 사용하는 방식이기 때문에 csrf를 disable합니다.
                 .csrf().disable()
 
@@ -68,19 +80,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .authorizeRequests()
-<<<<<<< HEAD
-                .antMatchers("/manager/register").permitAll()
-                .antMatchers("/manager/login").permitAll()
-                .antMatchers("/api/**").permitAll()
-                .antMatchers("/admin/**").hasRole("ADMIN") //ADMIN 권한만 접근 가능(나중에 manager/consultant 권한 나눌때 사용)
-=======
-                .antMatchers("/manager/register").permitAll() //관리자 가입
-                .antMatchers("/api/**").permitAll() //로그인 및 토큰재발급
-                .antMatchers("/consultant/register").hasRole("ADMIN") // 상담사 가입 페이지는 관리자만 접근 가능
-                .antMatchers("/admin/**").hasRole("ADMIN") //ADMIN 권한만 접근 가능(나중에 manager/consultant 권한 나눌때 사용)
-                //.antMatchers("/notice/**").hasRole("USER")
-                .antMatchers("/notice/**").permitAll()
->>>>>>> 720ba5db349fc8d76c4fa5a7da843029a6ebe84f
+//                .antMatchers("/manager/register").permitAll() //관리자 가입
+                .antMatchers("/auth/**").permitAll() //로그인 및 토큰재발급
+//                .antMatchers("/consultant/register").hasRole("ADMIN") // 상담사 가입 페이지는 관리자만 접근 가능
+//                .antMatchers("/admin/**").hasRole("ADMIN") //ADMIN 권한만 접근 가능(나중에 manager/consultant 권한 나눌때 사용)
+//                //.antMatchers("/notice/**").hasRole("USER")
+//                .antMatchers("/notice/**").permitAll()
+//                .antMatchers("/**").permitAll()
+                .antMatchers("/product/**").hasRole("ADMIN")
 
                 .anyRequest().authenticated()
 
@@ -89,11 +96,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     }
 
+
 //    @Bean
 //    public CorsConfigurationSource corsConfigurationSource() {
 //        CorsConfiguration configuration = new CorsConfiguration();
 //
-//        configuration.addAllowedOrigin("{hostURL:frontEndPort}");
+//        configuration.addAllowedOrigin("*");
 //        configuration.addAllowedHeader("*");
 //        configuration.addAllowedMethod("*");
 //        configuration.setAllowCredentials(true);
