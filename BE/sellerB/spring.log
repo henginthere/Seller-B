@@ -7153,3 +7153,294 @@ Caused by: java.lang.ClassCastException: class org.springframework.web.filter.Co
 2022-08-02 22:42:44.054  INFO 5116 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2022-08-02 22:42:44.055  INFO 5116 --- [SpringApplicationShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
 2022-08-02 22:42:44.176  INFO 5116 --- [SpringApplicationShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
+2022-08-03 13:28:43.135  INFO 7332 --- [main] b.s.SellerBApplication                   : Starting SellerBApplication using Java 11.0.16 on DESKTOP-KVCQHCD with PID 7332 (C:\SSAFY\SellerB\BE\sellerB\build\classes\java\main started by multicampus in C:\SSAFY\SellerB\BE\sellerB)
+2022-08-03 13:28:43.141  INFO 7332 --- [main] b.s.SellerBApplication                   : No active profile set, falling back to 1 default profile: "default"
+2022-08-03 13:28:43.824  INFO 7332 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-08-03 13:28:43.912  INFO 7332 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 82 ms. Found 13 JPA repository interfaces.
+2022-08-03 13:28:44.474  INFO 7332 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port(s): 5000 (http)
+2022-08-03 13:28:44.489  INFO 7332 --- [main] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2022-08-03 13:28:44.489  INFO 7332 --- [main] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2022-08-03 13:28:44.623  INFO 7332 --- [main] o.a.c.c.C.[.[.[/api]                     : Initializing Spring embedded WebApplicationContext
+2022-08-03 13:28:44.624  INFO 7332 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1450 ms
+2022-08-03 13:28:44.768  INFO 7332 --- [main] o.h.j.i.u.LogHelper                      : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-08-03 13:28:44.804  INFO 7332 --- [main] o.h.Version                              : HHH000412: Hibernate ORM core version 5.6.10.Final
+2022-08-03 13:28:44.922  INFO 7332 --- [main] o.h.a.c.Version                          : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-08-03 13:28:45.005  INFO 7332 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2022-08-03 13:28:45.174  INFO 7332 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2022-08-03 13:28:45.190  INFO 7332 --- [main] o.h.d.Dialect                            : HHH000400: Using dialect: org.hibernate.dialect.MariaDB106Dialect
+2022-08-03 13:28:46.627  INFO 7332 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-08-03 13:28:46.634  INFO 7332 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-08-03 13:28:47.003  WARN 7332 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-08-03 13:28:47.323  WARN 7332 --- [main] o.s.s.c.a.w.b.WebSecurity                : You are asking Spring Security to ignore Ant [pattern='/favicon.ico']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2022-08-03 13:28:47.323  INFO 7332 --- [main] o.s.s.w.DefaultSecurityFilterChain       : Will not secure Ant [pattern='/favicon.ico']
+2022-08-03 13:28:47.323  WARN 7332 --- [main] o.s.s.c.a.w.b.WebSecurity                : You are asking Spring Security to ignore Ant [pattern='/error']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2022-08-03 13:28:47.324  INFO 7332 --- [main] o.s.s.w.DefaultSecurityFilterChain       : Will not secure Ant [pattern='/error']
+2022-08-03 13:28:47.324  WARN 7332 --- [main] o.s.s.c.a.w.b.WebSecurity                : You are asking Spring Security to ignore Ant [pattern='/configuration/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2022-08-03 13:28:47.324  INFO 7332 --- [main] o.s.s.w.DefaultSecurityFilterChain       : Will not secure Ant [pattern='/configuration/**']
+2022-08-03 13:28:47.350  INFO 7332 --- [main] o.s.s.w.DefaultSecurityFilterChain       : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@41041c31, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@34a482d0, org.springframework.security.web.context.SecurityContextPersistenceFilter@2b0d818d, org.springframework.security.web.header.HeaderWriterFilter@aaf4375, org.springframework.web.filter.CorsFilter@2a738d47, org.springframework.security.web.authentication.logout.LogoutFilter@69efdfd9, org.springframework.web.filter.CorsFilter@8b13d91, backend.sellerB.jwt.JwtFilter@6939f18a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@306c8e09, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@762d2e4c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@8bd9d08, org.springframework.security.web.session.SessionManagementFilter@4ac26092, org.springframework.security.web.access.ExceptionTranslationFilter@21f9a305, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@6fc3f1a7]
+2022-08-03 13:28:47.928  INFO 7332 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port(s): 5000 (http) with context path '/api'
+2022-08-03 13:28:47.937  INFO 7332 --- [main] b.s.SellerBApplication                   : Started SellerBApplication in 5.345 seconds (JVM running for 7.646)
+2022-08-03 13:29:53.147  INFO 7332 --- [http-nio-5000-exec-3] o.a.c.c.C.[.[.[/api]                     : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-08-03 13:29:53.148  INFO 7332 --- [http-nio-5000-exec-3] o.s.w.s.DispatcherServlet                : Initializing Servlet 'dispatcherServlet'
+2022-08-03 13:29:53.149  INFO 7332 --- [http-nio-5000-exec-3] o.s.w.s.DispatcherServlet                : Completed initialization in 1 ms
+2022-08-03 13:29:53.492 TRACE 7332 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicBinder                    : binding parameter [1] as [VARCHAR] - [test22]
+2022-08-03 13:29:53.510 TRACE 7332 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_1_7_0_] : [INTEGER]) - [4]
+2022-08-03 13:29:53.511 TRACE 7332 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([authorit1_16_1_] : [VARCHAR]) - [ROLE_ADMIN]
+2022-08-03 13:29:53.518 TRACE 7332 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([brand_s13_7_0_] : [INTEGER]) - [null]
+2022-08-03 13:29:53.519 TRACE 7332 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_2_7_0_] : [TINYINT]) - [null]
+2022-08-03 13:29:53.519 TRACE 7332 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_3_7_0_] : [VARCHAR]) - [null]
+2022-08-03 13:29:53.520 TRACE 7332 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_4_7_0_] : [VARCHAR]) - [test22]
+2022-08-03 13:29:53.520 TRACE 7332 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_5_7_0_] : [VARCHAR]) - [null]
+2022-08-03 13:29:53.520 TRACE 7332 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_6_7_0_] : [TIMESTAMP]) - [null]
+2022-08-03 13:29:53.521 TRACE 7332 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_7_7_0_] : [INTEGER]) - [null]
+2022-08-03 13:29:53.521 TRACE 7332 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_8_7_0_] : [VARCHAR]) - [null]
+2022-08-03 13:29:53.521 TRACE 7332 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_9_7_0_] : [VARCHAR]) - [$2a$10$JVx7356NAUeWt2mOI.NPGu6LA3LWTxzpL3gBBmc6hVDa036aNNevC]
+2022-08-03 13:29:53.521 TRACE 7332 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([manager10_7_0_] : [TIMESTAMP]) - [null]
+2022-08-03 13:29:53.521 TRACE 7332 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([manager11_7_0_] : [INTEGER]) - [null]
+2022-08-03 13:29:53.521 TRACE 7332 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([manager12_7_0_] : [VARCHAR]) - [null]
+2022-08-03 13:29:53.521 TRACE 7332 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_4_7_0_] : [VARCHAR]) - [test22]
+2022-08-03 13:29:53.523 TRACE 7332 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([id1_17_0__] : [VARCHAR]) - [test22]
+2022-08-03 13:29:53.530 TRACE 7332 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([authorit2_17_0__] : [VARCHAR]) - [ROLE_ADMIN]
+2022-08-03 13:29:53.551 TRACE 7332 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicBinder                    : binding parameter [1] as [VARCHAR] - [test22]
+2022-08-03 13:29:53.565 TRACE 7332 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_1_7_0_] : [INTEGER]) - [4]
+2022-08-03 13:29:53.565 TRACE 7332 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([authorit1_16_1_] : [VARCHAR]) - [ROLE_ADMIN]
+2022-08-03 13:29:53.565 TRACE 7332 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([id1_17_0__] : [VARCHAR]) - [test22]
+2022-08-03 13:29:53.648  INFO 7332 --- [http-nio-5000-exec-3] b.s.s.AuthService                        : 권한 : ROLE_ADMIN
+2022-08-03 13:29:53.648  INFO 7332 --- [http-nio-5000-exec-3] b.s.j.TokenProvider                      : 매니저토큰권한?:ROLE_ADMIN
+2022-08-03 13:29:53.650 TRACE 7332 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicBinder                    : binding parameter [1] as [VARCHAR] - [test22]
+2022-08-03 13:29:53.662 TRACE 7332 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_1_7_0_] : [INTEGER]) - [4]
+2022-08-03 13:29:53.662 TRACE 7332 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([authorit1_16_1_] : [VARCHAR]) - [ROLE_ADMIN]
+2022-08-03 13:29:53.663 TRACE 7332 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([id1_17_0__] : [VARCHAR]) - [test22]
+2022-08-03 13:59:17.417  INFO 7332 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-08-03 13:59:17.418  INFO 7332 --- [SpringApplicationShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2022-08-03 13:59:17.497  INFO 7332 --- [SpringApplicationShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
+2022-08-03 13:59:22.359  INFO 14860 --- [main] b.s.SellerBApplication                   : Starting SellerBApplication using Java 11.0.16 on DESKTOP-KVCQHCD with PID 14860 (C:\SSAFY\SellerB\BE\sellerB\build\classes\java\main started by multicampus in C:\SSAFY\SellerB\BE\sellerB)
+2022-08-03 13:59:22.369  INFO 14860 --- [main] b.s.SellerBApplication                   : No active profile set, falling back to 1 default profile: "default"
+2022-08-03 13:59:23.044  INFO 14860 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-08-03 13:59:23.113  INFO 14860 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 63 ms. Found 13 JPA repository interfaces.
+2022-08-03 13:59:23.526  INFO 14860 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port(s): 5000 (http)
+2022-08-03 13:59:23.542  INFO 14860 --- [main] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2022-08-03 13:59:23.542  INFO 14860 --- [main] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2022-08-03 13:59:23.651  INFO 14860 --- [main] o.a.c.c.C.[.[.[/api]                     : Initializing Spring embedded WebApplicationContext
+2022-08-03 13:59:23.651  INFO 14860 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1230 ms
+2022-08-03 13:59:23.771  INFO 14860 --- [main] o.h.j.i.u.LogHelper                      : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-08-03 13:59:23.802  INFO 14860 --- [main] o.h.Version                              : HHH000412: Hibernate ORM core version 5.6.10.Final
+2022-08-03 13:59:23.912  INFO 14860 --- [main] o.h.a.c.Version                          : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-08-03 13:59:23.991  INFO 14860 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2022-08-03 13:59:24.124  INFO 14860 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2022-08-03 13:59:24.140  INFO 14860 --- [main] o.h.d.Dialect                            : HHH000400: Using dialect: org.hibernate.dialect.MariaDB106Dialect
+2022-08-03 13:59:25.572  INFO 14860 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-08-03 13:59:25.584  INFO 14860 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-08-03 13:59:25.943  WARN 14860 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-08-03 13:59:26.258  WARN 14860 --- [main] o.s.s.c.a.w.b.WebSecurity                : You are asking Spring Security to ignore Ant [pattern='/favicon.ico']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2022-08-03 13:59:26.258  INFO 14860 --- [main] o.s.s.w.DefaultSecurityFilterChain       : Will not secure Ant [pattern='/favicon.ico']
+2022-08-03 13:59:26.258  WARN 14860 --- [main] o.s.s.c.a.w.b.WebSecurity                : You are asking Spring Security to ignore Ant [pattern='/error']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2022-08-03 13:59:26.258  INFO 14860 --- [main] o.s.s.w.DefaultSecurityFilterChain       : Will not secure Ant [pattern='/error']
+2022-08-03 13:59:26.258  WARN 14860 --- [main] o.s.s.c.a.w.b.WebSecurity                : You are asking Spring Security to ignore Ant [pattern='/configuration/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2022-08-03 13:59:26.258  INFO 14860 --- [main] o.s.s.w.DefaultSecurityFilterChain       : Will not secure Ant [pattern='/configuration/**']
+2022-08-03 13:59:26.317  INFO 14860 --- [main] o.s.s.w.DefaultSecurityFilterChain       : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@15324f25, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7b9f7087, org.springframework.security.web.context.SecurityContextPersistenceFilter@721fc228, org.springframework.security.web.header.HeaderWriterFilter@24bc06dd, org.springframework.web.filter.CorsFilter@22e650e, org.springframework.security.web.authentication.logout.LogoutFilter@2a738d47, org.springframework.web.filter.CorsFilter@6f91fbda, backend.sellerB.jwt.JwtFilter@30a79476, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@623a891d, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@58a0f75b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@376bae20, org.springframework.security.web.session.SessionManagementFilter@5de14222, org.springframework.security.web.access.ExceptionTranslationFilter@48f95f96, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@267309f7]
+2022-08-03 13:59:26.880  INFO 14860 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port(s): 5000 (http) with context path '/api'
+2022-08-03 13:59:26.895  INFO 14860 --- [main] b.s.SellerBApplication                   : Started SellerBApplication in 5.245 seconds (JVM running for 6.454)
+2022-08-03 13:59:41.705  INFO 14860 --- [http-nio-5000-exec-3] o.a.c.c.C.[.[.[/api]                     : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-08-03 13:59:41.706  INFO 14860 --- [http-nio-5000-exec-3] o.s.w.s.DispatcherServlet                : Initializing Servlet 'dispatcherServlet'
+2022-08-03 13:59:41.707  INFO 14860 --- [http-nio-5000-exec-3] o.s.w.s.DispatcherServlet                : Completed initialization in 1 ms
+2022-08-03 13:59:42.031 TRACE 14860 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicBinder                    : binding parameter [1] as [VARCHAR] - [test22]
+2022-08-03 13:59:42.047 TRACE 14860 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_1_7_0_] : [INTEGER]) - [4]
+2022-08-03 13:59:42.047 TRACE 14860 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([authorit1_16_1_] : [VARCHAR]) - [ROLE_ADMIN]
+2022-08-03 13:59:42.052 TRACE 14860 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([brand_s13_7_0_] : [INTEGER]) - [null]
+2022-08-03 13:59:42.052 TRACE 14860 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_2_7_0_] : [TINYINT]) - [null]
+2022-08-03 13:59:42.052 TRACE 14860 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_3_7_0_] : [VARCHAR]) - [null]
+2022-08-03 13:59:42.052 TRACE 14860 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_4_7_0_] : [VARCHAR]) - [test22]
+2022-08-03 13:59:42.052 TRACE 14860 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_5_7_0_] : [VARCHAR]) - [null]
+2022-08-03 13:59:42.052 TRACE 14860 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_6_7_0_] : [TIMESTAMP]) - [null]
+2022-08-03 13:59:42.052 TRACE 14860 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_7_7_0_] : [INTEGER]) - [null]
+2022-08-03 13:59:42.052 TRACE 14860 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_8_7_0_] : [VARCHAR]) - [null]
+2022-08-03 13:59:42.052 TRACE 14860 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_9_7_0_] : [VARCHAR]) - [$2a$10$JVx7356NAUeWt2mOI.NPGu6LA3LWTxzpL3gBBmc6hVDa036aNNevC]
+2022-08-03 13:59:42.052 TRACE 14860 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([manager10_7_0_] : [TIMESTAMP]) - [null]
+2022-08-03 13:59:42.052 TRACE 14860 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([manager11_7_0_] : [INTEGER]) - [null]
+2022-08-03 13:59:42.052 TRACE 14860 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([manager12_7_0_] : [VARCHAR]) - [null]
+2022-08-03 13:59:42.052 TRACE 14860 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_4_7_0_] : [VARCHAR]) - [test22]
+2022-08-03 13:59:42.053 TRACE 14860 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([id1_17_0__] : [VARCHAR]) - [test22]
+2022-08-03 13:59:42.058 TRACE 14860 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([authorit2_17_0__] : [VARCHAR]) - [ROLE_ADMIN]
+2022-08-03 13:59:42.079 TRACE 14860 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicBinder                    : binding parameter [1] as [VARCHAR] - [test22]
+2022-08-03 13:59:42.090 TRACE 14860 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_1_7_0_] : [INTEGER]) - [4]
+2022-08-03 13:59:42.090 TRACE 14860 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([authorit1_16_1_] : [VARCHAR]) - [ROLE_ADMIN]
+2022-08-03 13:59:42.090 TRACE 14860 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([id1_17_0__] : [VARCHAR]) - [test22]
+2022-08-03 13:59:42.167  INFO 14860 --- [http-nio-5000-exec-3] b.s.s.AuthService                        : 권한 : ROLE_ADMIN
+2022-08-03 13:59:42.167  INFO 14860 --- [http-nio-5000-exec-3] b.s.j.TokenProvider                      : 매니저토큰권한?:ROLE_ADMIN
+2022-08-03 13:59:42.169 TRACE 14860 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicBinder                    : binding parameter [1] as [VARCHAR] - [test22]
+2022-08-03 13:59:42.181 TRACE 14860 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_1_7_0_] : [INTEGER]) - [4]
+2022-08-03 13:59:42.182 TRACE 14860 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([authorit1_16_1_] : [VARCHAR]) - [ROLE_ADMIN]
+2022-08-03 13:59:42.182 TRACE 14860 --- [http-nio-5000-exec-3] o.h.t.d.s.BasicExtractor                 : extracted value ([id1_17_0__] : [VARCHAR]) - [test22]
+2022-08-03 14:01:16.532 TRACE 14860 --- [http-nio-5000-exec-5] o.h.t.d.s.BasicBinder                    : binding parameter [1] as [VARCHAR] - [test22]
+2022-08-03 14:01:16.544 TRACE 14860 --- [http-nio-5000-exec-5] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_1_7_0_] : [INTEGER]) - [4]
+2022-08-03 14:01:16.544 TRACE 14860 --- [http-nio-5000-exec-5] o.h.t.d.s.BasicExtractor                 : extracted value ([authorit1_16_1_] : [VARCHAR]) - [ROLE_ADMIN]
+2022-08-03 14:01:16.545 TRACE 14860 --- [http-nio-5000-exec-5] o.h.t.d.s.BasicExtractor                 : extracted value ([brand_s13_7_0_] : [INTEGER]) - [null]
+2022-08-03 14:01:16.545 TRACE 14860 --- [http-nio-5000-exec-5] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_2_7_0_] : [TINYINT]) - [null]
+2022-08-03 14:01:16.545 TRACE 14860 --- [http-nio-5000-exec-5] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_3_7_0_] : [VARCHAR]) - [null]
+2022-08-03 14:01:16.545 TRACE 14860 --- [http-nio-5000-exec-5] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_4_7_0_] : [VARCHAR]) - [test22]
+2022-08-03 14:01:16.545 TRACE 14860 --- [http-nio-5000-exec-5] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_5_7_0_] : [VARCHAR]) - [null]
+2022-08-03 14:01:16.545 TRACE 14860 --- [http-nio-5000-exec-5] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_6_7_0_] : [TIMESTAMP]) - [null]
+2022-08-03 14:01:16.546 TRACE 14860 --- [http-nio-5000-exec-5] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_7_7_0_] : [INTEGER]) - [null]
+2022-08-03 14:01:16.546 TRACE 14860 --- [http-nio-5000-exec-5] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_8_7_0_] : [VARCHAR]) - [null]
+2022-08-03 14:01:16.546 TRACE 14860 --- [http-nio-5000-exec-5] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_9_7_0_] : [VARCHAR]) - [$2a$10$JVx7356NAUeWt2mOI.NPGu6LA3LWTxzpL3gBBmc6hVDa036aNNevC]
+2022-08-03 14:01:16.546 TRACE 14860 --- [http-nio-5000-exec-5] o.h.t.d.s.BasicExtractor                 : extracted value ([manager10_7_0_] : [TIMESTAMP]) - [null]
+2022-08-03 14:01:16.546 TRACE 14860 --- [http-nio-5000-exec-5] o.h.t.d.s.BasicExtractor                 : extracted value ([manager11_7_0_] : [INTEGER]) - [null]
+2022-08-03 14:01:16.546 TRACE 14860 --- [http-nio-5000-exec-5] o.h.t.d.s.BasicExtractor                 : extracted value ([manager12_7_0_] : [VARCHAR]) - [null]
+2022-08-03 14:01:16.547 TRACE 14860 --- [http-nio-5000-exec-5] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_4_7_0_] : [VARCHAR]) - [test22]
+2022-08-03 14:01:16.547 TRACE 14860 --- [http-nio-5000-exec-5] o.h.t.d.s.BasicExtractor                 : extracted value ([id1_17_0__] : [VARCHAR]) - [test22]
+2022-08-03 14:01:16.547 TRACE 14860 --- [http-nio-5000-exec-5] o.h.t.d.s.BasicExtractor                 : extracted value ([authorit2_17_0__] : [VARCHAR]) - [ROLE_ADMIN]
+2022-08-03 14:01:16.551 TRACE 14860 --- [http-nio-5000-exec-5] o.h.t.d.s.BasicBinder                    : binding parameter [1] as [VARCHAR] - [test22]
+2022-08-03 14:01:16.563 TRACE 14860 --- [http-nio-5000-exec-5] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_1_7_0_] : [INTEGER]) - [4]
+2022-08-03 14:01:16.563 TRACE 14860 --- [http-nio-5000-exec-5] o.h.t.d.s.BasicExtractor                 : extracted value ([authorit1_16_1_] : [VARCHAR]) - [ROLE_ADMIN]
+2022-08-03 14:01:16.563 TRACE 14860 --- [http-nio-5000-exec-5] o.h.t.d.s.BasicExtractor                 : extracted value ([id1_17_0__] : [VARCHAR]) - [test22]
+2022-08-03 14:01:16.640  INFO 14860 --- [http-nio-5000-exec-5] b.s.s.AuthService                        : 권한 : ROLE_ADMIN
+2022-08-03 14:01:16.640  INFO 14860 --- [http-nio-5000-exec-5] b.s.j.TokenProvider                      : 매니저토큰권한?:ROLE_ADMIN
+2022-08-03 14:01:16.642 TRACE 14860 --- [http-nio-5000-exec-5] o.h.t.d.s.BasicBinder                    : binding parameter [1] as [VARCHAR] - [test22]
+2022-08-03 14:01:16.653 TRACE 14860 --- [http-nio-5000-exec-5] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_1_7_0_] : [INTEGER]) - [4]
+2022-08-03 14:01:16.654 TRACE 14860 --- [http-nio-5000-exec-5] o.h.t.d.s.BasicExtractor                 : extracted value ([authorit1_16_1_] : [VARCHAR]) - [ROLE_ADMIN]
+2022-08-03 14:01:16.654 TRACE 14860 --- [http-nio-5000-exec-5] o.h.t.d.s.BasicExtractor                 : extracted value ([id1_17_0__] : [VARCHAR]) - [test22]
+2022-08-03 14:01:30.763 TRACE 14860 --- [http-nio-5000-exec-6] o.h.t.d.s.BasicBinder                    : binding parameter [1] as [VARCHAR] - [test22]
+2022-08-03 14:01:30.779 TRACE 14860 --- [http-nio-5000-exec-6] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_1_7_0_] : [INTEGER]) - [4]
+2022-08-03 14:01:30.780 TRACE 14860 --- [http-nio-5000-exec-6] o.h.t.d.s.BasicExtractor                 : extracted value ([authorit1_16_1_] : [VARCHAR]) - [ROLE_ADMIN]
+2022-08-03 14:01:30.780 TRACE 14860 --- [http-nio-5000-exec-6] o.h.t.d.s.BasicExtractor                 : extracted value ([brand_s13_7_0_] : [INTEGER]) - [null]
+2022-08-03 14:01:30.781 TRACE 14860 --- [http-nio-5000-exec-6] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_2_7_0_] : [TINYINT]) - [null]
+2022-08-03 14:01:30.781 TRACE 14860 --- [http-nio-5000-exec-6] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_3_7_0_] : [VARCHAR]) - [null]
+2022-08-03 14:01:30.781 TRACE 14860 --- [http-nio-5000-exec-6] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_4_7_0_] : [VARCHAR]) - [test22]
+2022-08-03 14:01:30.781 TRACE 14860 --- [http-nio-5000-exec-6] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_5_7_0_] : [VARCHAR]) - [null]
+2022-08-03 14:01:30.781 TRACE 14860 --- [http-nio-5000-exec-6] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_6_7_0_] : [TIMESTAMP]) - [null]
+2022-08-03 14:01:30.782 TRACE 14860 --- [http-nio-5000-exec-6] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_7_7_0_] : [INTEGER]) - [null]
+2022-08-03 14:01:30.782 TRACE 14860 --- [http-nio-5000-exec-6] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_8_7_0_] : [VARCHAR]) - [null]
+2022-08-03 14:01:30.782 TRACE 14860 --- [http-nio-5000-exec-6] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_9_7_0_] : [VARCHAR]) - [$2a$10$JVx7356NAUeWt2mOI.NPGu6LA3LWTxzpL3gBBmc6hVDa036aNNevC]
+2022-08-03 14:01:30.782 TRACE 14860 --- [http-nio-5000-exec-6] o.h.t.d.s.BasicExtractor                 : extracted value ([manager10_7_0_] : [TIMESTAMP]) - [null]
+2022-08-03 14:01:30.783 TRACE 14860 --- [http-nio-5000-exec-6] o.h.t.d.s.BasicExtractor                 : extracted value ([manager11_7_0_] : [INTEGER]) - [null]
+2022-08-03 14:01:30.783 TRACE 14860 --- [http-nio-5000-exec-6] o.h.t.d.s.BasicExtractor                 : extracted value ([manager12_7_0_] : [VARCHAR]) - [null]
+2022-08-03 14:01:30.783 TRACE 14860 --- [http-nio-5000-exec-6] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_4_7_0_] : [VARCHAR]) - [test22]
+2022-08-03 14:01:30.783 TRACE 14860 --- [http-nio-5000-exec-6] o.h.t.d.s.BasicExtractor                 : extracted value ([id1_17_0__] : [VARCHAR]) - [test22]
+2022-08-03 14:01:30.783 TRACE 14860 --- [http-nio-5000-exec-6] o.h.t.d.s.BasicExtractor                 : extracted value ([authorit2_17_0__] : [VARCHAR]) - [ROLE_ADMIN]
+2022-08-03 14:01:30.788 TRACE 14860 --- [http-nio-5000-exec-6] o.h.t.d.s.BasicBinder                    : binding parameter [1] as [VARCHAR] - [test22]
+2022-08-03 14:01:30.800 TRACE 14860 --- [http-nio-5000-exec-6] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_1_7_0_] : [INTEGER]) - [4]
+2022-08-03 14:01:30.801 TRACE 14860 --- [http-nio-5000-exec-6] o.h.t.d.s.BasicExtractor                 : extracted value ([authorit1_16_1_] : [VARCHAR]) - [ROLE_ADMIN]
+2022-08-03 14:01:30.801 TRACE 14860 --- [http-nio-5000-exec-6] o.h.t.d.s.BasicExtractor                 : extracted value ([id1_17_0__] : [VARCHAR]) - [test22]
+2022-08-03 14:01:30.887  INFO 14860 --- [http-nio-5000-exec-6] b.s.s.AuthService                        : 권한 : ROLE_ADMIN
+2022-08-03 14:01:30.887  INFO 14860 --- [http-nio-5000-exec-6] b.s.j.TokenProvider                      : 매니저토큰권한?:ROLE_ADMIN
+2022-08-03 14:01:30.888 TRACE 14860 --- [http-nio-5000-exec-6] o.h.t.d.s.BasicBinder                    : binding parameter [1] as [VARCHAR] - [test22]
+2022-08-03 14:01:30.908 TRACE 14860 --- [http-nio-5000-exec-6] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_1_7_0_] : [INTEGER]) - [4]
+2022-08-03 14:01:30.908 TRACE 14860 --- [http-nio-5000-exec-6] o.h.t.d.s.BasicExtractor                 : extracted value ([authorit1_16_1_] : [VARCHAR]) - [ROLE_ADMIN]
+2022-08-03 14:01:30.909 TRACE 14860 --- [http-nio-5000-exec-6] o.h.t.d.s.BasicExtractor                 : extracted value ([id1_17_0__] : [VARCHAR]) - [test22]
+2022-08-03 14:01:39.662  INFO 14860 --- [http-nio-5000-exec-7] b.s.j.TokenProvider                      : 잘못된 JWT 서명입니다.
+2022-08-03 14:01:39.688 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicBinder                    : binding parameter [1] as [VARCHAR] - [test22]
+2022-08-03 14:01:39.700 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_1_7_0_] : [INTEGER]) - [4]
+2022-08-03 14:01:39.700 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([authorit1_16_1_] : [VARCHAR]) - [ROLE_ADMIN]
+2022-08-03 14:01:39.701 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([brand_s13_7_0_] : [INTEGER]) - [null]
+2022-08-03 14:01:39.701 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_2_7_0_] : [TINYINT]) - [null]
+2022-08-03 14:01:39.701 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_3_7_0_] : [VARCHAR]) - [null]
+2022-08-03 14:01:39.702 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_4_7_0_] : [VARCHAR]) - [test22]
+2022-08-03 14:01:39.702 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_5_7_0_] : [VARCHAR]) - [null]
+2022-08-03 14:01:39.702 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_6_7_0_] : [TIMESTAMP]) - [null]
+2022-08-03 14:01:39.702 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_7_7_0_] : [INTEGER]) - [null]
+2022-08-03 14:01:39.703 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_8_7_0_] : [VARCHAR]) - [null]
+2022-08-03 14:01:39.703 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_9_7_0_] : [VARCHAR]) - [$2a$10$JVx7356NAUeWt2mOI.NPGu6LA3LWTxzpL3gBBmc6hVDa036aNNevC]
+2022-08-03 14:01:39.703 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([manager10_7_0_] : [TIMESTAMP]) - [null]
+2022-08-03 14:01:39.703 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([manager11_7_0_] : [INTEGER]) - [null]
+2022-08-03 14:01:39.704 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([manager12_7_0_] : [VARCHAR]) - [null]
+2022-08-03 14:01:39.704 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_4_7_0_] : [VARCHAR]) - [test22]
+2022-08-03 14:01:39.705 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([id1_17_0__] : [VARCHAR]) - [test22]
+2022-08-03 14:01:39.705 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([authorit2_17_0__] : [VARCHAR]) - [ROLE_ADMIN]
+2022-08-03 14:01:39.708 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicBinder                    : binding parameter [1] as [VARCHAR] - [test22]
+2022-08-03 14:01:39.720 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_1_7_0_] : [INTEGER]) - [4]
+2022-08-03 14:01:39.720 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([authorit1_16_1_] : [VARCHAR]) - [ROLE_ADMIN]
+2022-08-03 14:01:39.720 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([id1_17_0__] : [VARCHAR]) - [test22]
+2022-08-03 14:01:39.795  INFO 14860 --- [http-nio-5000-exec-7] b.s.s.AuthService                        : 권한 : ROLE_ADMIN
+2022-08-03 14:01:39.795  INFO 14860 --- [http-nio-5000-exec-7] b.s.j.TokenProvider                      : 매니저토큰권한?:ROLE_ADMIN
+2022-08-03 14:01:39.797 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicBinder                    : binding parameter [1] as [VARCHAR] - [test22]
+2022-08-03 14:01:39.808 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_1_7_0_] : [INTEGER]) - [4]
+2022-08-03 14:01:39.808 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([authorit1_16_1_] : [VARCHAR]) - [ROLE_ADMIN]
+2022-08-03 14:01:39.808 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([id1_17_0__] : [VARCHAR]) - [test22]
+2022-08-03 14:03:07.958  INFO 14860 --- [http-nio-5000-exec-1] b.s.j.TokenProvider                      : 잘못된 JWT 서명입니다.
+2022-08-03 14:03:07.987 TRACE 14860 --- [http-nio-5000-exec-1] o.h.t.d.s.BasicBinder                    : binding parameter [1] as [VARCHAR] - [test22]
+2022-08-03 14:03:08.000 TRACE 14860 --- [http-nio-5000-exec-1] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_1_7_0_] : [INTEGER]) - [4]
+2022-08-03 14:03:08.000 TRACE 14860 --- [http-nio-5000-exec-1] o.h.t.d.s.BasicExtractor                 : extracted value ([authorit1_16_1_] : [VARCHAR]) - [ROLE_ADMIN]
+2022-08-03 14:03:08.001 TRACE 14860 --- [http-nio-5000-exec-1] o.h.t.d.s.BasicExtractor                 : extracted value ([brand_s13_7_0_] : [INTEGER]) - [null]
+2022-08-03 14:03:08.001 TRACE 14860 --- [http-nio-5000-exec-1] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_2_7_0_] : [TINYINT]) - [null]
+2022-08-03 14:03:08.001 TRACE 14860 --- [http-nio-5000-exec-1] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_3_7_0_] : [VARCHAR]) - [null]
+2022-08-03 14:03:08.002 TRACE 14860 --- [http-nio-5000-exec-1] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_4_7_0_] : [VARCHAR]) - [test22]
+2022-08-03 14:03:08.002 TRACE 14860 --- [http-nio-5000-exec-1] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_5_7_0_] : [VARCHAR]) - [null]
+2022-08-03 14:03:08.002 TRACE 14860 --- [http-nio-5000-exec-1] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_6_7_0_] : [TIMESTAMP]) - [null]
+2022-08-03 14:03:08.002 TRACE 14860 --- [http-nio-5000-exec-1] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_7_7_0_] : [INTEGER]) - [null]
+2022-08-03 14:03:08.003 TRACE 14860 --- [http-nio-5000-exec-1] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_8_7_0_] : [VARCHAR]) - [null]
+2022-08-03 14:03:08.003 TRACE 14860 --- [http-nio-5000-exec-1] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_9_7_0_] : [VARCHAR]) - [$2a$10$JVx7356NAUeWt2mOI.NPGu6LA3LWTxzpL3gBBmc6hVDa036aNNevC]
+2022-08-03 14:03:08.003 TRACE 14860 --- [http-nio-5000-exec-1] o.h.t.d.s.BasicExtractor                 : extracted value ([manager10_7_0_] : [TIMESTAMP]) - [null]
+2022-08-03 14:03:08.004 TRACE 14860 --- [http-nio-5000-exec-1] o.h.t.d.s.BasicExtractor                 : extracted value ([manager11_7_0_] : [INTEGER]) - [null]
+2022-08-03 14:03:08.004 TRACE 14860 --- [http-nio-5000-exec-1] o.h.t.d.s.BasicExtractor                 : extracted value ([manager12_7_0_] : [VARCHAR]) - [null]
+2022-08-03 14:03:08.004 TRACE 14860 --- [http-nio-5000-exec-1] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_4_7_0_] : [VARCHAR]) - [test22]
+2022-08-03 14:03:08.005 TRACE 14860 --- [http-nio-5000-exec-1] o.h.t.d.s.BasicExtractor                 : extracted value ([id1_17_0__] : [VARCHAR]) - [test22]
+2022-08-03 14:03:08.005 TRACE 14860 --- [http-nio-5000-exec-1] o.h.t.d.s.BasicExtractor                 : extracted value ([authorit2_17_0__] : [VARCHAR]) - [ROLE_ADMIN]
+2022-08-03 14:03:08.009 TRACE 14860 --- [http-nio-5000-exec-1] o.h.t.d.s.BasicBinder                    : binding parameter [1] as [VARCHAR] - [test22]
+2022-08-03 14:03:08.021 TRACE 14860 --- [http-nio-5000-exec-1] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_1_7_0_] : [INTEGER]) - [4]
+2022-08-03 14:03:08.021 TRACE 14860 --- [http-nio-5000-exec-1] o.h.t.d.s.BasicExtractor                 : extracted value ([authorit1_16_1_] : [VARCHAR]) - [ROLE_ADMIN]
+2022-08-03 14:03:08.021 TRACE 14860 --- [http-nio-5000-exec-1] o.h.t.d.s.BasicExtractor                 : extracted value ([id1_17_0__] : [VARCHAR]) - [test22]
+2022-08-03 14:03:08.106  INFO 14860 --- [http-nio-5000-exec-1] b.s.s.AuthService                        : 권한 : ROLE_ADMIN
+2022-08-03 14:03:08.106  INFO 14860 --- [http-nio-5000-exec-1] b.s.j.TokenProvider                      : 매니저토큰권한?:ROLE_ADMIN
+2022-08-03 14:03:08.108 TRACE 14860 --- [http-nio-5000-exec-1] o.h.t.d.s.BasicBinder                    : binding parameter [1] as [VARCHAR] - [test22]
+2022-08-03 14:03:08.120 TRACE 14860 --- [http-nio-5000-exec-1] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_1_7_0_] : [INTEGER]) - [4]
+2022-08-03 14:03:08.121 TRACE 14860 --- [http-nio-5000-exec-1] o.h.t.d.s.BasicExtractor                 : extracted value ([authorit1_16_1_] : [VARCHAR]) - [ROLE_ADMIN]
+2022-08-03 14:03:08.121 TRACE 14860 --- [http-nio-5000-exec-1] o.h.t.d.s.BasicExtractor                 : extracted value ([id1_17_0__] : [VARCHAR]) - [test22]
+2022-08-03 14:04:52.704  INFO 14860 --- [http-nio-5000-exec-8] b.s.j.TokenProvider                      : 잘못된 JWT 서명입니다.
+2022-08-03 14:04:52.730 TRACE 14860 --- [http-nio-5000-exec-8] o.h.t.d.s.BasicBinder                    : binding parameter [1] as [VARCHAR] - [test22]
+2022-08-03 14:04:52.743 TRACE 14860 --- [http-nio-5000-exec-8] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_1_7_0_] : [INTEGER]) - [4]
+2022-08-03 14:04:52.743 TRACE 14860 --- [http-nio-5000-exec-8] o.h.t.d.s.BasicExtractor                 : extracted value ([authorit1_16_1_] : [VARCHAR]) - [ROLE_ADMIN]
+2022-08-03 14:04:52.743 TRACE 14860 --- [http-nio-5000-exec-8] o.h.t.d.s.BasicExtractor                 : extracted value ([brand_s13_7_0_] : [INTEGER]) - [null]
+2022-08-03 14:04:52.743 TRACE 14860 --- [http-nio-5000-exec-8] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_2_7_0_] : [TINYINT]) - [null]
+2022-08-03 14:04:52.743 TRACE 14860 --- [http-nio-5000-exec-8] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_3_7_0_] : [VARCHAR]) - [null]
+2022-08-03 14:04:52.743 TRACE 14860 --- [http-nio-5000-exec-8] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_4_7_0_] : [VARCHAR]) - [test22]
+2022-08-03 14:04:52.743 TRACE 14860 --- [http-nio-5000-exec-8] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_5_7_0_] : [VARCHAR]) - [null]
+2022-08-03 14:04:52.743 TRACE 14860 --- [http-nio-5000-exec-8] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_6_7_0_] : [TIMESTAMP]) - [null]
+2022-08-03 14:04:52.743 TRACE 14860 --- [http-nio-5000-exec-8] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_7_7_0_] : [INTEGER]) - [null]
+2022-08-03 14:04:52.743 TRACE 14860 --- [http-nio-5000-exec-8] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_8_7_0_] : [VARCHAR]) - [null]
+2022-08-03 14:04:52.743 TRACE 14860 --- [http-nio-5000-exec-8] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_9_7_0_] : [VARCHAR]) - [$2a$10$JVx7356NAUeWt2mOI.NPGu6LA3LWTxzpL3gBBmc6hVDa036aNNevC]
+2022-08-03 14:04:52.743 TRACE 14860 --- [http-nio-5000-exec-8] o.h.t.d.s.BasicExtractor                 : extracted value ([manager10_7_0_] : [TIMESTAMP]) - [null]
+2022-08-03 14:04:52.743 TRACE 14860 --- [http-nio-5000-exec-8] o.h.t.d.s.BasicExtractor                 : extracted value ([manager11_7_0_] : [INTEGER]) - [null]
+2022-08-03 14:04:52.743 TRACE 14860 --- [http-nio-5000-exec-8] o.h.t.d.s.BasicExtractor                 : extracted value ([manager12_7_0_] : [VARCHAR]) - [null]
+2022-08-03 14:04:52.743 TRACE 14860 --- [http-nio-5000-exec-8] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_4_7_0_] : [VARCHAR]) - [test22]
+2022-08-03 14:04:52.743 TRACE 14860 --- [http-nio-5000-exec-8] o.h.t.d.s.BasicExtractor                 : extracted value ([id1_17_0__] : [VARCHAR]) - [test22]
+2022-08-03 14:04:52.744 TRACE 14860 --- [http-nio-5000-exec-8] o.h.t.d.s.BasicExtractor                 : extracted value ([authorit2_17_0__] : [VARCHAR]) - [ROLE_ADMIN]
+2022-08-03 14:04:52.745 TRACE 14860 --- [http-nio-5000-exec-8] o.h.t.d.s.BasicBinder                    : binding parameter [1] as [VARCHAR] - [test22]
+2022-08-03 14:04:52.760 TRACE 14860 --- [http-nio-5000-exec-8] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_1_7_0_] : [INTEGER]) - [4]
+2022-08-03 14:04:52.760 TRACE 14860 --- [http-nio-5000-exec-8] o.h.t.d.s.BasicExtractor                 : extracted value ([authorit1_16_1_] : [VARCHAR]) - [ROLE_ADMIN]
+2022-08-03 14:04:52.760 TRACE 14860 --- [http-nio-5000-exec-8] o.h.t.d.s.BasicExtractor                 : extracted value ([id1_17_0__] : [VARCHAR]) - [test22]
+2022-08-03 14:04:52.836  INFO 14860 --- [http-nio-5000-exec-8] b.s.s.AuthService                        : 권한 : ROLE_ADMIN
+2022-08-03 14:04:52.836  INFO 14860 --- [http-nio-5000-exec-8] b.s.j.TokenProvider                      : 매니저토큰권한?:ROLE_ADMIN
+2022-08-03 14:04:52.838 TRACE 14860 --- [http-nio-5000-exec-8] o.h.t.d.s.BasicBinder                    : binding parameter [1] as [VARCHAR] - [test22]
+2022-08-03 14:04:52.852 TRACE 14860 --- [http-nio-5000-exec-8] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_1_7_0_] : [INTEGER]) - [4]
+2022-08-03 14:04:52.852 TRACE 14860 --- [http-nio-5000-exec-8] o.h.t.d.s.BasicExtractor                 : extracted value ([authorit1_16_1_] : [VARCHAR]) - [ROLE_ADMIN]
+2022-08-03 14:04:52.853 TRACE 14860 --- [http-nio-5000-exec-8] o.h.t.d.s.BasicExtractor                 : extracted value ([id1_17_0__] : [VARCHAR]) - [test22]
+2022-08-03 14:06:17.174  INFO 14860 --- [http-nio-5000-exec-7] b.s.j.TokenProvider                      : 잘못된 JWT 서명입니다.
+2022-08-03 14:06:17.200 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicBinder                    : binding parameter [1] as [VARCHAR] - [test22]
+2022-08-03 14:06:17.211 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_1_7_0_] : [INTEGER]) - [4]
+2022-08-03 14:06:17.212 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([authorit1_16_1_] : [VARCHAR]) - [ROLE_ADMIN]
+2022-08-03 14:06:17.212 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([brand_s13_7_0_] : [INTEGER]) - [null]
+2022-08-03 14:06:17.212 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_2_7_0_] : [TINYINT]) - [null]
+2022-08-03 14:06:17.213 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_3_7_0_] : [VARCHAR]) - [null]
+2022-08-03 14:06:17.213 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_4_7_0_] : [VARCHAR]) - [test22]
+2022-08-03 14:06:17.213 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_5_7_0_] : [VARCHAR]) - [null]
+2022-08-03 14:06:17.213 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_6_7_0_] : [TIMESTAMP]) - [null]
+2022-08-03 14:06:17.213 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_7_7_0_] : [INTEGER]) - [null]
+2022-08-03 14:06:17.213 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_8_7_0_] : [VARCHAR]) - [null]
+2022-08-03 14:06:17.214 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_9_7_0_] : [VARCHAR]) - [$2a$10$JVx7356NAUeWt2mOI.NPGu6LA3LWTxzpL3gBBmc6hVDa036aNNevC]
+2022-08-03 14:06:17.214 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([manager10_7_0_] : [TIMESTAMP]) - [null]
+2022-08-03 14:06:17.214 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([manager11_7_0_] : [INTEGER]) - [null]
+2022-08-03 14:06:17.214 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([manager12_7_0_] : [VARCHAR]) - [null]
+2022-08-03 14:06:17.215 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_4_7_0_] : [VARCHAR]) - [test22]
+2022-08-03 14:06:17.215 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([id1_17_0__] : [VARCHAR]) - [test22]
+2022-08-03 14:06:17.215 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([authorit2_17_0__] : [VARCHAR]) - [ROLE_ADMIN]
+2022-08-03 14:06:17.220 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicBinder                    : binding parameter [1] as [VARCHAR] - [test22]
+2022-08-03 14:06:17.232 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_1_7_0_] : [INTEGER]) - [4]
+2022-08-03 14:06:17.232 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([authorit1_16_1_] : [VARCHAR]) - [ROLE_ADMIN]
+2022-08-03 14:06:17.232 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([id1_17_0__] : [VARCHAR]) - [test22]
+2022-08-03 14:06:17.307  INFO 14860 --- [http-nio-5000-exec-7] b.s.s.AuthService                        : 권한 : ROLE_ADMIN
+2022-08-03 14:06:17.307  INFO 14860 --- [http-nio-5000-exec-7] b.s.j.TokenProvider                      : 매니저토큰권한?:ROLE_ADMIN
+2022-08-03 14:06:17.309 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicBinder                    : binding parameter [1] as [VARCHAR] - [test22]
+2022-08-03 14:06:17.320 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([manager_1_7_0_] : [INTEGER]) - [4]
+2022-08-03 14:06:17.320 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([authorit1_16_1_] : [VARCHAR]) - [ROLE_ADMIN]
+2022-08-03 14:06:17.320 TRACE 14860 --- [http-nio-5000-exec-7] o.h.t.d.s.BasicExtractor                 : extracted value ([id1_17_0__] : [VARCHAR]) - [test22]
