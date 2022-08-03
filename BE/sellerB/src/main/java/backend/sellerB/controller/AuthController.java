@@ -1,36 +1,32 @@
 package backend.sellerB.controller;
 
 import backend.sellerB.dto.LoginDto;
-import backend.sellerB.dto.ManagerDto;
+import backend.sellerB.dto.LoginResponseDto;
 import backend.sellerB.dto.TokenDto;
-import backend.sellerB.entity.Manager;
-import backend.sellerB.jwt.JwtFilter;
-import backend.sellerB.jwt.TokenProvider;
 import backend.sellerB.repository.ManagerRepository;
 import backend.sellerB.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthController {
 
     private final AuthService authService;
-    private final TokenProvider tokenProvider;
-    private final AuthenticationManagerBuilder authenticationManagerBuilder;
+    private final ManagerRepository managerRepository;
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
      //로그인을 했을때 토큰(AccessToken, RefreshToken)을 주는 메서드
     @PostMapping("/login")
-    public ResponseEntity<TokenDto> login(@Valid @RequestBody LoginDto loginDto) {
-        TokenDto tokenDto = authService.authorize(loginDto.getId(), loginDto.getPass());
-        return ResponseEntity.ok(tokenDto);
+    public ResponseEntity<LoginResponseDto> login(@Valid @RequestBody LoginDto loginDto) {
+        LoginResponseDto loginResponseDto = authService.authorize(loginDto.getId(), loginDto.getPass());
+
+        return ResponseEntity.ok(loginResponseDto);
     }
 
     //AccessToken이 만료되었을 때 토큰(AccessToken , RefreshToken)재발급해주는 메서드

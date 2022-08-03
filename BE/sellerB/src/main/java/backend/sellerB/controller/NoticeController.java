@@ -3,6 +3,11 @@ package backend.sellerB.controller;
 import backend.sellerB.dto.NoticeDto;
 import backend.sellerB.service.AuthService;
 import backend.sellerB.service.NoticeService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -27,7 +32,13 @@ public class NoticeController {
 
     private final NoticeService noticeService;
 
-
+    @Operation(summary = "create notice", description = "공지 가져오기")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = NoticeDto.class))),
+            @ApiResponse(responseCode = "400", description = "BAD REQUEST"),
+            @ApiResponse(responseCode = "404", description = "NOT FOUND"),
+            @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
+    })
     @PostMapping
     public ResponseEntity<NoticeDto> saveNotice(@Valid @RequestBody NoticeDto noticeDto) {
         return ResponseEntity.ok(noticeService.create(noticeDto));
