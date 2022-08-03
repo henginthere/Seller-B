@@ -34,7 +34,7 @@ function AttendanceLog({consultant_id}) {
 
   // axios : 상담사 출결이력 표시
   // useEffect(() => {
-  //   listAttendanceApi(params.consultant_id)
+  //   listConsultantAttendanceApi(params.consultant_id)
   //     .then((res) => {
   //       console.log(res.data);
 
