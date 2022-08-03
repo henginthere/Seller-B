@@ -1,4 +1,6 @@
 import { api } from './api';
+// import { useSelector } from 'react-redux'
+
 
 // post : Register : NoticeWrite.js
 export const registerNoticeApi = async ( content, success, fail ) => {
@@ -12,5 +14,5 @@ export const detailNoticeApi= async ( noticeId, success, fail) => {
 
 // get : List : NoticeList.js
 export const listNoticeApi = async (success, fail) => {
-    return await api.get(`/notice`).then(success).catch(fail);
+    return await api.get(`/notice/list`).then(success).catch(fail);
 }
