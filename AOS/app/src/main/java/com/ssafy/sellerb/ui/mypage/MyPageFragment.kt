@@ -1,6 +1,7 @@
 package com.ssafy.sellerb.ui.mypage
 
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import com.ssafy.sellerb.R
 import com.ssafy.sellerb.databinding.FragmentMyPageBinding
 import com.ssafy.sellerb.di.component.FragmentComponent
@@ -27,6 +28,19 @@ class MyPageFragment : BaseFragment<MyPageViewModel>() {
 
         _binding = FragmentMyPageBinding.bind(view)
 
+        binding.btnLogout.setOnClickListener{
+            viewModel.doLogout()
+        }
+    }
+
+    override fun setUpObserver() {
+        super.setUpObserver()
+
+        viewModel.launchLogin.observe(this){
+            it.getIfNotHandled()?.run{
+                findNavController().navigate(R.id.action_myPageFragment_to_LoginFragment)
+            }
+        }
     }
 
     override fun onDestroyView() {

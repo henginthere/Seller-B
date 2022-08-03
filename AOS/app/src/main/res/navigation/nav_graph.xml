@@ -12,7 +12,10 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_myPageFragment"
-            app:destination="@id/item_my_page" />
+            app:destination="@id/item_my_page"/>
+        <action
+            android:id="@+id/action_homeFragment_to_loginFragment"
+            app:destination="@+id/loginFragment"/>
     </fragment>
 
     <fragment
@@ -23,6 +26,19 @@
         <action
             android:id="@+id/action_myPageFragment_to_HomeFragment"
             app:destination="@id/item_home" />
+        <action
+            android:id="@+id/action_myPageFragment_to_LoginFragment"
+            app:destination="@+id/loginFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.ssafy.sellerb.ui.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_LoginFragment_to_HomeFragment"
+            app:destination="@+id/item_home" />
     </fragment>
 
 </navigation>

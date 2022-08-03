@@ -42,10 +42,10 @@ class MainActivity : BaseActivity<MainViewModel>(){
         when(destination.id){
             R.id.item_home,
             R.id.item_my_page ->{
-                binding.bottomNav.visibility = View.VISIBLE
+                binding.coordinator.visibility = View.VISIBLE
             }
             else ->{
-                binding.bottomNav.visibility = View.GONE
+                binding.coordinator.visibility = View.GONE
             }
 
         }
