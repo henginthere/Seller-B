@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import styled from "styled-components";
-// import Axios from 'axios'
-// import { listNoticeApi } from "../../api/noticeApi";
 
+import { useSelector } from 'react-redux';
+
+
+import { listNoticeApi, searchNoticeApi } from "../../api/noticeApi";
 import "./NoticeList.css";
 import { Footer, NavBar } from "../../components/index";
 
 import getStringDate from "../../utils/date";
+import axios from "axios";
 
+const BASE_URL = "https://i7d105.p.ssafy.io/api";
 const dummyNoticeList = [
   {
     notice_seq: 1,
@@ -26,13 +29,21 @@ const dummyNoticeList = [
     notice_reg_date: getStringDate(new Date()),
   },
 ];
-
+// const noticeList = {};
+// function noticeListApi(){
+//   axios.get(BASE_URL).then(function(res){
+//     noticeList = {...res};
+//     console.log(noticeList);
+//   }).catch((error) =>{
+//     console.log(error);
+//   })
+// }
 function NoticeList() {
-  const navigate = useNavigate();  
+  const navigate = useNavigate();
 
-  const [noticeList, setNoticeList] = useState(""); // -> api res.data 로 값 갱신해주기
+  const [noticeList, setNoticeList] = useState([]); // -> api res.data 로 값 갱신해주기
   const [searchTitle, setSearchTitle] = useState("");
-
+  var isManager = false;
   const onSearchByTitleHandler = (e) => {
     setSearchTitle(e.target.value);
   };
@@ -41,19 +52,49 @@ function NoticeList() {
     // Test
     console.log(searchTitle);
     // Axios
+    // if (searchTitle === "") {
+    //   initNoticeList();
+    // }
+    // searchNoticeApi(searchTitle)
+    //   .then((res) => {
+    //     console.log(res.data);
+    //     setNoticeList(res.data);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+  };
+  const initNoticeList = () => {
+    listNoticeApi()
+      .then((res) => {
+        console.log("response Data : " + res.data);
+
+        setNoticeList(res.data);
+        console.log(noticeList);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
-  // useEffect
-  // useEffect(()=>{
-  //   listNoticeApi()
-  //   .then((res)=>{
-  //     noticeList = res.data; 
-  //     console.log(res.data)
-  //   })
-  //   .catch((err)=>{
-  //     console.log(err);
-  //   })
-  // })
+  const atoken = useSelector((state) => state.authToken.accessToken);
+  useEffect(() => { 
+    console.log("actoken: " + atoken);
+  
+    axios.defaults.headers.common['Authorization'] = `Bearer ${atoken}`;
+
+    axios.get('/api/notice/list')
+
+      .then((res) => {
+        console.log("response Data : " + res.data);
+
+        setNoticeList(res.data);
+        console.log(noticeList);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <>
@@ -80,12 +121,14 @@ function NoticeList() {
               </tr>
             </thead>
             <tbody>
-              {dummyNoticeList.map(function (ele, i) {
+              {noticeList.map((list) => {
                 return (
                   <tr>
-                    <td>{ele.notice_seq}</td>
-                    <td  onClick={() => navigate(`/noticeDetail/${ele.notice_seq}`)}>{ele.notice_title}</td>
-                    <td>{ele.notice_reg_date}</td>
+                    <td>{list.noticeSeq}</td>
+                    <td onClick={() => navigate(`/noticeDetail/${list.noticeSeq}`)}>
+                      {list.noticeTitle}
+                    </td>
+                    <td>{list.noticeRegDate}</td>
                   </tr>
                 );
               })}
@@ -93,12 +136,11 @@ function NoticeList() {
           </table>
         </div>
         <div className="notice-write-wrapper">
-          <Link to="/manager/noticeWrite">
-           
-          
-            <button className="write-btn">글작성</button>
-          </Link>
-        
+          {isManager ? (
+            <Link to="/manager/noticeWrite">
+              <button className="write-btn">글작성</button>
+            </Link>
+          ) : null}
         </div>
       </div>
       <Footer />
