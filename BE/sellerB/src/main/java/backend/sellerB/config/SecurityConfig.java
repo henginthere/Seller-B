@@ -85,8 +85,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/consultant/register").hasRole("ADMIN") // 상담사 가입 페이지는 관리자만 접근 가능
 //                .antMatchers("/admin/**").hasRole("ADMIN") //ADMIN 권한만 접근 가능(나중에 manager/consultant 권한 나눌때 사용)
 //                //.antMatchers("/notice/**").hasRole("USER")
-//                .antMatchers("/notice/**").permitAll()
-//                .antMatchers("/**").permitAll()
+                .antMatchers("/notice/**").permitAll()
+                .antMatchers("/**").permitAll()
                 .antMatchers("/product/**").hasRole("ADMIN")
 
                 .anyRequest().authenticated()
