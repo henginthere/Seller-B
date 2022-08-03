@@ -1,12 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const TOKEN_TIME_OUT = 600*1000; // 600,000
 
+// accessToken 만료시간 처리 
+export const TOKEN_TIME_OUT = 600*1000; // 60초 ㄴ
 
 const initialState = {
     authenticated: false,
     accessToken: null,
-    expireTime: null
+    expireTime: null,
+    isAdmin: false, 
 };
 
 export const tokenSlice = createSlice({
@@ -21,11 +23,14 @@ export const tokenSlice = createSlice({
         DELETE_TOKEN: (state) => {
             state.authenticated = false;
             state.accessToken = null;
-            state.expireTime = null
-        },       
+            state.expireTime = null;
+        },   
+        CHECK_ADMIN: (state) =>{
+            state.isAdmin = true;
+        }    
     }
 })
 
-export const { SET_TOKEN, DELETE_TOKEN } = tokenSlice.actions;
+export const { SET_TOKEN, DELETE_TOKEN, CHECK_ADMIN } = tokenSlice.actions;
 
 export default tokenSlice.reducer;
