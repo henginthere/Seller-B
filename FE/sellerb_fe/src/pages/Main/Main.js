@@ -37,7 +37,8 @@ function Main() {
   };
   
   const isAdmin = useSelector((state)=> state.authToken.isAdmin);
-  console.log("(1) isAdmin :" + isAdmin);
+  const accessT = useSelector((state) => state.authToken.accessToken);
+  // console.log("(1) isAdmin :" + isAdmin);
   // 로그인 버튼 클릭 후
   const onLoginBtn = () => {
   
@@ -49,8 +50,11 @@ function Main() {
     axios.post("/api/auth/login", data)
     .then((res) => {
       // 데이터 자체만 뽑기
-      const { accessToken } = res.data;
-      const { refreshToken } = res.data;
+      console.log(res.data);
+      const accessToken  = res.data.tokenDto.accessToken;
+      const refreshToken = res.data.tokenDto.refreshToken;
+      const adminCheck = res.data.authority;
+      console.log("{accessToken } : " + accessToken);
 
       // authSlice state 에 accessToken 저장 
       dispatch(SET_TOKEN(accessToken));
@@ -62,17 +66,18 @@ function Main() {
       // isAdmin이라면, Redux isAdmin 값 true로 전환
       dispatch(CHECK_ADMIN());
       
-      if(isAdmin){
-        console.log("(2) isAdmin: " + isAdmin);
+      if(adminCheck === 'ROLE_ADMIN'){
+
         navigate("/manager/main");
       }
-
+      else{
+        navigate("/consultant/main");
+      }
 
     })
     .catch((err)=>{
       console.log(err.data);
     })
-
 
   };
   
