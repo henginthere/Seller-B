@@ -9,8 +9,11 @@ import backend.sellerB.repository.ManagerRepository;import backend.sellerB.repos
 import backend.sellerB.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 
+<<<<<<< HEAD
+=======
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+>>>>>>> 720ba5db349fc8d76c4fa5a7da843029a6ebe84f
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +26,13 @@ import java.util.Collections;
 public class ManagerService {
     private static final Logger logger = LoggerFactory.getLogger(ManagerService.class);
     private final ManagerRepository managerRepository;
+<<<<<<< HEAD
+
     private final PasswordEncoder passwordEncoder;
+
+=======
+    private final PasswordEncoder passwordEncoder;
+>>>>>>> 720ba5db349fc8d76c4fa5a7da843029a6ebe84f
     private final AuthorityRepository authorityRepository;
 
     @Transactional
