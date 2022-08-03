@@ -18,6 +18,7 @@ export const tokenSlice = createSlice({
         SET_TOKEN: (state, action) => {
             state.authenticated = true;
             state.accessToken = action.payload;
+            console.log("authSlice - action.payload : " + state.accessToken)
             state.expireTime = new Date().getTime() + TOKEN_TIME_OUT;
         },
         DELETE_TOKEN: (state) => {

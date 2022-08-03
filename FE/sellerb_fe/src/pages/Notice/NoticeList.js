@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+import { useSelector } from 'react-redux';
+
+
 import { listNoticeApi, searchNoticeApi } from "../../api/noticeApi";
 import "./NoticeList.css";
 import { Footer, NavBar } from "../../components/index";
 
 import getStringDate from "../../utils/date";
+import axios from "axios";
 
 const BASE_URL = "https://i7d105.p.ssafy.io/api";
 const dummyNoticeList = [
@@ -72,8 +76,15 @@ function NoticeList() {
         console.log(err);
       });
   };
-  useEffect(() => {
-    listNoticeApi()
+
+  const atoken = useSelector((state) => state.authToken.accessToken);
+  useEffect(() => { 
+    console.log("actoken: " + atoken);
+  
+    axios.defaults.headers.common['Authorization'] = `Bearer ${atoken}`;
+
+    axios.get('/api/notice/list')
+
       .then((res) => {
         console.log("response Data : " + res.data);
 
