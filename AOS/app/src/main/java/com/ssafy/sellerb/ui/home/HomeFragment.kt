@@ -31,6 +31,7 @@ class HomeFragment : BaseFragment<HomeViewModel>(){
 
         linearLayoutManager = LinearLayoutManager(requireContext())
 
+
     }
 
     override fun setUpObserver() {
@@ -39,7 +40,7 @@ class HomeFragment : BaseFragment<HomeViewModel>(){
         viewModel.isLogin.observe(this){
             it.getIfNotHandled()?.run{
                 if(!this){
-                    findNavController().navigate(R.id.action_homeFragment_to_myPageFragment)
+                    findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
                 }
             }
         }
