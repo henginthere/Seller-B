@@ -1,28 +1,19 @@
 package backend.sellerB.service;
 
-import backend.sellerB.controller.AuthController;
-import backend.sellerB.dto.ManagerDto;
 import backend.sellerB.dto.TokenDto;
-import backend.sellerB.exception.UnauthorizedException;
-import backend.sellerB.jwt.JwtFilter;
+import backend.sellerB.dto.LoginResponseDto;
 import backend.sellerB.jwt.TokenProvider;
 import backend.sellerB.repository.ConsultantRepository;
 import backend.sellerB.repository.ManagerRepository;
 import lombok.RequiredArgsConstructor;
-import net.bytebuddy.implementation.bind.MethodDelegationBinder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-<<<<<<< HEAD
-import org.springframework.http.HttpHeaders;
-=======
 import org.springframework.beans.factory.annotation.Autowired;
->>>>>>> 720ba5db349fc8d76c4fa5a7da843029a6ebe84f
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,46 +34,33 @@ public class AuthService {
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private static final Logger logger = LoggerFactory.getLogger(AuthService.class);
     // 로그인 관련 메서드
-    public TokenDto authorize(String id, String password) {
+    public LoginResponseDto authorize(String id, String password) {
+
 
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(id, password);
-<<<<<<< HEAD
-
-=======
->>>>>>> 720ba5db349fc8d76c4fa5a7da843029a6ebe84f
         //실제 검증이 일어나는 부분
         //authenticate 메서드가 실행될 때
 
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
-<<<<<<< HEAD
-
-=======
->>>>>>> 720ba5db349fc8d76c4fa5a7da843029a6ebe84f
         String authorities = getAuthorities(authentication);
-        logger.info("권한 :"+authorities);
 
         //TokenDto tokenDto = tokenProvider.createManagerToken(authentication.getName(), authorities);
 
         logger.info("권한 : "+authorities);
         //logger.info("토큰 발급 :"+tokenDto.getAccessToken());
-
+        TokenDto tokenDto;
         if(authorities.equals("ROLE_ADMIN")){
-            return tokenProvider.createManagerToken(authentication.getName(), authorities);
+            tokenDto = tokenProvider.createManagerToken(authentication.getName(), authorities);
         }
         else{
-            return tokenProvider.createConsultantToken(authentication.getName(),authorities);
+            tokenDto = tokenProvider.createConsultantToken(authentication.getName(),authorities);
         }
        // return tokenProvider.createManagerToken(authentication.getName(), authorities);
 
+        return new LoginResponseDto(tokenDto,authorities);
 
-<<<<<<< HEAD
-        logger.info("토큰 발급 :"+tokenDto.getAccessToken());
-
-        return tokenProvider.createToken(authentication.getName(), authorities);
-=======
->>>>>>> 720ba5db349fc8d76c4fa5a7da843029a6ebe84f
     }
 
     // 토큰 재발급 관련 메서드
