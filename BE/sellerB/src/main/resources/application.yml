@@ -43,3 +43,9 @@ logging:
           descriptor:
             sql: trace
 
+springdoc:
+  #  swagger-ui:
+  #    path: animal.html
+  #  version: v1
+  paths-to-match:
+    - /**
