@@ -7,6 +7,8 @@ COPY package.json /workspace/sellerB/FE/sellerb_fe
 COPY package-lock.json /workspace/sellerB/FE/sellerb_fe
 
 RUN npm install
+COPY . .
+RUN npm run build
 
 EXPOSE 3000
 
