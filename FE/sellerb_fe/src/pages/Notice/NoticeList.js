@@ -46,7 +46,7 @@ function NoticeList() {
     setSearchTitle(e.target.value);
   };
 
-  const submitSearchByTitle = (e) => {
+  const submitBtnSearchByTitle = (e) => {
     // Test
     console.log(searchTitle);
     // Axios
@@ -62,35 +62,19 @@ function NoticeList() {
     //     console.log(err);
     //   });
   };
-  const initNoticeList = () => {
-    listNoticeApi()
-      .then((res) => {
-        console.log("response Data : " + res.data);
 
-        setNoticeList(res.data);
-        console.log(noticeList);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-  const atoken = useSelector((state) => state.authToken.accessToken);
   useEffect(() => { 
-    console.log("actoken: " + atoken);
-  
-    axios.defaults.headers.common['Authorization'] = `Bearer ${atoken}`;
+    listNoticeApi()
+    .then((res)=>{
+      console.log(res.data);
 
-    axios.get('/api/notice/list')
-      .then((res) => {
-        console.log("response Data : " + res.data);
+      setNoticeList(res.data);
+    })
+    .catch((err)=>{
+      console.log(err);
+    });
+  })
 
-        setNoticeList(res.data);
-        console.log(noticeList);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
 
   return (
     <>
@@ -105,7 +89,7 @@ function NoticeList() {
             value={searchTitle}
             onChange={onSearchByTitleHandler}
           />
-          <button onClick={submitSearchByTitle}>검색</button>
+          <button onClick={submitBtnSearchByTitle}>검색</button>
         </div>
         <div className="notice-list">
           <table>
