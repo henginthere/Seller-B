@@ -2,7 +2,7 @@ import React, { useState , useEffect} from "react";
 import { Link, useNavigate} from "react-router-dom";
 
 // import Axios from 'axios'
-
+import { registerNoticeApi } from '../../api/noticeApi' 
 import "./NoticeWrite.css";
 import { Footer, NavBar } from "../../components/index";
 // calculate Date Util
@@ -30,16 +30,21 @@ function NoticeWrite() {
     const onSubmitBtnHandler = (event)=>{
         event.preventDefault();
 
-        //test
-        console.log(noticeContent);
-        console.log(noticeTitle);
-
         // axios
         let noticePostBody = {
             notice_title : noticeTitle,
             notice_content: noticeContent,
             notice_reg_date: getStringDate(new Date()),
         }
+
+        registerNoticeApi(noticePostBody)
+        .then((res)=>{
+            console.log(res.data);
+            navigate('/manager/noticeList');
+        })
+        .catch((err)=>{
+            console.log(err.data);
+        })
 
         // Axios.post('/notice', noticePostBody)
         // .then((res)=> console.log("success"))
