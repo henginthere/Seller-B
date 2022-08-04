@@ -29,7 +29,7 @@ public class Product {
     @Column(name = "product_seq")
     private Long productSeq;
     @ManyToOne
-    @JoinColumn(name = "product_group_seq", nullable = false)
+    @JoinColumn(name = "product_group_seq")
     @JsonBackReference
     private ProductGroup productGroup;
     @Basic
