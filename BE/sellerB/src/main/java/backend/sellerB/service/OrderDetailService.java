@@ -1,5 +1,6 @@
 package backend.sellerB.service;
 
+import backend.sellerB.dto.NoticeDto;
 import backend.sellerB.dto.OrderDetailDto;
 import backend.sellerB.entity.Orderdetail;
 import backend.sellerB.repository.OrderDetailRepository;
@@ -30,13 +31,13 @@ public class OrderDetailService {
         return OrderDetailDto.fromList(orderDetailRepository.findAll());
     }
 
-    public OrderDetailDto getOrderDetailDetail(Integer seq) {
+    public OrderDetailDto getOrderDetailDetail(Long seq) {
         Optional<Orderdetail> orderDetailOptional = orderDetailRepository.findById(seq);
         Orderdetail orderdetail = orderDetailOptional.get();
         return OrderDetailDto.from(orderdetail);
     }
 
-    public OrderDetailDto updateOrderDetail(Integer seq, OrderDetailDto orderDetailDto) {
+    public OrderDetailDto updateOrderDetail(Long seq, OrderDetailDto orderDetailDto) {
         Optional<Orderdetail> orderDetailOptional = orderDetailRepository.findById(seq);
         Orderdetail orderdetail = orderDetailOptional.get();
         orderdetail.setProduct(orderDetailDto.getProduct());
@@ -45,10 +46,10 @@ public class OrderDetailService {
         return OrderDetailDto.from(orderdetail);
     }
 
-    public OrderDetailDto deleteOrderDetail(Integer seq) {
+    public OrderDetailDto deleteOrderDetail(Long seq) {
         Optional<Orderdetail> orderDetailOptional = orderDetailRepository.findById(seq);
         Orderdetail orderdetail = orderDetailOptional.get();
-        orderDetailRepository.deleteById(seq);
+        orderdetail.setOrderDetailDelYn(true);
         return OrderDetailDto.from(orderdetail);
     }
 }
