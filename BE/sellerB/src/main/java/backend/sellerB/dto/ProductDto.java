@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ProductDto {
     private Long productSeq;
-    private ProductGroup productGroup;
+    private String productGroupName;
     private String productId;
     private String productName;
     private Integer productPrice;
@@ -27,7 +27,7 @@ public class ProductDto {
         if(product == null) return null;
         return ProductDto.builder()
                 .productSeq(product.getProductSeq())
-                .productGroup(product.getProductGroup())
+                .productGroupName(product.getProductGroup().getProductGroupName())
                 .productId(product.getProductId())
                 .productName(product.getProductName())
                 .productPrice(product.getProductPrice())
@@ -43,7 +43,7 @@ public class ProductDto {
         while (i < productList.size()) {
             ProductDto productDto = ProductDto.builder()
                     .productSeq(productList.get(i).getProductSeq())
-                    .productGroup(productList.get(i).getProductGroup())
+                    .productGroupName(productList.get(i).getProductGroup().getProductGroupName())
                     .productId(productList.get(i).getProductId())
                     .productName(productList.get(i).getProductName())
                     .productPrice(productList.get(i).getProductPrice())
