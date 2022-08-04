@@ -1,7 +1,11 @@
 package backend.sellerB.service;
 
+import backend.sellerB.dto.ConsultantDto;
+import backend.sellerB.dto.EditConsultantDto;
+import backend.sellerB.dto.EditManagerDto;
 import backend.sellerB.dto.ManagerDto;
 import backend.sellerB.entity.Authority;
+import backend.sellerB.entity.Consultant;
 import backend.sellerB.entity.Manager;
 import backend.sellerB.exception.DuplicateUserException;
 import backend.sellerB.repository.AuthorityRepository;
@@ -16,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -53,6 +58,31 @@ public class ManagerService {
         logger.info(manager.getManagerId());
         return ManagerDto.from(managerRepository.save(manager));
 
+    }
+    public ManagerDto getManagerDetail(Integer managerSeq) {
+        Optional<Manager> managerOptional = managerRepository.findByManagerSeq(managerSeq);
+        Manager manager = managerOptional.get();
+        return ManagerDto.from(manager);
+    }
+
+    public ManagerDto update(EditManagerDto editManagerDto, Integer managerSeq) {
+        Optional<Manager> managerOptional = managerRepository.findById(managerSeq);
+        Manager manager = managerOptional.get();
+        logger.info("@@@@@@@@"+manager.getManagerId());
+        manager.setManagerPass(passwordEncoder.encode(editManagerDto.getManagerPass()));
+        manager.setManagerEmail(editManagerDto.getManagerEmail());
+        manager.setManagerTel(editManagerDto.getManagerTel());
+        manager.setManagerImageUrl(editManagerDto.getManagerImageUrl());
+
+        return ManagerDto.from(manager);
+    }
+
+
+    public ManagerDto delete(Integer managerSeq) {
+        Optional<Manager> managerOptional = managerRepository.findById(managerSeq);
+        Manager manager = managerOptional.get();
+        manager.setManagerDelYn(true);
+        return ManagerDto.from(manager);
     }
 
     // SecurityContext에 저장된 username의 정보만 가져옴옴
