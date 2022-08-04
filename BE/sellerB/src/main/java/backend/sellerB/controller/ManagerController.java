@@ -29,17 +29,17 @@ public class ManagerController {
     }
 
     @GetMapping("/{managerSeq}")
-    public ResponseEntity<ManagerDto> getManagerDetail(@PathVariable Integer managerSeq) {
+    public ResponseEntity<ManagerDto> getManagerDetail(@PathVariable Long managerSeq) {
         return ResponseEntity.ok(managerService.getManagerDetail(managerSeq));
     }
 
     @PutMapping("/{managerSeq}")
-    public ResponseEntity<ManagerDto> updateManagerInfo(@Valid @RequestBody EditManagerDto editManagerDto, @PathVariable Integer managerSeq) {
+    public ResponseEntity<ManagerDto> updateManagerInfo(@Valid @RequestBody EditManagerDto editManagerDto, @PathVariable Long managerSeq) {
         return ResponseEntity.ok(managerService.update(editManagerDto, managerSeq));
     }
 
     @DeleteMapping("/{managerSeq}")
-    public ResponseEntity<ManagerDto> deleteManager(@PathVariable Integer managerSeq) {
+    public ResponseEntity<ManagerDto> deleteManager(@PathVariable Long managerSeq) {
         // Access the DB and delete the order
         return ResponseEntity.ok(managerService.delete(managerSeq));
     }
