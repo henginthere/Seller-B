@@ -1,21 +1,32 @@
 package backend.sellerB.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@DynamicInsert
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "t_wating_customer", schema = "sellerb", catalog = "")
 public class WatingCustomer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "waiting_customer_seq")
-    private int waitingCustomerSeq;
+    private Long waitingCustomerSeq;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_seq")
     private Customer customer;
@@ -23,11 +34,32 @@ public class WatingCustomer {
     @JoinColumn(name = "product_seq")
     private Product product;
     @Basic
-    @Column(name = "waiting_customer_state")
+    @Column(name = "waiting_customer_state",columnDefinition = "byte default 0")
     private Byte waitingCustomerState;
     @Basic
     @Column(name = "wating_customer_date")
-    private Timestamp watingCustomerDate;
+    private LocalDateTime watingCustomerDate;
+    @Basic
+    @Column(name = "watingCustomer_group_del_yn",columnDefinition = "boolean default false")
+    private Boolean watingCustomerGroupDelYn;
+    @CreatedBy
+    @Basic
+    @Column(name = "wating_customer_reg_user_seq")
+    private Long waitingCustomerRegUserSeq;
+    @CreatedDate
+    @Basic
+    @Column(name = "wating_customer_reg_date")
+    private LocalDateTime waitingCustomerRegDate;
+
+    @LastModifiedBy
+    @Basic
+    @Column(name = "wating_customer_mod_user_seq")
+    private Long waitingCustomerModUserSeq;
+
+    @LastModifiedDate
+    @Basic
+    @Column(name = "wating_customer_mod_date")
+    private LocalDateTime waitingCustomerModDate;
 
 
     @Override
