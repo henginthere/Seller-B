@@ -29,7 +29,6 @@ import {
 function App() {
   return (
     <>
-      <body>
         <Routes>
           <Route path='/' element={<Main />} />
           <Route path='/manager/main' element={<ManagerMain />} />
@@ -67,7 +66,6 @@ function App() {
           <Route path='/manager/waitingPage/:seq' element={<WaitingPage />} />
           <Route path='/meeting/mancon' element={<MeetingManCon />} />
         </Routes>
-      </body>
     </>
   );
 }

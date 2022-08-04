@@ -2,7 +2,7 @@ import { api } from './api';
 
 // GET : List : ManagerMainLeft.js
 export const listConsultantApi = async (success, fail) => {
-    return await api.get(`/consultant`).then(success).catch(fail);
+    return await api.get(`/consultant/list`).then(success).catch(fail);
 }
 
 // get : Detail : ConsultantDetail.js : 상담사 
@@ -14,7 +14,7 @@ export const detailConsultantApi= async ( consultant_id, success, fail) => {
 
 // post : Register : ConsultantWrite.js
 export const registerConsultantApi = async ( consultant_info, success, fail ) => {
-    return await api.post("/consultant", consultant_info).then(success).catch(fail);
+    return await api.post("/consultant/register", consultant_info).then(success).catch(fail);
 }
 
 // GET : List : AttendanceLog.js 
