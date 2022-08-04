@@ -32,10 +32,13 @@ public class Review {
     private Consulting consulting;
     @Basic
     @Column(name = "review_grade")
-    private Integer reviewGrade;
+    private Float reviewGrade;
     @Basic
     @Column(name = "review_content")
     private String reviewContent;
+    @Basic
+    @Column(name = "review_del_yn",columnDefinition = "boolean default false")
+    private Boolean reviewDelYn;
     @CreatedBy
     @Basic
     @Column(name = "review_reg_user_seq")

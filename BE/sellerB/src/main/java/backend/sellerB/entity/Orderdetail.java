@@ -2,8 +2,15 @@ package backend.sellerB.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -12,12 +19,14 @@ import java.util.Objects;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@DynamicInsert
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "t_orderdetail", schema = "sellerb", catalog = "")
 public class Orderdetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "order_detail_seq")
-    private int orderDetailSeq;
+    private Long orderDetailSeq;
     @ManyToOne
     @JoinColumn(name = "product_seq")
     @JsonBackReference
@@ -29,6 +38,27 @@ public class Orderdetail {
     @Basic
     @Column(name = "order_detail_count")
     private Integer orderDetailCount;
+    @Basic
+    @Column(name = "orderDetail_del_yn",columnDefinition = "boolean default false")
+    private Boolean orderDetailDelYn;
+    @CreatedBy
+    @Basic
+    @Column(name = "order_detail_reg_user_seq")
+    private Long orderDetailRegUserSeq;
+    @CreatedDate
+    @Basic
+    @Column(name = "order_detail_reg_date")
+    private LocalDateTime orderDetailRegDate;
+
+    @LastModifiedBy
+    @Basic
+    @Column(name = "order_detail_mod_user_seq")
+    private Long orderDetailModUserSeq;
+
+    @LastModifiedDate
+    @Basic
+    @Column(name = "order_detail_mod_date")
+    private LocalDateTime orderDetailModDate;
 
 
     @Override

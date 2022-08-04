@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class OrderDto {
     private Address address;
-    private String orderState;
+    private Byte orderState;
 
     public static OrderDto from(Order order) {
         if(order == null) return null;

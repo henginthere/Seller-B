@@ -35,7 +35,7 @@ public class NoticeService {
         return NoticeDto.fromList(noticeRepository.findAll());
     }
 
-    public NoticeDto getNoticeDetail(Integer seq) {
+    public NoticeDto getNoticeDetail(Long seq) {
 //        Notice notice = noticeRepository.findById(seq).orElseThrow();
         Optional<Notice> noticeOptional = noticeRepository.findById(seq);
         Notice notice = noticeOptional.get();
@@ -44,7 +44,7 @@ public class NoticeService {
 
 
 
-    public NoticeDto update(Integer seq, NoticeDto noticeDto) {
+    public NoticeDto update(Long seq, NoticeDto noticeDto) {
         Optional<Notice> noticeOptional = noticeRepository.findById(seq);
         Notice notice = noticeOptional.get();
         notice.setNoticeTitle(noticeDto.getNoticeTitle());
@@ -52,23 +52,23 @@ public class NoticeService {
         return NoticeDto.from(notice);
     }
 
-    public Integer delete(Integer seq) {
-        Optional<Notice> noticeOptional = noticeRepository.findById(seq);
-        if(!noticeOptional.isPresent()) throw new EntityNotFoundException();
-        try {
-            Notice deleteNotice = noticeOptional.get();
-            noticeRepository.delete(deleteNotice);
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-        return seq;
-
-
-    }
-    public NoticeDto deleteNotice(Integer seq) {
+//    public Long delete(Long seq) {
+//        Optional<Notice> noticeOptional = noticeRepository.findById(seq);
+//        if(!noticeOptional.isPresent()) throw new EntityNotFoundException();
+//        try {
+//            Notice deleteNotice = noticeOptional.get();
+//            noticeRepository.delete(deleteNotice);
+//        } catch (Exception e){
+//            e.printStackTrace();
+//        }
+//        return seq;
+//
+//
+//    }
+    public NoticeDto deleteNotice(Long seq) {
         Optional<Notice> noticeOptional = noticeRepository.findById(seq);
         Notice notice = noticeOptional.get();
-        notice.setNoticeDelYn("Y");
+        notice.setNoticeDelYn(true);
         return NoticeDto.from(notice);
     }
 
