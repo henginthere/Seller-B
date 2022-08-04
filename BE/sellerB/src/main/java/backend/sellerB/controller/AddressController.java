@@ -26,18 +26,18 @@ public class AddressController {
         this.addressService = addressService;
     }
 
-//    @Operation(summary = "get posts", description = "지역에 대한 posts들 가져오기")
-//    @ApiResponses({
-//            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = PostsResponseDto.class))),
-//            @ApiResponse(responseCode = "400", description = "BAD REQUEST"),
-//            @ApiResponse(responseCode = "404", description = "NOT FOUND"),
-//            @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
-//    })
-//    @Parameters({
-//            @Parameter(name = "province", description = "시", example = "경기도"),
-//            @Parameter(name = "city", description = "도", example = "고양시"),
-//            @Parameter(name = "hashtag", description = "검색한 해시태그", example = "['#자장면', '#중국집']")
-//    })
+    @Operation(summary = "get posts", description = "지역에 대한 posts들 가져오기")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = AddressDto.class))),
+            @ApiResponse(responseCode = "400", description = "BAD REQUEST"),
+            @ApiResponse(responseCode = "404", description = "NOT FOUND"),
+            @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
+    })
+    @Parameters({
+            @Parameter(name = "customer", description = "고객", example = "고객 엔티티인데 이건 param이 아니지 않나"),
+            @Parameter(name = "addr", description = "배송지", example = "구미 진평동"),
+            @Parameter(name = "addrRequest", description = "요청사항", example = "문 앞에 놓고 가주세요")
+    })
     @PostMapping
     public ResponseEntity<AddressDto> saveAddress(@Valid @RequestBody AddressDto addressDto) {
         return ResponseEntity.ok(addressService.create(addressDto));
