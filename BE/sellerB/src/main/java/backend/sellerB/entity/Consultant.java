@@ -1,12 +1,19 @@
 package backend.sellerB.entity;
 
 import lombok.*;
+import net.bytebuddy.asm.Advice;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.Set;
@@ -17,13 +24,14 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @DynamicInsert
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "t_consultant", schema = "sellerb", catalog = "")
 public class Consultant implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "consultant_seq")
     private Long consultantSeq;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "product_group_seq")
     private ProductGroup productGroup;
     @Basic
@@ -48,18 +56,23 @@ public class Consultant implements Serializable {
     @Basic
     @Column(name = "consultant_del_yn",columnDefinition = "boolean default false")
     private Boolean consultantDelYn;
+    @CreatedBy
     @Basic
     @Column(name = "consultant_reg_user_seq")
-    private Integer consultantRegUserSeq;
+    private Long consultantRegUserSeq;
+
+    @CreatedDate
     @Basic
     @Column(name = "consultant_reg_date")
-    private Timestamp consultantRegDate;
+    private LocalDateTime consultantRegDate;
+    @LastModifiedBy
     @Basic
     @Column(name = "consultant_mod_user_seq")
-    private Integer consultantModUserSeq;
+    private Long consultantModUserSeq;
+    @LastModifiedDate
     @Basic
     @Column(name = "consultant_mod_date")
-    private Timestamp consultantModDate;
+    private LocalDateTime consultantModDate;
 
 
     @Override
