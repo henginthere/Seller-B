@@ -2,6 +2,9 @@ package backend.sellerB.service;
 
 import backend.sellerB.dto.TokenDto;
 import backend.sellerB.dto.LoginResponseDto;
+import backend.sellerB.entity.Consultant;
+import backend.sellerB.entity.Manager;
+import backend.sellerB.exception.ManagerNotFoundException;
 import backend.sellerB.jwt.TokenProvider;
 import backend.sellerB.repository.ConsultantRepository;
 import backend.sellerB.repository.ManagerRepository;
@@ -46,20 +49,22 @@ public class AuthService {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String authorities = getAuthorities(authentication);
 
-        //TokenDto tokenDto = tokenProvider.createManagerToken(authentication.getName(), authorities);
-
         logger.info("권한 : "+authorities);
-        //logger.info("토큰 발급 :"+tokenDto.getAccessToken());
+
         TokenDto tokenDto;
+        Long seq;
         if(authorities.equals("ROLE_ADMIN")){
+            Manager manager = managerRepository.findBymanagerId(id).orElseThrow(()->new ManagerNotFoundException("가입되지 않은 정보입니다."));
+            seq = manager.getManagerSeq();
             tokenDto = tokenProvider.createManagerToken(authentication.getName(), authorities);
         }
         else{
+            Consultant consultant = consultantRepository.findByConsultantId(id).orElseThrow(()->new ManagerNotFoundException("가입되지 않은 정보입니다."));
+            seq = consultant.getConsultantSeq();
             tokenDto = tokenProvider.createConsultantToken(authentication.getName(),authorities);
         }
-       // return tokenProvider.createManagerToken(authentication.getName(), authorities);
 
-        return new LoginResponseDto(tokenDto,authorities);
+        return new LoginResponseDto(tokenDto,authorities,seq);
 
     }
 
@@ -78,11 +83,11 @@ public class AuthService {
         String memberId;
 
         if(authorities.equals("ROLE_ADMIN")){
-            memberId = managerRepository.findByManagerSeq(Integer.parseInt(authentication.getName())).getManagerId();
+            memberId = managerRepository.findByManagerSeq(Long.parseLong(authentication.getName())).get().getManagerId();
             return tokenProvider.createManagerToken(memberId, authorities);
         }
         else{
-            memberId = consultantRepository.findByConsultantSeq(Integer.parseInt(authentication.getName())).getConsultantId();
+            memberId = consultantRepository.findByConsultantSeq(Long.parseLong(authentication.getName())).getConsultantId();
             return tokenProvider.createConsultantToken(memberId, authorities);
         }
 

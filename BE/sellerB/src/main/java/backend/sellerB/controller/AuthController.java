@@ -3,6 +3,8 @@ package backend.sellerB.controller;
 import backend.sellerB.dto.LoginDto;
 import backend.sellerB.dto.LoginResponseDto;
 import backend.sellerB.dto.TokenDto;
+import backend.sellerB.entity.Manager;
+import backend.sellerB.exception.ManagerNotFoundException;
 import backend.sellerB.repository.ManagerRepository;
 import backend.sellerB.service.AuthService;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +26,7 @@ public class AuthController {
      //로그인을 했을때 토큰(AccessToken, RefreshToken)을 주는 메서드
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDto> login(@Valid @RequestBody LoginDto loginDto) {
+
         LoginResponseDto loginResponseDto = authService.authorize(loginDto.getId(), loginDto.getPass());
 
         return ResponseEntity.ok(loginResponseDto);

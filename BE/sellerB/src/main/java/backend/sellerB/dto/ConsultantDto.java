@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 public class ConsultantDto {
 
 
-    private Integer consultantSeq;
+    private Long consultantSeq;
     private String consultantId;
     private String consultantName;
     private String consultantEmail;
@@ -33,6 +33,7 @@ public class ConsultantDto {
     private String consultantTel;
     private ProductGroup productGroup;
     private String consultantImageUrl;
+    private Boolean consultantDelYn;
 
 
     private Set<AuthorityDto> authorityDtoSet;
@@ -50,6 +51,7 @@ public class ConsultantDto {
                 .consultantTel(consultant.getConsultantTel())
                 .productGroup(consultant.getProductGroup())
                 .consultantImageUrl(consultant.getConsultantImageUrl())
+                .consultantDelYn(consultant.getConsultantDelYn())
                 .authorityDtoSet(consultant.getAuthorities().stream()
                         .map(authority -> AuthorityDto.builder().authorityName(authority.getAuthorityName()).build())
                         .collect(Collectors.toSet()))
@@ -67,6 +69,7 @@ public class ConsultantDto {
                     .consultantEmail(consultantList.get(i).getConsultantEmail())
                     .consultantTel(consultantList.get(i).getConsultantTel())
                     .consultantImageUrl(consultantList.get(i).getConsultantImageUrl())
+                    .consultantDelYn(consultantList.get(i).getConsultantDelYn())
                     .build();
             listConsultantDto.add(consultantDto);
             i++;
