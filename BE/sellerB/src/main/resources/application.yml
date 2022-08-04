@@ -9,10 +9,6 @@ server:
 
 spring:
   datasource:
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://localhost:3306/sellerB?serverTimezone=Asia/Seoul
-#    username: root
-#    password: hy1234
     driver-class-name: org.mariadb.jdbc.Driver
     url: jdbc:mariadb://i7d105.p.ssafy.io:3306/sellerB?serverTimezone=Asia/Seoul
     username: sellerb
