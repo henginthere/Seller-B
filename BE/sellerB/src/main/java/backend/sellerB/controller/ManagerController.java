@@ -1,8 +1,6 @@
 package backend.sellerB.controller;
 
-import backend.sellerB.dto.ConsultantDto;
-import backend.sellerB.dto.ManagerDto;
-import backend.sellerB.dto.NoticeDto;
+import backend.sellerB.dto.*;
 import backend.sellerB.service.AuthService;
 import backend.sellerB.service.ManagerService;
 import backend.sellerB.service.NoticeService;
@@ -28,6 +26,16 @@ public class ManagerController {
     @PostMapping("/register")
     public ResponseEntity<ManagerDto> registerManager(@Valid @RequestBody ManagerDto managerDto) {
         return ResponseEntity.ok(managerService.signup(managerDto));
+    }
+
+    @GetMapping("/{managerSeq}")
+    public ResponseEntity<ManagerDto> getManagerDetail(@PathVariable Integer managerSeq) {
+        return ResponseEntity.ok(managerService.getManagerDetail(managerSeq));
+    }
+
+    @PutMapping("/{managerSeq}")
+    public ResponseEntity<ManagerDto> updateManagerInfo(@Valid @RequestBody EditManagerDto editManagerDto, @PathVariable Integer managerSeq) {
+        return ResponseEntity.ok(managerService.update(editManagerDto, managerSeq));
     }
 
     @DeleteMapping("/{managerSeq}")
