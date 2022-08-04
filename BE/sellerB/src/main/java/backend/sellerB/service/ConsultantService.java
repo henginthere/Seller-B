@@ -66,8 +66,8 @@ public class ConsultantService {
     }
 
 
-    public ConsultantDto getConsultantDetail(String consultantId) {
-        Optional<Consultant> consultantOptional = consultantRepository.findByConsultantId(consultantId);
+    public ConsultantDto getConsultantDetail(Long consultantSeq) {
+        Optional<Consultant> consultantOptional = consultantRepository.findById(consultantSeq);
         Consultant consultant = consultantOptional.get();
         return ConsultantDto.from(consultant);
     }
@@ -82,15 +82,15 @@ public class ConsultantService {
 //        return ConsultantDto.fromList(consultantRepository.findByConsultantIdContaining(consultantId));
 //    }
 
-    public List<ConsultantDto> searchByProductGroupSeq(Integer productGroupSeq) {
+    public List<ConsultantDto> searchByProductGroupSeq(Long productGroupSeq) {
 
         return ConsultantDto.fromList(consultantRepository.findByProductGroup(productGroupSeq));
     }
 
-    public ConsultantDto update(EditConsultantDto editConsultantDto, Integer consultantSeq) {
+    public ConsultantDto update(EditConsultantDto editConsultantDto, Long consultantSeq) {
         Optional<Consultant> consultantOptional = consultantRepository.findById(consultantSeq);
         Consultant consultant = consultantOptional.get();
-        consultant.setConsultantName(editConsultantDto.getConsultantName());
+        consultant.setConsultantPass(passwordEncoder.encode(editConsultantDto.getConsultantPass()));
         consultant.setConsultantEmail(editConsultantDto.getConsultantEmail());
         consultant.setConsultantImageUrl(editConsultantDto.getConsultantImageUrl());
         consultant.setConsultantTel(editConsultantDto.getConsultantTel());
@@ -99,10 +99,10 @@ public class ConsultantService {
         return ConsultantDto.from(consultant);
     }
 
-    public ConsultantDto delete(Integer consultantSeq) {
+    public ConsultantDto delete(Long consultantSeq) {
         Optional<Consultant> consultantOptional = consultantRepository.findById(consultantSeq);
         Consultant consultant = consultantOptional.get();
-        consultant.setConsultantDelYn("Y");
+        consultant.setConsultantDelYn(true);
         return ConsultantDto.from(consultant);
     }
 
