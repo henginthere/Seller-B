@@ -53,67 +53,67 @@ function ManagerMyPage() {
   const Main = () => {
     return (
       <>
-        <div className="topText">
+        <div className='topText'>
           <h2>내 정보</h2>
         </div>
-        <div className="InfoWrapper">
-          <div className="InfoTextField">
+        <div className='InfoWrapper'>
+          <div className='InfoTextField'>
             <TextField
-              id="outlined-read-only-input"
-              label="담당 브랜드"
+              id='outlined-read-only-input'
+              label='담당 브랜드'
               defaultValue={dummy_data.brand}
               InputProps={{
                 readOnly: true,
               }}
-              fullWidth="true"
+              fullWidth='true'
             />
           </div>
-          <div className="InfoTextField">
+          <div className='InfoTextField'>
             <TextField
-              label="ID"
+              label='ID'
               defaultValue={dummy_data.id}
               InputProps={{
                 readOnly: true,
               }}
-              fullWidth="true"
+              fullWidth='true'
             />
           </div>
-          <div className="InfoTextField">
+          <div className='InfoTextField'>
             <TextField
-              label="PW"
+              label='PW'
               value={dummy_data.pw}
               InputProps={{
                 readOnly: true,
               }}
-              type="password"
-              fullWidth="true"
+              type='password'
+              fullWidth='true'
             />
           </div>
-          <div className="InfoTextField">
+          <div className='InfoTextField'>
             <TextField
-              label="Tel."
+              label='Tel.'
               value={dummy_data.tel}
               InputProps={{
                 readOnly: true,
               }}
-              fullWidth="true"
+              fullWidth='true'
             />
           </div>
 
-          <div className="InfoTextField">
+          <div className='InfoTextField'>
             <TextField
-              label="Email"
+              label='Email'
               value={dummy_data.email}
               InputProps={{
                 readOnly: true,
               }}
-              fullWidth="true"
+              fullWidth='true'
             />
           </div>
         </div>
 
-        <div className="Button">
-          <Button variant="contained" size="large" onClick={ChangeToModify}>
+        <div className='Button'>
+          <Button variant='contained' size='large' onClick={ChangeToModify}>
             수정
           </Button>
         </div>
@@ -125,75 +125,80 @@ function ManagerMyPage() {
   const Modify = () => {
     return (
       <>
-        <div className="topText">
+        <div className='topText'>
           <h2>내 정보 수정</h2>
         </div>
-        <form className="InfoWrapper" onSubmit={handleSubmit}>
-          <div className="InfoTextField">
+        <form className='InfoWrapper' onSubmit={handleSubmit}>
+          <div className='InfoTextField'>
             {/* 이 부분 Form 으로 바꿔주기 */}
             <TextField
-              label="담당 브랜드"
+              label='담당 브랜드'
               defaultValue={data.brand}
               InputProps={{
                 readOnly: true,
               }}
-              fullWidth="true"
-              disabled="true"
-              variant="filled"
+              fullWidth='true'
+              disabled='true'
+              variant='filled'
             />
           </div>
-          <div className="InfoTextField">
+          <div className='InfoTextField'>
             <TextField
-              id="outlined-disabled"
-              label="ID"
+              id='outlined-disabled'
+              label='ID'
               defaultValue={data.id}
               InputProps={{
                 readOnly: true,
               }}
-              fullWidth="true"
-              disabled="true"
-              variant="filled"
+              fullWidth='true'
+              disabled='true'
+              variant='filled'
             />
           </div>
-          <div className="InfoTextField">
+          <div className='InfoTextField'>
             <TextField
               required
-              label="PW"
+              label='PW'
               defaultValue={data.pw}
-              type="password"
-              fullWidth="true"
-              name="pw"
+              type='password'
+              fullWidth='true'
+              name='pw'
               onChange={handleChange}
             />
           </div>
-          <div className="InfoTextField">
+          <div className='InfoTextField'>
             <TextField
               required
-              label="Tel."
+              label='Tel.'
               defaultValue={data.tel}
-              fullWidth="true"
-              name="tel"
+              fullWidth='true'
+              name='tel'
               onChange={handleChange}
             />
           </div>
-          <div className="InfoTextField">
+          <div className='InfoTextField'>
             <TextField
               required
-              label="Email"
+              label='Email'
               defaultValue={data.email}
               InputProps={{
                 readOnly: !{ isModify },
               }}
-              fullWidth="true"
-              name="email"
+              fullWidth='true'
+              name='email'
               onChange={handleChange}
             />
           </div>
-          <div className="Button">
-            <Button variant="contained" size="large" type="submit">
+          <div className='Button'>
+            <Button variant='contained' size='large' type='submit'>
               수정 완료
             </Button>
-            <Button variant="contained" color="error" size="large" onClick={cancelModify}>
+            <Button
+              variant='contained'
+              color='error'
+              size='large'
+              onClick={cancelModify}
+            >
               취소
             </Button>
           </div>
@@ -205,17 +210,20 @@ function ManagerMyPage() {
     <>
       <NavBar></NavBar>
       {/* 왼쪽 */}
-      <div className="wrapper">
-        <div id="left">
-          <div className="topText">
+      <div className='wrapper'>
+        <div id='left'>
+          <div className='topText'>
             <h2>My Page</h2>
           </div>
-          <div className="imageWrapper">
-            <img src={`${process.env.PUBLIC_URL}/img/ManagerImage.png`} alt="NOIMAGE"></img>
+          <div className='imageWrapper'>
+            <img
+              src={`${process.env.PUBLIC_URL}/img/ManagerImage.png`}
+              alt='NOIMAGE'
+            ></img>
           </div>
         </div>
         {/* 오른쪽 */}
-        <div id="right">
+        <div id='right'>
           <div>{isModify ? <Modify /> : <Main />}</div>
         </div>
       </div>

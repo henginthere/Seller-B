@@ -28,13 +28,13 @@ public class AddressService {
 
     public List<AddressDto> getAddressList(String customerId) { return AddressDto.fromList(addressRepository.findAddressesByCustomer_CustomerId(customerId));}
 
-    public AddressDto getAddressDetail(Integer seq) {
+    public AddressDto getAddressDetail(Long seq) {
         Optional<Address> addressOptional = addressRepository.findById(seq);
         Address address = addressOptional.get();
         return AddressDto.from(address);
     }
 
-    public AddressDto updateAddress(Integer seq, AddressDto addressDto) {
+    public AddressDto updateAddress(Long seq, AddressDto addressDto) {
         Optional<Address> addressOptional = addressRepository.findById(seq);
         Address address = addressOptional.get();
         address.setCustomer(addressDto.getCustomer());
@@ -43,10 +43,11 @@ public class AddressService {
         return AddressDto.from(address);
     }
 
-    public AddressDto deleteAddress(Integer seq) {
+    public AddressDto deleteAddress(Long seq) {
         Optional<Address> addressOptional = addressRepository.findById(seq);
         Address address = addressOptional.get();
-        addressRepository.deleteById(seq);
+       // addressRepository.deleteById(seq);
+        address.setAddrDelYn(true);
         return AddressDto.from(address);
     }
 }

@@ -17,5 +17,20 @@ export const listNoticeApi = async (success, fail) => {
 };
 
 export const searchNoticeApi = async (noticeTitle, success, fail) => {
-  return await api.get(`/notice/search/${noticeTitle}`).then(success).catch(fail);
+  return await api
+    .get(`/notice/search/${noticeTitle}`)
+    .then(success)
+    .catch(fail);
+};
+
+export const modifyNoticeApi = async (notice, success, fail) => {
+  console.log(notice);
+  return await api
+    .put(`/notice/${notice.noticeSeq}`, notice)
+    .then(success)
+    .catch(fail);
+};
+
+export const delNoticeApi = async (noticeSeq, success, fail) => {
+  return await api.delete(`/notice/${noticeSeq}`).then(success).catch(fail);
 };
