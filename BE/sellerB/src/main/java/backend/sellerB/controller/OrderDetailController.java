@@ -24,7 +24,7 @@ public class OrderDetailController {
     }
 
     @GetMapping("/{seq}")
-    public ResponseEntity<OrderDetailDto> getOrderDetailDetail(@PathVariable Integer seq) {
+    public ResponseEntity<OrderDetailDto> getOrderDetailDetail(@PathVariable Long seq) {
         return ResponseEntity.ok(orderDetailService.getOrderDetailDetail(seq));
     }
 
@@ -34,12 +34,12 @@ public class OrderDetailController {
     }
 
     @PutMapping("/{seq}")
-    public ResponseEntity<OrderDetailDto> updateOrderDetail(@Valid @RequestBody OrderDetailDto orderDetailDto, @PathVariable Integer seq) {
+    public ResponseEntity<OrderDetailDto> updateOrderDetail(@Valid @RequestBody OrderDetailDto orderDetailDto, @PathVariable Long seq) {
         return ResponseEntity.ok(orderDetailService.updateOrderDetail(seq, orderDetailDto));
     }
 
     @DeleteMapping("/{seq}")
-    public ResponseEntity<OrderDetailDto> deleteOrderDetail(@PathVariable Integer seq) {
+    public ResponseEntity<OrderDetailDto> deleteOrderDetail(@PathVariable Long seq) {
         return ResponseEntity.ok(orderDetailService.deleteOrderDetail(seq));
     }
 }
