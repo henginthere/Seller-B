@@ -1,6 +1,8 @@
 package backend.sellerB.service;
 
 import backend.sellerB.dto.ConsultantDto;
+import backend.sellerB.dto.EditConsultantDto;
+import backend.sellerB.dto.EditManagerDto;
 import backend.sellerB.dto.ManagerDto;
 import backend.sellerB.entity.Authority;
 import backend.sellerB.entity.Consultant;
@@ -60,6 +62,24 @@ public class ManagerService {
         return ManagerDto.from(managerRepository.save(manager));
 
     }
+    public ManagerDto getManagerDetail(Integer managerSeq) {
+        Optional<Manager> managerOptional = managerRepository.findByManagerSeq(managerSeq);
+        Manager manager = managerOptional.get();
+        return ManagerDto.from(manager);
+    }
+
+    public ManagerDto update(EditManagerDto editManagerDto, Integer managerSeq) {
+        Optional<Manager> managerOptional = managerRepository.findById(managerSeq);
+        Manager manager = managerOptional.get();
+        logger.info("@@@@@@@@"+manager.getManagerId());
+        manager.setManagerPass(passwordEncoder.encode(editManagerDto.getManagerPass()));
+        manager.setManagerEmail(editManagerDto.getManagerEmail());
+        manager.setManagerTel(editManagerDto.getManagerTel());
+        manager.setManagerImageUrl(editManagerDto.getManagerImageUrl());
+
+        return ManagerDto.from(manager);
+    }
+
 
     public ManagerDto delete(Integer managerSeq) {
         Optional<Manager> managerOptional = managerRepository.findById(managerSeq);

@@ -33,7 +33,7 @@ public class ConsultantDto {
     private String consultantTel;
     private ProductGroup productGroup;
     private String consultantImageUrl;
-    private String consultantDelYn;
+    private Boolean consultantDelYn;
 
 
     private Set<AuthorityDto> authorityDtoSet;

@@ -41,9 +41,9 @@ public class ConsultantController {
         return ResponseEntity.ok(consultantService.getConsultantList());
     }
 
-    @GetMapping("/{consultantId}")
-    public ResponseEntity<ConsultantDto> getConsultantDetail(@PathVariable String consultantId) {
-        return ResponseEntity.ok(consultantService.getConsultantDetail(consultantId));
+    @GetMapping("/{consultantSeq}")
+    public ResponseEntity<ConsultantDto> getConsultantDetail(@PathVariable Integer consultantSeq) {
+        return ResponseEntity.ok(consultantService.getConsultantDetail(consultantSeq));
     }
 
     @GetMapping("/search/{consultantName}")

@@ -36,7 +36,7 @@ logging:
   file:
     path: C:\SSAFY\SellerB\BE\sellerB
   level:
-    root: info
+    root: debug
     org:
       hibernate:
         type:

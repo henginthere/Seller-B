@@ -66,8 +66,8 @@ public class ConsultantService {
     }
 
 
-    public ConsultantDto getConsultantDetail(String consultantId) {
-        Optional<Consultant> consultantOptional = consultantRepository.findByConsultantId(consultantId);
+    public ConsultantDto getConsultantDetail(Integer consultantSeq) {
+        Optional<Consultant> consultantOptional = consultantRepository.findById(consultantSeq);
         Consultant consultant = consultantOptional.get();
         return ConsultantDto.from(consultant);
     }
@@ -90,7 +90,6 @@ public class ConsultantService {
     public ConsultantDto update(EditConsultantDto editConsultantDto, Integer consultantSeq) {
         Optional<Consultant> consultantOptional = consultantRepository.findById(consultantSeq);
         Consultant consultant = consultantOptional.get();
-        consultant.setConsultantName(editConsultantDto.getConsultantName());
         consultant.setConsultantEmail(editConsultantDto.getConsultantEmail());
         consultant.setConsultantImageUrl(editConsultantDto.getConsultantImageUrl());
         consultant.setConsultantTel(editConsultantDto.getConsultantTel());
@@ -102,7 +101,7 @@ public class ConsultantService {
     public ConsultantDto delete(Integer consultantSeq) {
         Optional<Consultant> consultantOptional = consultantRepository.findById(consultantSeq);
         Consultant consultant = consultantOptional.get();
-        consultant.setConsultantDelYn("Y");
+        consultant.setConsultantDelYn(true);
         return ConsultantDto.from(consultant);
     }
 
