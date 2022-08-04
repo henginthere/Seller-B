@@ -1,17 +1,13 @@
 package backend.sellerB.controller;
 
-import backend.sellerB.dto.ManagerDto;
-import backend.sellerB.dto.NoticeDto;
+import backend.sellerB.dto.*;
 import backend.sellerB.service.AuthService;
 import backend.sellerB.service.ManagerService;
 import backend.sellerB.service.NoticeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -30,6 +26,22 @@ public class ManagerController {
     @PostMapping("/register")
     public ResponseEntity<ManagerDto> registerManager(@Valid @RequestBody ManagerDto managerDto) {
         return ResponseEntity.ok(managerService.signup(managerDto));
+    }
+
+    @GetMapping("/{managerSeq}")
+    public ResponseEntity<ManagerDto> getManagerDetail(@PathVariable Integer managerSeq) {
+        return ResponseEntity.ok(managerService.getManagerDetail(managerSeq));
+    }
+
+    @PutMapping("/{managerSeq}")
+    public ResponseEntity<ManagerDto> updateManagerInfo(@Valid @RequestBody EditManagerDto editManagerDto, @PathVariable Integer managerSeq) {
+        return ResponseEntity.ok(managerService.update(editManagerDto, managerSeq));
+    }
+
+    @DeleteMapping("/{managerSeq}")
+    public ResponseEntity<ManagerDto> deleteManager(@PathVariable Integer managerSeq) {
+        // Access the DB and delete the order
+        return ResponseEntity.ok(managerService.delete(managerSeq));
     }
 
 
