@@ -11,6 +11,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -28,7 +30,7 @@ public class Brand {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "brand_seq")
-    private int brandSeq;
+    private Long brandSeq;
     @Basic
     @Column(name = "brand_name_kor")
     private String brandNameKor;
@@ -39,24 +41,24 @@ public class Brand {
     @Column(name = "brand_logo")
     private String brandLogo;
     @Basic
-    @Column(name = "brand_del_yn")
-    private String brandDelYn;
+    @Column(name = "brand_del_yn",columnDefinition = "boolean default false")
+    private Boolean brandDelYn;
     @CreatedBy
     @Basic
     @Column(name = "brand_reg_user_seq")
-    private Integer brandRegUserSeq;
+    private Long brandRegUserSeq;
     @CreatedDate
     @Basic
     @Column(name = "brand_reg_date")
-    private Timestamp brandRegDate;
+    private LocalDateTime brandRegDate;
     @LastModifiedBy
     @Basic
     @Column(name = "brand_mod_user_seq")
-    private Integer brandModUserSeq;
+    private Long brandModUserSeq;
     @LastModifiedDate
     @Basic
     @Column(name = "brand_mod_date")
-    private Timestamp brandModDate;
+    private LocalDateTime brandModDate;
 
     @OneToMany(mappedBy = "brand")
     @JsonManagedReference

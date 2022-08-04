@@ -24,7 +24,7 @@ public class CustomerWaitingPageController {
     }
 
     @GetMapping("/{seq}")
-    public ResponseEntity<CustomerWaitingPageDto> getCustomerWaitingPageDetail(@PathVariable Integer seq) {
+    public ResponseEntity<CustomerWaitingPageDto> getCustomerWaitingPageDetail(@PathVariable Long seq) {
         return ResponseEntity.ok(customerWaitingPageService.getCustomerWaitingPageDetail(seq));
     }
 
@@ -34,12 +34,12 @@ public class CustomerWaitingPageController {
     }
 
     @PutMapping("/{seq}")
-    public ResponseEntity<CustomerWaitingPageDto> updateCustomerWaitingPage(@Valid @RequestBody CustomerWaitingPageDto customerWaitingPageDto, @PathVariable Integer seq) {
+    public ResponseEntity<CustomerWaitingPageDto> updateCustomerWaitingPage(@Valid @RequestBody CustomerWaitingPageDto customerWaitingPageDto, @PathVariable Long seq) {
         return ResponseEntity.ok(customerWaitingPageService.update(seq, customerWaitingPageDto));
     }
 
     @DeleteMapping("/{seq}")
-    public ResponseEntity<CustomerWaitingPageDto> deleteCustomerWaitingPage(@PathVariable Integer seq) {
+    public ResponseEntity<CustomerWaitingPageDto> deleteCustomerWaitingPage(@PathVariable Long seq) {
         return ResponseEntity.ok(customerWaitingPageService.deleteCustomerWaitingPage(seq));
     }
 }

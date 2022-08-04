@@ -1,15 +1,13 @@
 package backend.sellerB.service;
 
-import backend.sellerB.dto.ConsultantDto;
-import backend.sellerB.dto.EditConsultantDto;
+
 import backend.sellerB.dto.EditManagerDto;
 import backend.sellerB.dto.ManagerDto;
 import backend.sellerB.entity.Authority;
-import backend.sellerB.entity.Consultant;
 import backend.sellerB.entity.Manager;
 import backend.sellerB.exception.DuplicateUserException;
 import backend.sellerB.repository.AuthorityRepository;
-import backend.sellerB.repository.ManagerRepository;import backend.sellerB.repository.NoticeRepository;
+import backend.sellerB.repository.ManagerRepository;
 import backend.sellerB.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 
@@ -59,13 +57,13 @@ public class ManagerService {
         return ManagerDto.from(managerRepository.save(manager));
 
     }
-    public ManagerDto getManagerDetail(Integer managerSeq) {
+    public ManagerDto getManagerDetail(Long managerSeq) {
         Optional<Manager> managerOptional = managerRepository.findByManagerSeq(managerSeq);
         Manager manager = managerOptional.get();
         return ManagerDto.from(manager);
     }
 
-    public ManagerDto update(EditManagerDto editManagerDto, Integer managerSeq) {
+    public ManagerDto update(EditManagerDto editManagerDto, Long managerSeq) {
         Optional<Manager> managerOptional = managerRepository.findById(managerSeq);
         Manager manager = managerOptional.get();
         manager.setManagerPass(passwordEncoder.encode(editManagerDto.getManagerPass()));
@@ -77,7 +75,7 @@ public class ManagerService {
     }
 
 
-    public ManagerDto delete(Integer managerSeq) {
+    public ManagerDto delete(Long managerSeq) {
         Optional<Manager> managerOptional = managerRepository.findById(managerSeq);
         Manager manager = managerOptional.get();
         manager.setManagerDelYn(true);
