@@ -1,8 +1,17 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './NavBar.css'
 
 function NavBar() {
+
+    const navigate = useNavigate();
+    const onLogOutBtn = ()=>{
+        localStorage.removeItem("accessToken");
+        navigate("/");
+    }
+
+
+
   return (
     <>
         <div className='navbar-wrapper'>
@@ -24,9 +33,7 @@ function NavBar() {
                     <Link to="/manager/mypage" className='link-to'>
                         <h4>마이페이지</h4>
                     </Link>
-                    <Link to="/" className='link-to'>
-                        <h4>로그아웃</h4>
-                    </Link>
+                        <h4 onClick={onLogOutBtn}>로그아웃</h4>
                 </div>
             </div>
         </div>

@@ -36,8 +36,7 @@ function Main() {
     setPass(e.target.value);
   };
   
-  const isAdmin = useSelector((state)=> state.authToken.isAdmin);
-  const accessT = useSelector((state) => state.authToken.accessToken);
+
   // console.log("(1) isAdmin :" + isAdmin);
   // 로그인 버튼 클릭 후
   const onLoginBtn = () => {
@@ -53,10 +52,18 @@ function Main() {
       const accessToken  = res.data.tokenDto.accessToken;
       const refreshToken = res.data.tokenDto.refreshToken;
       const adminCheck = res.data.authority;
-
+      // 관리자일 경우, manaerSeq로 / 컨설턴트면 consultantSeq로 저장
+      if(adminCheck){
+        const managerSeq = res.data.managerSeq;
+        localStorage.setItem("managerSeq", managerSeq);
+      }else{
+        const consultantSeq = res.data.consultantSeq;
+        localStorage.setItem("consultantSeq", consultantSeq);
+      }
       // localstorage에 저장
-      localStorage.setItem("accessToken", res.data.tokenDto.accessToken);
-      localStorage.setItem("refreshToken", res.data.tokenDto.refreshToken);
+      localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("refreshToken", refreshToken);
+      localStorage.setItem("adminCheck", adminCheck);
 
 
       // isAdmin이라면, Redux isAdmin 값 true로 전환
