@@ -1,6 +1,5 @@
 package backend.sellerB.dto;
 
-import backend.sellerB.entity.Brand;
 import backend.sellerB.entity.ProductGroup;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,32 +11,35 @@ import java.util.List;
 @Data
 @Builder
 @AllArgsConstructor
-public class ProductGroupDto {
+public class ProductGroupRes {
+    private Long productGroupSeq;
     private String brandName;
     private String productGroupCode;
     private String productGroupName;
 
-    public static ProductGroupDto from(ProductGroup productGroup) {
+    public static ProductGroupRes from(ProductGroup productGroup) {
         if(productGroup == null) return null;
-        return ProductGroupDto.builder()
+        return ProductGroupRes.builder()
+                .productGroupSeq(productGroup.getProductGroupSeq())
                 .brandName(productGroup.getBrand().getBrandNameKor())
                 .productGroupCode(productGroup.getProductGroupCode())
                 .productGroupName(productGroup.getProductGroupName())
                 .build();
     }
 
-    public static ArrayList<ProductGroupDto> fromList(List<ProductGroup> productGroupList) {
-        ArrayList<ProductGroupDto> listProductGroupDto = new ArrayList<>();
+    public static ArrayList<ProductGroupRes> fromList(List<ProductGroup> productGroupList) {
+        ArrayList<ProductGroupRes> listProductGroupRes = new ArrayList<>();
         int i = 0;
         while (i < productGroupList.size()) {
-            ProductGroupDto productGroupDto = ProductGroupDto.builder()
+            ProductGroupRes productGroupRes = ProductGroupRes.builder()
+                    .productGroupSeq(productGroupList.get(i).getProductGroupSeq())
                     .brandName(productGroupList.get(i).getBrand().getBrandNameKor())
                     .productGroupCode(productGroupList.get(i).getProductGroupCode())
                     .productGroupName(productGroupList.get(i).getProductGroupName())
                     .build();
-            listProductGroupDto.add(productGroupDto);
+            listProductGroupRes.add(productGroupRes);
             i++;
         }
-        return listProductGroupDto;
+        return listProductGroupRes;
     }
 }
