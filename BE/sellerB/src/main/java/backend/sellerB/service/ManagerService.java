@@ -68,7 +68,6 @@ public class ManagerService {
     public ManagerDto update(EditManagerDto editManagerDto, Integer managerSeq) {
         Optional<Manager> managerOptional = managerRepository.findById(managerSeq);
         Manager manager = managerOptional.get();
-        logger.info("@@@@@@@@"+manager.getManagerId());
         manager.setManagerPass(passwordEncoder.encode(editManagerDto.getManagerPass()));
         manager.setManagerEmail(editManagerDto.getManagerEmail());
         manager.setManagerTel(editManagerDto.getManagerTel());
