@@ -78,7 +78,7 @@ public class AuthService {
         String memberId;
 
         if(authorities.equals("ROLE_ADMIN")){
-            memberId = managerRepository.findByManagerSeq(Integer.parseInt(authentication.getName())).getManagerId();
+            memberId = managerRepository.findByManagerSeq(Integer.parseInt(authentication.getName())).get().getManagerId();
             return tokenProvider.createManagerToken(memberId, authorities);
         }
         else{
