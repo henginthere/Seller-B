@@ -10,7 +10,7 @@ function ProductList() {
    
     const navigate = useNavigate();
 
-    const [optionList, setOptionList] = useState(["선풍기", "김치냉장고"]);
+    const [optionList, setOptionList] = useState([]);
     const [searchWord, setSearchWord] = useState("");
     const [groupOption, setGroupOption] = useState("");
 
@@ -40,17 +40,21 @@ function ProductList() {
         );
     }
 
-    // useEffect(() => {
-    //     productLineListApi()
-    //       .then((res) => {
-    //         console.log(res.data);
-    //         setOptionList(res.data);
+    useEffect(() => {
+        productLineListApi()
+          .then((res) => {
+            // 1) 현재 로그인한 관리자가 속한 brand 이름 알아옴
+            // 2) 전체 LineList를 돌면서, 해당 정보 찾기
+            // 3) 해당하는 브랜드 - productGroups 를 map으로 돌면서 제품그룹군 알아오기
+            
+            console.log(res.data[0].brandGroups);
+            setOptionList(res.data.brandGroups);
 
-    //       })
-    //       .catch((err) => {
-    //         console.log(err);
-    //       });
-    //   }, []);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }, []);
 
   return (
     <>
