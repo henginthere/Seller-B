@@ -9,18 +9,15 @@ server:
 
 spring:
   datasource:
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://localhost:3306/sellerB?serverTimezone=Asia/Seoul
-#    username: root
-#    password: hy1234
     driver-class-name: org.mariadb.jdbc.Driver
     url: jdbc:mariadb://i7d105.p.ssafy.io:3306/sellerB?serverTimezone=Asia/Seoul
     username: sellerb
     password: hy1234
 
+
   jpa:
     hibernate:
-      ddl-auto: update #create update none
+      ddl-auto: create #create update none
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: true
@@ -36,7 +33,7 @@ logging:
   file:
     path: C:\SSAFY\SellerB\BE\sellerB
   level:
-    root: info
+    root: debug
     org:
       hibernate:
         type:
@@ -44,8 +41,8 @@ logging:
             sql: trace
 
 springdoc:
-  #  swagger-ui:
-  #    path: animal.html
-  #  version: v1
+#  swagger-ui:
+#    path: animal.html
+#  version: v1
   paths-to-match:
     - /**

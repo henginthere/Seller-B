@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class CustomerDto {
     private String customerGender;
     private String customerTel;
     private String customerAddr;
-    private Timestamp customerBirth;
+    private LocalDateTime customerBirth;
     private String customerToken;
 
     public static CustomerDto from(Customer customer) {

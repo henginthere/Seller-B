@@ -1,9 +1,12 @@
 package backend.sellerB.controller;
 
+import backend.sellerB.dto.AddressDto;
 import backend.sellerB.dto.NoticeDto;
 import backend.sellerB.service.AuthService;
 import backend.sellerB.service.NoticeService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -50,7 +53,7 @@ public class NoticeController {
     }
 
     @GetMapping("/{seq}")
-    public ResponseEntity<NoticeDto> getNoticeDetail(@PathVariable Integer seq) {
+    public ResponseEntity<NoticeDto> getNoticeDetail(@PathVariable Long seq) {
         return ResponseEntity.ok(noticeService.getNoticeDetail(seq));
     }
 
@@ -61,7 +64,7 @@ public class NoticeController {
 
 
     @PutMapping("/{seq}")
-    public ResponseEntity<NoticeDto> putNoticeDetail(@Valid @RequestBody NoticeDto noticeDto, @PathVariable Integer seq) {
+    public ResponseEntity<NoticeDto> putNoticeDetail(@Valid @RequestBody NoticeDto noticeDto, @PathVariable Long seq) {
         return ResponseEntity.ok(noticeService.update(seq, noticeDto));
     }
 
@@ -74,7 +77,7 @@ public class NoticeController {
 
     //soft delete
     @DeleteMapping("/{seq}")
-    public ResponseEntity<NoticeDto> deleteNotice(@PathVariable Integer seq) {
+    public ResponseEntity<NoticeDto> deleteNotice(@PathVariable Long seq) {
         // Access the DB and delete the order
         return ResponseEntity.ok(noticeService.deleteNotice(seq));
     }
