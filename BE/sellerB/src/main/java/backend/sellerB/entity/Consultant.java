@@ -1,6 +1,7 @@
 package backend.sellerB.entity;
 
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
@@ -45,8 +46,8 @@ public class Consultant implements Serializable {
     @Column(name = "consultant_email")
     private String consultantEmail;
     @Basic
-    @Column(name = "consultant_del_yn")
-    private String consultantDelYn;
+    @Column(name = "consultant_del_yn",columnDefinition = "boolean default false")
+    private Boolean consultantDelYn;
     @Basic
     @Column(name = "consultant_reg_user_seq")
     private Integer consultantRegUserSeq;
