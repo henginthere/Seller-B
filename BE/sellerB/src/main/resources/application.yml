@@ -9,18 +9,15 @@ server:
 
 spring:
   datasource:
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://localhost:3306/sellerB?serverTimezone=Asia/Seoul
-#    username: root
-#    password: hy1234
-#    driver-class-name: org.mariadb.jdbc.Driver
-#    url: jdbc:mariadb://i7d105.p.ssafy.io:3306/sellerB?serverTimezone=Asia/Seoul
-#    username: sellerb
-#    password: hy1234
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://localhost:3307/sellerB?serverTimezone=Asia/Seoul
-    username: root
-    password: 2031
+    url: jdbc:mariadb://i7d105.p.ssafy.io:3306/sellerB?serverTimezone=Asia/Seoul
+    username: sellerb
+    password: hy1234
+#    driver-class-name: org.mariadb.jdbc.Driver
+#    url: jdbc:mariadb://localhost:3307/sellerB?serverTimezone=Asia/Seoul
+#    username: root
+#    password: 2031
+
 
   jpa:
     hibernate:
