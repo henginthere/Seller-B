@@ -8,6 +8,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class EditConsultantDto {
 
+    private String consultantPass;
     private String consultantEmail;
     private String consultantTel;
     private ProductGroup productGroup;
