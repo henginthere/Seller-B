@@ -24,7 +24,7 @@ public class ProductGroupController {
     }
 
     @GetMapping("/{seq}")
-    public ResponseEntity<ProductGroupDto> getProductGroupDetail(@PathVariable Integer seq) {
+    public ResponseEntity<ProductGroupDto> getProductGroupDetail(@PathVariable Long seq) {
         return ResponseEntity.ok(productGroupService.getProductGroupDetail(seq));
     }
 
@@ -34,12 +34,12 @@ public class ProductGroupController {
     }
 
     @PutMapping("/{seq}")
-    public ResponseEntity<ProductGroupDto> updateProductGroup(@Valid @RequestBody ProductGroupDto productGroupDto, @PathVariable Integer seq) {
+    public ResponseEntity<ProductGroupDto> updateProductGroup(@Valid @RequestBody ProductGroupDto productGroupDto, @PathVariable Long seq) {
         return ResponseEntity.ok(productGroupService.update(seq, productGroupDto));
     }
 
     @DeleteMapping("/{seq}")
-    public ResponseEntity<ProductGroupDto> deleteProductGroup(@PathVariable Integer seq) {
+    public ResponseEntity<ProductGroupDto> deleteProductGroup(@PathVariable Long seq) {
         // Access the DB and delete the order
         return ResponseEntity.ok(productGroupService.deleteProductGroup(seq));
     }

@@ -12,6 +12,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -27,7 +28,7 @@ public class ProductGroup {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "product_group_seq")
-    private int productGroupSeq;
+    private Long productGroupSeq;
 
     @ManyToOne
     @JoinColumn(name = "brand_seq")
@@ -40,24 +41,24 @@ public class ProductGroup {
     @Column(name = "product_group_name")
     private String productGroupName;
     @Basic
-    @Column(name = "product_group_del_yn")
-    private String productGroupDelYn;
+    @Column(name = "product_group_del_yn",columnDefinition = "boolean default false")
+    private Boolean productGroupDelYn;
     @CreatedBy
     @Basic
     @Column(name = "product_group_reg_user_seq")
-    private Integer productGroupRegUserSeq;
+    private Long productGroupRegUserSeq;
     @CreatedDate
     @Basic
     @Column(name = "product_group_reg_date")
-    private Timestamp productGroupRegDate;
+    private LocalDateTime productGroupRegDate;
     @LastModifiedBy
     @Basic
     @Column(name = "product_group_mod_seq")
-    private Integer productGroupModSeq;
+    private Long productGroupModSeq;
     @LastModifiedDate
     @Basic
     @Column(name = "product_group_mod_date")
-    private Timestamp productGroupModDate;
+    private LocalDateTime productGroupModDate;
 
 
     @Override

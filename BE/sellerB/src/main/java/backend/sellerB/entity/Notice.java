@@ -28,7 +28,11 @@ public class Notice implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "notice_seq")
-    private int noticeSeq;
+    private Long noticeSeq;
+    @ManyToOne
+    @JoinColumn(name = "brand_seq")
+    @JsonBackReference
+    private Brand brandSeq;
     @Basic
     @Column(name = "notice_title")
     private String noticeTitle;
@@ -36,13 +40,13 @@ public class Notice implements Serializable {
     @Column(name = "notice_content")
     private String noticeContent;
     @Basic
-    @Column(name = "notice_del_yn")
-    private String noticeDelYn;
+    @Column(name = "notice_del_yn",columnDefinition = "boolean default false")
+    private Boolean noticeDelYn;
 
     @CreatedBy
     @Basic
     @Column(name = "notice_reg_user_seq")
-    private String noticeRegUserSeq;
+    private Long noticeRegUserSeq;
     @CreatedDate
     @Basic
     @Column(name = "notice_reg_date")
@@ -51,16 +55,13 @@ public class Notice implements Serializable {
     @LastModifiedBy
     @Basic
     @Column(name = "notice_mod_user_seq")
-    private String noticeModUserSeq;
+    private Long noticeModUserSeq;
 
     @LastModifiedDate
     @Basic
     @Column(name = "notice_mod_date")
     private LocalDateTime noticeModDate;
-    @ManyToOne
-    @JoinColumn(name = "brand_seq")
-    @JsonBackReference
-    private Brand brandSeq;
+
 
 
 
