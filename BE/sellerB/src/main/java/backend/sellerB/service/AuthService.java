@@ -83,11 +83,11 @@ public class AuthService {
         String memberId;
 
         if(authorities.equals("ROLE_ADMIN")){
-            memberId = managerRepository.findByManagerSeq(Integer.parseInt(authentication.getName())).get().getManagerId();
+            memberId = managerRepository.findByManagerSeq(Long.parseLong(authentication.getName())).get().getManagerId();
             return tokenProvider.createManagerToken(memberId, authorities);
         }
         else{
-            memberId = consultantRepository.findByConsultantSeq(Integer.parseInt(authentication.getName())).getConsultantId();
+            memberId = consultantRepository.findByConsultantSeq(Long.parseLong(authentication.getName())).getConsultantId();
             return tokenProvider.createConsultantToken(memberId, authorities);
         }
 
