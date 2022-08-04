@@ -44,7 +44,7 @@ public class AddressController {
     }
 
     @GetMapping("/{seq}")
-    public ResponseEntity<AddressDto> getAddressDetail(@PathVariable Integer seq) {
+    public ResponseEntity<AddressDto> getAddressDetail(@PathVariable Long seq) {
         return ResponseEntity.ok(addressService.getAddressDetail(seq));
     }
 
@@ -54,12 +54,12 @@ public class AddressController {
     }
 
     @PutMapping("/{seq}")
-    public ResponseEntity<AddressDto> updateAddress(@Valid @RequestBody AddressDto addressDto, @PathVariable Integer seq) {
+    public ResponseEntity<AddressDto> updateAddress(@Valid @RequestBody AddressDto addressDto, @PathVariable Long seq) {
         return ResponseEntity.ok(addressService.updateAddress(seq, addressDto));
     }
 
     @DeleteMapping("/{seq}")
-    public ResponseEntity<AddressDto> deleteAddress(@PathVariable Integer seq) {
+    public ResponseEntity<AddressDto> deleteAddress(@PathVariable Long seq) {
         return ResponseEntity.ok(addressService.deleteAddress(seq));
     }
 }

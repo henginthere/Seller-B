@@ -28,13 +28,13 @@ public class CustomerWaitingPageService {
 
     public List<CustomerWaitingPageDto> getCustomerWaitingPageList() { return CustomerWaitingPageDto.fromList(customerWaitingPageRepository.findAll());}
 
-    public CustomerWaitingPageDto getCustomerWaitingPageDetail(Integer seq) {
+    public CustomerWaitingPageDto getCustomerWaitingPageDetail(Long seq) {
         Optional<CustomerWaitingPage> customerWaitingPageOptional = customerWaitingPageRepository.findById(seq);
         CustomerWaitingPage customerWaitingPage = customerWaitingPageOptional.get();
         return CustomerWaitingPageDto.from(customerWaitingPage);
     }
 
-    public CustomerWaitingPageDto update(Integer seq, CustomerWaitingPageDto customerWaitingPageDto) {
+    public CustomerWaitingPageDto update(Long seq, CustomerWaitingPageDto customerWaitingPageDto) {
         Optional<CustomerWaitingPage> customerWaitingPageOptional = customerWaitingPageRepository.findById(seq);
         CustomerWaitingPage customerWaitingPage = customerWaitingPageOptional.get();
         customerWaitingPage.setProduct(customerWaitingPageDto.getProduct());
@@ -44,10 +44,10 @@ public class CustomerWaitingPageService {
     }
 
     //deleteYn이 불필요해서 repo에서 삭제하고 삭제한 데이터 반환
-    public CustomerWaitingPageDto deleteCustomerWaitingPage(Integer seq) {
+    public CustomerWaitingPageDto deleteCustomerWaitingPage(Long seq) {
         Optional<CustomerWaitingPage> customerWaitingPageOptional = customerWaitingPageRepository.findById(seq);
         CustomerWaitingPage customerWaitingPage = customerWaitingPageOptional.get();
-        customerWaitingPageRepository.deleteById(seq);
+        customerWaitingPage.setCustomerWaitingPageDelYn(true);
         return CustomerWaitingPageDto.from(customerWaitingPage);
     }
 }
