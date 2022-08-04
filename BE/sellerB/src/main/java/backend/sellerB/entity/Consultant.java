@@ -22,7 +22,7 @@ public class Consultant implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "consultant_seq")
-    private int consultantSeq;
+    private Long consultantSeq;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_group_seq")
     private ProductGroup productGroup;
