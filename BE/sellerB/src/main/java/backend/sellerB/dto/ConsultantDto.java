@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 public class ConsultantDto {
 
 
-    private Integer consultantSeq;
+    private Long consultantSeq;
     private String consultantId;
     private String consultantName;
     private String consultantEmail;
