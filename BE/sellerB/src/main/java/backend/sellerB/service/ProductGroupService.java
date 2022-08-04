@@ -30,13 +30,13 @@ public class ProductGroupService {
 
     public List<ProductGroupDto> getProductGroupList() { return ProductGroupDto.fromList(productGroupRepository.findAll());}
 
-    public ProductGroupDto getProductGroupDetail(Integer seq) {
+    public ProductGroupDto getProductGroupDetail(Long seq) {
         Optional<ProductGroup> productGroupOptional = productGroupRepository.findById(seq);
         ProductGroup productGroup = productGroupOptional.get();
         return ProductGroupDto.from(productGroup);
     }
 
-    public ProductGroupDto update(Integer seq, ProductGroupDto productGroupDto) {
+    public ProductGroupDto update(Long seq, ProductGroupDto productGroupDto) {
         Optional<ProductGroup> productGroupOptional = productGroupRepository.findById(seq);
         ProductGroup productGroup = productGroupOptional.get();
         productGroup.setBrand(productGroupDto.getBrand());
@@ -45,10 +45,10 @@ public class ProductGroupService {
         return ProductGroupDto.from(productGroup);
     }
 
-    public ProductGroupDto deleteProductGroup(Integer seq) {
+    public ProductGroupDto deleteProductGroup(Long seq) {
         Optional<ProductGroup> productGroupOptional = productGroupRepository.findById(seq);
         ProductGroup productGroup = productGroupOptional.get();
-        productGroup.setProductGroupDelYn("Y");
+        productGroup.setProductGroupDelYn(true);
         return ProductGroupDto.from(productGroup);
     }
 }

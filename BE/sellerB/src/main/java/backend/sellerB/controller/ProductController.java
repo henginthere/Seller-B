@@ -26,7 +26,7 @@ public class ProductController {
     }
 
     @GetMapping("/{seq}")
-    public ResponseEntity<ProductDto> getProductDetail(@PathVariable Integer seq) {
+    public ResponseEntity<ProductDto> getProductDetail(@PathVariable Long seq) {
         return ResponseEntity.ok(productService.getProductDetail(seq));
     }
 
@@ -36,12 +36,12 @@ public class ProductController {
     }
 
     @PutMapping("/{seq}")
-    public ResponseEntity<ProductDto> updateProduct(@Valid @RequestBody ProductDto productDto, @PathVariable Integer seq) {
+    public ResponseEntity<ProductDto> updateProduct(@Valid @RequestBody ProductDto productDto, @PathVariable Long seq) {
         return ResponseEntity.ok(productService.update(seq, productDto));
     }
 
     @DeleteMapping("/{seq}")
-    public ResponseEntity<ProductDto> deleteProduct(@PathVariable Integer seq) {
+    public ResponseEntity<ProductDto> deleteProduct(@PathVariable Long seq) {
         // Access the DB and delete the order
         return ResponseEntity.ok(productService.deleteProduct(seq));
     }
