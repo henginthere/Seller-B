@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class ManagerDto {
 
+    private Long managerSeq;
     private Brand brandSeq;
     private String managerId;
     private String managerName;
@@ -43,6 +44,7 @@ public class ManagerDto {
         logger.info(manager.getManagerId());
         if(manager == null) return null;
         return ManagerDto.builder()
+                .managerSeq(manager.getManagerSeq())
                 .brandSeq(manager.getBrandSeq())
                 .managerId(manager.getManagerId())
                 .managerName(manager.getManagerName())

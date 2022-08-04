@@ -27,7 +27,7 @@ public class Manager implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "manager_seq")
-    private int managerSeq;
+    private Long managerSeq;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "brand_seq")
     private Brand brandSeq;
