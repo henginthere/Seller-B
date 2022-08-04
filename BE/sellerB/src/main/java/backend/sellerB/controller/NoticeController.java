@@ -2,6 +2,7 @@ package backend.sellerB.controller;
 
 import backend.sellerB.dto.AddressDto;
 import backend.sellerB.dto.NoticeDto;
+import backend.sellerB.dto.NoticeReq;
 import backend.sellerB.service.AuthService;
 import backend.sellerB.service.NoticeService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -43,8 +44,8 @@ public class NoticeController {
             @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
     })
     @PostMapping
-    public ResponseEntity<NoticeDto> saveNotice(@Valid @RequestBody NoticeDto noticeDto) {
-        return ResponseEntity.ok(noticeService.create(noticeDto));
+    public ResponseEntity<NoticeReq> saveNotice(@Valid @RequestBody NoticeReq noticeReq) {
+        return ResponseEntity.ok(noticeService.create(noticeReq));
     }
 
     @GetMapping("/list")
@@ -64,8 +65,8 @@ public class NoticeController {
 
 
     @PutMapping("/{seq}")
-    public ResponseEntity<NoticeDto> putNoticeDetail(@Valid @RequestBody NoticeDto noticeDto, @PathVariable Long seq) {
-        return ResponseEntity.ok(noticeService.update(seq, noticeDto));
+    public ResponseEntity<NoticeReq> putNoticeDetail(@Valid @RequestBody NoticeReq noticeReq, @PathVariable Long seq) {
+        return ResponseEntity.ok(noticeService.update(seq, noticeReq));
     }
 
 //    @DeleteMapping ("/{seq}")
