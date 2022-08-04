@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "./NoticeWrite.css";
 import { Footer, NavBar } from "../../components/index";
+import Button from "@mui/material/Button";
 // api
 import {
   detailNoticeApi,
@@ -105,15 +106,19 @@ const NoticeDetail = () => {
         </div>
         <div>
           <div>
-            <button type='submit'>수정</button>
-            <button
+            <Button type='submit' variant='contained'>
+              수정
+            </Button>
+            <Button
+              variant='contained'
+              color='error'
               onClick={() => {
                 setIsModify(!isModify);
                 // console.log("After : " + isModify);
               }}
             >
               취소
-            </button>
+            </Button>
           </div>
         </div>
       </form>
@@ -137,20 +142,24 @@ const NoticeDetail = () => {
           />
         </div>
         <div>
-          <Link to='/manager/noticeList'>
-            <button>뒤로</button>
-          </Link>
           {isManager ? (
             <div>
-              <button
-                onClick={() => {
-                  setIsModify(!isModify);
-                  // console.log(isModify);
-                }}
-              >
-                수정
-              </button>
-              <button onClick={delNotice}>삭제</button>
+              <span className='noticedetail-button-wrapper'>
+                <Button
+                  variant='outlined'
+                  onClick={() => {
+                    setIsModify(!isModify);
+                    // console.log(isModify);
+                  }}
+                >
+                  수정
+                </Button>
+              </span>
+              <span className='noticedetail-button-wrapper'>
+                <Button variant='outlined' color='error' onClick={delNotice}>
+                  삭제
+                </Button>
+              </span>
             </div>
           ) : null}
         </div>
@@ -163,6 +172,11 @@ const NoticeDetail = () => {
       <NavBar />
       <NoticeWrapper>
         <div className='notice-write-header'>공지사항 내용</div>
+        <div className='notice-detail-gotoList'>
+          <Link to='/manager/noticeList'>
+            <Button>목록</Button>
+          </Link>
+        </div>
         {isModify ? <ModifyNotice /> : <DefaultNotice />}
       </NoticeWrapper>
       <Footer />

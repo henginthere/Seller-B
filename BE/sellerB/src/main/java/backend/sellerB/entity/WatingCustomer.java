@@ -27,10 +27,10 @@ public class WatingCustomer {
     @Id
     @Column(name = "waiting_customer_seq")
     private Long waitingCustomerSeq;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "customer_seq")
     private Customer customer;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "product_seq")
     private Product product;
     @Basic

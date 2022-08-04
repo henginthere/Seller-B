@@ -37,8 +37,7 @@ function Main() {
     setPass(e.target.value);
   };
 
-  const isAdmin = useSelector((state) => state.authToken.isAdmin);
-  const accessT = useSelector((state) => state.authToken.accessToken);
+  
 
   // 로그인 버튼 클릭 후
   const onLoginBtn = () => {
@@ -61,9 +60,9 @@ function Main() {
 
         // isAdmin이라면, Redux isAdmin 값 true로 전환
         dispatch(CHECK_ADMIN());
-
+        navigate("/manager/main");
         if (adminCheck === "ROLE_ADMIN") {
-          navigate("/manager/main");
+          
         } else {
           navigate("/consultant/main");
         }
