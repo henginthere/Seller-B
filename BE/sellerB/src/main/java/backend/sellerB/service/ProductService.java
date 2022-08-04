@@ -31,13 +31,13 @@ public class ProductService {
 
     public List<ProductDto> getProductList() { return ProductDto.fromList(productRepository.findAll());}
 
-    public ProductDto getProductDetail(Integer seq) {
+    public ProductDto getProductDetail(Long seq) {
         Optional<Product> productOptional = productRepository.findById(seq);
         Product product = productOptional.get();
         return ProductDto.from(product);
     }
 
-    public ProductDto update(Integer seq, ProductDto productDto) {
+    public ProductDto update(Long seq, ProductDto productDto) {
         Optional<Product> productOptional = productRepository.findById(seq);
         Product product = productOptional.get();
         product.setProductName(productDto.getProductName());
@@ -48,10 +48,10 @@ public class ProductService {
         return ProductDto.from(product);
     }
 
-    public ProductDto deleteProduct(Integer seq) {
+    public ProductDto deleteProduct(Long seq) {
         Optional<Product> productOptional = productRepository.findById(seq);
         Product product = productOptional.get();
-        product.setProductDelYn("Y");
+        product.setProductDelYn(true);
         return ProductDto.from(product);
     }
 }

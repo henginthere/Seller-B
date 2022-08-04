@@ -29,13 +29,13 @@ public class BrandService {
         return BrandDto.fromList(brandRepository.findAll());
     }
 
-    public BrandDto getBrandDetail(Integer seq) {
+    public BrandDto getBrandDetail(Long seq) {
         Optional<Brand> brandOptional = brandRepository.findById(seq);
         Brand brand = brandOptional.get();
         return BrandDto.from(brand);
     }
 
-    public BrandDto update(Integer seq, BrandDto brandDto) {
+    public BrandDto update(Long seq, BrandDto brandDto) {
         Optional<Brand> brandOptional = brandRepository.findById(seq);
         Brand brand = brandOptional.get();
         brand.setBrandNameKor(brandDto.getBrandNameKor());
@@ -44,10 +44,10 @@ public class BrandService {
         return BrandDto.from(brand);
     }
 
-    public BrandDto deleteBrand(Integer seq) {
+    public BrandDto deleteBrand(Long seq) {
         Optional<Brand> brandOptional = brandRepository.findById(seq);
         Brand brand = brandOptional.get();
-        brand.setBrandDelYn("Y");
+        brand.setBrandDelYn(true);
         return BrandDto.from(brand);
     }
 }

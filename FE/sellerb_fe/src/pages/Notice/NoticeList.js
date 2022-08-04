@@ -1,33 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import { useSelector } from "react-redux";
-
 import { listNoticeApi, searchNoticeApi } from "../../api/noticeApi";
 import "./NoticeList.css";
 import { Footer, NavBar } from "../../components/index";
 
-import getStringDate from "../../utils/date";
-import axios from "axios";
+// Dummy data
 
-const BASE_URL = "https://i7d105.p.ssafy.io/api";
-const dummyNoticeList = [
-  {
-    notice_seq: 1,
-    notice_title: "first Notice Title",
-    notice_reg_date: getStringDate(new Date()),
-  },
-  {
-    notice_seq: 2,
-    notice_title: "Two Notice Title",
-    notice_reg_date: getStringDate(new Date()),
-  },
-  {
-    notice_seq: 3,
-    notice_title: "Three Notice Title",
-    notice_reg_date: getStringDate(new Date()),
-  },
-];
+// const dummyNoticeList = [
+//   {
+//     notice_seq: 1,
+//     notice_title: "first Notice Title",
+//     notice_reg_date: getStringDate(new Date()),
+//   },
+//   {
+//     notice_seq: 2,
+//     notice_title: "Two Notice Title",
+//     notice_reg_date: getStringDate(new Date()),
+//   },
+//   {
+//     notice_seq: 3,
+//     notice_title: "Three Notice Title",
+//     notice_reg_date: getStringDate(new Date()),
+//   },
+// ];
 // const noticeList = {};
 // function noticeListApi(){
 //   axios.get(BASE_URL).then(function(res){
@@ -42,7 +38,7 @@ function NoticeList() {
 
   const [noticeList, setNoticeList] = useState([]); // -> api res.data 로 값 갱신해주기
   const [searchTitle, setSearchTitle] = useState("");
-  var isManager = false;
+  var isManager = true;
   const onSearchByTitleHandler = (e) => {
     setSearchTitle(e.target.value);
   };
@@ -51,47 +47,55 @@ function NoticeList() {
     // Test
     console.log(searchTitle);
     // Axios
-    // if (searchTitle === "") {
-    //   initNoticeList();
-    // }
-    // searchNoticeApi(searchTitle)
-    //   .then((res) => {
-    //     console.log(res.data);
-    //     setNoticeList(res.data);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    if (searchTitle === "") {
+      listNoticeApi()
+        .then((res) => {
+          // console.log(res.data);
+
+          setNoticeList(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    searchNoticeApi(searchTitle)
+      .then((res) => {
+        // console.log(res.data);
+        setNoticeList(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   useEffect(() => {
     listNoticeApi()
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
 
         setNoticeList(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
-  });
+  }, []);
 
   return (
     <>
       <NavBar />
 
-      <div className="notice-title">공지사항</div>
-      <div className="notice-wrapper">
-        <div className="search-byTitle-wrapper">
+      <div className='notice-title'>공지사항</div>
+      <div className='notice-wrapper'>
+        <div className='search-byTitle-wrapper'>
           <input
-            className="search-byTitle"
-            placeholder="제목으로 검색하기"
+            className='search-byTitle'
+            placeholder='제목으로 검색하기'
             value={searchTitle}
             onChange={onSearchByTitleHandler}
           />
           <button onClick={submitBtnSearchByTitle}>검색</button>
         </div>
-        <div className="notice-list">
+        <div className='notice-list'>
           <table>
             <thead>
               <tr>
@@ -105,7 +109,11 @@ function NoticeList() {
                 return (
                   <tr>
                     <td>{list.noticeSeq}</td>
-                    <td onClick={() => navigate(`/noticeDetail/${list.noticeSeq}`)}>
+                    <td
+                      onClick={() =>
+                        navigate(`/noticeDetail/${list.noticeSeq}`)
+                      }
+                    >
                       {list.noticeTitle}
                     </td>
                     <td>{list.noticeRegDate}</td>
@@ -115,10 +123,10 @@ function NoticeList() {
             </tbody>
           </table>
         </div>
-        <div className="notice-write-wrapper">
+        <div className='notice-write-wrapper'>
           {isManager ? (
-            <Link to="/manager/noticeWrite">
-              <button className="write-btn">글작성</button>
+            <Link to='/manager/noticeWrite'>
+              <button className='write-btn'>글작성</button>
             </Link>
           ) : null}
         </div>
