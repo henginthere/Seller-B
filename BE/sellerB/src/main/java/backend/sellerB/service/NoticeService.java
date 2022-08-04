@@ -1,6 +1,7 @@
 package backend.sellerB.service;
 
 import backend.sellerB.dto.NoticeDto;
+import backend.sellerB.dto.NoticeReq;
 import backend.sellerB.entity.Notice;
 import backend.sellerB.repository.NoticeRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,15 +20,15 @@ public class NoticeService {
     private final NoticeRepository noticeRepository;
 
     @Transactional
-    public NoticeDto create(NoticeDto noticeDto) {
+    public NoticeReq create(NoticeReq noticeReq) {
 
         //dto를 엔티티로
         Notice notice = Notice.builder()
-                .noticeTitle(noticeDto.getNoticeTitle())
-                .noticeContent(noticeDto.getNoticeContent())
+                .noticeTitle(noticeReq.getNoticeTitle())
+                .noticeContent(noticeReq.getNoticeContent())
                 .build();
 
-        return NoticeDto.from(noticeRepository.save(notice));
+        return NoticeReq.from(noticeRepository.save(notice));
 
     }
 
@@ -44,12 +45,12 @@ public class NoticeService {
 
 
 
-    public NoticeDto update(Long seq, NoticeDto noticeDto) {
+    public NoticeReq update(Long seq, NoticeReq noticeReq) {
         Optional<Notice> noticeOptional = noticeRepository.findById(seq);
         Notice notice = noticeOptional.get();
-        notice.setNoticeTitle(noticeDto.getNoticeTitle());
-        notice.setNoticeContent(noticeDto.getNoticeContent());
-        return NoticeDto.from(notice);
+        notice.setNoticeTitle(noticeReq.getNoticeTitle());
+        notice.setNoticeContent(noticeReq.getNoticeContent());
+        return NoticeReq.from(notice);
     }
 
 //    public Long delete(Long seq) {
