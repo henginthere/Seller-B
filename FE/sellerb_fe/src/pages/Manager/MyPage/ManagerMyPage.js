@@ -1,25 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./ManagerMyPage.css";
 import NavBar from "../../../components/Common/NavBar/NavBar";
 import Footer from "../../../components/Common/Footer/Footer";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 
+import { managerMyPageApi } from '../../../api/userApi';
+
 function ManagerMyPage() {
   // 초기 더미 데이터
-  const dummy_data = {
-    brand: "SAMSUNG",
-    id: "admin",
-    name: "관리자",
-    pw: "admin",
-    tel: "010-9999-9999",
-    email: "admin@admin.com",
-  };
+  const [data, setData] = useState({
+    brand: "",
+    id: " ",
+    name: "",
+    pw: "",
+    tel: "",
+    email: "",
+  });
 
   // 비동기로 처리하기 위함. useState로 바로바로 적용!
   const [isModify, setModify] = useState(false);
-  // 수정된 데이터  --> data
-  var data = { ...dummy_data };
   // 수정 페이지 인지 아닌지 바꿔주는 함수
   const ChangeToModify = () => {
     setModify(!isModify);
@@ -27,7 +27,7 @@ function ManagerMyPage() {
   };
 
   const cancelModify = () => {
-    data = { ...dummy_data };
+    
     ChangeToModify();
   };
   // 최종적으로 수정 완료 버튼을 누르면 api로 DB에 반영하기 위한 함수
@@ -37,17 +37,29 @@ function ManagerMyPage() {
     alert("수정하시겠습니까?");
 
     // 임시로 메인으로 돌아가게 함
-    console.log("이전 데이터 : " + dummy_data);
-    console.log("바뀐 데이터 : " + data);
     ChangeToModify();
   };
   // 바뀔때마다 setData로 수정된 데이터로 바꿔줌
   const handleChange = (e) => {
     e.preventDefault();
-    // console.log("handleChange!");
     data[e.target.name] = e.target.value;
-    // console.log(e.target.name + " : " + e.target.value);
   };
+
+
+  const manager_seq = localStorage.getItem("managerSeq"); 
+  useEffect(()=>{
+    managerMyPageApi(manager_seq)
+    .then((res)=>{
+      console.log("data:" + data);
+      console.log(res.data);
+
+      setData(res.data);
+
+    })
+    .catch((err)=>{
+      console.log(err.data);
+    })
+  })
 
   // 그냥 My Page 컴포넌트
   const Main = () => {
@@ -59,10 +71,10 @@ function ManagerMyPage() {
         <div className="InfoWrapper">
           <div className="InfoTextField">
             <TextField
-              id="outlined-read-only-input"
-              label="담당 브랜드"
-              defaultValue={dummy_data.brand}
-              InputProps={{
+                id="outlined-read-only-input"
+                label="담당 브랜드"
+                defaultValue={data.brand}
+                InputProps={{
                 readOnly: true,
               }}
               fullWidth="true"
@@ -71,7 +83,7 @@ function ManagerMyPage() {
           <div className="InfoTextField">
             <TextField
               label="ID"
-              defaultValue={dummy_data.id}
+              defaultValue={data.id}
               InputProps={{
                 readOnly: true,
               }}
@@ -81,7 +93,7 @@ function ManagerMyPage() {
           <div className="InfoTextField">
             <TextField
               label="PW"
-              value={dummy_data.pw}
+              value={data.pw}
               InputProps={{
                 readOnly: true,
               }}
@@ -92,7 +104,7 @@ function ManagerMyPage() {
           <div className="InfoTextField">
             <TextField
               label="Tel."
-              value={dummy_data.tel}
+              value={data.tel}
               InputProps={{
                 readOnly: true,
               }}
@@ -103,7 +115,7 @@ function ManagerMyPage() {
           <div className="InfoTextField">
             <TextField
               label="Email"
-              value={dummy_data.email}
+              value={data.email}
               InputProps={{
                 readOnly: true,
               }}
