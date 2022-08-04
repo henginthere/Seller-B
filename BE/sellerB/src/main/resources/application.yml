@@ -45,8 +45,8 @@ logging:
             sql: trace
 
 springdoc:
-  #  swagger-ui:
-  #    path: animal.html
-  #  version: v1
+#  swagger-ui:
+#    path: animal.html
+#  version: v1
   paths-to-match:
     - /**
