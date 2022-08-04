@@ -27,7 +27,7 @@ public class Review {
     @Id
     @Column(name = "review_seq")
     private Long reviewSeq;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "consulting_seq")
     private Consulting consulting;
     @Basic
