@@ -24,7 +24,7 @@ public class BrandController {
     }
 
     @GetMapping("/{seq}")
-    public ResponseEntity<BrandDto> getBrandDetail(@PathVariable Integer seq) {
+    public ResponseEntity<BrandDto> getBrandDetail(@PathVariable Long seq) {
         return ResponseEntity.ok(brandService.getBrandDetail(seq));
     }
 
@@ -34,12 +34,12 @@ public class BrandController {
     }
 
     @PutMapping("/{seq}")
-    public ResponseEntity<BrandDto> updateBrand(@Valid @RequestBody BrandDto brandDto, @PathVariable Integer seq) {
+    public ResponseEntity<BrandDto> updateBrand(@Valid @RequestBody BrandDto brandDto, @PathVariable Long seq) {
         return ResponseEntity.ok(brandService.update(seq, brandDto));
     }
 
     @DeleteMapping("/{seq}")
-    public ResponseEntity<BrandDto> deleteBrand(@PathVariable Integer seq) {
+    public ResponseEntity<BrandDto> deleteBrand(@PathVariable Long seq) {
         // Access the DB and delete the order
         return ResponseEntity.ok(brandService.deleteBrand(seq));
     }

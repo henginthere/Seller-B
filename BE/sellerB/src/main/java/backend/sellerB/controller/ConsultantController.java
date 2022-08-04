@@ -42,7 +42,7 @@ public class ConsultantController {
     }
 
     @GetMapping("/{consultantSeq}")
-    public ResponseEntity<ConsultantDto> getConsultantDetail(@PathVariable Integer consultantSeq) {
+    public ResponseEntity<ConsultantDto> getConsultantDetail(@PathVariable Long consultantSeq) {
         return ResponseEntity.ok(consultantService.getConsultantDetail(consultantSeq));
     }
 
@@ -51,23 +51,19 @@ public class ConsultantController {
         return ResponseEntity.ok(consultantService.searchByConsultantNameContaining(consultantName));
     }
 
-//    @GetMapping("/search/{consultantId}")
-//    public ResponseEntity<List<ConsultantDto>> findByConsultantId(@PathVariable String consultantId) {
-//        return ResponseEntity.ok(consultantService.searchByConsultantId(consultantId));
-//    }
 
     @GetMapping("/list/{productGroupSeq}")
-    public ResponseEntity<List<ConsultantDto>> findByProductGroupSeq(@PathVariable Integer productGroupSeq) {
+    public ResponseEntity<List<ConsultantDto>> findByProductGroupSeq(@PathVariable Long productGroupSeq) {
         return ResponseEntity.ok(consultantService.searchByProductGroupSeq(productGroupSeq));
     }
 
     @PutMapping("/{consultantSeq}")
-    public ResponseEntity<ConsultantDto> updateConsultantInfo(@Valid @RequestBody EditConsultantDto editConsultantDto, @PathVariable Integer consultantSeq) {
+    public ResponseEntity<ConsultantDto> updateConsultantInfo(@Valid @RequestBody EditConsultantDto editConsultantDto, @PathVariable Long consultantSeq) {
         return ResponseEntity.ok(consultantService.update(editConsultantDto, consultantSeq));
     }
 
     @DeleteMapping("/{consultantSeq}")
-    public ResponseEntity<ConsultantDto> deleteConsultant(@PathVariable Integer consultantSeq) {
+    public ResponseEntity<ConsultantDto> deleteConsultant(@PathVariable Long consultantSeq) {
         // Access the DB and delete the order
         return ResponseEntity.ok(consultantService.delete(consultantSeq));
     }
