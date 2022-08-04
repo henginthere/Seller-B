@@ -24,7 +24,7 @@ public class CustomerController {
     }
 
     @GetMapping("/{seq}")
-    public ResponseEntity<CustomerDto> getCustomerDetail(@PathVariable Integer seq) {
+    public ResponseEntity<CustomerDto> getCustomerDetail(@PathVariable Long seq) {
         return ResponseEntity.ok(customerService.getCustomerDetail(seq));
     }
 
@@ -34,12 +34,12 @@ public class CustomerController {
     }
 
     @PutMapping("/{seq}")
-    public ResponseEntity<CustomerDto> updateCustomer(@Valid @RequestBody CustomerDto customerDto, @PathVariable Integer seq) {
+    public ResponseEntity<CustomerDto> updateCustomer(@Valid @RequestBody CustomerDto customerDto, @PathVariable Long seq) {
         return ResponseEntity.ok(customerService.updateCustomer(seq, customerDto));
     }
 
     @DeleteMapping("/{seq}")
-    public ResponseEntity<CustomerDto> deleteCustomer(@PathVariable Integer seq) {
+    public ResponseEntity<CustomerDto> deleteCustomer(@PathVariable Long seq) {
         return ResponseEntity.ok(customerService.deleteCustomer(seq));
     }
 }
