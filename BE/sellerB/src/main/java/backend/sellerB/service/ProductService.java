@@ -1,6 +1,7 @@
 package backend.sellerB.service;
 
 import backend.sellerB.dto.ProductDto;
+import backend.sellerB.dto.ProductRes;
 import backend.sellerB.entity.Product;
 import backend.sellerB.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ public class ProductService {
 
     public ProductDto create(ProductDto productDto) {
         Product product = Product.builder()
+                .productSeq(productDto.getProductSeq())
                 .productGroup(productDto.getProductGroup())
                 .productId(productDto.getProductId())
                 .productName(productDto.getProductName())
@@ -29,17 +31,29 @@ public class ProductService {
         return ProductDto.from(productRepository.save(product));
     }
 
-    public List<ProductDto> getProductList() { return ProductDto.fromList(productRepository.findAll());}
+    public List<ProductRes> getProductList() { return ProductRes.fromList(productRepository.findAll());}
 
-    public ProductDto getProductDetail(Long seq) {
+    public ProductRes getProductDetail(Long seq) {
         Optional<Product> productOptional = productRepository.findById(seq);
         Product product = productOptional.get();
-        return ProductDto.from(product);
+        return ProductRes.from(product);
     }
 
+    public ProductRes getProductDetailByName(String name) {
+        Optional<Product> productOptional = productRepository.findByProductNameContaining(name);
+        Product product = productOptional.get();
+        return ProductRes.from(product);
+    }
+
+    public ProductRes getProductDetailById(String productId) {
+        Optional<Product> productOptional = productRepository.findByProductId(productId);
+        Product product = productOptional.get();
+        return ProductRes.from(product);
+    }
     public ProductDto update(Long seq, ProductDto productDto) {
         Optional<Product> productOptional = productRepository.findById(seq);
         Product product = productOptional.get();
+        product.setProductSeq(productDto.getProductSeq());
         product.setProductName(productDto.getProductName());
         product.setProductGroup(productDto.getProductGroup());
         product.setProductPrice(productDto.getProductPrice());
