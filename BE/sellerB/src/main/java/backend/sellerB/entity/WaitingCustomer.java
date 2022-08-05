@@ -9,7 +9,6 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -22,7 +21,7 @@ import java.util.Objects;
 @DynamicInsert
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "t_wating_customer", schema = "sellerb", catalog = "")
-public class WatingCustomer {
+public class WaitingCustomer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "waiting_customer_seq")
@@ -33,9 +32,12 @@ public class WatingCustomer {
     @ManyToOne
     @JoinColumn(name = "product_seq")
     private Product product;
+    @ManyToOne
+    @JoinColumn(name = "product_group_seq")
+    private ProductGroup productGroup;
     @Basic
-    @Column(name = "waiting_customer_state",columnDefinition = "byte default 0")
-    private Byte waitingCustomerState;
+    @Column(name = "waiting_customer_state",columnDefinition = "boolean default false")
+    private Boolean waitingCustomerState;
     @Basic
     @Column(name = "wating_customer_date")
     private LocalDateTime watingCustomerDate;
@@ -62,16 +64,16 @@ public class WatingCustomer {
     private LocalDateTime waitingCustomerModDate;
 
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        WatingCustomer that = (WatingCustomer) o;
-        return waitingCustomerSeq == that.waitingCustomerSeq && customer == that.customer && product == that.product && Objects.equals(waitingCustomerState, that.waitingCustomerState) && Objects.equals(watingCustomerDate, that.watingCustomerDate);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(waitingCustomerSeq, customer, product, waitingCustomerState, watingCustomerDate);
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        WaitingCustomer that = (WaitingCustomer) o;
+//        return waitingCustomerSeq == that.waitingCustomerSeq && customer == that.customer && product == that.product && Objects.equals(waitingCustomerState, that.waitingCustomerState) && Objects.equals(watingCustomerDate, that.watingCustomerDate);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(waitingCustomerSeq, customer, product, waitingCustomerState, watingCustomerDate);
+//    }
 }
