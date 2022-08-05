@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.ssafy.sellerb">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,7 +15,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SellerB"
+<<<<<<< HEAD
         tools:targetApi="31">
+=======
+        tools:ignore="Instantiatable"
+        tools:targetApi="31">
+        <activity
+            android:name=".ui.qrscan.QrScanActivity"
+            android:exported="false" />
+>>>>>>> feature-aos-login
         <activity
             android:name=".MainActivity"
             android:exported="true">
