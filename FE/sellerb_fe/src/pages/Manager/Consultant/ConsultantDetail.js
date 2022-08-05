@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import Axiso from "axios";
+// import Axiso from "axios";
 
 
 import "./ConsultantDetail.css";
@@ -10,7 +10,7 @@ import ConsultingLog from "../../../components/Log/ConsultingLog";
 // import Test from '../../../components/Log/Test'
 
 import {
-  detailConsultantApi,
+  detailConsultantApi, deleteConsultant
 } from "../../../api/consultantApi";
 
 function ConsultantDetail() {
@@ -40,7 +40,7 @@ function ConsultantDetail() {
           // consultant = res.data;
           
           setConsultant(res.data); 
-          console.log("consultant:" + consultant.consultantId);
+          console.log("detail > consultant:" + consultant.consultantId);
       })
       .catch((err)=>{
           console.log(err);
@@ -57,6 +57,18 @@ function ConsultantDetail() {
     }
  }
 
+ const onDeleteBtn = ()=>{
+    deleteConsultant(seq)
+    .then((res)=>{
+      console.log("onDelete Btn:" + res.data);
+
+      navigate("/manager/main");
+
+    })
+    .catch((err)=>{
+      console.log("Error")
+    })
+ }
 
   return (
 
@@ -66,24 +78,32 @@ function ConsultantDetail() {
       <div className="profile-wrapper">
         <div className="profile-left">
           <div className="profile-element">
-            사번
+            <p>사번</p>
             <div>{consultant.consultantId}</div>
           </div>
           <div className="profile-element">
-            사원명
+            <p>사원명</p>
             <div>{consultant.consultantName}</div>
           </div>
           <div className="profile-element">
-            사원 Email
+            <p>사원 Email</p>
             <div>{consultant.consultantEmail}</div>
           </div>
           <div className="profile-element">
-            사원 Pnum
+           <p>사원 Pnum</p>
             <div>{consultant.consultantTel}</div>
           </div>
           <div className="profile-element">
-            제품군
+            <p>제품군</p>
             <div>{consultant.consultantGroup}</div>
+          </div>
+          <div>
+            <button onClick={((e)=> navigate(`/manager/consultantModify/${consultant.consultantSeq}`))}>
+              수정하기
+            </button>
+            <button onClick={(e)=>onDeleteBtn()}>
+              삭제하기
+            </button>
           </div>
         </div>
         <div className="profile-right">
