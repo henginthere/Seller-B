@@ -20,7 +20,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @DynamicInsert
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "t_wating_customer", schema = "sellerb", catalog = "")
+@Table(name = "t_waiting_customer", schema = "sellerb", catalog = "")
 public class WaitingCustomer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
