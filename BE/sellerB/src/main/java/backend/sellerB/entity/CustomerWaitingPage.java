@@ -2,6 +2,8 @@ package backend.sellerB.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -20,6 +22,8 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
+@SQLDelete(sql = "UPDATE t_customer_waiting_page SET customer_waiting_page_del_yn=true WHERE customer_waiting_page_seq=?")
+@Where(clause = "customer_waiting_page_del_yn=false")
 @Table(name = "t_customer_waiting_page", schema = "sellerb", catalog = "")
 public class CustomerWaitingPage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
