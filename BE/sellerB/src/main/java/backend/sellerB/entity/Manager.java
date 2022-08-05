@@ -3,6 +3,8 @@ package backend.sellerB.entity;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import org.hibernate.type.descriptor.sql.TinyIntTypeDescriptor;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -27,6 +29,8 @@ import java.util.Set;
 @AllArgsConstructor
 @DynamicInsert
 @EntityListeners(AuditingEntityListener.class)
+@SQLDelete(sql = "UPDATE t_manager SET manager_id=null, manager_name=null, manager_pass=null, manager_email=null, manager_tel=null, manager_image_url=null,manager_del_yn=true WHERE manager_seq=?")
+@Where(clause = "manager_del_yn=false")
 @Table(name = "t_manager", schema = "sellerb", catalog = "")
 public class Manager implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,21 +39,21 @@ public class Manager implements Serializable {
     private Long managerSeq;
     @ManyToOne
     @JoinColumn(name = "brand_seq")
-    private Brand brandSeq;
+    private Brand brand;
     @Basic
-    @Column(name = "manager_id")
+    @Column(name = "manager_id",length = 25)
     private String managerId;
     @Basic
-    @Column(name = "manager_name")
+    @Column(name = "manager_name",length = 10)
     private String managerName;
     @Basic
-    @Column(name = "manager_pass")
+    @Column(name = "manager_pass",length = 100)
     private String managerPass;
     @Basic
-    @Column(name = "manager_tel")
+    @Column(name = "manager_tel",length = 15)
     private String managerTel;
     @Basic
-    @Column(name = "manager_email")
+    @Column(name = "manager_email",length = 50)
     private String managerEmail;
     @Basic
     @Column(name = "manager_image_url")
@@ -84,12 +88,12 @@ public class Manager implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Manager that = (Manager) o;
-        return managerSeq == that.managerSeq && brandSeq == that.brandSeq && Objects.equals(managerId, that.managerId) && Objects.equals(managerName, that.managerName) && Objects.equals(managerImageUrl, that.managerImageUrl) && Objects.equals(managerPass, that.managerPass) && Objects.equals(managerTel, that.managerTel) && Objects.equals(managerEmail, that.managerEmail) && Objects.equals(managerDelYn, that.managerDelYn) && Objects.equals(managerRegUserSeq, that.managerRegUserSeq) && Objects.equals(managerRegDate, that.managerRegDate) && Objects.equals(managerModUserSeq, that.managerModUserSeq) && Objects.equals(managerModDate, that.managerModDate);
+        return managerSeq == that.managerSeq && brand == that.brand && Objects.equals(managerId, that.managerId) && Objects.equals(managerName, that.managerName) && Objects.equals(managerImageUrl, that.managerImageUrl) && Objects.equals(managerPass, that.managerPass) && Objects.equals(managerTel, that.managerTel) && Objects.equals(managerEmail, that.managerEmail) && Objects.equals(managerDelYn, that.managerDelYn) && Objects.equals(managerRegUserSeq, that.managerRegUserSeq) && Objects.equals(managerRegDate, that.managerRegDate) && Objects.equals(managerModUserSeq, that.managerModUserSeq) && Objects.equals(managerModDate, that.managerModDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(managerSeq, brandSeq, managerId, managerName, managerPass, managerTel, managerEmail, managerImageUrl, managerDelYn, managerRegUserSeq, managerRegDate, managerModUserSeq, managerModDate);
+        return Objects.hash(managerSeq, brand, managerId, managerName, managerPass, managerTel, managerEmail, managerImageUrl, managerDelYn, managerRegUserSeq, managerRegDate, managerModUserSeq, managerModDate);
     }
 
 
