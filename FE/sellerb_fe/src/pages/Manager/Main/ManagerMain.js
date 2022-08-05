@@ -39,9 +39,7 @@ function ManagerMain() {
         <div id="manager-main-left">
           <ManagerMainLeft />
         </div>
-        <div id="manager-main-center">
-          <ManagerMainCenter />
-        </div>
+
         {/* 우측 상담사 관리 */}
         <div id="manager-main-right">
           <ManagerMainRight />
