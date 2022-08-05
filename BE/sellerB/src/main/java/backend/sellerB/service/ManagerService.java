@@ -3,10 +3,12 @@ package backend.sellerB.service;
 
 import backend.sellerB.dto.EditManagerDto;
 import backend.sellerB.dto.ManagerDto;
+import backend.sellerB.dto.RegisterManagerDto;
 import backend.sellerB.entity.Authority;
 import backend.sellerB.entity.Manager;
 import backend.sellerB.exception.DuplicateUserException;
 import backend.sellerB.repository.AuthorityRepository;
+import backend.sellerB.repository.BrandRepository;
 import backend.sellerB.repository.ManagerRepository;
 import backend.sellerB.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
@@ -28,11 +30,12 @@ public class ManagerService {
     private final ManagerRepository managerRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthorityRepository authorityRepository;
+    private final BrandRepository brandRepository;
 
     @Transactional
-    public ManagerDto signup(ManagerDto managerDto) {
-        if (managerRepository.findBymanagerId(managerDto.getManagerId()).orElse(null) != null) {
-            throw new DuplicateUserException(managerDto.getManagerId());
+    public ManagerDto signup(RegisterManagerDto registerManagerDto) {
+        if (managerRepository.findBymanagerId(registerManagerDto.getManagerId()).orElse(null) != null) {
+            throw new DuplicateUserException(registerManagerDto.getManagerId());
         }
 
 
@@ -43,16 +46,24 @@ public class ManagerService {
 
         authorityRepository.save(authority);
 
+        System.out.println("프론트에서 받아온 dto의 브랜드 번호: "+registerManagerDto.getBrandSeq());
+        System.out.println("프론트에서 받아온 id : "+registerManagerDto.getManagerId());
+
+
+
         //dto를 엔티티로
         Manager manager = Manager.builder()
-                .managerId(managerDto.getManagerId())
-                .managerName(managerDto.getManagerName())
-                .managerPass(passwordEncoder.encode(managerDto.getManagerPass()))
-                .managerTel(managerDto.getManagerTel())
-                .managerEmail(managerDto.getManagerEmail())
+                .managerSeq(registerManagerDto.getManagerSeq())
+                .brandSeq(brandRepository.findById(registerManagerDto.getBrandSeq()).get())
+                .managerId(registerManagerDto.getManagerId())
+                .managerName(registerManagerDto.getManagerName())
+                .managerPass(passwordEncoder.encode(registerManagerDto.getManagerPass()))
+                .managerTel(registerManagerDto.getManagerTel())
+                .managerEmail(registerManagerDto.getManagerEmail())
                 .authorities(Collections.singleton(authority))
                 .build();
 
+        System.out.println("manager빌더 : "+manager.getBrandSeq());
         logger.info(manager.getManagerId());
         return ManagerDto.from(managerRepository.save(manager));
 
