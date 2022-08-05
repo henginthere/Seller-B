@@ -8,6 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { listConsultantApi } from '../../../api/consultantApi'
 
 import './ManagerMain.css'
+
 const styleObj = {
   width: "75%",
   border: "solid 2px black",
