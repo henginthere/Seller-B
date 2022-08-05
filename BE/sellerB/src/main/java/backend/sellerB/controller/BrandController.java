@@ -1,6 +1,7 @@
 package backend.sellerB.controller;
 
 import backend.sellerB.dto.BrandDto;
+import backend.sellerB.dto.ResponseBrandDto;
 import backend.sellerB.service.BrandService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,12 +25,12 @@ public class BrandController {
     }
 
     @GetMapping("/{seq}")
-    public ResponseEntity<BrandDto> getBrandDetail(@PathVariable Long seq) {
+    public ResponseEntity<ResponseBrandDto> getBrandDetail(@PathVariable Long seq) {
         return ResponseEntity.ok(brandService.getBrandDetail(seq));
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<BrandDto>> getBrandList(HttpServletRequest request) {
+    public ResponseEntity<List<ResponseBrandDto>> getBrandList(HttpServletRequest request) {
         return ResponseEntity.ok(brandService.getBrandList());
     }
 
