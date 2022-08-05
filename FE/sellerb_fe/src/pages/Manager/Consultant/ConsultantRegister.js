@@ -18,17 +18,18 @@ function ConsultantRegister() {
   //   tel: "",
   //   // product: "",
   // });
+  const navigate = useNavigate();
 
   const [consultant, setConsultant] = useState({
-    id: "",
-    name: "",
-    email: "",
-    pass: "",
-    tel: "",
+    consultantId: "",
+    consultantName: "",
+    consultantEmail: "",
+    consultantPass: "",
+    consultantTel: "",
     // product: "",
   });
 
-  const { id, name, email, pass, tel } = consultant;
+  const { consultantId, consultantName, consultantEmail, consultantPass, consultantTel } = consultant;
 
   const product_list = [
     { value: "TV", label: "TV" },
@@ -38,25 +39,20 @@ function ConsultantRegister() {
     { value: "airCleaner", label: "공기청정기" },
   ];
 
-  const onRegisterBtn = ()=>{
+  const onRegisterBtn = (event)=>{
 
-    console.log("onRegisterBtn: " + consultant)
+    event.preventDefault();
 
     registerConsultantApi(consultant)
     .then((res)=>{
       console.log(res.data);
+      navigate('/manager/main');
     })
     .catch((err)=>{
       console.log(err.data);
     })
   }
 
-  // const handleChange = (e) => {
-  //   e.preventDefault();
-  //   // console.log("handleChange!");
-  //   consultant[e.target.name] = e.target.value;
-  //   // console.log(e.target.name + " : " + e.target.value);
-  // };
 
   const onChange = (e) => {
     e.preventDefault();
@@ -95,7 +91,7 @@ function ConsultantRegister() {
                 label='사번'
                 defaultValue={consultant.id}
                 fullWidth='true'
-                name='id'
+                name='consultantId'
                 onChange={onChange}
               />
             </div>
@@ -106,7 +102,7 @@ function ConsultantRegister() {
                 label='사원명'
                 defaultValue={consultant.name}
                 fullWidth='true'
-                name='name'
+                name='consultantName'
                 onChange={onChange}
               />
             </div>
@@ -116,7 +112,7 @@ function ConsultantRegister() {
                 label='사원Email'
                 defaultValue={consultant.email}
                 fullWidth='true'
-                name='email'
+                name='consultantEmail'
                 type='email'
                 onChange={onChange}
               />
@@ -128,7 +124,7 @@ function ConsultantRegister() {
                 defaultValue={consultant.pass}
                 type='password'
                 fullWidth='true'
-                name='pass'
+                name='consultantPass'
                 onChange={onChange}
                 autoComplete="on"
               />
@@ -140,7 +136,7 @@ function ConsultantRegister() {
                 label='사원 핸드폰 번호'
                 defaultValue={consultant.tel}
                 fullWidth='true'
-                name='tel'
+                name='consultantTel'
                 onChange={onChange}
               />
             </div>
@@ -150,7 +146,6 @@ function ConsultantRegister() {
                 required
                 select
                 label='제품군'
-                value={consultant.product}
                 fullWidth='true'
                 name='product'
                 SelectProps={{
