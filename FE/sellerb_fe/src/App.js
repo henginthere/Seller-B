@@ -64,7 +64,7 @@ function App() {
           />
           <Route path='/manager/productEdit/:seq' element={<ProductEdit />} />
           <Route path='/manager/waitingPage/:seq' element={<WaitingPage />} />
-          <Route path='/meeting/mancon' element={<MeetingManCon />} />
+	  {/* <Route path='/meeting/mancon' element={<MeetingManCon />} /> */}
         </Routes>
     </>
   );
