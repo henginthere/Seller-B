@@ -1,6 +1,7 @@
 package com.ssafy.sellerb.ui.home
 
 
+import android.content.Intent
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -8,6 +9,7 @@ import com.ssafy.sellerb.R
 import com.ssafy.sellerb.databinding.FragmentHomeBinding
 import com.ssafy.sellerb.di.component.FragmentComponent
 import com.ssafy.sellerb.ui.base.BaseFragment
+import com.ssafy.sellerb.ui.qrscan.QrScanActivity
 
 class HomeFragment : BaseFragment<HomeViewModel>(){
 
@@ -31,7 +33,10 @@ class HomeFragment : BaseFragment<HomeViewModel>(){
 
         linearLayoutManager = LinearLayoutManager(requireContext())
 
-
+        binding.ibIconQrScan.setOnClickListener{
+            val intent = Intent(requireContext(), QrScanActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun setUpObserver() {
@@ -44,6 +49,7 @@ class HomeFragment : BaseFragment<HomeViewModel>(){
                 }
             }
         }
+
     }
 
     override fun onDestroyView() {

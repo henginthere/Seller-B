@@ -37,6 +37,11 @@ class MainActivity : BaseActivity<MainViewModel>(){
         navController.addOnDestinationChangedListener{ _, destination, _ ->
             onDestinationChanged(destination)
         }
+
+        binding.fab.setOnClickListener {
+            navController.navigate(R.id.item_home)
+        }
+
     }
     private fun onDestinationChanged(destination: NavDestination){
         when(destination.id){
