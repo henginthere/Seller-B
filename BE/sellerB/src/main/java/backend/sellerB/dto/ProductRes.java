@@ -16,6 +16,7 @@ public class ProductRes {
     private String productName;
     private Integer productPrice;
     private String productManual;
+    private String productGroupName;
 
     public static ProductRes from(Product product) {
         if(product == null) return null;
@@ -24,6 +25,7 @@ public class ProductRes {
                 .productName(product.getProductName())
                 .productPrice(product.getProductPrice())
                 .productManual(product.getProductManual())
+                .productGroupName(product.getProductGroup().getProductGroupName())
                 .build();
     }
 
@@ -37,6 +39,7 @@ public class ProductRes {
                     .productName(productList.get(i).getProductName())
                     .productPrice(productList.get(i).getProductPrice())
                     .productManual(productList.get(i).getProductManual())
+                    .productGroupName(productList.get(i).getProductGroup().getProductGroupName())
                     .build();
             listProductRes.add(productRes);
             i++;
