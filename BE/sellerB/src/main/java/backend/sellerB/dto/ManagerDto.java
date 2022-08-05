@@ -38,11 +38,13 @@ public class ManagerDto {
 
     private Set<AuthorityDto> authorityDtoSet;
 
+
+
     //엔티티를 dto로
     public static ManagerDto from(Manager manager) {
-
         logger.info(manager.getManagerId());
         if(manager == null) return null;
+        System.out.println("DTO from에서 브랜드 로그: "+manager.getBrandSeq());
         return ManagerDto.builder()
                 .managerSeq(manager.getManagerSeq())
                 .brandSeq(manager.getBrandSeq())
