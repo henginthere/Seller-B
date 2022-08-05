@@ -54,7 +54,7 @@ public class ManagerService {
         //dto를 엔티티로
         Manager manager = Manager.builder()
                 .managerSeq(registerManagerDto.getManagerSeq())
-                .brandSeq(brandRepository.findById(registerManagerDto.getBrandSeq()).get())
+                .brand(brandRepository.findById(registerManagerDto.getBrandSeq()).get())
                 .managerId(registerManagerDto.getManagerId())
                 .managerName(registerManagerDto.getManagerName())
                 .managerPass(passwordEncoder.encode(registerManagerDto.getManagerPass()))
@@ -63,7 +63,7 @@ public class ManagerService {
                 .authorities(Collections.singleton(authority))
                 .build();
 
-        System.out.println("manager빌더 : "+manager.getBrandSeq());
+        System.out.println("manager빌더 : "+manager.getBrand());
         logger.info(manager.getManagerId());
         return ManagerDto.from(managerRepository.save(manager));
 
