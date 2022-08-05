@@ -38,6 +38,7 @@ public class WaitingCustomerService {
                 .customer(customer)
                 .product(product)
                 .waitingCustomerState(waitingCustomerDto.getWaitingCustomerState())
+                .productGroup(productGroup)
                 .build();
 
         return WaitingCustomerDto.from(waitingCustomerRepository.save(waitingCustomer));
