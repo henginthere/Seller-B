@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/brand")
+@RequestMapping("/consultant-attendance")
 public class ConsultantAttendanceController {
     private final ConsultantAttendanceService consultantAttendanceService;
 
@@ -21,18 +21,18 @@ public class ConsultantAttendanceController {
     }
 
     @PostMapping
-    public ResponseEntity<ConsultantAttendanceDto> saveConsultantAttendanc(@Valid @RequestBody ConsultantAttendanceDto consultantAttendanceDto) {
+    public ResponseEntity<ConsultantAttendanceDto> saveConsultantAttendance(@Valid @RequestBody ConsultantAttendanceDto consultantAttendanceDto) {
         return ResponseEntity.ok(consultantAttendanceService.create(consultantAttendanceDto));
     }
 
 
     @GetMapping("/list")
-    public ResponseEntity<List<ConsultantAttendanceDto>> getConsultantAttendancList(HttpServletRequest request) {
+    public ResponseEntity<List<ConsultantAttendanceDto>> getConsultantAttendanceList(HttpServletRequest request) {
         return ResponseEntity.ok(consultantAttendanceService.getConsultantAttendanceList());
     }
 
     @GetMapping("/list/{consultant-id}")
-    public ResponseEntity<List<ConsultantAttendanceDto>> getConsultantAttendancListByConsultantId(HttpServletRequest request,  @PathVariable("consultant-id") String consultantId) {
+    public ResponseEntity<List<ConsultantAttendanceDto>> getConsultantAttendanceListByConsultantId(HttpServletRequest request,  @PathVariable("consultant-id") String consultantId) {
         return ResponseEntity.ok(consultantAttendanceService.getConsultantAttendanceListByConsultantId(consultantId));
     }
 
