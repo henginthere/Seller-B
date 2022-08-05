@@ -3,6 +3,8 @@ package backend.sellerB.entity;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -25,6 +27,8 @@ import java.util.Objects;
 @AllArgsConstructor
 @DynamicInsert
 @EntityListeners(AuditingEntityListener.class)
+@SQLDelete(sql = "UPDATE t_brand SET brand_del_yn=true WHERE brand_seq=?")
+@Where(clause = "brand_del_yn=false")
 @Table(name = "t_brand", schema = "sellerb", catalog = "")
 public class Brand {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,10 +36,10 @@ public class Brand {
     @Column(name = "brand_seq")
     private Long brandSeq;
     @Basic
-    @Column(name = "brand_name_kor")
+    @Column(name = "brand_name_kor",length = 25)
     private String brandNameKor;
     @Basic
-    @Column(name = "brand_name_eng")
+    @Column(name = "brand_name_eng",length = 25)
     private String brandNameEng;
     @Basic
     @Column(name = "brand_logo")
