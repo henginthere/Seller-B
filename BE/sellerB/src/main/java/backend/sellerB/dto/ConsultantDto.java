@@ -70,6 +70,7 @@ public class ConsultantDto {
                     .consultantTel(consultantList.get(i).getConsultantTel())
                     .consultantImageUrl(consultantList.get(i).getConsultantImageUrl())
                     .consultantDelYn(consultantList.get(i).getConsultantDelYn())
+                    .productGroup(consultantList.get(i).getProductGroup())
                     .build();
             listConsultantDto.add(consultantDto);
             i++;
