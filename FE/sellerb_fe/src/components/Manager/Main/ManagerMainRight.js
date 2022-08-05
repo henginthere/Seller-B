@@ -90,9 +90,7 @@ function ManagerMainRight() {
   return (
     <div style={styleObj}>
       <div style={styleObj_right}>
-        <Link to="/manager/consultantRegister">
-          <Button variant="contained">상담사 추가</Button>
-        </Link>
+
         <input
           type="text"
           placeholder="상담사 이름을 검색하세요"
@@ -149,6 +147,9 @@ function ManagerMainRight() {
             )}
           </tbody>
         </table>
+        <Link to="/manager/consultantRegister">
+          <Button variant="contained">상담사 추가</Button>
+        </Link>
       </div>
     </div>
   );
