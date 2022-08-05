@@ -37,8 +37,6 @@ function Main() {
     setPass(e.target.value);
   };
 
-  
-
   // 로그인 버튼 클릭 후
   const onLoginBtn = () => {
     const data = {
