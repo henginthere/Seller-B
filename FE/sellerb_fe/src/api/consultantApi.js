@@ -18,7 +18,14 @@ export const registerConsultantApi = async ( consultant, success, fail ) => {
 
 // PUT : Modify : ConsultantModify.js
 export const modifyConsultantApi = async ( consultant, success, fail ) => {
+    console.log("in API: " + consultant);
     return await api.put(`/consultant/${consultant.consultantSeq}`, consultant).then(success).catch(fail);
+}
+
+// DELTE 
+export const deleteConsultant = async ( consultantSeq, success, fail) => {
+    
+    return await api.delete(`/consultant/${consultantSeq}`).then(success).catch(fail);
 }
 
 // GET : List : AttendanceLog.js 
