@@ -90,6 +90,7 @@ public class ManagerService {
         Optional<Manager> managerOptional = managerRepository.findById(managerSeq);
         Manager manager = managerOptional.get();
         manager.setManagerDelYn(true);
+        managerRepository.delete(manager);
         return ManagerDto.from(manager);
     }
 
