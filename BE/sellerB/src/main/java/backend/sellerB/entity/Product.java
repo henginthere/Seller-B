@@ -3,6 +3,8 @@ package backend.sellerB.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -22,6 +24,8 @@ import java.util.Objects;
 @AllArgsConstructor
 @DynamicInsert
 @EntityListeners(AuditingEntityListener.class)
+@SQLDelete(sql = "UPDATE t_product SET product_del_yn=true WHERE product_seq=?")
+@Where(clause = "product_del_yn=false")
 @Table(name = "t_product", schema = "sellerb", catalog = "")
 public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,10 +37,10 @@ public class Product {
     @JsonBackReference
     private ProductGroup productGroup;
     @Basic
-    @Column(name = "product_id")
+    @Column(name = "product_id", length = 25)
     private String productId;
     @Basic
-    @Column(name = "product_name")
+    @Column(name = "product_name", length = 25)
     private String productName;
     @Basic
     @Column(name = "product_price")
