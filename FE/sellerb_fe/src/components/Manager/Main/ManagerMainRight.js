@@ -46,8 +46,9 @@ function ManagerMainRight() {
   const [data, setData] = useState([]);
   console.log("MainRight: " + data);
 
-  const goDetail = (id)=>{
-    navigate(`/manager/consultantDetail/${id}`);
+  const goDetail = (seq)=>{
+    console.log("seq:" + seq);
+    navigate(`/manager/consultantDetail/${seq}`);
   }
 
   useEffect(()=>{
@@ -66,7 +67,7 @@ function ManagerMainRight() {
     <div style={styleObj}>
       <div style={styleObj_right}>
         <Link to="/manager/consultantRegister">
-          <Button variant="contained">상담사 관리</Button>
+          <Button variant="contained">상담사 추가</Button>
         </Link>
       </div>
       <div style={styleObj_center}>
@@ -86,10 +87,13 @@ function ManagerMainRight() {
                   {/* <td  onClick={() => navigate(`/noticeDetail/${ele.notice_seq}`)}>{ele.notice_title}</td> */}
                     {/* <td onClick={()=> navigate(`/manager/consultantDetail/${ele.consultant_id}`)}>{ele.consultant_name}</td> */}
                     {/* <td onClick={()=>goDetail(ele.consultant_id)}>{ele.consultant_name}</td> */}
-                    <td onClick={(e)=>{goDetail(ele.consultantId)}}>{ele.consultantName}</td>
+                    <td onClick={() =>
+                        navigate(`/manager/consultantDetail/${ele.consultantSeq}`)
+                      }>{ele.consultantName}</td>
                     <td>{ele.consultantId}</td>
-                    <td>{ele.productGroup}</td>
+                    <td>{ele.consultantSeq}</td>
                   </tr>
+                  
                 </>
               );
             })}
