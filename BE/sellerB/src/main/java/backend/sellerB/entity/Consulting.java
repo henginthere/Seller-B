@@ -29,7 +29,7 @@ public class Consulting {
     @Column(name = "consulting_seq")
     private Long consultingSeq;
     @ManyToOne
-    @JoinColumn(name = "customerq")
+    @JoinColumn(name = "customer_seq")
     private Customer customer;
     @ManyToOne
     @JoinColumn(name = "consultant_seq")
@@ -59,8 +59,8 @@ public class Consulting {
     @Column(name = "consulting_end_date")
     private LocalDateTime consultingEndDate;
     @Basic
-    @Column(name = "consulting_state",columnDefinition = "byte default 0")
-    private Byte consultingState;
+    @Column(name = "consulting_state",columnDefinition = "boolean default false")
+    private Boolean consultingState;
 
 
     @Override

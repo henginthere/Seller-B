@@ -49,7 +49,7 @@ function App() {
             element={<ConsultantRegister />}
           />
           <Route
-            path='/manager/consultantModify'
+            path='/manager/consultantModify/:id'
             element={<ConsultantModify />}
           />
           <Route path='/consultant/mypage' element={<ConsultantMyPage />} />

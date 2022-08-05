@@ -4,6 +4,22 @@
   flex-direction: row;
 }
 
+#manager-main-left {
+  width:30%;
+  margin-left: 100px;
+}
+
+#manager-main-right {
+  width: 30%;
+  margin-right: 100px;
+}
+
+#manager-main-center {
+  width: 30%;
+  
+}
+
 .center {
   text-align: center;
 }
+
