@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { Formik, ErrorMessage } from "formik";
@@ -7,12 +7,27 @@ import { Button, TextField } from "@mui/material";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { registerApi } from "../../api/userApi";
+import { listBrandApi } from "../../api/brandApi";
 
 import { Footer, NavBar } from "../index";
 import "./ManageRegister.css";
 
 function ManageRegister() {
   const navigate = useNavigate();
+  const [brandList, setBrandList] = useState([]); // API로 받아올 현재 브랜드 목록 
+  const [selectBrand, setSelectBrand] = useState("브랜드"); // 관리자가 선택하는 brand option 
+
+  const onBrandChange = (e) =>{
+    const { value } = e.target;
+    console.log("onBrandChange: " + value);
+    setSelectBrand(value);
+    
+    // 선택된 브랜드에 해당하는 BrandSeq 찾기
+    const item = brandList.find((it) => it.brandNameKor === value)
+    console.log("brandSeq: " + item.brandNameKor);
+
+  }
+
   const validationSchema = Yup.object().shape({
     brand: Yup.string().min(1).required("브랜드명을 입력하세요"),
     id: Yup.string()
@@ -40,6 +55,20 @@ function ManageRegister() {
       .required("이메일을 입력하세요!"),
   });
 
+  useEffect(()=>{
+    listBrandApi()
+    .then((res)=>{
+      console.log("brandList:" + res.data[0]);
+      setBrandList(res.data);
+      console.log(brandList[0])
+
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+  }, [])
+
+  // 회원가입 버튼
   const registerBtn = async (values)=>{
     const { brand, id, password, phone, email} = values;
     console.log(values.brand);
@@ -53,16 +82,18 @@ function ManageRegister() {
     }
 
     console.log("userInfo:" + userInfo.managerId);
+
     registerApi(userInfo)
     .then((res)=>{
       console.log(res.data);
+
     })
     .catch((err)=>{
       console.log(err);
     })
-
-
   }
+
+
 
   // Axios 
   const submit = async (values) => {
@@ -115,9 +146,18 @@ function ManageRegister() {
             <form onSubmit={handleSubmit} autoComplete="off" className="login-form">
             <h3 className="login-title">Welcome to SellerB</h3>
             <hr />
-            <label className="login-form-label">
+            {/* <label className="login-form-label"> */}
               <p>제품 브랜드</p>
-              <input
+              <select onChange={onBrandChange} value={selectBrand}>
+                {
+                  brandList.map((ele, i) =>{
+                    return (
+                      <option>{ele.brandNameKor}</option>
+                    )  
+                  })
+                }
+              </select>
+              {/* <input
                 value={values.brand}
                 name="brand"
                 type="text"
@@ -125,9 +165,9 @@ function ManageRegister() {
                 onChange={handleChange}
                 placeholder="제품 브랜드"
                 className="size"
-              />
+              /> */}
               <div className="error-message">{errors.brand}</div>
-            </label>
+            {/* </label> */}
             
             <label className="login-form-label">
               <p>아이디</p>
