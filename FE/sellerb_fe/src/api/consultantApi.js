@@ -28,6 +28,12 @@ export const deleteConsultant = async ( consultantSeq, success, fail) => {
     return await api.delete(`/consultant/${consultantSeq}`).then(success).catch(fail);
 }
 
+// GET : Search : ManagerMainRight.js
+export const searchConsultantApi = async ( consultantName, success, fail) => {
+    console.log("SEARCH API: " + consultantName);
+    return await api.get(`/consultant/search/${consultantName}`).then(success).catch(fail);
+}
+
 // GET : List : AttendanceLog.js 
 export const listAttendanceApi = async ( success, fail) => {
     return await api.post("/consultant-attendance/list").then(success).catch(fail);
