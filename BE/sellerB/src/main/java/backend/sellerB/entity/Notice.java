@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -23,6 +25,8 @@ import java.util.Objects;
 @AllArgsConstructor
 @DynamicInsert
 @EntityListeners(AuditingEntityListener.class)
+@SQLDelete(sql = "UPDATE t_notice SET notice_del_yn=true WHERE notice_seq=?")
+@Where(clause = "notice_del_yn=false")
 @Table(name = "t_notice", schema = "sellerb", catalog = "")
 public class Notice implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,10 +38,10 @@ public class Notice implements Serializable {
     @JsonBackReference
     private Brand brandSeq;
     @Basic
-    @Column(name = "notice_title")
+    @Column(name = "notice_title", length = 100)
     private String noticeTitle;
     @Basic
-    @Column(name = "notice_content")
+    @Column(name = "notice_content", length = 500)
     private String noticeContent;
     @Basic
     @Column(name = "notice_del_yn",columnDefinition = "boolean default false")
