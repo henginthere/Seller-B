@@ -6,6 +6,7 @@ import java.util.Map;
 public enum MemberAuth {
     ROLE_USER("ROLE_USER"),
     ROLE_ADMIN("ROLE_ADMIN"),
+    ROLE_CUSTOMER("ROLE_CUSTOMER")
 
     ;
 
