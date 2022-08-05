@@ -13,6 +13,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 public class BrandDto {
+
     private String brandNameKor;
     private String brandNameEng;
     private String brandLogo;

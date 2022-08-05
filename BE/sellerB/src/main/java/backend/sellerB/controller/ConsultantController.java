@@ -2,7 +2,9 @@ package backend.sellerB.controller;
 
 
 import backend.sellerB.dto.ConsultantDto;
+import backend.sellerB.dto.EditConsultantDto;
 import backend.sellerB.dto.ManagerDto;
+import backend.sellerB.dto.NoticeDto;
 import backend.sellerB.entity.Consultant;
 import backend.sellerB.service.BrandService;
 import backend.sellerB.service.ConsultantService;
@@ -10,12 +12,11 @@ import backend.sellerB.service.ManagerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 //@RequiredArgsConstructor
@@ -35,4 +36,35 @@ public class ConsultantController {
         return ResponseEntity.ok(consultantService.signup(consultantDto));
     }
 
+    @GetMapping("/list")
+    public ResponseEntity<List<ConsultantDto>> getConsultantList(HttpServletRequest request) {
+        return ResponseEntity.ok(consultantService.getConsultantList());
+    }
+
+    @GetMapping("/{consultantSeq}")
+    public ResponseEntity<ConsultantDto> getConsultantDetail(@PathVariable Long consultantSeq) {
+        return ResponseEntity.ok(consultantService.getConsultantDetail(consultantSeq));
+    }
+
+    @GetMapping("/search/{consultantName}")
+    public ResponseEntity<List<ConsultantDto>> findByConsultantName(@PathVariable String consultantName) {
+        return ResponseEntity.ok(consultantService.searchByConsultantNameContaining(consultantName));
+    }
+
+
+    @GetMapping("/list/{productGroupSeq}")
+    public ResponseEntity<List<ConsultantDto>> findByProductGroupSeq(@PathVariable Long productGroupSeq) {
+        return ResponseEntity.ok(consultantService.searchByProductGroupSeq(productGroupSeq));
+    }
+
+    @PutMapping("/{consultantSeq}")
+    public ResponseEntity<ConsultantDto> updateConsultantInfo(@Valid @RequestBody EditConsultantDto editConsultantDto, @PathVariable Long consultantSeq) {
+        return ResponseEntity.ok(consultantService.update(editConsultantDto, consultantSeq));
+    }
+
+    @DeleteMapping("/{consultantSeq}")
+    public ResponseEntity<ConsultantDto> deleteConsultant(@PathVariable Long consultantSeq) {
+        // Access the DB and delete the order
+        return ResponseEntity.ok(consultantService.delete(consultantSeq));
+    }
 }

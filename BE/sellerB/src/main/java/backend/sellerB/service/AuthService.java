@@ -1,28 +1,22 @@
 package backend.sellerB.service;
 
-import backend.sellerB.controller.AuthController;
-import backend.sellerB.dto.ManagerDto;
 import backend.sellerB.dto.TokenDto;
-import backend.sellerB.exception.UnauthorizedException;
-import backend.sellerB.jwt.JwtFilter;
+import backend.sellerB.dto.LoginResponseDto;
+import backend.sellerB.entity.Consultant;
+import backend.sellerB.entity.Manager;
+import backend.sellerB.exception.ManagerNotFoundException;
 import backend.sellerB.jwt.TokenProvider;
 import backend.sellerB.repository.ConsultantRepository;
 import backend.sellerB.repository.ManagerRepository;
 import lombok.RequiredArgsConstructor;
-import net.bytebuddy.implementation.bind.MethodDelegationBinder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-<<<<<<< HEAD
-import org.springframework.http.HttpHeaders;
-=======
 import org.springframework.beans.factory.annotation.Autowired;
->>>>>>> 720ba5db349fc8d76c4fa5a7da843029a6ebe84f
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,46 +37,35 @@ public class AuthService {
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private static final Logger logger = LoggerFactory.getLogger(AuthService.class);
     // 로그인 관련 메서드
-    public TokenDto authorize(String id, String password) {
+    public LoginResponseDto authorize(String id, String password) {
+
 
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(id, password);
-<<<<<<< HEAD
-
-=======
->>>>>>> 720ba5db349fc8d76c4fa5a7da843029a6ebe84f
         //실제 검증이 일어나는 부분
         //authenticate 메서드가 실행될 때
 
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
-<<<<<<< HEAD
-
-=======
->>>>>>> 720ba5db349fc8d76c4fa5a7da843029a6ebe84f
         String authorities = getAuthorities(authentication);
-        logger.info("권한 :"+authorities);
-
-        //TokenDto tokenDto = tokenProvider.createManagerToken(authentication.getName(), authorities);
 
         logger.info("권한 : "+authorities);
-        //logger.info("토큰 발급 :"+tokenDto.getAccessToken());
 
+        TokenDto tokenDto;
+        Long seq;
         if(authorities.equals("ROLE_ADMIN")){
-            return tokenProvider.createManagerToken(authentication.getName(), authorities);
+            Manager manager = managerRepository.findBymanagerId(id).orElseThrow(()->new ManagerNotFoundException("가입되지 않은 정보입니다."));
+            seq = manager.getManagerSeq();
+            tokenDto = tokenProvider.createManagerToken(authentication.getName(), authorities);
         }
         else{
-            return tokenProvider.createConsultantToken(authentication.getName(),authorities);
+            Consultant consultant = consultantRepository.findByConsultantId(id).orElseThrow(()->new ManagerNotFoundException("가입되지 않은 정보입니다."));
+            seq = consultant.getConsultantSeq();
+            tokenDto = tokenProvider.createConsultantToken(authentication.getName(),authorities);
         }
-       // return tokenProvider.createManagerToken(authentication.getName(), authorities);
 
+        return new LoginResponseDto(tokenDto,authorities,seq);
 
-<<<<<<< HEAD
-        logger.info("토큰 발급 :"+tokenDto.getAccessToken());
-
-        return tokenProvider.createToken(authentication.getName(), authorities);
-=======
->>>>>>> 720ba5db349fc8d76c4fa5a7da843029a6ebe84f
     }
 
     // 토큰 재발급 관련 메서드
@@ -100,11 +83,11 @@ public class AuthService {
         String memberId;
 
         if(authorities.equals("ROLE_ADMIN")){
-            memberId = managerRepository.findByManagerSeq(Integer.parseInt(authentication.getName())).getManagerId();
+            memberId = managerRepository.findByManagerSeq(Long.parseLong(authentication.getName())).get().getManagerId();
             return tokenProvider.createManagerToken(memberId, authorities);
         }
         else{
-            memberId = consultantRepository.findByConsultantSeq(Integer.parseInt(authentication.getName())).getConsultantId();
+            memberId = consultantRepository.findByConsultantSeq(Long.parseLong(authentication.getName())).getConsultantId();
             return tokenProvider.createConsultantToken(memberId, authorities);
         }
 

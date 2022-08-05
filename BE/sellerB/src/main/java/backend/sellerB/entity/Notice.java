@@ -11,6 +11,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -23,11 +24,15 @@ import java.util.Objects;
 @DynamicInsert
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "t_notice", schema = "sellerb", catalog = "")
-public class Notice {
+public class Notice implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "notice_seq")
-    private int noticeSeq;
+    private Long noticeSeq;
+    @ManyToOne
+    @JoinColumn(name = "brand_seq")
+    @JsonBackReference
+    private Brand brandSeq;
     @Basic
     @Column(name = "notice_title")
     private String noticeTitle;
@@ -35,13 +40,13 @@ public class Notice {
     @Column(name = "notice_content")
     private String noticeContent;
     @Basic
-    @Column(name = "notice_del_yn")
-    private String noticeDelYn;
+    @Column(name = "notice_del_yn",columnDefinition = "boolean default false")
+    private Boolean noticeDelYn;
 
     @CreatedBy
     @Basic
     @Column(name = "notice_reg_user_seq")
-    private String noticeRegUserSeq;
+    private Long noticeRegUserSeq;
     @CreatedDate
     @Basic
     @Column(name = "notice_reg_date")
@@ -50,16 +55,13 @@ public class Notice {
     @LastModifiedBy
     @Basic
     @Column(name = "notice_mod_user_seq")
-    private String noticeModUserSeq;
+    private Long noticeModUserSeq;
 
     @LastModifiedDate
     @Basic
     @Column(name = "notice_mod_date")
     private LocalDateTime noticeModDate;
-    @ManyToOne
-    @JoinColumn(name = "brand_seq")
-    @JsonBackReference
-    private Brand brandSeq;
+
 
 
 

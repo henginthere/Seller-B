@@ -1,39 +1,66 @@
 package backend.sellerB.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@DynamicInsert
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "t_consulting", schema = "sellerb", catalog = "")
 public class Consulting {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "consulting_seq")
-    private int consultingSeq;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "customerq")
+    private Long consultingSeq;
+    @ManyToOne
+    @JoinColumn(name = "customer_seq")
     private Customer customer;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "consultant_seq")
     private Consultant consultant;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "product_seq")
     private Product product;
+
+    @CreatedBy
+    @Basic
+    @Column(name = "consulting_reg_user_seq")
+    private Long consultingRegUserSeq;
+    //컬럼 생성 시간은 상담 시작 시간
+    @CreatedDate
     @Basic
     @Column(name = "consulting_start_date")
-    private Timestamp consultingStartDate;
+    private LocalDateTime consultingStartDate;
+
+    @LastModifiedBy
+    @Basic
+    @Column(name = "consulting_mod_user_seq")
+    private Long consultingModUserSeq;
+
+    //컬럼 수정 시간은 상담 종료 시간 (consultingState 수정할 것이므로)
+    @LastModifiedDate
     @Basic
     @Column(name = "consulting_end_date")
-    private Timestamp consultingEndDate;
+    private LocalDateTime consultingEndDate;
     @Basic
-    @Column(name = "consulting_state")
-    private String consultingState;
+    @Column(name = "consulting_state",columnDefinition = "boolean default false")
+    private Boolean consultingState;
 
 
     @Override

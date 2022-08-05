@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class NoticeDto {
 
-    private Integer noticeSeq;
+    private Long noticeSeq;
     private String noticeTitle;
     private String noticeContent;
     private LocalDateTime noticeRegDate;

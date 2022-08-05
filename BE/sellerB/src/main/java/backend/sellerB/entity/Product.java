@@ -27,9 +27,9 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "product_seq")
-    private int productSeq;
+    private Long productSeq;
     @ManyToOne
-    @JoinColumn(name = "product_group_seq", nullable = false)
+    @JoinColumn(name = "product_group_seq")
     @JsonBackReference
     private ProductGroup productGroup;
     @Basic
@@ -48,12 +48,12 @@ public class Product {
     @Column(name = "product_thumbnail")
     private String productThumbnail;
     @Basic
-    @Column(name = "product_del_yn")
-    private String productDelYn;
+    @Column(name = "product_del_yn",columnDefinition = "boolean default false")
+    private Boolean productDelYn;
     @CreatedBy
     @Basic
     @Column(name = "product_reg_user_seq")
-    private Integer productRegUserSeq;
+    private Long productRegUserSeq;
     @CreatedDate
     @Basic
     @Column(name = "product_reg_date")
@@ -61,7 +61,7 @@ public class Product {
     @LastModifiedBy
     @Basic
     @Column(name = "product_mod_user_seq")
-    private Integer productModUserSeq;
+    private Long productModUserSeq;
     @LastModifiedDate
     @Basic
     @Column(name = "product_mod_date")

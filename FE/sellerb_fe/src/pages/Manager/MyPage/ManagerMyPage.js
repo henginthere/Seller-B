@@ -176,7 +176,6 @@ function ManagerMyPage() {
               onChange={handleChange}
             />
           </div>
-
           <div className='InfoTextField'>
             <TextField
               required

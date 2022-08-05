@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface NoticeRepository extends JpaRepository<Notice, Integer> {
+public interface NoticeRepository extends JpaRepository<Notice, Long> {
     List<Notice> findByNoticeTitleContaining(String noticeTitle);
 
 }

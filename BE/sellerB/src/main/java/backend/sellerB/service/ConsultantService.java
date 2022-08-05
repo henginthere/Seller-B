@@ -2,9 +2,12 @@ package backend.sellerB.service;
 
 import backend.sellerB.dto.AuthorityDto;
 import backend.sellerB.dto.ConsultantDto;
+import backend.sellerB.dto.EditConsultantDto;
+import backend.sellerB.dto.NoticeDto;
 import backend.sellerB.entity.Authority;
 import backend.sellerB.entity.Consultant;
 import backend.sellerB.entity.MemberAuth;
+import backend.sellerB.entity.Notice;
 import backend.sellerB.exception.DuplicateUserException;
 import backend.sellerB.repository.AuthorityRepository;
 import backend.sellerB.repository.ConsultantRepository;
@@ -16,9 +19,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import javax.persistence.EntityNotFoundException;
+import java.util.*;
 
 
 @Service
@@ -59,10 +61,57 @@ public class ConsultantService {
 
     }
 
+    public List<ConsultantDto> getConsultantList() {
+        return ConsultantDto.fromList(consultantRepository.findAll());
+    }
+
+
+    public ConsultantDto getConsultantDetail(Long consultantSeq) {
+        Optional<Consultant> consultantOptional = consultantRepository.findById(consultantSeq);
+        Consultant consultant = consultantOptional.get();
+        return ConsultantDto.from(consultant);
+    }
+
+    public List<ConsultantDto> searchByConsultantNameContaining(String consultantName) {
+
+        return ConsultantDto.fromList(consultantRepository.findByConsultantNameContaining(consultantName));
+    }
+
+//    public List<ConsultantDto> searchByConsultantId(String consultantId) {
+//
+//        return ConsultantDto.fromList(consultantRepository.findByConsultantIdContaining(consultantId));
+//    }
+
+    public List<ConsultantDto> searchByProductGroupSeq(Long productGroupSeq) {
+
+        return ConsultantDto.fromList(consultantRepository.findByProductGroup(productGroupSeq));
+    }
+
+    public ConsultantDto update(EditConsultantDto editConsultantDto, Long consultantSeq) {
+        Optional<Consultant> consultantOptional = consultantRepository.findById(consultantSeq);
+        Consultant consultant = consultantOptional.get();
+        consultant.setConsultantPass(passwordEncoder.encode(editConsultantDto.getConsultantPass()));
+        consultant.setConsultantEmail(editConsultantDto.getConsultantEmail());
+        consultant.setConsultantImageUrl(editConsultantDto.getConsultantImageUrl());
+        consultant.setConsultantTel(editConsultantDto.getConsultantTel());
+        consultant.setProductGroup(editConsultantDto.getProductGroup());
+
+        return ConsultantDto.from(consultant);
+    }
+
+    public ConsultantDto delete(Long consultantSeq) {
+        Optional<Consultant> consultantOptional = consultantRepository.findById(consultantSeq);
+        Consultant consultant = consultantOptional.get();
+        consultant.setConsultantDelYn(true);
+        return ConsultantDto.from(consultant);
+    }
+
+
     // SecurityContext에 저장된 username의 정보만 가져옴옴
     @Transactional(readOnly = true)
     public ConsultantDto getMyUserWithAuthorities() {
         return ConsultantDto.from(SecurityUtil.getCurrentUserid().flatMap(consultantRepository::findByConsultantId).orElse(null));
     }
+
 
 }

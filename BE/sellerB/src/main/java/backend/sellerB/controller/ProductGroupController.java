@@ -1,6 +1,7 @@
 package backend.sellerB.controller;
 
 import backend.sellerB.dto.ProductGroupDto;
+import backend.sellerB.dto.ProductGroupRes;
 import backend.sellerB.service.ProductGroupService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,22 +25,22 @@ public class ProductGroupController {
     }
 
     @GetMapping("/{seq}")
-    public ResponseEntity<ProductGroupDto> getProductGroupDetail(@PathVariable Integer seq) {
+    public ResponseEntity<ProductGroupRes> getProductGroupDetail(@PathVariable Long seq) {
         return ResponseEntity.ok(productGroupService.getProductGroupDetail(seq));
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<ProductGroupDto>> getProductGroupList(HttpServletRequest request) {
+    public ResponseEntity<List<ProductGroupRes>> getProductGroupList(HttpServletRequest request) {
         return ResponseEntity.ok(productGroupService.getProductGroupList());
     }
 
     @PutMapping("/{seq}")
-    public ResponseEntity<ProductGroupDto> updateProductGroup(@Valid @RequestBody ProductGroupDto productGroupDto, @PathVariable Integer seq) {
+    public ResponseEntity<ProductGroupDto> updateProductGroup(@Valid @RequestBody ProductGroupDto productGroupDto, @PathVariable Long seq) {
         return ResponseEntity.ok(productGroupService.update(seq, productGroupDto));
     }
 
     @DeleteMapping("/{seq}")
-    public ResponseEntity<ProductGroupDto> deleteProductGroup(@PathVariable Integer seq) {
+    public ResponseEntity<ProductGroupDto> deleteProductGroup(@PathVariable Long seq) {
         // Access the DB and delete the order
         return ResponseEntity.ok(productGroupService.deleteProductGroup(seq));
     }

@@ -29,24 +29,24 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "customer_seq")
-    private int customerSeq;
+    private Long customerSeq;
     @Basic
-    @Column(nullable = false, name = "customer_id")
+    @Column(name = "customer_id")
     private String customerId;
     @Basic
-    @Column(nullable = false, name = "customer_name")
+    @Column(name = "customer_name")
     private String customerName;
     @Basic
     @JsonIgnore
     // 쓰기 전용 및 조회 불가
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @Column(nullable = false, name = "customer_pass")
+    @Column(name = "customer_pass")
     private String customerPass;
     @Basic
-    @Column(nullable = false, name = "customer_email")
+    @Column(name = "customer_email")
     private String customerEmail;
     @Basic
-    @Column(nullable = false, name = "customer_gender")
+    @Column(name = "customer_gender")
     private String customerGender;
     @Basic
     @Column(name = "customer_tel")
@@ -56,18 +56,17 @@ public class Customer {
     private String customerAddr;
     @Basic
     @Column(name = "customer_birth")
-    @NotNull
-    private Timestamp customerBirth;
+    private LocalDateTime customerBirth;
     @Basic
     @Column(name = "customer_token")
     private String customerToken;
     @Basic
-    @Column(name = "customer_del_yn")
-    private String customerDelYn;
+    @Column(name = "customer_del_yn",columnDefinition = "boolean default false")
+    private Boolean customerDelYn;
     @CreatedBy
     @Basic
     @Column(name = "customer_reg_user_seq")
-    private Integer customerRegUserSeq;
+    private Long customerRegUserSeq;
     @CreatedDate
     @Basic
     @Column(name = "customer_reg_date")
@@ -75,7 +74,7 @@ public class Customer {
     @LastModifiedBy
     @Basic
     @Column(name = "customer_mod_user_seq")
-    private Integer customerModUserSeq;
+    private Long customerModUserSeq;
     @LastModifiedDate
     @Basic
     @Column(name = "customer_mod_date")

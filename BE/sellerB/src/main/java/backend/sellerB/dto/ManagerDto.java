@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class ManagerDto {
 
+    private Long managerSeq;
     private Brand brandSeq;
     private String managerId;
     private String managerName;
@@ -33,6 +34,7 @@ public class ManagerDto {
     private String managerPass;
     private String managerTel;
     private String managerEmail;
+    private Boolean managerDelYn;
 
     private Set<AuthorityDto> authorityDtoSet;
 
@@ -42,12 +44,14 @@ public class ManagerDto {
         logger.info(manager.getManagerId());
         if(manager == null) return null;
         return ManagerDto.builder()
+                .managerSeq(manager.getManagerSeq())
                 .brandSeq(manager.getBrandSeq())
                 .managerId(manager.getManagerId())
                 .managerName(manager.getManagerName())
                 .managerPass(manager.getManagerPass())
                 .managerTel(manager.getManagerTel())
                 .managerEmail(manager.getManagerEmail())
+                .managerDelYn(manager.getManagerDelYn())
                 .authorityDtoSet(manager.getAuthorities().stream()
                         .map(authority -> AuthorityDto.builder().authorityName(authority.getAuthorityName()).build())
                         .collect(Collectors.toSet()))

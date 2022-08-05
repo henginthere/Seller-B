@@ -13,14 +13,14 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 public class ProductGroupDto {
-    private Brand brand;
+    private String brandName;
     private String productGroupCode;
     private String productGroupName;
 
     public static ProductGroupDto from(ProductGroup productGroup) {
         if(productGroup == null) return null;
         return ProductGroupDto.builder()
-                .brand(productGroup.getBrand())
+                .brandName(productGroup.getBrand().getBrandNameKor())
                 .productGroupCode(productGroup.getProductGroupCode())
                 .productGroupName(productGroup.getProductGroupName())
                 .build();
@@ -31,7 +31,7 @@ public class ProductGroupDto {
         int i = 0;
         while (i < productGroupList.size()) {
             ProductGroupDto productGroupDto = ProductGroupDto.builder()
-                    .brand(productGroupList.get(i).getBrand())
+                    .brandName(productGroupList.get(i).getBrand().getBrandNameKor())
                     .productGroupCode(productGroupList.get(i).getProductGroupCode())
                     .productGroupName(productGroupList.get(i).getProductGroupName())
                     .build();
