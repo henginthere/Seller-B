@@ -1,36 +1,60 @@
 package backend.sellerB.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@DynamicInsert
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "t_review", schema = "sellerb", catalog = "")
 public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "review_seq")
-    private int reviewSeq;
-    @ManyToOne(fetch = FetchType.LAZY)
+    private Long reviewSeq;
+    @ManyToOne
     @JoinColumn(name = "consulting_seq")
     private Consulting consulting;
     @Basic
     @Column(name = "review_grade")
-    private Integer reviewGrade;
+    private Float reviewGrade;
     @Basic
     @Column(name = "review_content")
     private String reviewContent;
     @Basic
+    @Column(name = "review_del_yn",columnDefinition = "boolean default false")
+    private Boolean reviewDelYn;
+    @CreatedBy
+    @Basic
+    @Column(name = "review_reg_user_seq")
+    private Long reviewRegUserSeq;
+    @CreatedDate
+    @Basic
     @Column(name = "review_reg_date")
-    private Timestamp reviewRegDate;
+    private LocalDateTime reviewRegDate;
+    @LastModifiedBy
+    @Basic
+    @Column(name = "review_mod_user_seq")
+    private Long reviewModUserSeq;
+    @LastModifiedDate
     @Basic
     @Column(name = "review_mod_date")
-    private Timestamp reviewModDate;
+    private LocalDateTime reviewModDate;
 
 
 

@@ -27,8 +27,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
-	runtimeOnly 'mysql:mysql-connector-java'
-//	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client' // MariaDB
+	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client' // MariaDB
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
@@ -42,6 +41,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-log4j2'
 	implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.10.3'
 
+	implementation 'org.springdoc:springdoc-openapi-ui:1.6.6'
+//	implementation group: 'io.springfox', name: 'springfox-boot-starter', version: '3.0.0'
 }
 
 tasks.named('test') {

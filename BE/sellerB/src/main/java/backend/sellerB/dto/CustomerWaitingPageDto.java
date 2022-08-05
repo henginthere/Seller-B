@@ -13,6 +13,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 public class CustomerWaitingPageDto {
+
     private Product product;
     private String customerWaitingPageMent;
     private String customerWaitingPageImage;

@@ -1,19 +1,27 @@
 package backend.sellerB.entity;
 
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.type.descriptor.sql.TinyIntTypeDescriptor;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
 @Entity
-@Getter @Setter
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,8 +32,8 @@ public class Manager implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "manager_seq")
-    private int managerSeq;
-    @ManyToOne(fetch = FetchType.LAZY)
+    private Long managerSeq;
+    @ManyToOne
     @JoinColumn(name = "brand_seq")
     private Brand brandSeq;
     @Basic
@@ -47,27 +55,30 @@ public class Manager implements Serializable {
     @Column(name = "manager_image_url")
     private String managerImageUrl;
     @Basic
-    @Column(name = "manager_del_yn")
-    private Byte managerDelYn;
+    @Column(name = "manager_del_yn",columnDefinition = "boolean default false")
+    private Boolean managerDelYn;
+    @CreatedBy
     @Basic
     @Column(name = "manager_reg_user_seq")
-    private Integer managerRegUserSeq;
+    private Long managerRegUserSeq;
+    @CreatedDate
     @Basic
     @Column(name = "manager_reg_date")
-    private Timestamp managerRegDate;
+    private LocalDateTime managerRegDate;
+    @LastModifiedBy
     @Basic
     @Column(name = "manager_mod_user_seq")
-    private Integer managerModUserSeq;
+    private Long managerModUserSeq;
+    @LastModifiedDate
     @Basic
     @Column(name = "manager_mod_date")
-    private Timestamp managerModDate;
+    private LocalDateTime managerModDate;
 
 
 
     public <T> Manager(String valueOf, String managerPass, Set<T> singleton) {
     }
-
-
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -88,4 +99,6 @@ public class Manager implements Serializable {
             joinColumns = {@JoinColumn(name = "id", referencedColumnName = "manager_id")},
             inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "authority_name")})
     private Set<Authority> authorities;
+
+
 }

@@ -32,13 +32,13 @@ public class OrderService {
         return OrderDto.fromList(orderRepository.findAll());
     }
 
-    public OrderDto getOrderDetail(Integer seq) {
+    public OrderDto getOrderDetail(Long seq) {
         Optional<Order> orderOptional = orderRepository.findById(seq);
         Order order = orderOptional.get();
         return OrderDto.from(order);
     }
 
-    public OrderDto updateOrder(Integer seq, OrderDto orderDto) {
+    public OrderDto updateOrder(Long seq, OrderDto orderDto) {
         Optional<Order> orderOptional = orderRepository.findById(seq);
         Order order = orderOptional.get();
         order.setAddr(orderDto.getAddress());
@@ -46,10 +46,10 @@ public class OrderService {
         return OrderDto.from(order);
     }
 
-    public OrderDto deleteOrder(Integer seq) {
+    public OrderDto deleteOrder(Long seq) {
         Optional<Order> orderOptional = orderRepository.findById(seq);
         Order order = orderOptional.get();
-        orderRepository.deleteById(seq);
+        order.setOrderDelYn(true);
         return OrderDto.from(order);
     }
 }

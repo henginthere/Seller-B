@@ -1,18 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Footer, NavBar } from "../../../components/index";
 import "./ConsultantRegister.css";
 import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import "./ConsultantRegister.css";
+import { registerConsultantApi } from '../../../api/consultantApi'
+
+
 function ConsultantRegister() {
-  const data = {
-    id: "",
-    name: "",
-    eamil: "",
-    tel: "",
-    pw: "",
-    product: "",
-  };
+
+  // const data= ({
+  //   id: "",
+  //   name: "",
+  //   email: "",
+  //   pass: "",
+  //   tel: "",
+  //   // product: "",
+  // });
+  const navigate = useNavigate();
+
+  const [consultant, setConsultant] = useState({
+    consultantId: "",
+    consultantName: "",
+    consultantEmail: "",
+    consultantPass: "",
+    consultantTel: "",
+    // product: "",
+  });
+
+  const { consultantId, consultantName, consultantEmail, consultantPass, consultantTel } = consultant;
+
   const product_list = [
     { value: "TV", label: "TV" },
     { value: "phone", label: "Phone" },
@@ -20,6 +38,33 @@ function ConsultantRegister() {
     { value: "Refrigerator", label: "냉장고" },
     { value: "airCleaner", label: "공기청정기" },
   ];
+
+  const onRegisterBtn = (event)=>{
+
+    event.preventDefault();
+
+    registerConsultantApi(consultant)
+    .then((res)=>{
+      console.log(res.data);
+      navigate('/manager/main');
+    })
+    .catch((err)=>{
+      console.log(err.data);
+    })
+  }
+
+
+  const onChange = (e) => {
+    e.preventDefault();
+    const { value, name } = e.target;
+    setConsultant({
+      ...consultant,
+      [name]: value,
+    });
+
+    console.log("setConsultant:" + consultant);
+  };
+
 
   return (
     <>
@@ -44,9 +89,10 @@ function ConsultantRegister() {
               <TextField
                 required
                 label='사번'
-                defaultValue={data.id}
+                defaultValue={consultant.id}
                 fullWidth='true'
-                name='id'
+                name='consultantId'
+                onChange={onChange}
               />
             </div>
             <div className='registerField'>
@@ -54,29 +100,33 @@ function ConsultantRegister() {
                 required
                 id='outlined-disabled'
                 label='사원명'
-                defaultValue={data.name}
+                defaultValue={consultant.name}
                 fullWidth='true'
-                name='name'
+                name='consultantName'
+                onChange={onChange}
               />
             </div>
             <div className='registerField'>
               <TextField
                 required
                 label='사원Email'
-                defaultValue={data.email}
+                defaultValue={consultant.email}
                 fullWidth='true'
-                name='email'
+                name='consultantEmail'
                 type='email'
+                onChange={onChange}
               />
             </div>
             <div className='registerField'>
               <TextField
                 required
                 label='초기 비밀번호'
-                defaultValue={data.pw}
+                defaultValue={consultant.pass}
                 type='password'
                 fullWidth='true'
-                name='pw'
+                name='consultantPass'
+                onChange={onChange}
+                autoComplete="on"
               />
             </div>
 
@@ -84,9 +134,10 @@ function ConsultantRegister() {
               <TextField
                 required
                 label='사원 핸드폰 번호'
-                defaultValue={data.tel}
+                defaultValue={consultant.tel}
                 fullWidth='true'
-                name='tel'
+                name='consultantTel'
+                onChange={onChange}
               />
             </div>
 
@@ -95,7 +146,6 @@ function ConsultantRegister() {
                 required
                 select
                 label='제품군'
-                value={data.product}
                 fullWidth='true'
                 name='product'
                 SelectProps={{
@@ -110,7 +160,7 @@ function ConsultantRegister() {
               </TextField>
             </div>
             <div className='Button'>
-              <Button className='registerBtn' variant='contained' type='submit'>
+              <Button onClick={onRegisterBtn} className='registerBtn' variant='contained' type='submit'>
                 등록
               </Button>
               <Button className='registerBtn' variant='contained' color='error'>

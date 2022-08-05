@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import Axiso from "axios";
+// import Axiso from "axios";
 
 
 import "./ConsultantDetail.css";
@@ -10,12 +10,14 @@ import ConsultingLog from "../../../components/Log/ConsultingLog";
 // import Test from '../../../components/Log/Test'
 
 import {
-  detailConsultantApi,
+  detailConsultantApi, deleteConsultant
 } from "../../../api/consultantApi";
 
 function ConsultantDetail() {
   const { id } = useParams();
-  console.log(id)
+  const seq = id;
+  console.log(seq)
+  // console.log("params:" + params.consultantSeq)
 
   const navigate = useNavigate();
 
@@ -30,32 +32,43 @@ function ConsultantDetail() {
     console.log(logOption);
   }
  
-  const dummyData = [];
-  // useEffect : axios 상담사 프로필에 넣을 정보
-  //   useEffect(() => {
-  //     detailConsultantApi(id)
-  //     .then((res)=>{
-  //         console.log(res.data);
+    useEffect(() => {
+      detailConsultantApi(seq)
+      .then((res)=>{
+          console.log("res.data:" + res.data);
           
-  //         // consultant = res.data;
-  //         setConsultant(res.data); 
+          // consultant = res.data;
           
-  //     })
-  //     .catch((err)=>{
-  //         console.log(err);
-  //     })
-  //   }, []);
+          setConsultant(res.data); 
+          console.log("detail > consultant:" + consultant.consultantId);
+      })
+      .catch((err)=>{
+          console.log(err);
+      })
+    }, []);
 
  function ConsultantLog (props) {
     if(logOption === '출결이력'){
         // console.log(params.consultants
-        return <AttendanceLog consultant_id = {id} />
+        return <AttendanceLog consultant_id = {seq} />
     }
     else{
-        return <ConsultingLog consultant_id = {id} />
+        return <ConsultingLog consultant_id = {seq} />
     }
  }
 
+ const onDeleteBtn = ()=>{
+    deleteConsultant(seq)
+    .then((res)=>{
+      console.log("onDelete Btn:" + res.data);
+
+      navigate("/manager/main");
+
+    })
+    .catch((err)=>{
+      console.log("Error")
+    })
+ }
 
   return (
 
@@ -65,24 +78,32 @@ function ConsultantDetail() {
       <div className="profile-wrapper">
         <div className="profile-left">
           <div className="profile-element">
-            사번
-            <div>ABC</div>
+            <p>사번</p>
+            <div>{consultant.consultantId}</div>
           </div>
           <div className="profile-element">
-            사원명
-            <div>김상담</div>
+            <p>사원명</p>
+            <div>{consultant.consultantName}</div>
           </div>
           <div className="profile-element">
-            사원 Email
-            <div>abc@abc.com</div>
+            <p>사원 Email</p>
+            <div>{consultant.consultantEmail}</div>
           </div>
           <div className="profile-element">
-            사원 Pnum
-            <div>010-1234-5678</div>
+           <p>사원 Pnum</p>
+            <div>{consultant.consultantTel}</div>
           </div>
           <div className="profile-element">
-            제품군
-            <div>에어컨</div>
+            <p>제품군</p>
+            <div>{consultant.consultantGroup}</div>
+          </div>
+          <div>
+            <button onClick={((e)=> navigate(`/manager/consultantModify/${consultant.consultantSeq}`))}>
+              수정하기
+            </button>
+            <button onClick={(e)=>onDeleteBtn()}>
+              삭제하기
+            </button>
           </div>
         </div>
         <div className="profile-right">
@@ -93,7 +114,7 @@ function ConsultantDetail() {
             </select>
           </div>
           <div className="attendance-log">
-            <ConsultantLog consultant_id = {id} />
+            <ConsultantLog consultant_id = {seq} />
           </div>
         </div>
       </div>
