@@ -5,6 +5,7 @@ import { Formik, ErrorMessage } from "formik";
 
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
+import { registerApi } from "../../api/userApi";
 
 import "./ManageRegister.css";
 
@@ -54,10 +55,41 @@ function ManageRegister() {
       .required("이메일을 입력하세요!"),
   });
 
+<<<<<<< HEAD
   // Axios
   const submit = async (values) => {
     console.log(values);
     // const { brand, id, password, phone, email} = values;
+=======
+  const registerBtn = async (values)=>{
+    const { brand, id, password, phone, email} = values;
+    console.log(values.brand);
+
+    const userInfo = {
+      "managerId": id,
+      "managerName":"",
+      "managerPass":password,
+      "managerTel":phone,
+      "managerEmail":email
+    }
+
+    console.log("userInfo:" + userInfo.managerId);
+    registerApi(userInfo)
+    .then((res)=>{
+      console.log(res.data);
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+
+
+  }
+
+  // Axios 
+  const submit = async (values) => {
+    const { brand, id, password, phone, email} = values;
+    console.log(values.brand);
+>>>>>>> feature-fe-consultant-crud-api-hy
     // try {
     //   await axios.post("/api/auth/signup", {
     //     brand,
@@ -82,6 +114,7 @@ function ManageRegister() {
   };
 
   return (
+<<<<<<< HEAD
     <div className='manage-register-page'>
       <div style={flexDisplay}>
         <img
@@ -223,6 +256,171 @@ function ManageRegister() {
             </div>
           )}
         </Formik>
+=======
+    <div className="manage-register-page">
+      <NavBar />
+      <div className="login">
+      <Formik
+        initialValues={{
+          brand: "",
+          id: "",
+          password: "",
+          password2: "",
+          phone: "",
+          email: "",
+        }}
+        validationSchema={validationSchema}
+        onSubmit={submit}
+        validateOnMount={true}
+      >
+        {({ values, handleSubmit, handleChange, errors }) => (
+          <div className="signup-wrapper">
+            {/* <ToastContainer /> */}
+            <form onSubmit={handleSubmit} autoComplete="off" className="login-form">
+            <h3 className="login-title">Welcome to SellerB</h3>
+            <hr />
+            <label className="login-form-label">
+              <p>제품 브랜드</p>
+              <input
+                value={values.brand}
+                name="brand"
+                type="text"
+                variant="outlined"
+                onChange={handleChange}
+                placeholder="제품 브랜드"
+                className="size"
+              />
+              <div className="error-message">{errors.brand}</div>
+            </label>
+            
+            <label className="login-form-label">
+              <p>아이디</p>
+              <input
+                value={values.id}
+                name="id"
+                type="text"
+                variant="outlined"
+                onChange={handleChange}
+                placeholder="아이디"
+                className="size"
+              />
+              <div className="error-message">{errors.id}</div>
+            </label>
+
+            <label className="login-form-label">
+              <p>비밀번호</p>
+              <input
+                value={values.password}
+                name="password"
+                type="text"
+                variant="outlined"
+                onChange={handleChange}
+                placeholder="비밀번호"
+                className="size"
+              />
+              <div className="error-message">{errors.password}</div>
+            </label>
+
+            <label className="login-form-label">
+              <p>비밀번호 확인</p>
+              <input
+                value={values.password2}
+                name="password2"
+                type="text"
+                variant="outlined"
+                onChange={handleChange}
+                placeholder="비밀번호 확인"
+                className="size"
+              />
+              <div className="error-message">{errors.password2}</div>
+            </label>
+  
+            <label className="login-form-label">
+              <p>Tel.</p>
+              <input
+                value={values.phone}
+                name="phone"
+                type="text"
+                variant="outlined"
+                onChange={handleChange}
+                placeholder="핸드폰번호"
+                className="size"
+              />
+              <div className="error-message">{errors.phone}</div>
+            </label>
+    
+            <label className="login-form-label">
+              <p>Email</p>
+              <input
+                value={values.email}
+                name="email"
+                type="text"
+                variant="outlined"
+                onChange={handleChange}
+                placeholder="Email"
+                className="size"
+              />
+              <div className="error-message">{errors.email}</div>
+            </label>
+
+              {/* <div className="input-forms">
+                <div className="input-forms-item">
+                  <div className="input-label">이메일</div>
+                  <TextField
+                    value={values.email}
+                    name="email"
+                    variant="outlined"
+                    onChange={handleChange}
+                  />
+                  <div className="error-message">{errors.email}</div>
+                </div>
+                <div className="input-forms-item">
+                  <div className="input-label">닉네임</div>
+                  <TextField
+                    value={values.username}
+                    name="username"
+                    variant="outlined"
+                    onChange={handleChange}
+                  />
+                  <div className="error-message">{errors.username}</div>
+                </div>
+                <div className="input-forms-item">
+                  <div className="input-label">비밀번호</div>
+                  <TextField
+                    value={values.password}
+                    name="password"
+                    variant="outlined"
+                    type="password"
+                    onChange={handleChange}
+                  />
+                  <div className="error-message">{errors.password}</div>
+                </div>
+                <div className="input-forms-item">
+                  <div className="input-label">비밀번호 확인</div>
+                  <TextField
+                    value={values.password2}
+                    name="password2"
+                    variant="outlined"
+                    type="password"
+                    onChange={handleChange}
+                  />
+                  <div className="error-message">{errors.password2}</div>
+        </div> */}
+                <Button
+                  color="primary"
+                  variant="contained"
+                  fullWidth
+                  type="submit"
+                  onClick={()=> registerBtn(values)}
+                >
+                  회원가입
+                </Button>
+           
+            </form>
+          </div>
+        )}
+      </Formik>
+>>>>>>> feature-fe-consultant-crud-api-hy
       </div>
     </div>
   );
