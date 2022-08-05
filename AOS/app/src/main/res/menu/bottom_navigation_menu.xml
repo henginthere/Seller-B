@@ -8,6 +8,11 @@
         android:icon="@drawable/selector_my_page"
         app:showAsAction="always"/>
 
+    <item android:id="@+id/item_empty"
+        android:title=""
+        android:enabled="false"
+        android:checkable="false"/>
+
     <item android:id="@+id/item_home"
         android:title="@string/menu_home"
         android:titleCondensed="@string/menu_home"
