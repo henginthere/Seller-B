@@ -15,7 +15,9 @@ import {
 
 function ConsultantDetail() {
   const { id } = useParams();
-  console.log(id)
+  const seq = id;
+  console.log(seq)
+  // console.log("params:" + params.consultantSeq)
 
   const navigate = useNavigate();
 
@@ -30,29 +32,28 @@ function ConsultantDetail() {
     console.log(logOption);
   }
  
-  const dummyData = [];
-  // useEffect : axios 상담사 프로필에 넣을 정보
-  //   useEffect(() => {
-  //     detailConsultantApi(id)
-  //     .then((res)=>{
-  //         console.log(res.data);
+    useEffect(() => {
+      detailConsultantApi(seq)
+      .then((res)=>{
+          console.log("res.data:" + res.data);
           
-  //         // consultant = res.data;
-  //         setConsultant(res.data); 
+          // consultant = res.data;
           
-  //     })
-  //     .catch((err)=>{
-  //         console.log(err);
-  //     })
-  //   }, []);
+          setConsultant(res.data); 
+          console.log("consultant:" + consultant.consultantId);
+      })
+      .catch((err)=>{
+          console.log(err);
+      })
+    }, []);
 
  function ConsultantLog (props) {
     if(logOption === '출결이력'){
         // console.log(params.consultants
-        return <AttendanceLog consultant_id = {id} />
+        return <AttendanceLog consultant_id = {seq} />
     }
     else{
-        return <ConsultingLog consultant_id = {id} />
+        return <ConsultingLog consultant_id = {seq} />
     }
  }
 
@@ -66,23 +67,23 @@ function ConsultantDetail() {
         <div className="profile-left">
           <div className="profile-element">
             사번
-            <div>ABC</div>
+            <div>{consultant.consultantId}</div>
           </div>
           <div className="profile-element">
             사원명
-            <div>김상담</div>
+            <div>{consultant.consultantName}</div>
           </div>
           <div className="profile-element">
             사원 Email
-            <div>abc@abc.com</div>
+            <div>{consultant.consultantEmail}</div>
           </div>
           <div className="profile-element">
             사원 Pnum
-            <div>010-1234-5678</div>
+            <div>{consultant.consultantTel}</div>
           </div>
           <div className="profile-element">
             제품군
-            <div>에어컨</div>
+            <div>{consultant.consultantGroup}</div>
           </div>
         </div>
         <div className="profile-right">
@@ -93,7 +94,7 @@ function ConsultantDetail() {
             </select>
           </div>
           <div className="attendance-log">
-            <ConsultantLog consultant_id = {id} />
+            <ConsultantLog consultant_id = {seq} />
           </div>
         </div>
       </div>
