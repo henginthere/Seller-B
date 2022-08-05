@@ -10,6 +10,19 @@ data class User (
     val id: String,
 
     @Expose
-    @SerializedName("userName")
-    val name: String
+    @SerializedName("accessToken")
+    var accessToken: String,
+
+    @Expose
+    @SerializedName("refreshToken")
+    var refreshToken: String,
+
+    @Expose
+    @SerializedName("authority")
+    var authority: String,
+
+    @Expose
+    @SerializedName("seq")
+    var seq: Long
+
     )

@@ -54,6 +54,9 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
             viewModel.doLogin()
         }
 
+        binding.tvSignup.setOnClickListener {
+            findNavController().navigate(R.id.action_LoginFragment_to_HomeFragment)
+        }
     }
 
     override fun setUpObserver() {

@@ -2,11 +2,12 @@ package com.ssafy.sellerb.ui.login
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.ssafy.sellerb.data.model.User
 import com.ssafy.sellerb.data.repository.UserRepository
 import com.ssafy.sellerb.ui.base.BaseViewModel
 import com.ssafy.sellerb.util.CoroutineDispatchers
 import com.ssafy.sellerb.util.Event
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
 class LoginViewModel(
@@ -31,11 +32,17 @@ class LoginViewModel(
         val pw = pwField.value
         if(id != null && pw != null){
             viewModelScope.launch(ioContext){
-                val currUser = User(id,pw)
-                userRepository.saveCurrentUser(currUser)
-                launchMain.postValue(Event(emptyMap()))
+                userRepository.doUserLogin(id,pw)
+                    .onStart {  }
+                    .collect{
+                        userRepository.saveCurrentUser(user = it)
+                        launchMain.postValue(Event(emptyMap()))
+                    }
             }
         }
+    }
+
+    fun getUserInfo() {
 
     }
 }
