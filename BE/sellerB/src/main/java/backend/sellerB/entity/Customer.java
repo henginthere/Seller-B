@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -24,6 +26,8 @@ import java.util.Objects;
 @AllArgsConstructor
 @DynamicInsert
 @EntityListeners(AuditingEntityListener.class)
+@SQLDelete(sql = "UPDATE t_customer SET cutomer_id=null, customer_name=null, customer_pass=null, customer_email=null, customer_birth=null, customer_token=null, customer_del_yn=true WHERE customer_seq=?")
+@Where(clause = "customer_del_yn=false")
 @Table(name = "t_customer", schema = "sellerb", catalog = "")
 public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,32 +35,23 @@ public class Customer {
     @Column(name = "customer_seq")
     private Long customerSeq;
     @Basic
-    @Column(name = "customer_id")
+    @Column(name = "customer_id", length = 25)
     private String customerId;
     @Basic
-    @Column(name = "customer_name")
+    @Column(name = "customer_name", length = 10)
     private String customerName;
     @Basic
     @JsonIgnore
     // 쓰기 전용 및 조회 불가
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @Column(name = "customer_pass")
+    @Column(name = "customer_pass", length = 100)
     private String customerPass;
     @Basic
-    @Column(name = "customer_email")
+    @Column(name = "customer_email", length = 50)
     private String customerEmail;
     @Basic
-    @Column(name = "customer_gender")
-    private String customerGender;
-    @Basic
-    @Column(name = "customer_tel")
-    private String customerTel;
-    @Basic
-    @Column(name = "customer_addr")
-    private String customerAddr;
-    @Basic
-    @Column(name = "customer_birth")
-    private LocalDateTime customerBirth;
+    @Column(name = "customer_birth",length = 10)
+    private String customerBirth;
     @Basic
     @Column(name = "customer_token")
     private String customerToken;
@@ -86,11 +81,11 @@ public class Customer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Customer that = (Customer) o;
-        return customerSeq == that.customerSeq && Objects.equals(customerId, that.customerId) && Objects.equals(customerName, that.customerName) && Objects.equals(customerPass, that.customerPass)  && Objects.equals(customerGender, that.customerGender) && Objects.equals(customerEmail, that.customerEmail) && Objects.equals(customerTel, that.customerTel) && Objects.equals(customerAddr, that.customerAddr) && Objects.equals(customerBirth, that.customerBirth) && Objects.equals(customerToken, that.customerToken) && Objects.equals(customerDelYn, that.customerDelYn) && Objects.equals(customerRegUserSeq, that.customerRegUserSeq) && Objects.equals(customerRegDate, that.customerRegDate) && Objects.equals(customerModUserSeq, that.customerModUserSeq) && Objects.equals(customerModDate, that.customerModDate);
+        return customerSeq == that.customerSeq && Objects.equals(customerId, that.customerId) && Objects.equals(customerName, that.customerName) && Objects.equals(customerPass, that.customerPass)  && Objects.equals(customerEmail, that.customerEmail) && Objects.equals(customerBirth, that.customerBirth) && Objects.equals(customerToken, that.customerToken) && Objects.equals(customerDelYn, that.customerDelYn) && Objects.equals(customerRegUserSeq, that.customerRegUserSeq) && Objects.equals(customerRegDate, that.customerRegDate) && Objects.equals(customerModUserSeq, that.customerModUserSeq) && Objects.equals(customerModDate, that.customerModDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(customerSeq, customerId, customerName, customerPass, customerGender, customerEmail, customerTel, customerAddr, customerBirth, customerToken, customerDelYn, customerRegUserSeq, customerRegDate, customerModUserSeq, customerModDate);
+        return Objects.hash(customerSeq, customerId, customerName, customerPass, customerEmail, customerBirth, customerToken, customerDelYn, customerRegUserSeq, customerRegDate, customerModUserSeq, customerModDate);
     }
 }
