@@ -43,7 +43,7 @@ class UserRepository @Inject constructor(
 
         return flow {
             val response = networkService.doLoginCall(LoginRequest(id,pass))
-            val userInfo = networkService.doSignupCall(LoginRequest(id,pass))
+            //val userInfo = networkService.doSignupCall(LoginRequest(id,pass))
 
             emit(User(id,response.token.accessToken,response.token.refreshToken,response.authority,response.seq))
         }.flowOn(Dispatchers.IO)
