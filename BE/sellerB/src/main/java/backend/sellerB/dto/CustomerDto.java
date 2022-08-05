@@ -20,10 +20,7 @@ public class CustomerDto {
     private String customerName;
     private String customerPass;
     private String customerEmail;
-    private String customerGender;
-    private String customerTel;
-    private String customerAddr;
-    private LocalDateTime customerBirth;
+    private String customerBirth;
     private String customerToken;
 
     public static CustomerDto from(Customer customer) {
@@ -33,9 +30,6 @@ public class CustomerDto {
                 .customerName(customer.getCustomerName())
                 .customerPass(customer.getCustomerPass())
                 .customerEmail(customer.getCustomerEmail())
-                .customerGender(customer.getCustomerGender())
-                .customerTel(customer.getCustomerTel())
-                .customerAddr(customer.getCustomerAddr())
                 .customerBirth(customer.getCustomerBirth())
                 .customerToken(customer.getCustomerToken())
                 .build();
@@ -51,9 +45,6 @@ public class CustomerDto {
                     .customerName(customerList.get(i).getCustomerName())
                     .customerPass(customerList.get(i).getCustomerPass())
                     .customerEmail(customerList.get(i).getCustomerEmail())
-                    .customerGender(customerList.get(i).getCustomerGender())
-                    .customerTel(customerList.get(i).getCustomerTel())
-                    .customerAddr(customerList.get(i).getCustomerAddr())
                     .customerBirth(customerList.get(i).getCustomerBirth())
                     .customerToken(customerList.get(i).getCustomerToken())
                     .build();
