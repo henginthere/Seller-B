@@ -6,6 +6,7 @@ import { toast, ToastContainer } from "react-toastify";
 import { Button, TextField } from "@mui/material";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
+import { registerApi } from "../../api/userApi";
 
 import { Footer, NavBar } from "../index";
 import "./ManageRegister.css";
@@ -39,9 +40,34 @@ function ManageRegister() {
       .required("이메일을 입력하세요!"),
   });
 
+  const registerBtn = async (values)=>{
+    const { brand, id, password, phone, email} = values;
+    console.log(values.brand);
+
+    const userInfo = {
+      "managerId": id,
+      "managerName":"",
+      "managerPass":password,
+      "managerTel":phone,
+      "managerEmail":email
+    }
+
+    console.log("userInfo:" + userInfo.managerId);
+    registerApi(userInfo)
+    .then((res)=>{
+      console.log(res.data);
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+
+
+  }
+
   // Axios 
   const submit = async (values) => {
-    // const { brand, id, password, phone, email} = values;
+    const { brand, id, password, phone, email} = values;
+    console.log(values.brand);
     // try {
     //   await axios.post("/api/auth/signup", {
     //     brand, 
@@ -215,16 +241,17 @@ function ManageRegister() {
                     onChange={handleChange}
                   />
                   <div className="error-message">{errors.password2}</div>
-                </div>
+        </div> */}
                 <Button
                   color="primary"
                   variant="contained"
                   fullWidth
                   type="submit"
+                  onClick={()=> registerBtn(values)}
                 >
                   회원가입
                 </Button>
-              </div> */}
+           
             </form>
           </div>
         )}
