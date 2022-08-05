@@ -2,6 +2,8 @@ package backend.sellerB.entity;
 
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -21,6 +23,8 @@ import java.util.Objects;
 @AllArgsConstructor
 @DynamicInsert
 @EntityListeners(AuditingEntityListener.class)
+@SQLDelete(sql = "UPDATE t_review SET review_del_yn=true WHERE review_seq=?")
+@Where(clause = "review_del_yn=false")
 @Table(name = "t_review", schema = "sellerb", catalog = "")
 public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
