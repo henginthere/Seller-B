@@ -1,7 +1,7 @@
 package backend.sellerB.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -17,6 +17,10 @@ import java.util.Objects;
 @Entity
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@DynamicInsert
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "t_consultant_attendance", schema = "sellerb", catalog = "")
 public class ConsultantAttendance {
@@ -48,8 +52,8 @@ public class ConsultantAttendance {
 
     //0이면 로그인, 1이면 로그아웃
     @Basic
-    @Column(name = "consultant_attendance_state",columnDefinition = "byte default 0")
-    private Byte consultantAttendanceState;
+    @Column(name = "consultant_attendance_state",columnDefinition = "boolean default false")
+    private Boolean consultantAttendanceState;
 
 
     @Override
