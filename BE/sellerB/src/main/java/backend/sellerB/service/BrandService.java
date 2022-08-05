@@ -1,6 +1,7 @@
 package backend.sellerB.service;
 
 import backend.sellerB.dto.BrandDto;
+import backend.sellerB.dto.ResponseBrandDto;
 import backend.sellerB.entity.Brand;
 import backend.sellerB.repository.BrandRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,14 +26,14 @@ public class BrandService {
         return BrandDto.from(brandRepository.save(brand));
     }
 
-    public List<BrandDto> getBrandList() {
-        return BrandDto.fromList(brandRepository.findAll());
+    public List<ResponseBrandDto> getBrandList() {
+        return ResponseBrandDto.fromList(brandRepository.findAll());
     }
 
-    public BrandDto getBrandDetail(Long seq) {
+    public ResponseBrandDto getBrandDetail(Long seq) {
         Optional<Brand> brandOptional = brandRepository.findById(seq);
         Brand brand = brandOptional.get();
-        return BrandDto.from(brand);
+        return ResponseBrandDto.from(brand);
     }
 
     public BrandDto update(Long seq, BrandDto brandDto) {

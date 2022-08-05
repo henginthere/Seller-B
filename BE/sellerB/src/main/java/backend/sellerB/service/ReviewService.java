@@ -34,6 +34,7 @@ public class ReviewService {
     }
 
     public List<ReviewDto> getReviewListByConsultantId(String consultantId) {
+
         return ReviewDto.fromList(reviewRepository.findAll());}
 
     public List<ReviewDto> getReviewListByCustomerSeq(Long customerSeq) {
