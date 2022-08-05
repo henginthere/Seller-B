@@ -2,6 +2,8 @@ package backend.sellerB.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -19,6 +21,8 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
+@SQLDelete(sql = "UPDATE t_address SET address_del_yn=true WHERE address_seq=?")
+@Where(clause = "address_del_yn=false")
 @Table(name = "t_address", schema = "sellerb", catalog = "")
 public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,10 +34,10 @@ public class Address {
     @JsonBackReference
     private Customer customer;
     @Basic
-    @Column(name = "addr")
+    @Column(name = "addr", length = 100)
     private String addr;
     @Basic
-    @Column(name = "addr_requests")
+    @Column(name = "addr_requests",length = 100)
     private String addrRequests;
 
     @Basic
