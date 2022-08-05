@@ -4,6 +4,8 @@ import lombok.*;
 import net.bytebuddy.asm.Advice;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -25,6 +27,8 @@ import java.util.Set;
 @AllArgsConstructor
 @DynamicInsert
 @EntityListeners(AuditingEntityListener.class)
+@SQLDelete(sql = "UPDATE t_consultant SET consultant_id=null, consultant_name=null, consultant_pass=null, consultant_email=null, consultant_tel=null, consultant_image_url=null,consultant_del_yn=true WHERE consultant_seq=?")
+@Where(clause = "consultant_del_yn=false")
 @Table(name = "t_consultant", schema = "sellerb", catalog = "")
 public class Consultant implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,23 +39,23 @@ public class Consultant implements Serializable {
     @JoinColumn(name = "product_group_seq")
     private ProductGroup productGroup;
     @Basic
-    @Column(name = "consultant_pass")
+    @Column(name = "consultant_pass",length = 100)
     private String consultantPass;
     @Basic
-    @Column(name = "consultant_id")
+    @Column(name = "consultant_id",length = 25)
     private String consultantId;
 
     @Basic
-    @Column(name = "consultant_name")
+    @Column(name = "consultant_name",length = 10)
     private String consultantName;
     @Basic
     @Column(name = "consultant_image_url")
     private String consultantImageUrl;
     @Basic
-    @Column(name = "consultant_tel")
+    @Column(name = "consultant_tel", length = 15)
     private String consultantTel;
     @Basic
-    @Column(name = "consultant_email")
+    @Column(name = "consultant_email", length = 50)
     private String consultantEmail;
     @Basic
     @Column(name = "consultant_del_yn",columnDefinition = "boolean default false")
