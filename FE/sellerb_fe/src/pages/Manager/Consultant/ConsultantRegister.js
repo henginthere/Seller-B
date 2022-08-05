@@ -6,19 +6,13 @@ import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import "./ConsultantRegister.css";
 import { registerConsultantApi } from '../../../api/consultantApi'
+import { productGroupListApi  } from '../../../api/productApi'
 
 
 function ConsultantRegister() {
 
-  // const data= ({
-  //   id: "",
-  //   name: "",
-  //   email: "",
-  //   pass: "",
-  //   tel: "",
-  //   // product: "",
-  // });
   const navigate = useNavigate();
+  const [groupList, setGroupList] = useState([]);
 
   const [consultant, setConsultant] = useState({
     consultantId: "",
@@ -26,21 +20,25 @@ function ConsultantRegister() {
     consultantEmail: "",
     consultantPass: "",
     consultantTel: "",
-    // product: "",
+    productGroupName: "",
   });
 
-  const { consultantId, consultantName, consultantEmail, consultantPass, consultantTel } = consultant;
+  const { consultantId, consultantName, consultantEmail, consultantPass, consultantTel, productGroupName } = consultant;
 
-  const product_list = [
-    { value: "TV", label: "TV" },
-    { value: "phone", label: "Phone" },
-    { value: "airConditioner", label: "에어컨" },
-    { value: "Refrigerator", label: "냉장고" },
-    { value: "airCleaner", label: "공기청정기" },
-  ];
+  useEffect(()=>{
+    productGroupListApi()
+    .then((res)=>{
+      console.log(res.data);
+
+      setGroupList(res.data);
+      console.log("groupList :" + groupList[0]);
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+  }, [])
 
   const onRegisterBtn = (event)=>{
-
     event.preventDefault();
 
     registerConsultantApi(consultant)
@@ -53,7 +51,6 @@ function ConsultantRegister() {
     })
   }
 
-
   const onChange = (e) => {
     e.preventDefault();
     const { value, name } = e.target;
@@ -62,7 +59,7 @@ function ConsultantRegister() {
       [name]: value,
     });
 
-    console.log("setConsultant:" + consultant);
+    console.log("setConsultant:" + consultant.productGroupName);
   };
 
 
@@ -89,7 +86,7 @@ function ConsultantRegister() {
               <TextField
                 required
                 label='사번'
-                defaultValue={consultant.id}
+                defaultValue={consultant.consultantId}
                 fullWidth='true'
                 name='consultantId'
                 onChange={onChange}
@@ -100,7 +97,7 @@ function ConsultantRegister() {
                 required
                 id='outlined-disabled'
                 label='사원명'
-                defaultValue={consultant.name}
+                defaultValue={consultant.consultantName}
                 fullWidth='true'
                 name='consultantName'
                 onChange={onChange}
@@ -110,7 +107,7 @@ function ConsultantRegister() {
               <TextField
                 required
                 label='사원Email'
-                defaultValue={consultant.email}
+                defaultValue={consultant.consultantEmail}
                 fullWidth='true'
                 name='consultantEmail'
                 type='email'
@@ -121,7 +118,7 @@ function ConsultantRegister() {
               <TextField
                 required
                 label='초기 비밀번호'
-                defaultValue={consultant.pass}
+                defaultValue={consultant.consultantPass}
                 type='password'
                 fullWidth='true'
                 name='consultantPass'
@@ -134,7 +131,7 @@ function ConsultantRegister() {
               <TextField
                 required
                 label='사원 핸드폰 번호'
-                defaultValue={consultant.tel}
+                defaultValue={consultant.consultantTel}
                 fullWidth='true'
                 name='consultantTel'
                 onChange={onChange}
@@ -145,16 +142,19 @@ function ConsultantRegister() {
               <TextField
                 required
                 select
-                label='제품군'
                 fullWidth='true'
-                name='product'
+                name='productGroupName'
+                value={consultant.productGroupName}
+                onChange={onChange}
                 SelectProps={{
                   native: true,
                 }}
+                label="제품군을 선택하세요"
               >
-                {product_list.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
+                <option value="" />
+                {groupList.map((option) => (
+                  <option>
+                    {option.productGroupName}
                   </option>
                 ))}
               </TextField>
