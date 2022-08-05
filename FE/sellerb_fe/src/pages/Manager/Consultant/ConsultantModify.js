@@ -1,18 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./ConsultantModify.css";
 import { Footer, NavBar } from "../../../components/index";
 import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 
+import { Link, useNavigate, useParams } from "react-router-dom";
+
+import { modifyConsultantApi, detailConsultantApi } from "../../../api/consultantApi"
+
 function ConsultantModify() {
-  const dummy_data = {
-    id: "U20220730",
-    name: "임상담",
-    email: "dlacogus5239@naver.com",
-    tel: "010-9999-8888",
-    pw: "U20220730",
-    product: "Phone",
-  };
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const seq = id; 
+
+  const [consultant, setConsultant] = useState({
+    consultantId: "",
+    consultantName: "",
+    consultantEmail:"",
+    consultantPass:"",
+    consultantTel :""
+  });
   const product_list = [
     { value: "TV", label: "TV" },
     { value: "phone", label: "Phone" },
@@ -20,27 +27,53 @@ function ConsultantModify() {
     { value: "Refrigerator", label: "냉장고" },
     { value: "airCleaner", label: "공기청정기" },
   ];
-  var data = { ...dummy_data };
 
-  const cancelModify = () => {
-    data = { ...dummy_data };
-  };
+  useEffect(() => {
+    detailConsultantApi(seq)
+    .then((res)=>{
+        console.log("res.data:" + res.data.consultantId);
+        
+        // consultant = res.data;
+        
+        setConsultant(res.data); 
+        console.log("consultant:" + consultant.consultantId);
+    })
+    .catch((err)=>{
+        console.log(err);
+    })
+  }, []);
+
   // 최종적으로 수정 완료 버튼을 누르면 api로 DB에 반영하기 위한 함수
-  const handleSubmit = (e) => {
+  const onHandleSubmit = (e) => {
     e.preventDefault();
+
+    modifyConsultantApi(consultant)
+    .then((res)=>{
+      console.log(res.data);
+    })
+    .catch((err)=>{
+      console.log("Error");
+    })
 
     alert("수정하시겠습니까?");
 
-    // 임시로 메인으로 돌아가게 함
-    console.log("이전 데이터 : " + dummy_data.product);
-    console.log("바뀐 데이터 : " + data.product);
+    navigate(`/manager/consultantDetail/${seq}`);
+
+
+    
+
   };
   // 바뀔때마다 setData로 수정된 데이터로 바꿔줌
-  const handleChange = (e) => {
+  const onChange = (e) => {
     e.preventDefault();
-    // console.log("handleChange!");
-    data[e.target.name] = e.target.value;
-    console.log(e.target.name + " : " + e.target.value);
+
+    const { value, name } = e.target;
+
+    setConsultant({
+      ...consultant,
+      [name] : value,
+    });
+
   };
   return (
     <>
@@ -58,55 +91,56 @@ function ConsultantModify() {
           <div className='topText'>
             <h2>상담사 수정</h2>
           </div>
-          <form className='InfoWrapper' onSubmit={handleSubmit}>
+          <form className='InfoWrapper'>
             <div className='registerField'>
               {/* 이 부분 Form 으로 바꿔주기 */}
               <TextField
                 required
-                label='사번'
-                defaultValue={data.id}
+                value={consultant.consultantId || ""}
                 fullWidth='true'
-                name='id'
+                name='consultantId'
+                onChange={onChange}
               />
             </div>
             <div className='registerField'>
               <TextField
                 required
                 id='outlined-disabled'
-                label='사원명'
-                defaultValue={data.name}
+                value={consultant.consultantName || ""}
                 fullWidth='true'
-                name='name'
+                name='consultantName'
+                onChange={onChange}
               />
             </div>
             <div className='registerField'>
               <TextField
                 required
-                label='사원Email'
-                defaultValue={data.email}
+                value={consultant.consultantEmail || ""}
                 fullWidth='true'
-                name='email'
+                name='consultantEmail'
+                onChange={onChange}
                 type='email'
               />
             </div>
             <div className='registerField'>
               <TextField
                 required
-                label='초기 비밀번호'
-                defaultValue={data.pw}
+                value={consultant.consultantPass || ""}
                 type='password'
+                onChange={onChange}
                 fullWidth='true'
-                name='pw'
+                name='consultantPass'
+                autocomplete="on"
               />
             </div>
 
             <div className='registerField'>
               <TextField
                 required
-                label='사원 핸드폰 번호'
-                defaultValue={data.tel}
+                value={consultant.consultantTel || ""}
+                onChange={onChange}
                 fullWidth='true'
-                name='tel'
+                name='consultantTel'
               />
             </div>
 
@@ -114,14 +148,12 @@ function ConsultantModify() {
               <TextField
                 required
                 select
-                label='제품군'
-                defaultvalue={data.product}
                 fullWidth='true'
-                name='product'
+                name='consultantGroup'
                 SelectProps={{
                   native: true,
                 }}
-                onChange={handleChange}
+                onChange={onChange}
               >
                 {product_list.map((option) => (
                   <option key={option.value} value={option.value}>
@@ -131,8 +163,8 @@ function ConsultantModify() {
               </TextField>
             </div>
             <div className='Button'>
-              <Button className='registerBtn' variant='contained' type='submit'>
-                수정
+              <Button onClick={onHandleSubmit} className='registerBtn' variant='contained' type='submit'>
+                수정완료
               </Button>
               <Button className='registerBtn' variant='contained' color='error'>
                 취소
