@@ -1,10 +1,7 @@
 package backend.sellerB.controller;
 
 
-import backend.sellerB.dto.ConsultantDto;
-import backend.sellerB.dto.EditConsultantDto;
-import backend.sellerB.dto.ManagerDto;
-import backend.sellerB.dto.NoticeDto;
+import backend.sellerB.dto.*;
 import backend.sellerB.entity.Consultant;
 import backend.sellerB.service.BrandService;
 import backend.sellerB.service.ConsultantService;
@@ -32,8 +29,8 @@ public class ConsultantController {
 
 
     @PostMapping("/register")
-    public ResponseEntity<ConsultantDto> registerConsultant(@Valid @RequestBody ConsultantDto consultantDto) {
-        return ResponseEntity.ok(consultantService.signup(consultantDto));
+    public ResponseEntity<ConsultantDto> registerConsultant(@Valid @RequestBody RegisterConsultantDto registerConsultantDto) {
+        return ResponseEntity.ok(consultantService.signup(registerConsultantDto));
     }
 
     @GetMapping("/list")

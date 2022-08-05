@@ -25,9 +25,6 @@ public class CustomerService {
                 .customerName(customerDto.getCustomerName())
                 .customerPass(passwordEncoder.encode(customerDto.getCustomerPass()))
                 .customerEmail(customerDto.getCustomerEmail())
-                .customerGender(customerDto.getCustomerGender())
-                .customerTel(customerDto.getCustomerTel())
-                .customerAddr(customerDto.getCustomerAddr())
                 .customerBirth(customerDto.getCustomerBirth())
                 .customerToken(customerDto.getCustomerToken())
                 .build();
@@ -48,8 +45,6 @@ public class CustomerService {
         Customer customer = customerOptional.get();
         customer.setCustomerPass(passwordEncoder.encode(customerDto.getCustomerPass()));
         customer.setCustomerEmail(customerDto.getCustomerEmail());
-        customer.setCustomerTel(customerDto.getCustomerTel());
-        customer.setCustomerAddr(customerDto.getCustomerAddr());
         customer.setCustomerToken(customerDto.getCustomerToken());
         return CustomerDto.from(customer);
     }

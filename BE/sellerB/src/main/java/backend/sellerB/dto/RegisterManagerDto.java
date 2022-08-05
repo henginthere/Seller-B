@@ -35,7 +35,7 @@ public class RegisterManagerDto {
         if(manager == null) return null;
         return RegisterManagerDto.builder()
                 .managerSeq(manager.getManagerSeq())
-                .brandSeq(manager.getBrandSeq().getBrandSeq())
+                .brandSeq(manager.getBrand().getBrandSeq())
                 .managerId(manager.getManagerId())
                 .managerName(manager.getManagerName())
                 .managerPass(manager.getManagerPass())

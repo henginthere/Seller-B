@@ -57,7 +57,7 @@ public class AuthService {
         if(authorities.equals("ROLE_ADMIN")){
             Manager manager = managerRepository.findBymanagerId(id).orElseThrow(()->new ManagerNotFoundException("가입되지 않은 정보입니다."));
             seq = manager.getManagerSeq();
-            brandSeq = manager.getBrandSeq().getBrandSeq();
+            brandSeq = manager.getBrand().getBrandSeq();
             tokenDto = tokenProvider.createManagerToken(authentication.getName(), authorities);
         }
         else{
