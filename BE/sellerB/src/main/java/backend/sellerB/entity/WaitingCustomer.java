@@ -2,6 +2,8 @@ package backend.sellerB.entity;
 
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -20,6 +22,8 @@ import java.util.Objects;
 @AllArgsConstructor
 @DynamicInsert
 @EntityListeners(AuditingEntityListener.class)
+@SQLDelete(sql = "UPDATE t_waiting_customer SET waitingCustomer_group_del_yn=true WHERE waiting_customer_seq=?")
+@Where(clause = "waitingCustomer_group_del_yn=false")
 @Table(name = "t_waiting_customer", schema = "sellerb", catalog = "")
 public class WaitingCustomer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,28 +43,28 @@ public class WaitingCustomer {
     @Column(name = "waiting_customer_state",columnDefinition = "boolean default false")
     private Boolean waitingCustomerState;
     @Basic
-    @Column(name = "wating_customer_date")
+    @Column(name = "waiting_customer_date")
     private LocalDateTime watingCustomerDate;
     @Basic
-    @Column(name = "watingCustomer_group_del_yn",columnDefinition = "boolean default false")
+    @Column(name = "waitingCustomer_group_del_yn",columnDefinition = "boolean default false")
     private Boolean watingCustomerGroupDelYn;
     @CreatedBy
     @Basic
-    @Column(name = "wating_customer_reg_user_seq")
+    @Column(name = "waiting_customer_reg_user_seq")
     private Long waitingCustomerRegUserSeq;
     @CreatedDate
     @Basic
-    @Column(name = "wating_customer_reg_date")
+    @Column(name = "waiting_customer_reg_date")
     private LocalDateTime waitingCustomerRegDate;
 
     @LastModifiedBy
     @Basic
-    @Column(name = "wating_customer_mod_user_seq")
+    @Column(name = "waiting_customer_mod_user_seq")
     private Long waitingCustomerModUserSeq;
 
     @LastModifiedDate
     @Basic
-    @Column(name = "wating_customer_mod_date")
+    @Column(name = "waiting_customer_mod_date")
     private LocalDateTime waitingCustomerModDate;
 
 
