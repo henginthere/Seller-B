@@ -2,8 +2,6 @@ package backend.sellerB.dto;
 
 import backend.sellerB.entity.Brand;
 import backend.sellerB.entity.Manager;
-import backend.sellerB.entity.Notice;
-import backend.sellerB.service.AuthService;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,8 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -44,7 +41,7 @@ public class ManagerDto {
     public static ManagerDto from(Manager manager) {
         logger.info(manager.getManagerId());
         if(manager == null) return null;
-        System.out.println("DTO from에서 브랜드 로그: "+manager.getBrandSeq());
+
         return ManagerDto.builder()
                 .managerSeq(manager.getManagerSeq())
                 .brandSeq(manager.getBrandSeq())
