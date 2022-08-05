@@ -24,8 +24,8 @@ public class ManagerController {
 
 
     @PostMapping("/register")
-    public ResponseEntity<ManagerDto> registerManager(@Valid @RequestBody ManagerDto managerDto) {
-        return ResponseEntity.ok(managerService.signup(managerDto));
+    public ResponseEntity<ManagerDto> registerManager(@Valid @RequestBody RegisterManagerDto registerManagerDto) {
+        return ResponseEntity.ok(managerService.signup(registerManagerDto));
     }
 
     @GetMapping("/{managerSeq}")
