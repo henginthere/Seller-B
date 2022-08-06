@@ -36,7 +36,6 @@ public class WaitingCustomerController {
     @GetMapping("/list/{product-group-name}")
     public ResponseEntity<List<WaitingCustomerDto>> getWaitingCustomerListByProductGroupNameList(@PathVariable("product-group-name") String productGroupName, HttpServletRequest request) throws UnsupportedEncodingException {
         String koreanProductGroupName = URLDecoder.decode(productGroupName, "UTF-8");
-        System.out.println(koreanProductGroupName);
         return ResponseEntity.ok(waitingCustomerService.getWaitingCustomersByProductGroup_ProductGroupName(koreanProductGroupName));
     }
 
