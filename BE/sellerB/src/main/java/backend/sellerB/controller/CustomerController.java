@@ -18,9 +18,9 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @PostMapping
-    public ResponseEntity<CustomerDto> saveCustomer(@Valid @RequestBody CustomerDto customerDto) {
-        return ResponseEntity.ok(customerService.createCustomer(customerDto));
+    @PostMapping("/register")
+    public ResponseEntity<CustomerDto> registerCustomer(@Valid @RequestBody CustomerDto customerDto) {
+        return ResponseEntity.ok(customerService.signup(customerDto));
     }
 
     @GetMapping("/{seq}")
