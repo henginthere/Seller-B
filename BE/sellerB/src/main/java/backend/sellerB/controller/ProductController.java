@@ -33,9 +33,9 @@ public class ProductController {
         return ResponseEntity.ok(productService.getProductDetail(seq));
     }
     @GetMapping("/name/{product-name}")
-    public ResponseEntity<ProductRes> getProductDetailByName(@PathVariable("product-name") String productName) throws UnsupportedEncodingException {
+    public ResponseEntity<List<ProductRes>> getProductListByName(HttpServletRequest request, @PathVariable("product-name") String productName) throws UnsupportedEncodingException {
         String koreanProductName = URLDecoder.decode(productName, "UTF-8");
-        return ResponseEntity.ok(productService.getProductDetailByName(productName));
+        return ResponseEntity.ok(productService.getProductListByName(koreanProductName));
     }
     @GetMapping("/id/{product-id}")
     public ResponseEntity<ProductRes> getProductDetailById(@PathVariable String productId) {
