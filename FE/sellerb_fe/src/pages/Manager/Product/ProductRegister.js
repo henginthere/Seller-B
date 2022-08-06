@@ -49,7 +49,6 @@ function ProductRegister() {
       formData: formData,
     })
 
-    // axios.post('api', product, config);
   };
 
   const [imgBase64, setImgBase64] = useState([]); // 미리보기를 구현할 state
