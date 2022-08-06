@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -23,6 +25,8 @@ import java.util.Objects;
 @AllArgsConstructor
 @DynamicInsert
 @EntityListeners(AuditingEntityListener.class)
+@SQLDelete(sql = "UPDATE t_product_group SET product_group_del_yn=true WHERE product_group_seq=?")
+@Where(clause = "product_group_del_yn=false")
 @Table(name = "t_product_group", schema = "sellerb", catalog = "")
 public class ProductGroup {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,10 +39,10 @@ public class ProductGroup {
     @JsonBackReference
     private Brand brand;
     @Basic
-    @Column(name = "product_group_code")
+    @Column(name = "product_group_code", length = 10)
     private String productGroupCode;
     @Basic
-    @Column(name = "product_group_name")
+    @Column(name = "product_group_name", length = 25)
     private String productGroupName;
     @Basic
     @Column(name = "product_group_del_yn",columnDefinition = "boolean default false")

@@ -1,9 +1,6 @@
 package backend.sellerB.service;
 
-import backend.sellerB.dto.AuthorityDto;
-import backend.sellerB.dto.ConsultantDto;
-import backend.sellerB.dto.EditConsultantDto;
-import backend.sellerB.dto.NoticeDto;
+import backend.sellerB.dto.*;
 import backend.sellerB.entity.Authority;
 import backend.sellerB.entity.Consultant;
 import backend.sellerB.entity.MemberAuth;
@@ -11,6 +8,7 @@ import backend.sellerB.entity.Notice;
 import backend.sellerB.exception.DuplicateUserException;
 import backend.sellerB.repository.AuthorityRepository;
 import backend.sellerB.repository.ConsultantRepository;
+import backend.sellerB.repository.ProductGroupRepository;
 import backend.sellerB.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -32,11 +30,12 @@ public class ConsultantService {
     private final ConsultantRepository consultantRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthorityRepository authorityRepository;
+    private final ProductGroupRepository productGroupRepository;
 
     @Transactional
-    public ConsultantDto signup(ConsultantDto consultantDto) {
-        if (consultantRepository.findByConsultantId(consultantDto.getConsultantId()).orElse(null) != null) {
-            throw new DuplicateUserException(consultantDto.getConsultantId());
+    public ConsultantDto signup(RegisterConsultantDto registerConsultantDto) {
+        if (consultantRepository.findByConsultantId(registerConsultantDto.getConsultantId()).orElse(null) != null) {
+            throw new DuplicateUserException(registerConsultantDto.getConsultantId());
         }
 
         // 권한 정보를 만듦
@@ -45,14 +44,16 @@ public class ConsultantService {
                 .build();
         authorityRepository.save(authority);
 
+
+
         //dto를 엔티티로
         Consultant consultant = Consultant.builder()
-                .consultantId(consultantDto.getConsultantId())
-                .consultantName(consultantDto.getConsultantName())
-                .consultantEmail(consultantDto.getConsultantEmail())
-                .consultantPass(passwordEncoder.encode(consultantDto.getConsultantPass()))
-                .consultantTel(consultantDto.getConsultantTel())
-                .productGroup(consultantDto.getProductGroup())
+                .consultantId(registerConsultantDto.getConsultantId())
+                .consultantName(registerConsultantDto.getConsultantName())
+                .consultantEmail(registerConsultantDto.getConsultantEmail())
+                .consultantPass(passwordEncoder.encode(registerConsultantDto.getConsultantPass()))
+                .consultantTel(registerConsultantDto.getConsultantTel())
+                .productGroup(productGroupRepository.findById(registerConsultantDto.getProductGroupSeq()).get())
                 .authorities(Collections.singleton(authority))
                 .build();
 
