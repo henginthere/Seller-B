@@ -3,9 +3,11 @@ package backend.sellerB.jwt;
 
 import backend.sellerB.dto.TokenDto;
 import backend.sellerB.entity.Consultant;
+import backend.sellerB.entity.Customer;
 import backend.sellerB.entity.Manager;
 import backend.sellerB.exception.ManagerNotFoundException;
 import backend.sellerB.repository.ConsultantRepository;
+import backend.sellerB.repository.CustomerRepository;
 import backend.sellerB.repository.ManagerRepository;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
@@ -33,6 +35,7 @@ public class TokenProvider implements InitializingBean {
     private final Logger logger = LoggerFactory.getLogger(TokenProvider.class);
     private final ManagerRepository managerRepository;
     private final ConsultantRepository consultantRepository;
+    private final CustomerRepository customerRepository;
     private static final String AUTHORITIES_KEY = "auth";
 
     private final String secret;
@@ -42,11 +45,12 @@ public class TokenProvider implements InitializingBean {
     private Key key;
 
 
-    public TokenProvider(ManagerRepository managerRepository, ConsultantRepository consultantRepository, @Value("${jwt.secret}") String secret,
+    public TokenProvider(ManagerRepository managerRepository, ConsultantRepository consultantRepository, CustomerRepository customerRepository, @Value("${jwt.secret}") String secret,
                          @Value("${jwt.access-token-validity-in-seconds}") long accessTokenValidityInSeconds,
                          @Value("${jwt.refresh-token-validity-in-seconds}") long refreshTokenValidityInSeconds) {
         this.managerRepository = managerRepository;
         this.consultantRepository = consultantRepository;
+        this.customerRepository = customerRepository;
         this.secret = secret;
         this.accessTokenValidityInMilliseconds = accessTokenValidityInSeconds * 1000;
         this.refreshTokenValidityInMilliseconds = refreshTokenValidityInSeconds * 1000;
@@ -116,7 +120,32 @@ public class TokenProvider implements InitializingBean {
     }
 
 
+    public TokenDto createCustomerToken(String id,
+                                       String authorities) {
+        long now = (new Date()).getTime();
 
+        Customer customer = customerRepository.findBycustomerId(id).orElseThrow(()->new ManagerNotFoundException("가입되지 않은 정보입니다."));
+
+        String accessToken = Jwts.builder()
+                .claim("customerSeq", customer.getCustomerSeq())
+                .claim(AUTHORITIES_KEY, authorities)
+                .setExpiration(new Date(now + accessTokenValidityInMilliseconds))
+                .signWith(key, SignatureAlgorithm.HS512)
+                .compact();
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        // jwt를 response header에 넣어줌
+        httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + accessToken);
+
+        String refreshToken = Jwts.builder()
+                .claim(AUTHORITIES_KEY, authorities)
+                .claim("customerSeq", customer.getCustomerSeq())
+                .setExpiration(new Date(now + refreshTokenValidityInMilliseconds))
+                .signWith(key, SignatureAlgorithm.HS512)
+                .compact();
+
+        return new TokenDto(accessToken, refreshToken);
+    }
     /*
      * 권한 가져오는 메서드
      */
