@@ -3,10 +3,12 @@ package backend.sellerB.service;
 import backend.sellerB.dto.TokenDto;
 import backend.sellerB.dto.LoginResponseDto;
 import backend.sellerB.entity.Consultant;
+import backend.sellerB.entity.Customer;
 import backend.sellerB.entity.Manager;
 import backend.sellerB.exception.ManagerNotFoundException;
 import backend.sellerB.jwt.TokenProvider;
 import backend.sellerB.repository.ConsultantRepository;
+import backend.sellerB.repository.CustomerRepository;
 import backend.sellerB.repository.ManagerRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -32,6 +34,9 @@ public class AuthService {
 
     @Autowired
     ConsultantRepository consultantRepository;
+
+    @Autowired
+    CustomerRepository customerRepository;
 
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
@@ -60,11 +65,17 @@ public class AuthService {
             brandSeq = manager.getBrand().getBrandSeq();
             tokenDto = tokenProvider.createManagerToken(authentication.getName(), authorities);
         }
-        else{
+        else if(authorities.equals("ROLE_USER")){
             Consultant consultant = consultantRepository.findByConsultantId(id).orElseThrow(()->new ManagerNotFoundException("가입되지 않은 정보입니다."));
             seq = consultant.getConsultantSeq();
             brandSeq = -1L;
             tokenDto = tokenProvider.createConsultantToken(authentication.getName(),authorities);
+        }
+        else{
+            Customer customer = customerRepository.findBycustomerId(id).orElseThrow(()->new ManagerNotFoundException("가입되지 않은 정보입니다."));
+            seq = customer.getCustomerSeq();
+            brandSeq = -1L;
+            tokenDto = tokenProvider.createCustomerToken(authentication.getName(),authorities);
         }
 
         return new LoginResponseDto(tokenDto,authorities,seq,brandSeq);
@@ -89,9 +100,15 @@ public class AuthService {
             memberId = managerRepository.findByManagerSeq(Long.parseLong(authentication.getName())).get().getManagerId();
             return tokenProvider.createManagerToken(memberId, authorities);
         }
-        else{
+
+        else if(authorities.equals("ROLE_USER")){
             memberId = consultantRepository.findByConsultantSeq(Long.parseLong(authentication.getName())).getConsultantId();
             return tokenProvider.createConsultantToken(memberId, authorities);
+        }
+        else{
+            memberId = customerRepository.findBycustomerSeq(Long.parseLong(authentication.getName())).get().getCustomerId();
+            return tokenProvider.createConsultantToken(memberId, authorities);
+
         }
 
 
