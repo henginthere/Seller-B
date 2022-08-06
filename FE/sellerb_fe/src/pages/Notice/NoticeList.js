@@ -5,34 +5,6 @@ import { listNoticeApi, searchNoticeApi } from "../../api/noticeApi";
 import "./NoticeList.css";
 import { Footer, NavBar } from "../../components/index";
 
-// Dummy data
-
-// const dummyNoticeList = [
-//   {
-//     notice_seq: 1,
-//     notice_title: "first Notice Title",
-//     notice_reg_date: getStringDate(new Date()),
-//   },
-//   {
-//     notice_seq: 2,
-//     notice_title: "Two Notice Title",
-//     notice_reg_date: getStringDate(new Date()),
-//   },
-//   {
-//     notice_seq: 3,
-//     notice_title: "Three Notice Title",
-//     notice_reg_date: getStringDate(new Date()),
-//   },
-// ];
-// const noticeList = {};
-// function noticeListApi(){
-//   axios.get(BASE_URL).then(function(res){
-//     noticeList = {...res};
-//     console.log(noticeList);
-//   }).catch((error) =>{
-//     console.log(error);
-//   })
-// }
 function NoticeList() {
   const navigate = useNavigate();
 
