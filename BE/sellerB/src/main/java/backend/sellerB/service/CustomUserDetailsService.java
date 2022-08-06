@@ -1,8 +1,10 @@
 package backend.sellerB.service;
 
 import backend.sellerB.entity.Consultant;
+import backend.sellerB.entity.Customer;
 import backend.sellerB.entity.Manager;
 import backend.sellerB.repository.ConsultantRepository;
+import backend.sellerB.repository.CustomerRepository;
 import backend.sellerB.repository.ManagerRepository;
 import backend.sellerB.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +32,8 @@ public class CustomUserDetailsService implements UserDetailsService {
     private final ManagerRepository managerRepository;
     private final ConsultantRepository consultantRepository;
 
+    private final CustomerRepository customerRepository;
+
     @Transactional
     @Override
     public UserDetails loadUserByUsername(String id)  {
@@ -43,6 +47,11 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
         else if(consultantRepository.findByConsultantId(id).isPresent()){
             return consultantRepository.findByConsultantId(id)
+                    .map(user->createUser(id,user))
+                    .get();
+        }
+        else if(customerRepository.findBycustomerId(id).isPresent()){
+            return customerRepository.findBycustomerId(id)
                     .map(user->createUser(id,user))
                     .get();
         }
@@ -68,6 +77,15 @@ public class CustomUserDetailsService implements UserDetailsService {
         // 1의 정보를 기반으로 userdetails.User객체를 생성해서 return
         return new org.springframework.security.core.userdetails.User(consultant.getConsultantId(),
                 consultant.getConsultantPass(),
+                grantedAuthorities);
+    }
+    private org.springframework.security.core.userdetails.User createUser(String id, Customer customer) {
+        List<GrantedAuthority> grantedAuthorities = customer.getAuthorities().stream()
+                .map(authority -> new SimpleGrantedAuthority(authority.getAuthorityName()))
+                .collect(Collectors.toList());
+        // 1의 정보를 기반으로 userdetails.User객체를 생성해서 return
+        return new org.springframework.security.core.userdetails.User(customer.getCustomerId(),
+                customer.getCustomerPass(),
                 grantedAuthorities);
     }
 
