@@ -7368,7 +7368,7 @@
     "is-docker" "^2.1.1"
     "is-wsl" "^2.2.0"
 
-"openvidu-browser@2.22.0":
+"openvidu-browser@^2.22.0", "openvidu-browser@2.22.0":
   "integrity" "sha512-fug7V5WZPwEXCF4im6RzhWSbv9nYB4QWMXrEQBEsh7RI1VPQ5Jl2VcindiUeMtN+quLqeTjXSRUh4lfkrTlQSQ=="
   "resolved" "https://registry.npmjs.org/openvidu-browser/-/openvidu-browser-2.22.0.tgz"
   "version" "2.22.0"
