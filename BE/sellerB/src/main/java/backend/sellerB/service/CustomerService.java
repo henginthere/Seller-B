@@ -2,14 +2,20 @@ package backend.sellerB.service;
 
 import backend.sellerB.dto.CustomerDto;
 import backend.sellerB.dto.ProductDto;
+import backend.sellerB.entity.Authority;
 import backend.sellerB.entity.Customer;
 import backend.sellerB.entity.Product;
+import backend.sellerB.exception.DuplicateUserException;
+import backend.sellerB.repository.AuthorityRepository;
+import backend.sellerB.repository.ConsultantRepository;
 import backend.sellerB.repository.CustomerRepository;
+import backend.sellerB.repository.ManagerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,8 +24,26 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CustomerService {
     private final CustomerRepository customerRepository;
+    private final ConsultantRepository consultantRepository;
+    private final ManagerRepository managerRepository;
+    private final AuthorityRepository authorityRepository;
     private final PasswordEncoder passwordEncoder;
-    public CustomerDto createCustomer(CustomerDto customerDto) {
+
+    @Transactional
+    public CustomerDto signup(CustomerDto customerDto) {
+        if (customerRepository.findBycustomerId(customerDto.getCustomerId()).orElse(null) != null ||
+        consultantRepository.findByConsultantId(customerDto.getCustomerId()).orElse(null)!=null ||
+        managerRepository.findBymanagerId(customerDto.getCustomerId()).orElse(null)!=null) {
+            throw new DuplicateUserException(customerDto.getCustomerId());
+        }
+
+        // 권한 정보를 만듦
+        Authority authority = Authority.builder()
+                .authorityName("ROLE_CUSTOMER")
+                .build();
+
+        authorityRepository.save(authority);
+
         Customer customer = Customer.builder()
                 .customerId(customerDto.getCustomerId())
                 .customerName(customerDto.getCustomerName())
@@ -27,7 +51,9 @@ public class CustomerService {
                 .customerEmail(customerDto.getCustomerEmail())
                 .customerBirth(customerDto.getCustomerBirth())
                 .customerToken(customerDto.getCustomerToken())
+                .authorities(Collections.singleton(authority))
                 .build();
+
 
         return CustomerDto.from(customerRepository.save(customer));
     }
