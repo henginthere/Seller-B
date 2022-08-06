@@ -16,6 +16,7 @@ function ManageRegister() {
   const navigate = useNavigate();
   const [brandList, setBrandList] = useState([]); // API로 받아올 현재 브랜드 목록 
   const [selectBrand, setSelectBrand] = useState("브랜드"); // 관리자가 선택하는 brand option 
+  const [selectedBrandSeq, setSelectedBrandSeq] = useState("");
 
   const onBrandChange = (e) =>{
     const { value } = e.target;
@@ -25,7 +26,7 @@ function ManageRegister() {
     // 선택된 브랜드에 해당하는 BrandSeq 찾기
     const item = brandList.find((it) => it.brandNameKor === value)
     console.log("brandSeq: " + item.brandNameKor);
-
+    setSelectedBrandSeq(item.brandSeq);
   }
 
   const validationSchema = Yup.object().shape({
@@ -74,6 +75,7 @@ function ManageRegister() {
     console.log(values.brand);
 
     const userInfo = {
+      "brandSeq": selectedBrandSeq,
       "managerId": id,
       "managerName":"",
       "managerPass":password,
@@ -86,6 +88,8 @@ function ManageRegister() {
     registerApi(userInfo)
     .then((res)=>{
       console.log(res.data);
+
+      navigate("/")
 
     })
     .catch((err)=>{
