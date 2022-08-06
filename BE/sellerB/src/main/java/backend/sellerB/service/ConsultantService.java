@@ -85,7 +85,8 @@ public class ConsultantService {
 
     public List<ConsultantDto> searchByProductGroupSeq(Long productGroupSeq) {
 
-        return ConsultantDto.fromList(consultantRepository.findByProductGroup(productGroupSeq));
+//        return ConsultantDto.fromList(consultantRepository.findByProductGroup(productGroupSeq));
+        return ConsultantDto.fromList(consultantRepository.findConsultantsByProductGroup_ProductGroupSeq(productGroupSeq));
     }
 
     public ConsultantDto update(EditConsultantDto editConsultantDto, Long consultantSeq) {
