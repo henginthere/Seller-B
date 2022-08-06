@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 
 @RestController
@@ -31,7 +33,8 @@ public class ProductController {
         return ResponseEntity.ok(productService.getProductDetail(seq));
     }
     @GetMapping("/name/{product-name}")
-    public ResponseEntity<ProductRes> getProductDetailByName(@PathVariable String productName) {
+    public ResponseEntity<ProductRes> getProductDetailByName(@PathVariable("product-name") String productName) throws UnsupportedEncodingException {
+        String koreanProductName = URLDecoder.decode(productName, "UTF-8");
         return ResponseEntity.ok(productService.getProductDetailByName(productName));
     }
     @GetMapping("/id/{product-id}")
@@ -42,6 +45,12 @@ public class ProductController {
     @GetMapping("/list")
     public ResponseEntity<List<ProductRes>> getProductList(HttpServletRequest request) {
         return ResponseEntity.ok(productService.getProductList());
+    }
+
+    @GetMapping("/list/{product-group-name}")
+    public ResponseEntity<List<ProductRes>> getProductListByProductGroupName(HttpServletRequest request, @PathVariable("product-group-name") String productGroupName) throws UnsupportedEncodingException {
+        String koreanProductGroupName = URLDecoder.decode(productGroupName, "UTF-8");
+        return ResponseEntity.ok(productService.getProductListByGroupName(koreanProductGroupName));
     }
 
     @PutMapping("/{seq}")
