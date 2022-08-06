@@ -14,9 +14,11 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -29,7 +31,7 @@ import java.util.Objects;
 @SQLDelete(sql = "UPDATE t_customer SET cutomer_id=null, customer_name=null, customer_pass=null, customer_email=null, customer_birth=null, customer_token=null, customer_del_yn=true WHERE customer_seq=?")
 @Where(clause = "customer_del_yn=false")
 @Table(name = "t_customer", schema = "sellerb", catalog = "")
-public class Customer {
+public class Customer implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "customer_seq")
@@ -88,4 +90,12 @@ public class Customer {
     public int hashCode() {
         return Objects.hash(customerSeq, customerId, customerName, customerPass, customerEmail, customerBirth, customerToken, customerDelYn, customerRegUserSeq, customerRegDate, customerModUserSeq, customerModDate);
     }
+
+
+    @ManyToMany // user와 authority 다대다 관계를 일대다, 다대일 관계의 조인테이블로 정의
+    @JoinTable(
+            name = "user_authority",
+            joinColumns = {@JoinColumn(name = "id", referencedColumnName = "customer_id")},
+            inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "authority_name")})
+    private Set<Authority> authorities;
 }
