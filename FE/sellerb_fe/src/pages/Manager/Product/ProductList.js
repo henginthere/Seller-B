@@ -17,10 +17,11 @@ function ProductList() {
   const [searchWord, setSearchWord] = useState("");
   const [groupOption, setGroupOption] = useState("");
 
-  const onHandleGroupOption = (event) => {
-    setGroupOption(event.currentTarget.value);
+  const onGroupChange = (e) => {
+    e.preventDefault();
+    setGroupOption(e.target.value)
 
-    // console.log(groupOption);
+    console.log("groupOption : " + groupOption);
   };
 
   const onSearchWordHandler = (e) => {
@@ -58,7 +59,8 @@ function ProductList() {
       <div className="product-list">
         <div className="page-navi-wrapper">
           <div className="navi-left">
-            <select onChange={onHandleGroupOption} value={groupOption}>
+            <select onChange={onGroupChange} value={groupOption}>
+                <option value="" />
                 {groupList.map((option) =>
                   option.brandName === managerBrand ? (
                     <option>{option.productGroupName}</option>
@@ -66,9 +68,7 @@ function ProductList() {
                     ""
                   )
                 )}
-              <option>에어컨</option>
-              <option>냉장고</option>
-              <option>전자레인지</option>
+
             </select>
           </div>
           <div className="navi-right">
