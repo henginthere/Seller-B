@@ -26,7 +26,7 @@ public class ConsultingService {
     private final ConsultantRepository consultantRepository;
 
     public RegisterConsultingDto createConsulting(RegisterConsultingDto registerConsultingDto) {
-        Optional<Customer> customerOptional = customerRepository.findCustomerByCustomerId(registerConsultingDto.getCustomerId());
+        Optional<Customer> customerOptional = customerRepository.findBycustomerId(registerConsultingDto.getCustomerId());
         Customer customer = customerOptional.get();
         Optional<Product> productOptional = productRepository.findById(registerConsultingDto.getProductSeq());
         Product product = productOptional.get();
@@ -52,7 +52,7 @@ public class ConsultingService {
     public RegisterConsultingDto updateConsulting(Long seq, RegisterConsultingDto registerConsultingDto) {
         Optional<Consulting> consultingOptional = consultingRepository.findById(seq);
         Consulting consulting = consultingOptional.get();
-        Optional<Customer> customerOptional = customerRepository.findCustomerByCustomerId(registerConsultingDto.getCustomerId());
+        Optional<Customer> customerOptional = customerRepository.findBycustomerId(registerConsultingDto.getCustomerId());
         Customer customer = customerOptional.get();
         Optional<Product> productOptional = productRepository.findById(registerConsultingDto.getProductSeq());
         Product product = productOptional.get();

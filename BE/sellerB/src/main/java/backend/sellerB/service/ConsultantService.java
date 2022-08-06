@@ -6,9 +6,7 @@ import backend.sellerB.entity.Consultant;
 import backend.sellerB.entity.MemberAuth;
 import backend.sellerB.entity.Notice;
 import backend.sellerB.exception.DuplicateUserException;
-import backend.sellerB.repository.AuthorityRepository;
-import backend.sellerB.repository.ConsultantRepository;
-import backend.sellerB.repository.ProductGroupRepository;
+import backend.sellerB.repository.*;
 import backend.sellerB.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -28,13 +26,17 @@ public class ConsultantService {
 
     private static final Logger logger = LoggerFactory.getLogger(ConsultantService.class);
     private final ConsultantRepository consultantRepository;
+    private final CustomerRepository customerRepository;
+    private final ManagerRepository managerRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthorityRepository authorityRepository;
     private final ProductGroupRepository productGroupRepository;
 
     @Transactional
     public ConsultantDto signup(RegisterConsultantDto registerConsultantDto) {
-        if (consultantRepository.findByConsultantId(registerConsultantDto.getConsultantId()).orElse(null) != null) {
+        if (consultantRepository.findByConsultantId(registerConsultantDto.getConsultantId()).orElse(null) != null ||
+            managerRepository.findBymanagerId(registerConsultantDto.getConsultantId()).orElse(null)!=null ||
+        customerRepository.findBycustomerId(registerConsultantDto.getConsultantId()).orElse(null)!=null ) {
             throw new DuplicateUserException(registerConsultantDto.getConsultantId());
         }
 
