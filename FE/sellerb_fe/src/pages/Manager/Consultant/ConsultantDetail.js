@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 // import Axiso from "axios";
 
-
 import "./ConsultantDetail.css";
 import { Footer, NavBar } from "../../../components/index";
 import AttendanceLog from "../../../components/Log/AttendanceLog";
@@ -25,6 +24,7 @@ function ConsultantDetail() {
   const [consultant, setConsultant] = useState("");
   const [attendance, setAttendance] = useState("");
   const [logOption, setLogOption] = useState("출결이력");
+  const [groupName, setGroupName] = useState("");
 
   const onHandleLogOption = (event)=>{
     setLogOption(event.currentTarget.value);
@@ -35,12 +35,15 @@ function ConsultantDetail() {
     useEffect(() => {
       detailConsultantApi(seq)
       .then((res)=>{
-          console.log("res.data:" + res.data);
-          
-          // consultant = res.data;
-          
-          setConsultant(res.data); 
-          console.log("detail > consultant:" + consultant.consultantId);
+        setConsultant(res.data); 
+        //////////////////////////////////////////////////////////////
+        console.log(JSON.stringify(res.data));
+        const test = consultant.productGroup;
+        console.log("test :" + test.productGroupName);
+        setGroupName(test.productGroupName);
+        console.log("groupName: " + groupName)
+        // console.log(test.productGroupName);
+
       })
       .catch((err)=>{
           console.log(err);
@@ -71,7 +74,6 @@ function ConsultantDetail() {
  }
 
   return (
-
     <>
       <NavBar />
       <div className="notice-title">상담사 프로필</div>
@@ -95,7 +97,7 @@ function ConsultantDetail() {
           </div>
           <div className="profile-element">
             <p>제품군</p>
-            <div>{consultant.consultantGroup}</div>
+            <div>{groupName}</div>
           </div>
           <div>
             <button onClick={((e)=> navigate(`/manager/consultantModify/${consultant.consultantSeq}`))}>

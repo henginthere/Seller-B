@@ -51,10 +51,25 @@ function Main() {
         const accessToken = res.data.tokenDto.accessToken;
         const refreshToken = res.data.tokenDto.refreshToken;
         const adminCheck = res.data.authority;
+        const managerSeq = res.data.seq;
+        const brandSeq = res.data.brandSeq;
 
         // localstorage에 저장
         localStorage.setItem("accessToken", res.data.tokenDto.accessToken);
         localStorage.setItem("refreshToken", res.data.tokenDto.refreshToken);
+        
+
+        axios
+          .get(`/api/brand/${brandSeq}`)
+          .then((res)=>{
+            localStorage.setItem("brandNameKor", res.data.brandNameKor);
+            console.log("manager's brand:" + res.data.brandNameKor);
+            localStorage.getItem("accessToken")
+            console.log(localStorage.getItem("brandNameKor"));
+          })
+          .catch((err)=>{
+
+          })
 
         // isAdmin이라면, Redux isAdmin 값 true로 전환
         dispatch(CHECK_ADMIN());
