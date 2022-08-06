@@ -37,6 +37,12 @@ public class ProductService {
     }
 
     public List<ProductRes> getProductList() { return ProductRes.fromList(productRepository.findAll());}
+    public List<ProductRes> getProductListByGroupName(String groupName) {
+        Optional<List<Product>> optionalProductResList = productRepository.findProductsByProductGroup_ProductGroupName(groupName);
+        List<Product> productList = optionalProductResList.get();
+        System.out.println(groupName);
+        System.out.println(productList);
+        return ProductRes.fromList(productList);}
 
     public ProductRes getProductDetail(Long seq) {
         Optional<Product> productOptional = productRepository.findById(seq);
@@ -44,10 +50,10 @@ public class ProductService {
         return ProductRes.from(product);
     }
 
-    public ProductRes getProductDetailByName(String name) {
-        Optional<Product> productOptional = productRepository.findByProductNameContaining(name);
-        Product product = productOptional.get();
-        return ProductRes.from(product);
+    public List<ProductRes> getProductListByName(String name) {
+        Optional<List<Product>> optionalProductResList = productRepository.findByProductNameContaining(name);
+        List<Product> productList = optionalProductResList.get();
+        return ProductRes.fromList(productList);
     }
 
     public ProductRes getProductDetailById(String productId) {
