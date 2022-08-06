@@ -1,8 +1,7 @@
 #wrppaer{
     width:100%;
     padding:20px;
-    display: flex;
-    flex-direction: column;
+    text-align: center;
     justify-content: center;
 }
 .TopText{
@@ -21,4 +20,10 @@
 }
 .innerInput{
     margin: 10px;
+}
+.joinning-session-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
