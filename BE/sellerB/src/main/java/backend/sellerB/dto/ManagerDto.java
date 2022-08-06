@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 public class ManagerDto {
 
     private Long managerSeq;
-    private Brand brandSeq;
+    private Brand brand;
     private String managerId;
     private String managerName;
     private static final Logger logger = LoggerFactory.getLogger(ManagerDto.class);
@@ -44,7 +44,7 @@ public class ManagerDto {
 
         return ManagerDto.builder()
                 .managerSeq(manager.getManagerSeq())
-                .brandSeq(manager.getBrandSeq())
+                .brand(manager.getBrand())
                 .managerId(manager.getManagerId())
                 .managerName(manager.getManagerName())
                 .managerPass(manager.getManagerPass())

@@ -3,6 +3,8 @@ package backend.sellerB.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -22,6 +24,8 @@ import java.util.Objects;
 @AllArgsConstructor
 @DynamicInsert
 @EntityListeners(AuditingEntityListener.class)
+@SQLDelete(sql = "UPDATE t_order SET order_del_yn=true WHERE order_seq=?")
+@Where(clause = "order_del_yn=false")
 @Table(name = "t_order", schema = "sellerb", catalog = "")
 public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
