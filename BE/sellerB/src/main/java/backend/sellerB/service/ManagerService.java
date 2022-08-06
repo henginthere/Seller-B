@@ -7,9 +7,7 @@ import backend.sellerB.dto.RegisterManagerDto;
 import backend.sellerB.entity.Authority;
 import backend.sellerB.entity.Manager;
 import backend.sellerB.exception.DuplicateUserException;
-import backend.sellerB.repository.AuthorityRepository;
-import backend.sellerB.repository.BrandRepository;
-import backend.sellerB.repository.ManagerRepository;
+import backend.sellerB.repository.*;
 import backend.sellerB.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 
@@ -28,13 +26,17 @@ import java.util.Optional;
 public class ManagerService {
     private static final Logger logger = LoggerFactory.getLogger(ManagerService.class);
     private final ManagerRepository managerRepository;
+    private final ConsultantRepository consultantRepository;
+    private final CustomerRepository customerRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthorityRepository authorityRepository;
     private final BrandRepository brandRepository;
 
     @Transactional
     public ManagerDto signup(RegisterManagerDto registerManagerDto) {
-        if (managerRepository.findBymanagerId(registerManagerDto.getManagerId()).orElse(null) != null) {
+        if (managerRepository.findBymanagerId(registerManagerDto.getManagerId()).orElse(null) != null ||
+                consultantRepository.findByConsultantId(registerManagerDto.getManagerId()).orElse(null)!=null||
+                customerRepository.findBycustomerId(registerManagerDto.getManagerId()).orElse(null)!=null) {
             throw new DuplicateUserException(registerManagerDto.getManagerId());
         }
 
