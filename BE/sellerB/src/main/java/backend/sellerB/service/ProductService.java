@@ -50,10 +50,10 @@ public class ProductService {
         return ProductRes.from(product);
     }
 
-    public ProductRes getProductDetailByName(String name) {
-        Optional<Product> productOptional = productRepository.findByProductNameContaining(name);
-        Product product = productOptional.get();
-        return ProductRes.from(product);
+    public List<ProductRes> getProductListByName(String name) {
+        Optional<List<Product>> optionalProductResList = productRepository.findByProductNameContaining(name);
+        List<Product> productList = optionalProductResList.get();
+        return ProductRes.fromList(productList);
     }
 
     public ProductRes getProductDetailById(String productId) {
