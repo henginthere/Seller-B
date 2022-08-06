@@ -6,7 +6,7 @@ import OpenViduSession from "openvidu-react";
 class MeetingManCon extends Component {
   constructor(props) {
     super(props);
-    this.OPENVIDU_SERVER_URL = "https://i7d105.p.ssafy.io:8443/";
+    this.OPENVIDU_SERVER_URL = "https://i7d105.p.ssafy.io:8443";
     this.OPENVIDU_SERVER_SECRET = "SELLERB";
     this.state = {
       mySessionId: "SessionA",
