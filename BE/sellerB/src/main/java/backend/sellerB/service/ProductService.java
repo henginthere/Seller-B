@@ -40,8 +40,6 @@ public class ProductService {
     public List<ProductRes> getProductListByGroupName(String groupName) {
         Optional<List<Product>> optionalProductResList = productRepository.findProductsByProductGroup_ProductGroupName(groupName);
         List<Product> productList = optionalProductResList.get();
-        System.out.println(groupName);
-        System.out.println(productList);
         return ProductRes.fromList(productList);}
 
     public ProductRes getProductDetail(Long seq) {
@@ -78,7 +76,8 @@ public class ProductService {
     public ProductDto deleteProduct(Long seq) {
         Optional<Product> productOptional = productRepository.findById(seq);
         Product product = productOptional.get();
-        product.setProductDelYn(true);
+//        product.setProductDelYn(true);
+        productRepository.deleteById(seq);
         return ProductDto.from(product);
     }
 }
