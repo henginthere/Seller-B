@@ -9,6 +9,8 @@ import {
   listConsultantApi,
   searchConsultantApi,
 } from "../../../api/consultantApi";
+import Pagination from 'react-js-pagination'
+import styled from 'styled-components'
 
 import "./ManagerMain.css";
 
@@ -34,6 +36,27 @@ const tableHeader = {
   // justifyContent: "center",
   backgroundColor: "grey",
 };
+const PaginationBox = styled.div`
+  .pagination { display: flex; justify-content: center; margin-top: 15px;}
+  ul { list-style: none; padding: 0; }
+  ul.pagination li {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #e2e2e2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem; 
+  }
+  ul.pagination li:first-child{ border-radius: 5px 0 0 5px; }
+  ul.pagination li:last-child{ border-radius: 0 5px 5px 0; }
+  ul.pagination li a { text-decoration: none; color: #337ab7; font-size: 1rem; }
+  ul.pagination li.active a { color: white; }
+  ul.pagination li.active { background-color: #337ab7; }
+  ul.pagination li a:hover,
+  ul.pagination li a.active { color: blue; }
+  `
 
 const tableRow = {};
 
@@ -44,6 +67,9 @@ const tableData = {
 function ManagerMainRight() {
   const navigate = useNavigate();
 
+  const [page, setPage] = useState(1);
+  const [it, setIt] = useState(4);
+
   const [data, setData] = useState([]);
   const [searchName, setSearchName] = useState();
   const [searchCon, setSearchCon] = useState([]); // 검색결과 해당 컨설턴트
@@ -51,6 +77,8 @@ function ManagerMainRight() {
   const [listState, setListState] = useState(true);
 
   console.log("MainRight: " + data);
+
+  const handlePageChange = (page) => { setPage(page); };
 
   const goDetail = (seq) => {
     console.log("seq:" + seq);
@@ -90,7 +118,6 @@ function ManagerMainRight() {
   return (
     <div style={styleObj}>
       <div style={styleObj_right}>
-
         <input
           type="text"
           placeholder="상담사 이름을 검색하세요"
@@ -110,7 +137,10 @@ function ManagerMainRight() {
           </thead>
           <tbody>
             {listState ? (
-              data.map(function (ele, i) {
+              data.slice(
+                it*(page-1),
+                it*(page-1)+it
+              ).map(function (ele, i) {
                 return (
                   <>
                     <tr>
@@ -147,6 +177,15 @@ function ManagerMainRight() {
             )}
           </tbody>
         </table>
+        <PaginationBox>
+        <Pagination
+          activePage={page}
+          itemsCountPerPage={it}
+          totalItemsCount={data.length-1}
+          pageRangeDisplayed={5}
+          onChange={handlePageChange}>
+        </Pagination>
+      </PaginationBox>
         <Link to="/manager/consultantRegister">
           <Button variant="contained">상담사 추가</Button>
         </Link>
