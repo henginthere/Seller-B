@@ -1,8 +1,10 @@
 .body-wrapper {
-    display: flex;
-    /* background-color: brown; */
-    /* border: 2px solid brown; */
-    /* border-color: brown; */
+  max-width: 75%;
+  max-height: 400px;
+  background-color: #01579b;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: auto;
 }
 
 .element-wrapper {
@@ -10,6 +12,7 @@
     border: 2px solid brown;
     margin-left: 40px;
     margin-right: 40px;
+    /* overflow: auto; */
     /* display: flex; */
 
     /* width: 100%; */

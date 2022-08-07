@@ -54,23 +54,12 @@ const dummyData = [
   // },
 ];
 
-function ProdcutOption({ group }) {
+function ProdcutOption({ items }) {
   // 해당 제품군에 대한 상품들 -> 리스트로 받기
-  const [data, setData] = useState(dummyData); // 더미데이터로 셋팅
+  // console.log("ITEMS: " + )
 
-  // useEffect(()=>{
-  //     // axios : 해당 제품군에 대한 제품 목록 받아오기
-  //     productLineItemsApi(group)
-  //     .then((res)=>{
-  //       console.log(res.data);
-
-  //       setData(res.data);
-  //     })
-  //     .catch((err)=>{
-  //       console.log(err.data);
-  //     })
-
-  // }, [])
+  console.log("prop items:" + items)
+  const [data, setData] =  useState(dummyData ); // 더미데이터로 셋팅
 
   const navigate = useNavigate();
   const onNavigate = (product_seq) => {
@@ -81,30 +70,28 @@ function ProdcutOption({ group }) {
     <>
       {/* 각 제품(div) 여러 개 만들기 */}
       <div className="body-wrapper">
-        {data.map((ele, i) => {
+        {items.map((ele, i) => {
           return (
             <>
             
               <div
                 className="element-wrapper"
                 onClick={() => navigate(`/manager/productDetail/${ele.product_seq}`)}>
-               
                 <img
                   alt="#"
                   src={`${process.env.PUBLIC_URL}/img/product_img.png`}
                 />
-              
                 <div className="product-info">
                   <h5>품번 : </h5>
-                  {ele.product_id}
+                  {ele.productId}
                 </div>
                 <div className="product-info" >
                   <h5>제품명 : </h5>
-                  {ele.product_name}
+                  {ele.productName}
                 </div>
                 <div className="product-info">
                   <h5>가격 : </h5>
-                  {ele.product_price}
+                  {ele.productPrice}
                 </div>
               </div>
               

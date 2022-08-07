@@ -12,7 +12,7 @@ export const productGroupListApi = async (success, fail) =>{
 
 // GET : List : ProductOpion.js : 해당 제품군의 제품들 조회 
 export const productGroupItemsApi = async (group_name, success, fail) =>{
-    return await api.get(`/product-group/${group_name}`).then(success).catch(fail);
+    return await api.get(`/product/list/${group_name}`).then(success).catch(fail);
 }
 
 // GET : ProductDetail.js : 제품 상세 정보 조회
