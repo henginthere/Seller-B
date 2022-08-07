@@ -6,6 +6,8 @@ import "./ProductList.css";
 import { Footer, NavBar, ProdcutOption } from "../../../components/index";
 import { productGroupListApi, productGroupItemsApi  } from "../../../api/productApi";
 
+import { SearchOutlined, PlusCircleOutlined } from '@ant-design/icons'
+
 function ProductList() {
   const navigate = useNavigate();
 
@@ -54,6 +56,7 @@ function ProductList() {
 
   // 선택한 제품군 option에 따라, 나타낼 해당 제품군 리스트 컴포넌트
   function GroupOptionList() {
+    console.log("items:" + items)
     return <ProdcutOption items={items} />;
   }
 
@@ -88,15 +91,20 @@ function ProductList() {
           </div>
           <div className="navi-right">
             <input
-              placeholder="제품검색하기"
+              placeholder="제품명으로 검색"
               value={searchWord}
               onChange={onSearchWordHandler}
             />
-            <button>go</button>
+            <SearchOutlined 
+              id="search-icon-btn"
+              onClick={()=> navigate("/")}
+            />
 
-            <Link to="/manager/productRegister">
               <div>제품등록</div>
-            </Link>
+              <PlusCircleOutlined
+                id="prod-create-btn" 
+                onClick={()=> navigate("/manager/productRegister")} 
+              />
           </div>
         </div>
         <div className="product-list-wrapper">
