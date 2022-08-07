@@ -69,8 +69,11 @@ public class ConsultantDto {
                     .consultantEmail(consultantList.get(i).getConsultantEmail())
                     .consultantTel(consultantList.get(i).getConsultantTel())
                     .consultantImageUrl(consultantList.get(i).getConsultantImageUrl())
-                    .consultantDelYn(consultantList.get(i).getConsultantDelYn())
-                    .productGroup(consultantList.get(i).getProductGroup())
+//                    .consultantDelYn(consultantList.get(i).getConsultantDelYn())
+//                    .productGroup(consultantList.get(i).getProductGroup())
+//                    .authorityDtoSet(consultantList.get(i).getAuthorities().stream()
+//                            .map(authority -> AuthorityDto.builder().authorityName(authority.getAuthorityName()).build())
+//                            .collect(Collectors.toSet()))
                     .build();
             listConsultantDto.add(consultantDto);
             i++;
