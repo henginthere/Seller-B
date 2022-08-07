@@ -1,8 +1,12 @@
 package com.ssafy.sellerb.ui.home
 
 
+import android.app.Activity
 import android.content.Intent
 import android.view.View
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContract
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ssafy.sellerb.R
@@ -23,7 +27,19 @@ class HomeFragment : BaseFragment<HomeViewModel>(){
 
     private val binding get() = _binding!!
 
+    private val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+        if(it.resultCode == Activity.RESULT_OK){
+            val intent = it.data
+            if(intent != null){
+                val url = intent.getStringExtra("url")
+                Toast.makeText(context,"Value: " + url, Toast.LENGTH_SHORT).show()
+            }
+
+        }
+    }
+
     override fun provideLayoutId(): Int = R.layout.fragment_home
+
 
     override fun injectDependencies(fragmentComponent: FragmentComponent) =
         fragmentComponent.inject(this)
@@ -35,7 +51,7 @@ class HomeFragment : BaseFragment<HomeViewModel>(){
 
         binding.ibIconQrScan.setOnClickListener{
             val intent = Intent(requireContext(), QrScanActivity::class.java)
-            startActivity(intent)
+            startForResult.launch(intent)
         }
     }
 
@@ -56,4 +72,5 @@ class HomeFragment : BaseFragment<HomeViewModel>(){
         super.onDestroyView()
         _binding = null
     }
+
 }
