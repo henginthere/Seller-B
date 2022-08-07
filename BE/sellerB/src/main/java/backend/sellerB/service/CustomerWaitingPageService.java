@@ -48,6 +48,7 @@ public class CustomerWaitingPageService {
         Optional<CustomerWaitingPage> customerWaitingPageOptional = customerWaitingPageRepository.findById(seq);
         CustomerWaitingPage customerWaitingPage = customerWaitingPageOptional.get();
         customerWaitingPage.setCustomerWaitingPageDelYn(true);
+        customerWaitingPageRepository.deleteById(seq);
         return CustomerWaitingPageDto.from(customerWaitingPage);
     }
 }
