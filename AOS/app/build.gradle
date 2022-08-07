@@ -8,6 +8,8 @@ apply plugin: 'kotlin-parcelize'
 
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
+apply plugin: 'com.google.gms.google-services'
+
 android {
     compileSdk 31
 
@@ -39,6 +41,7 @@ android {
 }
 
 dependencies {
+
     def dagger_version = "2.38.1"
     def camerax_version = "1.0.1"
 
@@ -72,7 +75,7 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2'
 
     //ML Kit
-    implementation 'com.google.mlkit:barcode-scanning:17.0.0'
+    implementation 'com.google.mlkit:barcode-scanning:17.0.2'
 
     // CameraX core library using camera2 implementation
     implementation "androidx.camera:camera-camera2:$camerax_version"

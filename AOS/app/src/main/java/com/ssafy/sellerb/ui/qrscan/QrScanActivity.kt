@@ -1,7 +1,8 @@
 package com.ssafy.sellerb.ui.qrscan
 
 import android.Manifest
-import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,9 +12,9 @@ import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.google.mlkit.vision.barcode.Barcode
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
+import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.common.InputImage
 import com.ssafy.sellerb.databinding.ActivityQrScanBinding
 import java.util.concurrent.ExecutorService
@@ -56,7 +57,8 @@ class QrScanActivity : AppCompatActivity() {
 
         val options = BarcodeScannerOptions.Builder()
             .setBarcodeFormats(
-                Barcode.FORMAT_QR_CODE)
+                Barcode.FORMAT_QR_CODE,
+                Barcode.FORMAT_AZTEC)
             .build()
 
         val scanner = BarcodeScanning.getClient(options)
@@ -64,20 +66,25 @@ class QrScanActivity : AppCompatActivity() {
         scanner.process(image)
             .addOnSuccessListener { barcodes ->
                 for (barcode in barcodes) {
-                    Toast.makeText(
-                        this,
-                        "Value: " + barcode.rawValue,
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
+//                    Toast.makeText(
+//                        this,
+//                        "Value: " + barcode.rawValue,
+//                        Toast.LENGTH_SHORT
+//                    ).show()
+                    if(barcode.url != null){
+                        val intent = Intent()
+                        intent.putExtra("url", barcode.url!!.url)
+                        setResult(Activity.RESULT_OK, intent)
+                        finish()
+                    }
 
                     val valueType = barcode.valueType
-
                     when (valueType) {
                         Barcode.TYPE_URL -> {
                             val title = barcode.url!!.title
                             val url = barcode.url!!.url
                             binding.tvQrCode.text = url
+
                         }
                     }
                 }
