@@ -1,5 +1,6 @@
 package com.ssafy.sellerb.ui.login
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ssafy.sellerb.data.repository.UserRepository
@@ -35,6 +36,7 @@ class LoginViewModel(
                 userRepository.doUserLogin(id,pw)
                     .onStart {  }
                     .collect{
+                        Log.e("TEST",it.toString())
                         userRepository.saveCurrentUser(user = it)
                         launchMain.postValue(Event(emptyMap()))
                     }
