@@ -14,20 +14,20 @@ import "./ManageRegister.css";
 
 function ManageRegister() {
   const navigate = useNavigate();
-  const [brandList, setBrandList] = useState([]); // API로 받아올 현재 브랜드 목록 
-  const [selectBrand, setSelectBrand] = useState("브랜드"); // 관리자가 선택하는 brand option 
+  const [brandList, setBrandList] = useState([]); // API로 받아올 현재 브랜드 목록
+  const [selectBrand, setSelectBrand] = useState("브랜드"); // 관리자가 선택하는 brand option
   const [selectedBrandSeq, setSelectedBrandSeq] = useState("");
 
-  const onBrandChange = (e) =>{
+  const onBrandChange = (e) => {
     const { value } = e.target;
     console.log("onBrandChange: " + value);
     setSelectBrand(value);
-    
+
     // 선택된 브랜드에 해당하는 BrandSeq 찾기
-    const item = brandList.find((it) => it.brandNameKor === value)
+    const item = brandList.find((it) => it.brandNameKor === value);
     console.log("brandSeq: " + item.brandNameKor);
     setSelectedBrandSeq(item.brandSeq);
-  }
+  };
 
   const validationSchema = Yup.object().shape({
     brand: Yup.string().min(1).required("브랜드명을 입력하세요"),
@@ -56,59 +56,55 @@ function ManageRegister() {
       .required("이메일을 입력하세요!"),
   });
 
-  useEffect(()=>{
+  useEffect(() => {
     listBrandApi()
-    .then((res)=>{
-      console.log("brandList:" + res.data[0]);
-      setBrandList(res.data);
-      console.log(brandList[0])
-
-    })
-    .catch((err)=>{
-      console.log(err);
-    })
-  }, [])
+      .then((res) => {
+        console.log("brandList:" + res.data[0]);
+        setBrandList(res.data);
+        console.log(brandList[0]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   // 회원가입 버튼
-  const registerBtn = async (values)=>{
-    const { brand, id, password, phone, email} = values;
+  const registerBtn = async (values) => {
+    const { brand, id, password, phone, email } = values;
     console.log(values.brand);
 
     const userInfo = {
-      "brandSeq": selectedBrandSeq,
-      "managerId": id,
-      "managerName":"",
-      "managerPass":password,
-      "managerTel":phone,
-      "managerEmail":email
-    }
+      brandSeq: selectedBrandSeq,
+      managerId: id,
+      managerName: "",
+      managerPass: password,
+      managerTel: phone,
+      managerEmail: email,
+    };
 
     console.log("userInfo:" + userInfo.managerId);
 
     registerApi(userInfo)
-    .then((res)=>{
-      console.log(res.data);
+      .then((res) => {
+        console.log(res.data);
 
-      navigate("/")
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-    })
-    .catch((err)=>{
-      console.log(err);
-    })
-  }
-
-
-
-  // Axios 
+  // Axios
   const submit = async (values) => {
-    const { brand, id, password, phone, email} = values;
+    const { brand, id, password, phone, email } = values;
     console.log(values.brand);
     // try {
     //   await axios.post("/api/auth/signup", {
-    //     brand, 
+    //     brand,
     //     id,
     //     password,
-    //     phone, 
+    //     phone,
     //     email
     //   });
     //   toast.success(<h3>회원가입이 완료되었습니다.<br/>로그인 하세요😎</h3>, {
@@ -129,39 +125,46 @@ function ManageRegister() {
 
   return (
     <div className="manage-register-page">
-      <NavBar />
       <div className="login">
-      <Formik
-        initialValues={{
-          brand: "",
-          id: "",
-          password: "",
-          password2: "",
-          phone: "",
-          email: "",
-        }}
-        validationSchema={validationSchema}
-        onSubmit={submit}
-        validateOnMount={true}
-      >
-        {({ values, handleSubmit, handleChange, errors }) => (
-          <div className="signup-wrapper">
-            {/* <ToastContainer /> */}
-            <form onSubmit={handleSubmit} autoComplete="off" className="login-form">
-            <h3 className="login-title">Welcome to SellerB</h3>
-            <hr />
-            {/* <label className="login-form-label"> */}
-              <p>제품 브랜드</p>
-              <select onChange={onBrandChange} value={selectBrand}>
-                {
-                  brandList.map((ele, i) =>{
-                    return (
-                      <option>{ele.brandNameKor}</option>
-                    )  
-                  })
-                }
-              </select>
-              {/* <input
+        <Formik
+          initialValues={{
+            brand: "",
+            id: "",
+            password: "",
+            password2: "",
+            phone: "",
+            email: "",
+          }}
+          validationSchema={validationSchema}
+          onSubmit={submit}
+          validateOnMount={true}
+        >
+          {({ values, handleSubmit, handleChange, errors }) => (
+            <div className="signup-wrapper">
+              {/* <ToastContainer /> */}
+              <form
+                onSubmit={handleSubmit}
+                autoComplete="off"
+                className="login-form"
+              >
+                <h3 className="login-title">Sign Up</h3>
+                <hr />
+                <div className="signUp-row">
+                  <div className="row-left-label">
+                    <div className="left-label-text">제품 브랜드</div>
+                  </div>
+                  <div className="row-right">
+                    <div className="right-wrapper">
+                      <div className="right-content">
+                        <select onChange={onBrandChange} value={selectBrand}>
+                          {brandList.map((ele, i) => {
+                            return <option>{ele.brandNameKor}</option>;
+                          })}
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  {/* <input
                 value={values.brand}
                 name="brand"
                 type="text"
@@ -170,136 +173,133 @@ function ManageRegister() {
                 placeholder="제품 브랜드"
                 className="size"
               /> */}
-              <div className="error-message">{errors.brand}</div>
-            {/* </label> */}
-            
-            <label className="login-form-label">
-              <p>아이디</p>
-              <input
-                value={values.id}
-                name="id"
-                type="text"
-                variant="outlined"
-                onChange={handleChange}
-                placeholder="아이디"
-                className="size"
-              />
-              <div className="error-message">{errors.id}</div>
-            </label>
-
-            <label className="login-form-label">
-              <p>비밀번호</p>
-              <input
-                value={values.password}
-                name="password"
-                type="text"
-                variant="outlined"
-                onChange={handleChange}
-                placeholder="비밀번호"
-                className="size"
-              />
-              <div className="error-message">{errors.password}</div>
-            </label>
-
-            <label className="login-form-label">
-              <p>비밀번호 확인</p>
-              <input
-                value={values.password2}
-                name="password2"
-                type="text"
-                variant="outlined"
-                onChange={handleChange}
-                placeholder="비밀번호 확인"
-                className="size"
-              />
-              <div className="error-message">{errors.password2}</div>
-            </label>
-  
-            <label className="login-form-label">
-              <p>Tel.</p>
-              <input
-                value={values.phone}
-                name="phone"
-                type="text"
-                variant="outlined"
-                onChange={handleChange}
-                placeholder="핸드폰번호"
-                className="size"
-              />
-              <div className="error-message">{errors.phone}</div>
-            </label>
-    
-            <label className="login-form-label">
-              <p>Email</p>
-              <input
-                value={values.email}
-                name="email"
-                type="text"
-                variant="outlined"
-                onChange={handleChange}
-                placeholder="Email"
-                className="size"
-              />
-              <div className="error-message">{errors.email}</div>
-            </label>
-
-              {/* <div className="input-forms">
-                <div className="input-forms-item">
-                  <div className="input-label">이메일</div>
-                  <TextField
-                    value={values.email}
-                    name="email"
-                    variant="outlined"
-                    onChange={handleChange}
-                  />
-                  <div className="error-message">{errors.email}</div>
+                  <div className="error-message">{errors.brand}</div>
+                  {/* </label> */}
                 </div>
-                <div className="input-forms-item">
-                  <div className="input-label">닉네임</div>
-                  <TextField
-                    value={values.username}
-                    name="username"
-                    variant="outlined"
-                    onChange={handleChange}
-                  />
-                  <div className="error-message">{errors.username}</div>
+
+                <div className="signUp-row">
+                  <div className="row-left-label">
+                    <div className="left-label-text">아이디</div>
+                  </div>
+                  <div className="row-right">
+                    <div className="right-wrapper">
+                      <div className="right-content">
+                        <input
+                          value={values.id}
+                          name="id"
+                          type="text"
+                          variant="outlined"
+                          onChange={handleChange}
+                          placeholder="아이디"
+                          className="size"
+                        />
+                      </div>
+                    </div>
+                    <div className="error-message">{errors.id}</div>
+                  </div>
                 </div>
-                <div className="input-forms-item">
-                  <div className="input-label">비밀번호</div>
-                  <TextField
-                    value={values.password}
-                    name="password"
-                    variant="outlined"
-                    type="password"
-                    onChange={handleChange}
-                  />
-                  <div className="error-message">{errors.password}</div>
+
+                <div className="signUp-row">
+                  <div className="row-left-label">
+                    <div className="left-label-text">비밀번호</div>
+                  </div>
+                  <div className="row-right">
+                    <div className="right-wrapper">
+                      <div className="right-content">
+                        <input
+                          value={values.password}
+                          name="password"
+                          type="text"
+                          variant="outlined"
+                          onChange={handleChange}
+                          placeholder="비밀번호"
+                          className="size"
+                        />
+                      </div>
+                    </div>
+                    <div className="error-message">{errors.password}</div>
+                  </div>
                 </div>
-                <div className="input-forms-item">
-                  <div className="input-label">비밀번호 확인</div>
-                  <TextField
-                    value={values.password2}
-                    name="password2"
-                    variant="outlined"
-                    type="password"
-                    onChange={handleChange}
-                  />
-                  <div className="error-message">{errors.password2}</div>
-        </div> */}
+
+                <div className="signUp-row">
+                  <div className="row-left-label">
+                    <div className="left-label-text">비밀번호 확인</div>
+                  </div>
+                  <div className="row-right">
+                    <div className="right-wrapper">
+                      <div className="right-content">
+                        <input
+                          value={values.password2}
+                          name="password2"
+                          type="text"
+                          variant="outlined"
+                          onChange={handleChange}
+                          placeholder="비밀번호 확인"
+                          className="size"
+                        />
+                      </div>
+                    </div>
+                    <div className="error-message">{errors.password2}</div>
+                  </div>
+                </div>
+
+                <div className="signUp-row">
+                  <div className="row-left-label">
+                    <div className="left-label-text">Tel.</div>
+                  </div>
+                  <div className="row-right">
+                    <div className="right-wrapper">
+                      <div className="right-content">
+                        <input
+                          value={values.phone}
+                          name="phone"
+                          type="text"
+                          variant="outlined"
+                          onChange={handleChange}
+                          placeholder="핸드폰번호"
+                          className="size"
+                        />
+                      </div>
+                    </div>
+                    <div className="error-message">{errors.phone}</div>
+                  </div>
+                </div>
+
+                <div className="signUp-row">
+                  <div className="row-left-label">
+                    <div className="left-label-text">Email</div>
+                  </div>
+                  <div className="row-right">
+                    <div className="right-wrapper">
+                      <div className="right-content">
+                        <input
+                          value={values.email}
+                          name="email"
+                          type="text"
+                          variant="outlined"
+                          onChange={handleChange}
+                          placeholder="Email"
+                          className="size"
+                        />
+                      </div>
+                    </div>
+                    <div className="error-message">{errors.email}</div>
+                  </div>
+                </div>
+
                 <Button
                   color="primary"
                   variant="contained"
                   fullWidth
                   type="submit"
-                  onClick={()=> registerBtn(values)}
+                  onClick={() => registerBtn(values)}
                 >
                   회원가입
                 </Button>
-           
-            </form>
-          </div>
-        )}
-      </Formik>
+              </form>
+            </div>
+          )}
+        </Formik>
       </div>
       <Footer />
     </div>
