@@ -63,7 +63,8 @@ public class ReviewService {
     public ReviewDto deleteReview(Long seq) {
         Optional<Review> reviewOptional = reviewRepository.findById(seq);
         Review review = reviewOptional.get();
-        review.setReviewDelYn(true);
+//        review.setReviewDelYn(true);
+        reviewRepository.deleteById(seq);
         return ReviewDto.from(review);
     }
 }
