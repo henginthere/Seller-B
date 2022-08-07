@@ -106,7 +106,8 @@ public class ConsultantService {
     public ConsultantDto delete(Long consultantSeq) {
         Optional<Consultant> consultantOptional = consultantRepository.findById(consultantSeq);
         Consultant consultant = consultantOptional.get();
-        consultant.setConsultantDelYn(true);
+//        consultant.setConsultantDelYn(true);
+        consultantRepository.deleteById(consultantSeq);
         return ConsultantDto.from(consultant);
     }
 
