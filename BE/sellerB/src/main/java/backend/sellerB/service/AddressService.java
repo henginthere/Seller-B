@@ -33,7 +33,11 @@ public class AddressService {
     }
 
     public List<AddressDto> getAddressList(String customerId) {
-        return AddressDto.fromList(addressRepository.findAddressesByCustomer_CustomerId(customerId));}
+        System.out.println(customerId);
+        Optional<List<Address>> addressOptionalList = addressRepository.findAddressesByCustomer_CustomerId(customerId);
+        List<Address> addressList = addressOptionalList.get();
+        return AddressDto.fromList(addressList);
+    }
 
     public AddressDto getAddressDetail(Long seq) {
         Optional<Address> addressOptional = addressRepository.findById(seq);
