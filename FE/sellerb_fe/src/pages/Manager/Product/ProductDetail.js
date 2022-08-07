@@ -22,17 +22,19 @@ function ProductDetail() {
   });
 
   /* 해당 seq에 맞는 Product 정보 먼저 가져오기 */
-    // useEffect(()=>{
-    //   productDetailApi(id)
-    //   .then((res)=>{
-    //       console.log(res.data);
+    useEffect(()=>{
+      console.log("in useEffect: " + seq);
 
-    //       setProduct(res.data);
-    //   })
-    //   .catch((err)=>{
-    //       console.log(err.data)
-    //   })
-    // })
+      productDetailApi(seq)
+      .then((res)=>{
+          console.log(res.data);
+
+          setProduct(res.data);
+      })
+      .catch((err)=>{
+          console.log(err.data)
+      })
+    })
 
   const navigate = useNavigate();
   const goWaitingPage = ()=>{
@@ -58,8 +60,8 @@ function ProductDetail() {
           <div className="input-ele">
             <p>품번</p>
             <input
-              name="product_id"
-              value={product.product_id}
+              name="productId"
+              value={product.productId}
               variant="outlined"
               readOnly={readOnly ? false : true}
             />
@@ -68,7 +70,7 @@ function ProductDetail() {
             <p>제품명</p>
             <input
               name="product_name"
-              value={product.product_name}
+              value={product.productName}
               variant="outlined"
               readOnly={readOnly ? false : true}
             />
@@ -77,7 +79,7 @@ function ProductDetail() {
             <p>가격</p>
             <input
               name="product_price"
-              value={product.product_price}
+              value={product.productPrice}
               variant="outlined"
               readOnly={readOnly ? false : true}
             />
@@ -86,7 +88,7 @@ function ProductDetail() {
             <p>제품군</p>
             <input
               name="product_line"
-              value={product.product_line}
+              value={product.productGroupName}
               variant="outlined"
               readOnly={readOnly ? false : true}
             />

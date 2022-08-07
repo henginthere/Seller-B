@@ -17,6 +17,8 @@ export const productGroupItemsApi = async (group_name, success, fail) =>{
 
 // GET : ProductDetail.js : 제품 상세 정보 조회
 export const productDetailApi = async(product_seq, success, fail) => {
+    console.log("in API: " + product_seq)
+
     return await api.get(`/product/${product_seq}`).then(success).catch(fail);
 }
 
