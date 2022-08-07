@@ -12,7 +12,7 @@
 
 .page-navi-wrapper{
     height: 30%;
-    background-color: grey;
+    /* background-color: #f6efec; */
 
     display: flex;
 }
@@ -35,7 +35,19 @@
 .navi-right > input {
     border-radius: 10px;
     border: none;
-    background-color: antiquewhite;
+    background-color: #eef0f0;
+}
+
+#search-icon-btn {
+    font-size: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#prod-create-btn {
+    font-size: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 
