@@ -25,7 +25,6 @@ public class CustomerDto {
     private String customerId;
     private String customerName;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @NotNull
     @Size(min = 3, max = 100)
     private String customerPass;
     private String customerEmail;
@@ -39,6 +38,7 @@ public class CustomerDto {
                 .customerSeq(customer.getCustomerSeq())
                 .customerId(customer.getCustomerId())
                 .customerName(customer.getCustomerName())
+                .customerPass(customer.getCustomerPass())
                 .customerEmail(customer.getCustomerEmail())
                 .customerBirth(customer.getCustomerBirth())
                 .customerToken(customer.getCustomerToken())

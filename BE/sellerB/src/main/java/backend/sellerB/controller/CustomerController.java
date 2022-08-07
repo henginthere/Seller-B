@@ -1,7 +1,10 @@
 package backend.sellerB.controller;
 
 import backend.sellerB.dto.CustomerDto;
+import backend.sellerB.dto.EditCustomerDto;
+import backend.sellerB.repository.CustomerRepository;
 import backend.sellerB.service.CustomerService;
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,11 +14,15 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/customer")
+@DynamicUpdate
 public class CustomerController {
     private final CustomerService customerService;
+    private final CustomerRepository customerRepository;
 
-    public CustomerController(CustomerService customerService) {
+
+    public CustomerController(CustomerService customerService, CustomerRepository customerRepository) {
         this.customerService = customerService;
+        this.customerRepository = customerRepository;
     }
 
     @PostMapping("/register")
@@ -34,8 +41,8 @@ public class CustomerController {
     }
 
     @PutMapping("/{seq}")
-    public ResponseEntity<CustomerDto> updateCustomer(@Valid @RequestBody CustomerDto customerDto, @PathVariable Long seq) {
-        return ResponseEntity.ok(customerService.updateCustomer(seq, customerDto));
+    public ResponseEntity<CustomerDto> updateCustomer(@Valid @RequestBody EditCustomerDto editCustomerDto, @PathVariable Long seq) {
+        return ResponseEntity.ok(customerService.updateCustomer(seq, editCustomerDto));
     }
 
     @DeleteMapping("/{seq}")
