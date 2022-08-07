@@ -1,6 +1,7 @@
 package backend.sellerB.service;
 
 import backend.sellerB.dto.CustomerDto;
+import backend.sellerB.dto.EditCustomerDto;
 import backend.sellerB.dto.ProductDto;
 import backend.sellerB.entity.Authority;
 import backend.sellerB.entity.Customer;
@@ -11,10 +12,12 @@ import backend.sellerB.repository.ConsultantRepository;
 import backend.sellerB.repository.CustomerRepository;
 import backend.sellerB.repository.ManagerRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.logging.log4j.core.util.PasswordDecryptor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.PreUpdate;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -66,14 +69,28 @@ public class CustomerService {
         return CustomerDto.from(customer);
     }
 
-    public CustomerDto updateCustomer(Long seq, CustomerDto customerDto) {
+    @PreUpdate
+    public CustomerDto updateCustomer(Long seq, EditCustomerDto editCustomerDto) {
+
         Optional<Customer> customerOptional = customerRepository.findById(seq);
         Customer customer = customerOptional.get();
-        customer.setCustomerPass(passwordEncoder.encode(customerDto.getCustomerPass()));
-        customer.setCustomerEmail(customerDto.getCustomerEmail());
-        customer.setCustomerToken(customerDto.getCustomerToken());
+        String pass;
+        if(editCustomerDto.getCustomerPass()==null || editCustomerDto.getCustomerPass()==""){
+            pass = customerRepository.findBycustomerSeq(seq).get().getCustomerPass();
+            customer.setCustomerPass(pass);
+            customer.setCustomerEmail(editCustomerDto.getCustomerEmail());
+        }
+        else{
+            customer.setCustomerPass(passwordEncoder.encode(editCustomerDto.getCustomerPass()));
+            customer.setCustomerEmail(editCustomerDto.getCustomerEmail());
+        }
+
+        customer = customerRepository.saveAndFlush(customer);
         return CustomerDto.from(customer);
+
+
     }
+
 
     public CustomerDto deleteCustomer(Long seq) {
         Optional<Customer> customerOptional = customerRepository.findById(seq);
