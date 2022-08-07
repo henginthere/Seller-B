@@ -4,10 +4,12 @@ import { Link, useNavigate } from "react-router-dom";
 import Axios from "axios";
 import "./ProductList.css";
 import { Footer, NavBar, ProdcutOption } from "../../../components/index";
-import { productGroupListApi } from "../../../api/productApi";
+import { productGroupListApi, productGroupItemsApi  } from "../../../api/productApi";
 
 function ProductList() {
   const navigate = useNavigate();
+
+  const [items, setItems] = useState([]);
 
   const [groupList, setGroupList] = useState([]);
   const [managerBrand, setManagerBrand] = useState(
@@ -20,6 +22,19 @@ function ProductList() {
   const onGroupChange = (e) => {
     e.preventDefault();
     setGroupOption(e.target.value)
+
+    console.log("바귄 group state: " + groupOption)
+    
+    // option에 해당하는 제품군의 제품들 불러오기
+    productGroupItemsApi(groupOption)
+    .then((res)=>{
+      console.log(res.data);
+      setItems(res.data)
+      console.log("itemslist :" + items);
+    })
+    .catch((err)=>{
+      console.log("error")
+    })
 
     console.log("groupOption : " + groupOption);
   };
@@ -39,7 +54,7 @@ function ProductList() {
 
   // 선택한 제품군 option에 따라, 나타낼 해당 제품군 리스트 컴포넌트
   function GroupOptionList() {
-    return <ProdcutOption group={groupOption} />;
+    return <ProdcutOption items={items} />;
   }
 
   useEffect(() => {
@@ -59,11 +74,11 @@ function ProductList() {
       <div className="product-list">
         <div className="page-navi-wrapper">
           <div className="navi-left">
-            <select onChange={onGroupChange} value={groupOption}>
-                <option value="" />
+            <select onChange={(e)=> onGroupChange(e)} key={groupOption} defaultValue={groupOption}>
+                {/* <option value="" /> */}
                 {groupList.map((option) =>
                   option.brandName === managerBrand ? (
-                    <option>{option.productGroupName}</option>
+                    <option value={option.productGroupName}>{option.productGroupName}</option>
                   ) : (
                     ""
                   )
