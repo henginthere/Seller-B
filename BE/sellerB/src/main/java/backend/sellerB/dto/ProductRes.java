@@ -1,6 +1,7 @@
 package backend.sellerB.dto;
 
 import backend.sellerB.entity.Product;
+import backend.sellerB.entity.ProductGroup;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,20 +13,24 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 public class ProductRes {
+    private Long productSeq;
     private String productId;
     private String productName;
     private Integer productPrice;
     private String productManual;
-    private String productGroupName;
+    private ProductGroup productGroup;
+    private String productThumbnail;
 
     public static ProductRes from(Product product) {
         if(product == null) return null;
         return ProductRes.builder()
+                .productSeq(product.getProductSeq())
                 .productId(product.getProductId())
                 .productName(product.getProductName())
                 .productPrice(product.getProductPrice())
                 .productManual(product.getProductManual())
-                .productGroupName(product.getProductGroup().getProductGroupName())
+                .productGroup(product.getProductGroup())
+                .productThumbnail(product.getProductThumbnail())
                 .build();
     }
 
@@ -35,11 +40,13 @@ public class ProductRes {
         int i = 0;
         while (i < productList.size()) {
             ProductRes productRes = ProductRes.builder()
+                    .productSeq(productList.get(i).getProductSeq())
                     .productId(productList.get(i).getProductId())
                     .productName(productList.get(i).getProductName())
                     .productPrice(productList.get(i).getProductPrice())
                     .productManual(productList.get(i).getProductManual())
-                    .productGroupName(productList.get(i).getProductGroup().getProductGroupName())
+                    .productGroup(productList.get(i).getProductGroup())
+                    .productThumbnail(productList.get(i).getProductThumbnail())
                     .build();
             listProductRes.add(productRes);
             i++;
