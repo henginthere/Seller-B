@@ -1,8 +1,8 @@
 import { api } from './api';
 
-// POST : 
+// POST : 제품 등록
 export const productRegisterApi = async (product, success, fail) => {
-    return await api.get("/product-line").then(success).catch(fail);
+    return await api.post("/product", product).then(success).catch(fail);
 }
 
 // GET : List : ProductList.js : 모든 제품군 '이름'을 가져옴
