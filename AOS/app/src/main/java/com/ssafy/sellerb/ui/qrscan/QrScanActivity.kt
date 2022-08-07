@@ -66,26 +66,11 @@ class QrScanActivity : AppCompatActivity() {
         scanner.process(image)
             .addOnSuccessListener { barcodes ->
                 for (barcode in barcodes) {
-//                    Toast.makeText(
-//                        this,
-//                        "Value: " + barcode.rawValue,
-//                        Toast.LENGTH_SHORT
-//                    ).show()
                     if(barcode.url != null){
                         val intent = Intent()
                         intent.putExtra("url", barcode.url!!.url)
                         setResult(Activity.RESULT_OK, intent)
                         finish()
-                    }
-
-                    val valueType = barcode.valueType
-                    when (valueType) {
-                        Barcode.TYPE_URL -> {
-                            val title = barcode.url!!.title
-                            val url = barcode.url!!.url
-                            binding.tvQrCode.text = url
-
-                        }
                     }
                 }
             }
