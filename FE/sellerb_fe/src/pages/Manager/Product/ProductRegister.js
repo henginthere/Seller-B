@@ -1,53 +1,62 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 import Axios from "axios";
 import "./ProductRegister.css";
 import { Footer, NavBar } from "../../../components/index";
-import { productRegisterApi } from "../../../api/productApi";
+import { productRegisterApi, productGroupListApi } from "../../../api/productApi";
 import axios from "axios";
 
 function ProductRegister() {
+  const navigate = useNavigate();
+  
   const [product, setProduct] = useState({
-    product_id: "",
-    product_name: "",
-    product_price: "",
-    product_line: "",
+    productGroupName: "",
+    productId: "",
+    productName: "",
+    productPrice: "",
+    productManual:"",
+    productThumbnail:"",
     // 사진 파일 부분 필드 추가 
-    formData: "",
+    // formData: "",
   });
 
-  const { product_id, product_name, product_price, product_line } = product;
+  const [groupList, setGroupList] = useState([]);
+  const [managerBrand, setManagerBrand] = useState(
+    localStorage.getItem("brandNameKor")
+  );
+  const { productGroupName, productId, 
+          productName, productPrice, 
+          productManual, productThumbnail } = product;
 
   const onChange = (e) => {
     const { value, name } = e.target;
+    console.log("value:"  + value);
+    console.log("name:" + name);
     setProduct({
       ...product,
       [name]: value,
     });
 
-    console.log(product_id);
+    console.log(productId);
   };
 
   // 서버에 파일 & 제품정보 전송 : FormData()
-  const onProductSubmitBtn = async (e) => {
-    const formData = new FormData(); // FormData객체 생성
+  const onProductSubmitBtn = (e) => {
+    // e.preventDefault();
+    console.log("product: " + JSON.stringify(product))
 
-    // Form객체에 파일값 추가 : append(key, value) or append(key, value, filename)
-    formData.append("file", e.target.files[0]);
-    console.log(formData);
-
-    // const config = {
-    //   Headers: {
-    //     "content-type": "multipart/form-data",
-    //   },
-    // };
-
-    // 제품 정보
-    setProduct({
-      ...product,
-      formData: formData,
+    productRegisterApi(product)
+    .then((res)=>{
+      console.log("onSubmitBtn:" + JSON.stringify(res.data));
+      console.log("success");
+      
+      // navigate("/manager/productList")
     })
+    .catch((err)=>{
+      console.log(JSON.stringify(err.data));
+    })
+
 
   };
 
@@ -91,6 +100,17 @@ function ProductRegister() {
     setImgBase64("");
   };
 
+  // 매니저가 속한 브랜드의 제품군 리스트 받아오기 
+  useEffect(() => {
+    productGroupListApi()
+      .then((res) => {
+        setGroupList(res.data); // groupList
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <>
       <NavBar />
@@ -104,9 +124,7 @@ function ProductRegister() {
             className="preview-img" 
             alt="#" src={imgFile.preview_URL} />
             : null
-            
           }
-      
           {imgBase64.map((item) => {
             return (
               <div className="img-wrapper">
@@ -119,38 +137,43 @@ function ProductRegister() {
           <div className="input-ele">
             <p>품번</p>
             <input
-              name="product_id"
+              name="productId"
               onChange={onChange}
-              value={product_id}
+              value={productId}
               variant="outlined"
             />
           </div>
           <div className="input-ele">
             <p>제품명</p>
             <input
-              name="product_name"
+              name="productName"
               onChange={onChange}
-              value={product_name}
+              value={productName}
               variant="outlined"
             />
           </div>
           <div className="input-ele">
             <p>가격</p>
             <input
-              name="product_price"
+              name="productPrice"
               onChange={onChange}
-              value={product_price}
+              value={productPrice}
               variant="outlined"
             />
           </div>
           <div className="input-ele">
             <p>제품군</p>
-            <input
-              name="product_line"
-              onChange={onChange}
-              value={product_line}
-              variant="outlined"
-            />
+            <select onChange={onChange} value={productGroupName} name="productGroupName">
+              <option value=""></option>
+            {groupList.map((option) =>
+                  option.brandName === managerBrand ? (
+                    <option>{option.productGroupName}</option>
+                  ) : (
+                    ""
+                  )
+                )}
+    
+            </select>
           </div>
         </div>
       </div>
@@ -164,7 +187,7 @@ function ProductRegister() {
           onChange={handleChangeFile}
         />
         {/* <button onClick={deleteImage}>이미지 삭제</button> */}
-        <button className="bottom-btn" onClick={onProductSubmitBtn}>
+        <button className="bottom-btn" onClick={()=> onProductSubmitBtn()}>
           업로드하기
         </button>
       </div>
