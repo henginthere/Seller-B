@@ -68,7 +68,8 @@ public class WaitingCustomerService {
     public WaitingCustomerDto deleteWaitingCustomer(Long seq) {
         Optional<WaitingCustomer> waitingCustomerOptional = waitingCustomerRepository.findById(seq);
         WaitingCustomer waitingCustomer = waitingCustomerOptional.get();
-        waitingCustomer.setWatingCustomerGroupDelYn(true);
+//        waitingCustomer.setWatingCustomerGroupDelYn(true);
+        waitingCustomerRepository.deleteById(seq);
         return WaitingCustomerDto.from(waitingCustomer);
     }
 

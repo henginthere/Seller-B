@@ -1,6 +1,7 @@
 package backend.sellerB.controller;
 
 import backend.sellerB.dto.AddressDto;
+import backend.sellerB.dto.RegisterAddressDto;
 import backend.sellerB.service.AddressService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -39,8 +40,8 @@ public class AddressController {
             @Parameter(name = "addrRequest", description = "요청사항", example = "문 앞에 놓고 가주세요")
     })
     @PostMapping
-    public ResponseEntity<AddressDto> saveAddress(@Valid @RequestBody AddressDto addressDto) {
-        return ResponseEntity.ok(addressService.create(addressDto));
+    public ResponseEntity<RegisterAddressDto> saveAddress(@Valid @RequestBody RegisterAddressDto registerAddressDto) {
+        return ResponseEntity.ok(addressService.create(registerAddressDto));
     }
 
     @GetMapping("/{seq}")
@@ -54,8 +55,8 @@ public class AddressController {
     }
 
     @PutMapping("/{seq}")
-    public ResponseEntity<AddressDto> updateAddress(@Valid @RequestBody AddressDto addressDto, @PathVariable Long seq) {
-        return ResponseEntity.ok(addressService.updateAddress(seq, addressDto));
+    public ResponseEntity<RegisterAddressDto> updateAddress(@Valid @RequestBody RegisterAddressDto registerAddressDto, @PathVariable Long seq) {
+        return ResponseEntity.ok(addressService.updateAddress(seq, registerAddressDto));
     }
 
     @DeleteMapping("/{seq}")
