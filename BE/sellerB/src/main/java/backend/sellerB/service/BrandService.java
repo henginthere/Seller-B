@@ -48,7 +48,8 @@ public class BrandService {
     public BrandDto deleteBrand(Long seq) {
         Optional<Brand> brandOptional = brandRepository.findById(seq);
         Brand brand = brandOptional.get();
-        brand.setBrandDelYn(true);
+//        brand.setBrandDelYn(true);
+        brandRepository.deleteById(seq);
         return BrandDto.from(brand);
     }
 }
