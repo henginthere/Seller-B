@@ -57,6 +57,8 @@ function Main() {
         // localstorage에 저장
         localStorage.setItem("accessToken", res.data.tokenDto.accessToken);
         localStorage.setItem("refreshToken", res.data.tokenDto.refreshToken);
+        localStorage.setItem("seq", res.data.seq);
+        console.log(localStorage.getItem("seq"))
         
 
         axios
