@@ -69,7 +69,8 @@ public class NoticeService {
     public NoticeDto deleteNotice(Long seq) {
         Optional<Notice> noticeOptional = noticeRepository.findById(seq);
         Notice notice = noticeOptional.get();
-        notice.setNoticeDelYn(true);
+//        notice.setNoticeDelYn(true);
+        noticeRepository.deleteById(seq);
         return NoticeDto.from(notice);
     }
 

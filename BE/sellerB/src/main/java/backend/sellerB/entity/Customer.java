@@ -28,7 +28,7 @@ import java.util.Set;
 @AllArgsConstructor
 @DynamicInsert
 @EntityListeners(AuditingEntityListener.class)
-@SQLDelete(sql = "UPDATE t_customer SET cutomer_id=null, customer_name=null, customer_pass=null, customer_email=null, customer_birth=null, customer_token=null, customer_del_yn=true WHERE customer_seq=?")
+@SQLDelete(sql = "UPDATE t_customer SET customer_name=null, customer_pass=null, customer_email=null, customer_birth=null, customer_token=null, customer_del_yn=true WHERE customer_seq=?")
 @Where(clause = "customer_del_yn=false")
 @Table(name = "t_customer", schema = "sellerb", catalog = "")
 public class Customer implements Serializable {
