@@ -49,7 +49,8 @@ public class OrderService {
     public OrderDto deleteOrder(Long seq) {
         Optional<Order> orderOptional = orderRepository.findById(seq);
         Order order = orderOptional.get();
-        order.setOrderDelYn(true);
+//        order.setOrderDelYn(true);
+        orderRepository.deleteById(seq);
         return OrderDto.from(order);
     }
 }
