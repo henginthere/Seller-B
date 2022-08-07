@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import java.util.Optional;
 import java.util.UUID;
 
-@EnableJpaAuditing
+
 @SpringBootApplication
 public class SellerBApplication {
 	public static void main(String[] args) {
