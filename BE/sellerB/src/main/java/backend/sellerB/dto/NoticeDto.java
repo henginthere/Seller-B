@@ -22,6 +22,7 @@ public class NoticeDto {
     private String noticeContent;
     private LocalDateTime noticeRegDate;
     private LocalDateTime noticeModDate;
+    private Boolean noticeDelYn;
 
     //엔티티를 dto로
     public static NoticeDto from(Notice notice) {
@@ -32,6 +33,7 @@ public class NoticeDto {
                 .noticeContent(notice.getNoticeContent())
                 .noticeRegDate(notice.getNoticeRegDate())
                 .noticeModDate(notice.getNoticeModDate())
+                .noticeDelYn(notice.getNoticeDelYn())
                 .build();
     }
 
@@ -45,6 +47,7 @@ public class NoticeDto {
                     .noticeContent(noticeList.get(i).getNoticeContent())
                     .noticeRegDate(noticeList.get(i).getNoticeRegDate())
                     .noticeModDate(noticeList.get(i).getNoticeModDate())
+                    .noticeDelYn(noticeList.get(i).getNoticeDelYn())
                     .build();
             listNoticeDto.add(noticeDto);
             i++;
