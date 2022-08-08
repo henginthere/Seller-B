@@ -59,9 +59,6 @@ function ConsultantModify() {
 
     navigate(`/manager/consultantDetail/${seq}`);
 
-
-    
-
   };
   // 바뀔때마다 setData로 수정된 데이터로 바꿔줌
   const onChange = (e) => {

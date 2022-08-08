@@ -2,6 +2,7 @@ package backend.sellerB.controller;
 
 import backend.sellerB.dto.ProductDto;
 import backend.sellerB.dto.ReviewDto;
+import backend.sellerB.dto.SaveReviewDto;
 import backend.sellerB.service.ReviewService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,8 +21,8 @@ public class ReviewController {
     }
 
     @PostMapping
-    public ResponseEntity<ReviewDto> saveReview(@Valid @RequestBody ReviewDto reviewDto) {
-        return ResponseEntity.ok(reviewService.createReview(reviewDto));
+    public ResponseEntity<ReviewDto> saveReview(@Valid @RequestBody SaveReviewDto saveReviewDto) {
+        return ResponseEntity.ok(reviewService.createReview(saveReviewDto));
     }
 
     @GetMapping("/{seq}")
