@@ -2,3 +2,103 @@
     display:flex;
     justify-content: flex-end;
 }
+
+/**/
+.board-wrap {
+    width: 1050px;
+    margin: 0px auto;
+    font-size: 12px;
+    line-height: 18px;
+}
+
+.detail-head {
+    width: 100%;
+    padding: 50px 0px;
+}
+
+.detail-head .notice-detail-title {
+    font-weight: 700;
+    font-size: 28px;
+    color: rgb(51, 51, 51);
+    line-height: 35px;
+    text-align: center;
+    letter-spacing: -1px;
+}
+
+.detail-head .notice-detail-subTitle {
+    margin-top: 5px;
+    color: #999;
+    line-height: 20px;
+    letter-spacing: -.1px;
+    text-align: center;
+}
+
+/* detail-content 부분 시작  */
+.notice-detail-content-header {
+    margin-top: 20px;
+    border-top: 2px solid rgb(51, 51, 51);
+    color: rgb(51, 51, 51);
+}
+
+.notice-detail-content-header .content-header-row {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid rgb(244, 244, 244);
+}
+
+.content-header-row .row-left {
+    width: 130px;
+    padding: 13px 0px 13px 20px;
+    background-color: rgb(247, 245, 248);
+    border-top: 1px solid rgb(244, 244, 244);
+    text-align: left;
+    font-weight: 500;
+}
+
+.content-header-row .row-right {
+    padding-left: 25px;
+    align-self: center;
+}
+
+.notice-detail-content-detail {
+    padding: 30px 10px 100px;
+    border-bottom: 1px solid rgb(128, 128, 128);
+}
+
+pre {
+    box-sizing: inherit;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    padding: 8px;
+    --saf-0: rgba(var(--sk_foreground_low,29,28,29),0.13);
+    overflow-wrap: break-word;
+    font-variant-ligatures: none;
+    line-height: 1.50001;
+    tab-size: 4;
+    white-space: pre-wrap;
+    word-break: normal;
+    border: 1px solid var(--saf-0);
+    border-radius: 4px;
+    counter-reset: list-0 0 list-1 0 list-2 0 list-3 0 list-4 0 list-5 0 list-6 0 list-7 0 list-8 0 list-9 0;
+}
+
+.notice-detail-bottom {
+    display: flex;
+    width: 100%;
+    padding: 20px 0px;
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+}
+
+.notice-detail-bottom .detail-button {
+    display: block;
+    padding: 0px 10px;
+    text-align: center;
+    overflow: hidden;
+    width: 150px;
+    height: 42px;
+    border-radius: 0px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(95, 0, 128);
+    border: 0px none;
+}
