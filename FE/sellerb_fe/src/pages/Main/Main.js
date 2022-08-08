@@ -59,7 +59,6 @@ function Main() {
         localStorage.setItem("refreshToken", res.data.tokenDto.refreshToken);
         localStorage.setItem("seq", res.data.seq);
         console.log(localStorage.getItem("seq"))
-        
 
         axios
           .get(`/api/brand/${brandSeq}`)
