@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 
 @RestController
@@ -34,7 +36,7 @@ public class ConsultantController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<ConsultantDto>> getConsultantList(HttpServletRequest request) {
+    public ResponseEntity<List<ResponseConsultantDto>> getConsultantList(HttpServletRequest request) {
         return ResponseEntity.ok(consultantService.getConsultantList());
     }
 
@@ -50,9 +52,20 @@ public class ConsultantController {
 
 
     @GetMapping("/list/{productGroupSeq}")
-    public ResponseEntity<List<ConsultantDto>> findByProductGroupSeq(@PathVariable Long productGroupSeq) {
+    public ResponseEntity<List<ResponseConsultantDto>> findByProductGroupSeq(@PathVariable Long productGroupSeq) {
         return ResponseEntity.ok(consultantService.searchByProductGroupSeq(productGroupSeq));
     }
+
+    @GetMapping("/list/brand/{brand-name}")
+    public ResponseEntity<List<ResponseConsultantDto>> findByBrandName(@PathVariable("brand-name") String brandName) throws UnsupportedEncodingException {
+        String koreanbrandName = URLDecoder.decode(brandName, "UTF-8");
+        return ResponseEntity.ok(consultantService.searchByBrandName(koreanbrandName));
+    }
+
+//    @GetMapping("/list/brand/{brandName}")
+//    public ResponseEntity<List<ConsultantDto>> findByBrandName(@PathVariable Long brandName) {
+//        return ResponseEntity.ok(consultantService.searchByProductGroupSeq(productGroupSeq));
+//    }
 
     @PutMapping("/{consultantSeq}")
     public ResponseEntity<ConsultantDto> updateConsultantInfo(@Valid @RequestBody EditConsultantDto editConsultantDto, @PathVariable Long consultantSeq) {
