@@ -46,7 +46,7 @@ public class ResponseConsultantDto {
                 Brand brand = productGroup.getBrand();
                 System.out.println("3");
                 if (brand != null) {
-                    String brandName = brand.getBrandNameKor();
+                    String brandName = brand.getBrandNameEng();
                     System.out.println("4");
                     if (brandName != null) {
                         System.out.println("5");
@@ -84,9 +84,6 @@ public class ResponseConsultantDto {
         ArrayList<ResponseConsultantDto> listResponseConsultantDto= new ArrayList<>();
         int i = 0;
         while(i < consultantList.size()){
-
-            String brandName = consultantList.get(i).getProductGroup().getBrand().getBrandNameKor();
-
             ResponseConsultantDto responseConsultantDto = ResponseConsultantDto.builder()
                     .consultantSeq(consultantList.get(i).getConsultantSeq())
                     .consultantId(consultantList.get(i).getConsultantId())
