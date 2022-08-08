@@ -54,19 +54,26 @@ function Main() {
         const managerSeq = res.data.seq;
         const brandSeq = res.data.brandSeq;
 
-        // localstorage에 저장
-        localStorage.setItem("accessToken", res.data.tokenDto.accessToken);
-        localStorage.setItem("refreshToken", res.data.tokenDto.refreshToken);
-        localStorage.setItem("seq", res.data.seq);
-        console.log(localStorage.getItem("seq"));
+        // sessionStorage에 저장
+        sessionStorage.setItem("accessToken", res.data.tokenDto.accessToken);
+        sessionStorage.setItem("refreshToken", res.data.tokenDto.refreshToken);
+        sessionStorage.setItem("seq", res.data.seq);
+        console.log(sessionStorage.getItem("seq"));
 
         axios
           .get(`/api/brand/${brandSeq}`)
+
           .then((res) => {
-            localStorage.setItem("brandNameKor", res.data.brandNameKor);
+            console.log("LOGIN: " + JSON.stringify(res.data));
+
+            sessionStorage.setItem("brandNameKor", res.data.brandNameKor);
+            sessionStorage.setItem("brandNameEng", res.data.brandNameEng);
             console.log("manager's brand:" + res.data.brandNameKor);
-            localStorage.getItem("accessToken");
-            console.log(localStorage.getItem("brandNameKor"));
+
+            console.log("manager's brand:" + sessionStorage.getItem("brandNameEng"));
+            sessionStorage.getItem("accessToken");
+
+            console.log(sessionStorage.getItem("brandNameKor"));
           })
           .catch((err) => {});
 
@@ -74,7 +81,9 @@ function Main() {
         dispatch(CHECK_ADMIN());
         navigate("/manager/main");
         if (adminCheck === "ROLE_ADMIN") {
+          sessionStorage.setItem("adminCheck", "ROLE_ADMIN");
         } else {
+          sessionStorage.setItem("adminCheck", "ROLE_USER");
           navigate("/consultant/main");
         }
       })
