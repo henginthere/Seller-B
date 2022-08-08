@@ -5,6 +5,13 @@ export const listConsultantApi = async (success, fail) => {
     return await api.get(`/consultant/list`).then(success).catch(fail);
 }
 
+// GET : List : ManagerMainRight.js : 제품군으로 해당하는 상담사 리스트 불러오기
+export const listGroupConsultantApi = async (productGroupName, success, fail) => {
+    console.log("listGroup API : " + productGroupName)
+    return await api.get(`/consultant/list/${productGroupName}`).then(success).catch(fail);
+}
+
+
 // get : Detail : ConsultantDetail.js : 상담사 
 export const detailConsultantApi= async ( consultantSeq, success, fail) => {
     return await api.get(`/consultant/${consultantSeq}`).then(success).catch(fail);
