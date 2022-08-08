@@ -9,7 +9,7 @@ import { getManagerInfoApi } from '../../../api/managerApi'
 function ManagerMyPage() {
   
   const [info, setInfo] = useState([]);
-  const [managerSeq, setManagerSeq] = useState(localStorage.getItem("seq"));
+  const [managerSeq, setManagerSeq] = useState(sessionStorage.getItem("seq"));
 
   // 비동기로 처리하기 위함. useState로 바로바로 적용!
   const [isModify, setModify] = useState(false);
@@ -49,7 +49,7 @@ function ManagerMyPage() {
   }
 
   useEffect(()=>{
-    console.log("useEffect:" + localStorage.getItem("seq"))
+    console.log("useEffect:" + sessionStorage.getItem("seq"))
     getManagerInfoApi(managerSeq)
     .then((res)=>{
       console.log(JSON.stringify(res.data));
