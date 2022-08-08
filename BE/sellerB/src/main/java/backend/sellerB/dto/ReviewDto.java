@@ -16,6 +16,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 public class ReviewDto {
+
     private Long reviewSeq;
     private Consulting consulting;
     private Float reviewGrade;

@@ -1,187 +1,108 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import "./NoticeWrite.css";
+import "./NoticeDetail.css";
 import { Footer, NavBar } from "../../components/index";
-import Button from "@mui/material/Button";
-// api
+
 import {
   detailNoticeApi,
   modifyNoticeApi,
   delNoticeApi,
 } from "../../api/noticeApi";
 
-const NoticeWrapper = styled.div`
-  padding: 3rem 5rem;
-  box-sizing: border-box;
-  width: 100%;
-  overflow: auto;
-`;
-var isManager = true;
-
-const NoticeDetail = () => {
-  const params = useParams();
-
-  console.log("params noticeSeq : " + params.notice_seq);
-
+function NoticeDetail() {
   const navigate = useNavigate();
+  const { id } = useParams();
+
   const [noticeData, setNoticeData] = useState({
-    noticeSeq: "",
+    noticeSeq: id,
     noticeTitle: "",
     noticeContent: "",
   });
-  var { noticeSeq, noticeTitle, noticeContent } = noticeData;
-  const [isModify, setIsModify] = useState(false);
 
-  // const dispatch = useDispatch();
-  const handleChange = (e) => {
-    e.preventDefault();
-    // console.log("handleChange!");
-
-    noticeData[e.target.name] = e.target.value;
-    console.log("==handleChange== ");
-    console.log(noticeData);
-  };
-  // mount시점에서, 공지사항 id에 해당하는 게시글 받아오기
+  // 게시글의 상세정보 받아와서 setState
   useEffect(() => {
-    detailNoticeApi(params.id)
+    detailNoticeApi(id)
       .then((res) => {
-        // console.log("== response Data in useEffect == ");
-        // console.log(res.data);
-        // response에 대해 비구조화 할당
         setNoticeData(res.data);
-
-        // console.log("== noticeData in useEffect ==");
-        // console.log(noticeData);
+        console.log("noticeData:" + noticeData);
       })
       .catch((e) => {
         console.log("err");
       });
   }, []);
 
-  const delNotice = () => {
-    if (window.confirm("삭제하시겠습니까?")) {
-      console.log(
-        "noticeData.noticeSeq in delNotice : " + noticeData.noticeSeq,
-      );
-      delNoticeApi(noticeData.noticeSeq);
-      navigate("/manager/noticeList");
-    } else {
-      return;
-    }
+  const onModifyBtn = () => {
+    console.log("modfiy전 id확인: " + id);
+    navigate(`/manager/noticeEdit/${id}`);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    alert("수정하시겠습니까?");
-    console.log("== noticeData in handleSubmit ==");
-    console.log(noticeData);
-    setNoticeData({
-      ...noticeData,
-    });
-    console.log("=== FINAL notice Data ===");
-    console.log(noticeData);
-    modifyNoticeApi(noticeData);
-    setIsModify(!isModify);
-  };
-  const ModifyNotice = () => {
-    return (
-      <form className='write-form-wrapper' onSubmit={handleSubmit}>
-        <div className='write-input-title'>
-          <input
-            className='write-title'
-            defaultValue={noticeData.noticeTitle}
-            onChange={handleChange}
-            name='noticeTitle'
-          />
-        </div>
-        <div className='write-input-content'>
-          <input
-            className='write-content'
-            defaultValue={noticeData.noticeContent}
-            onChange={handleChange}
-            name='noticeContent'
-          />
-        </div>
-        <div>
-          <div>
-            <Button type='submit' variant='contained'>
-              수정
-            </Button>
-            <Button
-              variant='contained'
-              color='error'
-              onClick={() => {
-                setIsModify(!isModify);
-                // console.log("After : " + isModify);
-              }}
-            >
-              취소
-            </Button>
-          </div>
-        </div>
-      </form>
-    );
-  };
-  const DefaultNotice = () => {
-    return (
-      <div className='write-form-wrapper'>
-        <div className='write-input-title'>
-          <input
-            readOnly={true}
-            className='write-title'
-            defaultValue={noticeData.noticeTitle}
-          />
-        </div>
-        <div className='write-input-content'>
-          <input
-            readOnly={true}
-            className='write-content'
-            defaultValue={noticeData.noticeContent}
-          />
-        </div>
-        <div>
-          {isManager ? (
-            <div>
-              <span className='noticedetail-button-wrapper'>
-                <Button
-                  variant='outlined'
-                  onClick={() => {
-                    setIsModify(!isModify);
-                    // console.log(isModify);
-                  }}
-                >
-                  수정
-                </Button>
-              </span>
-              <span className='noticedetail-button-wrapper'>
-                <Button variant='outlined' color='error' onClick={delNotice}>
-                  삭제
-                </Button>
-              </span>
-            </div>
-          ) : null}
-        </div>
-      </div>
-    );
+  const onDeleteBtn = () => {
+    delNoticeApi(id)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log("Error");
+      });
   };
 
   return (
     <>
       <NavBar />
-      <NoticeWrapper>
-        <div className='notice-write-header'>공지사항 내용</div>
-        <div className='notice-detail-gotoList'>
-          <Link to='/manager/noticeList'>
-            <Button>목록</Button>
-          </Link>
+        <div className="board-wrap">
+            <div className="detail-head">
+                <div className="notice-detail-title">공지사항</div>
+                <div className="notice-detail-subTitle">sellerB의 공지사항</div>
+            </div>
+
+            <div className="notice-detail-content-header">
+                <div className="content-header-row">
+                    <div className="row-left">제목</div>
+                    <div className="row-right">{noticeData.noticeTitle}</div>
+                </div>
+          
+          
+                <div className="content-header-row">
+                    <div className="row-left">작성일</div>
+                    <div className="row-right">{noticeData.noticeRegDate}</div>
+                </div>
+            
+            
+            <div className="notice-detail-content-detail">
+                <div>
+                    <pre>
+                        {noticeData.noticeContent}
+                        zzzzzzzzzzzz공지사하아앙
+                        zzzzzzzzzzzz공지사하아앙
+                        zzzzzzzzzzzz공지사하아앙
+                        zzzzzzzzzzzz공지사하아앙
+                        zzzzzzzzzzzz공지사하아앙
+                        zzzzzzzzzzzz공지사하아앙
+                        zzzzzzzzzzzz공지사하아앙
+                        zzzzzzzzzzzz공지사하아앙
+                        zzzzzzzzzzzz공지사하아앙
+                        zzzzzzzzzzzz공지사하아앙
+                        zzzzzzzzzzzz공지사하아앙
+                        zzzzzzzzzzzz공지사하아앙
+                        zzzzzzzzzzzz공지사하아앙
+                        zzzzzzzzzzzz공지사하아앙
+                        zzzzzzzzzzzz공지사하아앙
+                        zzzzzzzzzzzz공지사하아앙
+                        zzzzzzzzzzzz공지사하아앙
+                    </pre>
+                </div>
+            </div>
+            {/* content하단 */}
+            <div className="notice-detail-bottom">
+                <button className="detail-button">목록</button>
+            </div>
+
+            </div>
         </div>
-        {isModify ? <ModifyNotice /> : <DefaultNotice />}
-      </NoticeWrapper>
       <Footer />
     </>
   );
-};
+}
 
 export default NoticeDetail;
