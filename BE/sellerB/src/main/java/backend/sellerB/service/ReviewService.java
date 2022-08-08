@@ -2,8 +2,10 @@ package backend.sellerB.service;
 
 import backend.sellerB.dto.ProductDto;
 import backend.sellerB.dto.ReviewDto;
+import backend.sellerB.dto.SaveReviewDto;
 import backend.sellerB.entity.Product;
 import backend.sellerB.entity.Review;
+import backend.sellerB.repository.ConsultingRepository;
 import backend.sellerB.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,17 +19,13 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ReviewService {
     private final ReviewRepository reviewRepository;
+    private final ConsultingRepository consultingRepository;
 
-    public ReviewDto createReview(ReviewDto reviewDto) {
+    public ReviewDto createReview(SaveReviewDto saveReviewDto) {
         Review review = Review.builder()
-                .reviewSeq(reviewDto.getReviewSeq())
-                .consulting(reviewDto.getConsulting())
-                .reviewGrade(reviewDto.getReviewGrade())
-                .reviewContent(reviewDto.getReviewContent())
-                .reviewRegUserSeq(reviewDto.getReviewRegUserSeq())
-                .reviewRegDate(reviewDto.getReviewRegDate())
-                .reviewModUserSeq(reviewDto.getReviewModUserSeq())
-                .reviewModDate(reviewDto.getReviewModDate())
+                .consulting(consultingRepository.findById(saveReviewDto.getConsultingSeq()).get())
+                .reviewGrade(saveReviewDto.getReviewGrade())
+                .reviewContent(saveReviewDto.getReviewContent())
                 .build();
 
         return ReviewDto.from(reviewRepository.save(review));
