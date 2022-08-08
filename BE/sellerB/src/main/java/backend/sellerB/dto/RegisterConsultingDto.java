@@ -13,10 +13,11 @@ import java.util.List;
 @AllArgsConstructor
 public class RegisterConsultingDto {
     private Long consultingSeq;
-    private String customerId;
+    private String customerId;  //seq로 수정
     private Long consultantSeq;
     private Long productSeq;
     private Boolean consultingState;
+    //openvidu 정보를 입력
 
     public static RegisterConsultingDto from(Consulting consulting) {
         if(consulting == null) return null;
