@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 public class RegisterConsultingDto {
     private Long consultingSeq;
-    private String customerId;  //seq로 수정
+    private String customerId;  //seq로 수정? 이 정보로 바로 sessionId 만드는게 좋지 않을까
     private Long consultantSeq;
     private Long productSeq;
     private Boolean consultingState;
