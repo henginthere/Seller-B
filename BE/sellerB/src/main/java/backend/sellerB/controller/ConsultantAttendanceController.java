@@ -1,8 +1,6 @@
 package backend.sellerB.controller;
 
-import backend.sellerB.dto.BrandDto;
-import backend.sellerB.dto.ConsultantAttendanceDto;
-import backend.sellerB.dto.ResponseBrandDto;
+import backend.sellerB.dto.*;
 import backend.sellerB.service.ConsultantAttendanceService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,13 +29,19 @@ public class ConsultantAttendanceController {
         return ResponseEntity.ok(consultantAttendanceService.getConsultantAttendanceList());
     }
 
-    @GetMapping("/list/{consultant-id}")
-    public ResponseEntity<List<ConsultantAttendanceDto>> getConsultantAttendanceListByConsultantId(HttpServletRequest request,  @PathVariable("consultant-id") String consultantId) {
-        return ResponseEntity.ok(consultantAttendanceService.getConsultantAttendanceListByConsultantId(consultantId));
+    @GetMapping("/list/{consultantSeq}")
+    public ResponseEntity<List<ConsultantAttendanceDto>> getConsultantAttendanceListByConsultantId(@PathVariable Long consultantSeq) {
+        return ResponseEntity.ok(consultantAttendanceService.getConsultantAttendanceListByConsultantSeq(consultantSeq));
     }
 
     @PutMapping("/{seq}")
-    public ResponseEntity<ConsultantAttendanceDto> updateConsultantAttendance(@Valid @RequestBody ConsultantAttendanceDto consultantAttendanceDto, @PathVariable Long seq) {
-        return ResponseEntity.ok(consultantAttendanceService.updateConsultantAttendance(seq, consultantAttendanceDto));
+    public ResponseEntity<ConsultantAttendanceDto> updateConsultantAttendance(@PathVariable Long seq) {
+        return ResponseEntity.ok(consultantAttendanceService.updateConsultantAttendance(seq));
     }
+
+//    @DeleteMapping("/{seq}")
+//    public ResponseEntity<ConsultantAttendanceDto> leaveWorkConsultant(@PathVariable Long seq) {
+//        // Access the DB and delete the order
+//        return ResponseEntity.ok(consultantAttendanceService.leaveWork(seq));
+//    }
 }
