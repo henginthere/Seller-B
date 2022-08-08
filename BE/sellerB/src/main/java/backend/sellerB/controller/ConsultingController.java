@@ -3,6 +3,7 @@ package backend.sellerB.controller;
 import backend.sellerB.dto.RegisterConsultingDto;
 import backend.sellerB.dto.ResponseConsultingDto;
 import backend.sellerB.service.ConsultingService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +21,7 @@ public class ConsultingController {
     }
 
     @PostMapping
-    public ResponseEntity<RegisterConsultingDto> saveBrand(@Valid @RequestBody RegisterConsultingDto registerConsultingDto) {
+    public ResponseEntity<RegisterConsultingDto> saveConsulting(@Valid @RequestBody RegisterConsultingDto registerConsultingDto) throws Exception {
         return ResponseEntity.ok(consultingService.createConsulting(registerConsultingDto));
     }
 
@@ -35,7 +36,7 @@ public class ConsultingController {
     }
 
     @PutMapping("/{seq}")
-    public ResponseEntity<RegisterConsultingDto> updateBrand(@Valid @RequestBody RegisterConsultingDto registerConsultingDto, @PathVariable Long seq) {
+    public ResponseEntity<RegisterConsultingDto> updateConsulting(@Valid @RequestBody RegisterConsultingDto registerConsultingDto, @PathVariable Long seq) throws Exception {
         return ResponseEntity.ok(consultingService.updateConsulting(seq, registerConsultingDto));
     }
 }
