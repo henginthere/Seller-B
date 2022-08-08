@@ -8,8 +8,6 @@ apply plugin: 'kotlin-parcelize'
 
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
-apply plugin: 'com.google.gms.google-services'
-
 android {
     compileSdk 31
 

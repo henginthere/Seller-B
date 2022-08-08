@@ -1,13 +1,13 @@
-package com.ssafy.sellerb.ui.main
+package com.ssafy.sellerb.ui.consulting
 
 import com.ssafy.sellerb.data.repository.UserRepository
 import com.ssafy.sellerb.ui.base.BaseViewModel
 import com.ssafy.sellerb.util.CoroutineDispatchers
 
-class MainViewModel(
+class WaitingViewModel(
     coroutineDispatchers: CoroutineDispatchers,
-    private val userRepository: UserRepository
-) :BaseViewModel(coroutineDispatchers){
+    userRepository: UserRepository
+) : BaseViewModel(coroutineDispatchers){
 
 
     override fun onCreate() {

@@ -13,7 +13,9 @@ import com.ssafy.sellerb.R
 import com.ssafy.sellerb.databinding.FragmentHomeBinding
 import com.ssafy.sellerb.di.component.FragmentComponent
 import com.ssafy.sellerb.ui.base.BaseFragment
+import com.ssafy.sellerb.ui.main.MainSharedViewModel
 import com.ssafy.sellerb.ui.qrscan.QrScanActivity
+import javax.inject.Inject
 
 class HomeFragment : BaseFragment<HomeViewModel>(){
 
@@ -27,13 +29,17 @@ class HomeFragment : BaseFragment<HomeViewModel>(){
 
     private val binding get() = _binding!!
 
+    @Inject
+    lateinit var mainSharedViewModel: MainSharedViewModel
+
     private val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
         if(it.resultCode == Activity.RESULT_OK){
             val intent = it.data
             if(intent != null){
                 val url = intent.getStringExtra("url")
                 Toast.makeText(context,"Value: " + url, Toast.LENGTH_SHORT).show()
-            }
+                mainSharedViewModel.onQrCodeResult(url!!)
+        }
 
         }
     }
@@ -63,6 +69,12 @@ class HomeFragment : BaseFragment<HomeViewModel>(){
                 if(!this){
                     findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
                 }
+            }
+        }
+
+        mainSharedViewModel.qrCodeUrl.observe(this){
+            it.getIfNotHandled()?.run{
+                findNavController().navigate(R.id.action_homeFragment_to_WaitingFragment)
             }
         }
 
