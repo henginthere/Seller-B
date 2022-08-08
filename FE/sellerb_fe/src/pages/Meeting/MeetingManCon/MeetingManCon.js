@@ -1,8 +1,11 @@
 import axios from "axios";
 import { OpenVidu } from "openvidu-browser";
 import React, { Component } from "react";
-import OpenViduVideoComponent from "../../../components/Meeting/OvVideo";
 
+import { getManagerInfoApi } from "../../../api/managerApi";
+import { detailConsultantApi } from "../../../api/consultantApi";
+
+import OpenViduVideoComponent from "../../../components/Meeting/OvVideo";
 import UserVideoComponent from "../../../components/Meeting/UserVideoComponent";
 
 import { NavBar, Footer } from "../../../components/index";
@@ -14,7 +17,6 @@ const OPENVIDU_SERVER_SECRET = "SELLERB";
 class MeetingManCon extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       mySessionId: "SessionA",
       myUserName: "Manager or Consultant+num",
@@ -35,6 +37,28 @@ class MeetingManCon extends Component {
 
   componentDidMount() {
     window.addEventListener("beforeunload", this.onbeforeunload);
+    console.log("componentDitMount --> token : " + localStorage.getItem("accessToken"));
+    if (localStorage.getItem("accessToken") === null) {
+      alert("허가되지 않은 접근입니다");
+    } else {
+      if (localStorage.getItem("adminChenck") === "ROLE_ADMIN") {
+        console.log("Manager 접속");
+        getManagerInfoApi(localStorage.getItem("seq")).then((res) => {
+          this.setState({
+            myUserName: res.data.managerName,
+            mySessionId: res.data.brandNameKor + "Session",
+          });
+        });
+        console.log(
+          "userName : " + this.state.myUserName + "\n" + "sessionId : " + this.state.mySessionId
+        );
+      } else {
+        console.log("Consultant 접속");
+        detailConsultantApi(localStorage.getItem("seq")).then((res) => {
+          this.setState({ myUserName: res.data.consultantName });
+        });
+      }
+    }
   }
 
   componentWillUnmount() {
@@ -113,9 +137,7 @@ class MeetingManCon extends Component {
             .connect(token, { clientData: this.state.myUserName })
             .then(async () => {
               var devices = await this.OV.getDevices();
-              var videoDevices = devices.filter(
-                (device) => device.kind === "videoinput",
-              );
+              var videoDevices = devices.filter((device) => device.kind === "videoinput");
 
               let publisher = this.OV.initPublisher(undefined, {
                 audioSource: undefined,
@@ -141,11 +163,11 @@ class MeetingManCon extends Component {
               console.log(
                 "There was an error connecting to the session:",
                 error.code,
-                error.message,
+                error.message
               );
             });
         });
-      },
+      }
     );
   }
 
@@ -161,8 +183,6 @@ class MeetingManCon extends Component {
     this.setState({
       session: undefined,
       subscribers: [],
-      mySessionId: "SessionA",
-      myUserName: "Manager or Consultant + Num",
       mainStreamManager: undefined,
       publisher: undefined,
     });
@@ -181,10 +201,24 @@ class MeetingManCon extends Component {
 
         <div id='wrapper'>
           <div id='manager-video'>
-            <h2>Manager 화면</h2>
+            {this.state.mainStreamManager !== undefined ? (
+              <div id='main-video'>
+                <h2>Manager 화면</h2>
+                <UserVideoComponent streamManager={this.state.mainStreamManager} />
+              </div>
+            ) : null}
           </div>
           <div id='consultant-video'>
-            <h2>Consultant 화면들</h2>
+            {this.state.mainStreamManager !== undefined ? (
+              <div id='sub-video-wrapper'>
+                {this.state.subscribers.map((sub, i) => (
+                  <div id={videoClassName} key={i}>
+                    <h1 id='session-title'>{mySessionId}</h1>
+                    <UserVideoComponent streamManager={sub} />
+                  </div>
+                ))}
+              </div>
+            ) : null}
           </div>
         </div>
         <div id='meeting-container'>
@@ -193,7 +227,7 @@ class MeetingManCon extends Component {
               <div className='joinning-session-wrapper'>
                 <h1> 화상 회의 </h1>
                 <form className='form-group' onSubmit={this.joinSession}>
-                  <p>
+                  {/* <p>
                     <label>참가자 </label>
                     <input
                       className='form-control'
@@ -205,10 +239,7 @@ class MeetingManCon extends Component {
                     />
                   </p>
                   <p>
-                    <label>
-                      {" "}
-                      세션 명은 브랜드 이름 + session으로 설정 예정{" "}
-                    </label>
+                    <label> 세션 명은 브랜드 이름 + session으로 설정 예정 </label>
                     <input
                       className='form-control'
                       type='text'
@@ -217,7 +248,7 @@ class MeetingManCon extends Component {
                       onChange={this.handleChangeSessionId}
                       required
                     />
-                  </p>
+                  </p> */}
                   <p className='text-center'>
                     {myUserName === "Manager" ? (
                       <input
@@ -239,21 +270,6 @@ class MeetingManCon extends Component {
               </div>
             </div>
           ) : null}
-          {this.state.mainStreamManager !== undefined ? (
-            <div id='main-video'>
-              <UserVideoComponent
-                streamManager={this.state.mainStreamManager}
-              />
-            </div>
-          ) : null}
-          <div id='sub-video-wrapper'>
-            {this.state.subscribers.map((sub, i) => (
-              <div id={videoClassName} key={i}>
-                <h1 id='session-title'>{mySessionId}</h1>
-                <UserVideoComponent streamManager={sub} />
-              </div>
-            ))}
-          </div>
 
           {this.state.session !== undefined ? (
             <div id='session'>
@@ -299,7 +315,7 @@ class MeetingManCon extends Component {
 
   getToken() {
     return this.createSession(this.state.mySessionId).then((sessionId) =>
-      this.createToken(sessionId),
+      this.createToken(sessionId)
     );
   }
 
@@ -309,8 +325,7 @@ class MeetingManCon extends Component {
       axios
         .post(OPENVIDU_SERVER_URL + "/openvidu/api/sessions", data, {
           headers: {
-            Authorization:
-              "Basic " + btoa("OPENVIDUAPP:" + OPENVIDU_SERVER_SECRET),
+            Authorization: "Basic " + btoa("OPENVIDUAPP:" + OPENVIDU_SERVER_SECRET),
             "Content-Type": "application/json",
           },
         })
@@ -326,7 +341,7 @@ class MeetingManCon extends Component {
             console.log(error);
             console.warn(
               "No connection to OpenVidu Server. This may be a certificate error at " +
-                OPENVIDU_SERVER_URL,
+                OPENVIDU_SERVER_URL
             );
             if (
               window.confirm(
@@ -335,12 +350,10 @@ class MeetingManCon extends Component {
                   '"\n\nClick OK to navigate and accept it. ' +
                   'If no certificate warning is shown, then check that your OpenVidu Server is up and running at "' +
                   OPENVIDU_SERVER_URL +
-                  '"',
+                  '"'
               )
             ) {
-              window.location.assign(
-                OPENVIDU_SERVER_URL + "/accept-certificate",
-              );
+              window.location.assign(OPENVIDU_SERVER_URL + "/accept-certificate");
             }
           }
         });
@@ -351,20 +364,12 @@ class MeetingManCon extends Component {
     return new Promise((resolve, reject) => {
       var data = {};
       axios
-        .post(
-          OPENVIDU_SERVER_URL +
-            "/openvidu/api/sessions/" +
-            sessionId +
-            "/connection",
-          data,
-          {
-            headers: {
-              Authorization:
-                "Basic " + btoa("OPENVIDUAPP:" + OPENVIDU_SERVER_SECRET),
-              "Content-Type": "application/json",
-            },
+        .post(OPENVIDU_SERVER_URL + "/openvidu/api/sessions/" + sessionId + "/connection", data, {
+          headers: {
+            Authorization: "Basic " + btoa("OPENVIDUAPP:" + OPENVIDU_SERVER_SECRET),
+            "Content-Type": "application/json",
           },
-        )
+        })
         .then((response) => {
           console.log("TOKEN", response);
           resolve(response.data.token);

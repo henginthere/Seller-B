@@ -54,15 +54,16 @@
 #wrapper{
     width: 100%;
     display: flex;
+    flex-direction: column;
 }
 #manager-video{
-    width:40%;
+    width:100%;
     margin: 10px;
     border: 1px solid gray;
     border-radius: 5px;
 }
 #consultant-video{
-    width:60%;
+    width:100%;
     margin: 10px;
     border :1px solid gray;
     border-radius: 5px;
