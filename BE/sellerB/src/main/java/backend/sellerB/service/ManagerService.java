@@ -1,10 +1,12 @@
 package backend.sellerB.service;
 
 
+import backend.sellerB.dto.ConsultantDto;
 import backend.sellerB.dto.EditManagerDto;
 import backend.sellerB.dto.ManagerDto;
 import backend.sellerB.dto.RegisterManagerDto;
 import backend.sellerB.entity.Authority;
+import backend.sellerB.entity.Consultant;
 import backend.sellerB.entity.Manager;
 import backend.sellerB.exception.DuplicateUserException;
 import backend.sellerB.repository.*;
@@ -17,6 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.PreUpdate;
 import java.util.Collections;
 import java.util.Optional;
 
@@ -76,13 +79,24 @@ public class ManagerService {
         return ManagerDto.from(manager);
     }
 
+    @PreUpdate
     public ManagerDto update(EditManagerDto editManagerDto, Long managerSeq) {
         Optional<Manager> managerOptional = managerRepository.findById(managerSeq);
         Manager manager = managerOptional.get();
-        manager.setManagerPass(passwordEncoder.encode(editManagerDto.getManagerPass()));
+
+        String pass;
+        if(editManagerDto.getManagerPass()==null || editManagerDto.getManagerPass()==""){
+            pass = managerRepository.findByManagerSeq(managerSeq).get().getManagerPass();
+            manager.setManagerPass(pass);
+        }
+        else{
+            manager.setManagerPass(passwordEncoder.encode(editManagerDto.getManagerPass()));
+        }
         manager.setManagerEmail(editManagerDto.getManagerEmail());
         manager.setManagerTel(editManagerDto.getManagerTel());
         manager.setManagerImageUrl(editManagerDto.getManagerImageUrl());
+
+        manager = managerRepository.saveAndFlush(manager);
 
         return ManagerDto.from(manager);
     }
