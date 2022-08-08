@@ -99,7 +99,7 @@ function ConsultantModify() {
                 value={consultant.consultantId || ""}
                 fullWidth='true'
                 name='consultantId'
-                onChange={onChange}
+                // onChange={onChange}
               />
             </div>
             <div className='registerField'>
@@ -109,7 +109,7 @@ function ConsultantModify() {
                 value={consultant.consultantName || ""}
                 fullWidth='true'
                 name='consultantName'
-                onChange={onChange}
+                // onChange={onChange}
               />
             </div>
             <div className='registerField'>
