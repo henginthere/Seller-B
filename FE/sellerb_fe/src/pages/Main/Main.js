@@ -58,25 +58,22 @@ function Main() {
         localStorage.setItem("accessToken", res.data.tokenDto.accessToken);
         localStorage.setItem("refreshToken", res.data.tokenDto.refreshToken);
         localStorage.setItem("seq", res.data.seq);
-        console.log(localStorage.getItem("seq"))
+        console.log(localStorage.getItem("seq"));
 
         axios
           .get(`/api/brand/${brandSeq}`)
-          .then((res)=>{
+          .then((res) => {
             localStorage.setItem("brandNameKor", res.data.brandNameKor);
             console.log("manager's brand:" + res.data.brandNameKor);
-            localStorage.getItem("accessToken")
+            localStorage.getItem("accessToken");
             console.log(localStorage.getItem("brandNameKor"));
           })
-          .catch((err)=>{
-
-          })
+          .catch((err) => {});
 
         // isAdmin이라면, Redux isAdmin 값 true로 전환
         dispatch(CHECK_ADMIN());
         navigate("/manager/main");
         if (adminCheck === "ROLE_ADMIN") {
-          
         } else {
           navigate("/consultant/main");
         }
@@ -88,16 +85,16 @@ function Main() {
 
   return (
     <>
-      <div className="main-body">
+      <div className='main-body'>
         {/* main화면 왼쪽 */}
-        <div className="main-left">
-          <div className="big-sellerb">SellerB</div>
-          <div className="main-subtitle">오늘의 sellerB가 되어 보세요</div>
-          <div className="main-form-wrapper">
+        <div className='main-left'>
+          <div className='big-sellerb'>SellerB</div>
+          <div className='main-subtitle'>오늘의 sellerB가 되어 보세요</div>
+          <div className='main-form-wrapper'>
             {/* Form start */}
-            <form className="main-form">
+            <form className='main-form'>
               <TextField
-                className="main-TextField"
+                className='main-TextField'
                 sx={{
                   borderColor: "yellow",
                   height: "25%",
@@ -113,7 +110,7 @@ function Main() {
                 }}
                 value={id}
                 onChange={onIdHandler}
-                label="ID"
+                label='ID'
               />
               <TextField
                 sx={{
@@ -125,8 +122,8 @@ function Main() {
                 }}
                 style={{ marginBottom: "10px", display: "block" }}
                 onChange={onPasswordHandler}
-                type="password"
-                label="PASSWORD"
+                type='password'
+                label='PASSWORD'
               />
 
               <Button
@@ -148,12 +145,12 @@ function Main() {
               />
               관리자 로그인
               </div> */}
-              <div className="register-resetPassword">
-                <Link to="/manager/register" className="link-to">
-                  <div className="manager-register">관리자 회원가입</div>
+              <div className='register-resetPassword'>
+                <Link to='/manager/register' className='link-to'>
+                  <div className='manager-register'>관리자 회원가입</div>
                 </Link>
-                <div className="reset-pssword">
-                  <Link to="#" className="link-to">
+                <div className='reset-pssword'>
+                  <Link to='#' className='link-to'>
                     비밀번호 재설정
                   </Link>
                 </div>
@@ -164,8 +161,8 @@ function Main() {
         </div>
 
         {/* Main화면 오른쪽 이미지 */}
-        <div className="main-right">
-          <img className="main-bg-img" alt="#" src="img/Main-bg-img.png" />
+        <div className='main-right'>
+          <img className='main-bg-img' alt='#' src='img/Main-bg-img.png' />
         </div>
       </div>
     </>
