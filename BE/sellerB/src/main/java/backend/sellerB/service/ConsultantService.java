@@ -65,8 +65,8 @@ public class ConsultantService {
 
     }
 
-    public List<ConsultantDto> getConsultantList() {
-        return ConsultantDto.fromList(consultantRepository.findAll());
+    public List<ResponseConsultantDto> getConsultantList() {
+        return ResponseConsultantDto.fromList(consultantRepository.findAll());
     }
 
 
@@ -86,10 +86,14 @@ public class ConsultantService {
 //        return ConsultantDto.fromList(consultantRepository.findByConsultantIdContaining(consultantId));
 //    }
 
-    public List<ConsultantDto> searchByProductGroupSeq(Long productGroupSeq) {
+    public List<ResponseConsultantDto> searchByProductGroupSeq(Long productGroupSeq) {
 
 //        return ConsultantDto.fromList(consultantRepository.findByProductGroup(productGroupSeq));
-        return ConsultantDto.fromList(consultantRepository.findConsultantsByProductGroup_ProductGroupSeq(productGroupSeq));
+        return ResponseConsultantDto.fromList(consultantRepository.findConsultantsByProductGroup_ProductGroupSeq(productGroupSeq));
+    }
+
+    public List<ResponseConsultantDto> searchByBrandName(String brandName) {
+        return ResponseConsultantDto.fromList(consultantRepository.findConsultantsByProductGroup_Brand_BrandNameKor(brandName));
     }
 
     @PreUpdate
