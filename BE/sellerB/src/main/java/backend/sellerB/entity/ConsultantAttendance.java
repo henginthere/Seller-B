@@ -2,10 +2,12 @@ package backend.sellerB.entity;
 
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.SQLDelete;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.domain.Persistable;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -21,9 +23,10 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @DynamicInsert
+@SQLDelete(sql = "UPDATE t_consultant_attendance SET consultant_attendance_state=true,logout_time=CURRENT_TIMESTAMP WHERE consultant_attendance_seq=?")
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "t_consultant_attendance", schema = "sellerb", catalog = "")
-public class ConsultantAttendance {
+public class ConsultantAttendance implements Persistable<Long> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "consultant_attendance_seq")
@@ -50,7 +53,7 @@ public class ConsultantAttendance {
     @Column(name = "logout_time")
     private LocalDateTime logoutTime;
 
-    //0이면 로그인, 1이면 로그아웃
+    //0이면 출근, 1이면 퇴근
     @Basic
     @Column(name = "consultant_attendance_state",columnDefinition = "boolean default false")
     private Boolean consultantAttendanceState;
@@ -67,5 +70,15 @@ public class ConsultantAttendance {
     @Override
     public int hashCode() {
         return Objects.hash(consultantAttendanceSeq, consultant, loginTime, logoutTime);
+    }
+
+    @Override
+    public Long getId() {
+        return consultantAttendanceSeq;
+    }
+
+    @Override
+    public boolean isNew() {
+        return (consultantAttendanceState == null||consultantAttendanceState==true);
     }
 }
