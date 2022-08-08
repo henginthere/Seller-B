@@ -55,52 +55,58 @@ function NoticeList() {
   return (
     <>
       <NavBar />
+      <div className="notice-list-wrapper">
+        <div className="notice-title-wrapper">
+          <h4 className="notice-title-text">공지사항</h4>
+        </div>
+        <div className="notice-wrapper">
+          <div className="search-byTitle-wrapper">
+            <input
+              className="search-byTitle"
+              placeholder="제목으로 검색하기"
+              value={searchTitle}
+              onChange={onSearchByTitleHandler}
+            />
+            <button onClick={submitBtnSearchByTitle}>검색</button>
+          </div>
 
-      <div className='notice-title'>공지사항</div>
-      <div className='notice-wrapper'>
-        <div className='search-byTitle-wrapper'>
-          <input
-            className='search-byTitle'
-            placeholder='제목으로 검색하기'
-            value={searchTitle}
-            onChange={onSearchByTitleHandler}
-          />
-          <button onClick={submitBtnSearchByTitle}>검색</button>
-        </div>
-        <div className='notice-list'>
-          <table>
-            <thead>
-              <tr>
-                <th>No</th>
-                <th>Title</th>
-                <th>Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              {noticeList.map((list) => {
-                return (
-                  <tr>
-                    <td>{list.noticeSeq}</td>
-                    <td
-                      onClick={() =>
-                        navigate(`/noticeDetail/${list.noticeSeq}`)
-                      }
-                    >
-                      {list.noticeTitle}
-                    </td>
-                    <td>{list.noticeRegDate}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-        <div className='notice-write-wrapper'>
-          {isManager ? (
-            <Link to='/manager/noticeWrite'>
-              <button className='write-btn'>글작성</button>
-            </Link>
-          ) : null}
+            <table className="notice-table-list">
+              <thead className="notice-table-thead">
+                <tr className="notice-th-tr">
+                  <th className="notice-th-tr-No">No</th>
+                  <th className="notice-th-tr-title">Title</th>
+                  <th className="notice-th-th-manager">작성자</th>
+                  <th className="notice-th-tr-date">Date</th>
+                </tr>
+              </thead>
+              <tbody className="notice-body">
+                {noticeList.map((list) => {
+                  return (
+                    <tr className="notice-tbody-tr">
+                      <td className="notice-seq">{list.noticeSeq}</td>
+                      <td 
+                        className="notice-title"
+                        onClick={() =>
+                          navigate(`/noticeDetail/${list.noticeSeq}`)
+                        }
+                      >
+                        {list.noticeTitle}
+                      </td>
+                      <td className="notice-manager">sellerB관리자</td>
+                      <td className="notice-regdate">{list.noticeRegDate}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+     
+          <div className="notice-write-wrapper">
+            {isManager ? (
+              <Link to="/manager/noticeWrite">
+                <button className="write-btn">글작성</button>
+              </Link>
+            ) : null}
+          </div>
         </div>
       </div>
       <Footer />
