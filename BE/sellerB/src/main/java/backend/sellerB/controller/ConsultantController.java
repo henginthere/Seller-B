@@ -41,12 +41,12 @@ public class ConsultantController {
     }
 
     @GetMapping("/{consultantSeq}")
-    public ResponseEntity<ConsultantDto> getConsultantDetail(@PathVariable Long consultantSeq) {
+    public ResponseEntity<ResponseConsultantDto> getConsultantDetail(@PathVariable Long consultantSeq) {
         return ResponseEntity.ok(consultantService.getConsultantDetail(consultantSeq));
     }
 
     @GetMapping("/search/{consultantName}")
-    public ResponseEntity<List<ConsultantDto>> findByConsultantName(@PathVariable String consultantName) {
+    public ResponseEntity<List<ResponseConsultantDto>> findByConsultantName(@PathVariable String consultantName) {
         return ResponseEntity.ok(consultantService.searchByConsultantNameContaining(consultantName));
     }
 
