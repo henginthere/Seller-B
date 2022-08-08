@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState} from "react";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Formik, ErrorMessage } from "formik";
-import { toast, ToastContainer } from "react-toastify";
 import { Button, TextField } from "@mui/material";
 import * as Yup from "yup";
-import { useNavigate } from "react-router-dom";
 import { registerApi } from "../../api/userApi";
 import { listBrandApi } from "../../api/brandApi";
 
@@ -28,6 +26,7 @@ function ManageRegister() {
     console.log("brandSeq: " + item.brandNameKor);
     setSelectedBrandSeq(item.brandSeq);
   };
+
 
   const validationSchema = Yup.object().shape({
     brand: Yup.string().min(1).required("브랜드명을 입력하세요"),
@@ -87,6 +86,7 @@ function ManageRegister() {
     registerApi(userInfo)
       .then((res) => {
         console.log(res.data);
+      
 
         navigate("/");
       })
