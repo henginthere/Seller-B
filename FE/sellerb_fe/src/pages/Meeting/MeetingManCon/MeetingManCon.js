@@ -2,6 +2,7 @@ import axios from "axios";
 import { OpenVidu } from "openvidu-browser";
 import React, { Component } from "react";
 
+import { api } from "../../../api/api";
 import { getManagerInfoApi } from "../../../api/managerApi";
 import { detailConsultantApi } from "../../../api/consultantApi";
 
@@ -36,33 +37,37 @@ class MeetingManCon extends Component {
   }
 
   componentDidMount() {
-    window.addEventListener("beforeunload", this.onbeforeunload);
-    console.log("componentDitMount --> token : " + localStorage.getItem("accessToken"));
-    if (localStorage.getItem("accessToken") === null) {
-      alert("허가되지 않은 접근입니다");
-    } else {
-      if (localStorage.getItem("adminChenck") === "ROLE_ADMIN") {
-        console.log("Manager 접속");
-        getManagerInfoApi(localStorage.getItem("seq")).then((res) => {
+    if (sessionStorage.getItem("adminCheck") === "ROLE_ADMIN") {
+      // 관리자 일 경우
+      getManagerInfoApi(sessionStorage.getItem("seq"))
+        .then((res) => {
           this.setState({
             myUserName: res.data.managerName,
-            mySessionId: res.data.brandNameKor + "Session",
+            mySessionId: res.data.brand.brandNameEng + "-session",
           });
+        })
+        .catch((err) => {
+          console.log(err);
         });
-        console.log(
-          "userName : " + this.state.myUserName + "\n" + "sessionId : " + this.state.mySessionId
-        );
-      } else {
-        console.log("Consultant 접속");
-        detailConsultantApi(localStorage.getItem("seq")).then((res) => {
-          this.setState({ myUserName: res.data.consultantName });
+    } else {
+      // 상담사 일 경우
+      detailConsultantApi(sessionStorage.getItem("seq"))
+        .then((res) => {
+          this.setState({
+            myUserName: res.data.consultantName,
+            mySessionId: res.data.brandName + "-session",
+          });
+        })
+        .catch((err) => {
+          console.log(err);
         });
-      }
     }
+    window.addEventListener("beforeunload", this.onbeforeunload);
   }
 
   componentWillUnmount() {
     window.removeEventListener("beforeunload", this.onbeforeunload);
+    this.leaveSession();
   }
 
   onbeforeunload(event) {
@@ -99,6 +104,9 @@ class MeetingManCon extends Component {
       });
     }
   }
+  // 참여할 세션 정보 받아오기 위한 함수
+  // 세션이름을 (brand영문이름) + Session 이런식으로 만들어서
+  // 같은 브랜드 관리자와 상담사 전체 회의 관리
 
   joinSession() {
     this.OV = new OpenVidu();
@@ -131,8 +139,6 @@ class MeetingManCon extends Component {
         });
 
         this.getToken().then((token) => {
-          // First param is the token got from OpenVidu Server. Second param can be retrieved by every user on event
-          // 'streamCreated' (property Stream.connection.data), and will be appended to DOM as the user's nickname
           mySession
             .connect(token, { clientData: this.state.myUserName })
             .then(async () => {
@@ -191,10 +197,7 @@ class MeetingManCon extends Component {
   render() {
     const mySessionId = this.state.mySessionId;
     const myUserName = this.state.myUserName;
-    var videoClassName = "sub-video";
-    if (mySessionId === "Manager") {
-      videoClassName = "main-video";
-    }
+
     return (
       <>
         <NavBar />
@@ -204,6 +207,7 @@ class MeetingManCon extends Component {
             {this.state.mainStreamManager !== undefined ? (
               <div id='main-video'>
                 <h2>Manager 화면</h2>
+                <h1 id='session-title'>{mySessionId}</h1>
                 <UserVideoComponent streamManager={this.state.mainStreamManager} />
               </div>
             ) : null}
@@ -212,8 +216,7 @@ class MeetingManCon extends Component {
             {this.state.mainStreamManager !== undefined ? (
               <div id='sub-video-wrapper'>
                 {this.state.subscribers.map((sub, i) => (
-                  <div id={videoClassName} key={i}>
-                    <h1 id='session-title'>{mySessionId}</h1>
+                  <div id='sub-video' key={i}>
                     <UserVideoComponent streamManager={sub} />
                   </div>
                 ))}
@@ -228,29 +231,31 @@ class MeetingManCon extends Component {
                 <h1> 화상 회의 </h1>
                 <form className='form-group' onSubmit={this.joinSession}>
                   {/* <p>
-                    <label>참가자 </label>
+                    <label> 참가자 이름 </label>
                     <input
                       className='form-control'
                       type='text'
                       id='userName'
                       value={myUserName}
+                      readOnly={true}
                       onChange={this.handleChangeUserName}
                       required
                     />
                   </p>
                   <p>
-                    <label> 세션 명은 브랜드 이름 + session으로 설정 예정 </label>
+                    <label> 참가 세션 정보 </label>
                     <input
                       className='form-control'
                       type='text'
                       id='sessionId'
+                      readOnly={true}
                       value={mySessionId}
                       onChange={this.handleChangeSessionId}
                       required
                     />
                   </p> */}
                   <p className='text-center'>
-                    {myUserName === "Manager" ? (
+                    {sessionStorage.getItem("adminCheck") === "ROL" ? (
                       <input
                         className='btn btn-lg btn-success'
                         name='commit'
@@ -314,6 +319,7 @@ class MeetingManCon extends Component {
    */
 
   getToken() {
+    console.log("this.state.mySessionId in getToken" + this.state.mySessionId);
     return this.createSession(this.state.mySessionId).then((sessionId) =>
       this.createToken(sessionId)
     );
