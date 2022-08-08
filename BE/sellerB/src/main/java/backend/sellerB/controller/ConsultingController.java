@@ -20,7 +20,7 @@ public class ConsultingController {
     }
 
     @PostMapping
-    public ResponseEntity<RegisterConsultingDto> saveBrand(@Valid @RequestBody RegisterConsultingDto registerConsultingDto) {
+    public ResponseEntity<RegisterConsultingDto> saveConsulting(@Valid @RequestBody RegisterConsultingDto registerConsultingDto) {
         return ResponseEntity.ok(consultingService.createConsulting(registerConsultingDto));
     }
 
@@ -35,7 +35,7 @@ public class ConsultingController {
     }
 
     @PutMapping("/{seq}")
-    public ResponseEntity<RegisterConsultingDto> updateBrand(@Valid @RequestBody RegisterConsultingDto registerConsultingDto, @PathVariable Long seq) {
+    public ResponseEntity<RegisterConsultingDto> updateConsulting(@Valid @RequestBody RegisterConsultingDto registerConsultingDto, @PathVariable Long seq) {
         return ResponseEntity.ok(consultingService.updateConsulting(seq, registerConsultingDto));
     }
 }
