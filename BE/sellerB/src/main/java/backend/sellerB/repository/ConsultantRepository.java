@@ -21,4 +21,6 @@ public interface ConsultantRepository extends JpaRepository<Consultant, Long> {
 
     List<Consultant> findByProductGroup(Long productGroup);
     List<Consultant> findConsultantsByProductGroup_ProductGroupSeq(Long productGroupSeq);
+
+    List<Consultant> findConsultantsByProductGroup_Brand_BrandNameKor(String brandname);
 }

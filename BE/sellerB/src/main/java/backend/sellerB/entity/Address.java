@@ -2,6 +2,7 @@ package backend.sellerB.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 import org.springframework.data.annotation.CreatedBy;
@@ -20,6 +21,7 @@ import java.util.Objects;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@DynamicInsert
 @EntityListeners(AuditingEntityListener.class)
 @SQLDelete(sql = "UPDATE t_address SET address_del_yn=true WHERE address_seq=?")
 @Where(clause = "addr_del_yn=false")
