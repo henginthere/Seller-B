@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,14 +15,18 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 public class ConsultantAttendanceDto {
-    private String consultantId;
+    private Long consultantSeq;
     private Boolean consultantAttendanceState;
+    private LocalDateTime loginTime;
+    private LocalDateTime logoutTime;
 
     public static ConsultantAttendanceDto from(ConsultantAttendance consultantAttendance) {
         if(consultantAttendance == null) return null;
         return ConsultantAttendanceDto.builder()
-                .consultantId(consultantAttendance.getConsultant().getConsultantId())
+                .consultantSeq(consultantAttendance.getConsultant().getConsultantSeq())
                 .consultantAttendanceState(consultantAttendance.getConsultantAttendanceState())
+                .loginTime(consultantAttendance.getLoginTime())
+                .logoutTime(consultantAttendance.getLogoutTime())
                 .build();
     }
 
@@ -31,8 +36,10 @@ public class ConsultantAttendanceDto {
         int i = 0;
         while (i < consultantAttendanceList.size()) {
             ConsultantAttendanceDto consultantAttendanceDto = ConsultantAttendanceDto.builder()
-                    .consultantId(consultantAttendanceList.get(i).getConsultant().getConsultantId())
+                    .consultantSeq(consultantAttendanceList.get(i).getConsultant().getConsultantSeq())
                     .consultantAttendanceState(consultantAttendanceList.get(i).getConsultantAttendanceState())
+                    .loginTime(consultantAttendanceList.get(i).getLoginTime())
+                    .logoutTime(consultantAttendanceList.get(i).getLogoutTime())
                     .build();
             listConsultantAttendanceDto.add(consultantAttendanceDto);
             i++;
