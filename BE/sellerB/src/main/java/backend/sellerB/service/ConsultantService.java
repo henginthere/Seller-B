@@ -70,15 +70,15 @@ public class ConsultantService {
     }
 
 
-    public ConsultantDto getConsultantDetail(Long consultantSeq) {
+    public ResponseConsultantDto getConsultantDetail(Long consultantSeq) {
         Optional<Consultant> consultantOptional = consultantRepository.findById(consultantSeq);
         Consultant consultant = consultantOptional.get();
-        return ConsultantDto.from(consultant);
+        return ResponseConsultantDto.from(consultant);
     }
 
-    public List<ConsultantDto> searchByConsultantNameContaining(String consultantName) {
+    public List<ResponseConsultantDto> searchByConsultantNameContaining(String consultantName) {
 
-        return ConsultantDto.fromList(consultantRepository.findByConsultantNameContaining(consultantName));
+        return ResponseConsultantDto.fromList(consultantRepository.findByConsultantNameContaining(consultantName));
     }
 
 //    public List<ConsultantDto> searchByConsultantId(String consultantId) {
