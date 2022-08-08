@@ -5,9 +5,11 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { StaticDatePicker } from "@mui/x-date-pickers";
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 
 function ManagerMainLeft() {
   const [value, setValue] = React.useState(new Date());
+  const navigate = useNavigate();
   const styleObj_WrapDiv = {
     width: "35%",
   };
@@ -23,6 +25,9 @@ function ManagerMainLeft() {
   };
   const blue = {
     color: "blue",
+  };
+  const mvMeetingManCon = () => {
+    navigate("/meeting/mancon");
   };
 
   return (
@@ -47,7 +52,9 @@ function ManagerMainLeft() {
         </LocalizationProvider>
         {/* 달력 END */}
         <div style={styleObj_Button}>
-          <Button variant='contained'>회의 생성</Button>
+          <Button variant='contained' onClick={mvMeetingManCon}>
+            회의 생성
+          </Button>
         </div>
       </div>
     </>
