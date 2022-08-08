@@ -63,8 +63,12 @@ function Main() {
         axios
           .get(`/api/brand/${brandSeq}`)
           .then((res)=>{
+            console.log("LOGIN: " + JSON.stringify(res.data));
+
             localStorage.setItem("brandNameKor", res.data.brandNameKor);
+            localStorage.setItem("brandNameEng", res.data.brandNameEng);
             console.log("manager's brand:" + res.data.brandNameKor);
+            console.log("manager's brand:" + localStorage.getItem("brandNameEng"));
             localStorage.getItem("accessToken")
             console.log(localStorage.getItem("brandNameKor"));
           })

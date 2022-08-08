@@ -182,7 +182,7 @@ function ConsultantRegister() {
         it.productGroupName === consultant.productGroupName
     );
 
-    console.log("item: " + item.brandName + " , " + item.productGroupSeq);
+    console.log("item: " + item.brandNameKor + " , " + item.productGroupSeq);
 
     const { value, name } = e.target;
    
