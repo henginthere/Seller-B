@@ -61,7 +61,7 @@
     /* border-radius: 10%;
   background: #000000; */
     animation: ball 1s ease-in infinite alternate;
-    animation-duration: 1s;
+    animation-duration: 1.5s;
 }
 
 .main-body .main-right .main-bg-img {
