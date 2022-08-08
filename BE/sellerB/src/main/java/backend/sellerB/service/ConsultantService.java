@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.PreUpdate;
 import java.util.*;
 
 
@@ -91,14 +92,25 @@ public class ConsultantService {
         return ConsultantDto.fromList(consultantRepository.findConsultantsByProductGroup_ProductGroupSeq(productGroupSeq));
     }
 
+    @PreUpdate
     public ConsultantDto update(EditConsultantDto editConsultantDto, Long consultantSeq) {
         Optional<Consultant> consultantOptional = consultantRepository.findById(consultantSeq);
         Consultant consultant = consultantOptional.get();
-        consultant.setConsultantPass(passwordEncoder.encode(editConsultantDto.getConsultantPass()));
+
+        String pass;
+        if(editConsultantDto.getConsultantPass()==null || editConsultantDto.getConsultantPass()==""){
+            pass = consultantRepository.findByConsultantSeq(consultantSeq).getConsultantPass();
+            consultant.setConsultantPass(pass);
+        }
+        else{
+            consultant.setConsultantPass(passwordEncoder.encode(editConsultantDto.getConsultantPass()));
+        }
         consultant.setConsultantEmail(editConsultantDto.getConsultantEmail());
         consultant.setConsultantImageUrl(editConsultantDto.getConsultantImageUrl());
         consultant.setConsultantTel(editConsultantDto.getConsultantTel());
         consultant.setProductGroup(editConsultantDto.getProductGroup());
+
+        consultant = consultantRepository.saveAndFlush(consultant);
 
         return ConsultantDto.from(consultant);
     }
