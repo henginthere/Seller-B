@@ -22,8 +22,7 @@
             android:textStyle="bold"
             android:textSize="20sp"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" />
         <TextView
             android:id="@+id/tv_waiting_time_ex"
             android:layout_width="wrap_content"
@@ -55,12 +54,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="대기 인원 :  "
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
             android:textColor="@color/white"
             android:textStyle="bold"
             android:textSize="20sp"
             app:layout_constraintTop_toBottomOf="@id/tv_waiting_title"
-            app:layout_constraintEnd_toStartOf="@id/tv_waiting_num"
+            app:layout_constraintStart_toEndOf="@id/tv_waiting_time"
             />
         <TextView
             android:id="@+id/tv_waiting_num"
@@ -68,11 +68,22 @@
             android:layout_height="wrap_content"
             android:text="0명"
             android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
             android:textColor="@color/white"
             android:textStyle="bold"
             android:textSize="20sp"
             app:layout_constraintTop_toBottomOf="@id/tv_waiting_title"
+            app:layout_constraintStart_toEndOf="@id/tv_waiting_num_ex"
+            />
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_logout"
+            android:text="상담취소"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/main_blue"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             />
 

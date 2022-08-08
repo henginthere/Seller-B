@@ -1,9 +1,13 @@
 package com.ssafy.sellerb.data.repository
 
+import android.util.Log
 import com.ssafy.sellerb.data.local.prefs.UserPreferences
 import com.ssafy.sellerb.data.model.User
 import com.ssafy.sellerb.data.remote.NetworkService
 import com.ssafy.sellerb.data.remote.request.LoginRequest
+import com.ssafy.sellerb.data.remote.request.SignupRequest
+import com.ssafy.sellerb.data.remote.response.GeneralResponse
+import com.ssafy.sellerb.data.remote.response.UserInfoResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -69,6 +73,18 @@ class UserRepository @Inject constructor(
                 response.authority, response.seq, userInfoResponse.name ?: "",
                 userInfoResponse.email ?: "", userInfoResponse.birth ?: ""
                 , userInfoResponse.token ?: ""))
+        }.flowOn(Dispatchers.IO)
+    }
+
+    fun doUserSignup(request : SignupRequest) : Flow<GeneralResponse>{
+        return flow {
+            val response = networkService.doSignupCall(request)
+            if(response.name != null){
+                emit(GeneralResponse("200","OK"))
+            }else{
+                emit(GeneralResponse("500","Fail"))
+            }
+
         }.flowOn(Dispatchers.IO)
     }
 

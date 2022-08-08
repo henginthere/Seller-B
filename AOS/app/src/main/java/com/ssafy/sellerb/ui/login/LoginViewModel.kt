@@ -44,7 +44,4 @@ class LoginViewModel(
         }
     }
 
-    fun getUserInfo() {
-
-    }
 }

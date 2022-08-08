@@ -1,6 +1,8 @@
 package com.ssafy.sellerb.data.remote
 
 import com.ssafy.sellerb.data.remote.request.LoginRequest
+import com.ssafy.sellerb.data.remote.request.SignupRequest
+import com.ssafy.sellerb.data.remote.response.GeneralResponse
 import com.ssafy.sellerb.data.remote.response.LoginResponse
 import com.ssafy.sellerb.data.remote.response.UserInfoResponse
 import retrofit2.http.*
@@ -16,8 +18,8 @@ interface NetworkService {
 
     @POST(Endpoints.SIGNUP)
     suspend fun doSignupCall(
-        @Body request: LoginRequest
-    )
+        @Body request: SignupRequest
+    ):UserInfoResponse
 
     @GET(Endpoints.GET_USER_INFO)
     suspend fun getUserInfoCall(

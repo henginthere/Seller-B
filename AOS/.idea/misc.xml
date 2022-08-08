@@ -3,9 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/SSAFY/S07P12D105/AOS/app/src/main/res/layout/activity_main.xml" value="0.178125" />
         <entry key="..\:/SSAFY/S07P12D105/AOS/app/src/main/res/layout/activity_qr_scan.xml" value="0.1778115501519757" />
         <entry key="..\:/SSAFY/S07P12D105/AOS/app/src/main/res/layout/fragment_home.xml" value="0.1778115501519757" />
+        <entry key="..\:/SSAFY/S07P12D105/AOS/app/src/main/res/layout/fragment_login.xml" value="0.1105072463768116" />
         <entry key="..\:/SSAFY/S07P12D105/AOS/app/src/main/res/layout/fragment_my_page.xml" value="0.1" />
+        <entry key="..\:/SSAFY/S07P12D105/AOS/app/src/main/res/layout/fragment_signup.xml" value="0.25" />
         <entry key="..\:/SSAFY/S07P12D105/AOS/app/src/main/res/layout/fragment_waiting.xml" value="0.25" />
         <entry key="app/src/main/res/drawable/ic_baseline_qr_code_scanner_24.xml" value="0.1845" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1845" />
