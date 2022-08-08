@@ -38,6 +38,7 @@ public class ManagerController {
         return ResponseEntity.ok(managerService.update(editManagerDto, managerSeq));
     }
 
+
     @DeleteMapping("/{managerSeq}")
     public ResponseEntity<ManagerDto> deleteManager(@PathVariable Long managerSeq) {
         // Access the DB and delete the order
