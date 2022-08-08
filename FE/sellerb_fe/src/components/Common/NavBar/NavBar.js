@@ -1,17 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./NavBar.css";
+import { getManagerInfoApi } from "../../../api/managerApi";
+import { detailConsultantApi } from "../../../api/consultantApi";
 
 function NavBar() {
   var isManager = true;
+  if (sessionStorage.getItem("adminCheck") === "ROLE_ADMIN") {
+    isManager = true;
+  } else {
+    isManager = false;
+  }
+
   return (
     <>
       <div className='navbar-wrapper'>
         <div className='navbar-left'>
-          <Link
-            to={isManager ? "/manager/main" : "/consultant/main"}
-            style={{ marginTop: "7px" }}
-          >
+          <Link to={isManager ? "/manager/main" : "/consultant/main"} style={{ marginTop: "7px" }}>
             <img
               className='navbar-logo-img'
               alt='#'
@@ -27,8 +32,8 @@ function NavBar() {
               <Link to='/manager/noticeList' className='link-to'>
                 <h4>공지사항</h4>
               </Link>
-              <Link to='#' className='link-to'>
-                <h4>회의 참여</h4>
+              <Link to='/meeting/mancon' className='link-to'>
+                <h4>회의 생성</h4>
               </Link>
               <Link to='/manager/productList' className='link-to'>
                 <h4>제품관리</h4>
@@ -45,7 +50,7 @@ function NavBar() {
               <Link to='/manager/noticeList' className='link-to'>
                 <h4>공지사항</h4>
               </Link>
-              <Link to='#' className='link-to'>
+              <Link to='/meeting/mancon' className='link-to'>
                 <h4>회의 참여</h4>
               </Link>
               <Link to='/consultant/mypage' className='link-to'>
