@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_homeFragment_to_loginFragment"
             app:destination="@+id/loginFragment"/>
+        <action
+            android:id="@+id/action_homeFragment_to_WaitingFragment"
+            app:destination="@+id/waitingFragment"/>
     </fragment>
 
     <fragment
@@ -39,6 +42,16 @@
         <action
             android:id="@+id/action_LoginFragment_to_HomeFragment"
             app:destination="@+id/item_home" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/waitingFragment"
+        android:name="com.ssafy.sellerb.ui.consulting.WaitingFragment"
+        android:label="fragment_waiting"
+        tools:layout="@layout/fragment_waiting">
+        <action
+            android:id="@+id/action_WaitingFragment_to_HomeFragment"
+            app:destination="@+id/item_home"/>
     </fragment>
 
 </navigation>
