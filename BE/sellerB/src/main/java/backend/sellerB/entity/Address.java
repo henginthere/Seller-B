@@ -22,7 +22,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
 @SQLDelete(sql = "UPDATE t_address SET address_del_yn=true WHERE address_seq=?")
-@Where(clause = "address_del_yn=false")
+@Where(clause = "addr_del_yn=false")
 @Table(name = "t_address", schema = "sellerb", catalog = "")
 public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)

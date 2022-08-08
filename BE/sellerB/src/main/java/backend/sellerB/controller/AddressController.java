@@ -44,23 +44,23 @@ public class AddressController {
         return ResponseEntity.ok(addressService.create(registerAddressDto));
     }
 
-    @GetMapping("/{seq}")
-    public ResponseEntity<AddressDto> getAddressDetail(@PathVariable Long seq) {
+    @GetMapping("/{customer-id}/{seq}")
+    public ResponseEntity<AddressDto> getAddressDetail(@PathVariable("seq") Long seq) {
         return ResponseEntity.ok(addressService.getAddressDetail(seq));
     }
 
     @GetMapping("/list/{customer-id}")
-    public ResponseEntity<List<AddressDto>> getAddressList(@PathVariable String customerId, HttpServletRequest request) {
+    public ResponseEntity<List<AddressDto>> getAddressList(@PathVariable("customer-id") String customerId, HttpServletRequest request) {
         return ResponseEntity.ok(addressService.getAddressList(customerId));
     }
 
-    @PutMapping("/{seq}")
-    public ResponseEntity<RegisterAddressDto> updateAddress(@Valid @RequestBody RegisterAddressDto registerAddressDto, @PathVariable Long seq) {
+    @PutMapping("/{customer-id}/{seq}")
+    public ResponseEntity<RegisterAddressDto> updateAddress(@Valid @RequestBody RegisterAddressDto registerAddressDto, @PathVariable("seq") Long seq) {
         return ResponseEntity.ok(addressService.updateAddress(seq, registerAddressDto));
     }
 
-    @DeleteMapping("/{seq}")
-    public ResponseEntity<AddressDto> deleteAddress(@PathVariable Long seq) {
+    @DeleteMapping("/{customer-id}/{seq}")
+    public ResponseEntity<AddressDto> deleteAddress(@PathVariable("seq") Long seq) {
         return ResponseEntity.ok(addressService.deleteAddress(seq));
     }
 }
