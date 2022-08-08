@@ -1,4 +1,4 @@
-package com.ssafy.sellerb.ui.consulting
+package com.ssafy.sellerb.ui.consulting.waiting
 
 import com.ssafy.sellerb.data.repository.UserRepository
 import com.ssafy.sellerb.ui.base.BaseViewModel

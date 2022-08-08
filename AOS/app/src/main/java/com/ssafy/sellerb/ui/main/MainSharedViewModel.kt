@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import com.ssafy.sellerb.ui.base.BaseViewModel
 import com.ssafy.sellerb.util.CoroutineDispatchers
 import com.ssafy.sellerb.util.Event
-import com.ssafy.sellerb.util.network.NetworkHelper
 
 class MainSharedViewModel(
     coroutineDispatchers: CoroutineDispatchers,

@@ -1,8 +1,8 @@
-package com.ssafy.sellerb.ui.consulting
+package com.ssafy.sellerb.ui.consulting.waiting
 
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import com.ssafy.sellerb.R
-import com.ssafy.sellerb.databinding.FragmentHomeBinding
 import com.ssafy.sellerb.databinding.FragmentWaitingBinding
 import com.ssafy.sellerb.di.component.FragmentComponent
 import com.ssafy.sellerb.ui.base.BaseFragment
@@ -31,6 +31,10 @@ class WaitingFragment : BaseFragment<WaitingViewModel>(){
         _binding = FragmentWaitingBinding.bind(view)
 
         binding.tvQrTest.text = mainSharedViewModel.qrCodeUrl.value!!.peek()
+
+        binding.btnCancel.setOnClickListener{
+            findNavController().navigate(R.id.action_WaitingFragment_to_HomeFragment)
+        }
     }
 
     override fun setUpObserver() {
