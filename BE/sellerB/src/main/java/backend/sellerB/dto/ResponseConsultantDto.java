@@ -29,7 +29,7 @@ public class ResponseConsultantDto {
     @Size(min = 3, max = 100)
     private String consultantPass;
     private String consultantTel;
-    private ProductGroup productGroup;
+    private String productGroupName;
     private String consultantImageUrl;
     private Boolean consultantDelYn;
     private String brandName;
@@ -71,8 +71,7 @@ public class ResponseConsultantDto {
                 .consultantPass(consultant.getConsultantPass())
                 .consultantTel(consultant.getConsultantTel())
                 .brandName(getBrandName(consultant))
-                .productGroup(consultant.getProductGroup())
-
+                .productGroupName(consultant.getProductGroup().getProductGroupName())
                 .consultantImageUrl(consultant.getConsultantImageUrl())
                 .consultantDelYn(consultant.getConsultantDelYn())
                 .authorityDtoSet(consultant.getAuthorities().stream()
@@ -97,7 +96,7 @@ public class ResponseConsultantDto {
                     .consultantImageUrl(consultantList.get(i).getConsultantImageUrl())
                     .brandName(getBrandName(consultantList.get(i)))
 //                    .consultantDelYn(consultantList.get(i).getConsultantDelYn())
-//                    .productGroup(consultantList.get(i).getProductGroup())
+                    .productGroupName(consultantList.get(i).getProductGroup().getProductGroupName())
 //                    .authorityDtoSet(consultantList.get(i).getAuthorities().stream()
 //                            .map(authority -> AuthorityDto.builder().authorityName(authority.getAuthorityName()).build())
 //                            .collect(Collectors.toSet()))
