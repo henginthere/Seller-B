@@ -24,8 +24,7 @@ function ConsultantRegister() {
     consultantEmail: "",
     consultantPass: "",
     consultantTel: "",
-    prodcutGroupSeq: "",
-    productGroupName: "",
+    productGroupSeq: "",
     consultantImageUrl: "",
   });
 
@@ -42,7 +41,8 @@ function ConsultantRegister() {
     consultantEmail,
     consultantPass,
     consultantTel,
-    productGroupName,
+    productGroupSeq,
+    consultantImageUrl
   } = consultant;
 
   // 이미지 파일 관련
@@ -87,12 +87,6 @@ function ConsultantRegister() {
     formData.append("file", e.target.files[0]);
     console.log(formData);
 
-    // const config = {
-    //   Headers: {
-    //     "content-type": "multipart/form-data",
-    //   },
-    // };
-
     // 제품 정보
     setConsultant({
       ...consultant,
@@ -121,26 +115,9 @@ function ConsultantRegister() {
       });
   }, []);
 
-  const onRegisterBtn = (event) => {
-    event.preventDefault();
+  const onRegisterBtn = (e) => {
+
     // productGroupName에 맞는 Seq찾기
-
-    // const item = groupList.find(
-    //     (it) => it.brandName === managerBrand
-    //     && it.productGroupName === consultant.productGroupName
-    //     );
-
-    // console.log("item: " + item.brandName + " , " + item.productGroupSeq);
-
-    // const name = "productGroupSeq";
-    // const value = item.productGroupSeq;
-    // setConsultant({
-    //   ...consultant,
-    //   [name]: value,
-    // });
-
-    // console.log(consultant.prodcutGroupSeq)
-
     // const info = {
     //   consultantId: consultant.consultantId,
     //   consultantName : consultant.consultantName,
@@ -150,6 +127,7 @@ function ConsultantRegister() {
     //   prodcutGroupSeq : item.prodcutGroupSeq,
     //   consultantImageUrl:"",
     // }
+    console.log("등록전 컨설턴트 상태 : " + JSON.stringify(consultant))
 
     registerConsultantApi(consultant)
       .then((res) => {
@@ -179,19 +157,20 @@ function ConsultantRegister() {
     const item = groupList.find(
       (it) =>
         it.brandName === managerBrand &&
-        it.productGroupName === consultant.productGroupName
+        it.productGroupName === e.target.value
     );
 
-    console.log("item: " + item.brandNameKor + " , " + item.productGroupSeq);
+    console.log("item: " + item.brandName + " , " + item.productGroupSeq);
 
-    const { value, name } = e.target;
+    const value = item.prodcutGroupSeq;
+    const { name } = e.target;
    
     setConsultant({
       ...consultant,
       [name]: value,
     });
 
-    console.log("onGroupChange:" + consultant.productGroupName);
+    console.log("onGroupChange:" + consultant.productGroupSeq);
   };
 
   return (
@@ -221,7 +200,7 @@ function ConsultantRegister() {
             id="file"
             onChange={handleChangeFile}
           />
-          {/* <button onClick={deleteImage}>이미지 삭제</button> */}
+
           <button className="bottom-btn" onClick={onProductSubmitBtn}>
             업로드하기
           </button>
@@ -295,8 +274,8 @@ function ConsultantRegister() {
                 fullWidth="true"
                 name="productGroupName"
                 value={consultant.productGroupName}
-                onChange={onChange}
-                // onChange={onGroupChange}
+                // onChange={onChange}
+                onChange={onGroupChange}
                 SelectProps={{
                   native: true,
                 }}

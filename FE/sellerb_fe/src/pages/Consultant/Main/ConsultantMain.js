@@ -1,31 +1,53 @@
 import React from "react";
 
-import NavBar from "../../../components/Common/NavBar/NavBar";
+import { Footer, NavBar } from "../../../components/index";
 import "./ConsultantMain.css";
 import styled from "styled-components";
 
 function ConsultantMain() {
-
   const tableDummyData = [
     {
-      "No": 1,
-      "제품명" : "SHA-16A",
+      No: 1,
+      제품명: "SHA-16A",
     },
     {
-      "No": 2,
-      "제품명" : "SHA-16B",
+      No: 2,
+      제품명: "SHA-16B",
     },
     {
-      "No": 3,
-      "제품명" : "SHA-16C",
-    }
-  ]
+      No: 3,
+      제품명: "SHA-16C",
+    },
+  ];
 
   return (
     <>
       <NavBar></NavBar>
       <div className="consultant-main-wrapper">
-        <div className="welcome-msg">---님 환영합니다!</div>
+
+        <div className="main-header">
+          <div className="header-left">
+            <div className="left-content-comment">
+              oo님 환영합니다!
+            </div>
+            <div className="attend-wrapper">
+              <div className="go-btn-wrapper">
+                <div className="go-btn">
+                  출근하기
+                </div>
+              </div>
+              <div className="leave-btn-wrapper">
+              <div className="leave-btn">
+                  퇴근하기
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* <div className="attendance-wrappper">
+            <div>출근</div>
+            <div>퇴근</div>
+          </div> */}
+        </div>
         <div className="notice-consulting-wrapper">
           <div className="notice">
             <div className="notice-title">공지사항</div>
@@ -33,7 +55,9 @@ function ConsultantMain() {
           </div>
           <div className="consulting-request">
             <div className="reqeust-title">상담신청 내역</div>
+
             <hr />
+
             {/* table START*/}
             <table class="content-table">
               <thead>
@@ -79,7 +103,10 @@ function ConsultantMain() {
             </table>
           </div>
         </div>
+
+
       </div>
+      <Footer />
     </>
   );
 }
