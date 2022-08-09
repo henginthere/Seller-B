@@ -1,9 +1,12 @@
 package backend.sellerB.service;
 
+import backend.sellerB.dto.CreateOrderDto;
 import backend.sellerB.dto.CustomerDto;
 import backend.sellerB.dto.OrderDto;
+import backend.sellerB.entity.Address;
 import backend.sellerB.entity.Customer;
 import backend.sellerB.entity.Order;
+import backend.sellerB.repository.AddressRepository;
 import backend.sellerB.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,19 +20,24 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class OrderService {
     private final OrderRepository orderRepository;
+    private final AddressRepository addressRepository;
 
-    public OrderDto createOrder(OrderDto orderDto) {
+    public OrderDto createOrder(CreateOrderDto createOrderDto) {
+        Optional<Address> addressOptional = addressRepository.findById(createOrderDto.getAddrSeq());
+        Address address = addressOptional.get();
         Order order = Order.builder()
-                .addr(orderDto.getAddress())
-                .orderState(orderDto.getOrderState())
+                .addr(address)
+                .orderState(createOrderDto.getOrderState())
                 .build();
 
         return OrderDto.from(orderRepository.save(order));
     }
 
     //고객 자신만의 주문 목록을 조회해야한다
-    public List<OrderDto> getOrderList() {
-        return OrderDto.fromList(orderRepository.findAll());
+    public List<OrderDto> getOrderList(Long seq) {
+        Optional<List<Order>> orderOptionalList = orderRepository.findByOrderRegUserSeq(seq);
+        List<Order> orderList = orderOptionalList.get();
+        return OrderDto.fromList(orderList);
     }
 
     public OrderDto getOrderDetail(Long seq) {
