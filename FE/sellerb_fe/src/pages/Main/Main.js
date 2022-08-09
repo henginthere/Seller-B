@@ -9,6 +9,7 @@ import { LOGIN } from "../../slices/userSlice";
 // import { loginUser }
 
 import { LoginApi } from "../../api/userApi";
+import { getManagerInfoApi } from '../../api/managerApi';
 import { setRefreshToken, getCookieToken } from "../../storage/Cookie";
 import { SET_TOKEN, CHECK_ADMIN } from "../../slices/authSlice";
 
@@ -60,32 +61,47 @@ function Main() {
         sessionStorage.setItem("seq", res.data.seq);
         console.log(sessionStorage.getItem("seq"));
 
-        axios
-          .get(`/api/brand/${brandSeq}`)
+        // axios
+        //   .get(`/api/brand/${brandSeq}`)
+        //   .then((res) => {
+        //     console.log("LOGIN: " + JSON.stringify(res.data));
 
-          .then((res) => {
-            console.log("LOGIN: " + JSON.stringify(res.data));
+        //     sessionStorage.setItem("brandNameKor", res.data.brandNameKor);
+        //     sessionStorage.setItem("brandNameEng", res.data.brandNameEng);
+        //     console.log("manager's brand:" + res.data.brandNameKor);
 
-            sessionStorage.setItem("brandNameKor", res.data.brandNameKor);
-            sessionStorage.setItem("brandNameEng", res.data.brandNameEng);
-            console.log("manager's brand:" + res.data.brandNameKor);
+        //     console.log("manager's brand:" + sessionStorage.getItem("brandNameEng"));
+        //     sessionStorage.getItem("accessToken");
 
-            console.log("manager's brand:" + sessionStorage.getItem("brandNameEng"));
-            sessionStorage.getItem("accessToken");
-
-            console.log(sessionStorage.getItem("brandNameKor"));
-          })
-          .catch((err) => {});
+        //     console.log(sessionStorage.getItem("brandNameKor"));
+        //   })
+        //   .catch((err) => {});
 
         // isAdmin이라면, Redux isAdmin 값 true로 전환
         dispatch(CHECK_ADMIN());
-        navigate("/manager/main");
+       
         if (adminCheck === "ROLE_ADMIN") {
           sessionStorage.setItem("adminCheck", "ROLE_ADMIN");
         } else {
           sessionStorage.setItem("adminCheck", "ROLE_USER");
           navigate("/consultant/main");
         }
+
+        navigate("/manager/main");
+      })
+      .then((res)=>{
+        const seq = sessionStorage.getItem("seq");
+        // axios
+          getManagerInfoApi(seq)
+          .then((res) => {
+            console.log("LOGIN 한 매니저 정보: " + JSON.stringify(res.data));
+
+            sessionStorage.setItem("brandNameKor", res.data.brand.brandNameKor);
+            sessionStorage.setItem("brandNameEng", res.data.brand.brandNameEng);
+
+            console.log("IN SESSION:" + sessionStorage.getItem("brandNameKor"));
+          })
+          .catch((err) => {});
       })
       .catch((err) => {
         console.log(err.data);

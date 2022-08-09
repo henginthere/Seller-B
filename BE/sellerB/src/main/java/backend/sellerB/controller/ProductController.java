@@ -1,5 +1,6 @@
 package backend.sellerB.controller;
 
+import backend.sellerB.dto.EditProductDto;
 import backend.sellerB.dto.NoticeDto;
 import backend.sellerB.dto.ProductDto;
 import backend.sellerB.dto.ProductRes;
@@ -29,33 +30,32 @@ public class ProductController {
     }
 
     @GetMapping("/{seq}")
-    public ResponseEntity<ProductRes> getProductDetail(@PathVariable Long seq) {
+    public ResponseEntity<ProductDto> getProductDetail(@PathVariable Long seq) {
         return ResponseEntity.ok(productService.getProductDetail(seq));
     }
-    @GetMapping("/name/{product-name}")
-    public ResponseEntity<List<ProductRes>> getProductListByName(HttpServletRequest request, @PathVariable("product-name") String productName) throws UnsupportedEncodingException {
+    @GetMapping("/name/{productName}")
+    public ResponseEntity<List<ProductDto>> getProductListByName(HttpServletRequest request, @PathVariable String productName) throws UnsupportedEncodingException {
         String koreanProductName = URLDecoder.decode(productName, "UTF-8");
         return ResponseEntity.ok(productService.getProductListByName(koreanProductName));
     }
-    @GetMapping("/id/{product-id}")
-    public ResponseEntity<ProductRes> getProductDetailById(@PathVariable String productId) {
+    @GetMapping("/id/{productId}")
+    public ResponseEntity<ProductDto> getProductDetailById(@PathVariable String productId) {
         return ResponseEntity.ok(productService.getProductDetailById(productId));
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<ProductRes>> getProductList(HttpServletRequest request) {
+    public ResponseEntity<List<ProductDto>> getProductList(HttpServletRequest request) {
         return ResponseEntity.ok(productService.getProductList());
     }
 
-    @GetMapping("/list/{product-group-name}")
-    public ResponseEntity<List<ProductRes>> getProductListByProductGroupName(HttpServletRequest request, @PathVariable("product-group-name") String productGroupName) throws UnsupportedEncodingException {
-        String koreanProductGroupName = URLDecoder.decode(productGroupName, "UTF-8");
-        return ResponseEntity.ok(productService.getProductListByGroupName(koreanProductGroupName));
+    @GetMapping("/list/{productGroupSeq}")
+    public ResponseEntity<List<ProductDto>> getProductListByProductGroupSeq(HttpServletRequest request, @PathVariable Long productGroupSeq) {
+        return ResponseEntity.ok(productService.getProductListByGroupSeq(productGroupSeq));
     }
 
     @PutMapping("/{seq}")
-    public ResponseEntity<ProductDto> updateProduct(@Valid @RequestBody ProductDto productDto, @PathVariable Long seq) {
-        return ResponseEntity.ok(productService.update(seq, productDto));
+    public ResponseEntity<ProductDto> updateProduct(@Valid @RequestBody EditProductDto editProductDto, @PathVariable Long seq) {
+        return ResponseEntity.ok(productService.update(seq, editProductDto));
     }
 
     @DeleteMapping("/{seq}")
