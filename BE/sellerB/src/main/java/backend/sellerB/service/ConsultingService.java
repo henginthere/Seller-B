@@ -102,6 +102,8 @@ public class ConsultingService {
         // openvidu session 만들기
         OpenviduSessionDto openviduSessionDto = requestToOpenviduCreate(customer.getCustomerId());
 
+        // fcm 메세지 보내기
+
         return RegisterConsultingDto.from(consultingRepository.save(consulting));
     }
 

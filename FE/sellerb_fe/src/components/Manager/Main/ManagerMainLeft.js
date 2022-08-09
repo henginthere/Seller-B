@@ -7,6 +7,8 @@ import { StaticDatePicker } from "@mui/x-date-pickers";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 
+import { MediButton} from '../../Common/MediButton'
+
 function ManagerMainLeft() {
   const [value, setValue] = React.useState(new Date());
   const navigate = useNavigate();
@@ -52,9 +54,10 @@ function ManagerMainLeft() {
         </LocalizationProvider>
         {/* 달력 END */}
         <div style={styleObj_Button}>
-          <Button variant='contained' onClick={mvMeetingManCon}>
+          <MediButton label="회의 생성" onClick={mvMeetingManCon} />
+          {/* <Button variant='contained' onClick={mvMeetingManCon}>
             회의 생성
-          </Button>
+          </Button> */}
         </div>
       </div>
     </>
