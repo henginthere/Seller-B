@@ -38,7 +38,6 @@ public class CustomerDto {
                 .customerSeq(customer.getCustomerSeq())
                 .customerId(customer.getCustomerId())
                 .customerName(customer.getCustomerName())
-                .customerPass(customer.getCustomerPass())
                 .customerEmail(customer.getCustomerEmail())
                 .customerBirth(customer.getCustomerBirth())
                 .customerToken(customer.getCustomerToken())
