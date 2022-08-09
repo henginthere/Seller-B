@@ -16,7 +16,7 @@ public class RegisterConsultingDto {
     private String customerId;  //seq로 수정? 이 정보로 바로 sessionId 만드는게 좋지 않을까
     private Long consultantSeq;
     private Long productSeq;
-    private Boolean consultingState;
+    private String consultingState;
     //openvidu 정보를 입력
 
     public static RegisterConsultingDto from(Consulting consulting) {
