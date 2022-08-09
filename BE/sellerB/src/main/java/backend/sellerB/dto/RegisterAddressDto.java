@@ -13,14 +13,16 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 public class RegisterAddressDto {
-    private String customerId;
+    private Long addrSeq;
+    private Long customerSeq;
     private String addr;
     private String addrRequest;
 
     public static RegisterAddressDto from(Address address) {
         if(address == null) return null;
         return RegisterAddressDto.builder()
-                .customerId(address.getCustomer().getCustomerId())
+                .addrSeq(address.getAddrSeq())
+                .customerSeq(address.getCustomer().getCustomerSeq())
                 .addr(address.getAddr())
                 .addrRequest(address.getAddrRequests())
                 .build();
@@ -31,7 +33,8 @@ public class RegisterAddressDto {
         int i = 0;
         while (i < addressList.size()) {
             RegisterAddressDto registerAddressDto = RegisterAddressDto.builder()
-                    .customerId(addressList.get(i).getCustomer().getCustomerId())
+                    .addrSeq(addressList.get(i).getAddrSeq())
+                    .customerSeq(addressList.get(i).getCustomer().getCustomerSeq())
                     .addr(addressList.get(i).getAddr())
                     .addrRequest(addressList.get(i).getAddrRequests())
                     .build();
