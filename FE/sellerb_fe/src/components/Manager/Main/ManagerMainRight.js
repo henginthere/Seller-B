@@ -9,9 +9,12 @@ import {
   listConsultantApi,
   searchConsultantApi,
   listGroupConsultantApi,
+  brandConsultantListApi
 } from "../../../api/consultantApi";
 import { productGroupListApi } from "../../../api/productApi";
-
+import { getManagerInfoApi } from "../../../api/managerApi"
+import { SmallButton } from '../../Common/SmallButton'
+import { MediButton } from "../../Common/MediButton";
 import "./ManagerMain.css";
 
 const styleObj = {
@@ -67,6 +70,21 @@ function ManagerMainRight() {
   const [listState, setListState] = useState(true);
 
   useEffect(() => {
+    const name = sessionStorage.getItem("brandNameKor");
+    brandConsultantListApi(name)
+      .then((res) => {
+        // console.log("after API:" + res.data[0].consultantId);
+        // 소속브랜드의 상담사들만 보이기
+        console.log(JSON.stringify(res.data));
+        setConsultantList(res.data);
+      })
+      .catch((err) => {
+        console.log("err:" + err.data);
+      });
+  }, []);
+
+
+  useEffect(() => {
     productGroupListApi()
       .then((res) => {
         // const item = brandList.find((it) => it.brandNameKor === value)
@@ -80,12 +98,6 @@ function ManagerMainRight() {
   }, []);
 
 
-  // const filterMethod = (target) => {
-  //   return data.filter((it) =>
-  //   it.brandName === managerBrand && it.productGroupName === target
-  //   ? it 
-  //   : ""
-  //   )}
 
   const onGroupChange = (e) => {
     e.preventDefault();
@@ -93,53 +105,12 @@ function ManagerMainRight() {
     console.log("e.target.value:" + e.target.value)
 
     setSelectGroup(e.target.value);
-    console.log("selectGroup: " + JSON.stringify(selectGroup));
-
-    console.log("전체컨설턴트 data: " + JSON.stringify(consultantList));
-
-    let ENG = localStorage.getItem("brandNameEng");
-    console.log("managerBranEng: " + ENG)
 
     // data(전체 컨설턴트)에서, 브랜드네임이랑 && 선택한 제품군에 일치하는 상담사만 뽑기
       const item = consultantList.filter(
       it => it.brandName === managerBrandEng );
     
-    console.log("filter > item :" + JSON.stringify(item));
-
-    {
-      item.length > 1
-      ? setConsultantList(item)
-      : setConsultantList("dd")
-    }
-    
-    // setData(item);
-    // console.log("전체컨설턴트 data: " + JSON.stringify(data));
-    // console.log("onGroupChange:" + selectGroup);
   };
-
-
-  // const onGroupChange = (e) => {
-  //   e.preventDefault();
-  //   console.log("e.target.value:" + e.target.value)
-
-  //   setSelectGroup(e.target.value);
-
-  //   const item = groupList.find(
-  //     (it) =>
-  //       it.brandName === managerBrandKor && it.productGroupName === e.target.value
-  //   );
-  //   console.log("item: " + JSON.stringify(item));
-  //   console.log("onGroupChange:" + selectGroup);
-    
-  //   // 제품그룹군에 해당하는 상담사 리스트 api
-  //   listGroupConsultantApi(e.target.value)
-  //   .then((res)=>{
-  //     console.log("listGroupConsultantApi:" + res.data);
-  //   })
-  //   .catch((err)=>{
-  //     console.log(err.data);
-  //   })
-  // };
 
   const goDetail = (seq) => {
     console.log("seq:" + seq);
@@ -164,17 +135,6 @@ function ManagerMainRight() {
     setSearchName(e.target.value);
   };
 
-  useEffect(() => {
-    listConsultantApi()
-      .then((res) => {
-        // console.log("after API:" + res.data[0].consultantId);
-
-        setConsultantList(res.data);
-      })
-      .catch((err) => {
-        console.log("err:" + err.data);
-      });
-  }, []);
 
   return (
     <div style={styleObj}>
@@ -185,8 +145,8 @@ function ManagerMainRight() {
           value={searchName}
           onChange={onSearchNameChane}
         />
-        <button onClick={(e) => onSearchBtn()}>검색하기</button>
-
+        {/* <button onClick={(e) => onSearchBtn()}>검색하기</button> */}
+        <SmallButton onClick={(e) => onSearchBtn()} size="sm" label="검색하기" />
         <select onChange={onGroupChange} defaultValue={selectGroup}>
           <option />
           {groupList.map((option) =>
@@ -231,7 +191,6 @@ function ManagerMainRight() {
               })
             ) : (
               <>
-                {/* <div>TESTSSSSSSSSSSSSSSS</div> */}
                 <tr>
                   <td
                     onClick={() =>
@@ -250,7 +209,8 @@ function ManagerMainRight() {
           </tbody>
         </table>
         <Link to="/manager/consultantRegister">
-          <Button variant="contained">상담사 추가</Button>
+          {/* <Button variant="contained">상담사 추가</Button> */}
+          <MediButton size="md" label="상담사추가" />
         </Link>
       </div>
     </div>
