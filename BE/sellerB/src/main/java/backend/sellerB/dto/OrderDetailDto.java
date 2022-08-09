@@ -14,6 +14,8 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 public class OrderDetailDto {
+
+    private Long orderDetailSeq;
     private Product product;
     private Order order;
     private Integer orderDetailCount;
@@ -21,6 +23,7 @@ public class OrderDetailDto {
     public static OrderDetailDto from(Orderdetail orderdetail) {
         if(orderdetail == null) return null;
         return OrderDetailDto.builder()
+                .orderDetailSeq(orderdetail.getOrderDetailSeq())
                 .product(orderdetail.getProduct())
                 .order(orderdetail.getOrder())
                 .orderDetailCount(orderdetail.getOrderDetailCount())
@@ -32,6 +35,7 @@ public class OrderDetailDto {
         int i = 0;
         while (i < orderdetailList.size()) {
             OrderDetailDto orderDetailDto = OrderDetailDto.builder()
+                    .orderDetailSeq(orderdetailList.get(i).getOrderDetailSeq())
                     .product(orderdetailList.get(i).getProduct())
                     .order(orderdetailList.get(i).getOrder())
                     .orderDetailCount(orderdetailList.get(i).getOrderDetailCount())
