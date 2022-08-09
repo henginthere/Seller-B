@@ -109,7 +109,7 @@ public class ConsultingService {
         return ResponseConsultingDto.fromList(consultingRepository.findAllByConsultant_ConsultantId(consultantId));}
 
 
-    public RegisterConsultingDto updateConsulting(Long seq, RegisterConsultingDto registerConsultingDto) throws JsonProcessingException {
+    public RegisterConsultingDto updateConsulting(Long seq, RegisterConsultingDto registerConsultingDto) {
         Optional<Consulting> consultingOptional = consultingRepository.findById(seq);
         Consulting consulting = consultingOptional.get();
         Optional<Customer> customerOptional = customerRepository.findBycustomerId(registerConsultingDto.getCustomerId());
@@ -123,20 +123,31 @@ public class ConsultingService {
         consulting.setProduct(product);
         consulting.setConsultingState(registerConsultingDto.getConsultingState());
 
-        // openvidu session delete
-        if (registerConsultingDto.getConsultingState().equals("delete")) {
-            HttpEntity<String> response = requestToOpenviduDelete(customer.getCustomerId());
-        }
-        // fcm으로 고객에게 종료 알림?
+
         return RegisterConsultingDto.from(consulting);
     }
     @PreUpdate
-    public RegisterConsultingDto updateConsultingState(Long seq, EditConsultingStateDto editConsultingStateDto) {
+    public RegisterConsultingDto updateConsultingState(Long seq, EditConsultingStateDto editConsultingStateDto) throws JsonProcessingException {
         Optional<Consulting> consultingOptional = consultingRepository.findById(seq);
         Consulting consulting = consultingOptional.get();
-        consulting.setConsultingState(editConsultingStateDto.getConsultingState());
+        String consultingState = consulting.getConsultingState();
+
+        if (editConsultingStateDto.getConsultingState().equals("start")) {
+            consulting.setConsultingState(editConsultingStateDto.getConsultingState());
+            return RegisterConsultingDto.from(consulting);
+        }
+        if (consultingState.equals("waiting")) {
+            consulting.setConsultingState("noShow");
+        } else if (consultingState.equals("start")) {
+            consulting.setConsultingState("end");
+        }
+//        consulting.setConsultingState(editConsultingStateDto.getConsultingState());
+
+        // openvidu session delete
+        HttpEntity<String> response = requestToOpenviduDelete(consulting.getCustomer().getCustomerId());
 
         // fcm으로 고객에게 종료 알림?
+
         return RegisterConsultingDto.from(consulting);
     }
 }
