@@ -9,4 +9,6 @@ import java.util.Optional;
 
 public interface WaitingCustomerRepository extends JpaRepository<WaitingCustomer, Long> {
     List<WaitingCustomer> findWaitingCustomersByProductGroup_ProductGroupName(String productGroupName);
+
+    List<WaitingCustomer> findWaitingCustomersByProductGroup_ProductGroupSeq(Long productGroupSeq);
 }
