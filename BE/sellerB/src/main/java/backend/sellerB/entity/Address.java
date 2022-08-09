@@ -23,7 +23,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @DynamicInsert
 @EntityListeners(AuditingEntityListener.class)
-@SQLDelete(sql = "UPDATE t_address SET address_del_yn=true WHERE address_seq=?")
+@SQLDelete(sql = "UPDATE t_address SET addr_del_yn=true WHERE addr_seq=?")
 @Where(clause = "addr_del_yn=false")
 @Table(name = "t_address", schema = "sellerb", catalog = "")
 public class Address {

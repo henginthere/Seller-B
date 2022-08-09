@@ -8,4 +8,5 @@ import java.util.Optional;
 
 public interface AddressRepository extends JpaRepository<Address, Long> {
     Optional<List<Address>> findAddressesByCustomer_CustomerId(String customerId);
+    Optional<List<Address>> findAddressByCustomer_CustomerSeq(Long customerSeq);
 }
