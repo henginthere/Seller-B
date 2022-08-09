@@ -42,6 +42,12 @@ public class OrderDetailService {
         return OrderDetailDto.fromList(orderDetailRepository.findAll());
     }
 
+    public List<OrderDetailDto> getOrderDetailbyOrderSeq(Long orderSeq) {
+        Optional<List<Orderdetail>> orderDetailOptionalList = orderDetailRepository.findByOrder_OrderSeq(orderSeq);
+        List<Orderdetail> orderdetailList = orderDetailOptionalList.get();
+        return OrderDetailDto.fromList(orderdetailList);
+    }
+
     public OrderDetailDto getOrderDetailDetail(Long seq) {
         Optional<Orderdetail> orderDetailOptional = orderDetailRepository.findById(seq);
         Orderdetail orderdetail = orderDetailOptional.get();
