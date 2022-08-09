@@ -1,8 +1,6 @@
 package backend.sellerB.service;
 
 import backend.sellerB.dto.CreateWaitingCustomerDto;
-import backend.sellerB.dto.NoticeDto;
-import backend.sellerB.dto.NoticeReq;
 import backend.sellerB.dto.WaitingCustomerDto;
 import backend.sellerB.entity.*;
 import backend.sellerB.repository.CustomerRepository;
@@ -66,6 +64,7 @@ public class WaitingCustomerService {
         WaitingCustomer waitingCustomer = waitingCustomerOptional.get();
 //        waitingCustomer.setWatingCustomerGroupDelYn(true);
         waitingCustomerRepository.deleteById(seq);
+        // 대기 고객 삭제 -> 상담 생성으로 이어지게?
         return WaitingCustomerDto.from(waitingCustomer);
     }
 
