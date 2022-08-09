@@ -58,9 +58,11 @@ public class Consulting {
     @Basic
     @Column(name = "consulting_end_date")
     private LocalDateTime consultingEndDate;
+
+    // 생성 시 waiting -> 고객 입장 시 start -> 고객 퇴장 시 delete
     @Basic
-    @Column(name = "consulting_state",columnDefinition = "boolean default false")
-    private Boolean consultingState;
+    @Column(name = "consulting_state",columnDefinition = "string default 'waiting'")
+    private String consultingState;
 
 
     @Override

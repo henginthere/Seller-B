@@ -1,5 +1,6 @@
 package backend.sellerB.controller;
 
+import backend.sellerB.dto.EditConsultingStateDto;
 import backend.sellerB.dto.RegisterConsultingDto;
 import backend.sellerB.dto.ResponseConsultingDto;
 import backend.sellerB.service.ConsultingService;
@@ -33,6 +34,11 @@ public class ConsultingController {
     @GetMapping("/consultant/{consultant-id}")
     public ResponseEntity<List<ResponseConsultingDto>> getConsultingByConsultantId(@PathVariable("consultant-id") String consultantId, HttpServletRequest request) {
         return ResponseEntity.ok(consultingService.getConsultingListByConsultantId(consultantId));
+    }
+
+    @PutMapping("/state/{seq}")
+    public ResponseEntity<RegisterConsultingDto> updateConsultingState(@Valid @RequestBody EditConsultingStateDto editConsultingStateDto, @PathVariable Long seq) {
+        return ResponseEntity.ok(consultingService.updateConsultingState(seq, editConsultingStateDto));
     }
 
     @PutMapping("/{seq}")
