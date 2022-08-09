@@ -2,6 +2,7 @@ package backend.sellerB.service;
 
 import backend.sellerB.dto.CustomerDto;
 import backend.sellerB.dto.EditCustomerDto;
+import backend.sellerB.dto.EditCustomerTokenDto;
 import backend.sellerB.dto.ProductDto;
 import backend.sellerB.entity.Authority;
 import backend.sellerB.entity.Customer;
@@ -86,6 +87,19 @@ public class CustomerService {
         }
 
         customer = customerRepository.saveAndFlush(customer);
+        return CustomerDto.from(customer);
+
+
+    }
+
+    @PreUpdate
+    public CustomerDto updateCustomerToken(Long seq, EditCustomerTokenDto editCustomerTokenDto) {
+
+        Optional<Customer> customerOptional = customerRepository.findById(seq);
+        Customer customer = customerOptional.get();
+        customer.setCustomerToken(editCustomerTokenDto.getCustomerToken());
+//        customer = customerRepository.saveAndFlush(customer);
+        System.out.println(customer.getCustomerId());
         return CustomerDto.from(customer);
 
 
