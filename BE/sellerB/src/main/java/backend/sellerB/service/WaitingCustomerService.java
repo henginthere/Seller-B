@@ -1,5 +1,6 @@
 package backend.sellerB.service;
 
+import backend.sellerB.dto.CreateWaitingCustomerDto;
 import backend.sellerB.dto.NoticeDto;
 import backend.sellerB.dto.NoticeReq;
 import backend.sellerB.dto.WaitingCustomerDto;
@@ -25,19 +26,19 @@ public class WaitingCustomerService {
     private final ProductGroupRepository productGroupRepository;
 
     @Transactional
-    public WaitingCustomerDto create(WaitingCustomerDto waitingCustomerDto) {
-        Optional<Customer> customerOptional = customerRepository.findById(waitingCustomerDto.getCustomerSeq());
+    public WaitingCustomerDto create(CreateWaitingCustomerDto createWaitingCustomerDto) {
+        Optional<Customer> customerOptional = customerRepository.findById(createWaitingCustomerDto.getCustomerSeq());
         Customer customer = customerOptional.get();
-        Optional<Product> productOptional = productRepository.findById(waitingCustomerDto.getProductSeq());
+        Optional<Product> productOptional = productRepository.findById(createWaitingCustomerDto.getProductSeq());
         Product product = productOptional.get();
-        Optional<ProductGroup> productGroupOptional = productGroupRepository.findByProductGroupName(waitingCustomerDto.getProductGroupName());
+        Optional<ProductGroup> productGroupOptional = productGroupRepository.findById(product.getProductGroup().getProductGroupSeq());
         ProductGroup productGroup = productGroupOptional.get();
 
         //dto를 엔티티로
         WaitingCustomer waitingCustomer = WaitingCustomer.builder()
                 .customer(customer)
                 .product(product)
-                .waitingCustomerState(waitingCustomerDto.getWaitingCustomerState())
+                .waitingCustomerState(createWaitingCustomerDto.getWaitingCustomerState())
                 .productGroup(productGroup)
                 .build();
 
