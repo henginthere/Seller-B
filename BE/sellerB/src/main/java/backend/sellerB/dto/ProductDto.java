@@ -16,6 +16,7 @@ import java.util.List;
 public class ProductDto {
     private Long productSeq;
     private String productGroupName;
+    private Long productGroupSeq;
     private String productId;
     private String productName;
     private Integer productPrice;
@@ -28,6 +29,7 @@ public class ProductDto {
         return ProductDto.builder()
                 .productSeq(product.getProductSeq())
                 .productGroupName(product.getProductGroup().getProductGroupName())
+                .productGroupSeq(product.getProductGroup().getProductGroupSeq())
                 .productId(product.getProductId())
                 .productName(product.getProductName())
                 .productPrice(product.getProductPrice())
@@ -44,6 +46,7 @@ public class ProductDto {
             ProductDto productDto = ProductDto.builder()
                     .productSeq(productList.get(i).getProductSeq())
                     .productGroupName(productList.get(i).getProductGroup().getProductGroupName())
+                    .productGroupSeq(productList.get(i).getProductGroup().getProductGroupSeq())
                     .productId(productList.get(i).getProductId())
                     .productName(productList.get(i).getProductName())
                     .productPrice(productList.get(i).getProductPrice())
