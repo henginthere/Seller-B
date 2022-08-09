@@ -49,10 +49,12 @@
 .content-header-row .row-left {
     width: 130px;
     padding: 13px 0px 13px 20px;
-    background-color: rgb(247, 245, 248);
+    /* background-color: rgb(247, 245, 248); */
+    background-color: #E1EAFF;
     border-top: 1px solid rgb(244, 244, 244);
     text-align: left;
     font-weight: 500;
+    color: #324E66;
 }
 
 .content-header-row .row-right {
@@ -60,9 +62,16 @@
     align-self: center;
 }
 
+.content-header-row .row-right-input {
+    padding-left: 25px;
+    align-self: center;
+    width: 300px;
+}
+
+
 .notice-detail-content-detail {
     padding: 30px 10px 100px;
-    border-bottom: 1px solid rgb(128, 128, 128);
+    border-bottom: 1px solid rgb(130, 130, 130);
 }
 
 pre {
@@ -82,6 +91,8 @@ pre {
     counter-reset: list-0 0 list-1 0 list-2 0 list-3 0 list-4 0 list-5 0 list-6 0 list-7 0 list-8 0 list-9 0;
 }
 
+
+/* 콘텐츠 하단부 : 목록버튼 */
 .notice-detail-bottom {
     display: flex;
     width: 100%;
@@ -95,10 +106,11 @@ pre {
     padding: 0px 10px;
     text-align: center;
     overflow: hidden;
-    width: 150px;
+    width: 148px;
     height: 42px;
     border-radius: 0px;
-    color: rgb(255, 255, 255);
-    background-color: rgb(95, 0, 128);
+    color: #324E66;
+    background-color: #E1EAFF;
     border: 0px none;
+    margin-right: 10px;
 }
