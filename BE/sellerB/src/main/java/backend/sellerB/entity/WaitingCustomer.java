@@ -22,8 +22,8 @@ import java.util.Objects;
 @AllArgsConstructor
 @DynamicInsert
 @EntityListeners(AuditingEntityListener.class)
-@SQLDelete(sql = "UPDATE t_waiting_customer SET waitingCustomer_group_del_yn=true WHERE waiting_customer_seq=?")
-@Where(clause = "waitingCustomer_group_del_yn=false")
+@SQLDelete(sql = "UPDATE t_waiting_customer SET waiting_customer_state=true WHERE waiting_customer_seq=?")
+@Where(clause = "waiting_customer_state=false")
 @Table(name = "t_waiting_customer", schema = "sellerb", catalog = "")
 public class WaitingCustomer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)

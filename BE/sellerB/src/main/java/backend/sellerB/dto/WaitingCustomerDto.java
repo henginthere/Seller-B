@@ -14,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class WaitingCustomerDto {
 
+    private Long waitingCustomerSeq;
     private Long customerSeq;
     private Long productSeq;
     private Boolean waitingCustomerState;
@@ -22,6 +23,7 @@ public class WaitingCustomerDto {
     public static WaitingCustomerDto from(WaitingCustomer waitingCustomer) {
         if(waitingCustomer == null) return null;
         return WaitingCustomerDto.builder()
+                .waitingCustomerSeq(waitingCustomer.getWaitingCustomerSeq())
                 .customerSeq(waitingCustomer.getCustomer().getCustomerSeq())
                 .productSeq(waitingCustomer.getProduct().getProductSeq())
                 .waitingCustomerState(waitingCustomer.getWaitingCustomerState())
@@ -34,6 +36,7 @@ public class WaitingCustomerDto {
         int i = 0;
         while(i < waitingCustomerList.size()){
             WaitingCustomerDto waitingCustomerDto = WaitingCustomerDto.builder()
+                    .waitingCustomerSeq(waitingCustomerList.get(i).getWaitingCustomerSeq())
                     .customerSeq(waitingCustomerList.get(i).getCustomer().getCustomerSeq())
                     .productSeq(waitingCustomerList.get(i).getProduct().getProductSeq())
                     .waitingCustomerState(waitingCustomerList.get(i).getWaitingCustomerState())
