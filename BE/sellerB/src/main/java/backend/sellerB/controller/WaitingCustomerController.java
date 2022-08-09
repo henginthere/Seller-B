@@ -34,16 +34,11 @@ public class WaitingCustomerController {
         return ResponseEntity.ok(waitingCustomerService.getWaitingCustomerDetail(seq));
     }
 
-    @GetMapping("/list/{product-group-name}")
-    public ResponseEntity<List<WaitingCustomerDto>> getWaitingCustomerListByProductGroupNameList(@PathVariable("product-group-name") String productGroupName, HttpServletRequest request) throws UnsupportedEncodingException {
-        String koreanProductGroupName = URLDecoder.decode(productGroupName, "UTF-8");
-        return ResponseEntity.ok(waitingCustomerService.getWaitingCustomersByProductGroup_ProductGroupName(koreanProductGroupName));
+    @GetMapping("/list/{productGroupSeq}")
+    public ResponseEntity<List<WaitingCustomerDto>> getWaitingCustomerListByProductGroupSeq(@PathVariable Long productGroupSeq, HttpServletRequest request){
+        return ResponseEntity.ok(waitingCustomerService.getWaitingCustomersByProductGroup_ProductGroupSeq(productGroupSeq));
     }
 
-//    @PutMapping("/{seq}")
-//    public ResponseEntity<ProductDto> updateProduct(@Valid @RequestBody ProductDto productDto, @PathVariable Long seq) {
-//        return ResponseEntity.ok(productService.update(seq, productDto));
-//    }
 
     @DeleteMapping("/{seq}")
     public ResponseEntity<WaitingCustomerDto> deleteWaitingCustomer(@PathVariable Long seq) {

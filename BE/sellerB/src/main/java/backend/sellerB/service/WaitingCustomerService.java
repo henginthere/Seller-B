@@ -50,21 +50,16 @@ public class WaitingCustomerService {
         return WaitingCustomerDto.fromList(waitingCustomerRepository.findWaitingCustomersByProductGroup_ProductGroupName(productGroupName));
     }
 
+    public List<WaitingCustomerDto> getWaitingCustomersByProductGroup_ProductGroupSeq(Long productGroupSeq) {
+        return WaitingCustomerDto.fromList(waitingCustomerRepository.findWaitingCustomersByProductGroup_ProductGroupSeq(productGroupSeq));
+    }
+
     public WaitingCustomerDto getWaitingCustomerDetail(Long seq) {
         Optional<WaitingCustomer> waitingCustomerOptional = waitingCustomerRepository.findById(seq);
         WaitingCustomer waitingCustomer = waitingCustomerOptional.get();
         return WaitingCustomerDto.from(waitingCustomer);
     }
 
-
-//      상담이 잡히면 상태 변경이 아니라 그냥 삭제하면 될듯
-//    public NoticeReq updateWaitingCustomer(Long seq, NoticeReq noticeReq) {
-//        Optional<Notice> noticeOptional = noticeRepository.findById(seq);
-//        Notice notice = noticeOptional.get();
-//        notice.setNoticeTitle(noticeReq.getNoticeTitle());
-//        notice.setNoticeContent(noticeReq.getNoticeContent());
-//        return NoticeReq.from(notice);
-//    }
 
     public WaitingCustomerDto deleteWaitingCustomer(Long seq) {
         Optional<WaitingCustomer> waitingCustomerOptional = waitingCustomerRepository.findById(seq);
