@@ -28,7 +28,7 @@ function ProductList() {
     console.log("바귄 group state: " + groupOption)
     
     // option에 해당하는 제품군의 제품들 불러오기
-    productGroupItemsApi(groupOption)
+    productGroupItemsApi(e.target.value)
     .then((res)=>{
       console.log(res.data);
       setItems(res.data)
