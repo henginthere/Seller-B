@@ -50,6 +50,19 @@ export const brandConsultantListApi = async ( brandName, success, fail) => {
 
 
 // 상담사 출결기록 & 상담기록 
+
+// POST : ConsultantMain.js
+export const goWorkApi = async (consultantSeq, success, fail) =>{
+    console.log("in goWorkAPI :" + consultantSeq)
+
+    return await api.post("/consultant-attendance", consultantSeq).then(success).catch(fail);
+}
+
+// PUT : ConsultantMain.js
+export const leaveWorkApi = async (consultantSeq, success, fail) => {
+    return await api.put(`/consultant-attendance/${consultantSeq}`).then(success).catch(fail);
+}
+
 // GET : List : AttendanceLog.js 
 export const listAttendanceApi = async ( success, fail) => {
     return await api.post("/consultant-attendance/list").then(success).catch(fail);
