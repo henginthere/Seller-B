@@ -29,6 +29,10 @@ public class OrderDetailController {
         return ResponseEntity.ok(orderDetailService.getOrderDetailDetail(seq));
     }
 
+    @GetMapping("/list/{orderSeq}")
+    public ResponseEntity<List<OrderDetailDto>> getOrderDetailbyOrderSeq(@PathVariable Long orderSeq) {
+        return ResponseEntity.ok(orderDetailService.getOrderDetailbyOrderSeq(orderSeq));
+    }
     @GetMapping("/list")
     public ResponseEntity<List<OrderDetailDto>> getOrderDetailList(HttpServletRequest request) {
         return ResponseEntity.ok(orderDetailService.getOrderDetailList());
