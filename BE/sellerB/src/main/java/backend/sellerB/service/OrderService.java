@@ -34,8 +34,10 @@ public class OrderService {
     }
 
     //고객 자신만의 주문 목록을 조회해야한다
-    public List<OrderDto> getOrderList() {
-        return OrderDto.fromList(orderRepository.findAll());
+    public List<OrderDto> getOrderList(Long seq) {
+        Optional<List<Order>> orderOptionalList = orderRepository.findByOrderRegUserSeq(seq);
+        List<Order> orderList = orderOptionalList.get();
+        return OrderDto.fromList(orderList);
     }
 
     public OrderDto getOrderDetail(Long seq) {
