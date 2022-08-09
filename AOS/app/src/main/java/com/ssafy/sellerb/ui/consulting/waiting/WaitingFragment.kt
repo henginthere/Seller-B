@@ -1,11 +1,13 @@
 package com.ssafy.sellerb.ui.consulting.waiting
 
+import android.content.Intent
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.ssafy.sellerb.R
 import com.ssafy.sellerb.databinding.FragmentWaitingBinding
 import com.ssafy.sellerb.di.component.FragmentComponent
 import com.ssafy.sellerb.ui.base.BaseFragment
+import com.ssafy.sellerb.ui.consulting.ConsultingActivity
 import com.ssafy.sellerb.ui.main.MainSharedViewModel
 import javax.inject.Inject
 
@@ -34,6 +36,11 @@ class WaitingFragment : BaseFragment<WaitingViewModel>(){
 
         binding.btnCancel.setOnClickListener{
             findNavController().navigate(R.id.action_WaitingFragment_to_HomeFragment)
+        }
+
+        binding.btnTest.setOnClickListener {
+            val intent = Intent(context, ConsultingActivity::class.java)
+            startActivity(intent)
         }
     }
 

@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import com.ssafy.sellerb.di.component.ApplicationComponent
 import com.ssafy.sellerb.di.component.DaggerApplicationComponent
 import com.ssafy.sellerb.di.module.ApplicationModule
+import com.ssafy.webrtc.openvidu.LocalParticipant
 import javax.inject.Inject
 
 

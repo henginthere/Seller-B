@@ -51,6 +51,12 @@ class QrScanActivity : AppCompatActivity() {
             ActivityCompat.requestPermissions(
                 this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS)
         }
+        binding.btnTest.setOnClickListener {
+            val intent = Intent()
+            intent.putExtra("url", "https://i7d105.p.ssafy.io/api/product/1")
+            setResult(Activity.RESULT_OK, intent)
+            finish()
+        }
     }
 
     private fun scanBarcodes(image: InputImage){

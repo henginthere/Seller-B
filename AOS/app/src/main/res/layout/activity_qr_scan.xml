@@ -42,4 +42,13 @@
         android:src="@drawable/ic_logo"
         />
 
+    <Button
+        android:id="@+id/btn_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TEST"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        />
+
 </RelativeLayout>
