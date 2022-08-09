@@ -3,49 +3,59 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 
 import "./ProductRegister.css";
 import { Footer, NavBar } from "../../../components/index";
-import { productEditApi } from "../../../api/productApi";
+import { productEditApi, productDetailApi } from "../../../api/productApi";
 
 function ProductEdit() {
   const { seq } = useParams();
   const [readOnly, setReadOnly] = useState(true)
   const [product, setProduct] = useState({
-    // 가져왔다고 하고, 더미데이터로 테스트
-    product_seq: "3",
-    product_id: "abc",
-    product_name: "스탠드형 에어컨",
-    product_price: "1,300,000",
+    productSeq:"",
+    productId: "",
+    productName: "",
+    productPrice: "",
     // product_thumbnail : 서버에서 url로 받아옴
-    product_thumbnail:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1T5-8wefzN-Nv1nUOwyhfYoh4js2cTgJpCw&usqp=CAU",
-    product_line: "에어컨",
-    reg_date: "2022-07-25",
+    productThumbnail:"",
+    productGroup: {
+      productGroupName:"",
+    }
   });
 
-  /* 해당 seq에 맞는 Product 정보 먼저 가져오기 */
-    // useEffect(()=>{
-    //   productEditApi(id)
-    //   .then((res)=>{
-    //       console.log(res.data);
 
-    //       setProduct(res.data);
-    //   })
-    //   .catch((err)=>{
-    //       console.log(err.data)
-    //   })
-    // })
+  /* 해당 seq에 맞는 Product 정보 먼저 가져오기 */
+  useEffect(()=>{
+    console.log("product Edit Seq: " + seq);
+    productDetailApi(seq)
+    .then((res)=>{
+        console.log(res.data);
+        setProduct(res.data);
+        console.log("수정된 제품정보: " + product)
+    })
+    .catch((err)=>{
+        console.log(err.data)
+    })
+  }, [])
 
   const navigate = useNavigate();
+
   const goWaitingPage = ()=>{
-    navigate(`/manager/waitingPage/${product.product_seq}`); // 제품대기화면 페이지로 이동
+    navigate(`/manager/waitingPage/${seq}`); // 제품대기화면 페이지로 이동
   }
 
   const onEditCompleteBtn = ()=>{
 
-    productEditApi(product.product_seq)
-    .then((res)=>{
-        setProduct(res);
+    const editData = {
+      productSeq : seq,
+      productGroupName: product.productGroup.productGroupName,
+      productId: product.productId,
+      productName: product.productName,
+      productPrice : product.productPrice,
+      productManual: "",
+      productThumbnail: "",
+    }
 
-        console.log(res.data);
+    productEditApi(editData)
+    .then((res)=>{
+        console.log("Edit Success");
     })
     .catch((err)=>{
         console.log(err.data);
@@ -56,11 +66,12 @@ function ProductEdit() {
   }
 
  const onBackBtn = ()=>{
-    navigate(`/manager/ProductDetail/${product.product_seq}`);
+    navigate(`/manager/ProductDetail/${product.productSeq}`);
  }
 
   // input 수정값 다루기
-  const { product_id, product_name, product_price, product_line } = product;
+  const { productId, productName, productPrice, 
+        productGroup, productGroupName } = product;
   const onChange = (e) => {
     const { value, name } = e.target;
     setProduct({
@@ -68,7 +79,7 @@ function ProductEdit() {
       [name]: value,
     });
 
-    console.log(product_id);
+    console.log(productId);
   };
 
   const [imgBase64, setImgBase64] = useState([]); // 미리보기를 구현할 state
@@ -123,7 +134,6 @@ function ProductEdit() {
                 className="preview-img" 
                 alt="#" src={imgFile.preview_URL} />
                 : null
-              
             }
       
           {imgBase64.map((item) => {
@@ -145,13 +155,12 @@ function ProductEdit() {
         />
         </div>
 
-
         <div className="right-input">
           <div className="input-ele">
             <p>품번</p>
             <input
-              name="product_id"
-              value={product.product_id}
+              name="productId"
+              defaultValue={product.productId}
               onChange={onChange}
               variant="outlined"
             />
@@ -159,8 +168,8 @@ function ProductEdit() {
           <div className="input-ele">
             <p>제품명</p>
             <input
-              name="product_name"
-              value={product.product_name}
+              name="productName"
+              value={product.productName}
               onChange={onChange}
               variant="outlined"
             />
@@ -168,8 +177,8 @@ function ProductEdit() {
           <div className="input-ele">
             <p>가격</p>
             <input
-              name="product_price"
-              value={product.product_price}
+              name="productPrice"
+              value={product.productPrice}
               onChange={onChange}
               variant="outlined"
             />
@@ -177,8 +186,8 @@ function ProductEdit() {
           <div className="input-ele">
             <p>제품군</p>
             <input
-              name="product_line"
-              value={product.product_line}
+              name="productGroup"
+              // value={product.productGroup.productGroupName}
               onChange={onChange}
               variant="outlined"
             />
