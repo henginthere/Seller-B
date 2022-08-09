@@ -13,6 +13,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 public class OrderDto {
+
     private Address address;
     private Byte orderState;
 
