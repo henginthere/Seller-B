@@ -3,11 +3,77 @@
     margin:50px;
 }
 
+.consultant-main-wrapper .main-header {
+  margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    width: 1200px;
+    z-index: 1;
+}
+
+.main-header .header-left {
+    background-color: #FBF9F4;
+    float: left;
+    height: 150px;
+    margin-right: 1.66666667%;
+    position: relative;
+    width: 30%;
+}
+
+.header-left .left-content-comment {
+  padding: 35px 0 0 0;
+  margin-left: 30px;
+}
+
+.left-content-comment .attend-wrapper {
+  font-size: 0;
+  text-align: right;
+  padding: 0 40px 10px 0;
+  
+}
+
+.attend-wrapper .go-btn-wrapper {
+  background-color: #8c99a8;
+}
+
+ .go-btn-wrapper .go-btn{
+    display: block;
+    font-family: Roboto;
+    font-size: 1.4em;
+    font-weight: 500;
+    margin-bottom: 3px;
+}
+
+.attend-wrapper .leave-btn-wrapper {
+  background-color: #8c99a8;
+}
+
+.leave-btn-wrapper .leave-btn {
+  display: block;
+    font-family: Roboto;
+    font-size: 1.4em;
+    font-weight: 500;
+    margin-bottom: 3px;
+    padding-top: 0;
+}
+
+/* .left-content-comment > header {
+  position: relative;
+  margin-left: 25px;
+} */
+
+
+/**/
 
 .welcome-msg {
     font-size: 25px;
     font-family: bold ;
     color: #324E66;
+}
+
+/* 출근, 퇴근 버튼 */
+.attendance-wrapper {
+  display: flex;
 }
 
 /* 공지사항 , 상담시청 내역 div START*/
