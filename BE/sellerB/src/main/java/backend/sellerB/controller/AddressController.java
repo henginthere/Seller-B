@@ -2,6 +2,7 @@ package backend.sellerB.controller;
 
 import backend.sellerB.dto.AddressDto;
 import backend.sellerB.dto.RegisterAddressDto;
+import backend.sellerB.dto.ResponseAddressDetailDto;
 import backend.sellerB.service.AddressService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -44,23 +45,23 @@ public class AddressController {
         return ResponseEntity.ok(addressService.create(registerAddressDto));
     }
 
-    @GetMapping("/{customer-id}/{seq}")
-    public ResponseEntity<AddressDto> getAddressDetail(@PathVariable("seq") Long seq) {
+    @GetMapping("/{seq}")
+    public ResponseEntity<RegisterAddressDto> getAddressDetail(@PathVariable Long seq) {
         return ResponseEntity.ok(addressService.getAddressDetail(seq));
     }
 
-    @GetMapping("/list/{customer-id}")
-    public ResponseEntity<List<AddressDto>> getAddressList(@PathVariable("customer-id") String customerId, HttpServletRequest request) {
-        return ResponseEntity.ok(addressService.getAddressList(customerId));
+    @GetMapping("/list/{customerSeq}")
+    public ResponseEntity<List<RegisterAddressDto>> getAddressList(@PathVariable Long customerSeq, HttpServletRequest request) {
+        return ResponseEntity.ok(addressService.getAddressList(customerSeq));
     }
 
-    @PutMapping("/{customer-id}/{seq}")
-    public ResponseEntity<RegisterAddressDto> updateAddress(@Valid @RequestBody RegisterAddressDto registerAddressDto, @PathVariable("seq") Long seq) {
+    @PutMapping("/{seq}")
+    public ResponseEntity<RegisterAddressDto> updateAddress(@Valid @RequestBody RegisterAddressDto registerAddressDto, @PathVariable Long seq) {
         return ResponseEntity.ok(addressService.updateAddress(seq, registerAddressDto));
     }
 
-    @DeleteMapping("/{customer-id}/{seq}")
-    public ResponseEntity<AddressDto> deleteAddress(@PathVariable("seq") Long seq) {
+    @DeleteMapping("/{seq}")
+    public ResponseEntity<RegisterAddressDto> deleteAddress(@PathVariable Long seq) {
         return ResponseEntity.ok(addressService.deleteAddress(seq));
     }
 }
