@@ -2,8 +2,13 @@ package backend.sellerB.service;
 
 import backend.sellerB.dto.NoticeDto;
 import backend.sellerB.dto.OrderDetailDto;
+import backend.sellerB.dto.RegisterOrderDetailDto;
+import backend.sellerB.entity.Order;
 import backend.sellerB.entity.Orderdetail;
+import backend.sellerB.entity.Product;
 import backend.sellerB.repository.OrderDetailRepository;
+import backend.sellerB.repository.OrderRepository;
+import backend.sellerB.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,12 +21,18 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class OrderDetailService {
     private final OrderDetailRepository orderDetailRepository;
+    private final OrderRepository orderRepository;
+    private final ProductRepository productRepository;
 
-    public OrderDetailDto createOrderDetail(OrderDetailDto orderDetailDto) {
+    public OrderDetailDto createOrderDetail(RegisterOrderDetailDto registerOrderDetailDto) {
+
+        Product product = productRepository.findById(registerOrderDetailDto.getProductSeq()).get();
+        Order order = orderRepository.findById(registerOrderDetailDto.getOrderSeq()).get();
+
         Orderdetail orderDetail = Orderdetail.builder()
-                .product(orderDetailDto.getProduct())
-                .order(orderDetailDto.getOrder())
-                .orderDetailCount(orderDetailDto.getOrderDetailCount())
+                .product(product)
+                .order(order)
+                .orderDetailCount(registerOrderDetailDto.getOrderDetailCount())
                 .build();
 
         return OrderDetailDto.from(orderDetailRepository.save(orderDetail));
