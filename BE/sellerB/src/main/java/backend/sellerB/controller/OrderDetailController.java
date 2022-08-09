@@ -1,6 +1,7 @@
 package backend.sellerB.controller;
 
 import backend.sellerB.dto.OrderDetailDto;
+import backend.sellerB.dto.RegisterOrderDetailDto;
 import backend.sellerB.service.OrderDetailService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,8 +20,8 @@ public class OrderDetailController {
     }
 
     @PostMapping
-    public ResponseEntity<OrderDetailDto> saveOrderDetail(@Valid @RequestBody OrderDetailDto orderDetailDto) {
-        return ResponseEntity.ok(orderDetailService.createOrderDetail(orderDetailDto));
+    public ResponseEntity<OrderDetailDto> saveOrderDetail(@Valid @RequestBody RegisterOrderDetailDto registerOrderDetailDto) {
+        return ResponseEntity.ok(orderDetailService.createOrderDetail(registerOrderDetailDto));
     }
 
     @GetMapping("/{seq}")
