@@ -19,7 +19,7 @@ public class ResponseConsultingDto {
     private Customer customer;
     private Consultant consultant;
     private Product product;
-    private Boolean consultingState;
+    private String consultingState;
 
     public static ResponseConsultingDto from(Consulting consulting) {
         if(consulting == null) return null;
