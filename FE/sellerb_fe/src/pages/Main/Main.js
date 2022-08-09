@@ -82,16 +82,20 @@ function Main() {
        
         if (adminCheck === "ROLE_ADMIN") {
           sessionStorage.setItem("adminCheck", "ROLE_ADMIN");
+          console.log("admin:" + sessionStorage.getItem("adminCheck"));
+          navigate("/manager/main")
         } else {
-          sessionStorage.setItem("adminCheck", "ROLE_USER");
+
+          sessionStorage.setItem("adminCheck","ROLE_USER");
+          console.log("consultant:" + sessionStorage.getItem("adminCheck"));
           navigate("/consultant/main");
         }
 
-        navigate("/manager/main");
       })
       .then((res)=>{
         const seq = sessionStorage.getItem("seq");
         // axios
+        
           getManagerInfoApi(seq)
           .then((res) => {
             console.log("LOGIN 한 매니저 정보: " + JSON.stringify(res.data));
