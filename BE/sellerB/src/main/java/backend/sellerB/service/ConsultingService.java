@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
+import javax.persistence.PreUpdate;
 import java.util.List;
 import java.util.Optional;
 
@@ -77,12 +78,6 @@ public class ConsultingService {
 
         // Request
         HttpEntity<String> response = restTemplate.exchange(url, HttpMethod.DELETE, requestMessage, String.class);
-        System.out.println(response);
-        // Response 파싱
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        objectMapper.configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true);
-//        OpenviduSessionDto dto = objectMapper.readValue(response.getBody(), OpenviduSessionDto.class);
-
         return response;
     }
 
@@ -129,8 +124,19 @@ public class ConsultingService {
         consulting.setConsultingState(registerConsultingDto.getConsultingState());
 
         // openvidu session delete
-        HttpEntity<String> response = requestToOpenviduDelete(customer.getCustomerId());
-        System.out.println(response);
+        if (registerConsultingDto.getConsultingState().equals("delete")) {
+            HttpEntity<String> response = requestToOpenviduDelete(customer.getCustomerId());
+        }
+        // fcm으로 고객에게 종료 알림?
+        return RegisterConsultingDto.from(consulting);
+    }
+    @PreUpdate
+    public RegisterConsultingDto updateConsultingState(Long seq, EditConsultingStateDto editConsultingStateDto) {
+        Optional<Consulting> consultingOptional = consultingRepository.findById(seq);
+        Consulting consulting = consultingOptional.get();
+        consulting.setConsultingState(editConsultingStateDto.getConsultingState());
+
+        // fcm으로 고객에게 종료 알림?
         return RegisterConsultingDto.from(consulting);
     }
 }
