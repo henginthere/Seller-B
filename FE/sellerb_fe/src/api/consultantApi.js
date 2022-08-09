@@ -18,6 +18,8 @@ export const detailConsultantApi= async ( consultantSeq, success, fail) => {
 
 // post : Register : ConsultantWrite.js
 export const registerConsultantApi = async ( consultant, success, fail ) => {
+    console.log("in Register API: " + JSON.data(consultant));
+
     return await api.post("/consultant/register", consultant).then(success).catch(fail);
 }
 
