@@ -2,6 +2,7 @@ package backend.sellerB.service;
 
 import backend.sellerB.dto.AddressDto;
 import backend.sellerB.dto.RegisterAddressDto;
+import backend.sellerB.dto.ResponseAddressDetailDto;
 import backend.sellerB.entity.Address;
 import backend.sellerB.entity.Customer;
 import backend.sellerB.repository.AddressRepository;
@@ -10,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.PreUpdate;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,7 +23,7 @@ public class AddressService {
     private final CustomerRepository customerRepository;
 
     public RegisterAddressDto create(RegisterAddressDto registerAddressDto) {
-        Optional<Customer> customerOptional = customerRepository.findBycustomerId(registerAddressDto.getCustomerId());
+        Optional<Customer> customerOptional = customerRepository.findById(registerAddressDto.getCustomerSeq());
         Customer customer = customerOptional.get();
         Address address = Address.builder()
                 .customer(customer)
@@ -32,19 +34,21 @@ public class AddressService {
         return RegisterAddressDto.from(addressRepository.save(address));
     }
 
-    public List<AddressDto> getAddressList(String customerId) {
-        System.out.println(customerId);
-        Optional<List<Address>> addressOptionalList = addressRepository.findAddressesByCustomer_CustomerId(customerId);
+    public List<RegisterAddressDto> getAddressList(Long customerSeq) {
+        Optional<List<Address>> addressOptionalList = addressRepository.findAddressByCustomer_CustomerSeq(customerSeq);
         List<Address> addressList = addressOptionalList.get();
-        return AddressDto.fromList(addressList);
+        return RegisterAddressDto.fromList(addressList);
     }
 
-    public AddressDto getAddressDetail(Long seq) {
+    public RegisterAddressDto getAddressDetail(Long seq) {
         Optional<Address> addressOptional = addressRepository.findById(seq);
         Address address = addressOptional.get();
-        return AddressDto.from(address);
+
+
+        return RegisterAddressDto.from(address);
     }
 
+    @PreUpdate
     public RegisterAddressDto updateAddress(Long seq, RegisterAddressDto registerAddressDto) {
         Optional<Address> addressOptional = addressRepository.findById(seq);
         Address address = addressOptional.get();
@@ -54,11 +58,11 @@ public class AddressService {
         return RegisterAddressDto.from(address);
     }
 
-    public AddressDto deleteAddress(Long seq) {
+    public RegisterAddressDto deleteAddress(Long seq) {
         Optional<Address> addressOptional = addressRepository.findById(seq);
         Address address = addressOptional.get();
         addressRepository.deleteById(seq);
 //        address.setAddrDelYn(true);
-        return AddressDto.from(address);
+        return RegisterAddressDto.from(address);
     }
 }
