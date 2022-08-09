@@ -1,5 +1,6 @@
 package backend.sellerB.controller;
 
+import backend.sellerB.dto.CreateWaitingCustomerDto;
 import backend.sellerB.dto.ProductDto;
 import backend.sellerB.dto.ProductRes;
 import backend.sellerB.dto.WaitingCustomerDto;
@@ -24,8 +25,8 @@ public class WaitingCustomerController {
     }
 
     @PostMapping
-    public ResponseEntity<WaitingCustomerDto> saveWaitingCustomer(@Valid @RequestBody WaitingCustomerDto waitingCustomerDto) {
-        return ResponseEntity.ok(waitingCustomerService.create(waitingCustomerDto));
+    public ResponseEntity<WaitingCustomerDto> saveWaitingCustomer(@Valid @RequestBody CreateWaitingCustomerDto createWaitingCustomerDto) {
+        return ResponseEntity.ok(waitingCustomerService.create(createWaitingCustomerDto));
     }
 
     @GetMapping("/{seq}")
@@ -33,16 +34,11 @@ public class WaitingCustomerController {
         return ResponseEntity.ok(waitingCustomerService.getWaitingCustomerDetail(seq));
     }
 
-    @GetMapping("/list/{product-group-name}")
-    public ResponseEntity<List<WaitingCustomerDto>> getWaitingCustomerListByProductGroupNameList(@PathVariable("product-group-name") String productGroupName, HttpServletRequest request) throws UnsupportedEncodingException {
-        String koreanProductGroupName = URLDecoder.decode(productGroupName, "UTF-8");
-        return ResponseEntity.ok(waitingCustomerService.getWaitingCustomersByProductGroup_ProductGroupName(koreanProductGroupName));
+    @GetMapping("/list/{productGroupSeq}")
+    public ResponseEntity<List<WaitingCustomerDto>> getWaitingCustomerListByProductGroupSeq(@PathVariable Long productGroupSeq, HttpServletRequest request){
+        return ResponseEntity.ok(waitingCustomerService.getWaitingCustomersByProductGroup_ProductGroupSeq(productGroupSeq));
     }
 
-//    @PutMapping("/{seq}")
-//    public ResponseEntity<ProductDto> updateProduct(@Valid @RequestBody ProductDto productDto, @PathVariable Long seq) {
-//        return ResponseEntity.ok(productService.update(seq, productDto));
-//    }
 
     @DeleteMapping("/{seq}")
     public ResponseEntity<WaitingCustomerDto> deleteWaitingCustomer(@PathVariable Long seq) {
