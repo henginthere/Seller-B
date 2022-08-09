@@ -2,6 +2,7 @@ package backend.sellerB.controller;
 
 import backend.sellerB.dto.CustomerDto;
 import backend.sellerB.dto.EditCustomerDto;
+import backend.sellerB.dto.EditCustomerTokenDto;
 import backend.sellerB.repository.CustomerRepository;
 import backend.sellerB.service.CustomerService;
 import org.hibernate.annotations.DynamicUpdate;
@@ -40,10 +41,19 @@ public class CustomerController {
         return ResponseEntity.ok(customerService.getCustomerList());
     }
 
+    @PutMapping("token/{seq}")
+    public ResponseEntity<CustomerDto> updateCustomerToken(@Valid @RequestBody EditCustomerTokenDto editCustomerTokenDto, @PathVariable("seq") Long seq) {
+        System.out.println(seq);
+        System.out.println(editCustomerTokenDto.getCustomerToken());
+        return ResponseEntity.ok(customerService.updateCustomerToken(seq, editCustomerTokenDto));
+    }
+
     @PutMapping("/{seq}")
     public ResponseEntity<CustomerDto> updateCustomer(@Valid @RequestBody EditCustomerDto editCustomerDto, @PathVariable Long seq) {
         return ResponseEntity.ok(customerService.updateCustomer(seq, editCustomerDto));
     }
+
+
 
     @DeleteMapping("/{seq}")
     public ResponseEntity<CustomerDto> deleteCustomer(@PathVariable Long seq) {
