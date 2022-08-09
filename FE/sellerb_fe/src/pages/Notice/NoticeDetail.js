@@ -95,8 +95,16 @@ function NoticeDetail() {
             </div>
             {/* content하단 */}
             <div className="notice-detail-bottom">
-                <button className="detail-button">목록</button>
+                <button 
+                  className="detail-button"
+                  onClick={(e)=> navigate("/manager/noticeList")}
+                  >목록</button>
+                <button 
+                className="detail-button"
+                onClick={(e)=> onModifyBtn()}
+                >수정하기</button>
             </div>
+     
 
             </div>
         </div>
