@@ -67,7 +67,8 @@ function NoticeList() {
               value={searchTitle}
               onChange={onSearchByTitleHandler}
             />
-            <button onClick={submitBtnSearchByTitle}>검색</button>
+            <button className="list-search-button" onClick={submitBtnSearchByTitle}>검색</button>
+
           </div>
 
             <table className="notice-table-list">
@@ -101,11 +102,17 @@ function NoticeList() {
             </table>
      
           <div className="notice-write-wrapper">
-            {isManager ? (
+          <div className="notice-detail-bottom">
+                <button 
+                  className="detail-button"
+                  onClick={(e)=> navigate('/manager/noticeWrite')}
+                  >글 작성하기</button>
+            </div>
+            {/* {isManager ? (
               <Link to="/manager/noticeWrite">
                 <button className="write-btn">글작성</button>
               </Link>
-            ) : null}
+            ) : null} */}
           </div>
         </div>
       </div>
