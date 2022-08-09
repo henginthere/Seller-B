@@ -1,5 +1,6 @@
 package backend.sellerB.service;
 
+import backend.sellerB.dto.EditProductDto;
 import backend.sellerB.dto.ProductDto;
 import backend.sellerB.dto.ProductRes;
 import backend.sellerB.entity.Product;
@@ -21,7 +22,7 @@ public class ProductService {
     private final ProductGroupRepository productGroupRepository;
 
     public ProductDto create(ProductDto productDto) {
-        Optional<ProductGroup> productGroupOptional = productGroupRepository.findByProductGroupName(productDto.getProductGroupName());
+        Optional<ProductGroup> productGroupOptional = productGroupRepository.findById(productDto.getProductGroupSeq());
         ProductGroup productGroup = productGroupOptional.get();
         Product product = Product.builder()
                 .productSeq(productDto.getProductSeq())
@@ -36,40 +37,39 @@ public class ProductService {
         return ProductDto.from(productRepository.save(product));
     }
 
-    public List<ProductRes> getProductList() { return ProductRes.fromList(productRepository.findAll());}
-    public List<ProductRes> getProductListByGroupName(String groupName) {
-        Optional<List<Product>> optionalProductResList = productRepository.findProductsByProductGroup_ProductGroupName(groupName);
+    public List<ProductDto> getProductList() { return ProductDto.fromList(productRepository.findAll());}
+    public List<ProductDto> getProductListByGroupSeq(Long productGroupSeq) {
+        Optional<List<Product>> optionalProductResList = productRepository.findProductsByProductGroup_ProductGroupSeq(productGroupSeq);
         List<Product> productList = optionalProductResList.get();
-        return ProductRes.fromList(productList);}
+        return ProductDto.fromList(productList);}
 
-    public ProductRes getProductDetail(Long seq) {
+    public ProductDto getProductDetail(Long seq) {
         Optional<Product> productOptional = productRepository.findById(seq);
         Product product = productOptional.get();
-        return ProductRes.from(product);
+        return ProductDto.from(product);
     }
 
-    public List<ProductRes> getProductListByName(String name) {
+    public List<ProductDto> getProductListByName(String name) {
         Optional<List<Product>> optionalProductResList = productRepository.findByProductNameContaining(name);
         List<Product> productList = optionalProductResList.get();
-        return ProductRes.fromList(productList);
+        return ProductDto.fromList(productList);
     }
 
-    public ProductRes getProductDetailById(String productId) {
+    public ProductDto getProductDetailById(String productId) {
         Optional<Product> productOptional = productRepository.findByProductId(productId);
         Product product = productOptional.get();
-        return ProductRes.from(product);
+        return ProductDto.from(product);
     }
-    public ProductDto update(Long seq, ProductDto productDto) {
+    public ProductDto update(Long seq, EditProductDto editProductDto) {
         Optional<Product> productOptional = productRepository.findById(seq);
         Product product = productOptional.get();
-        Optional<ProductGroup> productGroupOptional = productGroupRepository.findByProductGroupName(productDto.getProductGroupName());
-        ProductGroup productGroup = productGroupOptional.get();
-        product.setProductSeq(productDto.getProductSeq());
-        product.setProductName(productDto.getProductName());
+        ProductGroup productGroup = product.getProductGroup();
+        product.setProductSeq(editProductDto.getProductSeq());
+        product.setProductName(editProductDto.getProductName());
         product.setProductGroup(productGroup);
-        product.setProductPrice(productDto.getProductPrice());
-        product.setProductManual(productDto.getProductManual());
-        product.setProductThumbnail(productDto.getProductThumbnail());
+        product.setProductPrice(editProductDto.getProductPrice());
+        product.setProductManual(editProductDto.getProductManual());
+        product.setProductThumbnail(editProductDto.getProductThumbnail());
         return ProductDto.from(product);
     }
 
