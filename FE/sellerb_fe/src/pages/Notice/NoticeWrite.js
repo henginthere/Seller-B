@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { SmallButton } from "../../components/Common/SmallButton";
 
-// import Axios from 'axios'
 import { registerNoticeApi } from "../../api/noticeApi";
 import "./NoticeWrite.css";
 import { Footer, NavBar } from "../../components/index";
-// calculate Date Util
 import getStringDate from "../../utils/date";
 
 function NoticeWrite() {
@@ -85,15 +84,18 @@ function NoticeWrite() {
           />
         </div>
         <div className='btns-wrapper'>
-          <button className='back-btn' onClick={onCloseBtnHandler}>
+          <SmallButton onClick={onCloseBtnHandler} label="뒤로" size="sm" />
+          {/* <button className='back-btn' onClick={onCloseBtnHandler}>
             뒤로
-          </button>
-          <button className='register-btn' onClick={onSubmitBtnHandler}>
+          </button> */}
+          <SmallButton onClick={onSubmitBtnHandler} label="등록" size="sm" />
+          {/* <button className='register-btn' onClick={onSubmitBtnHandler}>
             등록
-          </button>
-          <button className='reset-btn' onClick={onResetBtnHandler}>
+          </button> */}
+          <SmallButton onClick={onResetBtnHandler} label="초기화" size="sm" />
+          {/* <button className='reset-btn' onClick={onResetBtnHandler}>
             초기화
-          </button>
+          </button> */}
         </div>
       </div>
 
