@@ -1,5 +1,6 @@
 package backend.sellerB.controller;
 
+import backend.sellerB.dto.CreateWaitingCustomerDto;
 import backend.sellerB.dto.ProductDto;
 import backend.sellerB.dto.ProductRes;
 import backend.sellerB.dto.WaitingCustomerDto;
@@ -24,8 +25,8 @@ public class WaitingCustomerController {
     }
 
     @PostMapping
-    public ResponseEntity<WaitingCustomerDto> saveWaitingCustomer(@Valid @RequestBody WaitingCustomerDto waitingCustomerDto) {
-        return ResponseEntity.ok(waitingCustomerService.create(waitingCustomerDto));
+    public ResponseEntity<WaitingCustomerDto> saveWaitingCustomer(@Valid @RequestBody CreateWaitingCustomerDto createWaitingCustomerDto) {
+        return ResponseEntity.ok(waitingCustomerService.create(createWaitingCustomerDto));
     }
 
     @GetMapping("/{seq}")

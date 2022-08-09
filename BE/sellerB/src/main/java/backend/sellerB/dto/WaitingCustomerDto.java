@@ -13,10 +13,11 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 public class WaitingCustomerDto {
+
     private Long customerSeq;
     private Long productSeq;
     private Boolean waitingCustomerState;
-    private String productGroupName;
+    private Long productGroupSeq;
 
     public static WaitingCustomerDto from(WaitingCustomer waitingCustomer) {
         if(waitingCustomer == null) return null;
@@ -24,7 +25,7 @@ public class WaitingCustomerDto {
                 .customerSeq(waitingCustomer.getCustomer().getCustomerSeq())
                 .productSeq(waitingCustomer.getProduct().getProductSeq())
                 .waitingCustomerState(waitingCustomer.getWaitingCustomerState())
-                .productGroupName(waitingCustomer.getProduct().getProductGroup().getProductGroupName())
+                .productGroupSeq(waitingCustomer.getProduct().getProductGroup().getProductGroupSeq())
                 .build();
     }
 
@@ -36,7 +37,7 @@ public class WaitingCustomerDto {
                     .customerSeq(waitingCustomerList.get(i).getCustomer().getCustomerSeq())
                     .productSeq(waitingCustomerList.get(i).getProduct().getProductSeq())
                     .waitingCustomerState(waitingCustomerList.get(i).getWaitingCustomerState())
-                    .productGroupName(waitingCustomerList.get(i).getProduct().getProductGroup().getProductGroupName())
+                    .productGroupSeq(waitingCustomerList.get(i).getProduct().getProductGroup().getProductGroupSeq())
                     .build();
             listWaitingCustomerDto.add(waitingCustomerDto);
             i++;
