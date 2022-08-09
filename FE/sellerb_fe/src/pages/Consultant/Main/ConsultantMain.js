@@ -1,10 +1,13 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 
 import { Footer, NavBar } from "../../../components/index";
 import "./ConsultantMain.css";
 import styled from "styled-components";
+import { goWorkApi, leaveWorkApi } from "../../../api/consultantApi";
 
 function ConsultantMain() {
+
+  const [conSeq, setConSeq] = useState("");
   const tableDummyData = [
     {
       No: 1,
@@ -20,6 +23,42 @@ function ConsultantMain() {
     },
   ];
 
+  useEffect(()=>{
+    const val = sessionStorage.getItem("seq");
+
+    setConSeq(val);
+
+    console.log(conSeq);
+
+  }, [])
+
+  const goWorkBtn = () =>{
+    const Info = {
+      consultantSeq : conSeq
+    }
+    
+    goWorkApi(Info)
+    .then((res)=>{
+      console.log("success");
+    })
+    .catch((err)=>{
+      console.log("Error");
+    })
+
+
+  }
+  
+  const leaveWorkBtn = ()=>{
+    leaveWorkApi(conSeq)
+    .then((res)=>{
+      console.log("Success");
+    })
+    .catch((err)=>{
+      console.log("Error");
+    })
+
+  }
+
   return (
     <>
       <NavBar></NavBar>
@@ -31,14 +70,14 @@ function ConsultantMain() {
               oo님 환영합니다!
             </div>
             <div className="attend-wrapper">
-              <div className="go-btn-wrapper">
-                <div className="go-btn">
-                  출근하기
+              <div className="go-btn-wrapper" onClick={goWorkBtn}>
+                <div className="go-btn" >
+                  출근
                 </div>
               </div>
-              <div className="leave-btn-wrapper">
-              <div className="leave-btn">
-                  퇴근하기
+              <div className="leave-btn-wrapper" onClick={leaveWorkBtn}>
+              <div className="leave-btn" >
+                  퇴근
                 </div>
               </div>
             </div>
@@ -59,7 +98,7 @@ function ConsultantMain() {
             <hr />
 
             {/* table START*/}
-            <table class="content-table">
+            <table className="content-table">
               <thead>
                 <tr>
                   <th>No</th>

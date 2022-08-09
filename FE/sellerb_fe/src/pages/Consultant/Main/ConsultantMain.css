@@ -26,32 +26,40 @@
 }
 
 .left-content-comment .attend-wrapper {
+  display: flex;
   font-size: 0;
   text-align: right;
   padding: 0 40px 10px 0;
   
 }
 
+/* 출근버튼 영역*/
 .attend-wrapper .go-btn-wrapper {
-  background-color: #8c99a8;
+  width: 100px;
+  height: 80px;
+  background-color: #324E66;
+  color: white;
 }
 
  .go-btn-wrapper .go-btn{
-    display: block;
-    font-family: Roboto;
-    font-size: 1.4em;
+    /* display: block; */
+    font-size: 1em;
     font-weight: 500;
     margin-bottom: 3px;
 }
 
+/* 퇴근버튼 영역 */
 .attend-wrapper .leave-btn-wrapper {
-  background-color: #8c99a8;
+  width: 100px;
+  height: 80px;
+  justify-content: flex-end;
+  background-color: #324E66;
+  color: white;
 }
 
 .leave-btn-wrapper .leave-btn {
-  display: block;
-    font-family: Roboto;
-    font-size: 1.4em;
+    /* display: block; */
+    font-size: 1em;
     font-weight: 500;
     margin-bottom: 3px;
     padding-top: 0;
