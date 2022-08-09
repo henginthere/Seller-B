@@ -5,35 +5,35 @@ import "./ProductRegister.css";
 import styles from './WaitingPage.module.css'
 import { Footer, NavBar } from "../../../components/index";
 import { productRegisterApi } from "../../../api/productApi";
+import {productDetailApi } from "../../../api/productApi";
 
 function WaitingPage() {
   const navigate = useNavigate();
-  const { seq } = useParams();
-  console.log(seq);
+  const { id } = useParams();
 
   const [product, setProduct] = useState({
-    product_seq: "3",
-    product_id: "abc",
-    product_name: "스탠드형 에어컨",
-    product_price: "1,300,000",
-    // product_thumbnail : 서버에서 url로 받아옴
-    product_thumbnail:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1T5-8wefzN-Nv1nUOwyhfYoh4js2cTgJpCw&usqp=CAU",
-    product_line: "에어컨",
-    reg_date: "2022-07-25",
+    productSeq:"",
+    productId: "",
+    productName: "",
+    productPrice: "",
+    productThumbnail:"",
+    productGroup: {
+      productGroupName:"",
+    }
   });
-
-  //   useEffect(()=>{
-  //     productRegisterApi(seq)
-  //     .then((res)=>{
-  //         setProduct(res.data);
-  //         console.log(res.data);
-  //     })
-  //     .catch((err)=>{
-
-  //         console.log(err.data);
-  //     })
-  //   })
+  /* 해당 seq에 맞는 Product 정보 먼저 가져오기 */
+  useEffect(()=>{
+    console.log("WaitingPage Seq: " + id);
+    productDetailApi(id)
+    .then((res)=>{
+        console.log(res.data);
+        setProduct(res.data);
+        console.log("WatingPage : 가져온 제품정보: " + product)
+    })
+    .catch((err)=>{
+        console.log(err.data)
+    })
+  }, [])
 
   const [imgBase64, setImgBase64] = useState([]); // 미리보기를 구현할 state
   const [imgFile, setImgFile] = useState({
@@ -43,7 +43,6 @@ function WaitingPage() {
   });
 
   const handleChangeFile = (event) => {
-    console.log(event.target.files);
     setImgFile(event.target.files);
 
     setImgBase64([]);
@@ -66,6 +65,23 @@ function WaitingPage() {
     }
   };
 
+    // 서버에 파일 & 제품정보 전송 : FormData()
+    const onProductSubmitBtn = (e) => {
+      // e.preventDefault();
+      console.log("product: " + JSON.stringify(product))
+  
+      productRegisterApi(product)
+      .then((res)=>{
+        console.log("onSubmitBtn:" + JSON.stringify(res.data));
+        console.log("success");
+        
+        // navigate("/manager/productList")
+      })
+      .catch((err)=>{
+        console.log(JSON.stringify(err.data));
+      })
+    };
+
   return (
     <>
       <NavBar />
@@ -73,29 +89,37 @@ function WaitingPage() {
       <div className="mainContent-wrapper">
         <div className="left-img">
           {/* <div className="element-wrapper"> */}
-          {/* img 자리 */}
-          <img
-            className="img-wrapper"
-            alt="#"
-            src={`${product.product_thumbnail}`}
-          />
+          { 
+            imgFile.image_file === ""
+            ?    <img
+            className="preview-img" 
+            alt="#" src={imgFile.preview_URL} />
+            : null
+          }
+          {imgBase64.map((item) => {
+            return (
+              <div className="img-wrapper">
+                <img src={item} alt="Frist Slide" />
+              </div>
+            );
+          })}
 
           {/* 제품정보 */}
           <div className="product-info">
             <h5>품번 : </h5>
-            {product.product_id}
+            {product.productId}
           </div>
           <div className="product-info">
             <h5>제품명 : </h5>
-            {product.product_name}
+            {product.productName}
           </div>
           <div className="product-info">
             <h5>가격 : </h5>
-            {product.product_price}
+            {product.productPrice}
           </div>
         </div>
         {/* right content START */}
-        <div className="styles.right-waiting-img">
+        {/* <div className="styles.right-waiting-img">
           {imgFile.image_file === "" ? (
             <img className="preview-img" alt="#" src={imgFile.preview_URL} />
           ) : null}
@@ -106,7 +130,20 @@ function WaitingPage() {
               </div>
             );
           })}
-        </div>
+        </div> */}
+        <div className="bottomContent-wrapper">
+        <input
+          className="img-btn"
+          type="file"
+          accept="image/*"
+          id="file"
+          onChange={handleChangeFile}
+        />
+        {/* <button onClick={deleteImage}>이미지 삭제</button> */}
+        <button className="bottom-btn" onClick={()=> onProductSubmitBtn()}>
+          업로드하기
+        </button>
+      </div>
       </div>
 
       <Footer />

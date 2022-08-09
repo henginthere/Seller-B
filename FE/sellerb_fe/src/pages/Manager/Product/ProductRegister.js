@@ -17,8 +17,6 @@ function ProductRegister() {
     productPrice: "",
     productManual:"",
     productThumbnail:"",
-    // 사진 파일 부분 필드 추가 
-    // formData: "",
   });
 
   const [groupList, setGroupList] = useState([]);
@@ -56,19 +54,15 @@ function ProductRegister() {
     .catch((err)=>{
       console.log(JSON.stringify(err.data));
     })
-
-
   };
 
   const [imgBase64, setImgBase64] = useState([]); // 미리보기를 구현할 state
-  //const [imgFile, setImgFile] = useState(null); // 파일 그 자체를 받을 state
   const [imgFile, setImgFile] = useState({
     image_file: "",
     preview_URL: `${process.env.PUBLIC_URL}/img/default_img.png`,
   });
 
   const handleChangeFile = (event) => {
-    console.log(event.target.files);
     setImgFile(event.target.files);
 
     setImgBase64([]);
