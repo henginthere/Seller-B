@@ -60,7 +60,7 @@ abstract class Participant(
                 this.connectionId = connectionId
     }
 
-    fun dispose() {
+    open fun dispose() {
         if(peerConnection != null){
            try{
                 peerConnection.close()

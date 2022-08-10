@@ -1,9 +1,7 @@
 package com.ssafy.webrtc.utils
 
-import android.annotation.SuppressLint
+import android.app.Activity
 import android.view.View
-import android.widget.TextView
-import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import com.ssafy.webrtc.openvidu.RemoteParticipant
 import org.webrtc.MediaStream
@@ -21,8 +19,8 @@ fun AppCompatActivity.setRemoteMediaStream(
     }
 }
 
-@SuppressLint("ResourceType")
-fun AppCompatActivity.test(@LayoutRes res: Int,){
-    val textView: TextView = findViewById(res)
+
+fun AppCompatActivity.createRemoteParticipantVideo(remoteParticipant : RemoteParticipant) {
+
 
 }

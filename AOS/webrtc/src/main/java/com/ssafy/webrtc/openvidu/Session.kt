@@ -16,7 +16,6 @@ import org.webrtc.RtpTransceiver.RtpTransceiverInit
 class Session(
     private val id: String,
     private val token: String,
-    private val views_container: LinearLayout,
     private val activity: AppCompatActivity
 ) {
 
@@ -268,7 +267,8 @@ class Session(
         }
     }
 
-    fun removeView(view: View?) {
-        views_container.removeView(view)
+    fun setWebSocket(webSocket: CustomWebSocket){
+        this.websocket = websocket
     }
+
 }

@@ -27,4 +27,9 @@ interface NetworkService {
         @Header(Networking.HEADER_ACCESS_TOKEN) accessToken: String
     ):UserInfoResponse
 
+    @POST(Endpoints.GOOGLE_LOGIN)
+    suspend fun doGoogleLoginCall(
+        @Body request: String
+    ):String
+
 }
