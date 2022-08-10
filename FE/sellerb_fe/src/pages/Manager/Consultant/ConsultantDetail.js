@@ -22,7 +22,9 @@ function ConsultantDetail() {
 
   // useEffect - 상담사 프로필 정보 / 상담사 출결이력 정보
   const [consultant, setConsultant] = useState("");
+
   const [attendance, setAttendance] = useState("");
+
   const [logOption, setLogOption] = useState("출결이력");
   const [groupName, setGroupName] = useState("");
 
