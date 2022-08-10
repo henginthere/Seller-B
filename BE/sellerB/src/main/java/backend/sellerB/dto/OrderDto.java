@@ -16,10 +16,12 @@ public class OrderDto {
 
     private Address address;
     private Byte orderState;
+    private Long orderSeq;
 
     public static OrderDto from(Order order) {
         if(order == null) return null;
         return OrderDto.builder()
+                .orderSeq(order.getOrderSeq())
                 .address(order.getAddr())
                 .orderState(order.getOrderState())
                 .build();
@@ -30,6 +32,7 @@ public class OrderDto {
         int i = 0;
         while (i < orderList.size()) {
             OrderDto orderDto = OrderDto.builder()
+                    .orderSeq(orderList.get(i).getOrderSeq())
                     .address(orderList.get(i).getAddr())
                     .orderState(orderList.get(i).getOrderState())
                     .build();
