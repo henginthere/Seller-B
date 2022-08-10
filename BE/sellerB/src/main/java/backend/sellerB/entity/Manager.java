@@ -63,16 +63,16 @@ public class Manager implements Serializable {
     private Boolean managerDelYn;
     @CreatedBy
     @Basic
-    @Column(name = "manager_reg_user_seq")
-    private Long managerRegUserSeq;
+    @Column(name = "manager_reg_user")
+    private String managerRegUser;
     @CreatedDate
     @Basic
     @Column(name = "manager_reg_date")
     private LocalDateTime managerRegDate;
     @LastModifiedBy
     @Basic
-    @Column(name = "manager_mod_user_seq")
-    private Long managerModUserSeq;
+    @Column(name = "manager_mod_user")
+    private String managerModUser;
     @LastModifiedDate
     @Basic
     @Column(name = "manager_mod_date")
@@ -88,12 +88,12 @@ public class Manager implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Manager that = (Manager) o;
-        return managerSeq == that.managerSeq && brand == that.brand && Objects.equals(managerId, that.managerId) && Objects.equals(managerName, that.managerName) && Objects.equals(managerImageUrl, that.managerImageUrl) && Objects.equals(managerPass, that.managerPass) && Objects.equals(managerTel, that.managerTel) && Objects.equals(managerEmail, that.managerEmail) && Objects.equals(managerDelYn, that.managerDelYn) && Objects.equals(managerRegUserSeq, that.managerRegUserSeq) && Objects.equals(managerRegDate, that.managerRegDate) && Objects.equals(managerModUserSeq, that.managerModUserSeq) && Objects.equals(managerModDate, that.managerModDate);
+        return managerSeq == that.managerSeq && brand == that.brand && Objects.equals(managerId, that.managerId) && Objects.equals(managerName, that.managerName) && Objects.equals(managerImageUrl, that.managerImageUrl) && Objects.equals(managerPass, that.managerPass) && Objects.equals(managerTel, that.managerTel) && Objects.equals(managerEmail, that.managerEmail) && Objects.equals(managerDelYn, that.managerDelYn) && Objects.equals(managerRegUser, that.managerRegUser) && Objects.equals(managerRegDate, that.managerRegDate) && Objects.equals(managerModUser, that.managerModUser) && Objects.equals(managerModDate, that.managerModDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(managerSeq, brand, managerId, managerName, managerPass, managerTel, managerEmail, managerImageUrl, managerDelYn, managerRegUserSeq, managerRegDate, managerModUserSeq, managerModDate);
+        return Objects.hash(managerSeq, brand, managerId, managerName, managerPass, managerTel, managerEmail, managerImageUrl, managerDelYn, managerRegUser, managerRegDate, managerModUser, managerModDate);
     }
 
 
