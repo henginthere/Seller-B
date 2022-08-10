@@ -64,8 +64,8 @@ export const leaveWorkApi = async (consultantSeq, success, fail) => {
 }
 
 // GET : List : AttendanceLog.js 
-export const listAttendanceApi = async ( success, fail) => {
-    return await api.post("/consultant-attendance/list").then(success).catch(fail);
+export const listAttendanceApi = async ( consultantSeq, success, fail) => {
+    return await api.post(`/consultant-attendance/list/${consultantSeq}`).then(success).catch(fail);
 }
 
 // GET : List : ConsultingLog.js 

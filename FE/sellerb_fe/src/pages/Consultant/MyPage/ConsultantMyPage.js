@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import NavBar from "../../../components/Common/NavBar/NavBar";
 import Footer from "../../../components/Common/Footer/Footer";
 import { TextField } from "@mui/material";
@@ -11,89 +12,46 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+
+import {
+  detailConsultantApi 
+} from "../../../api/consultantApi";
+
+
 function ConsultantMyPage() {
-  // 초기 더미 데이터
-  const dummy_data = {
-    id: "U2022012",
-    name: "셀러비",
-    email: "sellerjy@sellovy.com",
-    pw: "U2022012",
-    tel: "010-5555-5555",
-    product: "TV",
-  };
-  const dummy_data_consultInfo = [
-    {
-      no: 1,
-      userId: "user_1",
-      productCode: "ABC12345",
-      startTime: "11:11",
-      endTime: "11:22",
-    },
-    {
-      no: 2,
-      userId: "user_2",
-      productCode: "ABC12345",
-      startTime: "11:11",
-      endTime: "11:22",
-    },
-    {
-      no: 3,
-      userId: "user_3",
-      productCode: "ABC12345",
-      startTime: "11:11",
-      endTime: "11:22",
-    },
-    {
-      no: 4,
-      userId: "user_4",
-      productCode: "ABC12345",
-      startTime: "11:11",
-      endTime: "11:22",
-    },
-    {
-      no: 5,
-      userId: "user_5",
-      productCode: "ABC12345",
-      startTime: "11:11",
-      endTime: "11:22",
-    },
-    {
-      no: 6,
-      userId: "user_6",
-      productCode: "ABC12345",
-      startTime: "11:11",
-      endTime: "11:22",
-    },
-  ];
+  const { id } = useParams();
+  const seq = id;
+  console.log(seq)
+
+  const navigate = useNavigate();
+
+  const [consultant, setConsultant] = useState("");
+
+
   const [isModify, setModify] = useState(false);
-  // 수정 된 데이터
-  var data = { ...dummy_data };
+
   // 수정 페이지 인지 아닌지 바꿔주는 함수
   const ChangeToModify = () => {
     setModify(!isModify);
-    console.log("isModify : " + isModify);
   };
+
   const cancelModify = () => {
-    data = { ...dummy_data };
     ChangeToModify();
   };
+
   // 최종적으로 수정 완료 버튼을 누르면 api로 DB에 반영하기 위한 함수
   const handleSubmit = (e) => {
     e.preventDefault();
 
     alert("수정하시겠습니까?");
 
-    // 임시로 메인으로 돌아가게 함
-    console.log("이전 데이터 : " + dummy_data);
-    console.log("바뀐 데이터 : " + data);
     ChangeToModify();
   };
-  // 바뀔때마다 setData로 수정된 데이터로 바꿔줌
+
   const handleChange = (e) => {
     e.preventDefault();
-    // console.log("handleChange!");
-    data[e.target.name] = e.target.value;
-    // console.log(e.target.name + " : " + e.target.value);
+
+    // [e.target.name] = e.target.value;
   };
 
   const Main = () => {
@@ -104,7 +62,7 @@ function ConsultantMyPage() {
             <TextField
               id='outlined-read-only-input'
               label='사번'
-              defaultValue={dummy_data.id}
+              defaultValue={consultant.consultantId}
               fullWidth={true}
               InputProps={{ readOnly: true }}
             />
@@ -112,7 +70,7 @@ function ConsultantMyPage() {
           <div className='InfoTextField'>
             <TextField
               label='사원명'
-              defaultValue={dummy_data.name}
+              defaultValue={consultant.consultantName}
               fullWidth={true}
               InputProps={{ readOnly: true }}
             />
@@ -120,7 +78,7 @@ function ConsultantMyPage() {
           <div className='InfoTextField'>
             <TextField
               label='사원 Email'
-              defaultValue={dummy_data.email}
+              defaultValue={consultant.consultantEmail}
               fullWidth={true}
               InputProps={{ readOnly: true }}
             />
@@ -128,7 +86,7 @@ function ConsultantMyPage() {
           <div className='InfoTextField'>
             <TextField
               label='PW'
-              defaultValue={dummy_data.pw}
+              defaultValue=""
               fullWidth={true}
               InputProps={{ readOnly: true }}
             />
@@ -136,7 +94,7 @@ function ConsultantMyPage() {
           <div className='InfoTextField'>
             <TextField
               label='제품군'
-              defaultValue={dummy_data.product}
+              defaultValue={consultant.productGroup}
               fullWidth={true}
               InputProps={{ readOnly: true }}
             />
@@ -150,6 +108,7 @@ function ConsultantMyPage() {
       </>
     );
   };
+
   const Modify = () => {
     return (
       <>
@@ -158,7 +117,7 @@ function ConsultantMyPage() {
             <TextField
               id='outlined-read-only-input'
               label='사번'
-              defaultValue={dummy_data.id}
+              defaultValue={consultant.consultantId}
               fullWidth={true}
               InputProps={{ readOnly: true }}
               disabled='true'
@@ -168,7 +127,7 @@ function ConsultantMyPage() {
           <div className='InfoTextField'>
             <TextField
               label='사원명'
-              defaultValue={dummy_data.name}
+              defaultValue={consultant.consultantName}
               fullWidth={true}
               InputProps={{ readOnly: true }}
               disabled='true'
@@ -178,7 +137,7 @@ function ConsultantMyPage() {
           <div className='InfoTextField'>
             <TextField
               label='사원 Email'
-              defaultValue={dummy_data.email}
+              defaultValue={consultant.consultantEmail}
               fullWidth={true}
               onChange={handleChange}
             />
@@ -186,7 +145,7 @@ function ConsultantMyPage() {
           <div className='InfoTextField'>
             <TextField
               label='PW'
-              defaultValue={dummy_data.pw}
+              defaultValue=""
               fullWidth={true}
               onChange={handleChange}
             />
@@ -194,7 +153,7 @@ function ConsultantMyPage() {
           <div className='InfoTextField'>
             <TextField
               label='제품군'
-              defaultValue={dummy_data.product}
+              defaultValue={consultant.productGroup}
               fullWidth={true}
               onChange={handleChange}
             />
@@ -227,10 +186,6 @@ function ConsultantMyPage() {
           </div>
           {/* 상담사 이미지 */}
           <div className='imageWrapper'>
-            <img
-              src={`${process.env.PUBLIC_URL}/img/ManagerImage.png`}
-              alt='NO IMAGE'
-            />
           </div>
           {/* 상담사 Info */}
           <div>
@@ -257,7 +212,7 @@ function ConsultantMyPage() {
                     <TableCell>종료시간</TableCell>
                   </TableRow>
                 </TableHead>
-                <TableBody>
+                {/* <TableBody>
                   {dummy_data_consultInfo.map((dummy_data_consultInfo) => (
                     <TableRow key={dummy_data_consultInfo.name}>
                       <TableCell>{dummy_data_consultInfo.no}</TableCell>
@@ -269,7 +224,7 @@ function ConsultantMyPage() {
                       <TableCell>{dummy_data_consultInfo.endTime}</TableCell>
                     </TableRow>
                   ))}
-                </TableBody>
+                </TableBody> */}
               </Table>
             </TableContainer>
           </div>
