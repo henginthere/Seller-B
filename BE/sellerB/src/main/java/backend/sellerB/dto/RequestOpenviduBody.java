@@ -8,6 +8,7 @@ import lombok.*;
 @Getter
 @Setter
 public class RequestOpenviduBody {
+
     public class DefaultRecordingProperties{
         @Builder.Default
         public String name = "MyRecording";
@@ -27,6 +28,7 @@ public class RequestOpenviduBody {
         public int shmSize = 536870912;
         public MediaNode mediaNode;
     }
+
 
 
     public class MediaNode{
