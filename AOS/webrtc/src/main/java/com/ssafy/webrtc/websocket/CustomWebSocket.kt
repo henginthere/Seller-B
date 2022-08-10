@@ -24,6 +24,7 @@ import com.neovisionaries.ws.client.*
 import com.ssafy.webrtc.openvidu.LocalParticipant
 import com.ssafy.webrtc.openvidu.Participant
 import com.ssafy.webrtc.openvidu.Session
+import com.ssafy.webrtc.utils.createRemoteParticipantVideo
 import java.io.IOException
 import java.lang.Exception
 import java.net.MalformedURLException
@@ -381,7 +382,7 @@ class CustomWebSocket(session: Session, openviduUrl: String, activity: AppCompat
             }
         }
         val remoteParticipant = RemoteParticipant(connectionId, participantName!!, session)
-        //activity.createRemoteParticipantVideo(remoteParticipant)
+        activity.createRemoteParticipantVideo(remoteParticipant)
         session.createRemotePeerConnection(remoteParticipant.getConnectionId())
         return remoteParticipant
     }

@@ -17,4 +17,15 @@ class RemoteParticipant(
 
     fun getVideoView():SurfaceViewRenderer = videoView
 
+    fun setVideoView(videoView: SurfaceViewRenderer){
+        this.videoView = videoView
+    }
+
+    fun getParticipantNameText() : TextView { return participantNameText}
+
+    fun setParticipantNameText(participantNameText: TextView){
+        this.participantNameText = participantNameText
+    }
+
+    override fun dispose() { super.dispose()}
 }
