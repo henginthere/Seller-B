@@ -25,10 +25,8 @@ class VideoRoomComponent extends Component {
     this.layout = new OpenViduLayout();
     let sessionName = this.props.sessionName
       ? this.props.sessionName
-      : "SessionA";
-    let userName = this.props.user
-      ? this.props.user
-      : "OpenVidu_User" + Math.floor(Math.random() * 100);
+      : "세션이름 받아오기 실패";
+    let userName = this.props.user ? this.props.user : "유저이름 받아오기 실패";
     this.remotes = [];
     this.localUserAccessAllowed = false;
     this.state = {
@@ -613,80 +611,80 @@ class VideoRoomComponent extends Component {
     );
   }
 
-  getToken() {
-    return this.createSession(this.state.mySessionId).then((sessionId) =>
-      this.createToken(sessionId),
-    );
-  }
+  // getToken() {
+  //   return this.createSession(this.state.mySessionId).then((sessionId) =>
+  //     this.createToken(sessionId),
+  //   );
+  // }
 
-  createSession(sessionId) {
-    return new Promise((resolve, reject) => {
-      var data = JSON.stringify({ customSessionId: sessionId });
-      axios
-        .post(this.OPENVIDU_SERVER_URL + "/openvidu/api/sessions", data, {
-          headers: {
-            Authorization:
-              "Basic " + btoa("OPENVIDUAPP:" + this.OPENVIDU_SERVER_SECRET),
-            "Content-Type": "application/json",
-          },
-        })
-        .then((response) => {
-          console.log("CREATE SESION", response);
-          resolve(response.data.id);
-        })
-        .catch((response) => {
-          var error = Object.assign({}, response);
-          if (error.response && error.response.status === 409) {
-            resolve(sessionId);
-          } else {
-            console.log(error);
-            console.warn(
-              "No connection to OpenVidu Server. This may be a certificate error at " +
-                this.OPENVIDU_SERVER_URL,
-            );
-            if (
-              window.confirm(
-                'No connection to OpenVidu Server. This may be a certificate error at "' +
-                  this.OPENVIDU_SERVER_URL +
-                  '"\n\nClick OK to navigate and accept it. ' +
-                  'If no certificate warning is shown, then check that your OpenVidu Server is up and running at "' +
-                  this.OPENVIDU_SERVER_URL +
-                  '"',
-              )
-            ) {
-              window.location.assign(
-                this.OPENVIDU_SERVER_URL + "/accept-certificate",
-              );
-            }
-          }
-        });
-    });
-  }
+  // createSession(sessionId) {
+  //   return new Promise((resolve, reject) => {
+  //     var data = JSON.stringify({ customSessionId: sessionId });
+  //     axios
+  //       .post(this.OPENVIDU_SERVER_URL + "/openvidu/api/sessions", data, {
+  //         headers: {
+  //           Authorization:
+  //             "Basic " + btoa("OPENVIDUAPP:" + this.OPENVIDU_SERVER_SECRET),
+  //           "Content-Type": "application/json",
+  //         },
+  //       })
+  //       .then((response) => {
+  //         console.log("CREATE SESION", response);
+  //         resolve(response.data.id);
+  //       })
+  //       .catch((response) => {
+  //         var error = Object.assign({}, response);
+  //         if (error.response && error.response.status === 409) {
+  //           resolve(sessionId);
+  //         } else {
+  //           console.log(error);
+  //           console.warn(
+  //             "No connection to OpenVidu Server. This may be a certificate error at " +
+  //               this.OPENVIDU_SERVER_URL,
+  //           );
+  //           if (
+  //             window.confirm(
+  //               'No connection to OpenVidu Server. This may be a certificate error at "' +
+  //                 this.OPENVIDU_SERVER_URL +
+  //                 '"\n\nClick OK to navigate and accept it. ' +
+  //                 'If no certificate warning is shown, then check that your OpenVidu Server is up and running at "' +
+  //                 this.OPENVIDU_SERVER_URL +
+  //                 '"',
+  //             )
+  //           ) {
+  //             window.location.assign(
+  //               this.OPENVIDU_SERVER_URL + "/accept-certificate",
+  //             );
+  //           }
+  //         }
+  //       });
+  //   });
+  // }
 
-  createToken(sessionId) {
-    return new Promise((resolve, reject) => {
-      var data = JSON.stringify({});
-      axios
-        .post(
-          this.OPENVIDU_SERVER_URL +
-            "/openvidu/api/sessions/" +
-            sessionId +
-            "/connection",
-          data,
-          {
-            headers: {
-              Authorization:
-                "Basic " + btoa("OPENVIDUAPP:" + this.OPENVIDU_SERVER_SECRET),
-              "Content-Type": "application/json",
-            },
-          },
-        )
-        .then((response) => {
-          console.log("TOKEN", response);
-          resolve(response.data.token);
-        })
-        .catch((error) => reject(error));
-    });
-  }
+  // createToken(sessionId) {
+  //   return new Promise((resolve, reject) => {
+  //     var data = JSON.stringify({});
+  //     axios
+  //       .post(
+  //         this.OPENVIDU_SERVER_URL +
+  //           "/openvidu/api/sessions/" +
+  //           sessionId +
+  //           "/connection",
+  //         data,
+  //         {
+  //           headers: {
+  //             Authorization:
+  //               "Basic " + btoa("OPENVIDUAPP:" + this.OPENVIDU_SERVER_SECRET),
+  //             "Content-Type": "application/json",
+  //           },
+  //         },
+  //       )
+  //       .then((response) => {
+  //         console.log("TOKEN", response);
+  //         resolve(response.data.token);
+  //       })
+  //       .catch((error) => reject(error));
+  //   });
+  // }
 }
 export default VideoRoomComponent;
