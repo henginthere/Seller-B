@@ -1,7 +1,16 @@
+//buildscript {
+//	ext {
+//		queryDslVersion = "5.0.0"
+//	}
+//}
+
 plugins {
 	id 'org.springframework.boot' version '2.7.2'
 	id 'io.spring.dependency-management' version '1.0.12.RELEASE'
 	id 'java'
+//	// querydsl 플러그인 추가
+//	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
+//	id "io.franzbecker.gradle-lombok" version "3.0.0"
 }
 
 group = 'backend'
@@ -27,7 +36,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
-	runtimeOnly 'mysql:mysql-connector-java'
+	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client' // MariaDB
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
@@ -41,8 +50,16 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-log4j2'
 	implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.10.3'
 
+	implementation 'org.springdoc:springdoc-openapi-ui:1.6.6'
+
+	//oauth
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client:2.6.2'
+	implementation group: 'com.google.api-client', name: 'google-api-client-jackson2', version: '1.30.10'
+
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+
 }
+

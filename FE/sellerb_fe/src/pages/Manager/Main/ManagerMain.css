@@ -1,0 +1,24 @@
+#wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+#manager-main-left {
+  width:40%;
+  margin-left: 100px;
+}
+
+#manager-main-right {
+  width: 40%;
+  margin-right: 100px;
+}
+
+/* #manager-main-center {
+  width: 30%;
+} */
+
+.center {
+  text-align: center;
+}
+

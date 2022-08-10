@@ -1,0 +1,177 @@
+
+.consultant-main-wrapper {
+    margin:50px;
+}
+
+.consultant-main-wrapper .main-header {
+  margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    width: 1200px;
+    z-index: 1;
+}
+
+.main-header .header-left {
+    background-color: #FBF9F4;
+    float: left;
+    height: 150px;
+    margin-right: 1.66666667%;
+    position: relative;
+    width: 30%;
+}
+
+.header-left .left-content-comment {
+  padding: 35px 0 0 0;
+  margin-left: 30px;
+}
+
+.left-content-comment .attend-wrapper {
+  font-size: 0;
+  text-align: right;
+  padding: 0 40px 10px 0;
+  
+}
+
+.attend-wrapper .go-btn-wrapper {
+  background-color: #8c99a8;
+}
+
+ .go-btn-wrapper .go-btn{
+    display: block;
+    font-family: Roboto;
+    font-size: 1.4em;
+    font-weight: 500;
+    margin-bottom: 3px;
+}
+
+.attend-wrapper .leave-btn-wrapper {
+  background-color: #8c99a8;
+}
+
+.leave-btn-wrapper .leave-btn {
+  display: block;
+    font-family: Roboto;
+    font-size: 1.4em;
+    font-weight: 500;
+    margin-bottom: 3px;
+    padding-top: 0;
+}
+
+/* .left-content-comment > header {
+  position: relative;
+  margin-left: 25px;
+} */
+
+
+/**/
+
+.welcome-msg {
+    font-size: 25px;
+    font-family: bold ;
+    color: #324E66;
+}
+
+/* 출근, 퇴근 버튼 */
+.attendance-wrapper {
+  display: flex;
+}
+
+/* 공지사항 , 상담시청 내역 div START*/
+
+.notice-consulting-wrapper {
+    display: flex;
+    margin-top: 55px;
+}
+
+.notice-consulting-wrapper hr {
+    width: 80%;
+}
+
+.notice-consulting-wrapper .notice {
+    width: 50%; 
+    justify-content: start;
+}
+
+.notice .notice-title {
+    border : solid 2px #F9F1E2;
+    width: 20%;
+
+    /* 위치 조절 */
+    margin-left: 40%;
+    margin-bottom: 30px;
+    padding: 10px;
+    /* font */
+    font-size: 13px;
+}
+
+/* 상담신청 내역 START */
+.notice-consulting-wrapper .consulting-request {
+    width: 50%; 
+    justify-content: end;
+
+}
+
+.consulting-request .reqeust-title {
+    border : solid 2px #F9F1E2;
+    width: 20%;
+
+    /* 위치 조절 */
+    margin-left: 40%;
+    margin-bottom: 30px;
+    padding: 10px;
+    /* font */
+    font-size: 13px;
+
+}
+
+/* table START */
+.content-table {
+    border-collapse: collapse;
+    margin-left: 150px;
+    margin-top: 20px;
+    font-size: 0.9em;
+    min-width: 400px;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  }
+  
+  .content-table thead tr {
+    background-color: grey;
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
+  }
+  
+  .content-table th,
+  .content-table td {
+    padding: 12px 15px;
+  }
+  
+  .content-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+  }
+  
+
+  
+  .content-table tbody tr:last-of-type {
+    border-bottom: 2px solid white;
+  }
+  
+
+  /* Btn */
+  .accept-btn {
+    border: none;
+  }
+
+  .accept-btn:hover {
+    background-color: #F8F0DE;
+  }
+
+  .reject-btn {
+    border: none;
+  }
+
+  .reject-btn:hover {
+    background-color: #F8F0DE;
+  }
