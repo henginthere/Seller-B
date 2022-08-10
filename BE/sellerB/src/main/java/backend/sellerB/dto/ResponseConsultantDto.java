@@ -38,35 +38,29 @@ public class ResponseConsultantDto {
     private Set<AuthorityDto> authorityDtoSet;
 
     public static String getBrandName(Consultant consultant){
-        System.out.println("1");
         if (consultant != null) {
             ProductGroup productGroup = consultant.getProductGroup();
-            System.out.println("2");
             if (productGroup != null) {
                 Brand brand = productGroup.getBrand();
-                System.out.println("3");
                 if (brand != null) {
                     String brandName = brand.getBrandNameEng();
-                    System.out.println("4");
                     if (brandName != null) {
-                        System.out.println("5");
                         return brandName;
                     }
                 }
             }
         }
-        System.out.println("666666");
         return "브랜드 없음";
     }
 
     public static String getProductGroupName(Consultant consultant){
-        System.out.println("1");
         if (consultant != null) {
             ProductGroup productGroup = consultant.getProductGroup();
-            System.out.println("2");
             if (productGroup != null) {
                 String productGroupName = productGroup.getProductGroupName();
-                System.out.println("3");
+                if (productGroupName != null) {
+                    return productGroupName;
+                }
             }
         }
         System.out.println("666666");
