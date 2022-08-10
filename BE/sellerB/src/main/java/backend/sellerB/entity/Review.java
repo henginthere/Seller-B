@@ -45,16 +45,16 @@ public class Review {
     private Boolean reviewDelYn;
     @CreatedBy
     @Basic
-    @Column(name = "review_reg_user_seq")
-    private Long reviewRegUserSeq;
+    @Column(name = "review_reg_user")
+    private String reviewRegUser;
     @CreatedDate
     @Basic
     @Column(name = "review_reg_date")
     private LocalDateTime reviewRegDate;
     @LastModifiedBy
     @Basic
-    @Column(name = "review_mod_user_seq")
-    private Long reviewModUserSeq;
+    @Column(name = "review_mod_user")
+    private String reviewModUser;
     @LastModifiedDate
     @Basic
     @Column(name = "review_mod_date")
