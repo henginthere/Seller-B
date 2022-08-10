@@ -41,8 +41,8 @@ function ConsultantDetail() {
         //////////////////////////////////////////////////////////////
         console.log(JSON.stringify(res.data));
         const test = consultant.productGroup;
-        console.log("test :" + test.productGroupName);
-        setGroupName(test.productGroupName);
+        // console.log("test :" + test.productGroupName);
+        // setGroupName(test.productGroupName);
         console.log("groupName: " + groupName)
         // console.log(test.productGroupName);
 
@@ -102,7 +102,7 @@ function ConsultantDetail() {
             <div>{groupName}</div>
           </div>
           <div>
-            <button onClick={((e)=> navigate(`/manager/consultantModify/${consultant.consultantSeq}`))}>
+            <button onClick={(e)=> navigate(`/manager/consultantModify/${consultant.consultantSeq}`)}>
               수정하기
             </button>
             <button onClick={(e)=>onDeleteBtn()}>

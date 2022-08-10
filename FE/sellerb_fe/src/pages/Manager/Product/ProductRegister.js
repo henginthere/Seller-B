@@ -122,7 +122,7 @@ function ProductRegister() {
           {imgBase64.map((item) => {
             return (
               <div className="img-wrapper">
-                <img src={item} alt="Frist Slide" />
+                <img src={item} alt="First Slide" />
               </div>
             );
           })}

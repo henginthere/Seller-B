@@ -13,6 +13,8 @@ export const listGroupConsultantApi = async (productGroupName, success, fail) =>
 
 // get : Detail : ConsultantDetail.js : 상담사 
 export const detailConsultantApi= async ( consultantSeq, success, fail) => {
+    console.log("in con deatil API: "+ consultantSeq)
+
     return await api.get(`/consultant/${consultantSeq}`).then(success).catch(fail);
 }
 
@@ -51,10 +53,9 @@ export const brandConsultantListApi = async ( brandName, success, fail) => {
 
 // 상담사 출결기록 & 상담기록 
 
+/* 상담사 출근버튼, 퇴근버튼  */
 // POST : ConsultantMain.js
 export const goWorkApi = async (consultantSeq, success, fail) =>{
-    console.log("in goWorkAPI :" + consultantSeq)
-
     return await api.post("/consultant-attendance", consultantSeq).then(success).catch(fail);
 }
 
@@ -63,16 +64,16 @@ export const leaveWorkApi = async (consultantSeq, success, fail) => {
     return await api.put(`/consultant-attendance/${consultantSeq}`).then(success).catch(fail);
 }
 
+/* 출결이력, 상담이력 List */
 // GET : List : AttendanceLog.js 
 export const listAttendanceApi = async ( consultantSeq, success, fail) => {
-    return await api.post(`/consultant-attendance/list/${consultantSeq}`).then(success).catch(fail);
+    return await api.get(`/consultant-attendance/list/${consultantSeq}`).then(success).catch(fail);
 }
 
 // GET : List : ConsultingLog.js 
-export const listConsultingApi = async ( success, fail) => {
-    return await api.post("/consulting/list").then(success).catch(fail);
+export const listConsultingApi = async ( consultantSeq, success, fail) => {
+    return await api.get(`/consulting/consultant/${consultantSeq}`).then(success).catch(fail);
 }
-
 
 
 
@@ -82,7 +83,3 @@ export const listConsultingApi = async ( success, fail) => {
 //     return await api.post("/consultant-attendance/list").then(success).catch(fail);
 // }
 
-// // get : List : ConsultingLog.js
-// export const listConsultantAttendanceApi = async ( success, fail) => {
-//     return await api.post("/consultant-attendance/list").then(success).catch(fail);
-// }
