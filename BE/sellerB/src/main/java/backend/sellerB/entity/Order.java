@@ -44,8 +44,8 @@ public class Order {
     private Boolean orderDelYn;
     @CreatedBy
     @Basic
-    @Column(name = "order_reg_user_seq")
-    private Long orderRegUserSeq;
+    @Column(name = "order_reg_user")
+    private String orderRegUser;
     @CreatedDate
     @Basic
     @Column(name = "order_reg_date")
@@ -53,8 +53,8 @@ public class Order {
 
     @LastModifiedBy
     @Basic
-    @Column(name = "order_mod_user_seq")
-    private Long orderModUserSeq;
+    @Column(name = "order_mod_user")
+    private String orderModUser;
 
     @LastModifiedDate
     @Basic

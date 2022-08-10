@@ -50,8 +50,8 @@ public class WaitingCustomer {
     private Boolean watingCustomerGroupDelYn;
     @CreatedBy
     @Basic
-    @Column(name = "waiting_customer_reg_user_seq")
-    private Long waitingCustomerRegUserSeq;
+    @Column(name = "waiting_customer_reg_user")
+    private String waitingCustomerRegUser;
     @CreatedDate
     @Basic
     @Column(name = "waiting_customer_reg_date")
@@ -59,8 +59,8 @@ public class WaitingCustomer {
 
     @LastModifiedBy
     @Basic
-    @Column(name = "waiting_customer_mod_user_seq")
-    private Long waitingCustomerModUserSeq;
+    @Column(name = "waiting_customer_mod_user")
+    private String waitingCustomerModUser;
 
     @LastModifiedDate
     @Basic

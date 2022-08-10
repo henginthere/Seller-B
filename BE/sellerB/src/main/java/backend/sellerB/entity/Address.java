@@ -47,16 +47,16 @@ public class Address {
     private Boolean addrDelYn;
     @CreatedBy
     @Basic
-    @Column(name = "addr_reg_user_seq")
-    private Long addrRegUserSeq;
+    @Column(name = "addr_reg_user")
+    private String addrRegUser;
     @CreatedDate
     @Basic
     @Column(name = "addr_reg_date")
     private LocalDateTime addrRegDate;
     @LastModifiedBy
     @Basic
-    @Column(name = "addr_mod_user_seq")
-    private Long addrModUserSeq;
+    @Column(name = "addr_mod_user")
+    private String addrModUser;
     @LastModifiedDate
     @Basic
     @Column(name = "addr_mod_date")
