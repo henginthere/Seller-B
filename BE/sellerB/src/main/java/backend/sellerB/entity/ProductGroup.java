@@ -49,16 +49,16 @@ public class ProductGroup {
     private Boolean productGroupDelYn;
     @CreatedBy
     @Basic
-    @Column(name = "product_group_reg_user_seq")
-    private Long productGroupRegUserSeq;
+    @Column(name = "product_group_reg_user")
+    private String productGroupRegUser;
     @CreatedDate
     @Basic
     @Column(name = "product_group_reg_date")
     private LocalDateTime productGroupRegDate;
     @LastModifiedBy
     @Basic
-    @Column(name = "product_group_mod_seq")
-    private Long productGroupModSeq;
+    @Column(name = "product_group_mod")
+    private String productGroupMod;
     @LastModifiedDate
     @Basic
     @Column(name = "product_group_mod_date")
@@ -70,11 +70,11 @@ public class ProductGroup {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProductGroup that = (ProductGroup) o;
-        return productGroupSeq == that.productGroupSeq && brand == that.brand && Objects.equals(productGroupCode, that.productGroupCode) && Objects.equals(productGroupName, that.productGroupName) && Objects.equals(productGroupDelYn, that.productGroupDelYn) && Objects.equals(productGroupRegUserSeq, that.productGroupRegUserSeq) && Objects.equals(productGroupRegDate, that.productGroupRegDate) && Objects.equals(productGroupModSeq, that.productGroupModSeq) && Objects.equals(productGroupModDate, that.productGroupModDate);
+        return productGroupSeq == that.productGroupSeq && brand == that.brand && Objects.equals(productGroupCode, that.productGroupCode) && Objects.equals(productGroupName, that.productGroupName) && Objects.equals(productGroupDelYn, that.productGroupDelYn) && Objects.equals(productGroupRegUser, that.productGroupRegUser) && Objects.equals(productGroupRegDate, that.productGroupRegDate) && Objects.equals(productGroupMod, that.productGroupMod) && Objects.equals(productGroupModDate, that.productGroupModDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(productGroupSeq, brand, productGroupCode, productGroupName, productGroupDelYn, productGroupRegUserSeq, productGroupRegDate, productGroupModSeq, productGroupModDate);
+        return Objects.hash(productGroupSeq, brand, productGroupCode, productGroupName, productGroupDelYn, productGroupRegUser, productGroupRegDate, productGroupMod, productGroupModDate);
     }
 }

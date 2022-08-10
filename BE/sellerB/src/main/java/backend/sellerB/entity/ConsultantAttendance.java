@@ -11,8 +11,6 @@ import org.springframework.data.domain.Persistable;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -37,8 +35,8 @@ public class ConsultantAttendance implements Persistable<Long> {
 
     @CreatedBy
     @Basic
-    @Column(name = "consultant_attendance_reg_user_seq")
-    private Long consultantAttendanceRegUserSeq;
+    @Column(name = "consultant_attendance_reg_user")
+    private String consultantAttendanceRegUser;
     @CreatedDate
     @Basic
     @Column(name = "login_time")
@@ -46,8 +44,8 @@ public class ConsultantAttendance implements Persistable<Long> {
 
     @LastModifiedBy
     @Basic
-    @Column(name = "consultant_attendance_mod_user_seq")
-    private Long consultantAttendanceModUserSeq;
+    @Column(name = "consultant_attendance_mod_user")
+    private String consultantAttendanceModUser;
     @LastModifiedDate
     @Basic
     @Column(name = "logout_time")

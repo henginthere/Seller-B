@@ -62,8 +62,8 @@ public class Consultant implements Serializable {
     private Boolean consultantDelYn;
     @CreatedBy
     @Basic
-    @Column(name = "consultant_reg_user_seq")
-    private Long consultantRegUserSeq;
+    @Column(name = "consultant_reg_user")
+    private String consultantRegUser;
 
     @CreatedDate
     @Basic
@@ -71,8 +71,8 @@ public class Consultant implements Serializable {
     private LocalDateTime consultantRegDate;
     @LastModifiedBy
     @Basic
-    @Column(name = "consultant_mod_user_seq")
-    private Long consultantModUserSeq;
+    @Column(name = "consultant_mod_user")
+    private String consultantModUser;
     @LastModifiedDate
     @Basic
     @Column(name = "consultant_mod_date")
@@ -84,12 +84,12 @@ public class Consultant implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Consultant that = (Consultant) o;
-        return consultantSeq == that.consultantSeq && productGroup == that.productGroup && Objects.equals(consultantId, that.consultantId) && Objects.equals(consultantPass, that.consultantPass) && Objects.equals(consultantName, that.consultantName) && Objects.equals(consultantImageUrl, that.consultantImageUrl) && Objects.equals(consultantTel, that.consultantTel) && Objects.equals(consultantEmail, that.consultantEmail) && Objects.equals(consultantDelYn, that.consultantDelYn) && Objects.equals(consultantRegUserSeq, that.consultantRegUserSeq) && Objects.equals(consultantRegDate, that.consultantRegDate) && Objects.equals(consultantModUserSeq, that.consultantModUserSeq) && Objects.equals(consultantModDate, that.consultantModDate);
+        return consultantSeq == that.consultantSeq && productGroup == that.productGroup && Objects.equals(consultantId, that.consultantId) && Objects.equals(consultantPass, that.consultantPass) && Objects.equals(consultantName, that.consultantName) && Objects.equals(consultantImageUrl, that.consultantImageUrl) && Objects.equals(consultantTel, that.consultantTel) && Objects.equals(consultantEmail, that.consultantEmail) && Objects.equals(consultantDelYn, that.consultantDelYn) && Objects.equals(consultantRegUser, that.consultantRegUser) && Objects.equals(consultantRegDate, that.consultantRegDate) && Objects.equals(consultantModUser, that.consultantModUser) && Objects.equals(consultantModDate, that.consultantModDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(consultantSeq, productGroup, consultantId, consultantPass, consultantName, consultantImageUrl, consultantTel, consultantEmail, consultantDelYn, consultantRegUserSeq, consultantRegDate, consultantModUserSeq, consultantModDate);
+        return Objects.hash(consultantSeq, productGroup, consultantId, consultantPass, consultantName, consultantImageUrl, consultantTel, consultantEmail, consultantDelYn, consultantRegUser, consultantRegDate, consultantModUser, consultantModDate);
     }
 
     @ManyToMany // user와 authority 다대다 관계를 일대다, 다대일 관계의 조인테이블로 정의
