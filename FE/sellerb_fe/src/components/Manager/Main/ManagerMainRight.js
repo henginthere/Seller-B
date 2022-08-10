@@ -146,7 +146,7 @@ function ManagerMainRight() {
           onChange={onSearchNameChane}
         />
         {/* <button onClick={(e) => onSearchBtn()}>검색하기</button> */}
-        <SmallButton onClick={(e) => onSearchBtn()} size="sm" label="검색하기" />
+        <SmallButton onClick={onSearchBtn} size="sm" label="검색하기" />
         <select onChange={onGroupChange} defaultValue={selectGroup}>
           <option />
           {groupList.map((option) =>
