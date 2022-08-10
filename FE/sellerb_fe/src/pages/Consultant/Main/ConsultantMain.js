@@ -3,11 +3,12 @@ import React, {useEffect, useState} from "react";
 import { Footer, NavBar } from "../../../components/index";
 import "./ConsultantMain.css";
 import styled from "styled-components";
-import { goWorkApi, leaveWorkApi } from "../../../api/consultantApi";
+import { goWorkApi, leaveWorkApi, detailConsultantApi } from "../../../api/consultantApi";
 
 function ConsultantMain() {
 
   const [conSeq, setConSeq] = useState("");
+  const [conName, setConName] = useState("");
   const tableDummyData = [
     {
       No: 1,
@@ -25,10 +26,17 @@ function ConsultantMain() {
 
   useEffect(()=>{
     const val = sessionStorage.getItem("seq");
-
     setConSeq(val);
 
-    console.log(conSeq);
+    detailConsultantApi(val)
+    .then((res)=>{
+
+      console.log("consultant Name: " + res.data.consultantName)
+      setConName(res.data.consultantName);
+    })
+    .catch((err)=>{
+      console.log("Error")
+    })
 
   }, [])
 
@@ -40,6 +48,9 @@ function ConsultantMain() {
     goWorkApi(Info)
     .then((res)=>{
       console.log("success");
+
+      alert("출근완료!");
+
     })
     .catch((err)=>{
       console.log("Error");
@@ -52,6 +63,8 @@ function ConsultantMain() {
     leaveWorkApi(conSeq)
     .then((res)=>{
       console.log("Success");
+
+      alert("퇴근완료!");
     })
     .catch((err)=>{
       console.log("Error");
@@ -67,7 +80,7 @@ function ConsultantMain() {
         <div className="main-header">
           <div className="header-left">
             <div className="left-content-comment">
-              oo님 환영합니다!
+              {conName} 님, 환영합니다!
             </div>
             <div className="attend-wrapper">
               <div className="go-btn-wrapper" onClick={goWorkBtn}>
