@@ -42,7 +42,7 @@ public class AuthService {
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private static final Logger logger = LoggerFactory.getLogger(AuthService.class);
     // 로그인 관련 메서드
-    public LoginResponseDto  authorize(String id, String password) {
+    public LoginResponseDto authorize(String id, String password) {
 
 
         UsernamePasswordAuthenticationToken authenticationToken =
