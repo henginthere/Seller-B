@@ -59,6 +59,20 @@ public class ResponseConsultantDto {
         return "브랜드 없음";
     }
 
+    public static String getProductGroupName(Consultant consultant){
+        System.out.println("1");
+        if (consultant != null) {
+            ProductGroup productGroup = consultant.getProductGroup();
+            System.out.println("2");
+            if (productGroup != null) {
+                String productGroupName = productGroup.getProductGroupName();
+                System.out.println("3");
+            }
+        }
+        System.out.println("666666");
+        return "제품군 없음";
+    }
+
     //엔티티를 dto로
     public static ResponseConsultantDto from(Consultant consultant) {
 
@@ -71,7 +85,7 @@ public class ResponseConsultantDto {
                 .consultantPass(consultant.getConsultantPass())
                 .consultantTel(consultant.getConsultantTel())
                 .brandName(getBrandName(consultant))
-                .productGroupName(consultant.getProductGroup().getProductGroupName())
+                .productGroupName(getProductGroupName(consultant))
                 .consultantImageUrl(consultant.getConsultantImageUrl())
                 .consultantDelYn(consultant.getConsultantDelYn())
                 .authorityDtoSet(consultant.getAuthorities().stream()
@@ -80,7 +94,7 @@ public class ResponseConsultantDto {
                 .build();
     }
 
-    public static ArrayList<ResponseConsultantDto> fromList(List<Consultant> consultantList) {
+    public static ArrayList<ResponseConsultantDto> fromList(List<Consultant> consultantList) throws NullPointerException{
         ArrayList<ResponseConsultantDto> listResponseConsultantDto= new ArrayList<>();
         int i = 0;
         while(i < consultantList.size()){
@@ -93,7 +107,7 @@ public class ResponseConsultantDto {
                     .consultantImageUrl(consultantList.get(i).getConsultantImageUrl())
                     .brandName(getBrandName(consultantList.get(i)))
 //                    .consultantDelYn(consultantList.get(i).getConsultantDelYn())
-                    .productGroupName(consultantList.get(i).getProductGroup().getProductGroupName())
+                    .productGroupName(getProductGroupName(consultantList.get(i)))
 //                    .authorityDtoSet(consultantList.get(i).getAuthorities().stream()
 //                            .map(authority -> AuthorityDto.builder().authorityName(authority.getAuthorityName()).build())
 //                            .collect(Collectors.toSet()))
