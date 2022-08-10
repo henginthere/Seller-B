@@ -1,8 +1,6 @@
 package backend.sellerB.controller;
 
-import backend.sellerB.dto.CustomerDto;
-import backend.sellerB.dto.EditCustomerDto;
-import backend.sellerB.dto.EditCustomerTokenDto;
+import backend.sellerB.dto.*;
 import backend.sellerB.repository.CustomerRepository;
 import backend.sellerB.service.CustomerService;
 import org.hibernate.annotations.DynamicUpdate;
@@ -11,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.List;
 
 @RestController
@@ -52,7 +52,10 @@ public class CustomerController {
     public ResponseEntity<CustomerDto> updateCustomer(@Valid @RequestBody EditCustomerDto editCustomerDto, @PathVariable Long seq) {
         return ResponseEntity.ok(customerService.updateCustomer(seq, editCustomerDto));
     }
-
+    @PutMapping("oauth/login/google")
+    public ResponseEntity<LoginResponseDto> googleLoginCustomer(@Valid @RequestBody GoogleLoginDto googleLoginDto) throws GeneralSecurityException, IOException {
+        return ResponseEntity.ok(customerService.googleLogin(googleLoginDto));
+    }
 
 
     @DeleteMapping("/{seq}")
