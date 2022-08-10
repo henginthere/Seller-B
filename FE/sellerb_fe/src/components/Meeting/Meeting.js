@@ -52,7 +52,7 @@ class Meeting extends Component {
         .then((res) => {
           this.setState({
             myUserName: res.data.consultantName,
-            mySessionId: res.data.brandName + "-session",
+            mySessionId: res.data.brandName,
           });
         })
         .catch((err) => {
@@ -112,7 +112,7 @@ class Meeting extends Component {
   render() {
     const mySessionId = this.state.mySessionId;
     const myUserName = this.state.myUserName;
-
+    const token = this.state.token;
     return (
       <>
         <div id='meeting-container'>
@@ -153,8 +153,9 @@ class Meeting extends Component {
               /> */}
               <VideoRoomComponent
                 sessionName={mySessionId}
-                userName={myUserName}
+                user={myUserName}
                 leaveSession={this.handlerLeaveSessionEvent}
+                token={this.state.token}
               />
             </div>
           )}
