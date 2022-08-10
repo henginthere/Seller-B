@@ -6,6 +6,7 @@ import "./ConsultantDetail.css";
 import { Footer, NavBar } from "../../../components/index";
 import AttendanceLog from "../../../components/Log/AttendanceLog";
 import ConsultingLog from "../../../components/Log/ConsultingLog";
+import { SmallButton } from '../../../components/Common/SmallButton'
 // import Test from '../../../components/Log/Test'
 
 import {
@@ -21,7 +22,7 @@ function ConsultantDetail() {
   const navigate = useNavigate();
 
   // useEffect - 상담사 프로필 정보 / 상담사 출결이력 정보
-  const [consultant, setConsultant] = useState("");
+  const [consultant, setConsultant] = useState([]);
 
   const [attendance, setAttendance] = useState("");
 
@@ -40,11 +41,10 @@ function ConsultantDetail() {
         setConsultant(res.data); 
         //////////////////////////////////////////////////////////////
         console.log(JSON.stringify(res.data));
-        const test = consultant.productGroup;
-        // console.log("test :" + test.productGroupName);
-        // setGroupName(test.productGroupName);
+        const test = consultant.productGroupName;
+
+        console.log("test :" + test);
         console.log("groupName: " + groupName)
-        // console.log(test.productGroupName);
 
       })
       .catch((err)=>{
@@ -75,6 +75,10 @@ function ConsultantDetail() {
     })
  }
 
+ const onEditBtn = () => {
+  navigate(`/manager/consultantModify/${consultant.consultantSeq}`)
+ }
+
   return (
     <>
       <NavBar />
@@ -99,15 +103,17 @@ function ConsultantDetail() {
           </div>
           <div className="profile-element">
             <p>제품군</p>
-            <div>{groupName}</div>
+            <div>{consultant.productGroupName}</div>
           </div>
-          <div>
-            <button onClick={(e)=> navigate(`/manager/consultantModify/${consultant.consultantSeq}`)}>
-              수정하기
-            </button>
-            <button onClick={(e)=>onDeleteBtn()}>
+          <div style={{display: "flex"}}>
+            {/* <button onClick={(e)=> navigate(`/manager/consultantModify/${consultant.consultantSeq}`)}> */}
+              {/* 수정하기 */}
+            {/* </button> */}
+            <SmallButton label="수정하기" onClick={onEditBtn} />
+            <SmallButton label="삭제하기" onClick={onDeleteBtn} />
+            {/* <button onClick={(e)=>onDeleteBtn()}>
               삭제하기
-            </button>
+            </button> */}
           </div>
         </div>
         <div className="profile-right">
