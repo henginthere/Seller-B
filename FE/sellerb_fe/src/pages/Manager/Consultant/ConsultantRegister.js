@@ -11,12 +11,12 @@ import { productGroupListApi } from "../../../api/productApi";
 function ConsultantRegister() {
   const navigate = useNavigate();
   const [groupList, setGroupList] = useState([]);
-  const [testList, setTestList] = useState([]);
+  
+  const [seqTest, setSeqTest] = useState([]);
+
 
   const [brandGroupList, setBrandGroupList] = useState([]);
-  const [managerBrand, setManagerBrand] = useState(
-    localStorage.getItem("brandNameKor")
-  );
+  const [managerBrand, setManagerBrand] = useState(localStorage.getItem("brandNameKor"));
 
   const [consultant, setConsultant] = useState({
     consultantId: "",
@@ -26,24 +26,16 @@ function ConsultantRegister() {
     consultantTel: "",
     productGroupSeq: "",
     consultantImageUrl: "",
+    formData:"",
   });
+  const { consultantId, consultantName, consultantEmail, consultantPass, consultantTel, productGroupSeq, consultantImageUrl } = consultant;
 
   const [imgBase64, setImgBase64] = useState([]); // 미리보기를 구현할 state
-  //const [imgFile, setImgFile] = useState(null); // 파일 그 자체를 받을 state
   const [imgFile, setImgFile] = useState({
     image_file: "",
     preview_URL: `${process.env.PUBLIC_URL}/img/default_img.png`,
   });
 
-  const {
-    consultantId,
-    consultantName,
-    consultantEmail,
-    consultantPass,
-    consultantTel,
-    productGroupSeq,
-    consultantImageUrl
-  } = consultant;
 
   // 이미지 파일 관련
   const handleChangeFile = (event) => {
@@ -69,6 +61,7 @@ function ConsultantRegister() {
       }
     }
   };
+
   // 이미지 파일 삭제
   const deleteImage = () => {
     setImgFile({
@@ -85,7 +78,6 @@ function ConsultantRegister() {
 
     // Form객체에 파일값 추가 : append(key, value) or append(key, value, filename)
     formData.append("file", e.target.files[0]);
-    console.log(formData);
 
     // 제품 정보
     setConsultant({
@@ -97,18 +89,7 @@ function ConsultantRegister() {
   useEffect(() => {
     productGroupListApi()
       .then((res) => {
-        // const item = brandList.find((it) => it.brandNameKor === value)
         setGroupList(res.data); // groupList
-        // console.log("groupListData:" + groupList[0].productGroupName)
-        // setGroupList(groupList.find((it)=> it.brandName === managerBrand));
-        // console.log("managerBrand State:" + managerBrand);
-        // const sample = groupList.find (data => data.brandName === managerBrand);
-        // console.log("sample:" + sample)
-        // setTestList(sample);
-        // console.log(testList[0].productGroupName)
-        // const managerBrandName = localStorage.getItem("brandNameKor");
-        // console.log(groupList[0])
-        // const list = groupList.find((it)=> it.brandNameKor === managerBrandName) // list : 매니저 브랜드의! 제품군 목록
       })
       .catch((err) => {
         console.log(err);
@@ -118,18 +99,17 @@ function ConsultantRegister() {
   const onRegisterBtn = (e) => {
 
     // productGroupName에 맞는 Seq찾기
-    // const info = {
-    //   consultantId: consultant.consultantId,
-    //   consultantName : consultant.consultantName,
-    //   consultantEmail : consultant.consultantEmail,
-    //   consultantPass : consultant.consultantPass,
-    //   consultantTel : consultant.consultantTel,
-    //   prodcutGroupSeq : item.prodcutGroupSeq,
-    //   consultantImageUrl:"",
-    // }
-    console.log("등록전 컨설턴트 상태 : " + JSON.stringify(consultant))
+    const info = {
+      consultantId: consultant.consultantId,
+      consultantName : consultant.consultantName,
+      consultantEmail : consultant.consultantEmail,
+      consultantPass : consultant.consultantPass,
+      consultantTel : consultant.consultantTel,
+      productGroupSeq :seqTest,
+      consultantImageUrl:""
+    }
 
-    registerConsultantApi(consultant)
+    registerConsultantApi(info)
       .then((res) => {
         console.log(res.data);
         navigate("/manager/main");
@@ -147,8 +127,6 @@ function ConsultantRegister() {
       ...consultant,
       [name]: value,
     });
-
-    console.log("setConsultant:" + consultant.productGroupName);
   };
 
   const onGroupChange = (e) => {
@@ -160,17 +138,7 @@ function ConsultantRegister() {
         it.productGroupName === e.target.value
     );
 
-    console.log("item: " + item.brandName + " , " + item.productGroupSeq);
-
-    const value = item.prodcutGroupSeq;
-    const { name } = e.target;
-   
-    setConsultant({
-      ...consultant,
-      [name]: value,
-    });
-
-    console.log("onGroupChange:" + consultant.productGroupSeq);
+    setSeqTest(item.productGroupSeq); 
   };
 
   return (
@@ -273,7 +241,7 @@ function ConsultantRegister() {
                 select
                 fullWidth="true"
                 name="productGroupName"
-                value={consultant.productGroupName}
+                // value={consultant.productGroupName}
                 // onChange={onChange}
                 onChange={onGroupChange}
                 SelectProps={{
@@ -293,10 +261,9 @@ function ConsultantRegister() {
             </div>
             <div className="Button">
               <Button
-                onClick={onRegisterBtn}
+                onClick={()=>onRegisterBtn()}
                 className="registerBtn"
                 variant="contained"
-                type="submit"
               >
                 등록
               </Button>
