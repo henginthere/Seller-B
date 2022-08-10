@@ -5,8 +5,6 @@ import React, { Component } from "react";
 import { getManagerInfoApi } from "../../api/managerApi";
 import { detailConsultantApi } from "../../api/consultantApi";
 
-import OpenViduSession from "openvidu-react";
-
 import VideoRoomComponent from "../VideoRoomComponent";
 // import VideoRoomComponent from "../VideoRoomComponent";
 
@@ -143,14 +141,6 @@ class Meeting extends Component {
             </div>
           ) : (
             <div id='meeting-container'>
-              {/* <OpenViduSession
-                sessionName={mySessionId}
-                user={myUserName}
-                token={token}
-                joinSession={this.handlerJoinSessionEvent}
-                leaveSession={this.handlerLeaveSessionEvent}
-                error={this.handlerErrorEvent}
-              /> */}
               <VideoRoomComponent
                 sessionName={mySessionId}
                 user={myUserName}
