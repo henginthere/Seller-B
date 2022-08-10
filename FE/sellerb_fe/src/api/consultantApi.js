@@ -20,14 +20,14 @@ export const detailConsultantApi= async ( consultantSeq, success, fail) => {
 
 // post : Register : ConsultantWrite.js
 export const registerConsultantApi = async ( consultant, success, fail ) => {
-    console.log("in Register API: " + JSON.data(consultant));
+    console.log("in Register API: " + JSON.stringify(consultant));
 
     return await api.post("/consultant/register", consultant).then(success).catch(fail);
 }
 
 // PUT : Modify : ConsultantModify.js
 export const modifyConsultantApi = async ( consultant, success, fail ) => {
-    console.log("in API: " + consultant);
+    console.log("in API: " + JSON.stringify(consultant));
     return await api.put(`/consultant/${consultant.consultantSeq}`, consultant).then(success).catch(fail);
 }
 
