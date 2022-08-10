@@ -41,8 +41,8 @@ public class ManagerConsultant {
     private Boolean consultantDelYn;
     @CreatedBy
     @Basic
-    @Column(name = "manager_consultant_reg_user_seq")
-    private Long managerConsultantRegUserSeq;
+    @Column(name = "manager_consultant_reg_user")
+    private String managerConsultantRegUser;
     @CreatedDate
     @Basic
     @Column(name = "manager_consultant_reg_date")
@@ -50,8 +50,8 @@ public class ManagerConsultant {
 
     @LastModifiedBy
     @Basic
-    @Column(name = "manager_consultant_mod_user_seq")
-    private Long managerConsultantModUserSeq;
+    @Column(name = "manager_consultant_mod_user")
+    private String managerConsultantModUser;
 
     @LastModifiedDate
     @Basic

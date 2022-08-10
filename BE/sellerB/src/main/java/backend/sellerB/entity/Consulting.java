@@ -40,8 +40,8 @@ public class Consulting {
 
     @CreatedBy
     @Basic
-    @Column(name = "consulting_reg_user_seq")
-    private Long consultingRegUserSeq;
+    @Column(name = "consulting_reg_user")
+    private String consultingRegUser;
     //컬럼 생성 시간은 상담 시작 시간
     @CreatedDate
     @Basic
@@ -50,8 +50,8 @@ public class Consulting {
 
     @LastModifiedBy
     @Basic
-    @Column(name = "consulting_mod_user_seq")
-    private Long consultingModUserSeq;
+    @Column(name = "consulting_mod_user")
+    private String consultingModUser;
 
     //컬럼 수정 시간은 상담 종료 시간 (consultingState 수정할 것이므로)
     @LastModifiedDate
