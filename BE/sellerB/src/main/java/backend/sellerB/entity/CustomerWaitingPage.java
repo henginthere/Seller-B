@@ -47,8 +47,8 @@ public class CustomerWaitingPage {
 
     @CreatedBy
     @Basic
-    @Column(name = "manager_reg_user_seq")
-    private Long customerWaitingPageRegUserSeq;
+    @Column(name = "manager_reg_user")
+    private String customerWaitingPageRegUser;
 
     @CreatedDate
     @Basic
@@ -57,8 +57,8 @@ public class CustomerWaitingPage {
 
     @LastModifiedBy
     @Basic
-    @Column(name = "manager_mod_user_seq")
-    private Long customerWaitingPageModUserSeq;
+    @Column(name = "manager_mod_user")
+    private String customerWaitingPageModUser;
 
     @LastModifiedDate
     @Basic

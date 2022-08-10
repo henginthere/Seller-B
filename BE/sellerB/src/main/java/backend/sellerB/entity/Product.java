@@ -56,16 +56,16 @@ public class Product {
     private Boolean productDelYn;
     @CreatedBy
     @Basic
-    @Column(name = "product_reg_user_seq")
-    private Long productRegUserSeq;
+    @Column(name = "product_reg_user")
+    private String productRegUser;
     @CreatedDate
     @Basic
     @Column(name = "product_reg_date")
     private LocalDateTime productRegDate;
     @LastModifiedBy
     @Basic
-    @Column(name = "product_mod_user_seq")
-    private Long productModUserSeq;
+    @Column(name = "product_mod_user")
+    private String productModUser;
     @LastModifiedDate
     @Basic
     @Column(name = "product_mod_date")
@@ -77,11 +77,11 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product that = (Product) o;
-        return productSeq == that.productSeq && productGroup == that.productGroup && Objects.equals(productId, that.productId) && Objects.equals(productName, that.productName) && Objects.equals(productPrice, that.productPrice) && Objects.equals(productManual, that.productManual) && Objects.equals(productThumbnail, that.productThumbnail) && Objects.equals(productDelYn, that.productDelYn) && Objects.equals(productRegUserSeq, that.productRegUserSeq) && Objects.equals(productRegDate, that.productRegDate) && Objects.equals(productModUserSeq, that.productModUserSeq) && Objects.equals(productModDate, that.productModDate);
+        return productSeq == that.productSeq && productGroup == that.productGroup && Objects.equals(productId, that.productId) && Objects.equals(productName, that.productName) && Objects.equals(productPrice, that.productPrice) && Objects.equals(productManual, that.productManual) && Objects.equals(productThumbnail, that.productThumbnail) && Objects.equals(productDelYn, that.productDelYn) && Objects.equals(productRegUser, that.productRegUser) && Objects.equals(productRegDate, that.productRegDate) && Objects.equals(productModUser, that.productModUser) && Objects.equals(productModDate, that.productModDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(productSeq, productGroup, productId, productName, productPrice, productManual, productThumbnail, productDelYn, productRegUserSeq, productRegDate, productModUserSeq, productModDate);
+        return Objects.hash(productSeq, productGroup, productId, productName, productPrice, productManual, productThumbnail, productDelYn, productRegUser, productRegDate, productModUser, productModDate);
     }
 }
