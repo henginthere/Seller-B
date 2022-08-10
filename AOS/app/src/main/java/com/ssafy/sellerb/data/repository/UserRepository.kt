@@ -88,4 +88,12 @@ class UserRepository @Inject constructor(
         }.flowOn(Dispatchers.IO)
     }
 
+    fun doGoogleLogin(idToken: String) : Flow<String>{
+        return flow {
+            val response = networkService.doGoogleLoginCall(idToken)
+            if( response != null){
+                emit(response)
+            }
+        }.flowOn(Dispatchers.IO)
+    }
 }

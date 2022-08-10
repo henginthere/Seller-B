@@ -8,6 +8,8 @@ apply plugin: 'kotlin-parcelize'
 
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
+apply plugin: 'com.google.gms.google-services'
+
 android {
     compileSdk 31
 
@@ -39,7 +41,6 @@ android {
 }
 
 dependencies {
-
     def dagger_version = "2.38.1"
     def camerax_version = "1.0.1"
 
@@ -86,6 +87,15 @@ dependencies {
     implementation 'org.webrtc:google-webrtc:1.0.+'
     implementation 'com.neovisionaries:nv-websocket-client:2.9'
     implementation 'com.squareup.okhttp3:okhttp:4.2.0'
+
+    //fcm
+    implementation 'com.google.firebase:firebase-auth:19.2.0'
+    implementation 'com.google.firebase:firebase-messaging:20.1.0'
+
+    implementation platform('com.google.firebase:firebase-bom:30.3.1')
+    implementation 'com.google.firebase:firebase-analytics'
+
+    implementation 'com.google.android.gms:play-services-auth:20.2.0'
 
     implementation project(":webrtc")
 }
