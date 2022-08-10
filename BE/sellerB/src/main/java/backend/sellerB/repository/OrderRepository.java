@@ -11,4 +11,5 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 
     Optional<List<Order>> findByOrderRegUserSeq(Long seq);
 
+    Order findTop1ByOrderByOrderSeqDesc();
 }
