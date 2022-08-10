@@ -2,8 +2,9 @@
     font-family: "twayair", cursive;
   }
 .wrapper{
-  width: 100%;
-  margin:10px;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
 }
 
 #left{

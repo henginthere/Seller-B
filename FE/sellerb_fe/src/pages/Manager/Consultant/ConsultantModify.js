@@ -18,8 +18,10 @@ function ConsultantModify() {
     consultantName: "",
     consultantEmail:"",
     consultantPass:"",
-    consultantTel :""
+    consultantTel :"",
+    productGroupSeq:""
   });
+
   const product_list = [
     { value: "TV", label: "TV" },
     { value: "phone", label: "Phone" },
@@ -47,7 +49,17 @@ function ConsultantModify() {
   const onHandleSubmit = (e) => {
     e.preventDefault();
 
-    modifyConsultantApi(consultant)
+    const info = {
+      "consultantId" : consultant.consultantId,
+      "consultantName": consultant.consultantId,
+      "consultantEmail": consultant.consultantEmail,
+      "consultantPass": consultant.consultantPass,
+      "consultantTel": consultant.consultantTel,
+      "productGroupSeq": "",
+      "consultantImageUrl": ""
+    }
+
+    modifyConsultantApi(info)
     .then((res)=>{
       console.log(res.data);
     })
@@ -146,13 +158,18 @@ function ConsultantModify() {
                 required
                 select
                 fullWidth='true'
-                name='consultantGroup'
+                name='productGroupSeq'
+                selected={consultant.productGroupName}
+                // defaultValue={consultant.productGroupName}
                 SelectProps={{
                   native: true,
                 }}
                 onChange={onChange}
               >
                 {product_list.map((option) => (
+                  option.value === consultant.productGroupName 
+                  ? ""
+                  :
                   <option key={option.value} value={option.value}>
                     {option.label}
                   </option>
