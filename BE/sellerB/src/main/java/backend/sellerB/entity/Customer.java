@@ -62,16 +62,16 @@ public class Customer implements Serializable {
     private Boolean customerDelYn;
     @CreatedBy
     @Basic
-    @Column(name = "customer_reg_user_seq")
-    private Long customerRegUserSeq;
+    @Column(name = "customer_reg_user")
+    private String customerRegUser;
     @CreatedDate
     @Basic
     @Column(name = "customer_reg_date")
     private LocalDateTime customerRegDate;
     @LastModifiedBy
     @Basic
-    @Column(name = "customer_mod_user_seq")
-    private Long customerModUserSeq;
+    @Column(name = "customer_mod_user")
+    private String customerModUser;
     @LastModifiedDate
     @Basic
     @Column(name = "customer_mod_date")
@@ -83,12 +83,12 @@ public class Customer implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Customer that = (Customer) o;
-        return customerSeq == that.customerSeq && Objects.equals(customerId, that.customerId) && Objects.equals(customerName, that.customerName) && Objects.equals(customerPass, that.customerPass)  && Objects.equals(customerEmail, that.customerEmail) && Objects.equals(customerBirth, that.customerBirth) && Objects.equals(customerToken, that.customerToken) && Objects.equals(customerDelYn, that.customerDelYn) && Objects.equals(customerRegUserSeq, that.customerRegUserSeq) && Objects.equals(customerRegDate, that.customerRegDate) && Objects.equals(customerModUserSeq, that.customerModUserSeq) && Objects.equals(customerModDate, that.customerModDate);
+        return customerSeq == that.customerSeq && Objects.equals(customerId, that.customerId) && Objects.equals(customerName, that.customerName) && Objects.equals(customerPass, that.customerPass)  && Objects.equals(customerEmail, that.customerEmail) && Objects.equals(customerBirth, that.customerBirth) && Objects.equals(customerToken, that.customerToken) && Objects.equals(customerDelYn, that.customerDelYn) && Objects.equals(customerRegUser, that.customerRegUser) && Objects.equals(customerRegDate, that.customerRegDate) && Objects.equals(customerModUser, that.customerModUser) && Objects.equals(customerModDate, that.customerModDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(customerSeq, customerId, customerName, customerPass, customerEmail, customerBirth, customerToken, customerDelYn, customerRegUserSeq, customerRegDate, customerModUserSeq, customerModDate);
+        return Objects.hash(customerSeq, customerId, customerName, customerPass, customerEmail, customerBirth, customerToken, customerDelYn, customerRegUser, customerRegDate, customerModUser, customerModDate);
     }
 
 

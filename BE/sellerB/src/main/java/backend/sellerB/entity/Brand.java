@@ -49,16 +49,16 @@ public class Brand {
     private Boolean brandDelYn;
     @CreatedBy
     @Basic
-    @Column(name = "brand_reg_user_seq")
-    private Long brandRegUserSeq;
+    @Column(name = "brand_reg_user")
+    private String brandRegUser;
     @CreatedDate
     @Basic
     @Column(name = "brand_reg_date")
     private LocalDateTime brandRegDate;
     @LastModifiedBy
     @Basic
-    @Column(name = "brand_mod_user_seq")
-    private Long brandModUserSeq;
+    @Column(name = "brand_mod_user")
+    private String brandModUser;
     @LastModifiedDate
     @Basic
     @Column(name = "brand_mod_date")
@@ -73,11 +73,11 @@ public class Brand {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Brand that = (Brand) o;
-        return brandSeq == that.brandSeq && Objects.equals(brandNameKor, that.brandNameKor) && Objects.equals(brandNameEng, that.brandNameEng) && Objects.equals(brandLogo, that.brandLogo) && Objects.equals(brandDelYn, that.brandDelYn) && Objects.equals(brandRegUserSeq, that.brandRegUserSeq) && Objects.equals(brandRegDate, that.brandRegDate) && Objects.equals(brandModUserSeq, that.brandModUserSeq) && Objects.equals(brandModDate, that.brandModDate);
+        return brandSeq == that.brandSeq && Objects.equals(brandNameKor, that.brandNameKor) && Objects.equals(brandNameEng, that.brandNameEng) && Objects.equals(brandLogo, that.brandLogo) && Objects.equals(brandDelYn, that.brandDelYn) && Objects.equals(brandRegUser, that.brandRegUser) && Objects.equals(brandRegDate, that.brandRegDate) && Objects.equals(brandModUser, that.brandModUser) && Objects.equals(brandModDate, that.brandModDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(brandSeq, brandNameKor, brandNameEng, brandLogo, brandDelYn, brandRegUserSeq, brandRegDate, brandModUserSeq, brandModDate);
+        return Objects.hash(brandSeq, brandNameKor, brandNameEng, brandLogo, brandDelYn, brandRegUser, brandRegDate, brandModUser, brandModDate);
     }
 }
