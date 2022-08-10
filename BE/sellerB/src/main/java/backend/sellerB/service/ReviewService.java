@@ -51,9 +51,9 @@ public class ReviewService {
         review.setConsulting(reviewDto.getConsulting());
         review.setReviewGrade(reviewDto.getReviewGrade());
         review.setReviewContent(reviewDto.getReviewContent());
-        review.setReviewRegUserSeq(reviewDto.getReviewRegUserSeq());
+        review.setReviewRegUser(reviewDto.getReviewRegUser());
         review.setReviewRegDate(reviewDto.getReviewRegDate());
-        review.setReviewModUserSeq(reviewDto.getReviewModUserSeq());
+        review.setReviewModUser(reviewDto.getReviewModUser());
         review.setReviewModDate(reviewDto.getReviewModDate());
         return ReviewDto.from(review);
     }
