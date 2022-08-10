@@ -13,6 +13,8 @@ spring:
     url: jdbc:mariadb://i7d105.p.ssafy.io:3306/sellerB?serverTimezone=Asia/Seoul
     username: sellerb
     password: hy1234
+  profiles:
+    include: oauth
 
 
   jpa:
