@@ -40,14 +40,14 @@ const StyledButton = styled.button`
 
 `;
 
-export const SmallButton = ({disabled, size, label}) => {
+export const SmallButton = ({disabled, size, label, onClick}) => {
   console.log("받은 SIZE: " + size)
 
   // 상단 사이즈 리스트에서 해당하는 것 가져옴
   const sizeStyle= SIZE[size];
 
   return ( 
-    <StyledButton disabled={disabled} sizeStyle={size}>
+    <StyledButton disabled={disabled} sizeStyle={size} onClick={()=> onClick()}>
       {label}
     </StyledButton>
   );

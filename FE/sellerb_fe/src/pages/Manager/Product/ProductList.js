@@ -63,7 +63,9 @@ function ProductList() {
   useEffect(() => {
     productGroupListApi()
       .then((res) => {
+        console.log(JSON.stringify(res.data));
         setGroupList(res.data); // groupList
+        console.log("groupList: " + groupList);
       })
       .catch((err) => {
         console.log(err);
