@@ -102,7 +102,7 @@ function Main() {
 
             sessionStorage.setItem("brandNameKor", res.data.brand.brandNameKor);
             sessionStorage.setItem("brandNameEng", res.data.brand.brandNameEng);
-
+            console.log("token정보 : " + sessionStorage.getItem("accessToken"))
             console.log("IN SESSION:" + sessionStorage.getItem("brandNameKor"));
           })
           .catch((err) => {});
