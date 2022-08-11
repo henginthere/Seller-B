@@ -1,4 +1,4 @@
-import { api } from "./api";
+import api from "./api";
 
 // Seq로 조회한 대기목록
 export const waitingCostomerApi = async (waitingSeq, success, fail) => {
