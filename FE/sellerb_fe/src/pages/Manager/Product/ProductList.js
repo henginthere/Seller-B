@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Axios from "axios";
 import "./ProductList.css";
 import { Footer, NavBar, ProdcutOption } from "../../../components/index";
-import { productGroupListApi, productGroupItemsApi  } from "../../../api/productApi";
+import { productGroupListApi, productGroupItemsApi, productSearchApi  } from "../../../api/productApi";
 
 import { SearchOutlined, PlusCircleOutlined } from '@ant-design/icons'
 
@@ -47,7 +47,17 @@ function ProductList() {
   };
 
   const onSearchBtn = () => {
-    //
+    // 입력된 검색어로 api 호출
+    productSearchApi(searchWord)
+    .then((res)=>{
+      console.log(JSON.stringify(res.data));
+      setItems(res.data);
+
+    })
+    .catch((err)=>{
+      console.log(JSON.stringify(err.data));
+    })
+
   };
 
   const onRegisterBtn = () => {
@@ -99,7 +109,7 @@ function ProductList() {
             />
             <SearchOutlined 
               id="search-icon-btn"
-              onClick={()=> navigate("/")}
+              onClick={()=> onSearchBtn()}
             />
 
               <div>제품등록</div>
