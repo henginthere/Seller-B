@@ -55,7 +55,7 @@
     margin-left: 100px;
     margin-right: 100px;
 
-    background-color:beige;
+    /* background-color:beige; */
     max-width: 100%;
     flex-wrap: nowrap;
     align-content: stretch;

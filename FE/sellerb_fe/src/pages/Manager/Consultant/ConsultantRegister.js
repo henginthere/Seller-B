@@ -16,7 +16,7 @@ function ConsultantRegister() {
 
 
   const [brandGroupList, setBrandGroupList] = useState([]);
-  const [managerBrand, setManagerBrand] = useState(localStorage.getItem("brandNameKor"));
+  const [managerBrand, setManagerBrand] = useState(sessionStorage.getItem("brandNameKor"));
 
   const [consultant, setConsultant] = useState({
     consultantId: "",
