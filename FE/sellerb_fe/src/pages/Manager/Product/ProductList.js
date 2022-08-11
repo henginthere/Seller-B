@@ -15,7 +15,7 @@ function ProductList() {
 
   const [groupList, setGroupList] = useState([]);
   const [managerBrand, setManagerBrand] = useState(
-    localStorage.getItem("brandNameKor")
+    sessionStorage.getItem("brandNameKor")
   );
 
   const [searchWord, setSearchWord] = useState("");
