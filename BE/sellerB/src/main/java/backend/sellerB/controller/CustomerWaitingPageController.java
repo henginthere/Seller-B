@@ -1,12 +1,14 @@
 package backend.sellerB.controller;
 
 import backend.sellerB.dto.CustomerWaitingPageDto;
+import backend.sellerB.dto.RegisterCustomerWaitingPageDto;
 import backend.sellerB.service.CustomerWaitingPageService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -19,8 +21,8 @@ public class CustomerWaitingPageController {
     }
 
     @PostMapping
-    public ResponseEntity<CustomerWaitingPageDto> saveCustomerWaitingPage(@Valid @RequestBody CustomerWaitingPageDto customerWaitingPageDto) {
-        return ResponseEntity.ok(customerWaitingPageService.create(customerWaitingPageDto));
+    public ResponseEntity<CustomerWaitingPageDto> saveCustomerWaitingPage(@Valid @ModelAttribute RegisterCustomerWaitingPageDto registerCustomerWaitingPageDto) throws IOException {
+        return ResponseEntity.ok(customerWaitingPageService.create(registerCustomerWaitingPageDto));
     }
 
     @GetMapping("/{seq}")
@@ -34,8 +36,8 @@ public class CustomerWaitingPageController {
     }
 
     @PutMapping("/{seq}")
-    public ResponseEntity<CustomerWaitingPageDto> updateCustomerWaitingPage(@Valid @RequestBody CustomerWaitingPageDto customerWaitingPageDto, @PathVariable Long seq) {
-        return ResponseEntity.ok(customerWaitingPageService.update(seq, customerWaitingPageDto));
+    public ResponseEntity<CustomerWaitingPageDto> updateCustomerWaitingPage(@Valid @ModelAttribute RegisterCustomerWaitingPageDto registerCustomerWaitingPageDto, @PathVariable Long seq) throws IOException {
+        return ResponseEntity.ok(customerWaitingPageService.update(seq, registerCustomerWaitingPageDto));
     }
 
     @DeleteMapping("/{seq}")
