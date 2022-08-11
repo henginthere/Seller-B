@@ -26,6 +26,8 @@ function ConsultantMain() {
     detailConsultantApi(val)
       .then((res) => {
         setConName(res.data.consultantName);
+        sessionStorage.setItem("productGroupSeq", res.data.productGroupSeq);
+        sessionStorage.setItem("consultantName", res.data.consultantName);
       })
       .catch((err) => {
         console.log("Error");
