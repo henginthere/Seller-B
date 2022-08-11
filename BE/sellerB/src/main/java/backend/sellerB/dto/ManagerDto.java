@@ -32,6 +32,7 @@ public class ManagerDto {
     private String managerTel;
     private String managerEmail;
     private Boolean managerDelYn;
+    private String managerImageUrl;
 
     private Set<AuthorityDto> authorityDtoSet;
 
@@ -51,6 +52,7 @@ public class ManagerDto {
                 .managerTel(manager.getManagerTel())
                 .managerEmail(manager.getManagerEmail())
                 .managerDelYn(manager.getManagerDelYn())
+                .managerImageUrl(manager.getManagerImageUrl())
                 .authorityDtoSet(manager.getAuthorities().stream()
                         .map(authority -> AuthorityDto.builder().authorityName(authority.getAuthorityName()).build())
                         .collect(Collectors.toSet()))

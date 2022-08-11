@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 
 import javax.validation.constraints.NotNull;
@@ -28,6 +29,7 @@ public class RegisterManagerDto {
     private String managerPass;
     private String managerTel;
     private String managerEmail;
+    private MultipartFile managerImageFile;
 
 
     public static RegisterManagerDto from(Manager manager) {
