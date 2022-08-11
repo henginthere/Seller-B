@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -20,7 +21,7 @@ public class BrandController {
     }
 
     @PostMapping
-    public ResponseEntity<BrandDto> saveBrand(@Valid @RequestBody BrandDto brandDto) {
+    public ResponseEntity<ResponseBrandDto> saveBrand(@Valid @ModelAttribute BrandDto brandDto) throws IOException {
         return ResponseEntity.ok(brandService.create(brandDto));
     }
 
@@ -35,7 +36,7 @@ public class BrandController {
     }
 
     @PutMapping("/{seq}")
-    public ResponseEntity<BrandDto> updateBrand(@Valid @RequestBody BrandDto brandDto, @PathVariable Long seq) {
+    public ResponseEntity<ResponseBrandDto> updateBrand(@Valid @ModelAttribute BrandDto brandDto, @PathVariable Long seq) throws IOException {
         return ResponseEntity.ok(brandService.update(seq, brandDto));
     }
 
