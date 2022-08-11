@@ -27,7 +27,7 @@ public class ProductService {
     public ProductDto create(RegisterProductDto registerProductDto) throws IOException {
         Optional<ProductGroup> productGroupOptional = productGroupRepository.findById(registerProductDto.getProductGroupSeq());
         ProductGroup productGroup = productGroupOptional.get();
-        String productThumbnail = awsS3Service.upload(registerProductDto.getProductThumbnailFile(), "static");
+//        String productThumbnail = awsS3Service.upload(registerProductDto.getProductThumbnailFile(), "static");
         Product product = Product.builder()
                 .productSeq(registerProductDto.getProductSeq())
                 .productGroup(productGroup)
@@ -35,7 +35,7 @@ public class ProductService {
                 .productName(registerProductDto.getProductName())
                 .productPrice(registerProductDto.getProductPrice())
                 .productManual(registerProductDto.getProductManual())
-                .productThumbnail(productThumbnail)
+                .productThumbnail(registerProductDto.getProductThumbnailUrl())
                 .build();
 
         return ProductDto.from(productRepository.save(product));
@@ -72,7 +72,7 @@ public class ProductService {
         Optional<Product> productOptional = productRepository.findById(seq);
         Product product = productOptional.get();
 
-        String productThumbnail = awsS3Service.upload(editProductDto.getProductThumbnailFile(), "static");
+//        String productThumbnail = awsS3Service.upload(editProductDto.getProductThumbnailFile(), "static");
 
         ProductGroup productGroup = product.getProductGroup();
         product.setProductSeq(editProductDto.getProductSeq());
@@ -80,7 +80,7 @@ public class ProductService {
         product.setProductGroup(productGroup);
         product.setProductPrice(editProductDto.getProductPrice());
         product.setProductManual(editProductDto.getProductManual());
-        product.setProductThumbnail(productThumbnail);
+        product.setProductThumbnail(editProductDto.getProductThumbnailUrl());
         return ProductDto.from(product);
     }
 
