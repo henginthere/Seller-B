@@ -30,6 +30,7 @@ public class ResponseConsultantDto {
     private String consultantPass;
     private String consultantTel;
     private String productGroupName;
+    private Long productGroupSeq;
     private String consultantImageUrl;
     private Boolean consultantDelYn;
     private String brandName;
@@ -80,6 +81,7 @@ public class ResponseConsultantDto {
                 .consultantTel(consultant.getConsultantTel())
                 .brandName(getBrandName(consultant))
                 .productGroupName(getProductGroupName(consultant))
+                .productGroupSeq(consultant.getProductGroup().getProductGroupSeq())
                 .consultantImageUrl(consultant.getConsultantImageUrl())
                 .consultantDelYn(consultant.getConsultantDelYn())
                 .authorityDtoSet(consultant.getAuthorities().stream()
@@ -100,6 +102,7 @@ public class ResponseConsultantDto {
                     .consultantTel(consultantList.get(i).getConsultantTel())
                     .consultantImageUrl(consultantList.get(i).getConsultantImageUrl())
                     .brandName(getBrandName(consultantList.get(i)))
+                    .productGroupSeq(consultantList.get(i).getProductGroup().getProductGroupSeq())
 //                    .consultantDelYn(consultantList.get(i).getConsultantDelYn())
                     .productGroupName(getProductGroupName(consultantList.get(i)))
 //                    .authorityDtoSet(consultantList.get(i).getAuthorities().stream()
