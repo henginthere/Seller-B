@@ -16,5 +16,5 @@ public class RegisterProductDto {
     private String productName;
     private Integer productPrice;
     private String productManual;
-    private MultipartFile productThumbnailFile;
+    private String productThumbnailUrl;
 }
