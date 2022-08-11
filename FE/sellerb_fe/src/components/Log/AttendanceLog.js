@@ -15,18 +15,6 @@ const styleObj_center = {
   margin: "50px",
 };
 
-const dummyData = [
-  {
-    date: "2022-07-25",
-    login_time: "08:30",
-    logout_time: "18:10",
-  },
-  {
-    date: "2022-07-26",
-    login_time: "08:35",
-    logout_time: "18:21",
-  },
-];
 
 //   function ConsultantLog (props) {
 //     if(logOption === '출결이력'){
@@ -59,7 +47,14 @@ function AttendanceLog({consultant_id}) {
         console.log(JSON.stringify(res.data));
 
         setInitData(res.data);
+
+        let list = initData.map((ele)=>
+          ele.loginTime
+        )
+        console.log("반환된 list : " + list);
+        list = list.slice()
         
+
         // logData = {initData.map((ele)=>{
         //   return (
         //     <>

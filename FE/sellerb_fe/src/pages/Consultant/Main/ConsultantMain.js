@@ -4,25 +4,17 @@ import { Footer, NavBar } from "../../../components/index";
 import "./ConsultantMain.css";
 import styled from "styled-components";
 import { goWorkApi, leaveWorkApi, detailConsultantApi } from "../../../api/consultantApi";
+import { listNoticeApi } from '../../../api/noticeApi'
 
 function ConsultantMain() {
 
-  const [conSeq, setConSeq] = useState("");
-  const [conName, setConName] = useState("");
-  const tableDummyData = [
-    {
-      No: 1,
-      제품명: "SHA-16A",
-    },
-    {
-      No: 2,
-      제품명: "SHA-16B",
-    },
-    {
-      No: 3,
-      제품명: "SHA-16C",
-    },
-  ];
+  const [conSeq, setConSeq] = useState(""); // 상담사 seq
+  const [conName, setConName] = useState(""); // 상담사 이름
+
+  // const [today, setToday] = useState(new Date().getFullYear() + "-" + (new Date().getMonth()+1) + "-" + new Date().getDate());
+  const [today, setToday] = useState(new Date()); 
+  const [items, setItems] = useState([]);
+  const [noticeList, setNoticeList] = useState([]); // 
 
   useEffect(()=>{
     const val = sessionStorage.getItem("seq");
@@ -30,14 +22,28 @@ function ConsultantMain() {
 
     detailConsultantApi(val)
     .then((res)=>{
-
-      console.log("consultant Name: " + res.data.consultantName)
       setConName(res.data.consultantName);
     })
     .catch((err)=>{
       console.log("Error")
     })
+  }, [])
 
+  useEffect(()=>{
+    console.log("Today : " + today);
+    listNoticeApi()
+    .then((res)=>{
+      console.log(res.data);
+      setItems(res.data);
+
+     console.log(items)
+
+      const items = res.data.filter((it)=> it.noticeRegDate.getDate() === today.getDate())
+      console.log("오늘 새로운 공지사항 갯수:");
+    })
+    .catch((err)=>{
+
+    })
   }, [])
 
   const goWorkBtn = () =>{
@@ -48,15 +54,12 @@ function ConsultantMain() {
     goWorkApi(Info)
     .then((res)=>{
       console.log("success");
-
       alert("출근완료!");
 
     })
     .catch((err)=>{
       console.log("Error");
     })
-
-
   }
   
   const leaveWorkBtn = ()=>{
@@ -102,57 +105,23 @@ function ConsultantMain() {
         </div>
         <div className="notice-consulting-wrapper">
           <div className="notice">
-            <div className="notice-title">공지사항</div>
+            <div className="notice-title">
+              공지사항
+            </div>
             <hr />
+            <div>
+
+            </div>
           </div>
           <div className="consulting-request">
             <div className="reqeust-title">상담신청 내역</div>
-
             <hr />
+            <div>
+              아직 들어온 상담 신청이 없습니다!
+            </div>
 
-            {/* table START*/}
-            <table className="content-table">
-              <thead>
-                <tr>
-                  <th>No</th>
-                  <th>제품명</th>
-                  <th>수락</th>
-                  <th>거절</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>SHA-16AA</td>
-                  <td>
-                    <button className="accept-btn">o</button>
-                  </td>
-                  <td>
-                    <button className="reject-btn">o</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>SPT-A134</td>
-                  <td>
-                    <button className="accept-btn">o</button>
-                  </td>
-                  <td>
-                    <button className="reject-btn">o</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>QTA-BC12</td>
-                  <td>
-                    <button className="accept-btn">o</button>
-                  </td>
-                  <td>
-                    <button className="reject-btn">o</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            {/* 새로 들어온 상담신청 띄울 영역 START*/}
+          
           </div>
         </div>
 
