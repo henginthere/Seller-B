@@ -38,6 +38,10 @@ public class ProductService {
     }
 
     public List<ProductDto> getProductList() { return ProductDto.fromList(productRepository.findAll());}
+    public List<ProductDto> getProductListByBrand(Long seq) {
+        Optional<List<Product>> optionalProductList = productRepository.findByProductGroup_Brand_BrandSeq(seq);
+        List<Product> productList = optionalProductList.get();
+        return ProductDto.fromList(productList);}
     public List<ProductDto> getProductListByGroupSeq(Long productGroupSeq) {
         Optional<List<Product>> optionalProductResList = productRepository.findProductsByProductGroup_ProductGroupSeq(productGroupSeq);
         List<Product> productList = optionalProductResList.get();
