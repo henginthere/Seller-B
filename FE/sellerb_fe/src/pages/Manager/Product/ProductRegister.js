@@ -21,7 +21,7 @@ function ProductRegister() {
 
   const [groupList, setGroupList] = useState([]);
   const [managerBrand, setManagerBrand] = useState(
-    localStorage.getItem("brandNameKor")
+    sessionStorage.getItem("brandNameKor")
   );
   const { productGroupName, productId, 
           productName, productPrice, 
@@ -49,7 +49,6 @@ function ProductRegister() {
       console.log("onSubmitBtn:" + JSON.stringify(res.data));
       console.log("success");
       
-      // navigate("/manager/productList")
     })
     .catch((err)=>{
       console.log(JSON.stringify(err.data));

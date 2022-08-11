@@ -8,7 +8,7 @@ export const fileapi = axios.create({
         "Content-Type" : `multipart/form-data`, 
         // Authorization: `Bearer ${
         //     sessionStorage.getItem("access-token") ||
-        //     localStorage.getItem("access-token")
+        //     sessionStorage.getItem("access-token")
         // }`,
     },
 });
