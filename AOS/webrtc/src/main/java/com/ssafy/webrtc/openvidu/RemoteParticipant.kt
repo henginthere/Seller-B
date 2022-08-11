@@ -12,10 +12,13 @@ class RemoteParticipant(
 ): Participant(connectionId,participantName,session){
 
     private lateinit var view: View
-    private lateinit var videoView: SurfaceViewRenderer
+    private var videoView: SurfaceViewRenderer? = null
     private lateinit var participantNameText: TextView
 
-    fun getVideoView():SurfaceViewRenderer = videoView
+    init {
+        getSession()?.addRemoteParticipant(this)
+    }
+    fun getVideoView():SurfaceViewRenderer? = videoView
 
     fun setVideoView(videoView: SurfaceViewRenderer){
         this.videoView = videoView

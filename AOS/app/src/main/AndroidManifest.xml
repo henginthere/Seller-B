@@ -30,7 +30,8 @@
         </service>
         <activity
             android:name=".ui.consulting.ConsultingActivity"
-            android:exported="false" />
+            android:exported="false"
+            />
         <activity
             android:name=".ui.qrscan.QrScanActivity"
             android:exported="false" />
@@ -48,5 +49,7 @@
             android:name="com.google.mlkit.vision.DEPENDENCIES"
             android:value="barcode" />
     </application>
+
+    <uses-feature android:name="android.hardware.camera" />
 
 </manifest>

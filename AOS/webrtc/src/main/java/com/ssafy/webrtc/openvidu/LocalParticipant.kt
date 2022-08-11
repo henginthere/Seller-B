@@ -1,31 +1,32 @@
 package com.ssafy.webrtc.openvidu
 
 import android.content.Context
+import android.os.AsyncTask
 import android.os.Build
 import org.webrtc.*
 
 class LocalParticipant(
     participantName: String,
     session: Session,
-    private val context: Context,
-    private val surfaceViewRenderer: SurfaceViewRenderer
+    private var context: Context?,
+    private var surfaceViewRenderer: SurfaceViewRenderer?
 ) : Participant(participantName, session) {
 
 
 
-    private lateinit var surfaceTextureHelper: SurfaceTextureHelper
-    private lateinit var videoCapturer: VideoCapturer
+    private var surfaceTextureHelper: SurfaceTextureHelper? = null
+    private var videoCapturer: VideoCapturer? = null
 
     private val localIceCandidates: Collection<IceCandidate> = mutableListOf()
     private lateinit var localSessionDescription: SessionDescription
 
     init {
-        getSession().setLocalParticipant(this)
+        getSession()?.setLocalParticipant(this)
     }
 
     fun startCamera(){
         val eglBaseContext = EglBase.create().eglBaseContext
-        val peerConnectionFactory = getSession().getPeerConnectionFactory()!!
+        val peerConnectionFactory = getSession()?.getPeerConnectionFactory()!!
 
         val audioSource = peerConnectionFactory.createAudioSource(MediaConstraints())
         setAudioTrack(peerConnectionFactory.createAudioTrack("101", audioSource))
@@ -83,13 +84,16 @@ class LocalParticipant(
     }
 
     override fun dispose() {
-        super.dispose();
-        if(getVideoTrack() != null){
+        AsyncTask.execute {
+            videoCapturer?.stopCapture()
             getVideoTrack().removeSink(surfaceViewRenderer)
-            videoCapturer.dispose()
+            videoCapturer?.dispose()
+            videoCapturer = null
+            surfaceTextureHelper?.dispose()
+            surfaceTextureHelper = null
         }
-        if(surfaceTextureHelper != null){
-            surfaceTextureHelper.dispose()
-        }
+        surfaceViewRenderer = null
+        context = null
+        super.dispose();
     }
 }
