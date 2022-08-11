@@ -15,6 +15,10 @@ spring:
     password: hy1234
   profiles:
     include: oauth
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 5MB
 
 
   jpa:
@@ -48,3 +52,12 @@ springdoc:
 #  version: v1
   paths-to-match:
     - /**
+cloud:
+  aws:
+    # AWS S3 bucket Info (S3 버킷정보)
+    s3:
+      bucket: sellerb
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
