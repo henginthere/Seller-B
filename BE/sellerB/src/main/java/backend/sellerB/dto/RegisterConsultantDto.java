@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -29,7 +30,8 @@ public class RegisterConsultantDto {
     private String consultantPass;
     private String consultantTel;
     private Long productGroupSeq;
-    private String consultantImageUrl;
+//    private String consultantImageUrl;
+    private MultipartFile consultantImageFile;
 
 
     private Set<AuthorityDto> authorityDtoSet;
@@ -45,7 +47,7 @@ public class RegisterConsultantDto {
                 .consultantEmail(consultant.getConsultantEmail())
                 .consultantTel(consultant.getConsultantTel())
                 .productGroupSeq(consultant.getProductGroup().getProductGroupSeq())
-                .consultantImageUrl(consultant.getConsultantImageUrl())
+//                .consultantImageUrl(consultant.getConsultantImageUrl())
                 .build();
     }
 
@@ -59,7 +61,7 @@ public class RegisterConsultantDto {
                     .consultantName(consultantList.get(i).getConsultantName())
                     .consultantEmail(consultantList.get(i).getConsultantEmail())
                     .consultantTel(consultantList.get(i).getConsultantTel())
-                    .consultantImageUrl(consultantList.get(i).getConsultantImageUrl())
+//                    .consultantImageUrl(consultantList.get(i).getConsultantImageUrl())
                     .productGroupSeq(consultantList.get(i).getProductGroup().getProductGroupSeq())
                     .build();
             listConsultantDto.add(registerConsultantDto);
