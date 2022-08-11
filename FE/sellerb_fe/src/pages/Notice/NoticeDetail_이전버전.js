@@ -20,7 +20,7 @@ const NoticeWrapper = styled.div`
 `;
 
 // 매니저 or 상담사 버튼 보이는 관리
-const adminCheck = localStorage.getItem("adminCheck");
+const adminCheck = sessionStorage.getItem("adminCheck");
 
 //////////////////////////////////////////////////
 
