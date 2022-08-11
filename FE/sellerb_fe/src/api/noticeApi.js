@@ -1,4 +1,4 @@
-import { api } from "./api";
+import api from "./api";
 // import { useSelector } from 'react-redux'
 
 // post : Register : NoticeWrite.js
