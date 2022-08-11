@@ -70,6 +70,7 @@ function ConsultingMain() {
       <NavBar />
       <div style={style_Container}>
         <h1 style={style_topText}>상담</h1>
+        {/* 상담중이 아닐 경우 */}
         {session === undefined ? (
           <div style={style_list}>
             <h2>상담 목록</h2>
@@ -101,6 +102,7 @@ function ConsultingMain() {
             </div>
           </div>
         ) : (
+          // 상담중일 경우
           <VideoRoomComponent
             user={sessionUserName}
             sessionName={sessionId}
