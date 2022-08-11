@@ -102,8 +102,9 @@ function Main() {
 
             sessionStorage.setItem("brandNameKor", res.data.brand.brandNameKor);
             sessionStorage.setItem("brandNameEng", res.data.brand.brandNameEng);
-            console.log("token정보 : " + sessionStorage.getItem("accessToken"))
-            console.log("IN SESSION:" + sessionStorage.getItem("brandNameKor"));
+            sessionStorage.setItem("brandSeq", res.data.brand.brandSeq);
+
+            console.log("IN SESSION:" + sessionStorage.getItem("brandSeq"));
           })
           .catch((err) => {});
       })
