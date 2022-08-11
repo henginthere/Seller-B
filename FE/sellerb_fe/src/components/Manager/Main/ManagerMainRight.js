@@ -130,7 +130,6 @@ function ManagerMainRight() {
         console.log(res.data);
         // 받아온 해당 컨설턴트 출력하기
         setSearchCon(res.data);
-        console.log(searchCon.consultantName);
         setListState(false);
       })
       .catch((err) => {
