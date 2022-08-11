@@ -23,7 +23,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<ProductDto> saveProduct(@Valid @ModelAttribute RegisterProductDto registerProductDto) throws IOException {
+    public ResponseEntity<ProductDto> saveProduct(@Valid @RequestBody RegisterProductDto registerProductDto) throws IOException {
         return ResponseEntity.ok(productService.create(registerProductDto));
     }
 
@@ -56,7 +56,7 @@ public class ProductController {
     }
 
     @PutMapping("/{seq}")
-    public ResponseEntity<ProductDto> updateProduct(@Valid @ModelAttribute EditProductDto editProductDto, @PathVariable Long seq) throws IOException {
+    public ResponseEntity<ProductDto> updateProduct(@Valid @RequestBody EditProductDto editProductDto, @PathVariable Long seq) throws IOException {
         return ResponseEntity.ok(productService.update(seq, editProductDto));
     }
 
