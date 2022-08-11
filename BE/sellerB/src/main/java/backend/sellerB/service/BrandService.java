@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,14 +17,16 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class BrandService {
     private final BrandRepository brandRepository;
+    private final AwsS3Service awsS3Service;
 
-    public BrandDto create(BrandDto brandDto) {
+    public ResponseBrandDto create(BrandDto brandDto) throws IOException {
+        String brandLogo = awsS3Service.upload(brandDto.getBrandLogoFile(), "static");
         Brand brand = Brand.builder()
                 .brandNameKor(brandDto.getBrandNameKor())
                 .brandNameEng(brandDto.getBrandNameEng())
-                .brandLogo(brandDto.getBrandLogo())
+                .brandLogo(brandLogo)
                 .build();
-        return BrandDto.from(brandRepository.save(brand));
+        return ResponseBrandDto.from(brandRepository.save(brand));
     }
 
     public List<ResponseBrandDto> getBrandList() {
@@ -36,13 +39,14 @@ public class BrandService {
         return ResponseBrandDto.from(brand);
     }
 
-    public BrandDto update(Long seq, BrandDto brandDto) {
+    public ResponseBrandDto update(Long seq, BrandDto brandDto) throws IOException {
+        String brandLogo = awsS3Service.upload(brandDto.getBrandLogoFile(), "static");
         Optional<Brand> brandOptional = brandRepository.findById(seq);
         Brand brand = brandOptional.get();
         brand.setBrandNameKor(brandDto.getBrandNameKor());
         brand.setBrandNameEng(brandDto.getBrandNameEng());
-        brand.setBrandLogo(brandDto.getBrandLogo());
-        return BrandDto.from(brand);
+        brand.setBrandLogo(brandLogo);
+        return ResponseBrandDto.from(brand);
     }
 
     public BrandDto deleteBrand(Long seq) {

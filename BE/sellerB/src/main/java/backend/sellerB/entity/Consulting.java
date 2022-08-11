@@ -61,7 +61,7 @@ public class Consulting {
 
     // 생성 시 waiting -> 고객 입장 시 start -> 고객 퇴장 시 delete
     @Basic
-    @Column(name = "consulting_state",columnDefinition = "string default 'waiting'")
+    @Column(name = "consulting_state",columnDefinition = "varchar(20) default 'waiting'")
     private String consultingState;
 
 
