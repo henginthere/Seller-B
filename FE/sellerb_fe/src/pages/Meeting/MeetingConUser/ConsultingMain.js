@@ -37,7 +37,7 @@ function ConsultingMain() {
 
   const productGroupSeq = sessionStorage.getItem("productGroupSeq");
   useEffect(() => {
-    // console.log("컴포넌트 화면 나타남!!!");
+    console.log("컴포넌트 화면 나타남!!!");
     if (session === undefined) {
       setTimeout(
         () =>
