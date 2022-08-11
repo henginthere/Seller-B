@@ -16,17 +16,20 @@ function NavBar() {
   }
 
   // 관리자, 상담사든 로그인할 때, 사용자의 seq받기
-  useEffect(()=>{
+  useEffect(() => {
     const seq = sessionStorage.getItem("seq");
     setSeq(seq);
-    console.log("받은 seq : " + seq)
-  }, [])
+    console.log("받은 seq : " + seq);
+  }, []);
 
   return (
     <>
       <div className='navbar-wrapper'>
         <div className='navbar-left'>
-          <Link to={isManager ? "/manager/main" : "/consultant/main"} style={{ marginTop: "7px" }}>
+          <Link
+            to={isManager ? "/manager/main" : "/consultant/main"}
+            style={{ marginTop: "7px" }}
+          >
             <img
               className='navbar-logo-img'
               alt='#'
@@ -48,7 +51,10 @@ function NavBar() {
               <Link to='/manager/productList' className='link-to'>
                 <h4>제품관리</h4>
               </Link>
-              <div className='link-to' onClick={()=> navigate(`/manager/mypage/${seq}`)}>
+              <div
+                className='link-to'
+                onClick={() => navigate(`/manager/mypage/${seq}`)}
+              >
                 <h4>마이페이지</h4>
               </div>
               <Link to='/' className='link-to'>
@@ -63,7 +69,13 @@ function NavBar() {
               <Link to='/meeting/mancon' className='link-to'>
                 <h4>회의 참여</h4>
               </Link>
-              <div className='link-to' onClick={(e)=> navigate(`/consultant/mypage/${seq}`)}>
+              <Link to='/meeting/consultingMain'>
+                <h4>상담</h4>
+              </Link>
+              <div
+                className='link-to'
+                onClick={(e) => navigate(`/consultant/mypage/${seq}`)}
+              >
                 <h4>마이페이지</h4>
               </div>
               <Link to='/' className='link-to'>
