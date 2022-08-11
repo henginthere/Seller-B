@@ -1,6 +1,8 @@
 package com.ssafy.sellerb.ui.consulting.waiting
 
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_MULTIPLE_TASK
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.ssafy.sellerb.R

@@ -16,17 +16,17 @@ import org.webrtc.RtpTransceiver.RtpTransceiverInit
 class Session(
     private val id: String,
     private val token: String,
-    private val activity: AppCompatActivity
+    private var activity: AppCompatActivity?
 ) {
 
-    private var peerConnectionFactory: PeerConnectionFactory
+    private var peerConnectionFactory: PeerConnectionFactory?
     private val remoteParticipants: MutableMap<String, RemoteParticipant> = mutableMapOf()
-    private lateinit var localParticipant: LocalParticipant
-    private lateinit var websocket: CustomWebSocket
+    private var localParticipant: LocalParticipant? = null
+    private var websocket: CustomWebSocket? = null
 
     init {
         val optionsBuilder = PeerConnectionFactory
-            .InitializationOptions.builder(activity.applicationContext)
+            .InitializationOptions.builder(activity!!.applicationContext)
         optionsBuilder.setEnableInternalTracer(true)
 
         val opt = optionsBuilder.createInitializationOptions()
@@ -45,7 +45,7 @@ class Session(
 
     }
 
-    fun createLocalPeerConnection(): PeerConnection{
+    fun createLocalPeerConnection(): PeerConnection?{
         val iceServers = ArrayList<PeerConnection.IceServer>();
         val iceServer = PeerConnection.IceServer
             .builder("stun:stun.l.google.com:19302")
@@ -62,45 +62,40 @@ class Session(
         rtcConfig.keyType = PeerConnection.KeyType.ECDSA
         rtcConfig.enableDtlsSrtp = true;
         rtcConfig.sdpSemantics = PeerConnection.SdpSemantics.UNIFIED_PLAN
+        if(peerConnectionFactory != null){
+            val peerConnection = peerConnectionFactory!!.createPeerConnection(
+                rtcConfig, object : CustomPeerConnectionObserver("local"){
+                    override fun onIceCandidate(iceCandidate: IceCandidate) {
+                        super.onIceCandidate(iceCandidate)
+                        websocket?.onIceCandidate(iceCandidate, localParticipant?.getConnectionId())
+                    }
 
-        val peerConnection = peerConnectionFactory.createPeerConnection(
-            rtcConfig, object : CustomPeerConnectionObserver("local"){
-
-                override fun onIceCandidate(iceCandidate: IceCandidate) {
-                    super.onIceCandidate(iceCandidate)
-                    websocket.onIceCandidate(iceCandidate, localParticipant.getConnectionId())
-                }
-
-                override fun onSignalingChange(signalingState: SignalingState) {
-                    if(PeerConnection.SignalingState.STABLE == signalingState){
-                        val it = localParticipant.getIceCandidateList().iterator()
-                        while (it.hasNext()){
-                            val candidate = it.next()
-                            localParticipant.getPeerConnection().addIceCandidate(candidate)
-                            it.remove()
+                    override fun onSignalingChange(signalingState: SignalingState) {
+                        if(PeerConnection.SignalingState.STABLE == signalingState){
+                            val it = localParticipant?.getIceCandidateList()?.iterator()
+                            while (it!!.hasNext()){
+                                val candidate = it.next()
+                                localParticipant?.getPeerConnection()?.addIceCandidate(candidate)
+                                it.remove()
+                            }
                         }
                     }
-                }
 
-                override fun onIceConnectionChange(p0: PeerConnection.IceConnectionState?) {
-                }
-            })
+                })
+            if(localParticipant?.getAudioTrack() != null){
+                peerConnection!!.addTransceiver(localParticipant?.getAudioTrack(),
+                    RtpTransceiver.RtpTransceiverInit(RtpTransceiver.RtpTransceiverDirection.SEND_ONLY))
+            }
+            if(localParticipant?.getVideoTrack() != null){
+                peerConnection!!.addTransceiver(localParticipant?.getVideoTrack(),
+                    RtpTransceiver.RtpTransceiverInit(RtpTransceiver.RtpTransceiverDirection.SEND_ONLY))
+            }
 
-        if(localParticipant.getAudioTrack() != null){
-            peerConnection!!.addTransceiver(localParticipant.getAudioTrack(),
-            RtpTransceiver.RtpTransceiverInit(RtpTransceiver.RtpTransceiverDirection.SEND_ONLY))
+            return peerConnection!!
         }
-        if(localParticipant.getVideoTrack() != null){
-            peerConnection!!.addTransceiver(localParticipant.getVideoTrack(),
-            RtpTransceiver.RtpTransceiverInit(RtpTransceiver.RtpTransceiverDirection.SEND_ONLY))
-        }
-
-        return peerConnection!!
+        return null
     }
 
-    fun test(){
-        activity.mainLooper
-    }
     fun createRemotePeerConnection(connectionId: String?) {
         val iceServers: MutableList<IceServer> = java.util.ArrayList()
         val iceServer = IceServer.builder("stun:stun.l.google.com:19302").createIceServer()
@@ -113,64 +108,63 @@ class Session(
         rtcConfig.keyType = KeyType.ECDSA
         rtcConfig.enableDtlsSrtp = true
         rtcConfig.sdpSemantics = SdpSemantics.UNIFIED_PLAN
-        val peerConnection = peerConnectionFactory.createPeerConnection(
-            rtcConfig,
-            object : CustomPeerConnectionObserver("remotePeerCreation") {
-                override fun onIceCandidate(iceCandidate: IceCandidate) {
-                    super.onIceCandidate(iceCandidate)
-                    websocket.onIceCandidate(iceCandidate, connectionId)
-                }
-
-                override fun onAddTrack(
-                    rtpReceiver: RtpReceiver?,
-                    mediaStreams: Array<MediaStream?>?
-                ) {
-                    super.onAddTrack(rtpReceiver, mediaStreams)
-                    if(mediaStreams != null && mediaStreams[0] != null && remoteParticipants != null){
-                        activity.setRemoteMediaStream(
-                            mediaStreams[0]!!,
-                            remoteParticipants[connectionId]!!)
+        if(peerConnectionFactory != null){
+            val peerConnection = peerConnectionFactory!!.createPeerConnection(
+                rtcConfig,
+                object : CustomPeerConnectionObserver("remotePeerCreation") {
+                    override fun onIceCandidate(iceCandidate: IceCandidate) {
+                        super.onIceCandidate(iceCandidate)
+                        websocket?.onIceCandidate(iceCandidate, connectionId)
                     }
-                }
 
-                override fun onSignalingChange(signalingState: SignalingState) {
-                    if (SignalingState.STABLE == signalingState) {
-                        // SDP Offer/Answer finished. Add stored remote candidates.
-                        val remoteParticipant = remoteParticipants[connectionId]!!
-                        val it: MutableIterator<IceCandidate> =
-                            remoteParticipant.getIceCandidateList().iterator()
-                        while (it.hasNext()) {
-                            val candidate = it.next()
-                            remoteParticipant.getPeerConnection().addIceCandidate(candidate)
-                            it.remove()
+                    override fun onAddTrack(
+                        rtpReceiver: RtpReceiver?,
+                        mediaStreams: Array<MediaStream?>?
+                    ) {
+                        super.onAddTrack(rtpReceiver, mediaStreams)
+                        if(mediaStreams != null && mediaStreams[0] != null && remoteParticipants != null){
+                            activity!!.setRemoteMediaStream(
+                                mediaStreams[0]!!,
+                                remoteParticipants[connectionId]!!)
                         }
                     }
-                }
 
-                override fun onIceConnectionChange(p0: IceConnectionState?) {
-                }
-            })
-        peerConnection!!.addTransceiver(
-            MediaStreamTrack.MediaType.MEDIA_TYPE_AUDIO,
-            RtpTransceiverInit(RtpTransceiver.RtpTransceiverDirection.RECV_ONLY)
-        )
-        peerConnection.addTransceiver(
-            MediaStreamTrack.MediaType.MEDIA_TYPE_VIDEO,
-            RtpTransceiverInit(RtpTransceiver.RtpTransceiverDirection.RECV_ONLY)
-        )
-        remoteParticipants[connectionId]!!.setPeerConnection(peerConnection)
+                    override fun onSignalingChange(signalingState: SignalingState) {
+                        if (SignalingState.STABLE == signalingState) {
+                            // SDP Offer/Answer finished. Add stored remote candidates.
+                            val remoteParticipant = remoteParticipants[connectionId]!!
+                            val it: MutableIterator<IceCandidate> =
+                                remoteParticipant.getIceCandidateList().iterator()
+                            while (it.hasNext()) {
+                                val candidate = it.next()
+                                remoteParticipant.getPeerConnection().addIceCandidate(candidate)
+                                it.remove()
+                            }
+                        }
+                    }
+                })
+            peerConnection!!.addTransceiver(
+                MediaStreamTrack.MediaType.MEDIA_TYPE_AUDIO,
+                RtpTransceiverInit(RtpTransceiver.RtpTransceiverDirection.RECV_ONLY)
+            )
+            peerConnection.addTransceiver(
+                MediaStreamTrack.MediaType.MEDIA_TYPE_VIDEO,
+                RtpTransceiverInit(RtpTransceiver.RtpTransceiverDirection.RECV_ONLY)
+            )
+            remoteParticipants[connectionId]!!.setPeerConnection(peerConnection)
+        }
     }
 
     fun createOfferForPublishing(constraints: MediaConstraints?) {
-        localParticipant.getPeerConnection().createOffer(object : CustomSdpObserver("createOffer") {
+        localParticipant?.getPeerConnection()?.createOffer(object : CustomSdpObserver("createOffer") {
             override fun onCreateSuccess(sessionDescription: SessionDescription?) {
                 super.onCreateSuccess(sessionDescription)
                 Log.i("createOffer SUCCESS", sessionDescription.toString())
-                localParticipant.getPeerConnection().setLocalDescription(
+                localParticipant?.getPeerConnection()?.setLocalDescription(
                     CustomSdpObserver("createOffer_setLocalDescription"),
                     sessionDescription
                 )
-                websocket.publishVideo(sessionDescription!!)
+                websocket?.publishVideo(sessionDescription!!)
             }
 
             override fun onCreateFailure(s: String?) {
@@ -192,7 +186,7 @@ class Session(
                     remoteParticipant.getPeerConnection().setLocalDescription(object :
                         CustomSdpObserver("createAnswerSubscribing_setLocalDescription") {
                         override fun onSetSuccess() {
-                            websocket.receiveVideoFrom(
+                            websocket?.receiveVideoFrom(
                                 sessionDescription,
                                 remoteParticipant,
                                 streamId!!
@@ -245,14 +239,14 @@ class Session(
 
     fun leaveSession() {
         AsyncTask.execute {
-            websocket.setWebsocketCancelled(true)
-            if (websocket != null) {
-                websocket.leaveRoom()
-                websocket.disconnect()
-            }
-            localParticipant.dispose()
+            websocket?.setWebsocketCancelled(true)
+            websocket?.leaveRoom()
+            websocket?.disconnect()
+            websocket = null
+            localParticipant?.dispose()
+            localParticipant = null
         }
-        activity.runOnUiThread {
+        activity!!.runOnUiThread {
             for (remoteParticipant in remoteParticipants.values) {
                 if (remoteParticipant.getPeerConnection() != null) {
                     remoteParticipant.getPeerConnection().close()
@@ -261,13 +255,14 @@ class Session(
         }
         AsyncTask.execute {
             if (peerConnectionFactory != null) {
-                peerConnectionFactory.dispose()
-//                peerConnectionFactory = null
+                peerConnectionFactory!!.dispose()
+                peerConnectionFactory = null
             }
         }
+
     }
 
-    fun setWebSocket(webSocket: CustomWebSocket){
+    fun setWebSocket(websocket: CustomWebSocket){
         this.websocket = websocket
     }
 

@@ -21,6 +21,8 @@ import org.json.JSONArray
 import org.webrtc.PeerConnection.SignalingState
 import android.widget.Toast
 import com.neovisionaries.ws.client.*
+import com.ssafy.webrtc.constants.JsonConstants.REMOTE_TEXT_VIEW
+import com.ssafy.webrtc.constants.JsonConstants.REMOTE_VIDEO_VIEW
 import com.ssafy.webrtc.openvidu.LocalParticipant
 import com.ssafy.webrtc.openvidu.Participant
 import com.ssafy.webrtc.openvidu.Session
@@ -43,7 +45,7 @@ import javax.net.ssl.SSLContext
 import javax.net.ssl.TrustManager
 import javax.net.ssl.X509TrustManager
 
-class CustomWebSocket(session: Session, openviduUrl: String, activity: AppCompatActivity) :
+class CustomWebSocket(session: Session, openviduUrl: String, activity: AppCompatActivity?) :
     AsyncTask<AppCompatActivity?, Void?, Void?>(), WebSocketListener {
 
     private val TAG = "CustomWebSocketListener"
@@ -72,10 +74,10 @@ class CustomWebSocket(session: Session, openviduUrl: String, activity: AppCompat
     private val IDS_PREPARERECEIVEVIDEO: MutableMap<Int, Pair<String, String>> = ConcurrentHashMap()
     private val IDS_RECEIVEVIDEO: MutableMap<Int, String> = ConcurrentHashMap()
     private val IDS_ONICECANDIDATE = Collections.newSetFromMap(ConcurrentHashMap<Int, Boolean>())
-    private val session: Session = session
+    private var session: Session? = session
     private val openviduUrl = openviduUrl
     private lateinit var mediaServer: String
-    private val activity = activity
+    private var activity = activity
     private lateinit var websocket: WebSocket
     private var websocketCancelled = false
 
@@ -100,11 +102,11 @@ class CustomWebSocket(session: Session, openviduUrl: String, activity: AppCompat
         } else if (rpcId == ID_JOINROOM.get()) {
             // Response to joinRoom
             //activity.viewToConnectedState()
-            val localParticipant: LocalParticipant = session.getLocalParticipant()!!
+            val localParticipant: LocalParticipant = session!!.getLocalParticipant()!!
             val localConnectionId = result.getString(JsonConstants.ID)
             mediaServer = result.getString(JsonConstants.MEDIA_SERVER)
             localParticipant.setConnectionId(localConnectionId)
-            val localPeerConnection: PeerConnection = session.createLocalPeerConnection()
+            val localPeerConnection: PeerConnection = session!!.createLocalPeerConnection()!!
             localParticipant.setPeerConnection(localPeerConnection)
             val sdpConstraints = MediaConstraints()
             sdpConstraints.mandatory.add(
@@ -119,7 +121,7 @@ class CustomWebSocket(session: Session, openviduUrl: String, activity: AppCompat
                     "false"
                 )
             )
-            session.createOfferForPublishing(sdpConstraints)
+            session!!.createOfferForPublishing(sdpConstraints)
             if (result.getJSONArray(JsonConstants.VALUE).length() > 0) {
                 // There were users already connected to the session
                 addRemoteParticipantsAlreadyInRoom(result)
@@ -131,7 +133,7 @@ class CustomWebSocket(session: Session, openviduUrl: String, activity: AppCompat
             }
         } else if (rpcId == ID_PUBLISHVIDEO.get()) {
             // Response to publishVideo
-            val localParticipant: LocalParticipant = session.getLocalParticipant()!!
+            val localParticipant: LocalParticipant = session!!.getLocalParticipant()!!
             val remoteSdpAnswer =
                 SessionDescription(SessionDescription.Type.ANSWER, result.getString("sdpAnswer"))
             localParticipant.getPeerConnection().setRemoteDescription(
@@ -142,7 +144,7 @@ class CustomWebSocket(session: Session, openviduUrl: String, activity: AppCompat
             // Response to prepareReceiveVideoFrom
             val participantAndStream = IDS_PREPARERECEIVEVIDEO.remove(rpcId)!!
             val remoteParticipant: RemoteParticipant =
-                session.getRemoteParticipant(participantAndStream.first)!!
+                session!!.getRemoteParticipant(participantAndStream.first)!!
             val streamId = participantAndStream.second
             val remoteSdpOffer =
                 SessionDescription(SessionDescription.Type.OFFER, result.getString("sdpOffer"))
@@ -164,7 +166,7 @@ class CustomWebSocket(session: Session, openviduUrl: String, activity: AppCompat
                     SessionDescription.Type.ANSWER,
                     result.getString("sdpAnswer")
                 )
-                session.getRemoteParticipant(id)!!.getPeerConnection().setRemoteDescription(
+                session!!.getRemoteParticipant(id)!!.getPeerConnection().setRemoteDescription(
                     CustomSdpObserver("remoteSetRemoteDesc"),
                     sessionDescription
                 )
@@ -180,12 +182,12 @@ class CustomWebSocket(session: Session, openviduUrl: String, activity: AppCompat
     fun joinRoom() {
         val joinRoomParams: MutableMap<String, String> = HashMap()
         joinRoomParams[JsonConstants.METADATA] =
-            "{\"clientData\": \"" + session.getLocalParticipant()!!.getParticipantName()
+            "{\"clientData\": \"" + session!!.getLocalParticipant()!!.getParticipantName()
                 .toString() + "\"}"
         joinRoomParams["secret"] = ""
-        joinRoomParams["session"] = session.getId()!!
+        joinRoomParams["session"] = session!!.getId()!!
         joinRoomParams["platform"] = "Android " + Build.VERSION.SDK_INT
-        joinRoomParams["token"] = session.getToken()!!
+        joinRoomParams["token"] = session!!.getToken()!!
         joinRoomParams["sdkVersion"] = "2.22.0"
         ID_JOINROOM.set(this.sendJson(JsonConstants.JOINROOM_METHOD, joinRoomParams))
     }
@@ -323,10 +325,10 @@ class CustomWebSocket(session: Session, openviduUrl: String, activity: AppCompat
         )
         val connectionId = params.getString("senderConnectionId")
         val isRemote: Boolean =
-            !session.getLocalParticipant()!!.getConnectionId().equals(connectionId)
+            !session!!.getLocalParticipant()!!.getConnectionId().equals(connectionId)
         val participant: Participant =
-            if (isRemote) session.getRemoteParticipant(connectionId)!!
-            else session.getLocalParticipant()!!
+            if (isRemote) session!!.getRemoteParticipant(connectionId)!!
+            else session!!.getLocalParticipant()!!
         val pc: PeerConnection = participant.getPeerConnection()
         when (pc.signalingState()) {
             SignalingState.CLOSED -> Log.e(
@@ -350,7 +352,7 @@ class CustomWebSocket(session: Session, openviduUrl: String, activity: AppCompat
     @Throws(JSONException::class)
     private fun participantPublishedEvent(params: JSONObject) {
         val remoteParticipantId = params.getString(JsonConstants.ID)
-        val remoteParticipant: RemoteParticipant = session.getRemoteParticipant(remoteParticipantId)!!
+        val remoteParticipant: RemoteParticipant = session!!.getRemoteParticipant(remoteParticipantId)!!
         val streamId = params.getJSONArray("streams").getJSONObject(0).getString("id")
         subscribe(remoteParticipant, streamId)
     }
@@ -358,9 +360,9 @@ class CustomWebSocket(session: Session, openviduUrl: String, activity: AppCompat
     @Throws(JSONException::class)
     private fun participantLeftEvent(params: JSONObject) {
         val remoteParticipant: RemoteParticipant =
-            session.removeRemoteParticipant(params.getString("connectionId"))!!
+            session!!.removeRemoteParticipant(params.getString("connectionId"))!!
         remoteParticipant.dispose()
-        val mainHandler: Handler = Handler(activity.getMainLooper())
+        val mainHandler: Handler = Handler(activity!!.getMainLooper())
         //        Runnable myRunnable = () -> session.removeView(remoteParticipant.getView());
 //        mainHandler.post(myRunnable);
     }
@@ -381,9 +383,9 @@ class CustomWebSocket(session: Session, openviduUrl: String, activity: AppCompat
                 participantName = jsonStringified
             }
         }
-        val remoteParticipant = RemoteParticipant(connectionId, participantName!!, session)
-        activity.createRemoteParticipantVideo(remoteParticipant)
-        session.createRemotePeerConnection(remoteParticipant.getConnectionId())
+        val remoteParticipant = RemoteParticipant(connectionId, participantName!!, session!!)
+        activity!!.createRemoteParticipantVideo(remoteParticipant,REMOTE_VIDEO_VIEW, REMOTE_TEXT_VIEW)
+        session!!.createRemotePeerConnection(remoteParticipant.getConnectionId())
         return remoteParticipant
     }
 
@@ -426,7 +428,7 @@ class CustomWebSocket(session: Session, openviduUrl: String, activity: AppCompat
         val sdpConstraints = MediaConstraints()
         sdpConstraints.mandatory.add(MediaConstraints.KeyValuePair("offerToReceiveAudio", "true"))
         sdpConstraints.mandatory.add(MediaConstraints.KeyValuePair("offerToReceiveVideo", "true"))
-        session.createAnswerForSubscribing(remoteParticipant, streamId, sdpConstraints)
+        session!!.createAnswerForSubscribing(remoteParticipant, streamId, sdpConstraints)
     }
 
     fun setWebsocketCancelled(websocketCancelled: Boolean) {
@@ -434,6 +436,8 @@ class CustomWebSocket(session: Session, openviduUrl: String, activity: AppCompat
     }
 
     fun disconnect() {
+        this.activity = null
+        this.session = null
         websocket!!.disconnect()
     }
 
@@ -645,41 +649,41 @@ class CustomWebSocket(session: Session, openviduUrl: String, activity: AppCompat
             websocket.connect()
         } catch (e: KeyManagementException) {
             Log.e("WebSocket error", e.message!!)
-            val mainHandler: Handler = Handler(activity.getMainLooper())
+            val mainHandler: Handler = Handler(activity!!.getMainLooper())
             val myRunnable = Runnable {
                 val toast = Toast.makeText(activity, e.message, Toast.LENGTH_LONG)
                 toast.show()
-                activity.finish()
+                activity!!.finish()
             }
             mainHandler.post(myRunnable)
             websocketCancelled = true
         } catch (e: NoSuchAlgorithmException) {
             Log.e("WebSocket error", e.message!!)
-            val mainHandler: Handler = Handler(activity.getMainLooper())
+            val mainHandler: Handler = Handler(activity!!.getMainLooper())
             val myRunnable = Runnable {
                 val toast = Toast.makeText(activity, e.message, Toast.LENGTH_LONG)
                 toast.show()
-                activity.finish()
+                activity!!.finish()
             }
             mainHandler.post(myRunnable)
             websocketCancelled = true
         } catch (e: IOException) {
             Log.e("WebSocket error", e.message!!)
-            val mainHandler: Handler = Handler(activity.getMainLooper())
+            val mainHandler: Handler = Handler(activity!!.getMainLooper())
             val myRunnable = Runnable {
                 val toast = Toast.makeText(activity, e.message, Toast.LENGTH_LONG)
                 toast.show()
-                activity.finish()
+                activity!!.finish()
             }
             mainHandler.post(myRunnable)
             websocketCancelled = true
         } catch (e: WebSocketException) {
             Log.e("WebSocket error", e.message!!)
-            val mainHandler: Handler = Handler(activity.getMainLooper())
+            val mainHandler: Handler = Handler(activity!!.getMainLooper())
             val myRunnable = Runnable {
                 val toast = Toast.makeText(activity, e.message, Toast.LENGTH_LONG)
                 toast.show()
-                activity.finish()
+                activity!!.finish()
             }
             mainHandler.post(myRunnable)
             websocketCancelled = true

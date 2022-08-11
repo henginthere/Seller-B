@@ -20,6 +20,7 @@ import com.ssafy.sellerb.R
 import com.ssafy.sellerb.databinding.FragmentLoginBinding
 import com.ssafy.sellerb.di.component.FragmentComponent
 import com.ssafy.sellerb.ui.base.BaseFragment
+import com.ssafy.sellerb.ui.consulting.ConsultingActivity
 import com.ssafy.sellerb.ui.qrscan.QrScanActivity
 import com.ssafy.sellerb.util.Constants.CLIENT_ID
 
@@ -91,8 +92,9 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
         }
 
         binding.btnLogin.setOnClickListener{
+//            val intent = Intent(context, ConsultingActivity::class.java)
+//            startActivity(intent)
             viewModel.doLogin()
-            mGoogleSignInClient.signOut()
         }
     }
 

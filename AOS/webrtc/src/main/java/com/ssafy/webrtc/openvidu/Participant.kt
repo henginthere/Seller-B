@@ -9,11 +9,11 @@ import org.webrtc.VideoTrack
 
 abstract class Participant(
     private val participantName: String,
-    private val session: Session
+    private var session: Session?
     ) {
 
     private lateinit var connectionId: String
-    private lateinit var iceCandidateList: List<IceCandidate>
+    private var iceCandidateList = mutableListOf<IceCandidate>()
     private lateinit var peerConnection: PeerConnection
     private lateinit var audioTrack: AudioTrack
     private lateinit var videoTrack: VideoTrack
@@ -34,13 +34,12 @@ abstract class Participant(
     }
     fun getConnectionId(): String = connectionId
 
-    fun setIceCandidateList(iceCandidates: List<IceCandidate>){
+    fun setIceCandidateList(iceCandidates: MutableList<IceCandidate>){
         iceCandidateList = iceCandidates
     }
 
     fun getIceCandidateList(): MutableList<IceCandidate> =
-        iceCandidateList as MutableList<IceCandidate>
-
+        iceCandidateList
     fun setAudioTrack(audioTrack: AudioTrack){
         this.audioTrack = audioTrack
     }
@@ -64,6 +63,7 @@ abstract class Participant(
         if(peerConnection != null){
            try{
                 peerConnection.close()
+                session = null
            }catch(e : IllegalStateException){
                Log.e("Dispose PeerConnection" , e.message.toString())
            }
