@@ -3,29 +3,30 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 
 import "./ProductRegister.css";
 import { Footer, NavBar } from "../../../components/index";
-import { productDetailApi } from "../../../api/productApi";
+import { productDetailApi, productEditApi } from "../../../api/productApi";
 
 function ProductDetail() {
   const { seq } = useParams();
   const [readOnly, setReadOnly] = useState(true)
   const [product, setProduct] = useState({
-    productSeq:"",
+    productSeq: "",
     productId: "",
     productName: "",
     productPrice: "",
     // product_thumbnail : 서버에서 url로 받아옴
-    productThumbnail:"",
-    productGroup: {
-      productGroupName:"",
-    }
+    productThumbnail:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1T5-8wefzN-Nv1nUOwyhfYoh4js2cTgJpCw&usqp=CAU",
+    productGroup: "",
   });
 
   /* 해당 seq에 맞는 Product 정보 먼저 가져오기 */
     useEffect(()=>{
+      console.log("in useEffect: " + seq);
 
       productDetailApi(seq)
       .then((res)=>{
           console.log(res.data);
+
           setProduct(res.data);
       })
       .catch((err)=>{
@@ -49,7 +50,7 @@ function ProductDetail() {
       <div className="mainContent-wrapper">
         <div className="left-img">
           {/* img 자리 */}
-          <img className="img-wrapper" alt="#" src={`${product.product_thumbnail}`} />
+          <img className="img-wrapper" alt="#" src={`${product.productThumbnail}`} />
         </div>
 
 
@@ -60,29 +61,32 @@ function ProductDetail() {
               name="productId"
               value={product.productId}
               variant="outlined"
+              readOnly={readOnly ? false : true}
             />
           </div>
           <div className="input-ele">
             <p>제품명</p>
             <input
-              name="product_name"
+              name="productName"
               value={product.productName}
               variant="outlined"
+              readOnly={readOnly ? false : true}
             />
           </div>
           <div className="input-ele">
             <p>가격</p>
             <input
-              name="product_price"
+              name="productPrice"
               value={product.productPrice}
               variant="outlined"
+              readOnly={readOnly ? false : true}
             />
           </div>
           <div className="input-ele">
             <p>제품군</p>
             <input
-              name="product_line"
-              value={product.productGroup.productGroupName}
+              name="productGroupName"
+              value={product.productGroupName}
               variant="outlined"
               readOnly={readOnly ? false : true}
             />
@@ -92,8 +96,7 @@ function ProductDetail() {
 
       {/* Btn */}
     <div className="bottomContent-wrapper">
-    <button className="bottom-btn" onClick={()=>
-      navigate(`/manager/productEdit/${seq}`)}>
+    <button className="bottom-btn" onClick={()=> onEdit()}>
             수정하기
         </button>
         <button className="bottom-btn" onClick={goWaitingPage}>
