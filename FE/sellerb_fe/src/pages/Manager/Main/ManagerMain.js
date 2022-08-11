@@ -3,30 +3,17 @@
  *  관리자 Main
  *
  *  */
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ManagerMainLeft from "../../../components/Manager/Main/ManagerMainLeft";
 import ManagerMainRight from "../../../components/Manager/Main/ManagerMainRight";
 import ManagerMainCenter from "../../../components/Manager/Main/ManagerMainCenter";
 import NavBar from "../../../components/Common/NavBar/NavBar";
 import Footer from "../../../components/Common/Footer/Footer";
-import { listConsultantApi } from "../../../api/consultantApi";
+
 import "./ManagerMain.css";
 
 function ManagerMain() {
   // const [list, setList] = useState([]);
-
-  // useEffect(()=>{
-  //   listConsultantApi()
-  //   .then((res)=>{
-  //     console.log("after API:" + res.data[0].consultantId);
-  //     setList(res.data);
-
-  //     console.log("consultantList: " + list[0].consultantId)
-  //   })
-  //   .catch((err)=>{
-  //     console.log("err:" + err.data);
-  //   })
-  // },[])
 
   return (
     <div className='center'>
