@@ -1,12 +1,15 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 
 import { Footer, NavBar } from "../../../components/index";
 import "./ConsultantMain.css";
 import styled from "styled-components";
-import { goWorkApi, leaveWorkApi, detailConsultantApi } from "../../../api/consultantApi";
+import {
+  goWorkApi,
+  leaveWorkApi,
+  detailConsultantApi,
+} from "../../../api/consultantApi";
 
 function ConsultantMain() {
-
   const [conSeq, setConSeq] = useState("");
   const [conName, setConName] = useState("");
   const tableDummyData = [
@@ -24,74 +27,68 @@ function ConsultantMain() {
     },
   ];
 
-  useEffect(()=>{
+  useEffect(() => {
     const val = sessionStorage.getItem("seq");
     setConSeq(val);
 
     detailConsultantApi(val)
-    .then((res)=>{
+      .then((res) => {
+        console.log("consultant Name: " + res.data.consultantName);
+        setConName(res.data.consultantName);
+        sessionStorage.setItem("productGroupSeq", res.data.productGroupSeq);
+        sessionStorage.setItem("consultantName", res.data.consultantName);
+        console.log(
+          "proudctGroupSeq : " + sessionStorage.getItem("productGroupSeq"),
+        );
+      })
+      .catch((err) => {
+        console.log("Error");
+      });
+  }, []);
 
-      console.log("consultant Name: " + res.data.consultantName)
-      setConName(res.data.consultantName);
-    })
-    .catch((err)=>{
-      console.log("Error")
-    })
-
-  }, [])
-
-  const goWorkBtn = () =>{
+  const goWorkBtn = () => {
     const Info = {
-      consultantSeq : conSeq
-    }
-    
+      consultantSeq: conSeq,
+    };
+
     goWorkApi(Info)
-    .then((res)=>{
-      console.log("success");
+      .then((res) => {
+        console.log("success");
 
-      alert("출근완료!");
+        alert("출근완료!");
+      })
+      .catch((err) => {
+        console.log("Error");
+      });
+  };
 
-    })
-    .catch((err)=>{
-      console.log("Error");
-    })
-
-
-  }
-  
-  const leaveWorkBtn = ()=>{
+  const leaveWorkBtn = () => {
     leaveWorkApi(conSeq)
-    .then((res)=>{
-      console.log("Success");
+      .then((res) => {
+        console.log("Success");
 
-      alert("퇴근완료!");
-    })
-    .catch((err)=>{
-      console.log("Error");
-    })
-
-  }
+        alert("퇴근완료!");
+      })
+      .catch((err) => {
+        console.log("Error");
+      });
+  };
 
   return (
     <>
       <NavBar></NavBar>
-      <div className="consultant-main-wrapper">
-
-        <div className="main-header">
-          <div className="header-left">
-            <div className="left-content-comment">
+      <div className='consultant-main-wrapper'>
+        <div className='main-header'>
+          <div className='header-left'>
+            <div className='left-content-comment'>
               {conName} 님, 환영합니다!
             </div>
-            <div className="attend-wrapper">
-              <div className="go-btn-wrapper" onClick={goWorkBtn}>
-                <div className="go-btn" >
-                  출근
-                </div>
+            <div className='attend-wrapper'>
+              <div className='go-btn-wrapper' onClick={goWorkBtn}>
+                <div className='go-btn'>출근</div>
               </div>
-              <div className="leave-btn-wrapper" onClick={leaveWorkBtn}>
-              <div className="leave-btn" >
-                  퇴근
-                </div>
+              <div className='leave-btn-wrapper' onClick={leaveWorkBtn}>
+                <div className='leave-btn'>퇴근</div>
               </div>
             </div>
           </div>
@@ -100,18 +97,18 @@ function ConsultantMain() {
             <div>퇴근</div>
           </div> */}
         </div>
-        <div className="notice-consulting-wrapper">
-          <div className="notice">
-            <div className="notice-title">공지사항</div>
+        <div className='notice-consulting-wrapper'>
+          <div className='notice'>
+            <div className='notice-title'>공지사항</div>
             <hr />
           </div>
-          <div className="consulting-request">
-            <div className="reqeust-title">상담신청 내역</div>
+          <div className='consulting-request'>
+            <div className='reqeust-title'>상담신청 내역</div>
 
             <hr />
 
             {/* table START*/}
-            <table className="content-table">
+            <table className='content-table'>
               <thead>
                 <tr>
                   <th>No</th>
@@ -125,38 +122,36 @@ function ConsultantMain() {
                   <td>1</td>
                   <td>SHA-16AA</td>
                   <td>
-                    <button className="accept-btn">o</button>
+                    <button className='accept-btn'>o</button>
                   </td>
                   <td>
-                    <button className="reject-btn">o</button>
+                    <button className='reject-btn'>o</button>
                   </td>
                 </tr>
                 <tr>
                   <td>2</td>
                   <td>SPT-A134</td>
                   <td>
-                    <button className="accept-btn">o</button>
+                    <button className='accept-btn'>o</button>
                   </td>
                   <td>
-                    <button className="reject-btn">o</button>
+                    <button className='reject-btn'>o</button>
                   </td>
                 </tr>
                 <tr>
                   <td>3</td>
                   <td>QTA-BC12</td>
                   <td>
-                    <button className="accept-btn">o</button>
+                    <button className='accept-btn'>o</button>
                   </td>
                   <td>
-                    <button className="reject-btn">o</button>
+                    <button className='reject-btn'>o</button>
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
-
-
       </div>
       <Footer />
     </>
