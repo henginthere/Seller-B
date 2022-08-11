@@ -43,7 +43,9 @@
     border-bottom: 1px solid #333;
 }
 
-.notice-table-th-tr {
+
+/* .notice-table-th-tr { */
+.notice-th-tr {    
     width: 100%;
     table-layout: fixed;
     border-bottom: 1px solid #333;
@@ -69,7 +71,7 @@
     font-size: 12px;
 }
 
-.notice-th-tr .notice-th-th-manager{
+.notice-th-tr .notice-th-tr-manager{
     width: 100px;
     padding: 20px 0;
     text-align: center;

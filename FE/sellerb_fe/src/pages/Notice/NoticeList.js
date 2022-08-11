@@ -5,12 +5,20 @@ import { listNoticeApi, searchNoticeApi } from "../../api/noticeApi";
 import "./NoticeList.css";
 import { Footer, NavBar } from "../../components/index";
 
+import { SmallButton} from '../../components/Common/SmallButton'
+
 function NoticeList() {
   const navigate = useNavigate();
 
   const [noticeList, setNoticeList] = useState([]); // -> api res.data 로 값 갱신해주기
   const [searchTitle, setSearchTitle] = useState("");
   var isManager = true;
+  if (sessionStorage.getItem("adminCheck") === "ROLE_ADMIN") {
+    isManager = true;
+  } else {
+    isManager = false;
+  }
+
   const onSearchByTitleHandler = (e) => {
     setSearchTitle(e.target.value);
   };
@@ -40,6 +48,10 @@ function NoticeList() {
       });
   };
 
+  const goWriteBtn = () =>{
+    navigate("/manager/noticeWrite");
+  }
+
   useEffect(() => {
     listNoticeApi()
       .then((res) => {
@@ -67,16 +79,18 @@ function NoticeList() {
               value={searchTitle}
               onChange={onSearchByTitleHandler}
             />
-            <button className="list-search-button" onClick={submitBtnSearchByTitle}>검색</button>
-
+            <SmallButton 
+              label="검색"
+              onClick={submitBtnSearchByTitle}
+            />
           </div>
-
+            <br />
             <table className="notice-table-list">
               <thead className="notice-table-thead">
                 <tr className="notice-th-tr">
                   <th className="notice-th-tr-No">No</th>
                   <th className="notice-th-tr-title">Title</th>
-                  <th className="notice-th-th-manager">작성자</th>
+                  <th className="notice-th-tr-manager">작성자</th>
                   <th className="notice-th-tr-date">Date</th>
                 </tr>
               </thead>
@@ -107,6 +121,7 @@ function NoticeList() {
                   className="detail-button"
                   onClick={(e)=> navigate('/manager/noticeWrite')}
                   >글 작성하기</button>
+                
             </div>
             {/* {isManager ? (
               <Link to="/manager/noticeWrite">
