@@ -47,6 +47,10 @@ public class ProductController {
     public ResponseEntity<List<ProductDto>> getProductList(HttpServletRequest request) {
         return ResponseEntity.ok(productService.getProductList());
     }
+    @GetMapping("/list/brand/{seq}")
+    public ResponseEntity<List<ProductDto>> getProductListByBrand(@PathVariable Long seq) {
+        return ResponseEntity.ok(productService.getProductListByBrand(seq));
+    }
 
     @GetMapping("/list/{productGroupSeq}")
     public ResponseEntity<List<ProductDto>> getProductListByProductGroupSeq(HttpServletRequest request, @PathVariable Long productGroupSeq) {
