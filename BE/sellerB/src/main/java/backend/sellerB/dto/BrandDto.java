@@ -5,6 +5,7 @@ import backend.sellerB.entity.Product;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,14 +17,13 @@ public class BrandDto {
 
     private String brandNameKor;
     private String brandNameEng;
-    private String brandLogo;
+    private MultipartFile brandLogoFile;
 
     public static BrandDto from(Brand brand) {
         if(brand == null) return null;
         return BrandDto.builder()
                 .brandNameKor(brand.getBrandNameKor())
                 .brandNameEng(brand.getBrandNameEng())
-                .brandLogo(brand.getBrandLogo())
                 .build();
     }
 
@@ -34,7 +34,6 @@ public class BrandDto {
             BrandDto brandDto = BrandDto.builder()
                     .brandNameKor(brandList.get(i).getBrandNameKor())
                     .brandNameEng(brandList.get(i).getBrandNameEng())
-                    .brandLogo(brandList.get(i).getBrandLogo())
                     .build();
             listBrandDto.add(brandDto);
             i++;
