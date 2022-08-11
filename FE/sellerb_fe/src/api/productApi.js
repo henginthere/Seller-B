@@ -28,8 +28,13 @@ export const waitingPageApi = async(product_seq, success, fail)=>{
 }
 
 // PUT : ProductEdit.js
-export const productEditApi = async (product, success, fail) =>{
-    return await api.put(`/product/${product.productSeq}`, product).then(success).catch(fail);
+export const productEditApi = async (product_seq, success, fail) =>{
+    return await api.put(`/product/${product_seq}`).then(success).catch(fail);
+}
+
+// GET : ProductList.js
+export const productSearchApi = async (productName, success, fail) => {
+    return await api.get(`/product/name/${productName}`).then(success).catch(fail);
 }
 
 
