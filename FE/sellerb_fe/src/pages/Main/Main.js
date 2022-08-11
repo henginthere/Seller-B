@@ -102,8 +102,9 @@ function Main() {
 
             sessionStorage.setItem("brandNameKor", res.data.brand.brandNameKor);
             sessionStorage.setItem("brandNameEng", res.data.brand.brandNameEng);
+            sessionStorage.setItem("brandSeq", res.data.brand.brandSeq);
 
-            console.log("IN SESSION:" + sessionStorage.getItem("brandNameKor"));
+            console.log("IN SESSION:" + sessionStorage.getItem("brandSeq"));
           })
           .catch((err) => {});
       })

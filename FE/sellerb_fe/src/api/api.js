@@ -15,7 +15,7 @@ export const api = axios.create({
   baseURL: "https://i7d105.p.ssafy.io/api/",
   headers: {
     "Content-Type": `application/json`,
-    Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+    Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
   },
 });
 

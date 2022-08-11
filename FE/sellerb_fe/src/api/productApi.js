@@ -32,4 +32,9 @@ export const productEditApi = async (product, success, fail) =>{
     return await api.put(`/product/${product.productSeq}`, product).then(success).catch(fail);
 }
 
+// GET : ProductList.js : 처음 접속 시, 해당 브랜드의 모든 제품 불러오기
+export const brandProductListApi = async (brandSeq, success, fail) => {
 
+    console.log("brandProductListAPi : " + brandSeq)
+    return await api.get(`/product/list/brand/${brandSeq}`).then(success).catch(fail);
+}

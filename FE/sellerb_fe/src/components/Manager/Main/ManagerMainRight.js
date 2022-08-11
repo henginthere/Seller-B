@@ -62,10 +62,10 @@ function ManagerMainRight() {
   const [it, setIt] = useState(4);
   // ManagerBrand
   const [managerBrandKor, setManagerBrandKor] = useState(
-    localStorage.getItem("brandNameKor")
+    sessionStorage.getItem("brandNameKor")
   );
   const [managerBrandEng, setManagerBrandEng] = useState(
-    localStorage.getItem("brandNameEng")
+    sessionStorage.getItem("brandNameEng")
   )
 
   // 처음에 받아온 컨설턴트 전체 리스트 / 입력된 상담사 검색어 / 검색결과를 담을 해당 컨설턴트 state  
@@ -130,7 +130,6 @@ function ManagerMainRight() {
         console.log(res.data);
         // 받아온 해당 컨설턴트 출력하기
         setSearchCon(res.data);
-        console.log(searchCon.consultantName);
         setListState(false);
       })
       .catch((err) => {
