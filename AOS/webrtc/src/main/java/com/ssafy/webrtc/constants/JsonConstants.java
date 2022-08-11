@@ -50,4 +50,8 @@ public final class JsonConstants {
     public static final String SDP_ANSWER = "sdpAnswer";
     public static final String METADATA = "metadata";
 
+    // Remote Video View Res
+    public static final String REMOTE_VIDEO_VIEW = "remote_gl_surface_view";
+    public static final String REMOTE_TEXT_VIEW = "remote_participant";
+
 }

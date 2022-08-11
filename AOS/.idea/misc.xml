@@ -16,7 +16,7 @@
         <entry key="app/src/main/res/drawable/sellerb_logo.xml" value="0.1845" />
         <entry key="app/src/main/res/drawable/sellerb_logo_text.xml" value="0.1845" />
         <entry key="app/src/main/res/drawable/shape_round.xml" value="0.1845" />
-        <entry key="app/src/main/res/layout/activity_consulting.xml" value="0.16822916666666668" />
+        <entry key="app/src/main/res/layout/activity_consulting.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.67" />
         <entry key="app/src/main/res/layout/activity_qr_scan.xml" value="0.34148550724637683" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2512664640324215" />
@@ -26,7 +26,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

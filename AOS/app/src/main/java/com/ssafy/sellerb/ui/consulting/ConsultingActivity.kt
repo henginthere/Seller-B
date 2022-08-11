@@ -16,7 +16,6 @@ import com.ssafy.sellerb.databinding.ActivityConsultingBinding
 import com.ssafy.sellerb.util.Constants.OPENVIDU_SECRET
 import com.ssafy.sellerb.util.Constants.OPENVIDU_URL
 import com.ssafy.webrtc.openvidu.LocalParticipant
-import com.ssafy.webrtc.openvidu.RemoteParticipant
 import com.ssafy.webrtc.openvidu.Session
 import com.ssafy.webrtc.utils.CustomHttpClient
 import com.ssafy.webrtc.websocket.CustomWebSocket
@@ -37,9 +36,6 @@ class ConsultingActivity : AppCompatActivity() {
 
     companion object{
         const val TAG = "ConsultingActivity"
-        private const val MY_PERMISSIONS_REQUEST_CAMERA = 100;
-        private const val MY_PERMISSIONS_REQUEST_RECORD_AUDIO = 101;
-        private const val MY_PERMISSIONS_REQUEST = 102;
 
         private const val REQUEST_CODE_PERMISSIONS = 10
         private val REQUIRED_PERMISSIONS =
@@ -58,6 +54,18 @@ class ConsultingActivity : AppCompatActivity() {
         setContentView(binding.root)
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
 
+        binding.btnSwitchCamera.setOnClickListener {
+            session.getLocalParticipant()!!.switchCamera()
+        }
+
+        binding.btnExit.setOnClickListener {
+            leaveSession()
+            finish()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
 
         if (allPermissionsGranted()) {
             initViews()
@@ -75,6 +83,7 @@ class ConsultingActivity : AppCompatActivity() {
             )
         }
     }
+
     private fun getToken(sessionId: String) {
         try {
             // Session Request
@@ -122,16 +131,19 @@ class ConsultingActivity : AppCompatActivity() {
 
                                 override fun onFailure(call: Call, e: IOException) {
                                     Log.e(TAG, "Error POST /api/tokens", e)
+                                    viewToDisconnectedState()
                                 }
                             })
                     }
                     override fun onFailure(call: Call, e: IOException) {
                         Log.e(TAG, "Error POST /api/sessions", e)
+                        viewToDisconnectedState()
                     }
                 })
         } catch (e: IOException) {
             Log.e(TAG, "Error getting token", e)
             e.printStackTrace()
+            viewToDisconnectedState()
         }
     }
     private fun initViews(){
@@ -158,8 +170,11 @@ class ConsultingActivity : AppCompatActivity() {
         runOnUiThread{
             binding.localGlSurfaceView.clearImage()
             binding.localGlSurfaceView.release()
+            binding.remoteGlSurfaceView.clearImage()
+            binding.remoteGlSurfaceView.release()
         }
     }
+
 
     private fun startWebSocket(){
         val webSocket = CustomWebSocket(session, OPENVIDU_URL, this)
@@ -187,38 +202,20 @@ class ConsultingActivity : AppCompatActivity() {
         }
     }
 
-    fun createRemoteParticipantVideo(remoteParticipant: RemoteParticipant){
-        val mainHandler = Handler(mainLooper)
-        val myRunnable = Runnable {
-            remoteParticipant.setVideoView(binding.remoteGlSurfaceView)
-            binding.remoteGlSurfaceView.setMirror(false)
-            val rootEglBase = EglBase.create()
-            binding.remoteGlSurfaceView.init(rootEglBase.eglBaseContext, null)
-            binding.remoteGlSurfaceView.setZOrderMediaOverlay(true)
-            remoteParticipant.setParticipantNameText((binding.remoteParticipant as TextView)!!)
-            remoteParticipant.getParticipantNameText().text = remoteParticipant.getParticipantName()
-            remoteParticipant.getParticipantNameText().setPadding(20, 3, 20, 3)
-        }
-        mainHandler.post(myRunnable)
-    }
-
     fun leaveSession() {
         this.session.leaveSession()
         this.httpClient.dispose()
+        runOnUiThread{
+            binding.localGlSurfaceView.clearImage()
+            binding.localGlSurfaceView.release()
+            binding.remoteGlSurfaceView.clearImage()
+            binding.remoteGlSurfaceView.release()
+        }
     }
 
-    override fun onDestroy() {
+    override fun onPause() {
         leaveSession()
-        super.onDestroy()
+        super.onPause()
     }
 
-    override fun onBackPressed() {
-        leaveSession()
-        super.onBackPressed()
-    }
-
-    override fun onStop() {
-        leaveSession()
-        super.onStop()
-    }
 }
