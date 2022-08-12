@@ -102,7 +102,7 @@ class Meeting extends Component {
   render() {
     const mySessionId = this.state.mySessionId;
     const myUserName = this.state.myUserName;
-    const token = this.state.token;
+
     return (
       <>
         <div id='meeting-container'>
