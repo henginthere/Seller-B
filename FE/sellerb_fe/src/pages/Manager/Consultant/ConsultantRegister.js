@@ -14,7 +14,6 @@ function ConsultantRegister() {
   
   const [seqTest, setSeqTest] = useState([]);
 
-
   const [brandGroupList, setBrandGroupList] = useState([]);
   const [managerBrand, setManagerBrand] = useState(sessionStorage.getItem("brandNameKor"));
 
@@ -35,7 +34,6 @@ function ConsultantRegister() {
     image_file: "",
     preview_URL: `${process.env.PUBLIC_URL}/img/default_img.png`,
   });
-
 
   // 이미지 파일 관련
   const handleChangeFile = (event) => {

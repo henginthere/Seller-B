@@ -1,10 +1,14 @@
-import api from './api';
+import api from "./api";
+import fileapi from './fileapi';
 
-// POST : 제품 등록
+// POST : 제품데이터 등록
 export const productRegisterApi = async (product, success, fail) => {
-    
-    console.log("in Register API : " + JSON.stringify(product));
     return await api.post("/product", product).then(success).catch(fail);
+}
+
+// POST : 제품 사진 등록
+export const productImgRegisterApi = async(productImg, success, fail) => {
+    return await fileapi.post("/file/product", productImg).then(success).catch(fail);
 }
 
 // GET : List : ProductList.js : 모든 제품군 '이름'을 가져옴
@@ -21,7 +25,6 @@ export const productGroupItemsApi = async (group_name, success, fail) =>{
 // GET : ProductDetail.js : 제품 상세 정보 조회
 export const productDetailApi = async(product_seq, success, fail) => {
     console.log("in productDetail API: " + product_seq)
-
     return await api.get(`/product/${product_seq}`).then(success).catch(fail);
 }
 
