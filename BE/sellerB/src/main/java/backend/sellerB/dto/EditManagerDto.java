@@ -12,6 +12,6 @@ public class EditManagerDto {
     private String managerPass;
     private String managerTel;
     private String managerEmail;
-//    private String managerImageUrl;
-    private MultipartFile managerImageFile;
+    private String managerImageUrl;
+//    private MultipartFile managerImageFile;
 }
