@@ -21,12 +21,12 @@ public class CustomerWaitingPageService {
     private final AwsS3Service awsS3Service;
     public CustomerWaitingPageDto create(RegisterCustomerWaitingPageDto registerCustomerWaitingPageDto) throws IOException {
 
-        String customerWaitingPageImage = awsS3Service.upload(registerCustomerWaitingPageDto.getCustomerWaitingPageImageFile(), "static");
+//        String customerWaitingPageImage = awsS3Service.upload(registerCustomerWaitingPageDto.getCustomerWaitingPageImageFile(), "static");
 
         CustomerWaitingPage customerWaitingPage = CustomerWaitingPage.builder()
                 .product(registerCustomerWaitingPageDto.getProduct())
                 .customerWaitingPageMent(registerCustomerWaitingPageDto.getCustomerWaitingPageMent())
-                .customerWaitingPageImage(customerWaitingPageImage)
+                .customerWaitingPageImage(registerCustomerWaitingPageDto.getCustomerWaitingPageImageUrl())
                 .build();
 
         return CustomerWaitingPageDto.from(customerWaitingPageRepository.save(customerWaitingPage));
@@ -43,10 +43,10 @@ public class CustomerWaitingPageService {
     public CustomerWaitingPageDto update(Long seq, RegisterCustomerWaitingPageDto registerCustomerWaitingPageDto) throws IOException {
         Optional<CustomerWaitingPage> customerWaitingPageOptional = customerWaitingPageRepository.findById(seq);
         CustomerWaitingPage customerWaitingPage = customerWaitingPageOptional.get();
-        String customerWaitingPageImage = awsS3Service.upload(registerCustomerWaitingPageDto.getCustomerWaitingPageImageFile(), "static");
+//        String customerWaitingPageImage = awsS3Service.upload(registerCustomerWaitingPageDto.getCustomerWaitingPageImageFile(), "static");
         customerWaitingPage.setProduct(registerCustomerWaitingPageDto.getProduct());
         customerWaitingPage.setCustomerWaitingPageMent(registerCustomerWaitingPageDto.getCustomerWaitingPageMent());
-        customerWaitingPage.setCustomerWaitingPageImage(customerWaitingPageImage);
+        customerWaitingPage.setCustomerWaitingPageImage(registerCustomerWaitingPageDto.getCustomerWaitingPageImageUrl());
         return CustomerWaitingPageDto.from(customerWaitingPage);
     }
 

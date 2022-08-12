@@ -1,44 +1,31 @@
 import React, { useState, useEffect } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 
-import Axios from "axios";
+import axios from "axios";
 import "./ProductRegister.css";
 import { Footer, NavBar } from "../../../components/index";
 import {
   productRegisterApi,
   productGroupListApi,
+  productImgRegisterApi,
 } from "../../../api/productApi";
-import axios from "axios";
 
 function ProductRegister() {
   const navigate = useNavigate();
-  const [imgBase64, setImgBase64] = useState([]); // 미리보기를 구현할 state
-  const [imgFile, setImgFile] = useState({
-    image_file: "",
-    preview_URL: `${process.env.PUBLIC_URL}/img/default_img.png`,
-  });
-
+  const [resImg, setResImg] = useState("");
   const [product, setProduct] = useState({
     productGroupName: "",
     productId: "",
     productName: "",
     productPrice: "",
-    productManual: "",
-    productThumbnail: "",
+    productManual: "준비중",
+    productThumbnail: resImg
   });
-
+  const [selectSeq, setSelectSeq] = useState([]);
   const [groupList, setGroupList] = useState([]);
-  const [selectGroup, setSelectGroup] = useState("");
-  const [groupSeq, setGroupSeq] = useState("");
-
-  // ManagerBrand
-  const [managerBrandKor, setManagerBrandKor] = useState(
+  const [managerBrand, setManagerBrand] = useState(
     sessionStorage.getItem("brandNameKor")
   );
-  const [managerBrandEng, setManagerBrandEng] = useState(
-    sessionStorage.getItem("brandNameEng")
-  );
-
   const {
     productGroupName,
     productId,
@@ -47,6 +34,12 @@ function ProductRegister() {
     productManual,
     productThumbnail,
   } = product;
+
+  const [imgBase64, setImgBase64] = useState([]); // 미리보기를 구현할 state
+  const [imgFile, setImgFile] = useState("");
+  const [previewUrl, setPreviewUrl] = useState(
+    `${process.env.PUBLIC_URL}/img/default_img.png`
+  );
 
   // 매니저가 속한 브랜드의 제품군 리스트 받아오기
   useEffect(() => {
@@ -61,61 +54,33 @@ function ProductRegister() {
 
   const onChange = (e) => {
     const { value, name } = e.target;
-    console.log("value:" + value);
-    console.log("name:" + name);
+
     setProduct({
       ...product,
       [name]: value,
     });
-
     console.log(productId);
   };
 
   const onGroupChange = (e) => {
     e.preventDefault();
-    console.log("e.target.value:" + e.target.value);
 
-    setSelectGroup(e.target.value);
-
-    // data(전체 그룹리스트)에서, 브랜드네임이랑 && 선택한 제품군에 일치하는 상담사만 뽑기
-    const item = groupList.filter(
-      (it) => it.brandName === managerBrandKor &&
-      it.productGroupName === e.target.value
+    const item = groupList.find(
+      (it) =>
+        it.brandName === managerBrand &&
+        it.productGroupName === e.target.value
     );
-    console.log("선택된 item : " + JSON.stringify(item));
-    console.log("선택된 grouSeq: " + item[0].productGroupSeq)
-    setGroupSeq(item[0].productGroupSeq);
-  }; 
 
-  // 서버에 파일 & 제품정보 전송 : FormData()
-  const onProductSubmitBtn = (e) => {
-    // e.preventDefault();
-    
-    const productInfo = {
-      productId : product.productId,
-      productName: product.productName,
-      productPrice : product.productPrice,
-      productManual: product.productManual,
-      productThumbnail: product.productThumbnail,
-      productGroupSeq: groupSeq
-    }
-    console.log("productInfo: " + JSON.stringify(productInfo));
-
-    productRegisterApi(productInfo)
-      .then((res) => {
-        console.log("onSubmitBtn:" + JSON.stringify(res.data));
-        console.log("success");
-
-        // navigate("/manager/productList")
-      })
-      .catch((err) => {
-        console.log(JSON.stringify(err.data));
-      });
+    setSelectSeq(item.productGroupSeq); 
   };
 
-  const handleChangeFile = (event) => {
+  // 이미지 파일을 업로드하면, 실행될 함수
+  const onHandleChangeFile = (event) => {
+    console.log(event.target.files);
     setImgFile(event.target.files);
+    // const file = event.target.files;
 
+    // 미리보기 state
     setImgBase64([]);
     for (var i = 0; i < event.target.files.length; i++) {
       if (event.target.files[i]) {
@@ -127,8 +92,8 @@ function ProductRegister() {
           const base64 = reader.result;
           console.log(base64);
           if (base64) {
+            // 변환해서 미리보기 이미지에 넣어주는 부분
             var base64Sub = base64.toString();
-
             setImgBase64((imgBase64) => [...imgBase64, base64Sub]);
           }
         };
@@ -141,9 +106,71 @@ function ProductRegister() {
       image_file: "",
       preview_URL: `${process.env.PUBLIC_URL}/img/default_img.png`,
     });
-
     setImgBase64("");
   };
+
+  const onRegisterBtn = () => {
+    console.log("in RegisterBtn API : " + resImg)
+
+    // 선택한 그룹군에 대해, productGroupSeq찾기 
+    console.log("제출 전 seq : " + selectSeq)
+
+    const Info = {
+      productGroupName : product.productGroupName,
+      productGroupSeq : selectSeq,
+      productId : product.productId,
+      productName: product.productName,
+      productPrice: 1234,
+      productManual: product.productManual,
+      productThumbnailUrl : resImg
+    };
+
+    console.log("등록 전 Product: " + JSON.stringify(Info))
+
+    productRegisterApi(Info)
+    .then((res)=>{
+      console.log(res.data);
+    })
+    .catch((err)=>{
+      console.log(err.data);
+    })
+  };
+
+  const onImgRegisterBtn = async() => {
+    const fd = new FormData(); 
+    // imgFile의 파일들을 읽어와서, file이라는 이름으로 저장하기 
+    // -> FormData에 file이라는 이름의 파일 배열이 들어감 
+    Object.values(imgFile).forEach((file) => fd.append("data", file));
+
+    // fd.append(
+    //   "comment",)
+    console.log("보낼 fd: " + fd);
+
+    await axios.post('https://i7d105.p.ssafy.io/api/file/post', fd, {
+      header: {
+        "Content-Type": `multipart/form-data`
+      }
+    })
+    .then((response) => {
+      if(response.data){
+        console.log(response.data)
+        setResImg(response.data);
+      }
+    })
+    .catch((error)=>{
+      console.log("Error");
+    })
+
+
+    // productImgRegisterApi(fd)
+    // .then((res)=>{
+    //   console.log("받은 URL: " + res.data);
+    // })
+    // .catch((err)=>{
+    //   console.log("Error")
+    // })
+  };
+  
 
   return (
     <>
@@ -151,8 +178,8 @@ function ProductRegister() {
       <h4 className="page-title">제품 등록</h4>
       <div className="mainContent-wrapper">
         <div className="left-img">
-          {imgFile.image_file === "" ? (
-            <img className="preview-img" alt="#" src={imgFile.preview_URL} />
+          {imgFile === "" ? (
+            <img className="preview-img" alt="#" src={previewUrl} />
           ) : null}
           {imgBase64.map((item) => {
             return (
@@ -168,7 +195,7 @@ function ProductRegister() {
             <input
               name="productId"
               onChange={onChange}
-              value={product.productId}
+              value={productId}
               variant="outlined"
             />
           </div>
@@ -177,7 +204,7 @@ function ProductRegister() {
             <input
               name="productName"
               onChange={onChange}
-              value={product.productName}
+              value={productName}
               variant="outlined"
             />
           </div>
@@ -186,7 +213,7 @@ function ProductRegister() {
             <input
               name="productPrice"
               onChange={onChange}
-              value={product.productPrice}
+              value={productPrice}
               variant="outlined"
             />
           </div>
@@ -194,12 +221,12 @@ function ProductRegister() {
             <p>제품군</p>
             <select
               onChange={onGroupChange}
-              value={product.productGroupName}
+              value={productGroupName}
               name="productGroupName"
             >
               <option value=""></option>
               {groupList.map((option) =>
-                option.brandName === managerBrandKor ? (
+                option.brandName === managerBrand ? (
                   <option>{option.productGroupName}</option>
                 ) : (
                   ""
@@ -213,15 +240,18 @@ function ProductRegister() {
       <div className="bottomContent-wrapper">
         <input
           className="img-btn"
+          multiple="multiple"
           type="file"
           accept="image/*"
           id="file"
-          onChange={handleChangeFile}
+          onChange={onHandleChangeFile}
         />
         {/* <button onClick={deleteImage}>이미지 삭제</button> */}
-        <button className="bottom-btn" onClick={() => onProductSubmitBtn()}>
+        {/* <button className="bottom-btn" onCanPlay={}>
           업로드하기
-        </button>
+        </button> */}
+        <button onClick={onImgRegisterBtn}>이미지등록하기</button>
+        <button onClick={onRegisterBtn }>제품 등록하기</button>
       </div>
       <Footer />
     </>
