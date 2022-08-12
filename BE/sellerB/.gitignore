@@ -6,6 +6,7 @@ build/
 !**/src/test/**/build/
 
 aws.yml
+sellerb-28f08-firebase-adminsdk-szd5u-ff507df489.json
 
 ### STS ###
 .apt_generated

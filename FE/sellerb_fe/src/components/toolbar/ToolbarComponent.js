@@ -80,7 +80,7 @@ export default class ToolbarComponent extends Component {
 
             {this.props.sessionId && (
               <div id='titleContent'>
-                <span id='session-title'>SellerB 회의 {mySessionId}</span>
+                <span id='session-title'>SellerB 회의</span>
               </div>
             )}
           </div>

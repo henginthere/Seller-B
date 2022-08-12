@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,8 @@ public class ResponseConsultingDto {
     private Consultant consultant;
     private Product product;
     private String consultingState;
+    private LocalDateTime consultingStartDate;
+    private LocalDateTime consultingEndDate;
 
     public static ResponseConsultingDto from(Consulting consulting) {
         if(consulting == null) return null;
@@ -29,6 +32,8 @@ public class ResponseConsultingDto {
                 .consultant(consulting.getConsultant())
                 .product(consulting.getProduct())
                 .consultingState(consulting.getConsultingState())
+                .consultingStartDate(consulting.getConsultingStartDate())
+                .consultingEndDate(consulting.getConsultingEndDate())
                 .build();
     }
 
@@ -42,6 +47,8 @@ public class ResponseConsultingDto {
                     .consultant(consultingList.get(i).getConsultant())
                     .product(consultingList.get(i).getProduct())
                     .consultingState(consultingList.get(i).getConsultingState())
+                    .consultingStartDate(consultingList.get(i).getConsultingStartDate())
+                    .consultingEndDate(consultingList.get(i).getConsultingEndDate())
                     .build();
             listResponseConsultingDto.add(responseConsultingDto);
             i++;
