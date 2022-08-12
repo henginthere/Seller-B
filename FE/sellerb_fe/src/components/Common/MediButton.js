@@ -34,16 +34,30 @@ const StyledButton = styled.button`
   border: 0px none;
   margin-right: 10px;
 
+  transition-duration: 600ms;
+  transition-timing-function: ease;
+  transition-property: transform;
+
+  &:hover {
+    transform: scale(1.1);
+    background-color: #CDD4E7;
+  }
+
+  &: focus {
+    transform: scale(1.1);
+  background-color: #CDD4E7;
+  }
+
 `;
 
-export const MediButton = ({disabled, label}) => {
+export const MediButton = ({disabled, size, label, onClick}) => {
 
 
   // 상단 사이즈 리스트에서 해당하는 것 가져옴
 //   const sizeStyle= SIZE[size];
 
   return ( 
-    <StyledButton disabled={disabled} >
+    <StyledButton disabled={disabled} sizeStyle={size} onClick={()=> onClick()}>
       {label}
     </StyledButton>
   );

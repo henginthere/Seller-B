@@ -11,6 +11,7 @@
   }
   .toolbar{
     padding: 0 !important;
+    width: 100%;
   }
   
   .headerLight{
@@ -35,8 +36,8 @@
   }
   
   #titleContent{
-    max-width: 200px;
-    background-color: #494949;
+    max-width: 300px;
+    background-color: gray;
     margin: 5px -18px;
     padding: 0px 15px;
     font-size: 16px;
@@ -54,7 +55,7 @@
   #header_img {
     max-width: 40px;
     max-height: 40px;
-    margin-right: 10px;
+    margin-right: 20px;
     margin-top: 10px;
   }
 

@@ -42,7 +42,6 @@ function ProductList() {
   }, []);
 
   const onGroupChange = (e) => {
-  
     e.preventDefault();
     setGroupOption(e.target.value)
     
@@ -80,6 +79,10 @@ function ProductList() {
   function GroupOptionList({props}) {
     console.log("items:" + props)
     return <ProdcutOption items={props} />;
+  }
+
+  const onChangeImage = () =>{
+
   }
 
   return (
