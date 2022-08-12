@@ -59,7 +59,7 @@ function ProdcutOption({ items }) {
                 onClick={() => navigate(`/manager/productDetail/${ele.productSeq}`)}>
                 <img
                   alt="#"
-                  src={`${process.env.PUBLIC_URL}/img/product_img.png`}
+                  src={ele.productThumbnail}
                 />
                 <div className="product-info">
                   <h5>품번 : </h5>
