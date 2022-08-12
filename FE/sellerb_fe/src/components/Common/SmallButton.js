@@ -38,6 +38,20 @@ const StyledButton = styled.button`
   border: 0px none;
   margin-right: 10px;
 
+  transition-duration: 600ms;
+  transition-timing-function: ease;
+  transition-property: transform;
+
+  &:hover {
+    transform: scale(1.1);
+    background-color: #CDD4E7;
+  }
+
+  &: focus {
+    transform: scale(1.1);
+  background-color: #CDD4E7;
+  }
+
 `;
 
 export const SmallButton = ({disabled, size, label, onClick}) => {
