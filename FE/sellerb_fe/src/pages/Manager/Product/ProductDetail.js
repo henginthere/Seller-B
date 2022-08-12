@@ -14,9 +14,10 @@ function ProductDetail() {
     productName: "",
     productPrice: "",
     // product_thumbnail : 서버에서 url로 받아옴
-    productThumbnail:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1T5-8wefzN-Nv1nUOwyhfYoh4js2cTgJpCw&usqp=CAU",
-    productGroup: "",
+    productThumbnailUrl:"",
+    productGroup: {
+      productGroupName:"",
+    }
   });
 
   /* 해당 seq에 맞는 Product 정보 먼저 가져오기 */
@@ -50,7 +51,7 @@ function ProductDetail() {
       <div className="mainContent-wrapper">
         <div className="left-img">
           {/* img 자리 */}
-          <img className="img-wrapper" alt="#" src={`${product.productThumbnail}`} />
+          <img className="img-wrapper" alt="#" src={product.productThumbnail} />
         </div>
 
 
@@ -85,7 +86,7 @@ function ProductDetail() {
           <div className="input-ele">
             <p>제품군</p>
             <input
-              name="productGroupName"
+              name="product_line"
               value={product.productGroupName}
               variant="outlined"
               readOnly={readOnly ? false : true}

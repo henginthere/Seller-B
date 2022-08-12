@@ -30,8 +30,8 @@ public class RegisterConsultantDto {
     private String consultantPass;
     private String consultantTel;
     private Long productGroupSeq;
-//    private String consultantImageUrl;
-    private MultipartFile consultantImageFile;
+    private String consultantImageUrl;
+//    private MultipartFile consultantImageFile;
 
 
     private Set<AuthorityDto> authorityDtoSet;
@@ -47,7 +47,7 @@ public class RegisterConsultantDto {
                 .consultantEmail(consultant.getConsultantEmail())
                 .consultantTel(consultant.getConsultantTel())
                 .productGroupSeq(consultant.getProductGroup().getProductGroupSeq())
-//                .consultantImageUrl(consultant.getConsultantImageUrl())
+                .consultantImageUrl(consultant.getConsultantImageUrl())
                 .build();
     }
 
@@ -61,7 +61,7 @@ public class RegisterConsultantDto {
                     .consultantName(consultantList.get(i).getConsultantName())
                     .consultantEmail(consultantList.get(i).getConsultantEmail())
                     .consultantTel(consultantList.get(i).getConsultantTel())
-//                    .consultantImageUrl(consultantList.get(i).getConsultantImageUrl())
+                    .consultantImageUrl(consultantList.get(i).getConsultantImageUrl())
                     .productGroupSeq(consultantList.get(i).getProductGroup().getProductGroupSeq())
                     .build();
             listConsultantDto.add(registerConsultantDto);
