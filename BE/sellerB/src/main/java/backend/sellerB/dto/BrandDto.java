@@ -17,13 +17,14 @@ public class BrandDto {
 
     private String brandNameKor;
     private String brandNameEng;
-    private MultipartFile brandLogoFile;
-
+//    private MultipartFile brandLogoFile;
+    private String brandLogoUrl;
     public static BrandDto from(Brand brand) {
         if(brand == null) return null;
         return BrandDto.builder()
                 .brandNameKor(brand.getBrandNameKor())
                 .brandNameEng(brand.getBrandNameEng())
+                .brandLogoUrl(brand.getBrandLogo())
                 .build();
     }
 
@@ -34,6 +35,7 @@ public class BrandDto {
             BrandDto brandDto = BrandDto.builder()
                     .brandNameKor(brandList.get(i).getBrandNameKor())
                     .brandNameEng(brandList.get(i).getBrandNameEng())
+                    .brandLogoUrl(brandList.get(i).getBrandLogo())
                     .build();
             listBrandDto.add(brandDto);
             i++;

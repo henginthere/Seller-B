@@ -33,7 +33,7 @@ public class ConsultantService {
     private final PasswordEncoder passwordEncoder;
     private final AuthorityRepository authorityRepository;
     private final ProductGroupRepository productGroupRepository;
-    private final AwsS3Service awsS3Service;
+//    private final AwsS3Service awsS3Service;
 
     @Transactional
     public ConsultantDto signup(RegisterConsultantDto registerConsultantDto) throws IOException {
@@ -50,7 +50,7 @@ public class ConsultantService {
         authorityRepository.save(authority);
 
         // 이미지 업로드
-        String consultantImageUrl = awsS3Service.upload(registerConsultantDto.getConsultantImageFile(), "static");
+//        String consultantImageUrl = awsS3Service.upload(registerConsultantDto.getConsultantImageFile(), "static");
 
         //dto를 엔티티로
         Consultant consultant = Consultant.builder()
@@ -60,7 +60,7 @@ public class ConsultantService {
                 .consultantPass(passwordEncoder.encode(registerConsultantDto.getConsultantPass()))
                 .consultantTel(registerConsultantDto.getConsultantTel())
                 .productGroup(productGroupRepository.findById(registerConsultantDto.getProductGroupSeq()).get())
-                .consultantImageUrl(consultantImageUrl)
+                .consultantImageUrl(registerConsultantDto.getConsultantImageUrl())
                 .authorities(Collections.singleton(authority))
                 .build();
 
@@ -105,7 +105,7 @@ public class ConsultantService {
         Optional<Consultant> consultantOptional = consultantRepository.findById(consultantSeq);
         Consultant consultant = consultantOptional.get();
 
-        String consultantImageUrl = awsS3Service.upload(editConsultantDto.getConsultantImageFile(), "static");
+//        String consultantImageUrl = awsS3Service.upload(editConsultantDto.getConsultantImageFile(), "static");
 
         String pass;
         if(editConsultantDto.getConsultantPass()==null || editConsultantDto.getConsultantPass()==""){
@@ -116,7 +116,7 @@ public class ConsultantService {
             consultant.setConsultantPass(passwordEncoder.encode(editConsultantDto.getConsultantPass()));
         }
         consultant.setConsultantEmail(editConsultantDto.getConsultantEmail());
-        consultant.setConsultantImageUrl(consultantImageUrl);
+        consultant.setConsultantImageUrl(editConsultantDto.getConsultantImageUrl());
         consultant.setConsultantTel(editConsultantDto.getConsultantTel());
         consultant.setProductGroup(editConsultantDto.getProductGroup());
 
