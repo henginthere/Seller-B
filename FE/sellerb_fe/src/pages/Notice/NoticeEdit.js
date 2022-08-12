@@ -21,41 +21,41 @@ function NoticeEdit() {
   });
 
   // 공지사항 내용 수정사항 반영
-  const onChange = (e)=>{
-    e.preventDefault(); 
+  const onChange = (e) => {
+    e.preventDefault();
 
-    const { value, name} = e.target;
+    const { value, name } = e.target;
 
     setNoticeData({
       ...noticeData,
-      [name] : value
-    })
-    console.log("noticeData:" + noticeData)
-  }
+      [name]: value,
+    });
+    console.log("noticeData:" + noticeData);
+  };
 
   // 수정사항 제출 버튼
-  const onEditSubmitBtn = ()=>{
+  const onEditSubmitBtn = () => {
     modifyNoticeApi(noticeData)
-    .then((res)=>{
-      console.log(res.data);
-      navigate("/manager/noticeList")
-    })
-    .catch((err)=>{
-      console.log(err.data)
-    })
-  }
+      .then((res) => {
+        console.log(res.data);
+        navigate("/manager/noticeList");
+      })
+      .catch((err) => {
+        console.log(err.data);
+      });
+  };
 
   // 삭제 버튼
-  const onDeleteSubmitBtn = ()=>{
+  const onDeleteSubmitBtn = () => {
     delNoticeApi(id)
-    .then((res)=>{
-      console.log(res.data);
-      navigate("/manager/noticeList")
-    })
-    .catch((err)=>{
-      console.log(err.data);
-    })
-  }
+      .then((res) => {
+        console.log(res.data);
+        navigate("/manager/noticeList");
+      })
+      .catch((err) => {
+        console.log(err.data);
+      });
+  };
 
   // 게시글의 상세정보 받아와서 setState
   useEffect(() => {
@@ -71,58 +71,59 @@ function NoticeEdit() {
 
   return (
     <>
-        <NavBar />
-        <div className="board-wrap">
-            <div className="detail-head">
-                <div className="notice-detail-title">공지사항</div>
-                <div className="notice-detail-subTitle">sellerB의 공지사항</div>
-            </div>
-
-            <div className="notice-detail-content-header">
-                <div className="content-header-row">
-                    <div className="row-left">제목</div>
-                    <input
-                      className="row-right"
-                      name="noticeTitle"
-                      onChange={onChange}
-                      defaultValue={noticeData.noticeTitle}
-                      />
-                </div>
-                <div className="content-header-row">
-                    <div className="row-left">작성일</div>
-                    <div className="row-right">{noticeData.noticeRegDate}</div>
-                </div>
-            
-            
-            <div className="notice-detail-content-detail">
-                <div>
-                    <pre>
-                    <input 
-                      className="row-right"
-                      name="noticeContent"
-                      defaultValue={noticeData.noticeContent}
-                      onChange={onChange}
-                    />
-                    </pre>
-                </div>
-            </div>
-            {/* content하단 */}
-            <div className="notice-detail-bottom">
-                <button className="detail-button"
-                  onClick={onEditSubmitBtn}>수정완료</button>
-                <button 
-                className="detail-button"
-                onClick={onDeleteSubmitBtn}
-                >삭제하기</button>
-            </div>
-     
-
-            </div>
+      <NavBar />
+      <div className='consultant-main-image-wrapper'>
+        <img
+          src={`${process.env.PUBLIC_URL}/img/consultantMainPageImage.jpg`}
+        />
+      </div>
+      <div className='board-wrap'>
+        <div className='detail-head'>
+          <div className='notice-detail-title'>공지사항</div>
+          <div className='notice-detail-subTitle'>sellerB의 공지사항</div>
         </div>
+
+        <div className='notice-detail-content-header'>
+          <div className='content-header-row'>
+            <div className='row-left'>제목</div>
+            <input
+              className='row-right'
+              name='noticeTitle'
+              onChange={onChange}
+              defaultValue={noticeData.noticeTitle}
+            />
+          </div>
+          <div className='content-header-row'>
+            <div className='row-left'>작성일</div>
+            <div className='row-right'>{noticeData.noticeRegDate}</div>
+          </div>
+
+          <div className='notice-detail-content-detail'>
+            <div>
+              <pre>
+                <input
+                  className='row-right'
+                  name='noticeContent'
+                  defaultValue={noticeData.noticeContent}
+                  onChange={onChange}
+                />
+              </pre>
+            </div>
+          </div>
+          {/* content하단 */}
+          <div className='notice-detail-bottom'>
+            <button className='detail-button' onClick={onEditSubmitBtn}>
+              수정완료
+            </button>
+            <button className='detail-button' onClick={onDeleteSubmitBtn}>
+              삭제하기
+            </button>
+          </div>
+        </div>
+      </div>
       <Footer />
-    
     </>
-  )
+  );
 }
 
-export default NoticeEdit
+export default NoticeEdit;

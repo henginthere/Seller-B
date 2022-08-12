@@ -12,6 +12,11 @@ function MeetingManCon() {
   return (
     <div style={wrapper}>
       <NavBar />
+      <div className='consultant-main-image-wrapper'>
+        <img
+          src={`${process.env.PUBLIC_URL}/img/consultantMainPageImage.jpg`}
+        />
+      </div>
       <div style={wrapper}>
         <Meeting />
       </div>
