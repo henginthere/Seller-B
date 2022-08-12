@@ -18,10 +18,10 @@ function ProductRegister() {
     productId: "",
     productName: "",
     productPrice: "",
-    productManual: "",
+    productManual: "준비중",
     productThumbnail: resImg
   });
-
+  const [selectSeq, setSelectSeq] = useState([]);
   const [groupList, setGroupList] = useState([]);
   const [managerBrand, setManagerBrand] = useState(
     sessionStorage.getItem("brandNameKor")
@@ -41,8 +41,6 @@ function ProductRegister() {
     `${process.env.PUBLIC_URL}/img/default_img.png`
   );
 
- 
-
   // 매니저가 속한 브랜드의 제품군 리스트 받아오기
   useEffect(() => {
     productGroupListApi()
@@ -56,8 +54,7 @@ function ProductRegister() {
 
   const onChange = (e) => {
     const { value, name } = e.target;
-    console.log("value:" + value);
-    console.log("name:" + name);
+
     setProduct({
       ...product,
       [name]: value,
@@ -65,28 +62,17 @@ function ProductRegister() {
     console.log(productId);
   };
 
-  // 서버에 파일 & 제품정보 전송 : FormData()
-  // const onProductSubmitBtn = (e) => {
-  //  const formData = new FormData(); // FormData객체 생성
+  const onGroupChange = (e) => {
+    e.preventDefault();
 
-  //   // Form객체에 파일값 추가 : append(key, value) or append(key, value, filename)
-  //   formData.append("file", e.target.files[0]);
-  //   setProduct({
-  //     ...product,
-  //     productThumbnail: formData,
-  //   });
+    const item = groupList.find(
+      (it) =>
+        it.brandName === managerBrand &&
+        it.productGroupName === e.target.value
+    );
 
-  //   console.log("보낼 product :" + JSON.stringify(product))
-
-  //   productRegisterApi(product)
-  //     .then((res) => {
-  //       console.log("onSubmitBtn:" + JSON.stringify(res.data));
-  //       console.log("success");
-  //     })
-  //     .catch((err) => {
-  //       console.log(JSON.stringify(err.data));
-  //     });
-  // };
+    setSelectSeq(item.productGroupSeq); 
+  };
 
   // 이미지 파일을 업로드하면, 실행될 함수
   const onHandleChangeFile = (event) => {
@@ -125,11 +111,16 @@ function ProductRegister() {
 
   const onRegisterBtn = () => {
     console.log("in RegisterBtn API : " + resImg)
+
+    // 선택한 그룹군에 대해, productGroupSeq찾기 
+    console.log("제출 전 seq : " + selectSeq)
+
     const Info = {
       productGroupName : product.productGroupName,
+      productGroupSeq : selectSeq,
       productId : product.productId,
       productName: product.productName,
-      productPrice: product.productPrice,
+      productPrice: 1234,
       productManual: product.productManual,
       productThumbnailUrl : resImg
     };
@@ -141,7 +132,7 @@ function ProductRegister() {
       console.log(res.data);
     })
     .catch((err)=>{
-      console.log("Error");
+      console.log(err.data);
     })
   };
 
@@ -155,7 +146,7 @@ function ProductRegister() {
     //   "comment",)
     console.log("보낼 fd: " + fd);
 
-    await axios.post('https://i7d105.p.ssafy.io/api/file', fd, {
+    await axios.post('https://i7d105.p.ssafy.io/api/file/post', fd, {
       header: {
         "Content-Type": `multipart/form-data`
       }
@@ -229,7 +220,7 @@ function ProductRegister() {
           <div className="input-ele">
             <p>제품군</p>
             <select
-              onChange={onChange}
+              onChange={onGroupChange}
               value={productGroupName}
               name="productGroupName"
             >
