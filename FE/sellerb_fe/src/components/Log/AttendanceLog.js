@@ -9,12 +9,10 @@ import {
 } from "../../api/consultantApi";
 import { getStringDate } from '../../utils/date'
 
-
 const styleObj_center = {
   textAlign: "center",
   margin: "50px",
 };
-
 
 //   function ConsultantLog (props) {
 //     if(logOption === '출결이력'){
@@ -25,7 +23,6 @@ const styleObj_center = {
 //         return <ConsultingLog consultant_id = {seq} />
 //     }
 //  }
-
 
 function AttendanceLog({consultant_id}) {
   console.log(consultant_id)
@@ -53,17 +50,6 @@ function AttendanceLog({consultant_id}) {
         )
         console.log("반환된 list : " + list);
         list = list.slice()
-        
-
-        // logData = {initData.map((ele)=>{
-        //   return (
-        //     <>
-            
-        //     </>
-        //   )
-        // })}
-
-        // setDate(getStringDate(logData));
 
       })
       .catch((err) => {
