@@ -7,9 +7,11 @@ import Button from "@mui/material/Button";
 import "./ConsultantRegister.css";
 import { registerConsultantApi } from "../../../api/consultantApi";
 import { productGroupListApi } from "../../../api/productApi";
+import axios from "axios";
 
 function ConsultantRegister() {
   const navigate = useNavigate();
+  const [resImg, setResImg] = useState("");
   const [groupList, setGroupList] = useState([]);
   
   const [seqTest, setSeqTest] = useState([]);
@@ -30,13 +32,33 @@ function ConsultantRegister() {
   const { consultantId, consultantName, consultantEmail, consultantPass, consultantTel, productGroupSeq, consultantImageUrl } = consultant;
 
   const [imgBase64, setImgBase64] = useState([]); // 미리보기를 구현할 state
-  const [imgFile, setImgFile] = useState({
-    image_file: "",
-    preview_URL: `${process.env.PUBLIC_URL}/img/default_img.png`,
-  });
+  const [imgFile, setImgFile] = useState("");
+  const [previewUrl, setPreviewUrl] = useState(
+    `${process.env.PUBLIC_URL}/img/default_img.png`
+  );
+
+  // 매니저가 속한 브랜드의 제품군 리스트 받아오기
+  useEffect(() => {
+    productGroupListApi()
+      .then((res) => {
+        setGroupList(res.data); // groupList
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const onChange = (e) => {
+    e.preventDefault();
+    const { value, name } = e.target;
+    setConsultant({
+      ...consultant,
+      [name]: value,
+    });
+  };
 
   // 이미지 파일 관련
-  const handleChangeFile = (event) => {
+  const onHandleChangeFile = (event) => {
     console.log(event.target.files);
     setImgFile(event.target.files);
 
@@ -52,7 +74,6 @@ function ConsultantRegister() {
           console.log(base64);
           if (base64) {
             var base64Sub = base64.toString();
-
             setImgBase64((imgBase64) => [...imgBase64, base64Sub]);
           }
         };
@@ -66,36 +87,11 @@ function ConsultantRegister() {
       image_file: "",
       preview_URL: `${process.env.PUBLIC_URL}/img/default_img.png`,
     });
-
     setImgBase64("");
   };
 
-  // 서버에 파일 & 제품정보 전송 : FormData()
-  const onProductSubmitBtn = async (e) => {
-    const formData = new FormData(); // FormData객체 생성
-
-    // Form객체에 파일값 추가 : append(key, value) or append(key, value, filename)
-    formData.append("file", e.target.files[0]);
-
-    // 제품 정보
-    setConsultant({
-      ...consultant,
-      formData: formData,
-    });
-  };
-
-  useEffect(() => {
-    productGroupListApi()
-      .then((res) => {
-        setGroupList(res.data); // groupList
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
+  // 컨설턴트 등록버튼
   const onRegisterBtn = (e) => {
-
     // productGroupName에 맞는 Seq찾기
     const info = {
       consultantId: consultant.consultantId,
@@ -104,8 +100,10 @@ function ConsultantRegister() {
       consultantPass : consultant.consultantPass,
       consultantTel : consultant.consultantTel,
       productGroupSeq :seqTest,
-      consultantImageUrl:""
+      consultantImageUrl:resImg
     }
+
+    console.log("제출전@ 컨설턴트 정보 : " + JSON.stringify(info))
 
     registerConsultantApi(info)
       .then((res) => {
@@ -117,15 +115,29 @@ function ConsultantRegister() {
       });
   };
 
-  const onChange = (e) => {
-    e.preventDefault();
+ 
+  const onImgRegisterBtn = async() => {
+    const fd = new FormData(); 
 
-    const { value, name } = e.target;
-    setConsultant({
-      ...consultant,
-      [name]: value,
-    });
-  };
+    Object.values(imgFile).forEach((file) => fd.append("data", file))
+
+    await axios.post('https://i7d105.p.ssafy.io/api/file/consultant', fd, {
+      header: {
+        "Content-Type": `multipart/form-data`
+      }
+    })
+    .then((response) => {
+      if(response.data){
+        console.log(response.data)
+        setResImg(response.data);
+      }
+    })
+    .catch((error)=>{
+      console.log("Error");
+    })
+  }
+
+
 
   const onGroupChange = (e) => {
     e.preventDefault();
@@ -147,7 +159,7 @@ function ConsultantRegister() {
         <div id="left">
           <div className="imageWrapper">
             {imgFile.image_file === "" ? (
-              <img className="preview-img" alt="#" src={imgFile.preview_URL} />
+              <img className="preview-img" alt="#" src={consultant.consultantImageUrl} />
             ) : null}
 
             {imgBase64.map((item) => {
@@ -164,15 +176,15 @@ function ConsultantRegister() {
             type="file"
             accept="image/*"
             id="file"
-            onChange={handleChangeFile}
+            onChange={onHandleChangeFile}
           />
 
-          <button className="bottom-btn" onClick={onProductSubmitBtn}>
-            업로드하기
+          <button className="bottom-btn" onClick={onImgRegisterBtn}>
+            이미지 등록
           </button>
         </div>
         <div id="right">
-          <div className="topText">
+          <div className="topText" onClick={onRegisterBtn }>
             <h2>상담사 등록</h2>
           </div>
           <form className="InfoWrapper">
