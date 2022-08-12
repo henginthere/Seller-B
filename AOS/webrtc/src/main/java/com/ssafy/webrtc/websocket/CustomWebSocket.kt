@@ -5,30 +5,27 @@ import android.os.Build
 import android.os.Handler
 import android.util.Log
 import android.util.Pair
-import androidx.appcompat.app.AppCompatActivity
-import kotlin.Throws
-import org.json.JSONObject
-import com.ssafy.webrtc.constants.JsonConstants
-import org.json.JSONException
-import org.webrtc.PeerConnection
-import org.webrtc.MediaConstraints
-import org.webrtc.SessionDescription
-import com.ssafy.webrtc.observers.CustomSdpObserver
-import com.ssafy.webrtc.openvidu.RemoteParticipant
-import org.webrtc.IceCandidate
-import kotlin.jvm.Synchronized
-import org.json.JSONArray
-import org.webrtc.PeerConnection.SignalingState
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.neovisionaries.ws.client.*
-import com.ssafy.webrtc.constants.JsonConstants.REMOTE_TEXT_VIEW
-import com.ssafy.webrtc.constants.JsonConstants.REMOTE_VIDEO_VIEW
+import com.ssafy.webrtc.constants.JsonConstants
+import com.ssafy.webrtc.constants.JsonConstants.*
+import com.ssafy.webrtc.observers.CustomSdpObserver
 import com.ssafy.webrtc.openvidu.LocalParticipant
 import com.ssafy.webrtc.openvidu.Participant
+import com.ssafy.webrtc.openvidu.RemoteParticipant
 import com.ssafy.webrtc.openvidu.Session
 import com.ssafy.webrtc.utils.createRemoteParticipantVideo
+import com.ssafy.webrtc.utils.createRemoteParticipantVideo2
+import com.ssafy.webrtc.utils.resizeView
+import org.json.JSONException
+import org.json.JSONObject
+import org.webrtc.IceCandidate
+import org.webrtc.MediaConstraints
+import org.webrtc.PeerConnection
+import org.webrtc.PeerConnection.SignalingState
+import org.webrtc.SessionDescription
 import java.io.IOException
-import java.lang.Exception
 import java.net.MalformedURLException
 import java.net.URL
 import java.security.KeyManagementException
@@ -80,6 +77,7 @@ class CustomWebSocket(session: Session, openviduUrl: String, activity: AppCompat
     private var activity = activity
     private lateinit var websocket: WebSocket
     private var websocketCancelled = false
+    private var first = true
 
     @Throws(Exception::class)
     override fun onTextMessage(websocket: WebSocket, text: String) {
@@ -359,12 +357,19 @@ class CustomWebSocket(session: Session, openviduUrl: String, activity: AppCompat
 
     @Throws(JSONException::class)
     private fun participantLeftEvent(params: JSONObject) {
+
         val remoteParticipant: RemoteParticipant =
             session!!.removeRemoteParticipant(params.getString("connectionId"))!!
+
+        activity?.resizeView(false, REMOTE_CONTAINER_VIEW)
         remoteParticipant.dispose()
-        val mainHandler: Handler = Handler(activity!!.getMainLooper())
-        //        Runnable myRunnable = () -> session.removeView(remoteParticipant.getView());
-//        mainHandler.post(myRunnable);
+        val mainHandler: Handler = Handler(activity!!.mainLooper)
+        val myRunnable = Runnable {
+            if(remoteParticipant.getView() != null){
+                session?.removeView(remoteParticipant.getView()!!)
+            }
+        }
+        mainHandler.post(myRunnable)
     }
 
     @Throws(JSONException::class)
@@ -383,8 +388,17 @@ class CustomWebSocket(session: Session, openviduUrl: String, activity: AppCompat
                 participantName = jsonStringified
             }
         }
+
         val remoteParticipant = RemoteParticipant(connectionId, participantName!!, session!!)
-        activity!!.createRemoteParticipantVideo(remoteParticipant,REMOTE_VIDEO_VIEW, REMOTE_TEXT_VIEW)
+
+        if(first){
+            activity!!.createRemoteParticipantVideo(remoteParticipant,REMOTE_VIDEO_VIEW, REMOTE_CONTAINER_VIEW)
+            activity!!.resizeView(false, REMOTE_CONTAINER_VIEW)
+            first = false
+        }else{
+            activity!!.createRemoteParticipantVideo2(remoteParticipant, CONTAINER_VIEW, PEER_LAYOUT)
+            activity!!.resizeView(true, REMOTE_CONTAINER_VIEW)
+        }
         session!!.createRemotePeerConnection(remoteParticipant.getConnectionId())
         return remoteParticipant
     }

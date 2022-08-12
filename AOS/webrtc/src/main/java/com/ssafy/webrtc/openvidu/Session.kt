@@ -4,6 +4,7 @@ import android.os.AsyncTask
 import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.ssafy.webrtc.observers.CustomPeerConnectionObserver
 import com.ssafy.webrtc.observers.CustomSdpObserver
@@ -16,7 +17,8 @@ import org.webrtc.RtpTransceiver.RtpTransceiverInit
 class Session(
     private val id: String,
     private val token: String,
-    private var activity: AppCompatActivity?
+    private var activity: AppCompatActivity?,
+    private var viewContainer: RelativeLayout?
 ) {
 
     private var peerConnectionFactory: PeerConnectionFactory?
@@ -225,6 +227,8 @@ class Session(
         return remoteParticipants[id]
     }
 
+    fun getRemoteNum() : Int = remoteParticipants.size
+
     fun getPeerConnectionFactory(): PeerConnectionFactory? {
         return peerConnectionFactory
     }
@@ -251,7 +255,11 @@ class Session(
                 if (remoteParticipant.getPeerConnection() != null) {
                     remoteParticipant.getPeerConnection().close()
                 }
+                if(remoteParticipant.getView() != null){
+                    viewContainer?.removeView(remoteParticipant.getView())
+                }
             }
+            viewContainer = null
         }
         AsyncTask.execute {
             if (peerConnectionFactory != null) {
@@ -266,4 +274,7 @@ class Session(
         this.websocket = websocket
     }
 
+    fun removeView(view: View){
+        this.viewContainer?.removeView(view)
+    }
 }

@@ -7,14 +7,16 @@ import com.ssafy.sellerb.data.repository.UserRepository
 import com.ssafy.sellerb.ui.base.BaseViewModel
 import com.ssafy.sellerb.util.CoroutineDispatchers
 import com.ssafy.sellerb.util.Event
+import com.ssafy.sellerb.util.network.NetworkHelper
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
 class SignupViewModel(
     coroutineDispatchers: CoroutineDispatchers,
+    networkHelper: NetworkHelper,
     private val userRepository: UserRepository
-) : BaseViewModel(coroutineDispatchers){
+) : BaseViewModel(coroutineDispatchers, networkHelper){
 
     override fun onCreate() {}
 

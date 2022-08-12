@@ -53,5 +53,7 @@ public final class JsonConstants {
     // Remote Video View Res
     public static final String REMOTE_VIDEO_VIEW = "remote_gl_surface_view";
     public static final String REMOTE_TEXT_VIEW = "remote_participant";
-
+    public static final String PEER_LAYOUT = "peer_video";
+    public static final String REMOTE_CONTAINER_VIEW = "peer_container_remote";
+    public static final String CONTAINER_VIEW = "views_container";
 }
