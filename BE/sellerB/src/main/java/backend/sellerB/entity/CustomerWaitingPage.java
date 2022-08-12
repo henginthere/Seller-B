@@ -42,27 +42,27 @@ public class CustomerWaitingPage {
     private String customerWaitingPageImage;
 
     @Basic
-    @Column(name = "manager_del_yn",columnDefinition = "boolean default false")
+    @Column(name = "customer_waiting_page_del_yn",columnDefinition = "boolean default false")
     private Boolean customerWaitingPageDelYn;
 
     @CreatedBy
     @Basic
-    @Column(name = "manager_reg_user")
+    @Column(name = "customer_waiting_page_reg_user")
     private String customerWaitingPageRegUser;
 
     @CreatedDate
     @Basic
-    @Column(name = "manager_reg_date")
+    @Column(name = "customer_waiting_page_reg_date")
     private LocalDateTime customerWaitingPageRegDate;
 
     @LastModifiedBy
     @Basic
-    @Column(name = "manager_mod_user")
+    @Column(name = "customer_waiting_page_mod_user")
     private String customerWaitingPageModUser;
 
     @LastModifiedDate
     @Basic
-    @Column(name = "manager_mod_date")
+    @Column(name = "customer_waiting_page_mod_date")
     private LocalDateTime customerWaitingPageModDate;
 
 
