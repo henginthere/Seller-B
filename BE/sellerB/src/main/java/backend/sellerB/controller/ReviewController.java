@@ -30,14 +30,14 @@ public class ReviewController {
         return ResponseEntity.ok(reviewService.getReviewDetail(seq));
     }
 
-    //상담사 아이디로 후기 내역 찾기
-    @GetMapping("/list/{consultant-id}")
-    public ResponseEntity<List<ReviewDto>> getReviewListByConsultantId(HttpServletRequest request, @PathVariable String consultantId) {
-        return ResponseEntity.ok(reviewService.getReviewListByConsultantId(consultantId));
+    //상담사별 후기 내역 리스트 조회
+    @GetMapping("/list/consultant/{consultantSeq}")
+    public ResponseEntity<List<ReviewDto>> getReviewListByConsultantSeq(HttpServletRequest request, @PathVariable Long consultantSeq) {
+        return ResponseEntity.ok(reviewService.getReviewListByConsultantSeq(consultantSeq));
     }
 
     // 고객 seq로 후기 내역 찾기
-    @GetMapping("/list/{customer-seq}")
+    @GetMapping("/list/customer/{customerSeq}")
     public ResponseEntity<List<ReviewDto>> getReviewListByCustomerSeq(HttpServletRequest request, @PathVariable Long customerSeq) {
         return ResponseEntity.ok(reviewService.getReviewListByCustomerSeq(customerSeq));
     }

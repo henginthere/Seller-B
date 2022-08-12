@@ -6,9 +6,11 @@ import backend.sellerB.repository.ConsultantRepository;
 import backend.sellerB.repository.ConsultingRepository;
 import backend.sellerB.repository.CustomerRepository;
 import backend.sellerB.repository.ProductRepository;
+import backend.sellerB.util.FcmUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.firebase.messaging.FirebaseMessagingException;
 import lombok.RequiredArgsConstructor;
 import lombok.Value;
 import org.springframework.http.HttpEntity;
@@ -31,6 +33,7 @@ public class ConsultingService {
     private final CustomerRepository customerRepository;
     private final ProductRepository productRepository;
     private final ConsultantRepository consultantRepository;
+//    private final FCMService fcmService;
 
     // openvidu session create rest api 요청
     public OpenviduSessionDto requestToOpenviduCreate(String customerId) throws JsonProcessingException {
@@ -81,7 +84,7 @@ public class ConsultingService {
         return response;
     }
 
-    public RegisterConsultingDto createConsulting(RegisterConsultingDto registerConsultingDto) throws JsonProcessingException {
+    public RegisterConsultingDto createConsulting(RegisterConsultingDto registerConsultingDto) throws JsonProcessingException, FirebaseMessagingException {
         Optional<Customer> customerOptional = customerRepository.findBycustomerId(registerConsultingDto.getCustomerId());
         Customer customer = customerOptional.get();
         Optional<Product> productOptional = productRepository.findById(registerConsultingDto.getProductSeq());
@@ -95,9 +98,10 @@ public class ConsultingService {
                 .consultingState(registerConsultingDto.getConsultingState())
                 .build();
         // openvidu session 만들기
-        OpenviduSessionDto openviduSessionDto = requestToOpenviduCreate(customer.getCustomerId());
+//        OpenviduSessionDto openviduSessionDto = requestToOpenviduCreate(customer.getCustomerId());
 
         // fcm 메세지 보내기
+        FcmUtil.send_FCM(customer.getCustomerToken(), "상담 시작 알림", "신청하신 상담이 시작되었습니다");
 
         return RegisterConsultingDto.from(consultingRepository.save(consulting));
     }
@@ -144,7 +148,7 @@ public class ConsultingService {
 //        consulting.setConsultingState(editConsultingStateDto.getConsultingState());
 
         // openvidu session delete
-        HttpEntity<String> response = requestToOpenviduDelete(consulting.getCustomer().getCustomerId());
+//        HttpEntity<String> response = requestToOpenviduDelete(consulting.getCustomer().getCustomerId());
 
         // fcm으로 고객에게 종료 알림?
 
