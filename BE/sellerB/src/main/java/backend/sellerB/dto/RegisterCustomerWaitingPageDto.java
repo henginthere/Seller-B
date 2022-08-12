@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Builder
 @AllArgsConstructor
 public class RegisterCustomerWaitingPageDto {
-    private Product product;
+    private Long productSeq;
     private String customerWaitingPageMent;
 //    private MultipartFile customerWaitingPageImageFile;
     private String customerWaitingPageImageUrl;
