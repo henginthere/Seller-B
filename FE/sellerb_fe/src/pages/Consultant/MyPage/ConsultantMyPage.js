@@ -12,7 +12,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import "./ConsultantMyPage.css"
+import "./ConsultantMyPage.css";
 
 import AttendanceLog from "../../../components/Log/AttendanceLog";
 import ConsultingLog from "../../../components/Log/ConsultingLog";
@@ -26,7 +26,6 @@ function ConsultantMyPage() {
 
   const navigate = useNavigate();
   const [logOption, setLogOption] = useState("출결이력");
-
 
   const [consultant, setConsultant] = useState([]);
   const [isModify, setModify] = useState(false);
@@ -48,22 +47,20 @@ function ConsultantMyPage() {
       });
   }, []);
 
-  const onHandleLogOption = (event)=>{
+  const onHandleLogOption = (event) => {
     setLogOption(event.currentTarget.value);
 
     console.log(logOption);
+  };
+
+  function ConsultantLog(props) {
+    if (logOption === "출결이력") {
+      // console.log(params.consultants
+      return <AttendanceLog consultant_id={seq} />;
+    } else {
+      return <ConsultingLog consultant_id={consultant.consultantId} />;
+    }
   }
-
-  function ConsultantLog (props) {
-    if(logOption === '출결이력'){
-        // console.log(params.consultants
-        return <AttendanceLog consultant_id = {seq} />
-    }
-    else{
-        return <ConsultingLog consultant_id = {seq} />
-    }
- }
-
 
   // 이미지 파일 관련
   const handleChangeFile = (event) => {
@@ -125,65 +122,67 @@ function ConsultantMyPage() {
   const Main = () => {
     return (
       <>
-        <div className="con-mypage-wrapper">
-          <div className="con-mypage-left-wrapper">
+        <div className='con-mypage-wrapper'>
+          <div className='con-mypage-left-wrapper'>
             {imgFile.image_file === "" ? (
-              <img 
-              className="con-mypage-default-img"  
-              alt="#" src={imgFile.preview_URL} />
+              <img
+                className='con-mypage-default-img'
+                alt='#'
+                src={imgFile.preview_URL}
+              />
             ) : null}
             {imgBase64.map((item) => {
               return (
                 <div>
-                  <img src={item} alt="First Slide" />
+                  <img src={item} alt='First Slide' />
                 </div>
               );
             })}
           </div>
 
-          <div className="InfoTextField">
+          <div className='InfoTextField'>
             <TextField
-              id="outlined-read-only-input"
-              label="사번"
+              id='outlined-read-only-input'
+              label='사번'
               defaultValue={consultant.consultantId}
               fullWidth={true}
               InputProps={{ readOnly: true }}
             />
           </div>
-          <div className="InfoTextField">
+          <div className='InfoTextField'>
             <TextField
-              label="사원명"
+              label='사원명'
               defaultValue={consultant.consultantName}
               fullWidth={true}
               InputProps={{ readOnly: true }}
             />
           </div>
-          <div className="InfoTextField">
+          <div className='InfoTextField'>
             <TextField
-              label="사원 Email"
+              label='사원 Email'
               defaultValue={consultant.consultantEmail}
               fullWidth={true}
               InputProps={{ readOnly: true }}
             />
           </div>
-          <div className="InfoTextField">
+          <div className='InfoTextField'>
             <TextField
-              label="PW"
-              defaultValue=""
+              label='PW'
+              defaultValue=''
               fullWidth={true}
               InputProps={{ readOnly: true }}
             />
           </div>
-          <div className="InfoTextField">
+          <div className='InfoTextField'>
             <TextField
-              label="제품군"
+              label='제품군'
               defaultValue={consultant.productGroupName}
               fullWidth={true}
               InputProps={{ readOnly: true }}
             />
           </div>
-          <div className="Button">
-            <Button variant="contained" size="large" onClick={ChangeToModify}>
+          <div className='Button'>
+            <Button variant='contained' size='large' onClick={ChangeToModify}>
               수정
             </Button>
           </div>
@@ -196,59 +195,59 @@ function ConsultantMyPage() {
     return (
       <>
         <form onSubmit={handleSubmit}>
-          <div className="InfoTextField">
+          <div className='InfoTextField'>
             <TextField
-              id="outlined-read-only-input"
-              label="사번"
+              id='outlined-read-only-input'
+              label='사번'
               defaultValue={consultant.consultantId}
               fullWidth={true}
               InputProps={{ readOnly: true }}
-              disabled="true"
-              variant="filled"
+              disabled='true'
+              variant='filled'
             />
           </div>
-          <div className="InfoTextField">
+          <div className='InfoTextField'>
             <TextField
-              label="사원명"
+              label='사원명'
               defaultValue={consultant.consultantName}
               fullWidth={true}
               InputProps={{ readOnly: true }}
-              disabled="true"
-              variant="filled"
+              disabled='true'
+              variant='filled'
             />
           </div>
-          <div className="InfoTextField">
+          <div className='InfoTextField'>
             <TextField
-              label="사원 Email"
+              label='사원 Email'
               defaultValue={consultant.consultantEmail}
               fullWidth={true}
               onChange={handleChange}
             />
           </div>
-          <div className="InfoTextField">
+          <div className='InfoTextField'>
             <TextField
-              label="PW"
-              defaultValue=""
+              label='PW'
+              defaultValue=''
               fullWidth={true}
               onChange={handleChange}
             />
           </div>
-          <div className="InfoTextField">
+          <div className='InfoTextField'>
             <TextField
-              label="제품군"
+              label='제품군'
               defaultValue={consultant.productGroup}
               fullWidth={true}
               onChange={handleChange}
             />
           </div>
-          <div className="Button">
-            <Button variant="contained" size="large" type="submit">
+          <div className='Button'>
+            <Button variant='contained' size='large' type='submit'>
               수정 완료
             </Button>
             <Button
-              variant="contained"
-              color="error"
-              size="large"
+              variant='contained'
+              color='error'
+              size='large'
               onClick={cancelModify}
             >
               취소
@@ -261,36 +260,33 @@ function ConsultantMyPage() {
   return (
     <>
       <NavBar />
-      <div className="wrapper">
+      <div className='wrapper'>
         {/* 왼쪽 */}
-        <div id="left">
-          <div className="topText">
+        <div id='left'>
+          <div className='topText'>
             <h2>My Page</h2>
           </div>
           {/* 상담사 이미지 */}
-      
+
           {/* 상담사 Info */}
           <div>
             <div>{isModify ? <Modify /> : <Main />}</div>
           </div>
         </div>
         {/* 오른쪽 */}
-        <div id="right">
-
-            {/* 상담 이력 LIST */}
-            <div className="profile-right">
-          <div className="select-wrapper">
-            <select onChange={onHandleLogOption} value={logOption}>
-              <option >출결이력</option>
-              <option>상담이력</option>
-            </select>
+        <div id='right'>
+          {/* 상담 이력 LIST */}
+          <div className='profile-right'>
+            <div className='select-wrapper'>
+              <select onChange={onHandleLogOption} value={logOption}>
+                <option>출결이력</option>
+                <option>상담이력</option>
+              </select>
+            </div>
+            <div>
+              <ConsultantLog consultant_id={seq} />
+            </div>
           </div>
-          <div className="attendance-log">
-            <ConsultantLog consultant_id = {seq} />
-          </div>
-        </div>
-
-
         </div>
       </div>
       <Footer />

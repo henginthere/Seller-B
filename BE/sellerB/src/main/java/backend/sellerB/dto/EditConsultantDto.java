@@ -13,6 +13,6 @@ public class EditConsultantDto {
     private String consultantEmail;
     private String consultantTel;
     private ProductGroup productGroup;
-//    private String consultantImageUrl;
-    private MultipartFile consultantImageFile;
+    private String consultantImageUrl;
+//    private MultipartFile consultantImageFile;
 }

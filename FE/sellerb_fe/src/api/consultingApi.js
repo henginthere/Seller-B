@@ -22,3 +22,24 @@ export const waitingCostomerListApi = async (
     .then(success)
     .catch(fail);
 };
+
+// 상담 시작시 상담 정보 올림
+export const startConsultingApi = async (consultingData, success, fail) => {
+  return await api
+    .post(`/consulting`, consultingData)
+    .then(success)
+    .catch(fail);
+};
+
+// 상담 종료시 state -> end로 변경
+export const endConsultingApi = async (
+  consultingSeq,
+  consultingStatus,
+  success,
+  fail,
+) => {
+  return await api
+    .put(`/consulting/state/${consultingSeq}`, consultingStatus)
+    .then(success)
+    .catch(fail);
+};
