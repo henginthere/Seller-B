@@ -3,6 +3,7 @@ import fileapi from './fileapi';
 
 // POST : 제품데이터 등록
 export const productRegisterApi = async (product, success, fail) => {
+    console.log("in productRegisterAPI : " + JSON.stringify(product))
     return await api.post("/product", product).then(success).catch(fail);
 }
 
