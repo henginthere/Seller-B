@@ -17,9 +17,11 @@ function ConsultantModify() {
     consultantId: "",
     consultantName: "",
     consultantEmail:"",
-    consultantPass:"",
     consultantTel :"",
-    productGroupSeq:""
+    productGroupName: "",
+    productGroupSeq: "",
+    consultantImageUrl: "",
+    brandName: ""
   });
 
   const product_list = [
@@ -36,8 +38,8 @@ function ConsultantModify() {
         console.log("res.data:" + res.data.consultantId);
         
         // consultant = res.data;
-        
         setConsultant(res.data); 
+        console.log("img: "+ res.data.consultantImageUrl)
         console.log("consultant:" + consultant.consultantId);
     })
     .catch((err)=>{
@@ -53,8 +55,8 @@ function ConsultantModify() {
       "consultantId" : consultant.consultantId,
       "consultantName": consultant.consultantId,
       "consultantEmail": consultant.consultantEmail,
-      "consultantPass": consultant.consultantPass,
       "consultantTel": consultant.consultantTel,
+      "consultantPass": consultant.consultantPass,
       "productGroupSeq": "",
       "consultantImageUrl": ""
     }
@@ -91,7 +93,7 @@ function ConsultantModify() {
         <div id='left'>
           <div className='imageWrapper'>
             <img
-              src={`${process.env.PUBLIC_URL}/img/ManagerImage.png`}
+              src={consultant.consultantImageUrl}
               alt='NOIMAGE'
             ></img>
           </div>
@@ -159,6 +161,7 @@ function ConsultantModify() {
                 select
                 fullWidth='true'
                 name='productGroupSeq'
+                value={consultant.productGroupName}
                 selected={consultant.productGroupName}
                 // defaultValue={consultant.productGroupName}
                 SelectProps={{
