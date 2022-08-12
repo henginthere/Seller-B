@@ -5,6 +5,7 @@ import { listNoticeApi, searchNoticeApi } from "../../api/noticeApi";
 import "./NoticeList.css";
 import { Footer, NavBar } from "../../components/index";
 import { SmallButton } from "../../components/Common/SmallButton";
+import { MediButton } from "../../components/Common/MediButton";
 import { PaginationBox } from "../../components/Common/PaginationBox";
 import Pagination from "react-js-pagination";
 
@@ -68,6 +69,8 @@ function NoticeList() {
       });
   }, []);
 
+
+
   return (
     <>
       <NavBar />
@@ -130,12 +133,7 @@ function NoticeList() {
                 onChange={handlePageChange}
               ></Pagination>
             </PaginationBox>
-              <button
-                className="detail-button"
-                onClick={(e) => navigate("/manager/noticeWrite")}
-              >
-                글 작성하기
-              </button>
+              <SmallButton onClick={goWriteBtn} size="sm" label="글작성하기" />
             </div>
 
             {/* {isManager ? (
