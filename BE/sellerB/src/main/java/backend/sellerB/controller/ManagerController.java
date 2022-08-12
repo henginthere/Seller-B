@@ -25,7 +25,7 @@ public class ManagerController {
 
 
     @PostMapping("/register")
-    public ResponseEntity<ManagerDto> registerManager(@Valid @ModelAttribute RegisterManagerDto registerManagerDto) throws IOException {
+    public ResponseEntity<ManagerDto> registerManager(@Valid @RequestBody RegisterManagerDto registerManagerDto) throws IOException {
         return ResponseEntity.ok(managerService.signup(registerManagerDto));
     }
 
@@ -35,7 +35,7 @@ public class ManagerController {
     }
 
     @PutMapping("/{managerSeq}")
-    public ResponseEntity<ManagerDto> updateManagerInfo(@Valid @ModelAttribute EditManagerDto editManagerDto, @PathVariable Long managerSeq) throws IOException {
+    public ResponseEntity<ManagerDto> updateManagerInfo(@Valid @RequestBody EditManagerDto editManagerDto, @PathVariable Long managerSeq) throws IOException {
         return ResponseEntity.ok(managerService.update(editManagerDto, managerSeq));
     }
 

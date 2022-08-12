@@ -21,7 +21,7 @@ public class BrandController {
     }
 
     @PostMapping
-    public ResponseEntity<ResponseBrandDto> saveBrand(@Valid @ModelAttribute BrandDto brandDto) throws IOException {
+    public ResponseEntity<ResponseBrandDto> saveBrand(@Valid @RequestBody BrandDto brandDto) throws IOException {
         return ResponseEntity.ok(brandService.create(brandDto));
     }
 
@@ -36,7 +36,7 @@ public class BrandController {
     }
 
     @PutMapping("/{seq}")
-    public ResponseEntity<ResponseBrandDto> updateBrand(@Valid @ModelAttribute BrandDto brandDto, @PathVariable Long seq) throws IOException {
+    public ResponseEntity<ResponseBrandDto> updateBrand(@Valid @RequestBody BrandDto brandDto, @PathVariable Long seq) throws IOException {
         return ResponseEntity.ok(brandService.update(seq, brandDto));
     }
 

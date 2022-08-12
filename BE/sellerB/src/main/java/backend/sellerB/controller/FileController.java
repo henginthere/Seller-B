@@ -15,10 +15,10 @@ public class FileController {
     private final AwsS3Service awsS3Service;
     private final BrandService brandService;
 
-    @PostMapping
+    @PostMapping("/{service-name}")
     @ResponseBody
-    public String upload(@RequestParam("data") MultipartFile multipartFile) throws IOException {
-        return awsS3Service.upload(multipartFile, "static");
+    public String upload(@RequestParam("data") MultipartFile multipartFile, @PathVariable("service-name") String folderName) throws IOException {
+        return awsS3Service.upload(multipartFile, folderName);
     }
 
 }
