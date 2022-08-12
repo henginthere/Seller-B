@@ -1,8 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  TableContainer,
+} from "@mui/material";
 
 import { Footer, NavBar } from "../../../components/index";
 import "./ConsultantMain.css";
-import styled from "styled-components";
 import {
   goWorkApi,
   leaveWorkApi,
@@ -11,6 +19,7 @@ import {
 import { listNoticeApi } from "../../../api/noticeApi";
 
 function ConsultantMain() {
+  const navigate = useNavigate();
   const [conSeq, setConSeq] = useState(""); // 상담사 seq
   const [conName, setConName] = useState(""); // 상담사 이름
 
@@ -38,15 +47,16 @@ function ConsultantMain() {
     console.log("Today : " + today);
     listNoticeApi()
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setItems(res.data);
 
-        console.log(items);
+        // console.log(items);
 
         const items = res.data.filter(
           (it) => it.noticeRegDate.getDate() === today.getDate(),
         );
         console.log("오늘 새로운 공지사항 갯수:");
+        console.log(items);
       })
       .catch((err) => {});
   }, []);
@@ -81,12 +91,19 @@ function ConsultantMain() {
   return (
     <>
       <NavBar></NavBar>
+      <div className='consultant-main-image-wrapper'>
+        <img
+          src={`${process.env.PUBLIC_URL}/img/consultantMainPageImage.jpg`}
+        />
+      </div>
+      <hr className='hr-in-consultant-main' />
       <div className='consultant-main-wrapper'>
         <div className='main-header'>
           <div className='header-left'>
-            <div className='left-content-comment'>
-              {conName} 님, 환영합니다!
+            <div className='header-topText'>
+              <h1> {conName} 님, 환영합니다!</h1>
             </div>
+
             <div className='attend-wrapper'>
               <div className='go-btn-wrapper' onClick={goWorkBtn}>
                 <div className='go-btn'>출근</div>
@@ -96,23 +113,55 @@ function ConsultantMain() {
               </div>
             </div>
           </div>
-          {/* <div className="attendance-wrappper">
-            <div>출근</div>
-            <div>퇴근</div>
-          </div> */}
         </div>
         <div className='notice-consulting-wrapper'>
           <div className='notice'>
             <div className='notice-title'>공지사항</div>
             <hr />
-            <div></div>
-          </div>
-          <div className='consulting-request'>
-            <div className='reqeust-title'>상담신청 내역</div>
-            <hr />
-            <div>아직 들어온 상담 신청이 없습니다!</div>
-
-            {/* 새로 들어온 상담신청 띄울 영역 START*/}
+            <div>
+              <TableContainer>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>No</TableCell>
+                      <TableCell>제목</TableCell>
+                      <TableCell>Date</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {items.slice(-6, -1).map((value) => {
+                      return (
+                        <>
+                          <TableRow>
+                            <TableCell
+                              onClick={() => {
+                                navigate(`/noticeDetail/${value.noticeSeq}`);
+                              }}
+                            >
+                              {value.noticeSeq}
+                            </TableCell>
+                            <TableCell
+                              onClick={() => {
+                                navigate(`/noticeDetail/${value.noticeSeq}`);
+                              }}
+                            >
+                              {value.noticeTitle}
+                            </TableCell>
+                            <TableCell
+                              onClick={() => {
+                                navigate(`/noticeDetail/${value.noticeSeq}`);
+                              }}
+                            >
+                              {value.noticeRegDate}
+                            </TableCell>
+                          </TableRow>
+                        </>
+                      );
+                    })}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </div>
           </div>
         </div>
       </div>
