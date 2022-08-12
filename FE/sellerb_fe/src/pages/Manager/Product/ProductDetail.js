@@ -14,7 +14,7 @@ function ProductDetail() {
     productName: "",
     productPrice: "",
     // product_thumbnail : 서버에서 url로 받아옴
-    productThumbnail:"",
+    productThumbnailUrl:"",
     productGroup: {
       productGroupName:"",
     }
@@ -49,7 +49,7 @@ function ProductDetail() {
       <div className="mainContent-wrapper">
         <div className="left-img">
           {/* img 자리 */}
-          <img className="img-wrapper" alt="#" src={`${product.product_thumbnail}`} />
+          <img className="img-wrapper" alt="#" src={product.productThumbnail} />
         </div>
 
 
@@ -82,7 +82,7 @@ function ProductDetail() {
             <p>제품군</p>
             <input
               name="product_line"
-              value={product.productGroup.productGroupName}
+              value={product.productGroupName}
               variant="outlined"
               readOnly={readOnly ? false : true}
             />
