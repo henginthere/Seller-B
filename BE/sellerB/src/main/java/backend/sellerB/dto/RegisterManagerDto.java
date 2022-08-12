@@ -29,8 +29,8 @@ public class RegisterManagerDto {
     private String managerPass;
     private String managerTel;
     private String managerEmail;
-    private MultipartFile managerImageFile;
-
+//    private MultipartFile managerImageFile;
+    private String managerImageUrl;
 
     public static RegisterManagerDto from(Manager manager) {
 
@@ -43,6 +43,7 @@ public class RegisterManagerDto {
                 .managerPass(manager.getManagerPass())
                 .managerTel(manager.getManagerTel())
                 .managerEmail(manager.getManagerEmail())
+                .managerImageUrl(manager.getManagerImageUrl())
                 .build();
     }
 
