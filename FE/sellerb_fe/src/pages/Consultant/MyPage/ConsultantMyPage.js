@@ -260,6 +260,7 @@ function ConsultantMyPage() {
   return (
     <>
       <NavBar />
+
       <div className='wrapper'>
         {/* 왼쪽 */}
         <div id='left'>

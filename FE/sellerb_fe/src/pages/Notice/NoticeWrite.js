@@ -63,6 +63,11 @@ function NoticeWrite() {
   return (
     <>
       <NavBar />
+      <div className='consultant-main-image-wrapper'>
+        <img
+          src={`${process.env.PUBLIC_URL}/img/consultantMainPageImage.jpg`}
+        />
+      </div>
       <div className='notice-write-header'>공지사항 작성</div>
       <div className='write-form-wrapper'>
         <div className='write-input-title'>
@@ -84,15 +89,15 @@ function NoticeWrite() {
           />
         </div>
         <div className='btns-wrapper'>
-          <SmallButton onClick={onCloseBtnHandler} label="뒤로" size="sm" />
+          <SmallButton onClick={onCloseBtnHandler} label='뒤로' size='sm' />
           {/* <button className='back-btn' onClick={onCloseBtnHandler}>
             뒤로
           </button> */}
-          <SmallButton onClick={onSubmitBtnHandler} label="등록" size="sm" />
+          <SmallButton onClick={onSubmitBtnHandler} label='등록' size='sm' />
           {/* <button className='register-btn' onClick={onSubmitBtnHandler}>
             등록
           </button> */}
-          <SmallButton onClick={onResetBtnHandler} label="초기화" size="sm" />
+          <SmallButton onClick={onResetBtnHandler} label='초기화' size='sm' />
           {/* <button className='reset-btn' onClick={onResetBtnHandler}>
             초기화
           </button> */}

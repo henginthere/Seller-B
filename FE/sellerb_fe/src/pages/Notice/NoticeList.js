@@ -71,6 +71,11 @@ function NoticeList() {
   return (
     <>
       <NavBar />
+      <div className='consultant-main-image-wrapper'>
+        <img
+          src={`${process.env.PUBLIC_URL}/img/consultantMainPageImage.jpg`}
+        />
+      </div>
       <div className='notice-list-wrapper'>
         <div className='notice-title-wrapper'>
           <h4 className='notice-title-text'>공지사항</h4>
