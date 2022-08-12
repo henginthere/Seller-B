@@ -92,8 +92,6 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
         }
 
         binding.btnLogin.setOnClickListener{
-//            val intent = Intent(context, ConsultingActivity::class.java)
-//            startActivity(intent)
             viewModel.doLogin()
         }
     }
@@ -130,6 +128,15 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
         viewModel.pwField.observe(this){
             if(binding.etPwd.text.toString() != it){
                 binding.etPwd.setText(it.toString())
+            }
+        }
+
+        viewModel.loginFail.observe(this){
+            it.getIfNotHandled()?.run{
+                if(it.peek()){
+                    Toast.makeText(context, "로그인 실패! 아이디 및 비밀번호를 확인해 주세요.",
+                        Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }

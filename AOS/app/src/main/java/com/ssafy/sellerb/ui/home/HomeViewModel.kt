@@ -7,11 +7,13 @@ import com.ssafy.sellerb.data.repository.UserRepository
 import com.ssafy.sellerb.ui.base.BaseViewModel
 import com.ssafy.sellerb.util.CoroutineDispatchers
 import com.ssafy.sellerb.util.Event
+import com.ssafy.sellerb.util.network.NetworkHelper
 
 class HomeViewModel(
     coroutineDispatchers: CoroutineDispatchers,
+    networkHelper: NetworkHelper,
     userRepository: UserRepository
-) : BaseViewModel(coroutineDispatchers) {
+) : BaseViewModel(coroutineDispatchers, networkHelper) {
 
     val count = 0;
 
