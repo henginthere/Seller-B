@@ -3,6 +3,7 @@
     margin:10px;
     width:100%;
     flex-direction:row;
+    min-height:800px;
 }
 * {
     font-family: "twayair", cursive;
@@ -82,4 +83,8 @@
   .con-mypage-left-wrapper .con-mypage-default-img {
     width: 300px;
     height: 200px;
+  }
+  .profile-right{
+    width: 100%;
+
   }

@@ -19,7 +19,6 @@ import Pagination from 'react-js-pagination'
 import { PaginationBox } from "../../Common/PaginationBox"
 import { SyncOutlined } from '@ant-design/icons'
 
-
 const styleObj = {
   width: "75%",
   border: "solid 2px black",
@@ -59,7 +58,7 @@ function ManagerMainRight() {
   // pagination 
   const [page, setPage] = useState(1);
   const handlePageChange = (page) => { setPage(page); };
-  const [it, setIt] = useState(4);
+  const [it, setIt] = useState(5);
   // ManagerBrand
   const [managerBrandKor, setManagerBrandKor] = useState(
     sessionStorage.getItem("brandNameKor")
@@ -166,7 +165,7 @@ function ManagerMainRight() {
         />
         {/* <button onClick={(e) => onSearchBtn()}>검색하기</button> */}
         <SmallButton onClick={onSearchBtn} size="sm" label="검색" />
-
+  
         <select onChange={onGroupChange} defaultValue={selectGroup}>
           <option />
           {groupList.map((option) =>
@@ -198,7 +197,10 @@ function ManagerMainRight() {
           </thead>
           <tbody className="con-list-body">
             {listState ? (
-              consultantList.map(function (ele, i) {
+              consultantList.slice(
+                it*(page-1), 
+                it*(page-1) + it
+                ).map(function (ele, i) {
                 return (
                   <>
                     <tr className="con-tbody-tr">
@@ -242,7 +244,7 @@ function ManagerMainRight() {
           activePage={page}
           itemsCountPerPage={it}
           totalItemsCount={consultantList.length-1}
-          pageRangeDisplayed={5}
+          pageRangeDisplayed={3}
           onChange={handlePageChange}>
         </Pagination>
       </PaginationBox>

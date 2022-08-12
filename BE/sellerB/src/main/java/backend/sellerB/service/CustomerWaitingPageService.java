@@ -3,7 +3,9 @@ package backend.sellerB.service;
 import backend.sellerB.dto.CustomerWaitingPageDto;
 import backend.sellerB.dto.RegisterCustomerWaitingPageDto;
 import backend.sellerB.entity.CustomerWaitingPage;
+import backend.sellerB.entity.Product;
 import backend.sellerB.repository.CustomerWaitingPageRepository;
+import backend.sellerB.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,14 +19,17 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CustomerWaitingPageService {
     private final CustomerWaitingPageRepository customerWaitingPageRepository;
+    private final ProductRepository productRepository;
 
-    private final AwsS3Service awsS3Service;
+//    private final AwsS3Service awsS3Service;
     public CustomerWaitingPageDto create(RegisterCustomerWaitingPageDto registerCustomerWaitingPageDto) throws IOException {
 
 //        String customerWaitingPageImage = awsS3Service.upload(registerCustomerWaitingPageDto.getCustomerWaitingPageImageFile(), "static");
+        Optional<Product> productOptional = productRepository.findById(registerCustomerWaitingPageDto.getProductSeq());
+        Product product = productOptional.get();
 
         CustomerWaitingPage customerWaitingPage = CustomerWaitingPage.builder()
-                .product(registerCustomerWaitingPageDto.getProduct())
+                .product(product)
                 .customerWaitingPageMent(registerCustomerWaitingPageDto.getCustomerWaitingPageMent())
                 .customerWaitingPageImage(registerCustomerWaitingPageDto.getCustomerWaitingPageImageUrl())
                 .build();
@@ -43,8 +48,10 @@ public class CustomerWaitingPageService {
     public CustomerWaitingPageDto update(Long seq, RegisterCustomerWaitingPageDto registerCustomerWaitingPageDto) throws IOException {
         Optional<CustomerWaitingPage> customerWaitingPageOptional = customerWaitingPageRepository.findById(seq);
         CustomerWaitingPage customerWaitingPage = customerWaitingPageOptional.get();
+        Optional<Product> productOptional = productRepository.findById(registerCustomerWaitingPageDto.getProductSeq());
+        Product product = productOptional.get();
 //        String customerWaitingPageImage = awsS3Service.upload(registerCustomerWaitingPageDto.getCustomerWaitingPageImageFile(), "static");
-        customerWaitingPage.setProduct(registerCustomerWaitingPageDto.getProduct());
+        customerWaitingPage.setProduct(product);
         customerWaitingPage.setCustomerWaitingPageMent(registerCustomerWaitingPageDto.getCustomerWaitingPageMent());
         customerWaitingPage.setCustomerWaitingPageImage(registerCustomerWaitingPageDto.getCustomerWaitingPageImageUrl());
         return CustomerWaitingPageDto.from(customerWaitingPage);
