@@ -1,31 +1,34 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import Axios from "axios";
-import { listConsultingApi } from "../../api/consultantApi"; 
-
-
+import { useParams } from "react-router-dom";
+import { listConsultingApi } from "../../api/consultantApi";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  TableContainer,
+} from "@mui/material";
+import { PaginationBox } from "../../components/Common/PaginationBox";
+import Pagination from "react-js-pagination";
 const styleObj_center = {
-  textAlign: "center",
+  display: "flex",
   margin: "50px",
+  justifyContent: "flex-start",
+  flexDirection: "column",
 };
 
-const dummyData = [
-  {
-    date: "2022-07-25",
-    login_time: "08:30",
-    logout_time: "18:10",
-  },
-  {
-    date: "2022-07-26",
-    login_time: "08:35",
-    logout_time: "18:21",
-  },
-];
-
-function ConsultingLog({consultant_id}) {
-  console.log(consultant_id)
+function ConsultingLog({ consultant_id }) {
+  // console.log(consultant_id)
   const params = useParams();
   const [logData, setLogData] = useState([]);
+  // pagination
+  const [page, setPage] = useState(1);
+  const handlePageChange = (page) => {
+    console.log("현재 페이지: " + page);
+    setPage(page);
+  };
+  const [it, setIt] = useState(9);
 
   // axios : 상담사 출결이력 표시
   useEffect(() => {
@@ -35,7 +38,6 @@ function ConsultingLog({consultant_id}) {
 
         // attendance = res.data;
         setLogData(res.data);
-      
       })
       .catch((err) => {
         console.log(err);
@@ -45,29 +47,53 @@ function ConsultingLog({consultant_id}) {
   return (
     <>
       <div style={styleObj_center}>
-        <table className="table-wrapper">
-          <thead className="table-header-wrapper">
-            <tr>
-              <th>{consultant_id}상담날짜</th>
-              <th>상담 시작시각 </th>
-              <th>상담 종료시각</th>
-            </tr>
-          </thead>
-          <tbody>
-            {dummyData.map(function (ele, i) {
-              return (
-                <>
-                  <tr>
-                    {/* <td  onClick={() => navigate(`/noticeDetail/${ele.notice_seq}`)}>{ele.notice_title}</td> */}
-                    <td>{ele.loginTime}</td>
-                    <td>{ele.loginTime}</td>
-                    <td>{ele.logoutTime}</td>
-                  </tr>
-                </>
-              );
-            })}
-          </tbody>
-        </table>
+        <TableContainer>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>상담 날짜</TableCell>
+                <TableCell>상담 시작시각 </TableCell>
+                <TableCell>상담 종료시각</TableCell>
+                <TableCell>상담 제품</TableCell>
+                <TableCell>상담 고객 이름</TableCell>
+                <TableCell>상담 고객 ID</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {logData
+                .slice(it * (page - 1), it * (page - 1) + it)
+                .map(function (ele, i) {
+                  return (
+                    <>
+                      <TableRow>
+                        <TableCell>
+                          {ele.consultingStartDate.slice(0, 10)}
+                        </TableCell>
+                        <TableCell>
+                          {ele.consultingStartDate.slice(11, 19)}
+                        </TableCell>
+                        <TableCell>
+                          {ele.consultingEndDate.slice(11, 19)}
+                        </TableCell>
+                        <TableCell>{ele.product.productName}</TableCell>
+                        <TableCell>{ele.customer.customerName}</TableCell>
+                        <TableCell>{ele.customer.customerId}</TableCell>
+                      </TableRow>
+                    </>
+                  );
+                })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <PaginationBox>
+          <Pagination
+            activePage={page}
+            itemsCountPerPage={it}
+            totalItemsCount={logData.length - 1}
+            pageRangeDisplayed={3}
+            onChange={handlePageChange}
+          ></Pagination>
+        </PaginationBox>
       </div>
     </>
   );

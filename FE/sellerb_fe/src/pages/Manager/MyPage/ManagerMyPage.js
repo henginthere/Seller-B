@@ -4,12 +4,13 @@ import NavBar from "../../../components/Common/NavBar/NavBar";
 import Footer from "../../../components/Common/Footer/Footer";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import { getManagerInfoApi } from '../../../api/managerApi'
+import { getManagerInfoApi } from "../../../api/managerApi";
+import { indigo } from "@mui/material/colors";
 
 function ManagerMyPage() {
-  
   const [info, setInfo] = useState([]);
   const [managerSeq, setManagerSeq] = useState(sessionStorage.getItem("seq"));
+  const [brandNameKor, setBrandNameKor] = useState("");
 
   // 비동기로 처리하기 위함. useState로 바로바로 적용!
   const [isModify, setModify] = useState(false);
@@ -22,7 +23,15 @@ function ManagerMyPage() {
   };
 
   const cancelModify = () => {
-    
+    getManagerInfoApi(managerSeq)
+      .then((res) => {
+        // console.log(JSON.stringify(res.data));
+        setInfo(res.data);
+        setBrandNameKor(res.data.brand.brandNameKor);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     ChangeToModify();
   };
   // 최종적으로 수정 완료 버튼을 누르면 api로 DB에 반영하기 위한 함수
@@ -30,37 +39,36 @@ function ManagerMyPage() {
     e.preventDefault();
 
     alert("수정하시겠습니까?");
-
+    console.log(info);
     ChangeToModify();
   };
   // 바뀔때마다 setData로 수정된 데이터로 바꿔줌
   const handleChange = (e) => {
     e.preventDefault();
-    const { value, name } = e.target.value;
-
+    const { value, name } = e.target;
+    console.log("[value, name] : " + " [" + value + ", " + name + "]");
     setInfo({
       ...info,
-      [name] : value
-    })
+      [name]: value,
+    });
   };
 
-  const onModifyBtn = ()=>{
-    console.log("modifyBtn: " + info.managerTel)
-  }
+  const onModifyBtn = () => {
+    console.log("modifyBtn: " + info.managerTel);
+  };
 
-  useEffect(()=>{
-    console.log("useEffect:" + sessionStorage.getItem("seq"))
+  useEffect(() => {
+    console.log("useEffect:" + sessionStorage.getItem("seq"));
     getManagerInfoApi(managerSeq)
-    .then((res)=>{
-      console.log(JSON.stringify(res.data));
-      setInfo(res.data);
-      // console.log(info)
-    })
-    .catch((err)=>{
-      console.log("error")
-    })
-  }, [])
-  
+      .then((res) => {
+        // console.log(JSON.stringify(res.data));
+        setInfo(res.data);
+        setBrandNameKor(res.data.brand.brandNameKor);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   // 그냥 My Page 컴포넌트
   const Main = () => {
@@ -74,7 +82,7 @@ function ManagerMyPage() {
             <TextField
               id='outlined-read-only-input'
               label='담당 브랜드'
-              defaultValue={info.managerId}
+              value={brandNameKor}
               InputProps={{
                 readOnly: true,
               }}
@@ -84,24 +92,26 @@ function ManagerMyPage() {
           <div className='InfoTextField'>
             <TextField
               label='ID'
-              defaultValue={info.managerId}
+              value={info.managerId}
               InputProps={{
                 readOnly: true,
               }}
               fullWidth='true'
             />
           </div>
-          <div className='InfoTextField'>
+          {/* <div className='InfoTextField'>
             <TextField
               label='PW'
-              value={info.manager}
+              value={info.pass}
               InputProps={{
                 readOnly: true,
               }}
               type='password'
               fullWidth='true'
+              name='pass'
+              onChange={handleChange}
             />
-          </div>
+          </div> */}
           <div className='InfoTextField'>
             <TextField
               label='Tel.'
@@ -110,6 +120,8 @@ function ManagerMyPage() {
                 readOnly: true,
               }}
               fullWidth='true'
+              name='managerTel'
+              onChange={handleChange}
             />
           </div>
 
@@ -121,6 +133,8 @@ function ManagerMyPage() {
                 readOnly: true,
               }}
               fullWidth='true'
+              name='managerEmail'
+              onChange={handleChange}
             />
           </div>
         </div>
@@ -143,22 +157,22 @@ function ManagerMyPage() {
         <form className='InfoWrapper' onSubmit={handleSubmit}>
           <div className='InfoTextField'>
             {/* 이 부분 Form 으로 바꿔주기 */}
-            {/* <TextField
+            <TextField
               label='담당 브랜드'
-              defaultValue={info.brand.brandNameKor}
+              defaultValue={brandNameKor}
               InputProps={{
                 readOnly: true,
               }}
               fullWidth='true'
               disabled='true'
               variant='filled'
-            /> */}
+            />
           </div>
           <div className='InfoTextField'>
             <TextField
               id='outlined-disabled'
               label='ID'
-              defaultValue={info.managerId}
+              value={info.managerId}
               InputProps={{
                 readOnly: true,
               }}
@@ -167,22 +181,22 @@ function ManagerMyPage() {
               variant='filled'
             />
           </div>
-          <div className='InfoTextField'>
+          {/* <div className='InfoTextField'>
             <TextField
               required
               label='PW'
-              defaultValue=""
+              value={info.pass}
               type='password'
               fullWidth='true'
               name='managerPass'
               onChange={handleChange}
             />
-          </div>
+          </div> */}
           <div className='InfoTextField'>
             <TextField
               required
               label='Tel.'
-              defaultValue={info.managerTel}
+              value={info.managerTel}
               fullWidth='true'
               name='managerTel'
               onChange={handleChange}
@@ -202,7 +216,12 @@ function ManagerMyPage() {
             />
           </div>
           <div className='Button'>
-            <Button onClick={()=> onModifyBtn()} variant='contained' size='large' type='submit'>
+            <Button
+              onClick={() => onModifyBtn()}
+              variant='contained'
+              size='large'
+              type='submit'
+            >
               수정 완료
             </Button>
             <Button
