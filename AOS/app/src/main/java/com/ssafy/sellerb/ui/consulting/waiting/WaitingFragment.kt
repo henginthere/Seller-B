@@ -1,9 +1,8 @@
 package com.ssafy.sellerb.ui.consulting.waiting
 
 import android.content.Intent
-import android.content.Intent.FLAG_ACTIVITY_MULTIPLE_TASK
-import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.view.View
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.ssafy.sellerb.R
 import com.ssafy.sellerb.databinding.FragmentWaitingBinding
@@ -48,6 +47,13 @@ class WaitingFragment : BaseFragment<WaitingViewModel>(){
 
     override fun setUpObserver() {
         super.setUpObserver()
+
+        viewModel.waitingSeq.observe(this){
+            Toast.makeText(context, "상담 대기중.. 잠시만 기다려 주세요 seq: ${it}",
+                Toast.LENGTH_SHORT)
+                .show()
+        }
+
 
     }
 

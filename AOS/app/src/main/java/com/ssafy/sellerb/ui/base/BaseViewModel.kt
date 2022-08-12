@@ -35,7 +35,6 @@ abstract class BaseViewModel(
                         -1 -> Resource.error(R.string.network_default_error)
                         0 -> Resource.error(R.string.server_connection_error)
                         HttpsURLConnection.HTTP_UNAUTHORIZED -> {
-                            forcedLogoutUser()
                             Resource.error(R.string.server_connection_error)
                         }
                         HttpsURLConnection.HTTP_INTERNAL_ERROR ->

@@ -1,13 +1,11 @@
 package com.ssafy.sellerb.data.repository
 
-import android.util.Log
 import com.ssafy.sellerb.data.local.prefs.UserPreferences
 import com.ssafy.sellerb.data.model.User
 import com.ssafy.sellerb.data.remote.NetworkService
 import com.ssafy.sellerb.data.remote.request.LoginRequest
 import com.ssafy.sellerb.data.remote.request.SignupRequest
 import com.ssafy.sellerb.data.remote.response.GeneralResponse
-import com.ssafy.sellerb.data.remote.response.UserInfoResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

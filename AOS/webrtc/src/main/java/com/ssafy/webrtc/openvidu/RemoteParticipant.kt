@@ -11,7 +11,7 @@ class RemoteParticipant(
     session: Session
 ): Participant(connectionId,participantName,session){
 
-    private lateinit var view: View
+    private var view: View? = null
     private var videoView: SurfaceViewRenderer? = null
     private lateinit var participantNameText: TextView
 
@@ -22,6 +22,12 @@ class RemoteParticipant(
 
     fun setVideoView(videoView: SurfaceViewRenderer){
         this.videoView = videoView
+    }
+
+    fun getView() = view
+
+    fun setView(view: View){
+        this.view = view
     }
 
     fun getParticipantNameText() : TextView { return participantNameText}

@@ -7,6 +7,7 @@ import com.ssafy.sellerb.data.repository.UserRepository
 import com.ssafy.sellerb.ui.base.BaseActivity
 import com.ssafy.sellerb.ui.main.MainViewModel
 import com.ssafy.sellerb.util.CoroutineDispatchers
+import com.ssafy.sellerb.util.network.NetworkHelper
 import dagger.Module
 import dagger.Provides
 
@@ -19,10 +20,11 @@ class ActivityModule(private val activity: BaseActivity<*>) {
     @Provides
     fun provideMainViewModel(
         coroutineDispatchers: CoroutineDispatchers,
+        networkHelper: NetworkHelper,
         userRepository: UserRepository
     ): MainViewModel = ViewModelProvider(
         activity, ViewModelProviderFactory(MainViewModel::class){
-            MainViewModel(coroutineDispatchers, userRepository)
+            MainViewModel(coroutineDispatchers, networkHelper, userRepository)
         }).get(MainViewModel::class.java)
 
 }

@@ -7,12 +7,14 @@ import com.ssafy.sellerb.data.repository.UserRepository
 import com.ssafy.sellerb.ui.base.BaseViewModel
 import com.ssafy.sellerb.util.CoroutineDispatchers
 import com.ssafy.sellerb.util.Event
+import com.ssafy.sellerb.util.network.NetworkHelper
 import kotlinx.coroutines.launch
 
 class MyPageViewModel(
     coroutineDispatchers: CoroutineDispatchers,
+    networkHelper: NetworkHelper,
     userRepository: UserRepository
-) :BaseViewModel(coroutineDispatchers) {
+) :BaseViewModel(coroutineDispatchers, networkHelper) {
 
     val launchLogin : MutableLiveData<Event<Map<String,String>>> = MutableLiveData()
 

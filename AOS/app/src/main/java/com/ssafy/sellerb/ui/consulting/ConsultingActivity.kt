@@ -1,17 +1,20 @@
 package com.ssafy.sellerb.ui.consulting
 
 import android.Manifest
+import android.app.ActionBar
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.util.TypedValue
+import android.view.ViewGroup
 import android.view.WindowManager
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.google.android.material.appbar.AppBarLayout
 import com.ssafy.sellerb.databinding.ActivityConsultingBinding
 import com.ssafy.sellerb.util.Constants.OPENVIDU_SECRET
 import com.ssafy.sellerb.util.Constants.OPENVIDU_URL
@@ -32,7 +35,7 @@ class ConsultingActivity : AppCompatActivity() {
 
     private lateinit var session : Session
     private lateinit var httpClient: CustomHttpClient
-
+    private var togle = true
 
     companion object{
         const val TAG = "ConsultingActivity"
@@ -62,8 +65,29 @@ class ConsultingActivity : AppCompatActivity() {
             leaveSession()
             finish()
         }
+
+        binding.btnSize.setOnClickListener {
+            reSize()
+        }
     }
 
+    fun reSize(){
+        var width: Int
+        var height: Int
+
+        if(togle){
+            width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 90f, resources.displayMetrics).toInt()
+            height = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 120f, resources.displayMetrics).toInt()
+
+        }else{
+            width = RelativeLayout.LayoutParams.MATCH_PARENT
+            height =  RelativeLayout.LayoutParams.MATCH_PARENT
+        }
+        binding.peerContainerRemote.layoutParams = RelativeLayout.LayoutParams(width,height)
+        //binding.localGlSurfaceView.layoutParams = ViewGroup.LayoutParams(width,height)
+
+        togle = !togle
+    }
     override fun onResume() {
         super.onResume()
 
@@ -74,7 +98,7 @@ class ConsultingActivity : AppCompatActivity() {
                     "OPENVIDUAPP:$OPENVIDU_SECRET".toByteArray(),android.util.Base64.DEFAULT
                 ).trim())
 
-            val sessionId = "TEST"
+            val sessionId = "kiddo-session2"
             getToken(sessionId)
 
         } else {
@@ -155,10 +179,10 @@ class ConsultingActivity : AppCompatActivity() {
     }
     private fun getTokenSuccess(token: String, sessionId: String) {
         // Initialize our session
-        session = Session(sessionId, token, this)
+        session = Session(sessionId, token, this, binding.viewsContainer)
 
         // Initialize our local participant and start local camera
-        val participantName: String = "TEST"
+        val participantName: String = "kiddo"
         val localParticipant =
             LocalParticipant(participantName, session, this.applicationContext, binding.localGlSurfaceView)
         localParticipant.startCamera()
