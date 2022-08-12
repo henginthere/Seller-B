@@ -19,6 +19,7 @@ public class WaitingCustomerDto {
     private String customerName;
     private String customerId;
     private Long productSeq;
+    private String productThumbnail;
     private String productName;
     private String productId;
     private Boolean waitingCustomerState;
@@ -35,6 +36,7 @@ public class WaitingCustomerDto {
                 .productSeq(waitingCustomer.getProduct().getProductSeq())
                 .productName(waitingCustomer.getProduct().getProductName())
                 .productId(waitingCustomer.getProduct().getProductId())
+                .productThumbnail(waitingCustomer.getProduct().getProductThumbnail())
                 .waitingCustomerState(waitingCustomer.getWaitingCustomerState())
                 .productGroupSeq(waitingCustomer.getProduct().getProductGroup().getProductGroupSeq())
                 .build();
@@ -52,6 +54,7 @@ public class WaitingCustomerDto {
                     .productSeq(waitingCustomerList.get(i).getProduct().getProductSeq())
                     .productName(waitingCustomerList.get(i).getProduct().getProductName())
                     .productId(waitingCustomerList.get(i).getProduct().getProductId())
+                    .productThumbnail(waitingCustomerList.get(i).getProduct().getProductThumbnail())
                     .waitingCustomerState(waitingCustomerList.get(i).getWaitingCustomerState())
                     .productGroupSeq(waitingCustomerList.get(i).getProduct().getProductGroup().getProductGroupSeq())
                     .build();
