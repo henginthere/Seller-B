@@ -18,13 +18,14 @@ function ProductList() {
   const [brandSeq, setBrandSeq] = useState(sessionStorage.getItem("brandSeq"));
 
   const [searchWord, setSearchWord] = useState(""); // 제품 검색어 
-  const [groupOption, setGroupOption] = useState(""); 
+  const [groupOption, setGroupOption] = useState("제품 전체보기"); 
 
   useEffect(()=>{
     brandProductListApi(brandSeq)
     .then((res)=>{
       setTotalItems(res.data)
       console.log("처음 전체 아이템들 : " + JSON.stringify(res.data));
+      
     })
   }, [])
 
@@ -89,7 +90,7 @@ function ProductList() {
         <div className="page-navi-wrapper">
           <div className="navi-left">
             <select onChange={onGroupChange} defaultValue={groupOption}>
-                <option />
+                <option>제품 전체보기</option>
                 {groupList.map((option) =>
                   option.brandName === managerBrand ? (
                     <option value={option.productGroupName}>{option.productGroupName}</option>
@@ -119,7 +120,7 @@ function ProductList() {
           </div>
         </div>
         <div className="product-list-wrapper">
-          {groupOption === ""
+          {groupOption === "제품 전체보기"
           ? <GroupOptionList props={totalItems} />
           : <GroupOptionList props={items} />
         }
