@@ -21,7 +21,7 @@ public class CustomerWaitingPageController {
     }
 
     @PostMapping
-    public ResponseEntity<CustomerWaitingPageDto> saveCustomerWaitingPage(@Valid @ModelAttribute RegisterCustomerWaitingPageDto registerCustomerWaitingPageDto) throws IOException {
+    public ResponseEntity<CustomerWaitingPageDto> saveCustomerWaitingPage(@Valid @RequestBody RegisterCustomerWaitingPageDto registerCustomerWaitingPageDto) throws IOException {
         return ResponseEntity.ok(customerWaitingPageService.create(registerCustomerWaitingPageDto));
     }
 
@@ -36,7 +36,7 @@ public class CustomerWaitingPageController {
     }
 
     @PutMapping("/{seq}")
-    public ResponseEntity<CustomerWaitingPageDto> updateCustomerWaitingPage(@Valid @ModelAttribute RegisterCustomerWaitingPageDto registerCustomerWaitingPageDto, @PathVariable Long seq) throws IOException {
+    public ResponseEntity<CustomerWaitingPageDto> updateCustomerWaitingPage(@Valid @RequestBody RegisterCustomerWaitingPageDto registerCustomerWaitingPageDto, @PathVariable Long seq) throws IOException {
         return ResponseEntity.ok(customerWaitingPageService.update(seq, registerCustomerWaitingPageDto));
     }
 
