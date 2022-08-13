@@ -32,8 +32,7 @@ function NavBar() {
   }, []);
 
   const onLogOutBtn = () => {
-    sessionStorage.clear();
-    navigate("/");
+    sessionStorage.removeItem("accessToken");
   };
 
   return (

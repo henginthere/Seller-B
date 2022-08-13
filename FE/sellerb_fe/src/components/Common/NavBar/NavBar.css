@@ -55,21 +55,6 @@
 .navi-title {
     font-size: 13px;
     margin-right: 20px;
-
-    transition-duration: 300ms;
-    transition-timing-function: ease;
-    transition-property: transform;
-}
-
-.navi-title:hover {
-    transform: scale(1.03);
-    background-color: #f1f3f6;
-    border-radius: 5px;
-}
-
-.navi-title:focuse {
-    transform: scale(1.1);
-    background-color: #f1f3f6;  
 }
 
 /* navBar Icon Custom */

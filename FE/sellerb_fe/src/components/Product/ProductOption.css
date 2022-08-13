@@ -1,7 +1,7 @@
 .body-wrapper {
   max-width: 100%;
   max-height: 400px;
-  /* background-color: #fffaff; */
+  background-color: #fffaff;
   display: flex;
   flex-wrap: wrap;
   overflow: auto;

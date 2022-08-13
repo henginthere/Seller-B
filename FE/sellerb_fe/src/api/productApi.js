@@ -33,11 +33,6 @@ export const waitingPageApi = async(product_seq, success, fail)=>{
     return await api.get(`/waiting-page/${product_seq}`).then(success).catch(fail);
 }
 
-// POST : WaitingPage.js : 해당 제품의 대기화면 등록하기
-export const registerWaitingPageApi = async(waitingPage, success, fail) => {
-    return await api.post("/waiting-page", waitingPage).then(success).catch(fail);
-}
-
 // PUT : ProductEdit.js
 export const productEditApi = async (product_seq, success, fail) =>{
     return await api.put(`/product/${product_seq}`).then(success).catch(fail);
