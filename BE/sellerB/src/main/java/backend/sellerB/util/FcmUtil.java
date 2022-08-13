@@ -1,10 +1,10 @@
 package backend.sellerB.util;
 
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
 
-import com.google.common.reflect.ClassPath;
-import org.checkerframework.common.reflection.qual.GetClass;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -17,7 +17,6 @@ import com.google.firebase.messaging.AndroidConfig;
 import com.google.firebase.messaging.AndroidNotification;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.Message;
-import org.springframework.util.FileCopyUtils;
 
 @Component
 public class FcmUtil {
@@ -28,8 +27,8 @@ public class FcmUtil {
 //            FileInputStream serviceAccount = new FileInputStream("C:\\Users\\multicampus\\Documents\\S07P12D105\\BE\\sellerB\\src\\main\\resources\\sellerb-28f08-firebase-adminsdk-szd5u-ff507df489.json");
 //            FileInputStream serviceAccount = new FileInputStream("/var/jenkins_home/workspace/sellerB/BE/sellerB/src/main/resources/sellerb-28f08-firebase-adminsdk-szd5u-ff507df489.json");
             PathMatchingResourcePatternResolver patternResolver = new PathMatchingResourcePatternResolver();
-            Resource resource = patternResolver.getResource("sellerb-28f08-firebase-adminsdk-szd5u-ff507df489.json");
-            FileInputStream serviceAccount = new FileInputStream(resource.getFile());
+//            Resource resource = patternResolver.getResource("/static/sellerb-28f08-firebase-adminsdk-szd5u-ff507df489.json").getInputStream();
+            InputStream serviceAccount = patternResolver.getResource("/static/sellerb-28f08-firebase-adminsdk-szd5u-ff507df489.json").getInputStream();
 //			FileInputStream serviceAccount = new FileInputStream("/home/careme/app/WEB-INF/classes/firebase/firebase_service_key.json");
             FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
