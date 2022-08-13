@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import javax.persistence.PreUpdate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -109,8 +110,30 @@ public class ConsultingService {
     public List<ResponseConsultingDto> getConsultingListByCustomerId(String customerId) {
         return ResponseConsultingDto.fromList(consultingRepository.findAllByCustomer_CustomerId(customerId));}
 
+    public List<ResponseConsultingDto> getConsultingListByCustomerIdPeriod(String customerId, Integer period) {
+        LocalDateTime now = LocalDateTime.now();
+        if (period.equals(1)) {
+            now = now.minusDays(1);
+        } else if (period.equals(7)) {
+            now = now.minusWeeks(1);
+        } else if (period.equals(30)) {
+            now = now.minusMonths(1);
+        }
+        return ResponseConsultingDto.fromList(consultingRepository.findConsultingsByCustomer_CustomerIdAndAndConsultingStartDateIsAfter(customerId, now));}
+
     public List<ResponseConsultingDto> getConsultingListByConsultantId(String consultantId) {
         return ResponseConsultingDto.fromList(consultingRepository.findAllByConsultant_ConsultantId(consultantId));}
+
+    public List<ResponseConsultingDto> getConsultingListByConsultantIdPeriod(String consultantId, Integer period) {
+        LocalDateTime now = LocalDateTime.now();
+        if (period.equals(1)) {
+            now = now.minusDays(1);
+        } else if (period.equals(7)) {
+            now = now.minusWeeks(1);
+        } else if (period.equals(30)) {
+            now = now.minusMonths(1);
+        }
+        return ResponseConsultingDto.fromList(consultingRepository.findConsultingsByConsultant_ConsultantIdAndConsultingStartDateIsAfter(consultantId, now));}
 
 
     public RegisterConsultingDto updateConsulting(Long seq, RegisterConsultingDto registerConsultingDto) {
