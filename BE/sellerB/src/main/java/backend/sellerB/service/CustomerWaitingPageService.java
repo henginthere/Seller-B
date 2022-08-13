@@ -38,7 +38,7 @@ public class CustomerWaitingPageService {
             CustomerWaitingPage customerWaitingPage = CustomerWaitingPage.builder()
                     .product(product)
                     .customerWaitingPageMent(registerCustomerWaitingPageDto.getCustomerWaitingPageMent())
-                    .customerWaitingPageImage(registerCustomerWaitingPageDto.getCustomerWaitingPageImageUrl())
+                    .customerWaitingPageImage(registerCustomerWaitingPageDto.getCustomerWaitingPageImage())
                     .build();
 
             return CustomerWaitingPageDto.from(customerWaitingPageRepository.save(customerWaitingPage));
@@ -51,30 +51,40 @@ public class CustomerWaitingPageService {
 
     public List<CustomerWaitingPageDto> getCustomerWaitingPageList() { return CustomerWaitingPageDto.fromList(customerWaitingPageRepository.findAll());}
 
-    public CustomerWaitingPageDto getCustomerWaitingPageDetail(Long seq) {
-        Optional<CustomerWaitingPage> customerWaitingPageOptional = customerWaitingPageRepository.findById(seq);
+//    public CustomerWaitingPageDto getCustomerWaitingPageDetail(Long seq) {
+//        Optional<CustomerWaitingPage> customerWaitingPageOptional = customerWaitingPageRepository.findById(seq);
+//        CustomerWaitingPage customerWaitingPage = customerWaitingPageOptional.get();
+//        return CustomerWaitingPageDto.from(customerWaitingPage);
+//    }
+
+    public CustomerWaitingPageDto getCustomerWaitingPageDetailByProductSeq(Long productSeq) {
+        Optional<CustomerWaitingPage> customerWaitingPageOptional = customerWaitingPageRepository.findByProduct_ProductSeq(productSeq);
         CustomerWaitingPage customerWaitingPage = customerWaitingPageOptional.get();
         return CustomerWaitingPageDto.from(customerWaitingPage);
     }
 
-    public CustomerWaitingPageDto update(Long seq, RegisterCustomerWaitingPageDto registerCustomerWaitingPageDto) throws IOException {
-        Optional<CustomerWaitingPage> customerWaitingPageOptional = customerWaitingPageRepository.findById(seq);
-        CustomerWaitingPage customerWaitingPage = customerWaitingPageOptional.get();
+    public CustomerWaitingPageDto update(Long productSeq, RegisterCustomerWaitingPageDto registerCustomerWaitingPageDto) throws IOException {
+//        Optional<CustomerWaitingPage> customerWaitingPageOptional = customerWaitingPageRepository.findById(seq);
+//        CustomerWaitingPage customerWaitingPage = customerWaitingPageOptional.get();
         Optional<Product> productOptional = productRepository.findById(registerCustomerWaitingPageDto.getProductSeq());
         Product product = productOptional.get();
 //        String customerWaitingPageImage = awsS3Service.upload(registerCustomerWaitingPageDto.getCustomerWaitingPageImageFile(), "static");
+        Optional<CustomerWaitingPage> customerWaitingPageOptional = customerWaitingPageRepository.findByProduct_ProductSeq(productSeq);
+        CustomerWaitingPage customerWaitingPage = customerWaitingPageOptional.get();
         customerWaitingPage.setProduct(product);
         customerWaitingPage.setCustomerWaitingPageMent(registerCustomerWaitingPageDto.getCustomerWaitingPageMent());
-        customerWaitingPage.setCustomerWaitingPageImage(registerCustomerWaitingPageDto.getCustomerWaitingPageImageUrl());
+        customerWaitingPage.setCustomerWaitingPageImage(registerCustomerWaitingPageDto.getCustomerWaitingPageImage());
         return CustomerWaitingPageDto.from(customerWaitingPage);
     }
 
     //deleteYn이 불필요해서 repo에서 삭제하고 삭제한 데이터 반환
-    public CustomerWaitingPageDto deleteCustomerWaitingPage(Long seq) {
-        Optional<CustomerWaitingPage> customerWaitingPageOptional = customerWaitingPageRepository.findById(seq);
+    public CustomerWaitingPageDto deleteCustomerWaitingPage(Long productSeq) {
+//        Optional<Product> productOptional = productRepository.findById(productSeq);
+//        Product product = productOptional.get();
+        Optional<CustomerWaitingPage> customerWaitingPageOptional = customerWaitingPageRepository.findByProduct_ProductSeq(productSeq);
         CustomerWaitingPage customerWaitingPage = customerWaitingPageOptional.get();
         customerWaitingPage.setCustomerWaitingPageDelYn(true);
-        customerWaitingPageRepository.deleteById(seq);
+        customerWaitingPageRepository.deleteById(customerWaitingPage.getCustomerWaitingPageSeq());
         return CustomerWaitingPageDto.from(customerWaitingPage);
     }
 }
