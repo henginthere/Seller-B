@@ -71,9 +71,11 @@
 
 .product-img-bottom-wrapper > input {
     margin-top: 10px;
+    width: 220px;
 }
 
 .product-register-small-btn {
+    display: flex;
     margin-top: 10px;
 }
 
@@ -119,6 +121,8 @@
     width: 430px;
     height: 370px;
     object-fit: cover;
+
+    border-radius: 15px;
     margin-top: 15px;
 }
 
