@@ -9,6 +9,8 @@ import {
   productGroupListApi,
   productImgRegisterApi,
 } from "../../../api/productApi";
+import { SmallButton } from "../../../components/Common/SmallButton";
+import { MediButton } from "../../../components/Common/MediButton";
 
 function ProductRegister() {
   const navigate = useNavigate();
@@ -19,7 +21,7 @@ function ProductRegister() {
     productName: "",
     productPrice: "",
     productManual: "준비중",
-    productThumbnail: resImg
+    productThumbnail: resImg,
   });
   const [selectSeq, setSelectSeq] = useState([]);
   const [groupList, setGroupList] = useState([]);
@@ -67,11 +69,10 @@ function ProductRegister() {
 
     const item = groupList.find(
       (it) =>
-        it.brandName === managerBrand &&
-        it.productGroupName === e.target.value
+        it.brandName === managerBrand && it.productGroupName === e.target.value
     );
 
-    setSelectSeq(item.productGroupSeq); 
+    setSelectSeq(item.productGroupSeq);
   };
 
   // 이미지 파일을 업로드하면, 실행될 함수
@@ -110,138 +111,165 @@ function ProductRegister() {
   };
 
   const onRegisterBtn = () => {
-    console.log("in RegisterBtn API : " + resImg)
+    console.log("in RegisterBtn API : " + resImg);
 
-    // 선택한 그룹군에 대해, productGroupSeq찾기 
-    console.log("제출 전 seq : " + selectSeq)
+    // 선택한 그룹군에 대해, productGroupSeq찾기
+    console.log("제출 전 seq : " + selectSeq);
 
     const Info = {
-      productGroupName : product.productGroupName,
-      productGroupSeq : selectSeq,
-      productId : product.productId,
+      productGroupName: product.productGroupName,
+      productGroupSeq: selectSeq,
+      productId: product.productId,
       productName: product.productName,
       productPrice: product.productPrice,
       productManual: product.productManual,
-      productThumbnailUrl : resImg
+      productThumbnailUrl: resImg,
     };
 
-    console.log("등록 전 Product: " + JSON.stringify(Info))
+    console.log("등록 전 Product: " + JSON.stringify(Info));
 
     productRegisterApi(Info)
-    .then((res)=>{
-      console.log(res.data);
-    })
-    .catch((err)=>{
-      console.log(err.data);
-    })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err.data);
+      });
   };
 
-  const onImgRegisterBtn = async() => {
-    const fd = new FormData(); 
-    // imgFile의 파일들을 읽어와서, file이라는 이름으로 저장하기 
-    // -> FormData에 file이라는 이름의 파일 배열이 들어감 
+  const onImgRegisterBtn = async () => {
+    const fd = new FormData();
+    // imgFile의 파일들을 읽어와서, file이라는 이름으로 저장하기
+    // -> FormData에 file이라는 이름의 파일 배열이 들어감
     Object.values(imgFile).forEach((file) => fd.append("data", file));
 
     // fd.append(
     //   "comment",)
     console.log("보낼 fd: " + fd);
 
-    await axios.post('https://i7d105.p.ssafy.io/api/file/product', fd, {
-      header: {
-        "Content-Type": `multipart/form-data`
-      }
-    })
-    .then((response) => {
-      if(response.data){
-        console.log(response.data)
-        setResImg(response.data);
-      }
-    })
-    .catch((error)=>{
-      console.log("Error");
-    })
+    await axios
+      .post("https://i7d105.p.ssafy.io/api/file/product", fd, {
+        header: {
+          "Content-Type": `multipart/form-data`,
+        },
+      })
+      .then((response) => {
+        if (response.data) {
+          console.log(response.data);
+          setResImg(response.data);
+        }
+      })
+      .catch((error) => {
+        console.log("Error");
+      });
   };
 
   return (
     <>
       <NavBar />
-      <h4 className="page-title">제품 등록</h4>
-      <div className="mainContent-wrapper">
-        <div className="left-img">
-          {imgFile === "" ? (
-            <img className="preview-img" alt="#" src={previewUrl} />
-          ) : null}
-          {imgBase64.map((item) => {
-            return (
-              <div className="img-wrapper">
-                <img src={item} alt="First Slide" />
+      {/* <h4 className="page-title">제품 등록</h4> */}
+      <div className="register-main-wrapper">
+        <div className="register-sub-wrapper">
+          <div className="register-area-wrapper">
+            <div className="left-img">
+              {imgFile === "" ? <img alt="#" src={previewUrl} /> : null}
+              {imgBase64.map((item) => {
+                return (
+                  <div>
+                    <img src={item} alt="First Slide" />
+                  </div>
+                );
+              })}
+              <input
+                className="img-btn"
+                multiple="multiple"
+                type="file"
+                accept="image/*"
+                id="file"
+                onChange={onHandleChangeFile}
+              />
+              <MediButton label="이미지 등록" onClick={onImgRegisterBtn} />
+            </div>
+
+            <div className="right-input">
+
+              <div className="input-sub-content-wrapper">
+
+              <div className="input-ele">
+                <div className="product-id">품번</div>
+                <div className="product-id-input-wrapper">
+                  <input
+                    className="product-id-input"
+                    name="productId"
+                    onChange={onChange}
+                    value={productId}
+                    variant="outlined"
+                  />
+                </div>
               </div>
-            );
-          })}
-        </div>
-        <div className="right-input">
-          <div className="input-ele">
-            <p>품번</p>
-            <input
-              name="productId"
-              onChange={onChange}
-              value={productId}
-              variant="outlined"
-            />
-          </div>
-          <div className="input-ele">
-            <p>제품명</p>
-            <input
-              name="productName"
-              onChange={onChange}
-              value={productName}
-              variant="outlined"
-            />
-          </div>
-          <div className="input-ele">
-            <p>가격</p>
-            <input
-              name="productPrice"
-              onChange={onChange}
-              value={productPrice}
-              variant="outlined"
-            />
-          </div>
-          <div className="input-ele">
-            <p>제품군</p>
-            <select
-              onChange={onGroupChange}
-              value={productGroupName}
-              name="productGroupName"
-            >
-              <option value=""></option>
-              {groupList.map((option) =>
-                option.brandName === managerBrand ? (
-                  <option>{option.productGroupName}</option>
-                ) : (
-                  ""
-                )
-              )}
-            </select>
+
+              <div className="input-ele">
+                <div className="product-id">제품명</div>
+                <div className="product-id-input-wrapper">
+                  <input
+                    className="product-id-input"
+                    name="productName"
+                    onChange={onChange}
+                    value={productName}
+                    variant="outlined"
+                  />
+                </div>
+              </div>
+
+                <div className="input-ele">
+                  <p>가격</p>
+                  <input
+                    name="productPrice"
+                    onChange={onChange}
+                    value={productPrice}
+                    variant="outlined"
+                  />
+                </div>
+
+                <div className="input-ele">
+                  <p>제품군</p>
+                  <select
+                    onChange={onGroupChange}
+                    value={productGroupName}
+                    name="productGroupName"
+                  >
+                    <option value=""></option>
+                    {groupList.map((option) =>
+                      option.brandName === managerBrand ? (
+                        <option>{option.productGroupName}</option>
+                      ) : (
+                        ""
+                      )
+                    )}
+                  </select>
+                </div>
+
+              </div>
+              {/* <MediButton label="이미지 등록" onClick={onImgRegisterBtn} /> */}
+              <MediButton label="제품 등록" onClick={onRegisterBtn} />
+            </div>
           </div>
         </div>
       </div>
 
       <div className="bottomContent-wrapper">
-        <input
+        {/* <input
           className="img-btn"
           multiple="multiple"
           type="file"
           accept="image/*"
           id="file"
           onChange={onHandleChangeFile}
-        />
+        /> */}
         {/* <button onClick={deleteImage}>이미지 삭제</button> */}
         {/* <button className="bottom-btn" onCanPlay={}>
           업로드하기
         </button> */}
-        <button onClick={onImgRegisterBtn}>이미지등록하기</button>
-        <button onClick={onRegisterBtn }>제품 등록하기</button>
       </div>
       <Footer />
     </>
