@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import axios from "axios";
 import "./VideoRoomComponent.css";
 import { OpenVidu } from "openvidu-browser";
 import StreamComponent from "./stream/StreamComponent";
@@ -87,7 +87,7 @@ class VideoRoomComponent extends Component {
     this.leaveSession();
   }
 
-  onbeforeunload() {
+  onbeforeunload(event) {
     this.leaveSession();
   }
 
@@ -231,19 +231,19 @@ class VideoRoomComponent extends Component {
 
     if (mySession) {
       mySession.disconnect();
+    }
 
-      // Empty all properties...
-      this.OV = null;
-      this.setState({
-        session: undefined,
-        subscribers: [],
-        mySessionId: "",
-        myUserName: "",
-        localUser: undefined,
-      });
-      if (this.props.leaveSession) {
-        this.props.leaveSession();
-      }
+    // Empty all properties...
+    this.OV = null;
+    this.setState({
+      session: undefined,
+      subscribers: [],
+      mySessionId: "",
+      myUserName: "",
+      localUser: undefined,
+    });
+    if (this.props.leaveSession) {
+      this.props.leaveSession();
     }
   }
   camStatusChanged() {
@@ -551,7 +551,6 @@ class VideoRoomComponent extends Component {
 
     return (
       <div className='container' id='container'>
-        {/* <NavBar /> */}
         <ToolbarComponent
           sessionId={mySessionId}
           user={localUser}
@@ -608,9 +607,84 @@ class VideoRoomComponent extends Component {
               </div>
             )}
         </div>
-        {/* <Footer /> */}
       </div>
     );
+  }
+
+  getToken() {
+    return this.createSession(this.state.mySessionId).then((sessionId) =>
+      this.createToken(sessionId),
+    );
+  }
+
+  createSession(sessionId) {
+    return new Promise((resolve, reject) => {
+      var data = JSON.stringify({ customSessionId: sessionId });
+      axios
+        .post(this.OPENVIDU_SERVER_URL + "/openvidu/api/sessions", data, {
+          headers: {
+            Authorization:
+              "Basic " + btoa("OPENVIDUAPP:" + this.OPENVIDU_SERVER_SECRET),
+            "Content-Type": "application/json",
+          },
+        })
+        .then((response) => {
+          console.log("CREATE SESION", response);
+          resolve(response.data.id);
+        })
+        .catch((response) => {
+          var error = Object.assign({}, response);
+          if (error.response && error.response.status === 409) {
+            resolve(sessionId);
+          } else {
+            console.log(error);
+            console.warn(
+              "No connection to OpenVidu Server. This may be a certificate error at " +
+                this.OPENVIDU_SERVER_URL,
+            );
+            if (
+              window.confirm(
+                'No connection to OpenVidu Server. This may be a certificate error at "' +
+                  this.OPENVIDU_SERVER_URL +
+                  '"\n\nClick OK to navigate and accept it. ' +
+                  'If no certificate warning is shown, then check that your OpenVidu Server is up and running at "' +
+                  this.OPENVIDU_SERVER_URL +
+                  '"',
+              )
+            ) {
+              window.location.assign(
+                this.OPENVIDU_SERVER_URL + "/accept-certificate",
+              );
+            }
+          }
+        });
+    });
+  }
+
+  createToken(sessionId) {
+    return new Promise((resolve, reject) => {
+      var data = JSON.stringify({});
+      axios
+        .post(
+          this.OPENVIDU_SERVER_URL +
+            "/openvidu/api/sessions/" +
+            sessionId +
+            "/connection",
+          data,
+          {
+            headers: {
+              Authorization:
+                "Basic " + btoa("OPENVIDUAPP:" + this.OPENVIDU_SERVER_SECRET),
+              "Content-Type": "application/json",
+            },
+          },
+        )
+        .then((response) => {
+          console.log("TOKEN", response);
+          resolve(response.data.token);
+        })
+        .catch((error) => reject(error));
+    });
   }
 }
 export default VideoRoomComponent;

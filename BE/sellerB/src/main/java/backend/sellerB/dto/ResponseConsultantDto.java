@@ -30,6 +30,7 @@ public class ResponseConsultantDto {
     private String consultantPass;
     private String consultantTel;
     private String productGroupName;
+    private Long productGroupSeq;
     private String consultantImageUrl;
     private Boolean consultantDelYn;
     private String brandName;
@@ -38,25 +39,33 @@ public class ResponseConsultantDto {
     private Set<AuthorityDto> authorityDtoSet;
 
     public static String getBrandName(Consultant consultant){
-        System.out.println("1");
         if (consultant != null) {
             ProductGroup productGroup = consultant.getProductGroup();
-            System.out.println("2");
             if (productGroup != null) {
                 Brand brand = productGroup.getBrand();
-                System.out.println("3");
                 if (brand != null) {
                     String brandName = brand.getBrandNameEng();
-                    System.out.println("4");
                     if (brandName != null) {
-                        System.out.println("5");
                         return brandName;
                     }
                 }
             }
         }
-        System.out.println("666666");
         return "브랜드 없음";
+    }
+
+    public static String getProductGroupName(Consultant consultant){
+        if (consultant != null) {
+            ProductGroup productGroup = consultant.getProductGroup();
+            if (productGroup != null) {
+                String productGroupName = productGroup.getProductGroupName();
+                if (productGroupName != null) {
+                    return productGroupName;
+                }
+            }
+        }
+        System.out.println("666666");
+        return "제품군 없음";
     }
 
     //엔티티를 dto로
@@ -71,7 +80,8 @@ public class ResponseConsultantDto {
                 .consultantPass(consultant.getConsultantPass())
                 .consultantTel(consultant.getConsultantTel())
                 .brandName(getBrandName(consultant))
-                .productGroupName(consultant.getProductGroup().getProductGroupName())
+                .productGroupName(getProductGroupName(consultant))
+                .productGroupSeq(consultant.getProductGroup().getProductGroupSeq())
                 .consultantImageUrl(consultant.getConsultantImageUrl())
                 .consultantDelYn(consultant.getConsultantDelYn())
                 .authorityDtoSet(consultant.getAuthorities().stream()
@@ -80,7 +90,7 @@ public class ResponseConsultantDto {
                 .build();
     }
 
-    public static ArrayList<ResponseConsultantDto> fromList(List<Consultant> consultantList) {
+    public static ArrayList<ResponseConsultantDto> fromList(List<Consultant> consultantList) throws NullPointerException{
         ArrayList<ResponseConsultantDto> listResponseConsultantDto= new ArrayList<>();
         int i = 0;
         while(i < consultantList.size()){
@@ -92,8 +102,9 @@ public class ResponseConsultantDto {
                     .consultantTel(consultantList.get(i).getConsultantTel())
                     .consultantImageUrl(consultantList.get(i).getConsultantImageUrl())
                     .brandName(getBrandName(consultantList.get(i)))
+                    .productGroupSeq(consultantList.get(i).getProductGroup().getProductGroupSeq())
 //                    .consultantDelYn(consultantList.get(i).getConsultantDelYn())
-                    .productGroupName(consultantList.get(i).getProductGroup().getProductGroupName())
+                    .productGroupName(getProductGroupName(consultantList.get(i)))
 //                    .authorityDtoSet(consultantList.get(i).getAuthorities().stream()
 //                            .map(authority -> AuthorityDto.builder().authorityName(authority.getAuthorityName()).build())
 //                            .collect(Collectors.toSet()))

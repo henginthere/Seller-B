@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.List;
@@ -31,7 +32,7 @@ public class ConsultantController {
 
 
     @PostMapping("/register")
-    public ResponseEntity<ConsultantDto> registerConsultant(@Valid @RequestBody RegisterConsultantDto registerConsultantDto) {
+    public ResponseEntity<ConsultantDto> registerConsultant(@Valid @RequestBody RegisterConsultantDto registerConsultantDto) throws IOException {
         return ResponseEntity.ok(consultantService.signup(registerConsultantDto));
     }
 
@@ -68,7 +69,7 @@ public class ConsultantController {
 //    }
 
     @PutMapping("/{consultantSeq}")
-    public ResponseEntity<ConsultantDto> updateConsultantInfo(@Valid @RequestBody EditConsultantDto editConsultantDto, @PathVariable Long consultantSeq) {
+    public ResponseEntity<ConsultantDto> updateConsultantInfo(@Valid @RequestBody EditConsultantDto editConsultantDto, @PathVariable Long consultantSeq) throws IOException {
         return ResponseEntity.ok(consultantService.update(editConsultantDto, consultantSeq));
     }
 

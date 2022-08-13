@@ -1,4 +1,4 @@
-import api from "./api";
+import api from './api';
 
 // GET : List : ManagerMainLeft.js
 export const listConsultantApi = async (success, fail) => {

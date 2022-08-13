@@ -9,6 +9,7 @@ import java.util.Optional;
 
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
-    Optional<List<Order>> findByOrderRegUserSeq(Long seq);
+    Optional<List<Order>> findByOrderRegUser(String id);
 
+    Order findTop1ByOrderByOrderSeqDesc();
 }
