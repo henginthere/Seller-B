@@ -35,7 +35,7 @@ class ConsultingActivity : AppCompatActivity() {
 
     private lateinit var session : Session
     private lateinit var httpClient: CustomHttpClient
-    private var togle = true
+    private var toggle = true
 
     companion object{
         const val TAG = "ConsultingActivity"
@@ -66,27 +66,28 @@ class ConsultingActivity : AppCompatActivity() {
             finish()
         }
 
-        binding.btnSize.setOnClickListener {
-            reSize()
+        binding.viewsContainer.setOnClickListener {
+            resizeView()
         }
     }
 
-    fun reSize(){
+    private fun resizeView(){
         var width: Int
         var height: Int
 
-        if(togle){
-            width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 90f, resources.displayMetrics).toInt()
-            height = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 120f, resources.displayMetrics).toInt()
+        if(toggle){
+            width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                90f, resources.displayMetrics).toInt()
+            height = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                120f, resources.displayMetrics).toInt()
 
         }else{
             width = RelativeLayout.LayoutParams.MATCH_PARENT
             height =  RelativeLayout.LayoutParams.MATCH_PARENT
         }
         binding.peerContainerRemote.layoutParams = RelativeLayout.LayoutParams(width,height)
-        //binding.localGlSurfaceView.layoutParams = ViewGroup.LayoutParams(width,height)
 
-        togle = !togle
+        toggle = !toggle
     }
     override fun onResume() {
         super.onResume()
@@ -98,7 +99,7 @@ class ConsultingActivity : AppCompatActivity() {
                     "OPENVIDUAPP:$OPENVIDU_SECRET".toByteArray(),android.util.Base64.DEFAULT
                 ).trim())
 
-            val sessionId = "kiddo-session2"
+            val sessionId = "kiddo-session3"
             getToken(sessionId)
 
         } else {
@@ -226,7 +227,7 @@ class ConsultingActivity : AppCompatActivity() {
         }
     }
 
-    fun leaveSession() {
+    private fun leaveSession() {
         this.session.leaveSession()
         this.httpClient.dispose()
         runOnUiThread{

@@ -16,7 +16,7 @@ import com.ssafy.webrtc.openvidu.Participant
 import com.ssafy.webrtc.openvidu.RemoteParticipant
 import com.ssafy.webrtc.openvidu.Session
 import com.ssafy.webrtc.utils.createRemoteParticipantVideo
-import com.ssafy.webrtc.utils.createRemoteParticipantVideo2
+import com.ssafy.webrtc.utils.createRemoteScreenVideo
 import com.ssafy.webrtc.utils.resizeView
 import org.json.JSONException
 import org.json.JSONObject
@@ -77,7 +77,7 @@ class CustomWebSocket(session: Session, openviduUrl: String, activity: AppCompat
     private var activity = activity
     private lateinit var websocket: WebSocket
     private var websocketCancelled = false
-    private var first = true
+    private var num = 0
 
     @Throws(Exception::class)
     override fun onTextMessage(websocket: WebSocket, text: String) {
@@ -133,7 +133,9 @@ class CustomWebSocket(session: Session, openviduUrl: String, activity: AppCompat
             // Response to publishVideo
             val localParticipant: LocalParticipant = session!!.getLocalParticipant()!!
             val remoteSdpAnswer =
-                SessionDescription(SessionDescription.Type.ANSWER, result.getString("sdpAnswer"))
+                SessionDescription(
+                    SessionDescription.Type.ANSWER,
+                    result.getString("sdpAnswer"))
             localParticipant.getPeerConnection().setRemoteDescription(
                 CustomSdpObserver("publishVideo_setRemoteDescription"),
                 remoteSdpAnswer
@@ -145,7 +147,9 @@ class CustomWebSocket(session: Session, openviduUrl: String, activity: AppCompat
                 session!!.getRemoteParticipant(participantAndStream.first)!!
             val streamId = participantAndStream.second
             val remoteSdpOffer =
-                SessionDescription(SessionDescription.Type.OFFER, result.getString("sdpOffer"))
+                SessionDescription(
+                    SessionDescription.Type.OFFER,
+                    result.getString("sdpOffer"))
             remoteParticipant.getPeerConnection().setRemoteDescription(object :
                 CustomSdpObserver("prepareReceiveVideoFrom_setRemoteDescription") {
                 override fun onSetSuccess() {
@@ -231,7 +235,9 @@ class CustomWebSocket(session: Session, openviduUrl: String, activity: AppCompat
         } else {
             receiveVideoFromParams["sdpAnswer"] = sessionDescription!!.description
         }
-        IDS_RECEIVEVIDEO[this.sendJson(JsonConstants.RECEIVEVIDEO_METHOD, receiveVideoFromParams)] =
+        IDS_RECEIVEVIDEO[this.sendJson(
+            JsonConstants.RECEIVEVIDEO_METHOD,
+            receiveVideoFromParams)] =
             remoteParticipant.getConnectionId()
     }
 
@@ -309,7 +315,8 @@ class CustomWebSocket(session: Session, openviduUrl: String, activity: AppCompat
             } catch (e: Exception) {
                 //Sometimes when we enter in room the other participants have no stream
                 //We catch that in this way the iteration of participants doesn't stop
-                Log.e(TAG, "Error in addRemoteParticipantsAlreadyInRoom: " + e.localizedMessage)
+                Log.e(TAG, "Error in addRemoteParticipantsAlreadyInRoom: "
+                        + e.localizedMessage)
             }
         }
     }
@@ -350,18 +357,23 @@ class CustomWebSocket(session: Session, openviduUrl: String, activity: AppCompat
     @Throws(JSONException::class)
     private fun participantPublishedEvent(params: JSONObject) {
         val remoteParticipantId = params.getString(JsonConstants.ID)
-        val remoteParticipant: RemoteParticipant = session!!.getRemoteParticipant(remoteParticipantId)!!
-        val streamId = params.getJSONArray("streams").getJSONObject(0).getString("id")
+        val remoteParticipant: RemoteParticipant
+        = session?.getRemoteParticipant(remoteParticipantId)!!
+
+        val streamId = params.
+        getJSONArray("streams").
+        getJSONObject(0).getString("id")
+
         subscribe(remoteParticipant, streamId)
     }
 
     @Throws(JSONException::class)
     private fun participantLeftEvent(params: JSONObject) {
-
         val remoteParticipant: RemoteParticipant =
             session!!.removeRemoteParticipant(params.getString("connectionId"))!!
-
-        activity?.resizeView(false, REMOTE_CONTAINER_VIEW)
+        if(remoteParticipant.getParticipantName().contains("SCREEN")){
+            activity?.resizeView(false, REMOTE_CONTAINER_VIEW)
+        }
         remoteParticipant.dispose()
         val mainHandler: Handler = Handler(activity!!.mainLooper)
         val myRunnable = Runnable {
@@ -390,16 +402,15 @@ class CustomWebSocket(session: Session, openviduUrl: String, activity: AppCompat
         }
 
         val remoteParticipant = RemoteParticipant(connectionId, participantName!!, session!!)
-
-        if(first){
-            activity!!.createRemoteParticipantVideo(remoteParticipant,REMOTE_VIDEO_VIEW, REMOTE_CONTAINER_VIEW)
-            activity!!.resizeView(false, REMOTE_CONTAINER_VIEW)
-            first = false
+        if(participantName.contains("SCREEN")){
+            activity?.createRemoteScreenVideo(
+                remoteParticipant, CONTAINER_VIEW, PEER_LAYOUT, num++)
+            activity?.resizeView(true, REMOTE_CONTAINER_VIEW)
         }else{
-            activity!!.createRemoteParticipantVideo2(remoteParticipant, CONTAINER_VIEW, PEER_LAYOUT)
-            activity!!.resizeView(true, REMOTE_CONTAINER_VIEW)
+            activity?.createRemoteParticipantVideo(
+                remoteParticipant,REMOTE_VIDEO_VIEW, REMOTE_CONTAINER_VIEW)
         }
-        session!!.createRemotePeerConnection(remoteParticipant.getConnectionId())
+        session?.createRemotePeerConnection(remoteParticipant.getConnectionId())
         return remoteParticipant
     }
 
@@ -442,7 +453,7 @@ class CustomWebSocket(session: Session, openviduUrl: String, activity: AppCompat
         val sdpConstraints = MediaConstraints()
         sdpConstraints.mandatory.add(MediaConstraints.KeyValuePair("offerToReceiveAudio", "true"))
         sdpConstraints.mandatory.add(MediaConstraints.KeyValuePair("offerToReceiveVideo", "true"))
-        session!!.createAnswerForSubscribing(remoteParticipant, streamId, sdpConstraints)
+        session?.createAnswerForSubscribing(remoteParticipant, streamId, sdpConstraints)
     }
 
     fun setWebsocketCancelled(websocketCancelled: Boolean) {
@@ -481,7 +492,10 @@ class CustomWebSocket(session: Session, openviduUrl: String, activity: AppCompat
     ) {
         Log.e(
             TAG,
-            "Disconnected " + serverCloseFrame.closeReason + " " + clientCloseFrame.closeReason + " " + closedByServer
+            "Disconnected "
+                    + serverCloseFrame.closeReason
+                    + " " + clientCloseFrame.closeReason
+                    + " " + closedByServer
         )
     }
 
@@ -643,7 +657,8 @@ class CustomWebSocket(session: Session, openviduUrl: String, activity: AppCompat
     private fun getWebSocketAddress(openviduUrl: String): String {
         return try {
             val url = URL(openviduUrl)
-            if (url.port > -1) "wss://" + url.host + ":" + url.port + "/openvidu" else "wss://" + url.host + "/openvidu"
+            if (url.port > -1) "wss://" + url.host + ":" + url.port + "/openvidu"
+            else "wss://" + url.host + "/openvidu"
         } catch (e: MalformedURLException) {
             Log.e(TAG, "Wrong URL", e)
             e.printStackTrace()

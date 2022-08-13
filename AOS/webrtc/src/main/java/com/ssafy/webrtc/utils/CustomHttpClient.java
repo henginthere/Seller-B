@@ -33,11 +33,13 @@ public class CustomHttpClient {
             final TrustManager[] trustAllCerts = new TrustManager[]{
                     new X509TrustManager() {
                         @Override
-                        public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+                        public void checkClientTrusted(X509Certificate[] chain, String authType)
+                                throws CertificateException {
                         }
 
                         @Override
-                        public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+                        public void checkServerTrusted(X509Certificate[] chain, String authType)
+                                throws CertificateException {
                         }
 
                         @Override
@@ -53,13 +55,16 @@ public class CustomHttpClient {
             // Create an ssl socket factory with our all-trusting manager
             final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
 
-            this.client = new OkHttpClient.Builder().sslSocketFactory(sslSocketFactory, new X509TrustManager() {
+            this.client = new OkHttpClient.Builder().sslSocketFactory(
+                    sslSocketFactory, new X509TrustManager() {
                 @Override
-                public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+                public void checkClientTrusted(X509Certificate[] chain, String authType)
+                        throws CertificateException {
                 }
 
                 @Override
-                public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+                public void checkServerTrusted(X509Certificate[] chain, String authType)
+                        throws CertificateException {
                 }
 
                 @Override
@@ -78,11 +83,13 @@ public class CustomHttpClient {
         }
     }
 
-    public void httpCall(String url, String method, String contentType, RequestBody body, Callback callback) throws IOException {
+    public void httpCall(String url, String method, String contentType,
+                         RequestBody body, Callback callback) throws IOException {
         url = url.startsWith("/") ? url.substring(1) : url;
         Request request = new Request.Builder()
                 .url(this.baseUrl + url)
-                .header("Authorization", this.basicAuth).header("Content-Type", contentType)
+                .header("Authorization", this.basicAuth)
+                .header("Content-Type", contentType)
                 .method(method, body)
                 .build();
         Call call = client.newCall(request);
