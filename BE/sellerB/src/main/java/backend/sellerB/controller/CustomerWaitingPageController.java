@@ -33,9 +33,14 @@ public class CustomerWaitingPageController {
 
     }
 
+//    @GetMapping("/{seq}")
+//    public ResponseEntity<CustomerWaitingPageDto> getCustomerWaitingPageDetail(@PathVariable Long seq) {
+//        return ResponseEntity.ok(customerWaitingPageService.getCustomerWaitingPageDetail(seq));
+//    }
+
     @GetMapping("/{seq}")
-    public ResponseEntity<CustomerWaitingPageDto> getCustomerWaitingPageDetail(@PathVariable Long seq) {
-        return ResponseEntity.ok(customerWaitingPageService.getCustomerWaitingPageDetail(seq));
+    public ResponseEntity<CustomerWaitingPageDto> getCustomerWaitingPageDetailByProductSeq(@PathVariable("seq") Long productSeq) {
+        return ResponseEntity.ok(customerWaitingPageService.getCustomerWaitingPageDetailByProductSeq(productSeq));
     }
 
     @GetMapping("/list")
