@@ -5,7 +5,7 @@ import "./ProductRegister.css";
 import axios from "axios";
 import styles from './WaitingPage.module.css'
 import { Footer, NavBar } from "../../../components/index";
-import { productRegisterApi, registerWaitingPageApi } from "../../../api/productApi";
+import { productRegisterApi, registerWaitingPageApi, waitingPageApi } from "../../../api/productApi";
 import {productDetailApi } from "../../../api/productApi";
 
 function WaitingPage() {
@@ -25,6 +25,11 @@ function WaitingPage() {
     productName: "",
     productPrice: ""
   });
+
+  const [waitingImg, setWaitingImg] = useState("");
+  const [waitingMent, setWaitingMent] = useState("");
+
+
   /* 해당 seq에 맞는 Product 정보 먼저 가져오기 */
   useEffect(()=>{
     console.log("WaitingPage Seq: " + id);
@@ -32,10 +37,22 @@ function WaitingPage() {
     .then((res)=>{
         console.log(res.data);
         setProduct(res.data);
-        console.log("WatingPage : 가져온 제품정보: " + product)
+        console.log("가져온 제품정보: " + product)
     })
     .catch((err)=>{
         console.log(err.data)
+    })
+  }, [])
+
+  useEffect(()=>{
+    waitingPageApi(product.productSeq)
+    .then((res)=>{
+      console.log("웨이팅 페이지 API: " + JSON.stringify(res.data));
+      // setWaitingImg(res.data.customerWaitingPageImage);
+      setImgFile(res.data.customerWaitingPageImage);
+    })
+    .catch((err)=>{
+
     })
   }, [])
 
@@ -134,11 +151,11 @@ function WaitingPage() {
         <div className="left-img">
           {/* <div className="element-wrapper"> */}
           { 
-            imgFile.image_file === ""
+            imgFile === ""
             ?    <img
             className="preview-img" 
-            alt="#" src={imgFile.preview_URL} />
-            : null
+            alt="#" src={previewUrl} />
+            : <img alt="#" src={imgFile} />
           }
           {imgBase64.map((item) => {
             return (
