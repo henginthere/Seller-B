@@ -23,9 +23,7 @@ function ProductRegister() {
   });
   const [selectSeq, setSelectSeq] = useState([]);
   const [groupList, setGroupList] = useState([]);
-  const [managerBrand, setManagerBrand] = useState(
-    sessionStorage.getItem("brandNameKor")
-  );
+  const [managerBrand, setManagerBrand] = useState(sessionStorage.getItem("brandNameKor"));
   const {
     productGroupName,
     productId,
@@ -54,12 +52,10 @@ function ProductRegister() {
 
   const onChange = (e) => {
     const { value, name } = e.target;
-
     setProduct({
       ...product,
       [name]: value,
     });
-    console.log(productId);
   };
 
   const onGroupChange = (e) => {
@@ -78,7 +74,6 @@ function ProductRegister() {
   const onHandleChangeFile = (event) => {
     console.log(event.target.files);
     setImgFile(event.target.files);
-    // const file = event.target.files;
 
     // 미리보기 state
     setImgBase64([]);
@@ -110,22 +105,16 @@ function ProductRegister() {
   };
 
   const onRegisterBtn = () => {
-    console.log("in RegisterBtn API : " + resImg)
-
-    // 선택한 그룹군에 대해, productGroupSeq찾기 
-    console.log("제출 전 seq : " + selectSeq)
 
     const Info = {
       productGroupName : product.productGroupName,
       productGroupSeq : selectSeq,
       productId : product.productId,
       productName: product.productName,
-      productPrice: product.productPrice,
+      productPrice: 1234,
       productManual: product.productManual,
       productThumbnailUrl : resImg
     };
-
-    console.log("등록 전 Product: " + JSON.stringify(Info))
 
     productRegisterApi(Info)
     .then((res)=>{
@@ -142,11 +131,7 @@ function ProductRegister() {
     // -> FormData에 file이라는 이름의 파일 배열이 들어감 
     Object.values(imgFile).forEach((file) => fd.append("data", file));
 
-    // fd.append(
-    //   "comment",)
-    console.log("보낼 fd: " + fd);
-
-    await axios.post('https://i7d105.p.ssafy.io/api/file/product', fd, {
+    await axios.post('https://i7d105.p.ssafy.io/api/file/post', fd, {
       header: {
         "Content-Type": `multipart/form-data`
       }
@@ -161,6 +146,7 @@ function ProductRegister() {
       console.log("Error");
     })
   };
+  
 
   return (
     <>
