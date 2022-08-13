@@ -29,6 +29,7 @@ public class ConsultantAttendanceService {
         //check가 있으면 퇴근을 안눌렀다는 것인데, 날짜가 달라지면 즉 다음날이 되면 새로 컬럼 생성 되어야함
         if(check.isPresent()){
             if(check.get().getLoginTime().getDayOfYear()!=LocalDateTime.now().getDayOfYear()){
+                check.get().setConsultantAttendanceState(true);
                 ConsultantAttendance consultantAttendance = ConsultantAttendance.builder()
                         .consultant(consultant)
                         .build();
