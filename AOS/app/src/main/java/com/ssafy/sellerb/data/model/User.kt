@@ -23,6 +23,21 @@ data class User (
 
     @Expose
     @SerializedName("seq")
-    var seq: Long
+    var seq: Long,
 
+    @Expose
+    @SerializedName("userName")
+    var name: String?,
+
+    @Expose
+    @SerializedName("userEmail")
+    var email: String?,
+
+    @Expose
+    @SerializedName("userBirth")
+    var birth: String?,
+
+    @Expose
+    @SerializedName("userToken")
+    var token: String?
     )

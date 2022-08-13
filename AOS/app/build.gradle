@@ -8,6 +8,8 @@ apply plugin: 'kotlin-parcelize'
 
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
+apply plugin: 'com.google.gms.google-services'
+
 android {
     compileSdk 31
 
@@ -72,7 +74,7 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2'
 
     //ML Kit
-    implementation 'com.google.mlkit:barcode-scanning:17.0.0'
+    implementation 'com.google.mlkit:barcode-scanning:17.0.2'
 
     // CameraX core library using camera2 implementation
     implementation "androidx.camera:camera-camera2:$camerax_version"
@@ -80,4 +82,25 @@ dependencies {
     implementation "androidx.camera:camera-lifecycle:$camerax_version"
     // CameraX View class
     implementation "androidx.camera:camera-view:1.0.0-alpha28"
+
+    //webrtc
+    implementation 'org.webrtc:google-webrtc:1.0.+'
+    implementation 'com.neovisionaries:nv-websocket-client:2.9'
+    implementation 'com.squareup.okhttp3:okhttp:4.2.0'
+
+    //fcm
+    implementation 'com.google.firebase:firebase-messaging:20.1.0'
+    implementation platform('com.google.firebase:firebase-bom:30.3.1')
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.android.gms:play-services-auth:20.2.0'
+
+    // Image
+    implementation "com.github.bumptech.glide:glide:4.12.0"
+    kapt "com.github.bumptech.glide:compiler:4.12.0"
+    implementation ("com.github.bumptech.glide:recyclerview-integration:4.12.0") {
+        // Excludes the support library because it's already included by Glide.
+        transitive = false
+    }
+
+    implementation project(":webrtc")
 }

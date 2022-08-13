@@ -1,25 +1,32 @@
 package com.ssafy.sellerb.ui.login
 
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ssafy.sellerb.data.repository.UserRepository
 import com.ssafy.sellerb.ui.base.BaseViewModel
 import com.ssafy.sellerb.util.CoroutineDispatchers
 import com.ssafy.sellerb.util.Event
+import com.ssafy.sellerb.util.network.NetworkHelper
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
+import java.lang.Exception
 
 class LoginViewModel(
     coroutineDispatchers: CoroutineDispatchers,
+    networkHelper: NetworkHelper,
     private val userRepository: UserRepository
 ) : BaseViewModel(
-    coroutineDispatchers
+    coroutineDispatchers,
+    networkHelper
 ){
     private val ioContext = coroutineDispatchers.io()
     val launchMain: MutableLiveData<Event<Map<String, String>>> = MutableLiveData()
     val idField : MutableLiveData<String> = MutableLiveData()
     val pwField : MutableLiveData<String> = MutableLiveData()
+    val loginFail: MutableLiveData<Event<Boolean>> = MutableLiveData()
 
     override fun onCreate() {}
 
@@ -32,17 +39,19 @@ class LoginViewModel(
         val pw = pwField.value
         if(id != null && pw != null){
             viewModelScope.launch(ioContext){
-                userRepository.doUserLogin(id,pw)
-                    .onStart {  }
-                    .collect{
-                        userRepository.saveCurrentUser(user = it)
-                        launchMain.postValue(Event(emptyMap()))
-                    }
+                try {
+                    userRepository.doUserLogin(id,pw)
+                        .onStart {  }
+                        .collect{
+                            userRepository.saveCurrentUser(user = it)
+                            launchMain.postValue(Event(emptyMap()))
+                        }
+                }catch (ex: Exception){
+                    handleNetworkError(ex)
+                    loginFail.postValue(Event(true))
+                }
             }
         }
     }
 
-    fun getUserInfo() {
-
-    }
 }
