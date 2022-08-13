@@ -9,53 +9,55 @@ function ProductEdit() {
   const { seq } = useParams();
   const [readOnly, setReadOnly] = useState(true)
   const [product, setProduct] = useState({
-    productSeq:"",
+    productSeq: "",
     productId: "",
     productName: "",
     productPrice: "",
     // product_thumbnail : 서버에서 url로 받아옴
-    productThumbnail:"",
-    productGroup: {
-      productGroupName:"",
-    }
+    productThumbnail:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1T5-8wefzN-Nv1nUOwyhfYoh4js2cTgJpCw&usqp=CAU",
+    productGroup: "",
   });
 
 
   /* 해당 seq에 맞는 Product 정보 먼저 가져오기 */
   useEffect(()=>{
-    console.log("product Edit Seq: " + seq);
+    console.log("in useEffect: " + seq);
+
     productDetailApi(seq)
     .then((res)=>{
         console.log(res.data);
+
         setProduct(res.data);
-        console.log("수정된 제품정보: " + product)
     })
     .catch((err)=>{
         console.log(err.data)
     })
   }, [])
+    // useEffect(()=>{
+    //   productEditApi(id)
+    //   .then((res)=>{
+    //       console.log(res.data);
+
+    //       setProduct(res.data);
+    //   })
+    //   .catch((err)=>{
+    //       console.log(err.data)
+    //   })
+    // })
 
   const navigate = useNavigate();
-
   const goWaitingPage = ()=>{
-    navigate(`/manager/waitingPage/${seq}`); // 제품대기화면 페이지로 이동
+    navigate(`/manager/waitingPage/${product.product_seq}`); // 제품대기화면 페이지로 이동
   }
 
   const onEditCompleteBtn = ()=>{
 
-    const editData = {
-      productSeq : seq,
-      productGroupName: product.productGroup.productGroupName,
-      productId: product.productId,
-      productName: product.productName,
-      productPrice : product.productPrice,
-      productManual: "",
-      productThumbnail: "",
-    }
-
-    productEditApi(editData)
+    productEditApi(product)
     .then((res)=>{
-        console.log("Edit Success");
+        setProduct(res);
+
+        console.log(res.data);
     })
     .catch((err)=>{
         console.log(err.data);
@@ -66,12 +68,10 @@ function ProductEdit() {
   }
 
  const onBackBtn = ()=>{
-    navigate(`/manager/ProductDetail/${product.productSeq}`);
+    navigate(`/manager/ProductDetail/${product.product_seq}`);
  }
 
-  // input 수정값 다루기
-  const { productId, productName, productPrice, 
-        productGroup, productGroupName } = product;
+  const { productSeq, productId, productName, productPrice, productThumbnail, productGroup } = product;
   const onChange = (e) => {
     const { value, name } = e.target;
     setProduct({
@@ -134,6 +134,7 @@ function ProductEdit() {
                 className="preview-img" 
                 alt="#" src={imgFile.preview_URL} />
                 : null
+              
             }
       
           {imgBase64.map((item) => {
@@ -155,12 +156,13 @@ function ProductEdit() {
         />
         </div>
 
+
         <div className="right-input">
           <div className="input-ele">
             <p>품번</p>
             <input
               name="productId"
-              defaultValue={product.productId}
+              value={product.productId}
               onChange={onChange}
               variant="outlined"
             />
@@ -187,7 +189,7 @@ function ProductEdit() {
             <p>제품군</p>
             <input
               name="productGroup"
-              // value={product.productGroup.productGroupName}
+              value={product.productGroup.productGroupName}
               onChange={onChange}
               variant="outlined"
             />

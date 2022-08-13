@@ -21,9 +21,9 @@ public class ReviewDto {
     private Consulting consulting;
     private Float reviewGrade;
     private String reviewContent;
-    private Long reviewRegUserSeq;
+    private String reviewRegUser;
     private LocalDateTime reviewRegDate;
-    private Long reviewModUserSeq;
+    private String reviewModUser;
     private LocalDateTime reviewModDate;
 
     public static ReviewDto from(Review review) {
@@ -33,9 +33,9 @@ public class ReviewDto {
                 .consulting(review.getConsulting())
                 .reviewGrade(review.getReviewGrade())
                 .reviewContent(review.getReviewContent())
-                .reviewRegUserSeq(review.getReviewRegUserSeq())
+                .reviewRegUser(review.getReviewRegUser())
                 .reviewRegDate(review.getReviewRegDate())
-                .reviewModUserSeq(review.getReviewModUserSeq())
+                .reviewModUser(review.getReviewModUser())
                 .reviewModDate(review.getReviewModDate())
                 .build();
     }
@@ -50,9 +50,9 @@ public class ReviewDto {
                     .consulting(reviewList.get(i).getConsulting())
                     .reviewGrade(reviewList.get(i).getReviewGrade())
                     .reviewContent(reviewList.get(i).getReviewContent())
-                    .reviewRegUserSeq(reviewList.get(i).getReviewRegUserSeq())
+                    .reviewRegUser(reviewList.get(i).getReviewRegUser())
                     .reviewRegDate(reviewList.get(i).getReviewRegDate())
-                    .reviewModUserSeq(reviewList.get(i).getReviewModUserSeq())
+                    .reviewModUser(reviewList.get(i).getReviewModUser())
                     .reviewModDate(reviewList.get(i).getReviewModDate())
                     .build();
             listReviewDto.add(reviewDto);

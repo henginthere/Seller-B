@@ -3,7 +3,6 @@ import fileapi from './fileapi';
 
 // POST : 제품데이터 등록
 export const productRegisterApi = async (product, success, fail) => {
-    console.log("in productRegisterAPI : " + JSON.stringify(product))
     return await api.post("/product", product).then(success).catch(fail);
 }
 
@@ -14,6 +13,7 @@ export const productImgRegisterApi = async(productImg, success, fail) => {
 
 // GET : List : ProductList.js : 모든 제품군 '이름'을 가져옴
 export const productGroupListApi = async (success, fail) =>{
+    console.log("api 객체 : " + api)
     return await api.get("/product-group/list").then(success).catch(fail);
 }
 
@@ -39,8 +39,13 @@ export const registerWaitingPageApi = async(waitingPage, success, fail) => {
 }
 
 // PUT : ProductEdit.js
-export const productEditApi = async (product, success, fail) =>{
-    return await api.put(`/product/${product.productSeq}`, product).then(success).catch(fail);
+export const productEditApi = async (product_seq, success, fail) =>{
+    return await api.put(`/product/${product_seq}`).then(success).catch(fail);
+}
+
+// GET : ProductList.js
+export const productSearchApi = async (productName, success, fail) => {
+    return await api.get(`/product/name/${productName}`).then(success).catch(fail);
 }
 
 // GET : ProductList.js : 처음 접속 시, 해당 브랜드의 모든 제품 불러오기

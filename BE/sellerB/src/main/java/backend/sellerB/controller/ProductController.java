@@ -1,15 +1,13 @@
 package backend.sellerB.controller;
 
-import backend.sellerB.dto.EditProductDto;
-import backend.sellerB.dto.NoticeDto;
-import backend.sellerB.dto.ProductDto;
-import backend.sellerB.dto.ProductRes;
+import backend.sellerB.dto.*;
 import backend.sellerB.service.ProductService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.List;
@@ -25,8 +23,8 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<ProductDto> saveProduct(@Valid @RequestBody ProductDto productDto) {
-        return ResponseEntity.ok(productService.create(productDto));
+    public ResponseEntity<ProductDto> saveProduct(@Valid @RequestBody RegisterProductDto registerProductDto) throws IOException {
+        return ResponseEntity.ok(productService.create(registerProductDto));
     }
 
     @GetMapping("/{seq}")
@@ -47,6 +45,10 @@ public class ProductController {
     public ResponseEntity<List<ProductDto>> getProductList(HttpServletRequest request) {
         return ResponseEntity.ok(productService.getProductList());
     }
+    @GetMapping("/list/brand/{seq}")
+    public ResponseEntity<List<ProductDto>> getProductListByBrand(@PathVariable Long seq) {
+        return ResponseEntity.ok(productService.getProductListByBrand(seq));
+    }
 
     @GetMapping("/list/{productGroupSeq}")
     public ResponseEntity<List<ProductDto>> getProductListByProductGroupSeq(HttpServletRequest request, @PathVariable Long productGroupSeq) {
@@ -54,7 +56,7 @@ public class ProductController {
     }
 
     @PutMapping("/{seq}")
-    public ResponseEntity<ProductDto> updateProduct(@Valid @RequestBody EditProductDto editProductDto, @PathVariable Long seq) {
+    public ResponseEntity<ProductDto> updateProduct(@Valid @RequestBody EditProductDto editProductDto, @PathVariable Long seq) throws IOException {
         return ResponseEntity.ok(productService.update(seq, editProductDto));
     }
 

@@ -31,12 +31,17 @@ public class ReviewService {
         return ReviewDto.from(reviewRepository.save(review));
     }
 
-    public List<ReviewDto> getReviewListByConsultantId(String consultantId) {
-
-        return ReviewDto.fromList(reviewRepository.findAll());}
+    public List<ReviewDto> getReviewListByConsultantSeq(Long consultantSeq) {
+        Optional<List<Review>> optionalReviewList = reviewRepository.findByConsulting_Consultant_ConsultantSeq(consultantSeq);
+        List<Review> reviewList = optionalReviewList.get();
+        return ReviewDto.fromList(reviewList);
+    }
 
     public List<ReviewDto> getReviewListByCustomerSeq(Long customerSeq) {
-        return ReviewDto.fromList(reviewRepository.findAll());}
+        Optional<List<Review>> optionalReviewList = reviewRepository.findByConsulting_Customer_CustomerSeq(customerSeq);
+        List<Review> reviewList = optionalReviewList.get();
+        return ReviewDto.fromList(reviewList);
+    }
 
     public ReviewDto getReviewDetail(Long seq) {
         Optional<Review> reviewOptional = reviewRepository.findById(seq);
@@ -51,9 +56,9 @@ public class ReviewService {
         review.setConsulting(reviewDto.getConsulting());
         review.setReviewGrade(reviewDto.getReviewGrade());
         review.setReviewContent(reviewDto.getReviewContent());
-        review.setReviewRegUserSeq(reviewDto.getReviewRegUserSeq());
+        review.setReviewRegUser(reviewDto.getReviewRegUser());
         review.setReviewRegDate(reviewDto.getReviewRegDate());
-        review.setReviewModUserSeq(reviewDto.getReviewModUserSeq());
+        review.setReviewModUser(reviewDto.getReviewModUser());
         review.setReviewModDate(reviewDto.getReviewModDate());
         return ReviewDto.from(review);
     }

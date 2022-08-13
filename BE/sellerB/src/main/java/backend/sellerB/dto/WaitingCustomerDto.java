@@ -16,16 +16,27 @@ public class WaitingCustomerDto {
 
     private Long waitingCustomerSeq;
     private Long customerSeq;
+    private String customerName;
+    private String customerId;
     private Long productSeq;
+    private String productThumbnail;
+    private String productName;
+    private String productId;
     private Boolean waitingCustomerState;
     private Long productGroupSeq;
+
 
     public static WaitingCustomerDto from(WaitingCustomer waitingCustomer) {
         if(waitingCustomer == null) return null;
         return WaitingCustomerDto.builder()
                 .waitingCustomerSeq(waitingCustomer.getWaitingCustomerSeq())
                 .customerSeq(waitingCustomer.getCustomer().getCustomerSeq())
+                .customerName(waitingCustomer.getCustomer().getCustomerName())
+                .customerId(waitingCustomer.getCustomer().getCustomerId())
                 .productSeq(waitingCustomer.getProduct().getProductSeq())
+                .productName(waitingCustomer.getProduct().getProductName())
+                .productId(waitingCustomer.getProduct().getProductId())
+                .productThumbnail(waitingCustomer.getProduct().getProductThumbnail())
                 .waitingCustomerState(waitingCustomer.getWaitingCustomerState())
                 .productGroupSeq(waitingCustomer.getProduct().getProductGroup().getProductGroupSeq())
                 .build();
@@ -38,7 +49,12 @@ public class WaitingCustomerDto {
             WaitingCustomerDto waitingCustomerDto = WaitingCustomerDto.builder()
                     .waitingCustomerSeq(waitingCustomerList.get(i).getWaitingCustomerSeq())
                     .customerSeq(waitingCustomerList.get(i).getCustomer().getCustomerSeq())
+                    .customerName(waitingCustomerList.get(i).getCustomer().getCustomerName())
+                    .customerId(waitingCustomerList.get(i).getCustomer().getCustomerId())
                     .productSeq(waitingCustomerList.get(i).getProduct().getProductSeq())
+                    .productName(waitingCustomerList.get(i).getProduct().getProductName())
+                    .productId(waitingCustomerList.get(i).getProduct().getProductId())
+                    .productThumbnail(waitingCustomerList.get(i).getProduct().getProductThumbnail())
                     .waitingCustomerState(waitingCustomerList.get(i).getWaitingCustomerState())
                     .productGroupSeq(waitingCustomerList.get(i).getProduct().getProductGroup().getProductGroupSeq())
                     .build();

@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.PreUpdate;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.Optional;
 
@@ -34,9 +35,10 @@ public class ManagerService {
     private final PasswordEncoder passwordEncoder;
     private final AuthorityRepository authorityRepository;
     private final BrandRepository brandRepository;
+    private final AwsS3Service awsS3Service;
 
     @Transactional
-    public ManagerDto signup(RegisterManagerDto registerManagerDto) {
+    public ManagerDto signup(RegisterManagerDto registerManagerDto) throws IOException {
         if (managerRepository.findBymanagerId(registerManagerDto.getManagerId()).orElse(null) != null ||
                 consultantRepository.findByConsultantId(registerManagerDto.getManagerId()).orElse(null)!=null||
                 customerRepository.findBycustomerId(registerManagerDto.getManagerId()).orElse(null)!=null) {
@@ -54,7 +56,7 @@ public class ManagerService {
         System.out.println("프론트에서 받아온 dto의 브랜드 번호: "+registerManagerDto.getBrandSeq());
         System.out.println("프론트에서 받아온 id : "+registerManagerDto.getManagerId());
 
-
+//        String managerImageUrl = awsS3Service.upload(registerManagerDto.getManagerImageFile(), "static");
 
         //dto를 엔티티로
         Manager manager = Manager.builder()
@@ -65,6 +67,7 @@ public class ManagerService {
                 .managerPass(passwordEncoder.encode(registerManagerDto.getManagerPass()))
                 .managerTel(registerManagerDto.getManagerTel())
                 .managerEmail(registerManagerDto.getManagerEmail())
+                .managerImageUrl(registerManagerDto.getManagerImageUrl())
                 .authorities(Collections.singleton(authority))
                 .build();
 
@@ -80,7 +83,7 @@ public class ManagerService {
     }
 
     @PreUpdate
-    public ManagerDto update(EditManagerDto editManagerDto, Long managerSeq) {
+    public ManagerDto update(EditManagerDto editManagerDto, Long managerSeq) throws IOException {
         Optional<Manager> managerOptional = managerRepository.findById(managerSeq);
         Manager manager = managerOptional.get();
 
@@ -92,6 +95,8 @@ public class ManagerService {
         else{
             manager.setManagerPass(passwordEncoder.encode(editManagerDto.getManagerPass()));
         }
+
+//        String managerImageUrl = awsS3Service.upload(editManagerDto.getManagerImageFile(), "static");
         manager.setManagerEmail(editManagerDto.getManagerEmail());
         manager.setManagerTel(editManagerDto.getManagerTel());
         manager.setManagerImageUrl(editManagerDto.getManagerImageUrl());

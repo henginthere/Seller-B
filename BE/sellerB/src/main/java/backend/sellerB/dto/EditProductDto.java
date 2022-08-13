@@ -2,6 +2,7 @@ package backend.sellerB.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
 @AllArgsConstructor
@@ -11,5 +12,6 @@ public class EditProductDto {
     private String productName;
     private Integer productPrice;
     private String productManual;
-    private String productThumbnail;
+    private String productThumbnailUrl;
+//    private MultipartFile productThumbnailFile;
 }

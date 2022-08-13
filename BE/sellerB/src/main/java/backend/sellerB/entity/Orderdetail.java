@@ -47,8 +47,8 @@ public class Orderdetail {
     private Boolean orderDetailDelYn;
     @CreatedBy
     @Basic
-    @Column(name = "order_detail_reg_user_seq")
-    private Long orderDetailRegUserSeq;
+    @Column(name = "order_detail_reg_user")
+    private String orderDetailRegUser;
     @CreatedDate
     @Basic
     @Column(name = "order_detail_reg_date")
@@ -56,8 +56,8 @@ public class Orderdetail {
 
     @LastModifiedBy
     @Basic
-    @Column(name = "order_detail_mod_user_seq")
-    private Long orderDetailModUserSeq;
+    @Column(name = "order_detail_mod_user")
+    private String orderDetailModUser;
 
     @LastModifiedDate
     @Basic

@@ -1,21 +1,28 @@
-import axios from "axios";
-
-import React, { Component } from "react";
+import React from "react";
 import Meeting from "../../../components/Meeting/Meeting";
 
 import { NavBar, Footer } from "../../../components/index";
 import "../Meeting.css";
 
-class MeetingManCon extends Component {
-  render() {
-    return (
-      <>
-        <NavBar />
+function MeetingManCon() {
+  const wrapper = {
+    minHeight: "555px",
+    height: "100%",
+  };
+  return (
+    <div style={wrapper}>
+      <NavBar />
+      <div className='consultant-main-image-wrapper'>
+        <img
+          src={`${process.env.PUBLIC_URL}/img/consultantMainPageImage.jpg`}
+        />
+      </div>
+      <div style={wrapper}>
         <Meeting />
-        <Footer />
-      </>
-    );
-  }
+      </div>
+      <Footer />
+    </div>
+  );
 }
 
 export default MeetingManCon;

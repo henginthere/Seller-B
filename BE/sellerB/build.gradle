@@ -56,6 +56,11 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client:2.6.2'
 	implementation group: 'com.google.api-client', name: 'google-api-client-jackson2', version: '1.30.10'
 
+	// aws s3
+	implementation 'io.awspring.cloud:spring-cloud-starter-aws:2.3.1'
+
+	// firebase
+	implementation 'com.google.firebase:firebase-admin:9.0.0'
 }
 
 tasks.named('test') {

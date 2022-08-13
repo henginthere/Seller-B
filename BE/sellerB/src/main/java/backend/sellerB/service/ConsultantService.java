@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PreUpdate;
+import java.io.IOException;
 import java.util.*;
 
 
@@ -32,9 +33,10 @@ public class ConsultantService {
     private final PasswordEncoder passwordEncoder;
     private final AuthorityRepository authorityRepository;
     private final ProductGroupRepository productGroupRepository;
+//    private final AwsS3Service awsS3Service;
 
     @Transactional
-    public ConsultantDto signup(RegisterConsultantDto registerConsultantDto) {
+    public ConsultantDto signup(RegisterConsultantDto registerConsultantDto) throws IOException {
         if (consultantRepository.findByConsultantId(registerConsultantDto.getConsultantId()).orElse(null) != null ||
             managerRepository.findBymanagerId(registerConsultantDto.getConsultantId()).orElse(null)!=null ||
         customerRepository.findBycustomerId(registerConsultantDto.getConsultantId()).orElse(null)!=null ) {
@@ -47,7 +49,8 @@ public class ConsultantService {
                 .build();
         authorityRepository.save(authority);
 
-
+        // 이미지 업로드
+//        String consultantImageUrl = awsS3Service.upload(registerConsultantDto.getConsultantImageFile(), "static");
 
         //dto를 엔티티로
         Consultant consultant = Consultant.builder()
@@ -57,6 +60,7 @@ public class ConsultantService {
                 .consultantPass(passwordEncoder.encode(registerConsultantDto.getConsultantPass()))
                 .consultantTel(registerConsultantDto.getConsultantTel())
                 .productGroup(productGroupRepository.findById(registerConsultantDto.getProductGroupSeq()).get())
+                .consultantImageUrl(registerConsultantDto.getConsultantImageUrl())
                 .authorities(Collections.singleton(authority))
                 .build();
 
@@ -97,9 +101,11 @@ public class ConsultantService {
     }
 
     @PreUpdate
-    public ConsultantDto update(EditConsultantDto editConsultantDto, Long consultantSeq) {
+    public ConsultantDto update(EditConsultantDto editConsultantDto, Long consultantSeq) throws IOException {
         Optional<Consultant> consultantOptional = consultantRepository.findById(consultantSeq);
         Consultant consultant = consultantOptional.get();
+
+//        String consultantImageUrl = awsS3Service.upload(editConsultantDto.getConsultantImageFile(), "static");
 
         String pass;
         if(editConsultantDto.getConsultantPass()==null || editConsultantDto.getConsultantPass()==""){

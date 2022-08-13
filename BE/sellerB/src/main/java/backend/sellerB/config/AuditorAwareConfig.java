@@ -26,27 +26,27 @@ public class AuditorAwareConfig {
     @Resource
     private CustomerRepository customerRepository;
     @Bean
-    public AuditorAware<Long> auditorAware() {
+    public AuditorAware<String> auditorAware() {
 
         return new AuditorAware<>() {
             @Override
-            public Optional<Long> getCurrentAuditor() {
+            public Optional<String> getCurrentAuditor() {
                 Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
                 String authorities = getAuthorities(authentication);
                 System.out.println("권한정보 : "+authentication);
                 if (authentication.getPrincipal().equals("anonymousUser") || authorities.equals("ROLE_ANONYMOUS"))
                 {
-                    return Optional.of(-1L);
+                    return Optional.of("비회원");
                 }
                 else if(authorities.equals("ROLE_ADMIN")){
-                    return Optional.of(managerRepository.findByManagerSeq(Long.parseLong(authentication.getName())).get().getManagerSeq());
+                    return Optional.of(managerRepository.findByManagerSeq(Long.parseLong(authentication.getName())).get().getManagerId());
                 }
                 else if(authorities.equals("ROEL_USER")){
-                    return Optional.of(consultantRepository.findByConsultantSeq(Long.parseLong(authentication.getName())).getConsultantSeq());
+                    return Optional.of(consultantRepository.findByConsultantSeq(Long.parseLong(authentication.getName())).getConsultantId());
                 }
                 else{
-                    return Optional.of(customerRepository.findBycustomerSeq(Long.parseLong(authentication.getName())).get().getCustomerSeq());
+                    return Optional.of(customerRepository.findBycustomerSeq(Long.parseLong(authentication.getName())).get().getCustomerId());
                 }
             }
 

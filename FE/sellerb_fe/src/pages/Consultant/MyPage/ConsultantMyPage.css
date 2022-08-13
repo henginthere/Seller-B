@@ -1,85 +1,92 @@
-.wrapper{
-    display: flex;
-    margin:10px;
-    width:100%;
-    flex-direction:row;
+.wrapper {
+  display: flex;
+  margin: 10px;
+  width: 100%;
+  flex-direction: row;
+  min-height: 800px;
 }
 * {
-    font-family: "twayair", cursive;
-  }
-  
-  #left {
-    display: flex;
-    flex-direction: column;
-    width: 35%;
-    padding: 20px;
-    display: flex;
-    border-style: none solid none solid;
-    border-width: 0px 1px 0px 1px;
-  }
+  font-family: "twayair", cursive;
+}
 
-  #right {
-    display: flex;
-    width: 65%;
-    margin: 10px;
-    min-height: 500px;
-    justify-content: center;
-    border: 2px solid gray;
-    border-radius: 10px;
-    flex-direction: column;
-  }
+#left {
+  display: flex;
+  flex-direction: column;
+  width: 35%;
+  padding: 20px;
+  display: flex;
+  border-style: none solid none solid;
+  border-width: 0px 1px 0px 1px;
+}
 
-  .imageWrapper {
-    width: 150px;
-    height: 150px;
-  }
+#consultant-mypage-right {
+  display: flex;
+  width: 65%;
+  margin: 10px;
+  min-height: 500px;
+  padding: 30px;
+  justify-content: flex-start;
+  border: 2px solid gray;
+  border-radius: 10px;
+  flex-direction: column;
+}
 
-  .imageWrapper img {
-    max-width: 100%;
-    max-height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.imageWrapper {
+  width: 150px;
+  height: 150px;
+}
 
-  .Button {
-    display: flex;
-    justify-content: flex-start;
-    margin: 20px;
-    min-width: 50px;
-  }
+.imageWrapper img {
+  max-width: 100%;
+  max-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  .InfoWrapper {
-    display: flex;
-    flex-direction: column;
+.Button {
+  display: flex;
+  justify-content: flex-start;
+  margin: 20px;
+  min-width: 50px;
+}
 
-  }
+.InfoWrapper {
+  display: flex;
+  flex-direction: column;
+}
 
-  .InfoTextField {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 10px;
-  }
+.InfoTextField {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 10px;
+}
 
-  .topText {
-    display: flex;
-    margin: 5px;
-    align-items: flex-start;
-  }
-  
-  /* 혜연 */
-  /* 전체 */
-  .con-mypage-wrapper {
-    width: 80%;
+.topText {
+  display: flex;
+  margin: 5px;
+  align-items: flex-start;
+}
 
-  }
+/* 혜연 */
+/* 전체 */
+.con-mypage-wrapper {
+  width: 80%;
+}
 
-  .con-mypage-wrapper .con-mypage-left-wrapper {
-    width: 35%;
-  }
+.con-mypage-wrapper .con-mypage-left-wrapper {
+  width: 35%;
+}
 
-  .con-mypage-left-wrapper .con-mypage-default-img {
-    width: 300px;
-    height: 200px;
-  }
+.con-mypage-left-wrapper .con-mypage-default-img {
+  width: 300px;
+  height: 200px;
+}
+.profile-right {
+  width: 100%;
+}
+
+.select-wrapper {
+  margin-left: 30px;
+}
