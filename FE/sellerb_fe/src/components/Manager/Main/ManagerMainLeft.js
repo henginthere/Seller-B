@@ -15,9 +15,7 @@ function ManagerMainLeft() {
   const [managerName, setManagerName] = useState("");
 
   const navigate = useNavigate();
-  const styleObj_WrapDiv = {
-    width: "35%",
-  };
+
   const styleObj_Button = {
     textAlign: "center",
     margin: "50px",
@@ -47,12 +45,19 @@ function ManagerMainLeft() {
     .catch((err)=>{
       console.log("Error");
     })
-    
   })
 
   return (
     <>
-      <div style={styleObj_WrapDiv}>
+      <div className="managerMainLeft-wrapper">
+        <div className="left-wrapper">
+          
+        </div>
+
+        <div className="right-wrapper">
+
+        </div>
+
         <div style={welcome_text}>
           <h2 style={blue}>{managerName}</h2>
           <h2>님 환영합니다!</h2>
@@ -71,15 +76,12 @@ function ManagerMainLeft() {
           />
         </LocalizationProvider>
         {/* 달력 END */}
-        <div style={styleObj_Button}>
+        {/* <div style={styleObj_Button}>
           <MediButton 
             label="회의 생성" 
             onClick={mvMeetingManCon} 
           />
-          {/* <Button variant='contained' onClick={mvMeetingManCon}>
-            회의 생성
-          </Button> */}
-        </div>
+        </div> */}
       </div>
     </>
   );
