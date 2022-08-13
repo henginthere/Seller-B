@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import isWeekend from "date-fns/isWeekend";
 import TextField from "@mui/material/TextField";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
@@ -7,8 +7,8 @@ import { StaticDatePicker } from "@mui/x-date-pickers";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 
-import { MediButton } from "../../Common/MediButton";
-import { getManagerInfoApi } from "../../../api/managerApi";
+import { MediButton} from '../../Common/MediButton'
+import { getManagerInfoApi } from '../../../api/managerApi'
 
 function ManagerMainLeft() {
   const [value, setValue] = React.useState(new Date());
@@ -27,7 +27,7 @@ function ManagerMainLeft() {
     textAlign: "center",
     size: "20px",
     justifyContent: "center",
-    marginTop: "20px",
+    marginTop: "20px"
   };
   const blue = {
     color: "blue",
@@ -36,18 +36,19 @@ function ManagerMainLeft() {
     navigate("/meeting/mancon");
   };
 
-  useEffect(() => {
+  useEffect(()=>{
     const managerSeq = sessionStorage.getItem("seq");
     console.log(managerSeq);
 
     getManagerInfoApi(managerSeq)
-      .then((res) => {
-        setManagerName(res.data.managerName);
-      })
-      .catch((err) => {
-        console.log("Error");
-      });
-  });
+    .then((res)=>{
+      setManagerName(res.data.managerName);
+    })
+    .catch((err)=>{
+      console.log("Error");
+    })
+    
+  })
 
   return (
     <>
@@ -71,7 +72,13 @@ function ManagerMainLeft() {
         </LocalizationProvider>
         {/* 달력 END */}
         <div style={styleObj_Button}>
-          <MediButton label='회의 생성' onClick={mvMeetingManCon} />
+          <MediButton 
+            label="회의 생성" 
+            onClick={mvMeetingManCon} 
+          />
+          {/* <Button variant='contained' onClick={mvMeetingManCon}>
+            회의 생성
+          </Button> */}
         </div>
       </div>
     </>
