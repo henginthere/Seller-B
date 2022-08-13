@@ -5,7 +5,6 @@ import android.app.Activity
 import android.content.Intent
 import android.view.View
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,20 +31,19 @@ class HomeFragment : BaseFragment<HomeViewModel>(){
     @Inject
     lateinit var mainSharedViewModel: MainSharedViewModel
 
-    private val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+    private val startForResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
         if(it.resultCode == Activity.RESULT_OK){
             val intent = it.data
             if(intent != null){
-                val url = intent.getStringExtra("url")
+                val url = intent.getStringExtra("productSeq")
                 Toast.makeText(context,"Value: " + url, Toast.LENGTH_SHORT).show()
                 mainSharedViewModel.onQrCodeResult(url!!)
-        }
-
+            }
         }
     }
 
     override fun provideLayoutId(): Int = R.layout.fragment_home
-
 
     override fun injectDependencies(fragmentComponent: FragmentComponent) =
         fragmentComponent.inject(this)

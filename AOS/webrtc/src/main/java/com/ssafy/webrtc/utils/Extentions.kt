@@ -1,18 +1,13 @@
 package com.ssafy.webrtc.utils
 
-import android.annotation.SuppressLint
 import android.os.Handler
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.RelativeLayout
-import android.widget.TextView
-import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.children
 import com.ssafy.webrtc.openvidu.RemoteParticipant
-import okhttp3.internal.http2.Http2Reader
 import org.webrtc.EglBase
 import org.webrtc.MediaStream
 import org.webrtc.SurfaceViewRenderer
@@ -37,7 +32,8 @@ fun AppCompatActivity.createRemoteParticipantVideo(
     containerViewRes: String) {
     val mainHandler = Handler(this.mainLooper)
     val myRunnable = Runnable {
-        val videoViewId = baseContext.resources.getIdentifier(videoViewRes,"id",baseContext.packageName)
+        val videoViewId = baseContext.resources.getIdentifier(videoViewRes,
+            "id",baseContext.packageName)
         val videoView = findViewById<SurfaceViewRenderer>(videoViewId)
         remoteParticipant.setVideoView(videoView)
         videoView.setMirror(false)
@@ -53,28 +49,33 @@ fun AppCompatActivity.createRemoteParticipantVideo(
 
 
 
-fun AppCompatActivity.createRemoteParticipantVideo2(
+fun AppCompatActivity.createRemoteScreenVideo(
     remoteParticipant : RemoteParticipant,
     containerRes: String,
     pearViewRes: String,
+    num: Int
     ) {
     val mainHandler = Handler(this.mainLooper)
     val myRunnable = Runnable {
-        val containerViewId = baseContext.resources.getIdentifier(containerRes,"id",baseContext.packageName)
+        val containerViewId = baseContext.resources.getIdentifier(containerRes,
+            "id",baseContext.packageName)
         val containerView = findViewById<RelativeLayout>(containerViewId)
-        val pearViewId = baseContext.resources.getIdentifier(pearViewRes,"layout",baseContext.packageName)
+        val pearViewId = baseContext.resources.getIdentifier(pearViewRes,
+            "layout",baseContext.packageName)
         val rowView = this.layoutInflater.inflate(pearViewId, null)
-        val rp = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT)
+        val rp = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
+            RelativeLayout.LayoutParams.MATCH_PARENT)
         rowView.layoutParams = rp
         val rowId = View.generateViewId()
         rowView.id = rowId
+        rowView.translationZ = num.toFloat()
         containerView.addView(rowView)
         val videoView = (rowView as ViewGroup).getChildAt(0) as SurfaceViewRenderer
         remoteParticipant.setVideoView(videoView)
         videoView.setMirror(false)
         val rootEglBase = EglBase.create()
         videoView.init(rootEglBase.eglBaseContext, null)
-        //videoView.setZOrderMediaOverlay(true)
+        videoView.setZOrderMediaOverlay(false)
         remoteParticipant.setView(rowView)
     }
     mainHandler.post(myRunnable)
@@ -86,14 +87,17 @@ fun AppCompatActivity.resizeView(
 ){
     val mainHandler = Handler(this.mainLooper)
     val myRunnable = Runnable {
-        val containerViewId = baseContext.resources.getIdentifier(containerViewRes,"id",baseContext.packageName)
+        val containerViewId = baseContext.resources.getIdentifier(containerViewRes,
+            "id",baseContext.packageName)
         val containerView = findViewById<FrameLayout>(containerViewId)
         var width: Int
         var height: Int
 
         if(toggle){
-            width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 90f, resources.displayMetrics).toInt()
-            height = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 120f, resources.displayMetrics).toInt()
+            width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                90f, resources.displayMetrics).toInt()
+            height = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                120f, resources.displayMetrics).toInt()
 
         }else{
             width = RelativeLayout.LayoutParams.MATCH_PARENT

@@ -15,8 +15,6 @@ class HomeViewModel(
     userRepository: UserRepository
 ) : BaseViewModel(coroutineDispatchers, networkHelper) {
 
-    val count = 0;
-
     private val user: User? = userRepository.getCurrentUser()
 
     private val _isLogIn: MutableLiveData<Event<Boolean>> = MutableLiveData()
