@@ -1,0 +1,61 @@
+// @import url('https://fonts.googleapis.com/css?family=Permanent+Marker');
+
+// @import url('https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Edu+QLD+Beginner&display=swap');
+// @font-face {
+//   font-family: 'twayair';
+//   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_tway@1.0/twayair.woff') format('woff');
+//   font-weight: normal;
+//   font-style: normal;
+// }
+
+.container {
+	background-color: white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	
+	svg {
+		max-width: 45rem;
+		width: 100%;
+		height: auto;
+		fill: none;
+		stroke: black;
+		stroke-width: 4;
+		
+		tspan > tspan {
+			stroke-dasharray: 1500;
+			stroke-dashoffset: -1500;
+			
+			@for $i from 1 through 15 {
+				
+				&:nth-of-type(#{$i}) {
+					animation: draw 1100ms #{$i * 150}ms forwards;
+				}
+			}
+		}
+	}
+}
+
+@keyframes draw {
+	100% {
+		stroke-dashoffset: 0;
+	}
+}
+
+// 버튼
+@keyframes blink-effect {
+	50% {
+		opacity: 0.3;
+	}
+}
+
+.blink {
+	animation: blink-effect 1s step-end infinite;
+}
+
+.RightCircleOutlined-Icon {
+	width: 200px;
+	height: 200px;
+}
