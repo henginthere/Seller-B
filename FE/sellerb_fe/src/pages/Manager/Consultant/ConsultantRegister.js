@@ -7,16 +7,17 @@ import Button from "@mui/material/Button";
 import "./ConsultantRegister.css";
 import { registerConsultantApi } from "../../../api/consultantApi";
 import { productGroupListApi } from "../../../api/productApi";
+import axios from "axios";
 
 function ConsultantRegister() {
   const navigate = useNavigate();
+  const [resImg, setResImg] = useState("");
   const [groupList, setGroupList] = useState([]);
-  const [testList, setTestList] = useState([]);
+  
+  const [seqTest, setSeqTest] = useState([]);
 
   const [brandGroupList, setBrandGroupList] = useState([]);
-  const [managerBrand, setManagerBrand] = useState(
-    localStorage.getItem("brandNameKor")
-  );
+  const [managerBrand, setManagerBrand] = useState(sessionStorage.getItem("brandNameKor"));
 
   const [consultant, setConsultant] = useState({
     consultantId: "",
@@ -26,27 +27,38 @@ function ConsultantRegister() {
     consultantTel: "",
     productGroupSeq: "",
     consultantImageUrl: "",
+    formData:"",
   });
+  const { consultantId, consultantName, consultantEmail, consultantPass, consultantTel, productGroupSeq, consultantImageUrl } = consultant;
 
   const [imgBase64, setImgBase64] = useState([]); // 미리보기를 구현할 state
-  //const [imgFile, setImgFile] = useState(null); // 파일 그 자체를 받을 state
-  const [imgFile, setImgFile] = useState({
-    image_file: "",
-    preview_URL: `${process.env.PUBLIC_URL}/img/default_img.png`,
-  });
+  const [imgFile, setImgFile] = useState("");
+  const [previewUrl, setPreviewUrl] = useState(
+    `${process.env.PUBLIC_URL}/img/default_img.png`
+  );
 
-  const {
-    consultantId,
-    consultantName,
-    consultantEmail,
-    consultantPass,
-    consultantTel,
-    productGroupSeq,
-    consultantImageUrl
-  } = consultant;
+  // 매니저가 속한 브랜드의 제품군 리스트 받아오기
+  useEffect(() => {
+    productGroupListApi()
+      .then((res) => {
+        setGroupList(res.data); // groupList
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const onChange = (e) => {
+    e.preventDefault();
+    const { value, name } = e.target;
+    setConsultant({
+      ...consultant,
+      [name]: value,
+    });
+  };
 
   // 이미지 파일 관련
-  const handleChangeFile = (event) => {
+  const onHandleChangeFile = (event) => {
     console.log(event.target.files);
     setImgFile(event.target.files);
 
@@ -62,74 +74,38 @@ function ConsultantRegister() {
           console.log(base64);
           if (base64) {
             var base64Sub = base64.toString();
-
             setImgBase64((imgBase64) => [...imgBase64, base64Sub]);
           }
         };
       }
     }
   };
+
   // 이미지 파일 삭제
   const deleteImage = () => {
     setImgFile({
       image_file: "",
       preview_URL: `${process.env.PUBLIC_URL}/img/default_img.png`,
     });
-
     setImgBase64("");
   };
 
-  // 서버에 파일 & 제품정보 전송 : FormData()
-  const onProductSubmitBtn = async (e) => {
-    const formData = new FormData(); // FormData객체 생성
-
-    // Form객체에 파일값 추가 : append(key, value) or append(key, value, filename)
-    formData.append("file", e.target.files[0]);
-    console.log(formData);
-
-    // 제품 정보
-    setConsultant({
-      ...consultant,
-      formData: formData,
-    });
-  };
-
-  useEffect(() => {
-    productGroupListApi()
-      .then((res) => {
-        // const item = brandList.find((it) => it.brandNameKor === value)
-        setGroupList(res.data); // groupList
-        // console.log("groupListData:" + groupList[0].productGroupName)
-        // setGroupList(groupList.find((it)=> it.brandName === managerBrand));
-        // console.log("managerBrand State:" + managerBrand);
-        // const sample = groupList.find (data => data.brandName === managerBrand);
-        // console.log("sample:" + sample)
-        // setTestList(sample);
-        // console.log(testList[0].productGroupName)
-        // const managerBrandName = localStorage.getItem("brandNameKor");
-        // console.log(groupList[0])
-        // const list = groupList.find((it)=> it.brandNameKor === managerBrandName) // list : 매니저 브랜드의! 제품군 목록
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
+  // 컨설턴트 등록버튼
   const onRegisterBtn = (e) => {
-
     // productGroupName에 맞는 Seq찾기
-    // const info = {
-    //   consultantId: consultant.consultantId,
-    //   consultantName : consultant.consultantName,
-    //   consultantEmail : consultant.consultantEmail,
-    //   consultantPass : consultant.consultantPass,
-    //   consultantTel : consultant.consultantTel,
-    //   prodcutGroupSeq : item.prodcutGroupSeq,
-    //   consultantImageUrl:"",
-    // }
-    console.log("등록전 컨설턴트 상태 : " + JSON.stringify(consultant))
+    const info = {
+      consultantId: consultant.consultantId,
+      consultantName : consultant.consultantName,
+      consultantEmail : consultant.consultantEmail,
+      consultantPass : consultant.consultantPass,
+      consultantTel : consultant.consultantTel,
+      productGroupSeq :seqTest,
+      consultantImageUrl:resImg
+    }
 
-    registerConsultantApi(consultant)
+    console.log("제출전@ 컨설턴트 정보 : " + JSON.stringify(info))
+
+    registerConsultantApi(info)
       .then((res) => {
         console.log(res.data);
         navigate("/manager/main");
@@ -139,17 +115,29 @@ function ConsultantRegister() {
       });
   };
 
-  const onChange = (e) => {
-    e.preventDefault();
+ 
+  const onImgRegisterBtn = async() => {
+    const fd = new FormData(); 
 
-    const { value, name } = e.target;
-    setConsultant({
-      ...consultant,
-      [name]: value,
-    });
+    Object.values(imgFile).forEach((file) => fd.append("data", file))
 
-    console.log("setConsultant:" + consultant.productGroupName);
-  };
+    await axios.post('https://i7d105.p.ssafy.io/api/file/consultant', fd, {
+      header: {
+        "Content-Type": `multipart/form-data`
+      }
+    })
+    .then((response) => {
+      if(response.data){
+        console.log(response.data)
+        setResImg(response.data);
+      }
+    })
+    .catch((error)=>{
+      console.log("Error");
+    })
+  }
+
+
 
   const onGroupChange = (e) => {
     e.preventDefault();
@@ -160,17 +148,7 @@ function ConsultantRegister() {
         it.productGroupName === e.target.value
     );
 
-    console.log("item: " + item.brandName + " , " + item.productGroupSeq);
-
-    const value = item.prodcutGroupSeq;
-    const { name } = e.target;
-   
-    setConsultant({
-      ...consultant,
-      [name]: value,
-    });
-
-    console.log("onGroupChange:" + consultant.productGroupSeq);
+    setSeqTest(item.productGroupSeq); 
   };
 
   return (
@@ -181,7 +159,7 @@ function ConsultantRegister() {
         <div id="left">
           <div className="imageWrapper">
             {imgFile.image_file === "" ? (
-              <img className="preview-img" alt="#" src={imgFile.preview_URL} />
+              <img className="preview-img" alt="#" src={consultant.consultantImageUrl} />
             ) : null}
 
             {imgBase64.map((item) => {
@@ -198,15 +176,15 @@ function ConsultantRegister() {
             type="file"
             accept="image/*"
             id="file"
-            onChange={handleChangeFile}
+            onChange={onHandleChangeFile}
           />
 
-          <button className="bottom-btn" onClick={onProductSubmitBtn}>
-            업로드하기
+          <button className="bottom-btn" onClick={onImgRegisterBtn}>
+            이미지 등록
           </button>
         </div>
         <div id="right">
-          <div className="topText">
+          <div className="topText" onClick={onRegisterBtn }>
             <h2>상담사 등록</h2>
           </div>
           <form className="InfoWrapper">
@@ -273,7 +251,7 @@ function ConsultantRegister() {
                 select
                 fullWidth="true"
                 name="productGroupName"
-                value={consultant.productGroupName}
+                // value={consultant.productGroupName}
                 // onChange={onChange}
                 onChange={onGroupChange}
                 SelectProps={{
@@ -293,10 +271,9 @@ function ConsultantRegister() {
             </div>
             <div className="Button">
               <Button
-                onClick={onRegisterBtn}
+                onClick={()=>onRegisterBtn()}
                 className="registerBtn"
                 variant="contained"
-                type="submit"
               >
                 등록
               </Button>

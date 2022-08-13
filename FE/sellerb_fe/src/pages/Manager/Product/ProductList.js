@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import Axios from "axios";
 import "./ProductList.css";
 import { Footer, NavBar, ProdcutOption } from "../../../components/index";
-import { productGroupListApi, productGroupItemsApi  } from "../../../api/productApi";
+import { productGroupListApi, productGroupItemsApi, brandProductListApi  } from "../../../api/productApi";
 
 import { SearchOutlined, PlusCircleOutlined } from '@ant-design/icons'
 
@@ -12,23 +11,45 @@ function ProductList() {
   const navigate = useNavigate();
 
   const [items, setItems] = useState([]);
+  const [totalItems, setTotalItems] = useState([]);
 
   const [groupList, setGroupList] = useState([]);
-  const [managerBrand, setManagerBrand] = useState(
-    localStorage.getItem("brandNameKor")
-  );
+  const [managerBrand, setManagerBrand] = useState(sessionStorage.getItem("brandNameKor"));
+  const [brandSeq, setBrandSeq] = useState(sessionStorage.getItem("brandSeq"));
 
-  const [searchWord, setSearchWord] = useState("");
-  const [groupOption, setGroupOption] = useState("");
+  const [searchWord, setSearchWord] = useState(""); // 제품 검색어 
+  const [groupOption, setGroupOption] = useState("제품 전체보기"); 
+
+  useEffect(()=>{
+    brandProductListApi(brandSeq)
+    .then((res)=>{
+      setTotalItems(res.data)
+      console.log("처음 전체 아이템들 : " + JSON.stringify(res.data));
+      
+    })
+  }, [])
+
+  useEffect(() => {
+    productGroupListApi()
+      .then((res) => {
+        console.log(JSON.stringify(res.data));
+        setGroupList(res.data); // groupList
+        console.log("groupList: " + groupList);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const onGroupChange = (e) => {
     e.preventDefault();
     setGroupOption(e.target.value)
-
-    console.log("바귄 group state: " + groupOption)
     
     // option에 해당하는 제품군의 제품들 불러오기
-    productGroupItemsApi(e.target.value)
+    const selectGroupSeq = groupList.find((it)=> it.brandName === managerBrand
+                              && it.productGroupName === e.target.value);
+
+    productGroupItemsApi(selectGroupSeq.productGroupSeq)
     .then((res)=>{
       console.log(res.data);
       setItems(res.data)
@@ -55,20 +76,14 @@ function ProductList() {
   };
 
   // 선택한 제품군 option에 따라, 나타낼 해당 제품군 리스트 컴포넌트
-  function GroupOptionList() {
-    console.log("items:" + items)
-    return <ProdcutOption items={items} />;
+  function GroupOptionList({props}) {
+    console.log("items:" + props)
+    return <ProdcutOption items={props} />;
   }
 
-  useEffect(() => {
-    productGroupListApi()
-      .then((res) => {
-        setGroupList(res.data); // groupList
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  const onChangeImage = () =>{
+
+  }
 
   return (
     <>
@@ -77,8 +92,8 @@ function ProductList() {
       <div className="product-list">
         <div className="page-navi-wrapper">
           <div className="navi-left">
-            <select onChange={(e)=> onGroupChange(e)} key={groupOption} defaultValue={groupOption}>
-                {/* <option value="" /> */}
+            <select onChange={onGroupChange} defaultValue={groupOption}>
+                <option>제품 전체보기</option>
                 {groupList.map((option) =>
                   option.brandName === managerBrand ? (
                     <option value={option.productGroupName}>{option.productGroupName}</option>
@@ -108,7 +123,11 @@ function ProductList() {
           </div>
         </div>
         <div className="product-list-wrapper">
-          <GroupOptionList />
+          {groupOption === "제품 전체보기"
+          ? <GroupOptionList props={totalItems} />
+          : <GroupOptionList props={items} />
+        }
+          
         </div>
         {/* end : page-navi-wrapper */}
       </div>

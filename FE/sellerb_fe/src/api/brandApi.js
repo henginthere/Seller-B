@@ -1,4 +1,4 @@
-import { api } from "./api";
+import api from "./api";
 
 // GET : 브랜드 목록
 export const listBrandApi = async(success, fail) => {

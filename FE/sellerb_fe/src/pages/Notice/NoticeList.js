@@ -4,6 +4,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { listNoticeApi, searchNoticeApi } from "../../api/noticeApi";
 import "./NoticeList.css";
 import { Footer, NavBar } from "../../components/index";
+import { SmallButton } from "../../components/Common/SmallButton";
+import { MediButton } from "../../components/Common/MediButton";
+import { PaginationBox } from "../../components/Common/PaginationBox";
+import Pagination from "react-js-pagination";
 
 function NoticeList() {
   const navigate = useNavigate();
@@ -11,6 +15,19 @@ function NoticeList() {
   const [noticeList, setNoticeList] = useState([]); // -> api res.data 로 값 갱신해주기
   const [searchTitle, setSearchTitle] = useState("");
   var isManager = true;
+  if (sessionStorage.getItem("adminCheck") === "ROLE_ADMIN") {
+    isManager = true;
+  } else {
+    isManager = false;
+  }
+  // pagination
+  const [page, setPage] = useState(1);
+  const handlePageChange = (page) => {
+    console.log("현재 페이지: " + page)
+    setPage(page);
+  };
+  const [it, setIt] = useState(5);
+
   const onSearchByTitleHandler = (e) => {
     setSearchTitle(e.target.value);
   };
@@ -22,8 +39,6 @@ function NoticeList() {
     if (searchTitle === "") {
       listNoticeApi()
         .then((res) => {
-          // console.log(res.data);
-
           setNoticeList(res.data);
         })
         .catch((err) => {
@@ -32,7 +47,6 @@ function NoticeList() {
     }
     searchNoticeApi(searchTitle)
       .then((res) => {
-        // console.log(res.data);
         setNoticeList(res.data);
       })
       .catch((err) => {
@@ -40,17 +54,22 @@ function NoticeList() {
       });
   };
 
+  const goWriteBtn = () => {
+    navigate("/manager/noticeWrite");
+  };
+
   useEffect(() => {
     listNoticeApi()
       .then((res) => {
         // console.log(res.data);
-
         setNoticeList(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
+
+
 
   return (
     <>
@@ -67,47 +86,56 @@ function NoticeList() {
               value={searchTitle}
               onChange={onSearchByTitleHandler}
             />
-            <button className="list-search-button" onClick={submitBtnSearchByTitle}>검색</button>
-
+            <SmallButton label="검색" onClick={submitBtnSearchByTitle} />
           </div>
+          <br />
+          <table className="notice-table-list">
+            <thead className="notice-table-thead">
+              <tr className="notice-th-tr">
+                <th className="notice-th-tr-No">No</th>
+                <th className="notice-th-tr-title">Title</th>
+                <th className="notice-th-tr-manager">작성자</th>
+                <th className="notice-th-tr-date">Date</th>
+              </tr>
+            </thead>
+            <tbody className="notice-body">
+              {noticeList.slice(
+                it*(page-1),
+                it*(page-1)+it
+              ).map((list) => {
+                return (
+                  <tr className="notice-tbody-tr">
+                    <td className="notice-seq">{list.noticeSeq}</td>
+                    <td
+                      className="notice-title"
+                      onClick={() =>
+                        navigate(`/noticeDetail/${list.noticeSeq}`)
+                      }
+                    >
+                      {list.noticeTitle}
+                    </td>
+                    <td className="notice-manager">sellerB관리자</td>
+                    <td className="notice-regdate">{list.noticeRegDate}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
 
-            <table className="notice-table-list">
-              <thead className="notice-table-thead">
-                <tr className="notice-th-tr">
-                  <th className="notice-th-tr-No">No</th>
-                  <th className="notice-th-tr-title">Title</th>
-                  <th className="notice-th-th-manager">작성자</th>
-                  <th className="notice-th-tr-date">Date</th>
-                </tr>
-              </thead>
-              <tbody className="notice-body">
-                {noticeList.map((list) => {
-                  return (
-                    <tr className="notice-tbody-tr">
-                      <td className="notice-seq">{list.noticeSeq}</td>
-                      <td 
-                        className="notice-title"
-                        onClick={() =>
-                          navigate(`/noticeDetail/${list.noticeSeq}`)
-                        }
-                      >
-                        {list.noticeTitle}
-                      </td>
-                      <td className="notice-manager">sellerB관리자</td>
-                      <td className="notice-regdate">{list.noticeRegDate}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-     
           <div className="notice-write-wrapper">
-          <div className="notice-detail-bottom">
-                <button 
-                  className="detail-button"
-                  onClick={(e)=> navigate('/manager/noticeWrite')}
-                  >글 작성하기</button>
+            <div className="notice-detail-bottom">
+            <PaginationBox>
+              <Pagination
+                activePage={page}
+                itemsCountPerPage={it}
+                totalItemsCount={noticeList.length-1}
+                pageRangeDisplayed={3}
+                onChange={handlePageChange}
+              ></Pagination>
+            </PaginationBox>
+              <SmallButton onClick={goWriteBtn} size="sm" label="글작성하기" />
             </div>
+
             {/* {isManager ? (
               <Link to="/manager/noticeWrite">
                 <button className="write-btn">글작성</button>
