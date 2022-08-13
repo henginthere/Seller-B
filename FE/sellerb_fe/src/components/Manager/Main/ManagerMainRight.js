@@ -79,6 +79,7 @@ function ManagerMainRight() {
     const name = sessionStorage.getItem("brandNameKor");
     brandConsultantListApi(name)
       .then((res) => {
+        console.log("전체컨설턴트 :" + JSON.stringify(res.data));
         setConsultantList(res.data);
       })
       .catch((err) => {
