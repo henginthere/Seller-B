@@ -9,7 +9,7 @@ import { LOGIN } from "../../slices/userSlice";
 // import { loginUser }
 
 import { LoginApi } from "../../api/userApi";
-import { getManagerInfoApi } from "../../api/managerApi";
+import { getManagerInfoApi } from '../../api/managerApi';
 import { setRefreshToken, getCookieToken } from "../../storage/Cookie";
 import { SET_TOKEN, CHECK_ADMIN } from "../../slices/authSlice";
 
@@ -79,28 +79,32 @@ function Main() {
 
         // isAdmin이라면, Redux isAdmin 값 true로 전환
         dispatch(CHECK_ADMIN());
-
+       
         if (adminCheck === "ROLE_ADMIN") {
           sessionStorage.setItem("adminCheck", "ROLE_ADMIN");
-          navigate("/manager/main");
+          console.log("admin:" + sessionStorage.getItem("adminCheck"));
+          navigate("/manager/main")
         } else {
-          sessionStorage.setItem("adminCheck", "ROLE_USER");
+
+          sessionStorage.setItem("adminCheck","ROLE_USER");
+          console.log("consultant:" + sessionStorage.getItem("adminCheck"));
           navigate("/consultant/main");
         }
+
       })
-      .then((res) => {
+      .then((res)=>{
         const seq = sessionStorage.getItem("seq");
         // axios
-        getManagerInfoApi(seq)
+        
+          getManagerInfoApi(seq)
           .then((res) => {
             console.log("LOGIN 한 매니저 정보: " + JSON.stringify(res.data));
 
             sessionStorage.setItem("brandNameKor", res.data.brand.brandNameKor);
             sessionStorage.setItem("brandNameEng", res.data.brand.brandNameEng);
+            sessionStorage.setItem("brandSeq", res.data.brand.brandSeq);
 
-            console.log(
-              "IN SESSION: STORAGE" + sessionStorage.getItem("brandNameKor"),
-            );
+            console.log("IN SESSION:" + sessionStorage.getItem("brandSeq"));
           })
           .catch((err) => {});
       })

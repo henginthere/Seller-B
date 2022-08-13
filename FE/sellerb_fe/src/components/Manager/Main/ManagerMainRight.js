@@ -6,16 +6,18 @@ import { ListItemText } from "@mui/material";
 import { Divider } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import {
-  listConsultantApi,
-  searchConsultantApi,
-  listGroupConsultantApi,
-  brandConsultantListApi
+  listConsultantApi, searchConsultantApi,
+  listGroupConsultantApi, brandConsultantListApi
 } from "../../../api/consultantApi";
 import { productGroupListApi } from "../../../api/productApi";
 import { getManagerInfoApi } from "../../../api/managerApi"
 import { SmallButton } from '../../Common/SmallButton'
 import { MediButton } from "../../Common/MediButton";
 import "./ManagerMain.css";
+import "./ManagerMainRight.css";
+import Pagination from 'react-js-pagination'
+import { PaginationBox } from "../../Common/PaginationBox"
+import { SyncOutlined } from '@ant-design/icons'
 
 const styleObj = {
   width: "75%",
@@ -52,13 +54,17 @@ function ManagerMainRight() {
   const [groupList, setGroupList] = useState([]); // api에서 받아올 전~체 제품군 리스트 
   const [brandGroupList, setBrandGroupList] = useState([]);
   const [selectGroup, setSelectGroup] = useState("");
-
+  
+  // pagination 
+  const [page, setPage] = useState(1);
+  const handlePageChange = (page) => { setPage(page); };
+  const [it, setIt] = useState(5);
   // ManagerBrand
   const [managerBrandKor, setManagerBrandKor] = useState(
-    localStorage.getItem("brandNameKor")
+    sessionStorage.getItem("brandNameKor")
   );
   const [managerBrandEng, setManagerBrandEng] = useState(
-    localStorage.getItem("brandNameEng")
+    sessionStorage.getItem("brandNameEng")
   )
 
   // 처음에 받아온 컨설턴트 전체 리스트 / 입력된 상담사 검색어 / 검색결과를 담을 해당 컨설턴트 state  
@@ -73,9 +79,6 @@ function ManagerMainRight() {
     const name = sessionStorage.getItem("brandNameKor");
     brandConsultantListApi(name)
       .then((res) => {
-        // console.log("after API:" + res.data[0].consultantId);
-        // 소속브랜드의 상담사들만 보이기
-        console.log(JSON.stringify(res.data));
         setConsultantList(res.data);
       })
       .catch((err) => {
@@ -98,18 +101,20 @@ function ManagerMainRight() {
   }, []);
 
 
-
   const onGroupChange = (e) => {
     e.preventDefault();
 
-    console.log("e.target.value:" + e.target.value)
-
     setSelectGroup(e.target.value);
 
-    // data(전체 컨설턴트)에서, 브랜드네임이랑 && 선택한 제품군에 일치하는 상담사만 뽑기
-      const item = consultantList.filter(
-      it => it.brandName === managerBrandEng );
-    
+    // 바뀐 제품군 이름에 따라 -> 상담사 리스트 보여주기
+    // 제품군 이름 : e.target.value // 상담사 리스트 : consultantList
+
+    const items = consultantList.filter((it) => it.brandName === managerBrandEng
+    && it.productGroupName === e.target.value);
+
+    setConsultantList(items);
+    console.log("filtered Items : " + JSON.stringify(items));
+ 
   };
 
   const goDetail = (seq) => {
@@ -123,7 +128,6 @@ function ManagerMainRight() {
         console.log(res.data);
         // 받아온 해당 컨설턴트 출력하기
         setSearchCon(res.data);
-        console.log(searchCon.consultantName);
         setListState(false);
       })
       .catch((err) => {
@@ -134,6 +138,19 @@ function ManagerMainRight() {
   const onSearchNameChane = (e) => {
     setSearchName(e.target.value);
   };
+
+  const ResetConsultantList = () =>{
+    const name = sessionStorage.getItem("brandNameKor");
+    brandConsultantListApi(name)
+      .then((res) => {
+        console.log("전체컨설턴트 :" + JSON.stringify(res.data));
+        // setConsultantList([]);
+        setConsultantList(res.data);
+      })
+      .catch((err) => {
+        console.log("err:" + err.data);
+      });
+  }
 
 
   return (
@@ -146,7 +163,8 @@ function ManagerMainRight() {
           onChange={onSearchNameChane}
         />
         {/* <button onClick={(e) => onSearchBtn()}>검색하기</button> */}
-        <SmallButton onClick={(e) => onSearchBtn()} size="sm" label="검색하기" />
+        <SmallButton onClick={onSearchBtn} size="sm" label="검색" />
+  
         <select onChange={onGroupChange} defaultValue={selectGroup}>
           <option />
           {groupList.map((option) =>
@@ -158,23 +176,35 @@ function ManagerMainRight() {
             )
           )}
         </select>
+        <SyncOutlined 
+          style={{ fontSize: "20px", marginLeft: "15px", marginTop:"5px"}}
+          onClick={ResetConsultantList}
+        />
       </div>
+  
       <div style={styleObj_center}>
-        <table className="table-wrapper">
-          <thead className="table-header-wrapper">
-            <tr>
-              <th>상담사 이름</th>
-              <th>사번</th>
-              <th>담당 제품군</th>
+        <Link to="/manager/consultantRegister">
+          <MediButton size="md" label="상담사추가" />
+        </Link>
+        <table className="con-table-list">
+          <thead className="con-table-thead">
+            <tr className="con-th-tr">
+              <th className="con-th-tr-name">상담사 이름</th>
+              <th className="con-th-tr-id">사번</th>
+              <th className="con-th-tr-group">담당 제품군</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="con-list-body">
             {listState ? (
-              consultantList.map(function (ele, i) {
+              consultantList.slice(
+                it*(page-1), 
+                it*(page-1) + it
+                ).map(function (ele, i) {
                 return (
                   <>
-                    <tr>
+                    <tr className="con-tbody-tr">
                       <td
+                        className="con-name"
                         onClick={() =>
                           navigate(
                             `/manager/consultantDetail/${ele.consultantSeq}`
@@ -183,8 +213,8 @@ function ManagerMainRight() {
                       >
                         {ele.consultantName}
                       </td>
-                      <td>{ele.consultantId}</td>
-                      <td>{ele.consultantSeq}</td>
+                      <td className="con-id">{ele.consultantId}</td>
+                      <td className="con-seq">{ele.consultantSeq}</td>
                     </tr>
                   </>
                 );
@@ -208,10 +238,15 @@ function ManagerMainRight() {
             )}
           </tbody>
         </table>
-        <Link to="/manager/consultantRegister">
-          {/* <Button variant="contained">상담사 추가</Button> */}
-          <MediButton size="md" label="상담사추가" />
-        </Link>
+        <PaginationBox>
+        <Pagination
+          activePage={page}
+          itemsCountPerPage={it}
+          totalItemsCount={consultantList.length-1}
+          pageRangeDisplayed={3}
+          onChange={handlePageChange}>
+        </Pagination>
+      </PaginationBox>
       </div>
     </div>
   );

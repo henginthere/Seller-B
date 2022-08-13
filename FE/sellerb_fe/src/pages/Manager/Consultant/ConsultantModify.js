@@ -17,9 +17,13 @@ function ConsultantModify() {
     consultantId: "",
     consultantName: "",
     consultantEmail:"",
-    consultantPass:"",
-    consultantTel :""
+    consultantTel :"",
+    productGroupName: "",
+    productGroupSeq: "",
+    consultantImageUrl: "",
+    brandName: ""
   });
+
   const product_list = [
     { value: "TV", label: "TV" },
     { value: "phone", label: "Phone" },
@@ -34,8 +38,8 @@ function ConsultantModify() {
         console.log("res.data:" + res.data.consultantId);
         
         // consultant = res.data;
-        
         setConsultant(res.data); 
+        console.log("img: "+ res.data.consultantImageUrl)
         console.log("consultant:" + consultant.consultantId);
     })
     .catch((err)=>{
@@ -47,7 +51,17 @@ function ConsultantModify() {
   const onHandleSubmit = (e) => {
     e.preventDefault();
 
-    modifyConsultantApi(consultant)
+    const info = {
+      "consultantId" : consultant.consultantId,
+      "consultantName": consultant.consultantId,
+      "consultantEmail": consultant.consultantEmail,
+      "consultantTel": consultant.consultantTel,
+      "consultantPass": consultant.consultantPass,
+      "productGroupSeq": "",
+      "consultantImageUrl": ""
+    }
+
+    modifyConsultantApi(info)
     .then((res)=>{
       console.log(res.data);
     })
@@ -79,7 +93,7 @@ function ConsultantModify() {
         <div id='left'>
           <div className='imageWrapper'>
             <img
-              src={`${process.env.PUBLIC_URL}/img/ManagerImage.png`}
+              src={consultant.consultantImageUrl}
               alt='NOIMAGE'
             ></img>
           </div>
@@ -146,13 +160,19 @@ function ConsultantModify() {
                 required
                 select
                 fullWidth='true'
-                name='consultantGroup'
+                name='productGroupSeq'
+                value={consultant.productGroupName}
+                selected={consultant.productGroupName}
+                // defaultValue={consultant.productGroupName}
                 SelectProps={{
                   native: true,
                 }}
                 onChange={onChange}
               >
                 {product_list.map((option) => (
+                  option.value === consultant.productGroupName 
+                  ? ""
+                  :
                   <option key={option.value} value={option.value}>
                     {option.label}
                   </option>

@@ -2,6 +2,7 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import React from "react";
 
+import MainTwo from './pages/Main/MainTwo'
 // import Main from './pages/Main/Main';
 import {
   Main,
@@ -33,7 +34,7 @@ function App() {
           <Route path='/' element={<Main />} />
           <Route path='/manager/main' element={<ManagerMain />} />
           <Route path='/consultant/main' element={<ConsultantMain />} />
-          <Route path='/manager/mypage' element={<ManagerMyPage />} />
+          <Route path='/manager/mypage/:id' element={<ManagerMyPage />} />
           <Route path='/manager/register' element={<ManageRegister />} />
           <Route path='/manager/noticeList' element={<NoticeList />} />
           <Route path='/manager/noticeWrite' element={<NoticeWrite />} />
@@ -52,7 +53,7 @@ function App() {
             path='/manager/consultantModify/:id'
             element={<ConsultantModify />}
           />
-          <Route path='/consultant/mypage' element={<ConsultantMyPage />} />
+          <Route path='/consultant/mypage/:id' element={<ConsultantMyPage />} />
           <Route path='/manager/productList' element={<ProductList />} />
           <Route
             path='/manager/productRegister'

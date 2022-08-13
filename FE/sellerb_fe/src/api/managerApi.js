@@ -1,4 +1,4 @@
-import { api } from "./api";
+import api from "./api";
 
 export const managerRegisterApi = async (managerData, success, fail) => {
   return await api

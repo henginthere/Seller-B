@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Axios from "axios";
-
+import { listConsultingApi } from "../../api/consultantApi"; 
 
 
 const styleObj_center = {
@@ -25,21 +25,22 @@ const dummyData = [
 function ConsultingLog({consultant_id}) {
   console.log(consultant_id)
   const params = useParams();
-  const [data, setData] = useState("");
+  const [logData, setLogData] = useState([]);
 
   // axios : 상담사 출결이력 표시
-  // useEffect(() => {
-  //   listConsultingApi({consultant_id})
-  //     .then((res) => {
-  //       console.log(res.data);
+  useEffect(() => {
+    listConsultingApi(consultant_id)
+      .then((res) => {
+        console.log(JSON.stringify(res.data));
 
-  //       // attendance = res.data;
-  //       setData(res.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
+        // attendance = res.data;
+        setLogData(res.data);
+      
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <>
@@ -58,9 +59,9 @@ function ConsultingLog({consultant_id}) {
                 <>
                   <tr>
                     {/* <td  onClick={() => navigate(`/noticeDetail/${ele.notice_seq}`)}>{ele.notice_title}</td> */}
-                    <td>{ele.date}</td>
-                    <td>{ele.login_time}</td>
-                    <td>{ele.logout_time}</td>
+                    <td>{ele.loginTime}</td>
+                    <td>{ele.loginTime}</td>
+                    <td>{ele.logoutTime}</td>
                   </tr>
                 </>
               );
