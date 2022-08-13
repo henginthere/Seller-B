@@ -2,6 +2,7 @@ package com.ssafy.sellerb.data.repository
 
 import com.ssafy.sellerb.data.local.prefs.UserPreferences
 import com.ssafy.sellerb.data.model.User
+import com.ssafy.sellerb.data.model.Waiting
 import com.ssafy.sellerb.data.remote.NetworkService
 import com.ssafy.sellerb.data.remote.request.LoginRequest
 import com.ssafy.sellerb.data.remote.request.SignupRequest
@@ -52,7 +53,6 @@ class UserRepository @Inject constructor(
         val userEmail = userPreferences.getUserEmail()
         val userBirth = userPreferences.getUserBirth()
         val userToken = userPreferences.getUserToken()
-
         return if (userId != null && accessToken != null && refreshToken != null
             && authority != null && userSeq != null)
             User(userId,accessToken,refreshToken,authority, userSeq, userName,
@@ -60,6 +60,14 @@ class UserRepository @Inject constructor(
         else
             null
     }
+
+    fun setWaitingSeq(waitingSeq: Long){
+        userPreferences.setWaitingSeq(waitingSeq)
+    }
+
+    fun removeWaitingSeq() = userPreferences.removeWaitingSeq()
+
+    fun getWaitingSeq() = userPreferences.getWaitingSeq()
 
     fun doUserLogin(id : String, pass : String) : Flow<User> {
         return flow {

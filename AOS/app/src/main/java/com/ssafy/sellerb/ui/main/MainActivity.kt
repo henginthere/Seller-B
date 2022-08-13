@@ -3,10 +3,12 @@ package com.ssafy.sellerb.ui.main
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
@@ -20,6 +22,8 @@ import com.ssafy.sellerb.databinding.ActivityMainBinding
 import com.ssafy.sellerb.di.component.ActivityComponent
 import com.ssafy.sellerb.ui.base.BaseActivity
 import com.ssafy.sellerb.util.Constants.CHANNEL_ID
+import com.ssafy.sellerb.util.Constants.EXTRA_KEY_CONSULTING_SEQ
+import javax.inject.Inject
 
 
 class MainActivity : BaseActivity<MainViewModel>(){
@@ -37,6 +41,9 @@ class MainActivity : BaseActivity<MainViewModel>(){
         return binding.root
     }
 
+    @Inject
+    lateinit var mainSharedViewModel: MainSharedViewModel
+
     override fun injectDependencies(activityComponent: ActivityComponent)
     = activityComponent.inject(this)
 
@@ -53,30 +60,12 @@ class MainActivity : BaseActivity<MainViewModel>(){
             navController.navigate(R.id.item_home)
         }
 
-        // FCM 토큰 수신
-        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                Log.w(TAG, "FCM 토큰 얻기에 실패하였습니다.", task.exception)
-                return@OnCompleteListener
-            }
-            //uploadToken(task.result!!)
-
-            // token log 남기기
-            Log.d(TAG, "token: ${task.result ?: "task.result is null"}")
-        })
-        createNotificationChannel(CHANNEL_ID, "sellerb")
-
+        val consultingSeq = intent!!.getLongExtra(EXTRA_KEY_CONSULTING_SEQ,0L)
+        Log.e(TAG,"CONSULTING_SEQ : " + consultingSeq)
+        mainSharedViewModel.consultingSeq.postValue(consultingSeq)
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    // Notification 수신을 위한 채널 추가
-    private fun createNotificationChannel(id: String, name: String) {
-        val importance = NotificationManager.IMPORTANCE_DEFAULT
-        val channel = NotificationChannel(id, name, importance)
 
-        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        notificationManager.createNotificationChannel(channel)
-    }
 
     private fun onDestinationChanged(destination: NavDestination){
         when(destination.id){
@@ -87,14 +76,19 @@ class MainActivity : BaseActivity<MainViewModel>(){
             else ->{
                 binding.coordinator.visibility = View.GONE
             }
-
         }
-
     }
 
     override fun onNavigateUp(): Boolean {
         return navController.navigateUp() || super.onNavigateUp()
     }
 
+    override fun onNewIntent(intent: Intent?) {
+        val consultingSeq = intent!!.getLongExtra(EXTRA_KEY_CONSULTING_SEQ,0L)
+        Toast.makeText(this,"LONG  " + consultingSeq, Toast.LENGTH_SHORT).show()
+        Log.e(TAG,"CONSULTING_SEQ : " + consultingSeq)
+        mainSharedViewModel.consultingSeq.postValue(consultingSeq)
+        super.onNewIntent(intent)
+    }
 
 }

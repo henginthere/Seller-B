@@ -4,12 +4,14 @@ import android.content.Intent
 import android.view.View
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.ssafy.sellerb.R
 import com.ssafy.sellerb.databinding.FragmentWaitingBinding
 import com.ssafy.sellerb.di.component.FragmentComponent
 import com.ssafy.sellerb.ui.base.BaseFragment
 import com.ssafy.sellerb.ui.consulting.ConsultingActivity
 import com.ssafy.sellerb.ui.main.MainSharedViewModel
+import com.ssafy.sellerb.util.GlideHelper
 import javax.inject.Inject
 
 class WaitingFragment : BaseFragment<WaitingViewModel>(){
@@ -33,28 +35,48 @@ class WaitingFragment : BaseFragment<WaitingViewModel>(){
     override fun setupView(view: View) {
         _binding = FragmentWaitingBinding.bind(view)
 
-        binding.tvQrTest.text = mainSharedViewModel.qrCodeUrl.value!!.peek()
-
         binding.btnCancel.setOnClickListener{
-            findNavController().navigate(R.id.action_WaitingFragment_to_HomeFragment)
+            viewModel.doCancel()
         }
 
         binding.btnTest.setOnClickListener {
             val intent = Intent(context, ConsultingActivity::class.java)
             startActivity(intent)
         }
+
+
     }
 
     override fun setUpObserver() {
         super.setUpObserver()
 
-        viewModel.waitingSeq.observe(this){
-            Toast.makeText(context, "상담 대기중.. 잠시만 기다려 주세요 seq: ${it}",
-                Toast.LENGTH_SHORT)
-                .show()
+        viewModel.waiting.observe(this){
+            Glide
+                .with(binding.ivProductThumbnail.context)
+                .load(it.productThumbnail)
+                .into(binding.ivProductThumbnail)
+            binding.tvProductName.text = it.productName
         }
 
+        viewModel.waitingCancel.observe(this){
+            findNavController().navigate(R.id.action_WaitingFragment_to_HomeFragment)
+        }
 
+        viewModel.isWaiting.observe(this){
+            if(it){
+                val productSeq = mainSharedViewModel.qrCodeResult.value!!.peek()
+                viewModel.startWaiting(productSeq)
+            }else{
+                if(mainSharedViewModel.consultingSeq.value == 0L){
+                    viewModel.loadWaiting()
+                }else{
+                    viewModel.doCancel()
+                    val intent = Intent(context, ConsultingActivity::class.java)
+                    startActivity(intent)
+                }
+            }
+        }
     }
+
 
 }

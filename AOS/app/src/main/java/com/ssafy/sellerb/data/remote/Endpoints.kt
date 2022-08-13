@@ -1,5 +1,7 @@
 package com.ssafy.sellerb.data.remote
 
+import com.ssafy.sellerb.data.model.Waiting
+
 object Endpoints {
 
     const val LOGIN = "auth/login"
@@ -10,4 +12,7 @@ object Endpoints {
     const val WAITING_CUSTOMER = "waiting"
     const val GET_CONSULTING_INFO = "consulting/customer/{customer-id}"
     const val START_CONSULTING = "consulting/state/{seq}"
+    const val WAITING_CANCEL = "waiting/{seq}"
+    const val GET_WAITING_INFO = "waiting/{seq}"
+
 }

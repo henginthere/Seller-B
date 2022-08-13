@@ -17,6 +17,7 @@ class UserPreferences @Inject constructor(private val prefs: SharedPreferences){
         const val KEY_USER_EMAIL = "PREF_USER_EMAIL"
         const val KEY_USER_BIRTH = "PREF_USER_BIRTH"
         const val KEY_USER_TOKEN = "PREF_USER_TOKEN"
+        const val KEY_WAITING_SEQ = "PREF_WAITING_SEQ"
     }
 
     fun getUserId(): String? =
@@ -100,4 +101,12 @@ class UserPreferences @Inject constructor(private val prefs: SharedPreferences){
     fun removeUserToken() =
         prefs.edit().remove(KEY_USER_TOKEN).apply()
 
+    fun getWaitingSeq() =
+        prefs.getLong(KEY_WAITING_SEQ, 0L)
+
+    fun setWaitingSeq(waitingSeq: Long) =
+        prefs.edit().putLong(KEY_WAITING_SEQ, waitingSeq).apply()
+
+    fun removeWaitingSeq() =
+        prefs.edit().remove(KEY_WAITING_SEQ).apply()
 }

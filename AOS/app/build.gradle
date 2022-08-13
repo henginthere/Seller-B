@@ -89,13 +89,18 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.2.0'
 
     //fcm
-    implementation 'com.google.firebase:firebase-auth:19.2.0'
     implementation 'com.google.firebase:firebase-messaging:20.1.0'
-
-
     implementation platform('com.google.firebase:firebase-bom:30.3.1')
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.android.gms:play-services-auth:20.2.0'
+
+    // Image
+    implementation "com.github.bumptech.glide:glide:4.12.0"
+    kapt "com.github.bumptech.glide:compiler:4.12.0"
+    implementation ("com.github.bumptech.glide:recyclerview-integration:4.12.0") {
+        // Excludes the support library because it's already included by Glide.
+        transitive = false
+    }
 
     implementation project(":webrtc")
 }
