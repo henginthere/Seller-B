@@ -13,7 +13,7 @@ function NoticeList() {
 
   const [noticeList, setNoticeList] = useState([]); // -> api res.data 로 값 갱신해주기
   const [searchTitle, setSearchTitle] = useState("");
-  var isManager = true;
+  var isManager = false;
   if (sessionStorage.getItem("adminCheck") === "ROLE_ADMIN") {
     isManager = true;
   } else {
@@ -25,7 +25,7 @@ function NoticeList() {
     console.log("현재 페이지: " + page);
     setPage(page);
   };
-  const [it, setIt] = useState(5);
+  const [it, setIt] = useState(9);
 
   const onSearchByTitleHandler = (e) => {
     setSearchTitle(e.target.value);

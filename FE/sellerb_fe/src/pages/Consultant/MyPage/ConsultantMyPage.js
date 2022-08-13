@@ -275,7 +275,7 @@ function ConsultantMyPage() {
           </div>
         </div>
         {/* 오른쪽 */}
-        <div id='right'>
+        <div id='consultant-mypage-right'>
           {/* 상담 이력 LIST */}
           <div className='profile-right'>
             <div className='select-wrapper'>
