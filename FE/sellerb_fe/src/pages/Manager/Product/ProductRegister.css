@@ -8,14 +8,16 @@
 .register-main-wrapper .register-sub-wrapper {
     width: 1050px;
     margin: 0px auto;
-    padding-top: 30px;
+    padding-top: 70px;
 }
 
 .register-sub-wrapper .register-area-wrapper {
+    margin-left: 100px;
+
     display: flex;
     -webkit-box-pack: justify;
     justify-content: space-between;
-    font-family: "Noto Sans";
+    /* font-family: "Noto Sans"; */
 }
 
 .register-area-wrapper .left-img > img {
@@ -25,6 +27,8 @@
 
 .register-area-wrapper .right-input {
     width: 560px;
+    margin-left: 100px;
+    margin-top: 50px;
 }
 
 .right-input .input-id {
@@ -57,32 +61,28 @@
 .input-sub-content-wrapper {
     box-sizing: border-box;
     margin: 0;
+    border-bottom: solid 0.3px #D4DAE6;
+    padding-bottom: 50px;
+}
+
+.product-img-bottom-wrapper {
+    display: flex;
+}
+
+.product-img-bottom-wrapper > input {
+    margin-top: 10px;
+}
+
+.product-register-small-btn {
+    margin-top: 10px;
+}
+
+.product-register-medi-btn {
+    display: flex;
+    margin-top: 40px;
 }
 
 
-
-/* .left-img .preview-img {
-    width: 400px;
-    height: 250px;
-
-    margin-left: 200px;
-} */
-
-
-/* 
-.left-img .img-wrapper {
-    width: 400px;
-    height: 250px;
-    border-radius: 15%;
-    overflow: hidden;
-    margin-left: 200px;
-} */
-
-.img-wrapper > img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
 
 /* right input  */
 .mainContent-wrapper .right-input {
@@ -114,12 +114,11 @@
     width: 500px;
 }
 
-
-.bottom-btn {
-    border: 2px solid black;
-    width: 100px;
-    font-size: 12px;
-    background-color: beige;
-    margin-left: 80%;
+/* 이미지 관련 설정 */
+.product-register-img {
+    width: 430px;
+    height: 370px;
+    object-fit: cover;
+    margin-top: 15px;
 }
 
