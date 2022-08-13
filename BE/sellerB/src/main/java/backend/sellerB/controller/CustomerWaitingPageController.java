@@ -3,6 +3,7 @@ package backend.sellerB.controller;
 import backend.sellerB.dto.CustomerWaitingPageDto;
 import backend.sellerB.dto.RegisterCustomerWaitingPageDto;
 import backend.sellerB.service.CustomerWaitingPageService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +23,14 @@ public class CustomerWaitingPageController {
 
     @PostMapping
     public ResponseEntity<CustomerWaitingPageDto> saveCustomerWaitingPage(@Valid @RequestBody RegisterCustomerWaitingPageDto registerCustomerWaitingPageDto) throws IOException {
-        return ResponseEntity.ok(customerWaitingPageService.create(registerCustomerWaitingPageDto));
+        CustomerWaitingPageDto customerWaitingPageDto = customerWaitingPageService.create(registerCustomerWaitingPageDto);
+        if(customerWaitingPageDto!=null){
+            return ResponseEntity.ok(customerWaitingPageDto);
+        }
+        else{
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+
     }
 
     @GetMapping("/{seq}")
