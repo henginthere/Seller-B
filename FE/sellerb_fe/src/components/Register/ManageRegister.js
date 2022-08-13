@@ -99,28 +99,7 @@ function ManageRegister() {
   const submit = async (values) => {
     const { brand, id, password, phone, email } = values;
     console.log(values.brand);
-    // try {
-    //   await axios.post("/api/auth/signup", {
-    //     brand,
-    //     id,
-    //     password,
-    //     phone,
-    //     email
-    //   });
-    //   toast.success(<h3>회원가입이 완료되었습니다.<br/>로그인 하세요😎</h3>, {
-    //     position: "top-center",
-    //     autoClose: 2000
-    //   });
-    //   setTimeout(()=> {
-    //     navigate("/login");
-    //   }, 2000);
-
-    // } catch (e) {
-    //   // 서버에서 받은 에러 메시지 출력
-    //   toast.error(e.response.data.message + "😭", {
-    //     position: "top-center",
-    //   });
-    // }
+  
   };
 
   return (
@@ -164,15 +143,6 @@ function ManageRegister() {
                       </div>
                     </div>
                   </div>
-                  {/* <input
-                value={values.brand}
-                name="brand"
-                type="text"
-                variant="outlined"
-                onChange={handleChange}
-                placeholder="제품 브랜드"
-                className="size"
-              /> */}
                   <div className="error-message">{errors.brand}</div>
                   {/* </label> */}
                 </div>
