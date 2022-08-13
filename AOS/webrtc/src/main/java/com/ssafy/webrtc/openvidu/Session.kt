@@ -69,7 +69,8 @@ class Session(
                 rtcConfig, object : CustomPeerConnectionObserver("local"){
                     override fun onIceCandidate(iceCandidate: IceCandidate) {
                         super.onIceCandidate(iceCandidate)
-                        websocket?.onIceCandidate(iceCandidate, localParticipant?.getConnectionId())
+                        websocket?.onIceCandidate(iceCandidate, localParticipant?.
+                        getConnectionId())
                     }
 
                     override fun onSignalingChange(signalingState: SignalingState) {
@@ -86,11 +87,13 @@ class Session(
                 })
             if(localParticipant?.getAudioTrack() != null){
                 peerConnection!!.addTransceiver(localParticipant?.getAudioTrack(),
-                    RtpTransceiver.RtpTransceiverInit(RtpTransceiver.RtpTransceiverDirection.SEND_ONLY))
+                    RtpTransceiver.RtpTransceiverInit(
+                        RtpTransceiver.RtpTransceiverDirection.SEND_ONLY))
             }
             if(localParticipant?.getVideoTrack() != null){
                 peerConnection!!.addTransceiver(localParticipant?.getVideoTrack(),
-                    RtpTransceiver.RtpTransceiverInit(RtpTransceiver.RtpTransceiverDirection.SEND_ONLY))
+                    RtpTransceiver.RtpTransceiverInit(
+                        RtpTransceiver.RtpTransceiverDirection.SEND_ONLY))
             }
 
             return peerConnection!!
@@ -124,7 +127,8 @@ class Session(
                         mediaStreams: Array<MediaStream?>?
                     ) {
                         super.onAddTrack(rtpReceiver, mediaStreams)
-                        if(mediaStreams != null && mediaStreams[0] != null && remoteParticipants != null){
+                        if(mediaStreams != null && mediaStreams[0] != null
+                            && remoteParticipants != null){
                             activity!!.setRemoteMediaStream(
                                 mediaStreams[0]!!,
                                 remoteParticipants[connectionId]!!)
@@ -158,7 +162,8 @@ class Session(
     }
 
     fun createOfferForPublishing(constraints: MediaConstraints?) {
-        localParticipant?.getPeerConnection()?.createOffer(object : CustomSdpObserver("createOffer") {
+        localParticipant?.getPeerConnection()?.createOffer(
+            object : CustomSdpObserver("createOffer") {
             override fun onCreateSuccess(sessionDescription: SessionDescription?) {
                 super.onCreateSuccess(sessionDescription)
                 Log.i("createOffer SUCCESS", sessionDescription.toString())
@@ -226,8 +231,6 @@ class Session(
     fun getRemoteParticipant(id: String?): RemoteParticipant? {
         return remoteParticipants[id]
     }
-
-    fun getRemoteNum() : Int = remoteParticipants.size
 
     fun getPeerConnectionFactory(): PeerConnectionFactory? {
         return peerConnectionFactory

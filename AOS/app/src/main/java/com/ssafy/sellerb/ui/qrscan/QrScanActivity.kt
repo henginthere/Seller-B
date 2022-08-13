@@ -72,12 +72,16 @@ class QrScanActivity : AppCompatActivity() {
         scanner.process(image)
             .addOnSuccessListener { barcodes ->
                 for (barcode in barcodes) {
-                    if(barcode.url != null){
-                        val intent = Intent()
-                        intent.putExtra("url", barcode.url!!.url)
-                        setResult(Activity.RESULT_OK, intent)
-                        finish()
-                    }
+                    val intent = Intent()
+                    intent.putExtra("productSeq", barcode.rawValue)
+                    setResult(Activity.RESULT_OK, intent)
+                    finish()
+//                    if(barcode.url != null){
+//                        val intent = Intent()
+//                        intent.putExtra("url", barcode.url!!.url)
+//                        setResult(Activity.RESULT_OK, intent)
+//                        finish()
+//                    }
                 }
             }
             .addOnFailureListener {
@@ -89,7 +93,8 @@ class QrScanActivity : AppCompatActivity() {
         override fun analyze(imageProxy: ImageProxy) {
             val mediaImage = imageProxy.image
             if (mediaImage != null) {
-                val image = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
+                val image = InputImage
+                    .fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
                 scanBarcodes(image)
             }
             imageProxy.close()
