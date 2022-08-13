@@ -3,9 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 
 import "./ProductList.css";
 import { Footer, NavBar, ProdcutOption } from "../../../components/index";
-import { productGroupListApi, productGroupItemsApi, brandProductListApi  } from "../../../api/productApi";
+import {
+  productGroupListApi,
+  productGroupItemsApi,
+  brandProductListApi,
+} from "../../../api/productApi";
 
-import { SearchOutlined, PlusCircleOutlined } from '@ant-design/icons'
+import { SearchOutlined, PlusCircleOutlined } from "@ant-design/icons";
 
 function ProductList() {
   const navigate = useNavigate();
@@ -14,20 +18,20 @@ function ProductList() {
   const [totalItems, setTotalItems] = useState([]);
 
   const [groupList, setGroupList] = useState([]);
-  const [managerBrand, setManagerBrand] = useState(sessionStorage.getItem("brandNameKor"));
+  const [managerBrand, setManagerBrand] = useState(
+    sessionStorage.getItem("brandNameKor"),
+  );
   const [brandSeq, setBrandSeq] = useState(sessionStorage.getItem("brandSeq"));
 
-  const [searchWord, setSearchWord] = useState(""); // 제품 검색어 
-  const [groupOption, setGroupOption] = useState("제품 전체보기"); 
+  const [searchWord, setSearchWord] = useState(""); // 제품 검색어
+  const [groupOption, setGroupOption] = useState("제품 전체보기");
 
-  useEffect(()=>{
-    brandProductListApi(brandSeq)
-    .then((res)=>{
-      setTotalItems(res.data)
+  useEffect(() => {
+    brandProductListApi(brandSeq).then((res) => {
+      setTotalItems(res.data);
       console.log("처음 전체 아이템들 : " + JSON.stringify(res.data));
-      
-    })
-  }, [])
+    });
+  }, []);
 
   useEffect(() => {
     productGroupListApi()
@@ -43,21 +47,23 @@ function ProductList() {
 
   const onGroupChange = (e) => {
     e.preventDefault();
-    setGroupOption(e.target.value)
-    
+    setGroupOption(e.target.value);
+
     // option에 해당하는 제품군의 제품들 불러오기
-    const selectGroupSeq = groupList.find((it)=> it.brandName === managerBrand
-                              && it.productGroupName === e.target.value);
+    const selectGroupSeq = groupList.find(
+      (it) =>
+        it.brandName === managerBrand && it.productGroupName === e.target.value,
+    );
 
     productGroupItemsApi(selectGroupSeq.productGroupSeq)
-    .then((res)=>{
-      console.log(res.data);
-      setItems(res.data)
-      console.log("itemslist :" + items);
-    })
-    .catch((err)=>{
-      console.log("error")
-    })
+      .then((res) => {
+        console.log(res.data);
+        setItems(res.data);
+        console.log("itemslist :" + items);
+      })
+      .catch((err) => {
+        console.log("error");
+      });
 
     console.log("groupOption : " + groupOption);
   };
@@ -76,58 +82,57 @@ function ProductList() {
   };
 
   // 선택한 제품군 option에 따라, 나타낼 해당 제품군 리스트 컴포넌트
-  function GroupOptionList({props}) {
-    console.log("items:" + props)
+  function GroupOptionList({ props }) {
+    console.log("items:" + props);
     return <ProdcutOption items={props} />;
   }
 
-  const onChangeImage = () =>{
-
-  }
+  const onChangeImage = () => {};
 
   return (
     <>
       <NavBar />
-      <div className="page-title">제품 목록</div>
-      <div className="product-list">
-        <div className="page-navi-wrapper">
-          <div className="navi-left">
+      <div className='page-title'>제품 목록</div>
+      <div className='product-list'>
+        <div className='page-navi-wrapper'>
+          <div className='navi-left'>
             <select onChange={onGroupChange} defaultValue={groupOption}>
-                <option>제품 전체보기</option>
-                {groupList.map((option) =>
-                  option.brandName === managerBrand ? (
-                    <option value={option.productGroupName}>{option.productGroupName}</option>
-                  ) : (
-                    ""
-                  )
-                )}
-
+              <option>제품 전체보기</option>
+              {groupList.map((option) =>
+                option.brandName === managerBrand ? (
+                  <option value={option.productGroupName}>
+                    {option.productGroupName}
+                  </option>
+                ) : (
+                  ""
+                ),
+              )}
             </select>
           </div>
-          <div className="navi-right">
+          <div className='navi-right'>
             <input
-              placeholder="제품명으로 검색"
+              placeholder='제품명으로 검색'
               value={searchWord}
               onChange={onSearchWordHandler}
             />
-            <SearchOutlined 
-              id="search-icon-btn"
-              onClick={()=> navigate("/")}
+            <SearchOutlined
+              id='search-icon-btn'
+              onClick={() => navigate("/")}
             />
 
-              <div>제품등록</div>
-              <PlusCircleOutlined
-                id="prod-create-btn" 
-                onClick={()=> navigate("/manager/productRegister")} 
-              />
+            <div>제품등록</div>
+            <PlusCircleOutlined
+              id='prod-create-btn'
+              onClick={() => navigate("/manager/productRegister")}
+            />
           </div>
         </div>
-        <div className="product-list-wrapper">
-          {groupOption === "제품 전체보기"
-          ? <GroupOptionList props={totalItems} />
-          : <GroupOptionList props={items} />
-        }
-          
+        <div className='product-list-wrapper'>
+          {groupOption === "제품 전체보기" ? (
+            <GroupOptionList props={totalItems} />
+          ) : (
+            <GroupOptionList props={items} />
+          )}
         </div>
         {/* end : page-navi-wrapper */}
       </div>

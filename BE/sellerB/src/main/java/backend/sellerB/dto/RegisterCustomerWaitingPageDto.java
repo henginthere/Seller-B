@@ -13,5 +13,5 @@ public class RegisterCustomerWaitingPageDto {
     private Long productSeq;
     private String customerWaitingPageMent;
 //    private MultipartFile customerWaitingPageImageFile;
-    private String customerWaitingPageImageUrl;
+    private String customerWaitingPageImage;
 }
