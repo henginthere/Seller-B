@@ -25,7 +25,6 @@ function ProductList() {
     .then((res)=>{
       setTotalItems(res.data)
       console.log("처음 전체 아이템들 : " + JSON.stringify(res.data));
-      
     })
   }, [])
 
@@ -58,7 +57,6 @@ function ProductList() {
     .catch((err)=>{
       console.log("error")
     })
-
     console.log("groupOption : " + groupOption);
   };
 

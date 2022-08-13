@@ -14,7 +14,7 @@ function ProdcutOption({ items }) {
   // 해당 제품군에 대한 상품들 -> 리스트로 받기
   const [data, setData] =  useState(items); // 더미데이터로 셋팅
   const [page, setPage] = useState(1);
-  const [it, setIt] = useState(4);
+  const [it, setIt] = useState(8);
   const navigate = useNavigate();
   
   const handlePageChange = (page) => { setPage(page); };
@@ -36,24 +36,20 @@ function ProdcutOption({ items }) {
               <div
                 className="element-wrapper"
                 onClick={() => navigate(`/manager/productDetail/${ele.productSeq}`)}>
-                <img
+                <img className="prod-option-img"
                   alt="#"
                   src={ele.productThumbnail}
                 />
-                <div className="product-info">
-                  <h5>품번 : </h5>
+                <div className="product-info-id">
                   {ele.productId}
                 </div>
-                <div className="product-info" >
-                  <h5>제품명 : </h5>
+                <div className="product-info-name" >
                   {ele.productName}
                 </div>
-                <div className="product-info">
-                  <h5>가격 : </h5>
+                <div className="product-info-price">
                   {ele.productPrice}
                 </div>
               </div>
-              
             </>
           );
         })}
