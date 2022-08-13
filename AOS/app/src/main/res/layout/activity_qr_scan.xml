@@ -5,27 +5,52 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+
     <androidx.camera.view.PreviewView
         android:id="@+id/pv_camera"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
+        android:layout_height="match_parent"
         android:importantForAccessibility="no" />
 
     <ImageView
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:src="@drawable/qr_scan_background"
+        android:id="@+id/iv_qr_guide"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:src="@drawable/br_qr_sacn"
         android:layout_centerInParent="true"
-
         />
 
     <TextView
         android:id="@+id/tv_qr_code"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/pv_camera"
-        android:text="QR Code"
-        android:layout_marginTop="30dp"
-        android:gravity="center"/>
+        android:layout_above="@+id/iv_qr_guide"
+        android:layout_marginBottom="30dp"
+        android:text="QR 코드를 찍어 상담을 시작해 보세요!"
+        android:textSize="20dp"
+        android:textColor="#A6C8C5C5"
+        android:gravity="center"
+        />
+
+    <ImageView
+        android:id="@+id/iv_qr_logo"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/ic_logo" />
+
+    <Button
+        android:id="@+id/btn_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TEST"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        />
 
 </RelativeLayout>
