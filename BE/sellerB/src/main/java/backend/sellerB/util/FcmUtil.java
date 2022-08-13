@@ -28,7 +28,7 @@ public class FcmUtil {
 //            FileInputStream serviceAccount = new FileInputStream("/var/jenkins_home/workspace/sellerB/BE/sellerB/src/main/resources/sellerb-28f08-firebase-adminsdk-szd5u-ff507df489.json");
             PathMatchingResourcePatternResolver patternResolver = new PathMatchingResourcePatternResolver();
 //            Resource resource = patternResolver.getResource("/static/sellerb-28f08-firebase-adminsdk-szd5u-ff507df489.json").getInputStream();
-            InputStream serviceAccount = patternResolver.getResource("/static/sellerb-28f08-firebase-adminsdk-szd5u-ff507df489.json").getInputStream();
+            InputStream serviceAccount = patternResolver.getResource("/sellerb-28f08-firebase-adminsdk-szd5u-ff507df489.json").getInputStream();
 //			FileInputStream serviceAccount = new FileInputStream("/home/careme/app/WEB-INF/classes/firebase/firebase_service_key.json");
             FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
