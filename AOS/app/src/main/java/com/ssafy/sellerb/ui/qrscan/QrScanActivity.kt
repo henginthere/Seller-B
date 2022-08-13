@@ -53,7 +53,7 @@ class QrScanActivity : AppCompatActivity() {
         }
         binding.btnTest.setOnClickListener {
             val intent = Intent()
-            intent.putExtra("url", "https://i7d105.p.ssafy.io/api/product/1")
+            intent.putExtra("productSeq", 1L)
             setResult(Activity.RESULT_OK, intent)
             finish()
         }
@@ -72,8 +72,11 @@ class QrScanActivity : AppCompatActivity() {
         scanner.process(image)
             .addOnSuccessListener { barcodes ->
                 for (barcode in barcodes) {
+                    val rawValue = barcode.rawValue
+                    val productSeq = rawValue!!.substring(
+                        rawValue.indexOf("=") + 1).toLong()
                     val intent = Intent()
-                    intent.putExtra("productSeq", barcode.rawValue)
+                    intent.putExtra("productSeq", productSeq)
                     setResult(Activity.RESULT_OK, intent)
                     finish()
 //                    if(barcode.url != null){

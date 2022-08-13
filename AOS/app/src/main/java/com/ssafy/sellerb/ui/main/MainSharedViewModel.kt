@@ -13,9 +13,15 @@ class MainSharedViewModel(
 
     override fun onCreate() {}
 
-    val qrCodeUrl = MutableLiveData<Event<String>>()
+    val qrCodeResult = MutableLiveData<Event<Long>>()
 
-    fun onQrCodeResult(url : String){
-        qrCodeUrl.postValue(Event(url))
+    val consultingSeq = MutableLiveData<Long>()
+
+    init {
+        consultingSeq.postValue(0L)
+    }
+
+    fun onQrCodeResult(productSeq : Long){
+        qrCodeResult.postValue(Event(productSeq))
     }
 }

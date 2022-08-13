@@ -20,15 +20,23 @@ class HomeViewModel(
     private val _isLogIn: MutableLiveData<Event<Boolean>> = MutableLiveData()
     val isLogin: LiveData<Event<Boolean>> = _isLogIn
 
+    val isWaiting: MutableLiveData<Boolean> = MutableLiveData()
+
     init {
         if(user == null){
             _isLogIn.postValue(Event(false))
         }else{
             _isLogIn.postValue(Event(true))
         }
+        //userRepository.removeWaitingSeq()
+        if(userRepository.getWaitingSeq() != 0L){
+            isWaiting.postValue(false)
+        }else{
+            isWaiting.postValue(true)
+        }
     }
-    override fun onCreate() {
 
+    override fun onCreate() {
     }
 
 

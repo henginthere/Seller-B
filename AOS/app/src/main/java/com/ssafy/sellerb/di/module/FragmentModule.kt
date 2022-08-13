@@ -3,6 +3,7 @@ package com.ssafy.sellerb.di.module
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ssafy.sellerb.ViewModelProviderFactory
+import com.ssafy.sellerb.data.repository.ConsultingRepository
 import com.ssafy.sellerb.data.repository.ProductRepository
 import com.ssafy.sellerb.data.repository.UserRepository
 import com.ssafy.sellerb.ui.base.BaseFragment
@@ -58,10 +59,10 @@ class FragmentModule(private val fragment: BaseFragment<*>) {
         coroutineDispatchers: CoroutineDispatchers,
         networkHelper: NetworkHelper,
         userRepository: UserRepository,
-        productRepository: ProductRepository
+        consultingRepository: ConsultingRepository
     ): WaitingViewModel = ViewModelProvider(
         fragment, ViewModelProviderFactory(WaitingViewModel::class){
-            WaitingViewModel(coroutineDispatchers, networkHelper, userRepository, productRepository)
+            WaitingViewModel(coroutineDispatchers, networkHelper, userRepository, consultingRepository)
         })[WaitingViewModel::class.java]
 
     @Provides

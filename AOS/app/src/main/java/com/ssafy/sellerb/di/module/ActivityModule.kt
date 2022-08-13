@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ssafy.sellerb.ViewModelProviderFactory
 import com.ssafy.sellerb.data.repository.UserRepository
 import com.ssafy.sellerb.ui.base.BaseActivity
+import com.ssafy.sellerb.ui.main.MainSharedViewModel
 import com.ssafy.sellerb.ui.main.MainViewModel
 import com.ssafy.sellerb.util.CoroutineDispatchers
 import com.ssafy.sellerb.util.network.NetworkHelper
@@ -26,5 +27,14 @@ class ActivityModule(private val activity: BaseActivity<*>) {
         activity, ViewModelProviderFactory(MainViewModel::class){
             MainViewModel(coroutineDispatchers, networkHelper, userRepository)
         }).get(MainViewModel::class.java)
+
+    @Provides
+    fun provideMainSharedViewModel(
+        coroutineDispatchers: CoroutineDispatchers,
+        networkHelper: NetworkHelper
+    ) : MainSharedViewModel = ViewModelProvider(
+        activity, ViewModelProviderFactory(MainSharedViewModel::class){
+            MainSharedViewModel(coroutineDispatchers, networkHelper)
+        })[MainSharedViewModel::class.java]
 
 }
