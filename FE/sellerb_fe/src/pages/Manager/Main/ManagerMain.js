@@ -21,7 +21,12 @@ function ManagerMain() {
       <nav>
         <NavBar></NavBar>
       </nav>
-      <div id='wrapper'>
+      <div className='consultant-main-image-wrapper'>
+        <img
+          src={`${process.env.PUBLIC_URL}/img/consultantMainPageImage.jpg`}
+        />
+      </div>
+      <div id='manager-main-wrapper'>
         {/* 좌측 환영인사 및 달력, 회의생성 */}
         <div id='manager-main-left'>
           <ManagerMainLeft />
