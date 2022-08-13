@@ -4,6 +4,9 @@ import backend.sellerB.entity.Notice;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-public interface NoticeRepository extends JpaRepository<Notice, Integer> {
+import java.util.List;
+
+public interface NoticeRepository extends JpaRepository<Notice, Long> {
+    List<Notice> findByNoticeTitleContaining(String noticeTitle);
 
 }

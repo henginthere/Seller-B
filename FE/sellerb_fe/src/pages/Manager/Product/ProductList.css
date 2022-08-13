@@ -1,0 +1,64 @@
+
+.page-title {
+    font-size: 25px;
+    font-family: twayair;
+    color: #324E66;
+    padding: 1.5rem;
+}
+
+.product-list {
+
+}
+
+.page-navi-wrapper{
+    height: 30%;
+    /* background-color: #f6efec; */
+
+    display: flex;
+}
+
+.navi-left {
+    justify-content: start;
+    width: 50%;
+
+    margin-left: 10%;
+}
+
+.navi-right {
+    justify-content: end;
+    display: flex;
+    width: 50%;
+
+    margin-right: 10%;
+}
+
+.navi-right > input {
+    border-radius: 10px;
+    border: none;
+    background-color: #eef0f0;
+}
+
+#search-icon-btn {
+    font-size: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#prod-create-btn {
+    font-size: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+
+.product-list-wrapper {
+    margin-left: 100px;
+    margin-right: 100px;
+
+    /* background-color:beige; */
+    max-width: 100%;
+    flex-wrap: nowrap;
+    align-content: stretch;
+    height: auto; 
+    background-color: yello;
+}

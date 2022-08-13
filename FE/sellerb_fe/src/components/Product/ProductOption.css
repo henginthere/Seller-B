@@ -1,0 +1,29 @@
+.body-wrapper {
+  max-width: 100%;
+  max-height: 400px;
+  /* background-color: #fffaff; */
+  display: flex;
+  flex-wrap: wrap;
+  overflow: auto;
+}
+
+.element-wrapper {
+    width: 18%;
+    /* border: 1px solid brown; */
+    background-color: #f4fcf3;
+    border-radius: 7%;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.element-wrapper > img {
+    width: 80%;
+    margin-left: 10%;
+    margin-bottom: 15px;
+}
+
+.element-wrapper .product-info {
+    display: flex;
+    margin-top: 10px;
+
+}

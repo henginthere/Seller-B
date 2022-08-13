@@ -1,30 +1,60 @@
 package backend.sellerB.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.SQLDelete;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.domain.Persistable;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@DynamicInsert
+@SQLDelete(sql = "UPDATE t_consultant_attendance SET consultant_attendance_state=true,logout_time=CURRENT_TIMESTAMP WHERE consultant_attendance_seq=?")
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "t_consultant_attendance", schema = "sellerb", catalog = "")
-public class ConsultantAttendance {
+public class ConsultantAttendance implements Persistable<Long> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "consultant_attendance_seq")
-    private int consultantAttendanceSeq;
-    @ManyToOne(fetch = FetchType.LAZY)
+    private Long consultantAttendanceSeq;
+    @ManyToOne
     @JoinColumn(name = "consultant_seq")
     private Consultant consultant;
+
+    @CreatedBy
+    @Basic
+    @Column(name = "consultant_attendance_reg_user")
+    private String consultantAttendanceRegUser;
+    @CreatedDate
     @Basic
     @Column(name = "login_time")
-    private Timestamp loginTime;
+    private LocalDateTime loginTime;
+
+    @LastModifiedBy
+    @Basic
+    @Column(name = "consultant_attendance_mod_user")
+    private String consultantAttendanceModUser;
+    @LastModifiedDate
     @Basic
     @Column(name = "logout_time")
-    private Timestamp logoutTime;
+    private LocalDateTime logoutTime;
+
+    //0이면 출근, 1이면 퇴근
+    @Basic
+    @Column(name = "consultant_attendance_state",columnDefinition = "boolean default false")
+    private Boolean consultantAttendanceState;
 
 
     @Override
@@ -38,5 +68,15 @@ public class ConsultantAttendance {
     @Override
     public int hashCode() {
         return Objects.hash(consultantAttendanceSeq, consultant, loginTime, logoutTime);
+    }
+
+    @Override
+    public Long getId() {
+        return consultantAttendanceSeq;
+    }
+
+    @Override
+    public boolean isNew() {
+        return (consultantAttendanceState == null||consultantAttendanceState==true);
     }
 }

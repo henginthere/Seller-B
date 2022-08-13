@@ -1,0 +1,66 @@
+.wrapper {
+  display: flex;
+  margin: 10px;
+  width: 100%;
+  flex-direction: row;
+}
+* {
+  font-family: "twayair", cursive;
+}
+
+#left {
+  display: flex;
+  flex-direction: column;
+  width: 35%;
+  margin: 10px;
+  border: 2px solid gray;
+  border-radius: 10px;
+}
+#right {
+  display: flex;
+  width: 65%;
+  margin: 10px;
+  min-height: 500px;
+  justify-content: center;
+  border: 2px solid gray;
+  border-radius: 10px;
+  flex-direction: column;
+}
+.imageWrapper {
+  width: 200px;
+  height: 200px;
+}
+.imageWrapper img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid transparent;
+  background-image: linear-gradient(#fff, #fff),
+    linear-gradient(to right, blue 0%, skyblue 100%);
+
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+}
+.Button {
+  display: flex;
+  justify-content: flex-start;
+  margin: 20px;
+  min-width: 50px;
+}
+.InfoWrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+.InfoTextField {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
+.topText {
+  margin: 10px;
+  justify-content: flex-start;
+  align-items: flex-start;
+}

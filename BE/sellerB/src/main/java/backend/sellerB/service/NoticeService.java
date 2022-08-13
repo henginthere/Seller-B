@@ -1,6 +1,7 @@
 package backend.sellerB.service;
 
 import backend.sellerB.dto.NoticeDto;
+import backend.sellerB.dto.NoticeReq;
 import backend.sellerB.entity.Notice;
 import backend.sellerB.repository.NoticeRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,15 +20,15 @@ public class NoticeService {
     private final NoticeRepository noticeRepository;
 
     @Transactional
-    public NoticeDto create(NoticeDto noticeDto) {
+    public NoticeReq create(NoticeReq noticeReq) {
 
         //dto를 엔티티로
         Notice notice = Notice.builder()
-                .noticeTitle(noticeDto.getNoticeTitle())
-                .noticeContent(noticeDto.getNoticeContent())
+                .noticeTitle(noticeReq.getNoticeTitle())
+                .noticeContent(noticeReq.getNoticeContent())
                 .build();
 
-        return NoticeDto.from(noticeRepository.save(notice));
+        return NoticeReq.from(noticeRepository.save(notice));
 
     }
 
@@ -35,38 +36,47 @@ public class NoticeService {
         return NoticeDto.fromList(noticeRepository.findAll());
     }
 
-    public NoticeDto getNoticeDetail(Integer seq) {
+    public NoticeDto getNoticeDetail(Long seq) {
 //        Notice notice = noticeRepository.findById(seq).orElseThrow();
         Optional<Notice> noticeOptional = noticeRepository.findById(seq);
         Notice notice = noticeOptional.get();
         return NoticeDto.from(notice);
     }
 
-    public NoticeDto update(Integer seq, NoticeDto noticeDto) {
+
+
+    public NoticeReq update(Long seq, NoticeReq noticeReq) {
         Optional<Notice> noticeOptional = noticeRepository.findById(seq);
         Notice notice = noticeOptional.get();
-        notice.setNoticeTitle(noticeDto.getNoticeTitle());
-        notice.setNoticeContent(noticeDto.getNoticeContent());
+        notice.setNoticeTitle(noticeReq.getNoticeTitle());
+        notice.setNoticeContent(noticeReq.getNoticeContent());
+        return NoticeReq.from(notice);
+    }
+
+//    public Long delete(Long seq) {
+//        Optional<Notice> noticeOptional = noticeRepository.findById(seq);
+//        if(!noticeOptional.isPresent()) throw new EntityNotFoundException();
+//        try {
+//            Notice deleteNotice = noticeOptional.get();
+//            noticeRepository.delete(deleteNotice);
+//        } catch (Exception e){
+//            e.printStackTrace();
+//        }
+//        return seq;
+//
+//
+//    }
+    public NoticeDto deleteNotice(Long seq) {
+        Optional<Notice> noticeOptional = noticeRepository.findById(seq);
+        Notice notice = noticeOptional.get();
+//        notice.setNoticeDelYn(true);
+        noticeRepository.deleteById(seq);
         return NoticeDto.from(notice);
     }
 
-    public Integer delete(Integer seq) {
-        Optional<Notice> noticeOptional = noticeRepository.findById(seq);
-        if(!noticeOptional.isPresent()) throw new EntityNotFoundException();
-        try {
-            Notice deleteNotice = noticeOptional.get();
-            noticeRepository.delete(deleteNotice);
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-        return seq;
+    public List<NoticeDto> search(String noticeTitle) {
 
+       return NoticeDto.fromList(noticeRepository.findByNoticeTitleContaining(noticeTitle));
+    }
 
-    }
-    public NoticeDto deleteNotice(Integer seq) {
-        Optional<Notice> noticeOptional = noticeRepository.findById(seq);
-        Notice notice = noticeOptional.get();
-        notice.setNoticeDelYn("Y");
-        return NoticeDto.from(notice);
-    }
 }
