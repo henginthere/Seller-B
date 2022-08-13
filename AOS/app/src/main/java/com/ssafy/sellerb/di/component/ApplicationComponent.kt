@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.ssafy.sellerb.SellerBApplication
 import com.ssafy.sellerb.data.remote.NetworkService
+import com.ssafy.sellerb.data.repository.ConsultingRepository
+import com.ssafy.sellerb.data.repository.ProductRepository
 import com.ssafy.sellerb.data.repository.UserRepository
 import com.ssafy.sellerb.di.ApplicationContext
 import com.ssafy.sellerb.di.module.ApplicationModule
@@ -26,11 +28,15 @@ interface ApplicationComponent {
 
     fun getSharedPreferences(): SharedPreferences
 
-    fun getUserRepository(): UserRepository
-
     fun getCoroutineDispatchersProvider(): CoroutineDispatchers
 
     fun getNetworkService(): NetworkService
 
     fun getNetworkHelper(): NetworkHelper
+
+    fun getProductRepository(): ProductRepository
+
+    fun getUserRepository(): UserRepository
+
+    fun getConsultingRepository(): ConsultingRepository
 }

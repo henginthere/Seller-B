@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "491941720865",
+    "project_id": "sellerb-28f08",
+    "storage_bucket": "sellerb-28f08.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:491941720865:android:d036df81da0c3573698460",
+        "android_client_info": {
+          "package_name": "com.ssafy.sellerb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "491941720865-869tela9s5sfc205do15omjqdc1f65f8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMiupoHeoy5vvHQ2l5-b-p2cxVzhL9AOc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "491941720865-869tela9s5sfc205do15omjqdc1f65f8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
