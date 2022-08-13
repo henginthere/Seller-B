@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -22,12 +23,20 @@ public class ConsultantAttendanceService {
     private final ConsultantRepository consultantRepository;
 
     public ConsultantAttendanceDto create(ConsultantAttendanceDto consultantAttendanceDto) {
-        ConsultantAttendance check
+        Optional<ConsultantAttendance> check
                 = consultantAttendanceRepository.findConsultantAttendanceByConsultant_ConsultantSeqAndConsultantAttendanceState(consultantAttendanceDto.getConsultantSeq(),false);
         Consultant consultant = consultantRepository.findByConsultantSeq(consultantAttendanceDto.getConsultantSeq());
-        if(check!=null){
+        //check가 있으면 퇴근을 안눌렀다는 것인데, 날짜가 달라지면 즉 다음날이 되면 새로 컬럼 생성 되어야함
+        if(check.isPresent()){
+            if(check.get().getLoginTime().getDayOfYear()!=LocalDateTime.now().getDayOfYear()){
+                ConsultantAttendance consultantAttendance = ConsultantAttendance.builder()
+                        .consultant(consultant)
+                        .build();
+                return ConsultantAttendanceDto.from(consultantAttendanceRepository.save(consultantAttendance));
+            }
             return null;
         }
+
         ConsultantAttendance consultantAttendance = ConsultantAttendance.builder()
                 .consultant(consultant)
                 .build();
