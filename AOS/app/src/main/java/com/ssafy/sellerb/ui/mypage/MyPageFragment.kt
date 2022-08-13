@@ -31,6 +31,9 @@ class MyPageFragment : BaseFragment<MyPageViewModel>() {
         binding.btnLogout.setOnClickListener{
             viewModel.doLogout()
         }
+
+        binding.tvUserName.text = ( viewModel.user!!.name ?: "미등록" ) + " 님"
+
     }
 
     override fun setUpObserver() {
