@@ -172,63 +172,80 @@ function ProductRegister() {
         <div className="register-sub-wrapper">
           <div className="register-area-wrapper">
             <div className="left-img">
-              {imgFile === "" ? <img alt="#" src={previewUrl} /> : null}
+              {imgFile === "" ? (
+                <img
+                  className="product-register-img"
+                  alt="#"
+                  src={previewUrl}
+                />
+              ) : null}
               {imgBase64.map((item) => {
                 return (
                   <div>
-                    <img src={item} alt="First Slide" />
+                    <img
+                      className="product-register-img"
+                      src={item}
+                      alt="First Slide"
+                    />
                   </div>
                 );
               })}
-              <input
-                className="img-btn"
-                multiple="multiple"
-                type="file"
-                accept="image/*"
-                id="file"
-                onChange={onHandleChangeFile}
-              />
-              <MediButton label="이미지 등록" onClick={onImgRegisterBtn} />
+              <div className="product-img-bottom-wrapper">
+                <input
+                  className="img-btn"
+                  multiple="multiple"
+                  type="file"
+                  accept="image/*"
+                  id="file"
+                  onChange={onHandleChangeFile}
+                />
+                <div className="product-register-small-btn">
+                  <SmallButton label="이미지 등록" onClick={onImgRegisterBtn} />
+                </div>
+              </div>
             </div>
 
+            {/* 오른쪽 영역 */}
             <div className="right-input">
-
               <div className="input-sub-content-wrapper">
-
-              <div className="input-ele">
-                <div className="product-id">품번</div>
-                <div className="product-id-input-wrapper">
-                  <input
-                    className="product-id-input"
-                    name="productId"
-                    onChange={onChange}
-                    value={productId}
-                    variant="outlined"
-                  />
+                
+                <div className="input-ele">
+                  <p>품번</p>
+                  <div className="product-id-input-wrapper">
+                    <input
+                      className="product-id-input"
+                      name="productId"
+                      onChange={onChange}
+                      value={productId}
+                      variant="outlined"
+                    />
+                  </div>
                 </div>
-              </div>
 
-              <div className="input-ele">
-                <div className="product-id">제품명</div>
-                <div className="product-id-input-wrapper">
-                  <input
-                    className="product-id-input"
-                    name="productName"
-                    onChange={onChange}
-                    value={productName}
-                    variant="outlined"
-                  />
+                <div className="input-ele">
+                  <p>제품명</p>
+                  <div className="product-id-input-wrapper">
+                    <input
+                      className="product-id-input"
+                      name="productName"
+                      onChange={onChange}
+                      value={productName}
+                      variant="outlined"
+                    />
+                  </div>
                 </div>
-              </div>
 
                 <div className="input-ele">
                   <p>가격</p>
-                  <input
-                    name="productPrice"
-                    onChange={onChange}
-                    value={productPrice}
-                    variant="outlined"
-                  />
+                  <div className="product-id-input-wrapper">
+                    <input
+                      className="product-id-input"
+                      name="productPrice"
+                      onChange={onChange}
+                      value={productPrice}
+                      variant="outlined"
+                    />
+                  </div>
                 </div>
 
                 <div className="input-ele">
@@ -248,29 +265,16 @@ function ProductRegister() {
                     )}
                   </select>
                 </div>
-
               </div>
-              {/* <MediButton label="이미지 등록" onClick={onImgRegisterBtn} /> */}
-              <MediButton label="제품 등록" onClick={onRegisterBtn} />
+              <div className="product-register-medi-btn">
+                <MediButton label="제품 등록" onClick={onRegisterBtn} />
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="bottomContent-wrapper">
-        {/* <input
-          className="img-btn"
-          multiple="multiple"
-          type="file"
-          accept="image/*"
-          id="file"
-          onChange={onHandleChangeFile}
-        /> */}
-        {/* <button onClick={deleteImage}>이미지 삭제</button> */}
-        {/* <button className="bottom-btn" onCanPlay={}>
-          업로드하기
-        </button> */}
-      </div>
+      <div className="bottomContent-wrapper"></div>
       <Footer />
     </>
   );
