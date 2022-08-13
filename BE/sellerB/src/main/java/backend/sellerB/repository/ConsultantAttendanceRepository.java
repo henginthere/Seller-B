@@ -9,5 +9,5 @@ import java.util.Optional;
 
 public interface ConsultantAttendanceRepository extends JpaRepository<ConsultantAttendance, Long> {
     List<ConsultantAttendance> findConsultantAttendancesByConsultant_ConsultantSeq(Long consultantSeq);
-    ConsultantAttendance findConsultantAttendanceByConsultant_ConsultantSeqAndConsultantAttendanceState(Long consultantSeq, Boolean state);
+    Optional<ConsultantAttendance> findConsultantAttendanceByConsultant_ConsultantSeqAndConsultantAttendanceState(Long consultantSeq, Boolean state);
 }
