@@ -14,6 +14,7 @@ function ConsultingMain() {
     width: "100%",
     height: "100%",
     minHeight: "500px",
+    padding: "30px",
     border: "1px solid black",
     borderRadius: "10px",
   };
@@ -62,8 +63,14 @@ function ConsultingMain() {
   return (
     <>
       <NavBar />
+      <div className='consultant-main-image-wrapper'>
+        <img
+          src={`${process.env.PUBLIC_URL}/img/consultantMainPageImage.jpg`}
+        />
+      </div>
       <div style={style_Container}>
         <h1 style={style_topText}>상담</h1>
+        <hr />
         {/* 상담중이 아닐 경우 */}
         {session === undefined ? (
           <div style={style_list}>

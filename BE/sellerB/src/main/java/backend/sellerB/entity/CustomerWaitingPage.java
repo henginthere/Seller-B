@@ -2,6 +2,8 @@ package backend.sellerB.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 import org.springframework.data.annotation.CreatedBy;
@@ -21,6 +23,7 @@ import java.util.Objects;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@DynamicInsert
 @EntityListeners(AuditingEntityListener.class)
 @SQLDelete(sql = "UPDATE t_customer_waiting_page SET customer_waiting_page_del_yn=true WHERE customer_waiting_page_seq=?")
 @Where(clause = "customer_waiting_page_del_yn=false")
@@ -42,27 +45,28 @@ public class CustomerWaitingPage {
     private String customerWaitingPageImage;
 
     @Basic
-    @Column(name = "manager_del_yn",columnDefinition = "boolean default false")
+    @Column(name = "customer_waiting_page_del_yn",columnDefinition = "boolean default false")
+    @ColumnDefault("false")
     private Boolean customerWaitingPageDelYn;
 
     @CreatedBy
     @Basic
-    @Column(name = "manager_reg_user")
+    @Column(name = "customer_waiting_page_reg_user")
     private String customerWaitingPageRegUser;
 
     @CreatedDate
     @Basic
-    @Column(name = "manager_reg_date")
+    @Column(name = "customer_waiting_page_reg_date")
     private LocalDateTime customerWaitingPageRegDate;
 
     @LastModifiedBy
     @Basic
-    @Column(name = "manager_mod_user")
+    @Column(name = "customer_waiting_page_mod_user")
     private String customerWaitingPageModUser;
 
     @LastModifiedDate
     @Basic
-    @Column(name = "manager_mod_date")
+    @Column(name = "customer_waiting_page_mod_date")
     private LocalDateTime customerWaitingPageModDate;
 
 
