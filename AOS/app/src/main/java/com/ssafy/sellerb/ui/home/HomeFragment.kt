@@ -36,9 +36,8 @@ class HomeFragment : BaseFragment<HomeViewModel>(){
         if(it.resultCode == Activity.RESULT_OK){
             val intent = it.data
             if(intent != null){
-                val url = intent.getStringExtra("productSeq")
-                Toast.makeText(context,"Value: " + url, Toast.LENGTH_SHORT).show()
-                mainSharedViewModel.onQrCodeResult(url!!)
+                val productSeq = intent.getLongExtra("productSeq",0L)
+                mainSharedViewModel.onQrCodeResult(productSeq)
             }
         }
     }
@@ -57,6 +56,7 @@ class HomeFragment : BaseFragment<HomeViewModel>(){
             val intent = Intent(requireContext(), QrScanActivity::class.java)
             startForResult.launch(intent)
         }
+
     }
 
     override fun setUpObserver() {
@@ -70,12 +70,17 @@ class HomeFragment : BaseFragment<HomeViewModel>(){
             }
         }
 
-        mainSharedViewModel.qrCodeUrl.observe(this){
+        mainSharedViewModel.qrCodeResult.observe(this){
             it.getIfNotHandled()?.run{
                 findNavController().navigate(R.id.action_homeFragment_to_WaitingFragment)
             }
         }
 
+        viewModel.isWaiting.observe(this){
+            if(!it){
+                findNavController().navigate(R.id.action_homeFragment_to_WaitingFragment)
+            }
+        }
     }
 
     override fun onDestroyView() {

@@ -30,13 +30,4 @@ class ProductRepository @Inject constructor(
         }
     }
 
-    fun doWaitingCustomer(waitingRequest: WaitingRequest): Flow<Long>{
-        return flow{
-            val response = networkService.getWaitingCustomer(
-                waitingRequest
-            )
-            emit(response.waitingCustomerSeq)
-        }
-    }
-
 }

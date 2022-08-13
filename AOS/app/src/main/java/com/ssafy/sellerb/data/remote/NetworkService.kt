@@ -40,7 +40,7 @@ interface NetworkService {
     ):Product
 
     @POST(Endpoints.WAITING_CUSTOMER)
-    suspend fun getWaitingCustomer(
+    suspend fun startWaiting(
         @Body request: WaitingRequest
     ):WaitingResponse
 
@@ -54,4 +54,16 @@ interface NetworkService {
         @Path("seq") seq: Long,
         @Body request: ConsultingStartRequest
     ):Boolean
+
+    @DELETE(Endpoints.WAITING_CANCEL)
+    suspend fun cancelWaiting(
+        @Path("seq") seq: Long,
+        @Header(Networking.HEADER_ACCESS_TOKEN) accessToken: String
+    ):GeneralResponse
+
+    @GET(Endpoints.GET_WAITING_INFO)
+    suspend fun getWaitingInfo(
+        @Path("seq") seq: Long,
+        @Header(Networking.HEADER_ACCESS_TOKEN) accessToken: String
+    ):WaitingResponse
 }

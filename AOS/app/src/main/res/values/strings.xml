@@ -9,6 +9,7 @@
 
     <!-- -->
     <string name="home_content">제품의 QR 코드를 스캔하여 상담을 시작해보세요!</string>
+    <string name="waiting_description">앱을 종료해도 상담이 시작되면\n 알림으로 알려 드려요!</string>
 
     <string name="network_connection_error">Internet connection lost, please retry again</string>
     <string name="network_default_error">Something wrong happened, please retry again</string>
@@ -18,5 +19,7 @@
     </string>
     <string name="server_connection_error">Not able to connect, please retry again</string>
     <string name="try_again">Something went wrong Try Again</string>
+
+
 
 </resources>

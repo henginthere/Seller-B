@@ -9,6 +9,7 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.ssafy.sellerb.ui.main.MainActivity
 import com.ssafy.sellerb.util.Constants.CHANNEL_ID
+import com.ssafy.sellerb.util.Constants.EXTRA_KEY_CONSULTING_SEQ
 
 
 class FcmService : FirebaseMessagingService() {
@@ -32,15 +33,16 @@ class FcmService : FirebaseMessagingService() {
         remoteMessage.notification.let { message ->
             val messageTitle = message!!.title
             val messageContent = message!!.body
-
+            
             val mainIntent = Intent(this, MainActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             }
-            //mainIntent.putExtra("content", messageContent.toString())
-            //noti = messageContent.toString()
+
+            mainIntent.putExtra(EXTRA_KEY_CONSULTING_SEQ, 2L)
 
             val mainPendingIntent =
                 PendingIntent.getActivity(this, 0, mainIntent, 0)
+
 
             val builder = NotificationCompat.Builder(this, CHANNEL_ID)
                 .setSmallIcon(android.R.drawable.ic_dialog_info)
@@ -52,6 +54,8 @@ class FcmService : FirebaseMessagingService() {
             NotificationManagerCompat.from(this).apply {
                 notify(101, builder.build())
             }
+
+            startActivity(mainIntent)
         }
     }
 
