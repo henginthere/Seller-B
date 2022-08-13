@@ -15,6 +15,7 @@ function NoticeList() {
   const [noticeList, setNoticeList] = useState([]); // -> api res.data 로 값 갱신해주기
   const [searchTitle, setSearchTitle] = useState("");
   var isManager = true;
+  var isManager = false;
   if (sessionStorage.getItem("adminCheck") === "ROLE_ADMIN") {
     isManager = true;
   } else {
@@ -27,6 +28,7 @@ function NoticeList() {
     setPage(page);
   };
   const [it, setIt] = useState(5);
+  const [it, setIt] = useState(9);
 
   const onSearchByTitleHandler = (e) => {
     setSearchTitle(e.target.value);
@@ -74,9 +76,20 @@ function NoticeList() {
   return (
     <>
       <NavBar />
+<<<<<<< HEAD
       <div className="notice-list-wrapper">
         <div className="notice-title-wrapper">
           <h4 className="notice-title-text">공지사항</h4>
+=======
+      <div className='consultant-main-image-wrapper'>
+        <img
+          src={`${process.env.PUBLIC_URL}/img/consultantMainPageImage.jpg`}
+        />
+      </div>
+      <div className='notice-list-wrapper'>
+        <div className='notice-title-wrapper'>
+          <h4 className='notice-title-text'>공지사항</h4>
+>>>>>>> feature-fe-consultantUIFix(CH)
         </div>
         <div className="notice-wrapper">
           <div className="search-byTitle-wrapper">
