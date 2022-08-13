@@ -7,6 +7,8 @@ import styles from './WaitingPage.module.css'
 import { Footer, NavBar } from "../../../components/index";
 import { productRegisterApi, registerWaitingPageApi, waitingPageApi } from "../../../api/productApi";
 import {productDetailApi } from "../../../api/productApi";
+import { SmallButton } from "../../../components/Common/SmallButton";
+import { MediButton } from "../../../components/Common/MediButton";
 
 function WaitingPage() {
   const navigate = useNavigate();
@@ -56,7 +58,7 @@ function WaitingPage() {
     })
   }, [])
 
-  const handleChangeFile = (event) => {
+  const onHandleChangeFile = (event) => {
     setImgFile(event.target.files);
 
     setImgBase64([]);
@@ -78,21 +80,9 @@ function WaitingPage() {
     }
   };
 
-    // const onProductSubmitBtn = (e) => {
-    //   // e.preventDefault();
-    //   console.log("product: " + JSON.stringify(product))
-  
-    //   productRegisterApi(product)
-    //   .then((res)=>{
-    //     console.log("onSubmitBtn:" + JSON.stringify(res.data));
-    //     console.log("success");
-        
-    //     // navigate("/manager/productList")
-    //   })
-    //   .catch((err)=>{
-    //     console.log(JSON.stringify(err.data));
-    //   })
-    // };
+  const onResetFile = () => {
+
+  };
 
     const onRegisterBtn = () => {
       console.log("in RegisterBtn API : " + resImg)
@@ -146,10 +136,111 @@ function WaitingPage() {
   return (
     <>
       <NavBar />
-      <h4 className="page-title">대기화면 등록</h4>
+      {/* <h4 className="page-title">대기화면 등록</h4> */}
+    <div className="register-main-wrapper">
+      <div className="register-sub-wrapper">
+        <div className="register-area-wrapper">
+          {/*  */}
+          <div className="left-img">
+            {imgFile === "" ? (
+                <img
+                  className="product-register-img"
+                  alt="#"
+                  src={previewUrl}
+                />
+              ) : null}
+              {imgBase64.map((item) => {
+                return (
+                  <div>
+                    <img
+                      className="product-register-img"
+                      src={item}
+                      alt="First Slide"
+                    />
+                  </div>
+                );
+              })}
+              <div className="product-img-bottom-wrapper">
+                <input
+                  className="img-btn"
+                  multiple="multiple"
+                  type="file"
+                  accept="image/*"
+                  id="file"
+                  onChange={onHandleChangeFile}
+                />
+
+              </div>
+
+          </div>
+          {/*  */}
+          <div className="right-input">
+              <div className="input-sub-content-wrapper">
+                {/*  */}
+                <div className="input-ele">
+                  <p>품번</p>
+                  <div className="product-id-input-wrapper">
+                    <input
+                      className="product-id-input"
+                      name="productId"
+                      defaultValue={product.productId}
+                      variant="outlined"
+                    />
+                  </div>
+                </div>
+                {/*  */}
+                <div className="input-ele">
+                  <p>제품명</p>
+                  <div className="product-id-input-wrapper">
+                    <input
+                      className="product-id-input"
+                      name="productName"
+                      value={product.productName}
+                      variant="outlined"
+                    />
+                  </div>
+                </div>
+                {/*  */}
+                <div className="input-ele">
+                  <p>가격</p>
+                  <div className="product-id-input-wrapper">
+                    <input
+                      className="product-id-input"
+                      name="productPrice"
+                      value={product.productPrice}
+                      variant="outlined"
+                    />
+                  </div>
+                </div>
+                {/*  */}
+                <div className="input-ele">
+                  <p>제품군</p>
+                  <div className="product-id-input-wrapper">
+                    <input
+                      className="product-id-input"
+                      name="productGroup"
+                      // value={product.productGroup.productGroupName}
+                      variant="outlined"
+                    />
+                  </div>
+                </div>
+              {/*  */}
+              <div className="product-register-medi-btn">
+                <MediButton label="대기화면 등록" onClick={onImgRegisterBtn} />
+                <MediButton label="이미지 초기화" onClick={onResetFile} />
+              </div>             
+              </div>
+            </div>
+            {/*  */}
+        </div>
+      </div>
+    </div>
+
+
+
+{/* 
       <div className="mainContent-wrapper">
         <div className="left-img">
-          {/* <div className="element-wrapper"> */}
           { 
             imgFile === ""
             ?    <img
@@ -163,9 +254,8 @@ function WaitingPage() {
                 <img src={item} alt="Frist Slide" />
               </div>
             );
-          })}
-
-          {/* 제품정보 */}
+          })} */}
+{/* 
           <div className="product-info">
             <h5>품번 : </h5>
             {product.productId}
@@ -178,7 +268,7 @@ function WaitingPage() {
             <h5>가격 : </h5>
             {product.productPrice}
           </div>
-        </div>
+        </div> */}
         {/* right content START */}
         {/* <div className="styles.right-waiting-img">
           {imgFile.image_file === "" ? (
@@ -192,7 +282,7 @@ function WaitingPage() {
             );
           })}
         </div> */}
-        <div className="bottomContent-wrapper">
+        {/* <div className="bottomContent-wrapper">
         <input
           className="img-btn"
           type="file"
@@ -200,11 +290,10 @@ function WaitingPage() {
           id="file"
           onChange={handleChangeFile}
         />
-        {/* <button onClick={deleteImage}>이미지 삭제</button> */}
         <button onClick={onImgRegisterBtn}>이미지등록하기</button>
         <button onClick={onRegisterBtn }>제품 등록하기</button>
       </div>
-      </div>
+      </div> */}
 
       <Footer />
     </>

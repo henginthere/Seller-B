@@ -113,7 +113,7 @@ function ProductDetail() {
                 </div>
 
                 {/* 하단 버튼 */}
-                <div className="product-register-medi-btn">
+              <div className="product-register-medi-btn">
                 <MediButton label="수정하기" onClick={onEditBtn} />
                 <MediButton label="제품대기화면 등록" onClick={goWaitingPage} />
               </div>
