@@ -20,6 +20,11 @@
     /* font-family: "Noto Sans"; */
 }
 
+/* .register-area-wrapper .left-img {
+    border-right : 1px solid grey;
+    padding-right: 25px;
+} */
+
 .register-area-wrapper .left-img > img {
     width: 430px;
     height: 380px;
