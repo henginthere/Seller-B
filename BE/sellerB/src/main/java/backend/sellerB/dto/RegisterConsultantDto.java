@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -30,6 +31,7 @@ public class RegisterConsultantDto {
     private String consultantTel;
     private Long productGroupSeq;
     private String consultantImageUrl;
+//    private MultipartFile consultantImageFile;
 
 
     private Set<AuthorityDto> authorityDtoSet;

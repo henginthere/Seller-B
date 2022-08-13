@@ -3,13 +3,13 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 
 import "./ProductRegister.css";
 import { Footer, NavBar } from "../../../components/index";
-import { productDetailApi } from "../../../api/productApi";
+import { productDetailApi, productEditApi } from "../../../api/productApi";
 
 function ProductDetail() {
   const { seq } = useParams();
   const [readOnly, setReadOnly] = useState(true)
   const [product, setProduct] = useState({
-    productSeq:"",
+    productSeq: "",
     productId: "",
     productName: "",
     productPrice: "",
@@ -22,10 +22,12 @@ function ProductDetail() {
 
   /* 해당 seq에 맞는 Product 정보 먼저 가져오기 */
     useEffect(()=>{
+      console.log("in useEffect: " + seq);
 
       productDetailApi(seq)
       .then((res)=>{
           console.log(res.data);
+
           setProduct(res.data);
       })
       .catch((err)=>{
@@ -60,22 +62,25 @@ function ProductDetail() {
               name="productId"
               value={product.productId}
               variant="outlined"
+              readOnly={readOnly ? false : true}
             />
           </div>
           <div className="input-ele">
             <p>제품명</p>
             <input
-              name="product_name"
+              name="productName"
               value={product.productName}
               variant="outlined"
+              readOnly={readOnly ? false : true}
             />
           </div>
           <div className="input-ele">
             <p>가격</p>
             <input
-              name="product_price"
+              name="productPrice"
               value={product.productPrice}
               variant="outlined"
+              readOnly={readOnly ? false : true}
             />
           </div>
           <div className="input-ele">
@@ -92,8 +97,7 @@ function ProductDetail() {
 
       {/* Btn */}
     <div className="bottomContent-wrapper">
-    <button className="bottom-btn" onClick={()=>
-      navigate(`/manager/productEdit/${seq}`)}>
+    <button className="bottom-btn" onClick={()=> onEdit()}>
             수정하기
         </button>
         <button className="bottom-btn" onClick={goWaitingPage}>

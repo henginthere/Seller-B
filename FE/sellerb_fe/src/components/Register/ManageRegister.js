@@ -36,7 +36,7 @@ function ManageRegister() {
       .max(10, "아이디 최대 10글자입니다!")
       .matches(
         /^[가-힣a-zA-Z][^!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?\s]*$/,
-        "닉네임에 특수문자가 포함되면 안되고 숫자로 시작하면 안됩니다!"
+        "닉네임에 특수문자가 포함되면 안되고 숫자로 시작하면 안됩니다!",
       )
       .required("아이디를 입력하세요!"),
     password: Yup.string()
@@ -45,7 +45,7 @@ function ManageRegister() {
       .required("패스워드를 입력하세요!")
       .matches(
         /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])[^\s]*$/,
-        "알파벳, 숫자, 공백을 제외한 특수문자를 모두 포함해야 합니다!"
+        "알파벳, 숫자, 공백을 제외한 특수문자를 모두 포함해야 합니다!",
       ),
     password2: Yup.string()
       .oneOf([Yup.ref("password"), null], "비밀번호가 일치하지 않습니다!")
@@ -124,8 +124,8 @@ function ManageRegister() {
   };
 
   return (
-    <div className="manage-register-page">
-      <div className="login">
+    <div className='manage-register-page'>
+      <div className='login'>
         <Formik
           initialValues={{
             brand: "",
@@ -140,22 +140,22 @@ function ManageRegister() {
           validateOnMount={true}
         >
           {({ values, handleSubmit, handleChange, errors }) => (
-            <div className="signup-wrapper">
+            <div className='signup-wrapper'>
               {/* <ToastContainer /> */}
               <form
                 onSubmit={handleSubmit}
-                autoComplete="off"
-                className="login-form"
+                autoComplete='off'
+                className='login-form'
               >
-                <h3 className="login-title">Sign Up</h3>
-                <hr />
-                <div className="signUp-row">
-                  <div className="row-left-label">
-                    <div className="left-label-text">제품 브랜드</div>
+                <h3 className='login-title'>Sign Up</h3>
+                <hr className='hr-in-manager-register' />
+                <div className='signUp-row'>
+                  <div className='row-left-label'>
+                    <div className='left-label-text'>제품 브랜드</div>
                   </div>
-                  <div className="row-right">
-                    <div className="right-wrapper">
-                      <div className="right-content">
+                  <div className='row-right'>
+                    <div className='right-wrapper'>
+                      <div className='right-content'>
                         <select onChange={onBrandChange} value={selectBrand}>
                           {brandList.map((ele, i) => {
                             return <option>{ele.brandNameKor}</option>;
@@ -173,125 +173,125 @@ function ManageRegister() {
                 placeholder="제품 브랜드"
                 className="size"
               /> */}
-                  <div className="error-message">{errors.brand}</div>
+                  <div className='error-message'>{errors.brand}</div>
                   {/* </label> */}
                 </div>
 
-                <div className="signUp-row">
-                  <div className="row-left-label">
-                    <div className="left-label-text">아이디</div>
+                <div className='signUp-row'>
+                  <div className='row-left-label'>
+                    <div className='left-label-text'>아이디</div>
                   </div>
-                  <div className="row-right">
-                    <div className="right-wrapper">
-                      <div className="right-content">
+                  <div className='row-right'>
+                    <div className='right-wrapper'>
+                      <div className='right-content'>
                         <input
                           value={values.id}
-                          name="id"
-                          type="text"
-                          variant="outlined"
+                          name='id'
+                          type='text'
+                          variant='outlined'
                           onChange={handleChange}
-                          placeholder="아이디"
-                          className="size"
+                          placeholder='아이디'
+                          className='size'
                         />
                       </div>
                     </div>
-                    <div className="error-message">{errors.id}</div>
+                    <div className='error-message'>{errors.id}</div>
                   </div>
                 </div>
 
-                <div className="signUp-row">
-                  <div className="row-left-label">
-                    <div className="left-label-text">비밀번호</div>
+                <div className='signUp-row'>
+                  <div className='row-left-label'>
+                    <div className='left-label-text'>비밀번호</div>
                   </div>
-                  <div className="row-right">
-                    <div className="right-wrapper">
-                      <div className="right-content">
+                  <div className='row-right'>
+                    <div className='right-wrapper'>
+                      <div className='right-content'>
                         <input
                           value={values.password}
-                          name="password"
-                          type="text"
-                          variant="outlined"
+                          name='password'
+                          type='text'
+                          variant='outlined'
                           onChange={handleChange}
-                          placeholder="비밀번호"
-                          className="size"
+                          placeholder='비밀번호'
+                          className='size'
                         />
                       </div>
                     </div>
-                    <div className="error-message">{errors.password}</div>
+                    <div className='error-message'>{errors.password}</div>
                   </div>
                 </div>
 
-                <div className="signUp-row">
-                  <div className="row-left-label">
-                    <div className="left-label-text">비밀번호 확인</div>
+                <div className='signUp-row'>
+                  <div className='row-left-label'>
+                    <div className='left-label-text'>비밀번호 확인</div>
                   </div>
-                  <div className="row-right">
-                    <div className="right-wrapper">
-                      <div className="right-content">
+                  <div className='row-right'>
+                    <div className='right-wrapper'>
+                      <div className='right-content'>
                         <input
                           value={values.password2}
-                          name="password2"
-                          type="text"
-                          variant="outlined"
+                          name='password2'
+                          type='text'
+                          variant='outlined'
                           onChange={handleChange}
-                          placeholder="비밀번호 확인"
-                          className="size"
+                          placeholder='비밀번호 확인'
+                          className='size'
                         />
                       </div>
                     </div>
-                    <div className="error-message">{errors.password2}</div>
+                    <div className='error-message'>{errors.password2}</div>
                   </div>
                 </div>
 
-                <div className="signUp-row">
-                  <div className="row-left-label">
-                    <div className="left-label-text">Tel.</div>
+                <div className='signUp-row'>
+                  <div className='row-left-label'>
+                    <div className='left-label-text'>Tel.</div>
                   </div>
-                  <div className="row-right">
-                    <div className="right-wrapper">
-                      <div className="right-content">
+                  <div className='row-right'>
+                    <div className='right-wrapper'>
+                      <div className='right-content'>
                         <input
                           value={values.phone}
-                          name="phone"
-                          type="text"
-                          variant="outlined"
+                          name='phone'
+                          type='text'
+                          variant='outlined'
                           onChange={handleChange}
-                          placeholder="핸드폰번호"
-                          className="size"
+                          placeholder='핸드폰번호'
+                          className='size'
                         />
                       </div>
                     </div>
-                    <div className="error-message">{errors.phone}</div>
+                    <div className='error-message'>{errors.phone}</div>
                   </div>
                 </div>
 
-                <div className="signUp-row">
-                  <div className="row-left-label">
-                    <div className="left-label-text">Email</div>
+                <div className='signUp-row'>
+                  <div className='row-left-label'>
+                    <div className='left-label-text'>Email</div>
                   </div>
-                  <div className="row-right">
-                    <div className="right-wrapper">
-                      <div className="right-content">
+                  <div className='row-right'>
+                    <div className='right-wrapper'>
+                      <div className='right-content'>
                         <input
                           value={values.email}
-                          name="email"
-                          type="text"
-                          variant="outlined"
+                          name='email'
+                          type='text'
+                          variant='outlined'
                           onChange={handleChange}
-                          placeholder="Email"
-                          className="size"
+                          placeholder='Email'
+                          className='size'
                         />
                       </div>
                     </div>
-                    <div className="error-message">{errors.email}</div>
+                    <div className='error-message'>{errors.email}</div>
                   </div>
                 </div>
 
                 <Button
-                  color="primary"
-                  variant="contained"
+                  color='primary'
+                  variant='contained'
                   fullWidth
-                  type="submit"
+                  type='submit'
                   onClick={() => registerBtn(values)}
                 >
                   회원가입

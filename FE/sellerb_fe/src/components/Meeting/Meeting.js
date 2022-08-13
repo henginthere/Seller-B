@@ -6,19 +6,15 @@ import { getManagerInfoApi } from "../../api/managerApi";
 import { detailConsultantApi } from "../../api/consultantApi";
 
 import VideoRoomComponent from "../VideoRoomComponent";
-// import VideoRoomComponent from "../VideoRoomComponent";
 
 import "./Meeting.css";
-
-const OPENVIDU_SERVER_URL = "https://i7d105.p.ssafy.io:8443";
-const OPENVIDU_SERVER_SECRET = "SELLERB";
 
 class Meeting extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      mySessionId: "SessionA",
-      myUserName: "OpenVidu_User_" + Math.floor(Math.random() * 100),
+      mySessionId: undefined,
+      myUserName: undefined,
       token: undefined,
     };
 
@@ -38,7 +34,7 @@ class Meeting extends Component {
         .then((res) => {
           this.setState({
             myUserName: res.data.managerName + "-Manager",
-            mySessionId: res.data.brand.brandNameEng,
+            mySessionId: res.data.brand.brandNameEng + "-session",
           });
         })
         .catch((err) => {
@@ -83,12 +79,10 @@ class Meeting extends Component {
 
   joinSession(event) {
     if (this.state.mySessionId && this.state.myUserName) {
-      this.getToken().then((token) => {
-        this.setState({
-          token: token,
-          session: true,
-        });
+      this.setState({
+        session: true,
       });
+
       event.preventDefault();
     }
   }
@@ -100,8 +94,6 @@ class Meeting extends Component {
       mySession.disconnect();
     }
 
-    // Empty all properties...
-    this.OV = null;
     this.setState({
       session: undefined,
     });
@@ -110,7 +102,7 @@ class Meeting extends Component {
   render() {
     const mySessionId = this.state.mySessionId;
     const myUserName = this.state.myUserName;
-    const token = this.state.token;
+
     return (
       <>
         <div id='meeting-container'>
@@ -120,7 +112,7 @@ class Meeting extends Component {
                 <h1> 화상 회의 </h1>
                 <form className='form-group' onSubmit={this.joinSession}>
                   <p className='text-center'>
-                    {sessionStorage.getItem("adminCheck") === "ROL" ? (
+                    {sessionStorage.getItem("adminCheck") === "ROLE_ADMIN" ? (
                       <input
                         className='btn btn-lg btn-success'
                         name='commit'
@@ -152,86 +144,6 @@ class Meeting extends Component {
         </div>
       </>
     );
-  }
-
-  getToken() {
-    console.log("this.state.mySessionId in getToken" + this.state.mySessionId);
-    return this.createSession(this.state.mySessionId).then((sessionId) =>
-      this.createToken(sessionId),
-    );
-  }
-
-  createSession(sessionId) {
-    return new Promise((resolve, reject) => {
-      var data = JSON.stringify({ customSessionId: sessionId });
-      axios
-        .post(OPENVIDU_SERVER_URL + "/openvidu/api/sessions", data, {
-          headers: {
-            Authorization:
-              "Basic " + btoa("OPENVIDUAPP:" + OPENVIDU_SERVER_SECRET),
-            "Content-Type": "application/json",
-          },
-        })
-        .then((response) => {
-          console.log("CREATE SESION", response);
-          resolve(response.data.id);
-        })
-        .catch((response) => {
-          var error = Object.assign({}, response);
-          if (error?.response?.status === 409) {
-            resolve(sessionId);
-          } else {
-            console.log(error);
-            console.warn(
-              "No connection to OpenVidu Server. This may be a certificate error at " +
-                OPENVIDU_SERVER_URL,
-            );
-            if (
-              window.confirm(
-                'No connection to OpenVidu Server. This may be a certificate error at "' +
-                  OPENVIDU_SERVER_URL +
-                  '"\n\nClick OK to navigate and accept it. ' +
-                  'If no certificate warning is shown, then check that your OpenVidu Server is up and running at "' +
-                  OPENVIDU_SERVER_URL +
-                  '"',
-              )
-            ) {
-              window.location.assign(
-                OPENVIDU_SERVER_URL + "/accept-certificate",
-              );
-            }
-          }
-        });
-    });
-  }
-
-  createToken(sessionId) {
-    return new Promise((resolve, reject) => {
-      var data = {};
-      axios
-        .post(
-          OPENVIDU_SERVER_URL +
-            "/openvidu/api/sessions/" +
-            sessionId +
-            "/connection",
-          data,
-          {
-            headers: {
-              Authorization:
-                "Basic " + btoa("OPENVIDUAPP:" + OPENVIDU_SERVER_SECRET),
-              "Content-Type": "application/json",
-            },
-          },
-        )
-        .then((response) => {
-          console.log("TOKEN", response);
-          resolve(response.data.token);
-        })
-        .catch((error) => {
-          alert("Session 생성 오류");
-          reject(error);
-        });
-    });
   }
 }
 

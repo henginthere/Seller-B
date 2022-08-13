@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.IOException;
 
 @RestController
 //@RequiredArgsConstructor
@@ -24,7 +25,7 @@ public class ManagerController {
 
 
     @PostMapping("/register")
-    public ResponseEntity<ManagerDto> registerManager(@Valid @RequestBody RegisterManagerDto registerManagerDto) {
+    public ResponseEntity<ManagerDto> registerManager(@Valid @RequestBody RegisterManagerDto registerManagerDto) throws IOException {
         return ResponseEntity.ok(managerService.signup(registerManagerDto));
     }
 
@@ -34,7 +35,7 @@ public class ManagerController {
     }
 
     @PutMapping("/{managerSeq}")
-    public ResponseEntity<ManagerDto> updateManagerInfo(@Valid @RequestBody EditManagerDto editManagerDto, @PathVariable Long managerSeq) {
+    public ResponseEntity<ManagerDto> updateManagerInfo(@Valid @RequestBody EditManagerDto editManagerDto, @PathVariable Long managerSeq) throws IOException {
         return ResponseEntity.ok(managerService.update(editManagerDto, managerSeq));
     }
 
