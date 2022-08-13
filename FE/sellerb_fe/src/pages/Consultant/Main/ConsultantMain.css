@@ -13,9 +13,9 @@
 }
 .consultant-main-image-wrapper img {
   width: 100%;
-  height: 150px;
+  height: 300px;
   object-fit: cover;
-  opacity: 0.8;
+  opacity: 0.6;
 }
 .hr-in-consultant-main {
   width: 100%;
@@ -30,6 +30,11 @@
   min-height: 200px;
   width: 30%;
   border-radius: 20px;
+}
+.manager-main-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
 }
 .header-left {
 }
@@ -220,4 +225,11 @@
 
 .reject-btn:hover {
   background-color: #f8f0de;
+}
+
+.manager-main-left {
+  width: 50%;
+}
+.manager-main-right {
+  width: 50%;
 }
