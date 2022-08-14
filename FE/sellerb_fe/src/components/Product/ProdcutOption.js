@@ -26,7 +26,11 @@ function ProdcutOption({ items }) {
   return (
     <>
       {/* 각 제품(div) 여러 개 만들기 */}
-      <div className="body-wrapper">
+      <div className="product-list-total-count">
+        총 {items.length} 건 
+      </div>
+      
+      <div className="body-wrapper">  
         {items.slice(
           it*(page-1),
           it*(page-1)+it

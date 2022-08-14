@@ -26,16 +26,16 @@ function ProductList() {
     brandProductListApi(brandSeq)
     .then((res)=>{
       setTotalItems(res.data)
-      console.log("처음 전체 아이템들 : " + JSON.stringify(res.data));
+      // console.log("처음 전체 아이템들 : " + JSON.stringify(res.data));
     })
   }, [])
 
   useEffect(() => {
     productGroupListApi()
       .then((res) => {
-        console.log(JSON.stringify(res.data));
+        // console.log(JSON.stringify(res.data));
         setGroupList(res.data); // groupList
-        console.log("groupList: " + groupList);
+        // console.log("groupList: " + groupList);
       })
       .catch((err) => {
         console.log(err);
@@ -91,7 +91,7 @@ function ProductList() {
   }
 
   const onChangeImage = () =>{
-
+      
   }
 
   return (
@@ -138,7 +138,7 @@ function ProductList() {
              ? <GroupOptionList props={items} />
              : <GroupOptionList props={searchItems} />
           )
-        }
+          }
           
         </div>
         {/* end : page-navi-wrapper */}
