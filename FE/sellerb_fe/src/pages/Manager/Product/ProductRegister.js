@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
 
 import axios from "axios";
 import "./ProductRegister.css";
@@ -131,8 +133,15 @@ function ProductRegister() {
     productRegisterApi(Info)
       .then((res) => {
         console.log(res.data);
+        
+        
+        navigate('manager/productList')
       })
       .catch((err) => {
+        toast.error("내용을 채워주세요!", {
+          autoClose: 1000,
+          position: toast.POSITION.TOP_CENTER
+        });
         console.log(err.data);
       });
   };
@@ -157,9 +166,19 @@ function ProductRegister() {
         if (response.data) {
           console.log(response.data);
           setResImg(response.data);
+
+          toast.success("이미지 등록 완료!", {
+            autoClose: 1000,
+            position: toast.POSITION.TOP_CENTER
+          });
+
         }
       })
       .catch((error) => {
+        toast.error("이미지를 등록해주세요!", {
+          autoClose: 1000,
+          position: toast.POSITION.TOP_CENTER
+        });
         console.log("Error");
       });
   };
@@ -201,6 +220,7 @@ function ProductRegister() {
                 />
                 <div className="product-register-small-btn">
                   <SmallButton label="이미지 등록" onClick={onImgRegisterBtn} />
+                  <ToastContainer />
                 </div>
               </div>
             </div>

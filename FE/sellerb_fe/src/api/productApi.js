@@ -49,6 +49,12 @@ export const productSearchApi = async (productName, success, fail) => {
     return await api.get(`/product/name/${productName}`).then(success).catch(fail);
 }
 
+// Del : ProductDetail.js
+export const productDelApi = async (productSeq, success, fail) =>{
+
+    return await api.delete(`/product/${productSeq}`).then(success).catch(fail);
+}
+
 // GET : ProductList.js : 처음 접속 시, 해당 브랜드의 모든 제품 불러오기
 export const brandProductListApi = async (brandSeq, success, fail) => {
 
