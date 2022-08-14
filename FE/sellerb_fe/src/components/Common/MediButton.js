@@ -45,7 +45,7 @@ const StyledButton = styled.button`
 
   &: focus {
     transform: scale(1.1);
-  background-color: #CDD4E7;
+    background-color: #CDD4E7;
   }
 
 `;
