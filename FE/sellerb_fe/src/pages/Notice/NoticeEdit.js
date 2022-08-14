@@ -68,7 +68,28 @@ function NoticeEdit() {
         console.log("err");
       });
   }, []);
-
+  const parsingDate = (date) => {
+    var parsedDate = new Date(date);
+    var yyyy = parsedDate.getFullYear();
+    var MM = parsedDate.getMonth() + 1;
+    var dd = parsedDate.getDate();
+    var hh = parsedDate.getHours() + 9;
+    var mm = parsedDate.getMinutes();
+    return (
+      yyyy +
+      "-" +
+      addZero(MM) +
+      "-" +
+      addZero(dd) +
+      "-" +
+      addZero(hh) +
+      ":" +
+      addZero(mm)
+    );
+  };
+  const addZero = (n) => {
+    return n < 10 ? "0" + n : n;
+  };
   return (
     <>
       <NavBar />
@@ -95,7 +116,9 @@ function NoticeEdit() {
           </div>
           <div className='content-header-row'>
             <div className='row-left'>작성일</div>
-            <div className='row-right'>{noticeData.noticeRegDate}</div>
+            <div className='row-right'>
+              {parsingDate(noticeData.noticeRegDate)}
+            </div>
           </div>
 
           <div className='notice-detail-content-detail'>

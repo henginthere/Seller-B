@@ -46,68 +46,70 @@ function NoticeDetail() {
         console.log("Error");
       });
   };
+  const parsingDate = (date) => {
+    var parsedDate = new Date(date);
+    var yyyy = parsedDate.getFullYear();
+    var MM = parsedDate.getMonth() + 1;
+    var dd = parsedDate.getDate();
+    var hh = parsedDate.getHours() + 9;
+    var mm = parsedDate.getMinutes();
+    return (
+      yyyy +
+      "-" +
+      addZero(MM) +
+      "-" +
+      addZero(dd) +
+      "-" +
+      addZero(hh) +
+      ":" +
+      addZero(mm)
+    );
+  };
+  const addZero = (n) => {
+    return n < 10 ? "0" + n : n;
+  };
 
   return (
     <>
       <NavBar />
-        <div className="board-wrap">
-            <div className="detail-head">
-                <div className="notice-detail-title">공지사항</div>
-                <div className="notice-detail-subTitle">sellerB의 공지사항</div>
-            </div>
-
-            <div className="notice-detail-content-header">
-                <div className="content-header-row">
-                    <div className="row-left">제목</div>
-                    <div className="row-right">{noticeData.noticeTitle}</div>
-                </div>
-          
-          
-                <div className="content-header-row">
-                    <div className="row-left">작성일</div>
-                    <div className="row-right">{noticeData.noticeRegDate}</div>
-                </div>
-            
-            
-            <div className="notice-detail-content-detail">
-                <div>
-                    <pre>
-                        {noticeData.noticeContent}
-                        zzzzzzzzzzzz공지사하아앙
-                        zzzzzzzzzzzz공지사하아앙
-                        zzzzzzzzzzzz공지사하아앙
-                        zzzzzzzzzzzz공지사하아앙
-                        zzzzzzzzzzzz공지사하아앙
-                        zzzzzzzzzzzz공지사하아앙
-                        zzzzzzzzzzzz공지사하아앙
-                        zzzzzzzzzzzz공지사하아앙
-                        zzzzzzzzzzzz공지사하아앙
-                        zzzzzzzzzzzz공지사하아앙
-                        zzzzzzzzzzzz공지사하아앙
-                        zzzzzzzzzzzz공지사하아앙
-                        zzzzzzzzzzzz공지사하아앙
-                        zzzzzzzzzzzz공지사하아앙
-                        zzzzzzzzzzzz공지사하아앙
-                        zzzzzzzzzzzz공지사하아앙
-                        zzzzzzzzzzzz공지사하아앙
-                    </pre>
-                </div>
-            </div>
-            {/* content하단 */}
-            <div className="notice-detail-bottom">
-                <button 
-                  className="detail-button"
-                  onClick={(e)=> navigate("/manager/noticeList")}
-                  >목록</button>
-                <button 
-                className="detail-button"
-                onClick={(e)=> onModifyBtn()}
-                >수정하기</button>
-            </div>
-     
-
-            </div>
+      <div className='board-wrap'>
+        <div className='detail-head'>
+          <div className='notice-detail-title'>공지사항</div>
+          <div className='notice-detail-subTitle'>sellerB의 공지사항</div>
         </div>
+
+        <div className='notice-detail-content-header'>
+          <div className='content-header-row'>
+            <div className='row-left'>제목</div>
+            <div className='row-right'>{noticeData.noticeTitle}</div>
+          </div>
+
+          <div className='content-header-row'>
+            <div className='row-left'>작성일</div>
+            <div className='row-right'>
+              {parsingDate(noticeData.noticeRegDate)}
+            </div>
+          </div>
+
+          <div className='notice-detail-content-detail'>
+            <div>
+              <pre>{noticeData.noticeContent}</pre>
+            </div>
+          </div>
+          {/* content하단 */}
+          <div className='notice-detail-bottom'>
+            <button
+              className='detail-button'
+              onClick={(e) => navigate("/manager/noticeList")}
+            >
+              목록
+            </button>
+            <button className='detail-button' onClick={(e) => onModifyBtn()}>
+              수정하기
+            </button>
+          </div>
+        </div>
+      </div>
       <Footer />
     </>
   );
