@@ -26,7 +26,7 @@ function NoticeWrite() {
   };
 
   const onSubmitBtnHandler = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
 
     if (window.confirm("공지사항을 등록하시겠습니까?")) {
       let noticePostBody = {
