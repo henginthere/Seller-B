@@ -141,9 +141,10 @@ function ManagerMainRight() {
 
   const ResetConsultantList = () =>{
     const name = sessionStorage.getItem("brandNameKor");
+    setListState(true);
     brandConsultantListApi(name)
       .then((res) => {
-        console.log("전체컨설턴트 :" + JSON.stringify(res.data));
+        console.log("리셋 버튼 전체컨설턴트 :" + JSON.stringify(res.data));
         // setConsultantList([]);
         setConsultantList(res.data);
       })
