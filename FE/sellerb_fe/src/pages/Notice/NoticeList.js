@@ -69,7 +69,28 @@ function NoticeList() {
         console.log(err);
       });
   }, []);
-
+  const parsingDate = (date) => {
+    var parsedDate = new Date(date);
+    var yyyy = parsedDate.getFullYear();
+    var MM = parsedDate.getMonth() + 1;
+    var dd = parsedDate.getDate();
+    var hh = parsedDate.getHours() + 9;
+    var mm = parsedDate.getMinutes();
+    return (
+      yyyy +
+      "-" +
+      addZero(MM) +
+      "-" +
+      addZero(dd) +
+      "-" +
+      addZero(hh) +
+      ":" +
+      addZero(mm)
+    );
+  };
+  const addZero = (n) => {
+    return n < 10 ? "0" + n : n;
+  };
   return (
     <>
       <NavBar />
@@ -99,7 +120,6 @@ function NoticeList() {
               <tr className='notice-th-tr'>
                 <th className='notice-th-tr-No'>No</th>
                 <th className='notice-th-tr-title'>Title</th>
-                <th className='notice-th-tr-manager'>작성자</th>
                 <th className='notice-th-tr-date'>Date</th>
               </tr>
             </thead>
@@ -118,8 +138,9 @@ function NoticeList() {
                       >
                         {list.noticeTitle}
                       </td>
-                      <td className='notice-manager'>sellerB관리자</td>
-                      <td className='notice-regdate'>{list.noticeRegDate}</td>
+                      <td className='notice-regdate'>
+                        {parsingDate(list.noticeRegDate).slice(0, 10)}
+                      </td>
                     </tr>
                   );
                 })}
