@@ -25,12 +25,13 @@ function WaitingPage() {
     productSeq:"",
     productId: "",
     productName: "",
-    productPrice: ""
+    productPrice: "",
+    customerWaitingPageImage:""
   });
+
 
   const [waitingImg, setWaitingImg] = useState("");
   const [waitingMent, setWaitingMent] = useState("");
-
 
   /* 해당 seq에 맞는 Product 정보 먼저 가져오기 */
   useEffect(()=>{
@@ -46,15 +47,15 @@ function WaitingPage() {
     })
   }, [])
 
+
   useEffect(()=>{
-    waitingPageApi(product.productSeq)
+    waitingPageApi(id)
     .then((res)=>{
-      console.log("웨이팅 페이지 API: " + JSON.stringify(res.data));
-      // setWaitingImg(res.data.customerWaitingPageImage);
-      setImgFile(res.data.customerWaitingPageImage);
+      console.log("in UseEffect waitingPageApi: " + JSON.stringify(res.data));
+      setWaitingImg(res.data.customerWaitingPageImage);
     })
     .catch((err)=>{
-
+      console.log("가져온 대기화면 정보 없음")
     })
   }, [])
 
@@ -85,18 +86,18 @@ function WaitingPage() {
   };
 
     const onRegisterBtn = () => {
-      console.log("in RegisterBtn API : " + resImg)
+      // console.log("in RegisterBtn API : " + resImg)
   
       // 선택한 그룹군에 대해, productGroupSeq찾기 
       // console.log("제출 전 seq : " + selectSeq)
   
       const Info = {
         productSeq: product.productSeq,
-        customerWaitingPageMent: "멘트준비중",
-        customerWaitingPageImageUrl: resImg
+        customerWaitingPageMent: "준비중",
+        customerWaitingPageImage: resImg
       };
   
-      console.log("등록 전 Product: " + JSON.stringify(Info))
+      console.log("등록 전, WaitingPage Info: " + JSON.stringify(Info))
   
       registerWaitingPageApi(Info)
       .then((res)=>{
@@ -142,13 +143,18 @@ function WaitingPage() {
         <div className="register-area-wrapper">
           {/*  */}
           <div className="left-img">
-            {imgFile === "" ? (
+            {imgFile === "" && waitingImg === "" ? (
                 <img
                   className="product-register-img"
                   alt="#"
                   src={previewUrl}
                 />
-              ) : null}
+              ) : <img
+              className="product-register-img"
+              alt="#"
+              src={waitingImg}
+                />
+            }
               {imgBase64.map((item) => {
                 return (
                   <div>
@@ -169,7 +175,9 @@ function WaitingPage() {
                   id="file"
                   onChange={onHandleChangeFile}
                 />
-
+              <div className="product-register-small-btn">
+                <SmallButton label="업로드 완료" onClick={onImgRegisterBtn} />
+              </div> 
               </div>
 
           </div>
@@ -183,7 +191,7 @@ function WaitingPage() {
                     <input
                       className="product-id-input"
                       name="productId"
-                      defaultValue={product.productId}
+                      value={product.productId}
                       variant="outlined"
                     />
                   </div>
@@ -226,7 +234,7 @@ function WaitingPage() {
                 </div>
               {/*  */}
               <div className="product-register-medi-btn">
-                <MediButton label="대기화면 등록" onClick={onImgRegisterBtn} />
+                <MediButton label="등록하기" onClick={onRegisterBtn} />
                 <MediButton label="이미지 초기화" onClick={onResetFile} />
               </div>             
               </div>
