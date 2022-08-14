@@ -24,6 +24,11 @@
     margin-left: 10%;
 }
 
+.navi-left > select {
+    width: 150px;
+    height: 35px;
+}
+
 .navi-right {
     justify-content: end;
     display: flex;
