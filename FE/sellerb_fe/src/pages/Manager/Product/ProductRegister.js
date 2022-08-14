@@ -251,6 +251,7 @@ function ProductRegister() {
                 <div className="input-ele">
                   <p>제품군</p>
                   <select
+                    className="product-select-option"
                     onChange={onGroupChange}
                     value={productGroupName}
                     name="productGroupName"

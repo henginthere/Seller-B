@@ -30,6 +30,7 @@ export const productDetailApi = async(product_seq, success, fail) => {
 
 // GET : WatingPage.js : 해당 제품의 대기화면 이미지 
 export const waitingPageApi = async(product_seq, success, fail)=>{
+    console.log("in waitingPageAPi ; "+ product_seq)
     return await api.get(`/waiting-page/${product_seq}`).then(success).catch(fail);
 }
 
