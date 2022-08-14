@@ -18,6 +18,8 @@ function ProductList() {
   const [brandSeq, setBrandSeq] = useState(sessionStorage.getItem("brandSeq"));
 
   const [searchWord, setSearchWord] = useState(""); // 제품 검색어 
+  const [searchState, setSearchState] = useState(false);
+  const [searchItems, setSearchItems] = useState([]);
   const [groupOption, setGroupOption] = useState("제품 전체보기"); 
 
   useEffect(()=>{
@@ -50,9 +52,7 @@ function ProductList() {
 
     productGroupItemsApi(selectGroupSeq.productGroupSeq)
     .then((res)=>{
-      console.log(res.data);
       setItems(res.data)
-      console.log("itemslist :" + items);
     })
     .catch((err)=>{
       console.log("error")
@@ -66,7 +66,15 @@ function ProductList() {
   };
 
   const onSearchBtn = () => {
-    //
+    // searchWord state가 바뀌고 나서,,
+    // 제품리스트 안에서, 이 브랜드이면서 & productName이 일치하는거 찾아서 return 
+    // -> 여러개일 수 있겠다
+    setSearchState(false);
+
+    const search = totalItems.filter((ele)=> ele.productName.includes(searchWord) )
+    console.log("After search Filter : " + JSON.stringify(search))
+    setSearchItems(search);
+
   };
 
   const onRegisterBtn = () => {
@@ -75,8 +83,11 @@ function ProductList() {
 
   // 선택한 제품군 option에 따라, 나타낼 해당 제품군 리스트 컴포넌트
   function GroupOptionList({props}) {
-    console.log("items:" + props)
+
     return <ProdcutOption items={props} />;
+    if(searchWord !== ""){
+      setSearchWord("");
+    }
   }
 
   const onChangeImage = () =>{
@@ -110,7 +121,7 @@ function ProductList() {
             />
             <SearchOutlined 
               id="search-icon-btn"
-              onClick={()=> navigate("/")}
+              onClick={onSearchBtn}
             />
 
               <div>제품등록</div>
@@ -121,9 +132,12 @@ function ProductList() {
           </div>
         </div>
         <div className="product-list-wrapper">
-          {groupOption === "제품 전체보기"
-          ? <GroupOptionList props={totalItems} />
-          : <GroupOptionList props={items} />
+          {groupOption === "제품 전체보기" && searchWord === ""
+          ? <GroupOptionList props={totalItems} />    
+          : ( groupOption !== "제품 전체보기" && searchWord === ""
+             ? <GroupOptionList props={items} />
+             : <GroupOptionList props={searchItems} />
+          )
         }
           
         </div>
