@@ -38,19 +38,16 @@ const StyledButton = styled.button`
   border: 0px none;
   margin-right: 10px;
 
-  transition-duration: 600ms;
+  transition-duration: 400ms;
   transition-timing-function: ease;
   transition-property: transform;
 
   &:hover {
-    transform: scale(1.1);
+    transform: scale(1.04);
     background-color: #CDD4E7;
+    cursor: pointer;
   }
 
-  &: focus {
-    transform: scale(1.1);
-  background-color: #CDD4E7;
-  }
 
 `;
 

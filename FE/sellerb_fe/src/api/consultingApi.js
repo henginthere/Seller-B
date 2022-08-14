@@ -31,7 +31,7 @@ export const startConsultingApi = async (consultingData, success, fail) => {
     .catch(fail);
 };
 
-// 상담 종료시 state -> end로 변경
+// 상담 종료시 state -> end로 변경w
 export const endConsultingApi = async (
   consultingSeq,
   consultingStatus,
