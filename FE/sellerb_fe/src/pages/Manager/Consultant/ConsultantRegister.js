@@ -9,6 +9,9 @@ import { registerConsultantApi } from "../../../api/consultantApi";
 import { productGroupListApi } from "../../../api/productApi";
 import axios from "axios";
 
+import { SmallButton } from "../../../components/Common/SmallButton";
+import { MediButton } from "../../../components/Common/MediButton";
+
 function ConsultantRegister() {
   const navigate = useNavigate();
   const [resImg, setResImg] = useState("");
@@ -137,8 +140,6 @@ function ConsultantRegister() {
     })
   }
 
-
-
   const onGroupChange = (e) => {
     e.preventDefault();
 
@@ -150,6 +151,11 @@ function ConsultantRegister() {
 
     setSeqTest(item.productGroupSeq); 
   };
+
+  const onCancleBtn = (e) => {
+    
+    navigate("/manager/main")
+  }
 
   return (
     <>
@@ -270,16 +276,16 @@ function ConsultantRegister() {
               </TextField>
             </div>
             <div className="Button">
-              <Button
-                onClick={()=>onRegisterBtn()}
+              <MediButton
+                onClick={onRegisterBtn}
                 className="registerBtn"
                 variant="contained"
-              >
-                등록
-              </Button>
-              <Button className="registerBtn" variant="contained" color="error">
-                취소
-              </Button>
+                label="등록"
+              />
+              <MediButton
+                onClick={onCancleBtn}
+                label="취소"
+              />
             </div>
           </form>
         </div>
