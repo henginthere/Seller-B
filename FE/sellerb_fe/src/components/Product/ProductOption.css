@@ -30,12 +30,12 @@
 
 .element-wrapper:hover {
     transform: scale(1.03);
-    background-color: #CDD4E7;
+    background-color: rgb(250, 247, 247);
 }
 
 .element-wrapper:focus {
     transform: scale(1.03);
-    background-color: #CDD4E7;
+    background-color: rgb(250, 247, 247);
 }
 
 /* .element-wrapper > img {
@@ -66,9 +66,12 @@
 .element-wrapper .product-info-name {
     font-size: 13px;
     margin-left: 10px;
+
+    color: grey;
 }
 
 .element-wrapper .product-info-price {
     font-size: 13px;
     margin-left: 10px;
+    color: grey;
 }
