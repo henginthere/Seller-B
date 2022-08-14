@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 
 import "./ProductRegister.css";
 import { Footer, NavBar } from "../../../components/index";
-import { productDetailApi } from "../../../api/productApi";
+import { productDetailApi, productDelApi } from "../../../api/productApi";
 import { SmallButton } from "../../../components/Common/SmallButton";
 import { MediButton } from "../../../components/Common/MediButton";
 
@@ -42,6 +42,19 @@ function ProductDetail() {
   const onEditBtn = () => {
     navigate(`/manager/productEdit/${product.productSeq}`);
   };
+
+  const onDeleteBtn = () =>{
+
+    productDelApi(seq)
+    .then((res)=>{
+      console.log(res.data);
+    })
+    .catch((err)=>{
+      console.log("Error");
+    })
+
+    navigate("/manager/productList");
+  }
 
   return (
     <>
@@ -115,7 +128,8 @@ function ProductDetail() {
                 {/* 하단 버튼 */}
               <div className="product-register-medi-btn">
                 <MediButton label="수정하기" onClick={onEditBtn} />
-                <MediButton label="제품대기화면 등록" onClick={goWaitingPage} />
+                <MediButton label="삭제하기" onClick={onDeleteBtn} />
+                <MediButton label="대기화면 등록" onClick={goWaitingPage} />
               </div>
               {/* <div className="product-register-medi-btn">
                 
