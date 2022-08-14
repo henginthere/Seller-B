@@ -96,7 +96,7 @@ function ConsultingMain() {
                           customerId: values.customerId,
                           productSeq: values.productSeq,
                           consultantSeq: sessionStorage.getItem("seq"),
-                          consultingState: "start",
+                          consultingState: "waiting",
                         })
                           .then((res) => {
                             // console.log("startConsultingApi Call");

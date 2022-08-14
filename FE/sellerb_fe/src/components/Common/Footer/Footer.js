@@ -7,7 +7,7 @@ function Footer() {
     width: "100%",
     height: "200px",
     textAlign: "center",
-    backgroundColor: "lightgray",
+    backgroundColor: "#e2e2e2",
     display: "flex",
   };
   const styleObj_content = {

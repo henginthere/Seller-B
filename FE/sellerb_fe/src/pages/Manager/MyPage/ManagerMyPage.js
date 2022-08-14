@@ -7,6 +7,9 @@ import TextField from "@mui/material/TextField";
 import { getManagerInfoApi } from "../../../api/managerApi";
 import { indigo } from "@mui/material/colors";
 
+import { SmallButton } from "../../../components/Common/SmallButton";
+import { MediButton } from "../../../components/Common/MediButton";
+
 function ManagerMyPage() {
   const [info, setInfo] = useState([]);
   const [managerSeq, setManagerSeq] = useState(sessionStorage.getItem("seq"));
@@ -21,6 +24,7 @@ function ManagerMyPage() {
     setModify(!isModify);
     console.log("isModify : " + isModify);
   };
+  
 
   const cancelModify = () => {
     getManagerInfoApi(managerSeq)

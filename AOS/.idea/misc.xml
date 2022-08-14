@@ -3,16 +3,27 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/SSAFY/S07P12D105/AOS/app/src/main/res/layout/fragment_login.xml" value="0.190625" />
         <entry key="app/src/main/res/drawable/ic_baseline_qr_code_scanner_24.xml" value="0.1845" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1845" />
         <entry key="app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1845" />
+        <entry key="app/src/main/res/drawable/ic_logout.xml" value="0.1845" />
+        <entry key="app/src/main/res/drawable/ic_qr_scan.xml" value="0.1845" />
         <entry key="app/src/main/res/drawable/icon_qr_scan.xml" value="0.1845" />
         <entry key="app/src/main/res/drawable/qr_scan_background.xml" value="0.1845" />
+        <entry key="app/src/main/res/drawable/selector_home.xml" value="0.1845" />
+        <entry key="app/src/main/res/drawable/selector_my_page.xml" value="0.1845" />
+        <entry key="app/src/main/res/drawable/sellerb_logo.xml" value="0.1845" />
+        <entry key="app/src/main/res/drawable/sellerb_logo_text.xml" value="0.1845" />
+        <entry key="app/src/main/res/drawable/shape_round.xml" value="0.1845" />
+        <entry key="app/src/main/res/layout/activity_consulting.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.67" />
         <entry key="app/src/main/res/layout/activity_qr_scan.xml" value="0.34148550724637683" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2512664640324215" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.34148550724637683" />
-        <entry key="app/src/main/res/layout/fragment_my_page.xml" value="0.34148550724637683" />
+        <entry key="app/src/main/res/layout/fragment_my_page.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_waiting.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/peer_video.xml" value="0.23731884057971014" />
       </map>
     </option>
   </component>

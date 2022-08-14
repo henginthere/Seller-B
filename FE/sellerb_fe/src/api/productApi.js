@@ -30,6 +30,7 @@ export const productDetailApi = async(product_seq, success, fail) => {
 
 // GET : WatingPage.js : 해당 제품의 대기화면 이미지 
 export const waitingPageApi = async(product_seq, success, fail)=>{
+    console.log("in waitingPageAPi ; "+ product_seq)
     return await api.get(`/waiting-page/${product_seq}`).then(success).catch(fail);
 }
 
@@ -38,9 +39,20 @@ export const productEditApi = async (product_seq, success, fail) =>{
     return await api.put(`/product/${product_seq}`).then(success).catch(fail);
 }
 
+// POST : WaitingPage.js : 해당 제품의 대기화면 등록하기
+export const registerWaitingPageApi = async(waitingPage, success, fail) => {
+    return await api.post("/waiting-page", waitingPage).then(success).catch(fail);
+}
+
 // GET : ProductList.js
 export const productSearchApi = async (productName, success, fail) => {
     return await api.get(`/product/name/${productName}`).then(success).catch(fail);
+}
+
+// Del : ProductDetail.js
+export const productDelApi = async (productSeq, success, fail) =>{
+
+    return await api.delete(`/product/${productSeq}`).then(success).catch(fail);
 }
 
 // GET : ProductList.js : 처음 접속 시, 해당 브랜드의 모든 제품 불러오기
