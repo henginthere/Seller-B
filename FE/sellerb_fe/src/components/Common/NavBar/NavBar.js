@@ -10,25 +10,25 @@ import {
   DatabaseOutlined,
   LogoutOutlined,
   BuildOutlined,
+  CustomerServiceOutlined,
 } from "@ant-design/icons";
 import { CgProfile } from "react-icons/cg";
 
 function NavBar() {
   const navigate = useNavigate();
   const [seq, setSeq] = useState("");
-
-  var isManager = true;
-  if (sessionStorage.getItem("adminCheck") === "ROLE_ADMIN") {
-    isManager = true;
-  } else {
-    isManager = false;
-  }
+  const [isManager, setIsManager] = useState(true);
 
   // 관리자, 상담사든 로그인할 때, 사용자의 seq받기
   useEffect(() => {
+    if (sessionStorage.getItem("adminCheck") === "ROLE_ADMIN") {
+      setIsManager(true);
+    } else {
+      setIsManager(false);
+    }
+
     const seq = sessionStorage.getItem("seq");
     setSeq(seq);
-    console.log("받은 seq : " + seq);
   }, []);
 
   const onLogOutBtn = () => {
@@ -36,21 +36,27 @@ function NavBar() {
     navigate("/");
   };
 
+  const onGoMain = () => {
+    if (isManager) {
+      navigate("/manager/main");
+    } else {
+      navigate("/consultant/main");
+    }
+  };
+
   return (
     <>
       <div className='navbar-wrapper'>
         <div className='navbar-left'>
-          <Link
-            to={isManager ? "/manager/main" : "/consultant/main"}
-            style={{ marginTop: "7px" }}
-          >
-            <img
-              className='navbar-logo-img'
-              alt='#'
-              src={`${process.env.PUBLIC_URL}/img/sellerB_Logo.svg`}
-            />
-          </Link>
-          <div className='small-sellerb'>SellerB</div>
+          <img
+            onClick={onGoMain}
+            className='navbar-logo-img'
+            alt='#'
+            src={`${process.env.PUBLIC_URL}/img/sellerB_Logo.svg`}
+          />
+          <div className='small-sellerb' onClick={onGoMain}>
+            SellerB
+          </div>
         </div>
 
         <div className='navbar-right'>
@@ -103,14 +109,13 @@ function NavBar() {
                 onClick={() => navigate("/meeting/mancon")}
               >
                 <YoutubeOutlined id='meet-icon' />
-                회의생성
+                회의참가
               </div>
               <div
                 className='navi-title'
-                onClick={() => navigate("/meeting/ConsultingMain")}
+                onClick={() => navigate("/meeting/consultingMain")}
               >
-                <YoutubeOutlined id='meet-icon' />
-                상담
+                <CustomerServiceOutlined id='notice-icon' /> 상담
               </div>
               <div
                 className='navi-title'

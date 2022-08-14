@@ -7,18 +7,20 @@ import com.ssafy.sellerb.data.repository.UserRepository
 import com.ssafy.sellerb.ui.base.BaseViewModel
 import com.ssafy.sellerb.util.CoroutineDispatchers
 import com.ssafy.sellerb.util.Event
+import com.ssafy.sellerb.util.network.NetworkHelper
 
 class HomeViewModel(
     coroutineDispatchers: CoroutineDispatchers,
+    networkHelper: NetworkHelper,
     userRepository: UserRepository
-) : BaseViewModel(coroutineDispatchers) {
-
-    val count = 0;
+) : BaseViewModel(coroutineDispatchers, networkHelper) {
 
     private val user: User? = userRepository.getCurrentUser()
 
     private val _isLogIn: MutableLiveData<Event<Boolean>> = MutableLiveData()
     val isLogin: LiveData<Event<Boolean>> = _isLogIn
+
+    val isWaiting: MutableLiveData<Boolean> = MutableLiveData()
 
     init {
         if(user == null){
@@ -26,9 +28,15 @@ class HomeViewModel(
         }else{
             _isLogIn.postValue(Event(true))
         }
+        //userRepository.removeWaitingSeq()
+        if(userRepository.getWaitingSeq() != 0L){
+            isWaiting.postValue(false)
+        }else{
+            isWaiting.postValue(true)
+        }
     }
-    override fun onCreate() {
 
+    override fun onCreate() {
     }
 
 
