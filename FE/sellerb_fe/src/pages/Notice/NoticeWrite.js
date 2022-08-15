@@ -1,112 +1,102 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { SmallButton } from "../../components/Common/SmallButton";
 
-import { registerNoticeApi } from "../../api/noticeApi";
-import "./NoticeWrite.css";
 import { Footer, NavBar } from "../../components/index";
-import getStringDate from "../../utils/date";
+import { MediButton } from "../../components/Common/MediButton";
 
-function NoticeWrite() {
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+
+
+import "./NoticeWrite.css"
+import { registerNoticeApi } from "../../api/noticeApi";
+
+function NotieWriteTwo() {
   const navigate = useNavigate();
 
   const [noticeTitle, setNoticeTitle] = useState("");
   const [noticeContent, setNoticeContent] = useState("");
 
-  const onNoticeTitleHandler = (event) => {
-    setNoticeTitle(event.currentTarget.value);
-    // test
-    // console.log(noticeTitle);
+  const [viewContent, setViewContent] = useState([]);
+
+  const onNoticeTitleHandler = (e) => {
+    setNoticeTitle(e.target.value);
+    console.log("바뀐 Title: " + noticeTitle);
   };
 
-  const onNoticeContentHandler = (event) => {
-    setNoticeContent(event.currentTarget.value);
-    // test
-    // console.log(noticeContent);
+  const onNoticeContentHandler = (e) => {
+    setNoticeContent(e.target.value);
+    console.log("바뀐 Content: " + noticeContent);
   };
 
-  const onSubmitBtnHandler = (event) => {
-    // event.preventDefault();
+  const onSubmitBtnHandler = (event) =>{
+    // event.preventDefault(); 
 
-    if (window.confirm("공지사항을 등록하시겠습니까?")) {
-      let noticePostBody = {
-        noticeTitle: noticeTitle,
-        noticeContent: noticeContent,
-      };
-      console.log(noticePostBody);
+    // const parseResult = noticeContent.
 
-      registerNoticeApi(noticePostBody)
-        .then((res) => {
-          console.log(res.data);
-          navigate("/manager/noticeList");
-        })
-        .catch((err) => {
-          console.log(err.data);
-        });
-    }
-    // axios
+    let noticePostBody = {
+      noticeTitle: noticeTitle,
+      noticeContent: noticeContent
+    };
 
-    // Axios.post('/notice', noticePostBody)
-    // .then((res)=> console.log("success"))
-    // .catch((err) => console.log("err"))
-  };
+    registerNoticeApi(noticePostBody)
+      .then((res)=>{
+        console.log(res.data);
+        navigate("/manager/noticeList");
+      })
+      .catch((err)=>{
+        console.log(err.data);
+      })
+  }
 
-  const onResetBtnHandler = () => {
-    setNoticeTitle("");
-    setNoticeContent("");
-  };
-
-  const onCloseBtnHandler = () => {
-    navigate("/manager/noticeList", { replace: true });
-  };
+  const onCancleBtnHandler = () => {
+    navigate("/manager/noticeList");
+  }
 
   return (
     <>
       <NavBar />
-      <div className='consultant-main-image-wrapper'>
-        <img
-          src={`${process.env.PUBLIC_URL}/img/consultantMainPageImage.jpg`}
-        />
-      </div>
-      <div className='notice-write-header'>공지사항 작성</div>
-      <div className='write-form-wrapper'>
-        <div className='write-input-title'>
+      <div className="notice-list-wrapper">
+      <div className='notice-title-wrapper'>
+          <h4 className='notice-title-text'>공지사항</h4>
+        </div>
+        <div className="write-two-input-title">
           <input
-            className='write-title'
-            placeholder='제목을 입력해주세요..'
+            className="write-title"
+            placeholder="제목을 입력해주세요.."
             value={noticeTitle}
             onChange={onNoticeTitleHandler}
           />
           <hr />
         </div>
+        {/*  */}
+        <div className="ckeditor-wrapper">
+        <CKEditor
+          className="ckeditor"
+          editor={ClassicEditor}
+          data="<p>내용을 작성해주세요!</p>"
 
-        <div className='write-input-content'>
-          <input
-            className='write-content'
-            placeholder='내용을 입력해주세요 ..'
-            value={noticeContent}
-            onChange={onNoticeContentHandler}
-          />
-        </div>
-        <div className='btns-wrapper'>
-          <SmallButton onClick={onCloseBtnHandler} label='뒤로' size='sm' />
-          {/* <button className='back-btn' onClick={onCloseBtnHandler}>
-            뒤로
-          </button> */}
-          <SmallButton onClick={onSubmitBtnHandler} label='등록' size='sm' />
-          {/* <button className='register-btn' onClick={onSubmitBtnHandler}>
-            등록
-          </button> */}
-          <SmallButton onClick={onResetBtnHandler} label='초기화' size='sm' />
-          {/* <button className='reset-btn' onClick={onResetBtnHandler}>
-            초기화
-          </button> */}
-        </div>
-      </div>
+          onReady={(editor) => {
+            console.log("Editor is ready to use!", editor);
+          }}
 
-      <Footer />
+          onChange={(event, editor) => {
+            const data = editor.getData(); 
+            console.log({event, editor, data});
+            setNoticeContent(data);
+
+            console.log("바뀐 editor 내용: "+ noticeContent)
+          }}
+        />
+        </div>
+        {/*  */}
+    <div className="notice-write-bottom-wrapper" >
+        <MediButton onClick={onSubmitBtnHandler} label='등록' size='sm' />
+        <MediButton onClick={onCancleBtnHandler} label='뒤로가기' />
+    </div>
+    </div>
     </>
   );
 }
 
-export default NoticeWrite;
+export default NotieWriteTwo;

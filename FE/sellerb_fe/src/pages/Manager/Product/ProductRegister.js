@@ -27,6 +27,8 @@ function ProductRegister() {
   });
   const [selectSeq, setSelectSeq] = useState([]);
   const [groupList, setGroupList] = useState([]);
+  const [groupOption, setGroupOption] = useState("");
+
   const [managerBrand, setManagerBrand] = useState(
     sessionStorage.getItem("brandNameKor")
   );
@@ -134,8 +136,7 @@ function ProductRegister() {
       .then((res) => {
         console.log(res.data);
         
-        
-        navigate('manager/productList')
+        navigate('/manager/productList')
       })
       .catch((err) => {
         toast.error("내용을 채워주세요!", {
@@ -211,14 +212,19 @@ function ProductRegister() {
               })}
               <div className="product-img-bottom-wrapper">
                 <input
-                  className="img-btn"
+                  // className="img-btn"
                   multiple="multiple"
                   type="file"
-                  accept="image/*"
                   id="file"
+                  name="file"
+                  accept="image/*"
                   onChange={onHandleChangeFile}
+                  style={{"display":"none"}}
                 />
                 <div className="product-register-small-btn">
+                  <label for="file">
+                    <div className="find-file-btn">파일찾기</div>
+                  </label>
                   <SmallButton label="이미지 등록" onClick={onImgRegisterBtn} />
                   <ToastContainer />
                 </div>
@@ -271,15 +277,17 @@ function ProductRegister() {
                 <div className="input-ele">
                   <p>제품군</p>
                   <select
-                    className="product-select-option"
                     onChange={onGroupChange}
-                    value={productGroupName}
+                    className="product-select-option"
+                    defaultValue={product.productGroupName}
                     name="productGroupName"
                   >
-                    <option value=""></option>
+                    <option>---제품군 선택--</option>
                     {groupList.map((option) =>
                       option.brandName === managerBrand ? (
-                        <option>{option.productGroupName}</option>
+                        <option value={option.productGroupName}>
+                          {option.productGroupName}
+                        </option>
                       ) : (
                         ""
                       )
