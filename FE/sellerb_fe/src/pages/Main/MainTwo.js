@@ -21,6 +21,7 @@ function MainTwo() {
               font-family="twayair"
               font-size="144"
             >
+              
               <tspan x="-250" y="109">
                 <tspan>S</tspan>
                 <tspan>e</tspan>
@@ -31,9 +32,9 @@ function MainTwo() {
                 <tspan>B</tspan>
               </tspan>
             </text>
-          </g>
+          </g> 
         </svg>
-        <div className="blink" onClick={()=> navigate("/manager/main")} >
+        <div className="blink" onClick={()=> navigate("/main")} >
         <DoubleRightOutlined style={{"width":"100px", "marginTop":"25px"}} />
       </div>
       </div>
