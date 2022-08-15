@@ -8,5 +8,6 @@ import java.util.List;
 
 public interface NoticeRepository extends JpaRepository<Notice, Long> {
     List<Notice> findByNoticeTitleContaining(String noticeTitle);
+    List<Notice> findNoticesByBrandSeq_BrandSeq(Long brandSeq);
 
 }
