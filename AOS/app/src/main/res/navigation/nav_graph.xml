@@ -66,6 +66,20 @@
         <action
             android:id="@+id/action_WaitingFragment_to_HomeFragment"
             app:destination="@+id/item_home"/>
+        <action
+            android:id="@+id/action_WaitingFragment_to_ConsultingReviewDialog"
+            app:destination="@+id/consultingReviewDialog"/>
     </fragment>
+
+    <dialog
+        android:id="@+id/consultingReviewDialog"
+        android:name="com.ssafy.sellerb.ui.consulting.review.ConsultingReviewDialog"
+        android:label="ConsultingReviewDialog"
+        tools:layout="@layout/dialog_consulting_review"
+        >
+        <action
+            android:id="@+id/action_ConsultingReviewDialog_to_HomeFragment"
+            app:destination="@id/item_home"/>
+    </dialog>
 
 </navigation>

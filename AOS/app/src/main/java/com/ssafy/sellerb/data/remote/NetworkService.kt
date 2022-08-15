@@ -50,10 +50,10 @@ interface NetworkService {
     ):ConsultingInfoResponse
 
     @PUT(Endpoints.START_CONSULTING)
-    suspend fun startConsulting(
+    suspend fun setConsultingState(
         @Path("seq") seq: Long,
         @Body request: ConsultingStartRequest
-    ):Boolean
+    ):GeneralResponse
 
     @DELETE(Endpoints.WAITING_CANCEL)
     suspend fun cancelWaiting(
@@ -66,4 +66,10 @@ interface NetworkService {
         @Path("seq") seq: Long,
         @Header(Networking.HEADER_ACCESS_TOKEN) accessToken: String
     ):WaitingResponse
+
+    @GET(Endpoints.GET_CONSULTING_STATE)
+    suspend fun getConsultingState(
+        @Path("customer-id") id: String,
+        @Header(Networking.HEADER_ACCESS_TOKEN) accessToken: String
+    ):List<ConsultingStateResponse>
 }
