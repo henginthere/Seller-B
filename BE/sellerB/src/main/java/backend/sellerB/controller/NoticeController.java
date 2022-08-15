@@ -53,6 +53,11 @@ public class NoticeController {
         return ResponseEntity.ok(noticeService.getNoticeList());
     }
 
+    @GetMapping("/list/{brand-seq}")
+    public ResponseEntity<List<NoticeDto>> getNoticeListByBrandSeq(HttpServletRequest request, @PathVariable("brand-seq") Long brandSeq) {
+        return ResponseEntity.ok(noticeService.getNoticeListByBrand(brandSeq));
+    }
+
     @GetMapping("/{seq}")
     public ResponseEntity<NoticeDto> getNoticeDetail(@PathVariable Long seq) {
         return ResponseEntity.ok(noticeService.getNoticeDetail(seq));
