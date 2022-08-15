@@ -19,7 +19,7 @@
 
 .navi-left {
     justify-content: start;
-    width: 50%;
+    width: 30%;
 
     margin-left: 10%;
 }
@@ -29,10 +29,28 @@
     height: 35px;
 }
 
+.navi-center {
+    width: 30%;
+    display: flex;
+    margin-left: 55px;
+}
+
+.navi-center .navi-center-search-word {
+    font-size: 25px;
+    color: #324E66;
+    margin-right: 5px;
+}
+
+.navi-center .navi-center-result-word {
+    font-size: 15px;
+    margin-top: 8px;
+}
+
+/* navi 오른쪽 영역 */
 .navi-right {
     justify-content: end;
     display: flex;
-    width: 50%;
+    width: 30%;
 
     margin-right: 10%;
 }
@@ -43,15 +61,20 @@
     background-color: #eef0f0;
 }
 
+.navi-right .navi-prod-register-btn {
+    margin-left: 15px;
+    margin-top: 5px;
+}
+
 #search-icon-btn {
     font-size: 20px;
-    margin-left: 10px;
+    /* margin-left: 10px; */
     margin-right: 10px;
 }
 
 #prod-create-btn {
     font-size: 20px;
-    margin-left: 10px;
+    margin-left: 20px;
     margin-right: 10px;
 }
 
