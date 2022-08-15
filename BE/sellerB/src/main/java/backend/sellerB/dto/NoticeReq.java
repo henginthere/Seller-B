@@ -12,12 +12,14 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 public class NoticeReq {
+    private Long brandSeq;
     private String noticeTitle;
     private String noticeContent;
 
     public static NoticeReq from(Notice notice) {
         if(notice == null) return null;
         return NoticeReq.builder()
+                .brandSeq(notice.getBrandSeq().getBrandSeq())
                 .noticeTitle(notice.getNoticeTitle())
                 .noticeContent(notice.getNoticeContent())
                 .build();
@@ -28,6 +30,7 @@ public class NoticeReq {
         int i = 0;
         while(i < noticeList.size()){
             NoticeReq noticeReq = NoticeReq.builder()
+                    .brandSeq(noticeList.get(i).getBrandSeq().getBrandSeq())
                     .noticeTitle(noticeList.get(i).getNoticeTitle())
                     .noticeContent(noticeList.get(i).getNoticeContent())
                     .build();
