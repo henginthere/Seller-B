@@ -3,7 +3,8 @@ import "./ConsultantModify.css";
 import { Footer, NavBar } from "../../../components/index";
 import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
-
+import { SmallButton } from '../../../components/Common/SmallButton'
+import { MediButton } from '../../../components/Common/MediButton'
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 import { modifyConsultantApi, detailConsultantApi } from "../../../api/consultantApi"
