@@ -28,9 +28,10 @@ const StyledButton = styled.button`
   overflow: hidden;
   width: 148px;
   height: 42px;
+
   border-radius: 0px;
-  color: #324E66;
-  background-color: ##ca5253;
+ color: #edefe9;
+  background-color: #ff7d68;
   border: 0px none;
   margin-right: 10px;
 
@@ -40,7 +41,7 @@ const StyledButton = styled.button`
 
   &:hover {
     transform: scale(1.04);
-    background-color: #CDD4E7;
+    background-color: #923c35;
     cursor: pointer;
   }
 
