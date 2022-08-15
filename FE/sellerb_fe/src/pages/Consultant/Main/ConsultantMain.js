@@ -47,7 +47,7 @@ function ConsultantMain() {
     console.log("Today : " + today);
     listNoticeApi()
       .then((res) => {
-        setItems(res.data);
+        setItems(res.data.reverse());
 
         // const items = res.data.filter(
         //   (it) => it.noticeRegDate.getDate() === today.getDate(),
@@ -142,7 +142,14 @@ function ConsultantMain() {
         </div>
         <div className='notice-consulting-wrapper'>
           <div className='notice'>
-            <div className='notice-title'>공지사항</div>
+            <div
+              className='notice-title'
+              onClick={() => {
+                navigate("/manager/noticeList");
+              }}
+            >
+              공지사항
+            </div>
             <hr />
             <div>
               <TableContainer>
