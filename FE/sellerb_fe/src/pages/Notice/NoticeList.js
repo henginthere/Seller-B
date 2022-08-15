@@ -48,7 +48,7 @@ function NoticeList() {
     }
     searchNoticeApi(searchTitle)
       .then((res) => {
-        setNoticeList(res.data);
+        setNoticeList(res.data.reverse());
       })
       .catch((err) => {
         console.log(err);
@@ -63,7 +63,7 @@ function NoticeList() {
     listNoticeApi()
       .then((res) => {
         // console.log(res.data);
-        setNoticeList(res.data);
+        setNoticeList(res.data.reverse());
       })
       .catch((err) => {
         console.log(err);
