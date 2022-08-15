@@ -102,7 +102,8 @@ function NoticeEdit() {
             <div>
               <pre>
                 <input
-                  className='row-right'
+                  style={{"width":"100%"}}
+                  // className='row-right'
                   name='noticeContent'
                   defaultValue={noticeData.noticeContent}
                   onChange={onChange}
