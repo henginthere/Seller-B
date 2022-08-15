@@ -37,6 +37,7 @@ function WaitingPage() {
 
   const [waitingImg, setWaitingImg] = useState("");
   const [waitingMent, setWaitingMent] = useState("");
+  const [inputWaitingMent, setInputWaitingMent] = useState("");
 
   /* 해당 seq에 맞는 Product 정보 먼저 가져오기 */
   useEffect(() => {
@@ -89,7 +90,7 @@ function WaitingPage() {
   const onChangeMent = (e)=>{
     console.log(e.target.value);
 
-    setWaitingMent(e.target.value);
+    setInputWaitingMent(e.target.value);
   }
 
   const onResetFile = () => {
@@ -101,12 +102,14 @@ function WaitingPage() {
     // console.log("in RegisterBtn API : " + resImg)
 
     // 선택한 그룹군에 대해, productGroupSeq찾기
-    // console.log("제출 전 seq : " + selectSeq)
+    // console.log("제출 전 seq : " + selectSe
+    console.log("등록할 멘트 : " + waitingMent)
+    
 
     const Info = {
       productSeq: product.productSeq,
-      customerWaitingPageMent: waitingMent,
-      customerWaitingPageImage: resImg,
+      customerWaitingPageMent: inputWaitingMent,
+      customerWaitingPageImage: resImg
     };
 
     console.log("등록 전, WaitingPage Info: " + JSON.stringify(Info));
@@ -157,32 +160,41 @@ function WaitingPage() {
           <div className="register-area-wrapper">
             {/*  */}
             <div className="left-img">
-              {waitingImg === "" && imgFile === "" 
-              ? (
-                <img
-                  className="product-register-img"
-                  alt="#"
-                  src={previewUrl}
-                />
-              ) 
-              : (
-                <img
-                  className="product-register-img"
-                  alt="###"
-                  src={waitingImg}
-                />
-              )}
-              {imgBase64.map((item) => {
-                return (
-                  <div>
+              {
+                // 기존이미지도 없고, 새로 올린 파일도 없으면, Preview 이미지  
+                waitingImg === "" && imgFile === ""
+                ? (
+                  <img
+                    className="product-register-img"
+                    alt="#"
+                    src={previewUrl}
+                  />
+                  ) 
+              : ( 
+                waitingImg !=="" // 만약에 기존등록이미지가 있으면 고걸 보여줘
+                  ? (   
                     <img
                       className="product-register-img"
-                      src={item}
-                      alt="First Slide"
+                      alt="###"
+                      src={waitingImg}
                     />
-                  </div>
-                );
-              })}
+                    )
+                : (
+                  imgBase64.map((item) => {
+                    return (
+                      <div>
+                        <img
+                          className="product-register-img"
+                          src={item}
+                          alt="First Slide"
+                        />
+                      </div>
+                    );
+                  })
+                )
+                
+              )}
+              
               <div className="product-img-bottom-wrapper">
                 <input
                   className="img-btn"
@@ -257,14 +269,16 @@ function WaitingPage() {
                       waitingMent === "" 
                       ? <input
                         className="product-id-input"
-                        name="productGroup"
+                        onChange={onChangeMent}
+                        // name="productGroup"
+                        value={inputWaitingMent}
                         placeholder="출력 멘트를 입력해주세요"
                         variant="outlined"
                       />
                     : <input
                         className="product-id-input"
                         name="productGroup"
-                        defaultValue={waitingMent}
+                        value={waitingMent}
                         variant="outlined"
                       />
                     }
