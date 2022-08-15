@@ -16,7 +16,7 @@ import "./ConsultantMyPage.css";
 
 import AttendanceLog from "../../../components/Log/AttendanceLog";
 import ConsultingLog from "../../../components/Log/ConsultingLog";
-
+import { MediButton } from "../../../components/Common/MediButton";
 import { detailConsultantApi } from "../../../api/consultantApi";
 
 function ConsultantMyPage() {
@@ -31,10 +31,8 @@ function ConsultantMyPage() {
   const [isModify, setModify] = useState(false);
 
   const [imgBase64, setImgBase64] = useState([]); // 미리보기를 구현할 state
-  const [imgFile, setImgFile] = useState({
-    image_file: "",
-    preview_URL: `${process.env.PUBLIC_URL}/img/default_img.png`,
-  });
+  const [imgFile, setImgFile] = useState("");
+  const [previewUrl, setPreviewUrl] = useState(`${process.env.PUBLIC_URL}/img/default_img.png`)
 
   useEffect(() => {
     detailConsultantApi(seq)
@@ -124,20 +122,11 @@ function ConsultantMyPage() {
       <>
         <div className='con-mypage-wrapper'>
           <div className='con-mypage-left-wrapper'>
-            {imgFile.image_file === "" ? (
               <img
                 className='con-mypage-default-img'
                 alt='#'
-                src={imgFile.preview_URL}
+                src={consultant.consultantImageUrl}
               />
-            ) : null}
-            {imgBase64.map((item) => {
-              return (
-                <div>
-                  <img src={item} alt='First Slide' />
-                </div>
-              );
-            })}
           </div>
 
           <div className='InfoTextField'>
@@ -182,9 +171,10 @@ function ConsultantMyPage() {
             />
           </div>
           <div className='Button'>
-            <Button variant='contained' size='large' onClick={ChangeToModify}>
+            <MediButton label="수정하기" onClick={ChangeToModify} />
+            {/* <Button variant='contained' size='large' onClick={ChangeToModify}>
               수정
-            </Button>
+            </Button> */}
           </div>
         </div>
       </>
@@ -265,7 +255,7 @@ function ConsultantMyPage() {
         {/* 왼쪽 */}
         <div id='left'>
           <div className='topText'>
-            <h2>My Page</h2>
+            {/* <h2>My Page</h2> */}
           </div>
           {/* 상담사 이미지 */}
 
@@ -278,7 +268,7 @@ function ConsultantMyPage() {
         <div id='consultant-mypage-right'>
           {/* 상담 이력 LIST */}
           <div className='profile-right'>
-            <div className='select-wrapper'>
+            <div className='consultant-detail-select-wrapper'>
               <select onChange={onHandleLogOption} value={logOption}>
                 <option>출결이력</option>
                 <option>상담이력</option>
