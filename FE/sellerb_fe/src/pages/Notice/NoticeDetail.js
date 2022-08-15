@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "./NoticeDetail.css";
@@ -71,25 +71,8 @@ function NoticeDetail() {
             
             <div className="notice-detail-content-detail">
                 <div>
-                    <pre>
-                        {noticeData.noticeContent}
-                        zzzzzzzzzzzz공지사하아앙
-                        zzzzzzzzzzzz공지사하아앙
-                        zzzzzzzzzzzz공지사하아앙
-                        zzzzzzzzzzzz공지사하아앙
-                        zzzzzzzzzzzz공지사하아앙
-                        zzzzzzzzzzzz공지사하아앙
-                        zzzzzzzzzzzz공지사하아앙
-                        zzzzzzzzzzzz공지사하아앙
-                        zzzzzzzzzzzz공지사하아앙
-                        zzzzzzzzzzzz공지사하아앙
-                        zzzzzzzzzzzz공지사하아앙
-                        zzzzzzzzzzzz공지사하아앙
-                        zzzzzzzzzzzz공지사하아앙
-                        zzzzzzzzzzzz공지사하아앙
-                        zzzzzzzzzzzz공지사하아앙
-                        zzzzzzzzzzzz공지사하아앙
-                        zzzzzzzzzzzz공지사하아앙
+                    <pre dangerouslySetInnerHTML={ {__html: noticeData.noticeContent}}>
+                        {/* {noticeData.noticeContent} */}
                     </pre>
                 </div>
             </div>
