@@ -2,6 +2,8 @@ package com.ssafy.sellerb.ui.consulting
 
 import android.Manifest
 import android.app.ActionBar
+import android.app.Activity
+import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -15,7 +17,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.material.appbar.AppBarLayout
+import com.ssafy.sellerb.data.remote.response.ConsultingStateResponse
 import com.ssafy.sellerb.databinding.ActivityConsultingBinding
+import com.ssafy.sellerb.util.Constants.EXTRA_KEY_CONSULTING_INFO
 import com.ssafy.sellerb.util.Constants.OPENVIDU_SECRET
 import com.ssafy.sellerb.util.Constants.OPENVIDU_URL
 import com.ssafy.webrtc.openvidu.LocalParticipant
@@ -36,6 +40,7 @@ class ConsultingActivity : AppCompatActivity() {
     private lateinit var session : Session
     private lateinit var httpClient: CustomHttpClient
     private var toggle = true
+    private lateinit var consultingInfo: ConsultingStateResponse
 
     companion object{
         const val TAG = "ConsultingActivity"
@@ -57,6 +62,20 @@ class ConsultingActivity : AppCompatActivity() {
         setContentView(binding.root)
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
 
+        consultingInfo = intent.getSerializableExtra(EXTRA_KEY_CONSULTING_INFO)
+                as ConsultingStateResponse
+
+        if(consultingInfo != null){
+            val consultantName = binding.tvConsultantName.text.toString()
+            val productPrice = binding.tvProductPrice.text.toString()
+            val productName = binding.tvProductName.text.toString()
+            binding.tvConsultantName.text =
+                consultantName + consultingInfo.consultant.consultantName
+            binding.tvProductName.text =
+                productName + consultingInfo.product.name
+            binding.tvProductPrice.text =
+                productPrice + consultingInfo.product.price.toString()
+        }
         binding.btnSwitchCamera.setOnClickListener {
             session.getLocalParticipant()!!.switchCamera()
         }
@@ -68,6 +87,10 @@ class ConsultingActivity : AppCompatActivity() {
 
         binding.viewsContainer.setOnClickListener {
             resizeView()
+        }
+
+        binding.btnSpeakerMode.setOnClickListener {
+            it.isActivated = !it.isActivated
         }
     }
 
@@ -99,7 +122,7 @@ class ConsultingActivity : AppCompatActivity() {
                     "OPENVIDUAPP:$OPENVIDU_SECRET".toByteArray(),android.util.Base64.DEFAULT
                 ).trim())
 
-            val sessionId = "kiddo-session3"
+            val sessionId = "kiddo-session"
             getToken(sessionId)
 
         } else {
@@ -195,8 +218,8 @@ class ConsultingActivity : AppCompatActivity() {
         runOnUiThread{
             binding.localGlSurfaceView.clearImage()
             binding.localGlSurfaceView.release()
-            binding.remoteGlSurfaceView.clearImage()
-            binding.remoteGlSurfaceView.release()
+//            binding.remoteGlSurfaceView.clearImage()
+//            binding.remoteGlSurfaceView.release()
         }
     }
 
@@ -233,9 +256,11 @@ class ConsultingActivity : AppCompatActivity() {
         runOnUiThread{
             binding.localGlSurfaceView.clearImage()
             binding.localGlSurfaceView.release()
-            binding.remoteGlSurfaceView.clearImage()
-            binding.remoteGlSurfaceView.release()
+//            binding.remoteGlSurfaceView.clearImage()
+//            binding.remoteGlSurfaceView.release()
         }
+        val intent = Intent()
+        setResult(Activity.RESULT_OK, intent)
     }
 
     override fun onPause() {

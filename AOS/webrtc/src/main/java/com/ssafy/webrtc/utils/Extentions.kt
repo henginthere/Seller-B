@@ -63,19 +63,20 @@ fun AppCompatActivity.createRemoteScreenVideo(
         val pearViewId = baseContext.resources.getIdentifier(pearViewRes,
             "layout",baseContext.packageName)
         val rowView = this.layoutInflater.inflate(pearViewId, null)
-        val rp = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
-            RelativeLayout.LayoutParams.MATCH_PARENT)
+        val rp = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
+            RelativeLayout.LayoutParams.WRAP_CONTENT)
         rowView.layoutParams = rp
         val rowId = View.generateViewId()
         rowView.id = rowId
-        rowView.translationZ = num.toFloat()
+        //rowView.translationZ = num.toFloat()
         containerView.addView(rowView)
+        containerView.bringChildToFront(rowView)
         val videoView = (rowView as ViewGroup).getChildAt(0) as SurfaceViewRenderer
         remoteParticipant.setVideoView(videoView)
         videoView.setMirror(false)
         val rootEglBase = EglBase.create()
         videoView.init(rootEglBase.eglBaseContext, null)
-        videoView.setZOrderMediaOverlay(false)
+        videoView.setZOrderMediaOverlay(true)
         remoteParticipant.setView(rowView)
     }
     mainHandler.post(myRunnable)

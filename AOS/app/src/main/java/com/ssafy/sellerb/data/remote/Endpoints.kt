@@ -14,5 +14,6 @@ object Endpoints {
     const val START_CONSULTING = "consulting/state/{seq}"
     const val WAITING_CANCEL = "waiting/{seq}"
     const val GET_WAITING_INFO = "waiting/{seq}"
+    const val GET_CONSULTING_STATE = "consulting/customer/day/{customer-id}"
 
 }

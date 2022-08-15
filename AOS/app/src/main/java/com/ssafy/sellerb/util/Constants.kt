@@ -7,4 +7,5 @@ object Constants {
     const val CHANNEL_ID = "seller_b_channel"
     const val CLIENT_ID = "1003695658833-bjoh77qv1hpu9kpt8q9udc6ie2cd4aim.apps.googleusercontent.com"
     const val EXTRA_KEY_CONSULTING_SEQ = "consultingSeq"
+    const val EXTRA_KEY_CONSULTING_INFO = "consultingInfo"
 }
