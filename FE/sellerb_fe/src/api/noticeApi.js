@@ -24,8 +24,8 @@ export const searchNoticeApi = async (noticeTitle, success, fail) => {
 };
 
 export const modifyNoticeApi = async (Info, success, fail) => {
-  console.log("inAPI:" + JSON.stringify(Info.post));
-  console.log("inAPI: id :" + Info.noticeSeq);
+  console.log("in modifyNoticeAPI:" + JSON.stringify(Info.post));
+  console.log("in modifyNoticeAPI: id :" + Info.noticeSeq);
   return await api
     .put(`/notice/${Info.noticeSeq}`, Info.post)
     .then(success)
