@@ -31,7 +31,8 @@ function NavBar() {
   }, []);
 
   const onLogOutBtn = () => {
-    sessionStorage.removeItem("accessToken");
+    sessionStorage.clear();
+    navigate("/main");
   };
   
   const onGoMain = () => {
