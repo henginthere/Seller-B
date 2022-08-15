@@ -27,7 +27,7 @@ function NoticeList() {
     console.log("현재 페이지: " + page);
     setPage(page);
   };
-  const [it, setIt] = useState(9);
+  const [it, setIt] = useState(7);
 
   const onSearchByTitleHandler = (e) => {
     setSearchTitle(e.target.value);
