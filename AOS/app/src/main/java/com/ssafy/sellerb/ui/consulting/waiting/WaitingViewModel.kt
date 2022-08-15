@@ -5,6 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.ssafy.sellerb.data.model.User
 import com.ssafy.sellerb.data.model.Waiting
 import com.ssafy.sellerb.data.remote.request.WaitingRequest
+import com.ssafy.sellerb.data.remote.response.ConsultingInfoResponse
+import com.ssafy.sellerb.data.remote.response.ConsultingStateResponse
 import com.ssafy.sellerb.data.repository.ConsultingRepository
 import com.ssafy.sellerb.data.repository.ProductRepository
 import com.ssafy.sellerb.data.repository.UserRepository
@@ -35,6 +37,11 @@ class WaitingViewModel(
     private val waitingSeq: Long = userRepository.getWaitingSeq()
     val isWaiting: MutableLiveData<Boolean> = MutableLiveData()
 
+    val startConsulting: MutableLiveData<Boolean> = MutableLiveData()
+
+    val consultingInfo: MutableLiveData<ConsultingStateResponse> = MutableLiveData()
+
+
     init {
         if(waitingSeq != 0L){
             isWaiting.postValue(false)
@@ -50,6 +57,7 @@ class WaitingViewModel(
                     .onStart {  }
                     .collect{
                         waiting.postValue(it)
+                        getConsultingState()
                     }
             }catch (ex : Exception){
                 handleNetworkError(ex)
@@ -89,6 +97,32 @@ class WaitingViewModel(
             }catch (ex: Exception){
                 handleNetworkError(ex)
             }
+        }
+    }
+
+    fun getConsultingState(){
+        viewModelScope.launch(coroutineDispatchers.io()){
+            consultingRepository.getConsultingState(user!!.id, user.accessToken)
+                .onStart {  }
+                .collect{
+                    if(it.consultingState == "waiting"){
+                        consultingInfo.postValue(it)
+                    }
+                }
+        }
+    }
+
+    fun setConsulting(){
+        viewModelScope.launch(coroutineDispatchers.io()){
+            consultingRepository.startConsulting(user!!.id, user.accessToken,
+                consultingInfo.value!!.consultingSeq, waitingSeq)
+                .onStart { }
+                .collect{
+                    if(it){
+                        startConsulting.postValue(true)
+                        userRepository.removeWaitingSeq()
+                    }
+                }
         }
     }
 

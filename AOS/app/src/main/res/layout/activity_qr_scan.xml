@@ -51,6 +51,7 @@
         android:text="TEST"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
+        android:visibility="visible"
         />
 
 </RelativeLayout>
