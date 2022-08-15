@@ -13,7 +13,7 @@ import { PaginationBox } from "../../components/Common/PaginationBox";
 import Pagination from "react-js-pagination";
 const styleObj_center = {
   display: "flex",
-  margin: "50px",
+  margin: "20px",
   justifyContent: "flex-start",
   flexDirection: "column",
 };
