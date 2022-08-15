@@ -2,7 +2,7 @@ package com.ssafy.sellerb.ui.main
 
 import androidx.lifecycle.MutableLiveData
 import com.ssafy.sellerb.ui.base.BaseViewModel
-import com.ssafy.sellerb.util.CoroutineDispatchers
+import com.ssafy.sellerb.util.coroutine.CoroutineDispatchers
 import com.ssafy.sellerb.util.Event
 import com.ssafy.sellerb.util.network.NetworkHelper
 

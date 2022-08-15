@@ -6,6 +6,7 @@
     <string name="menu_home">Home</string>
     <string name="menu_my_page">MyPage</string>
     <string name="menu_product">Products</string>
+    <string name="menu_history">History</string>
 
     <!-- -->
     <string name="home_content">제품의 QR 코드를 스캔하여 상담을 시작해보세요!</string>

@@ -8,8 +8,8 @@ import com.ssafy.sellerb.data.remote.NetworkService
 import com.ssafy.sellerb.data.remote.Networking
 import com.ssafy.sellerb.di.ApplicationContext
 import com.ssafy.sellerb.util.Constants
-import com.ssafy.sellerb.util.CoroutineDispatchers
-import com.ssafy.sellerb.util.CoroutineDispatchersProvider
+import com.ssafy.sellerb.util.coroutine.CoroutineDispatchers
+import com.ssafy.sellerb.util.coroutine.CoroutineDispatchersProvider
 import com.ssafy.sellerb.util.network.NetworkHelper
 import dagger.Module
 import dagger.Provides

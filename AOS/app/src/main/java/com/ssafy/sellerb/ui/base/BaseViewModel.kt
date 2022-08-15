@@ -3,7 +3,7 @@ package com.ssafy.sellerb.ui.base
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ssafy.sellerb.R
-import com.ssafy.sellerb.util.CoroutineDispatchers
+import com.ssafy.sellerb.util.coroutine.CoroutineDispatchers
 import com.ssafy.sellerb.util.Resource
 import com.ssafy.sellerb.util.network.NetworkHelper
 import javax.net.ssl.HttpsURLConnection

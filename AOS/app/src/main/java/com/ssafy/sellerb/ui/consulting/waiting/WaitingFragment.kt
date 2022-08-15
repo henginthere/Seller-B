@@ -18,22 +18,21 @@ import com.ssafy.sellerb.util.Constants.EXTRA_KEY_CONSULTING_INFO
 import com.ssafy.sellerb.util.GlideHelper
 import javax.inject.Inject
 
-class WaitingFragment : BaseFragment<WaitingViewModel>(){
+class WaitingFragment : BaseFragment<WaitingViewModel>() {
 
     companion object {
         const val TAG = "WaitingFragment"
     }
 
     private var _binding: FragmentWaitingBinding? = null
-
     private val binding get() = _binding!!
 
     @Inject
     lateinit var mainSharedViewModel: MainSharedViewModel
 
     private val startForResult =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-            if(it.resultCode == Activity.RESULT_OK){
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == Activity.RESULT_OK) {
                 findNavController().navigate(R.id.action_WaitingFragment_to_ConsultingReviewDialog)
             }
         }
@@ -47,7 +46,7 @@ class WaitingFragment : BaseFragment<WaitingViewModel>(){
     override fun setupView(view: View) {
         _binding = FragmentWaitingBinding.bind(view)
 
-        binding.btnCancel.setOnClickListener{
+        binding.btnCancel.setOnClickListener {
             viewModel.doCancel()
         }
 
@@ -64,7 +63,7 @@ class WaitingFragment : BaseFragment<WaitingViewModel>(){
     override fun setUpObserver() {
         super.setUpObserver()
 
-        viewModel.waiting.observe(this){
+        viewModel.waiting.observe(this) {
             Glide
                 .with(binding.ivProductThumbnail.context)
                 .load(it.productThumbnail)
@@ -72,25 +71,25 @@ class WaitingFragment : BaseFragment<WaitingViewModel>(){
             binding.tvProductName.text = it.productName
         }
 
-        viewModel.waitingCancel.observe(this){
+        viewModel.waitingCancel.observe(this) {
             findNavController().navigate(R.id.action_WaitingFragment_to_HomeFragment)
         }
 
-        viewModel.isWaiting.observe(this){
-            if(it){
+        viewModel.isWaiting.observe(this) {
+            if (it) {
                 val productSeq = mainSharedViewModel.qrCodeResult.value!!.peek()
                 viewModel.startWaiting(productSeq)
-            }else{
+            } else {
                 viewModel.loadWaiting()
             }
         }
 
-        viewModel.consultingInfo.observe(this){
+        viewModel.consultingInfo.observe(this) {
             viewModel.setConsulting()
         }
 
-        viewModel.startConsulting.observe(this){
-            if(it){
+        viewModel.startConsulting.observe(this) {
+            if (it) {
                 val intent = Intent(requireContext(), ConsultingActivity::class.java)
                 intent.putExtra(EXTRA_KEY_CONSULTING_INFO, viewModel.consultingInfo.value)
                 startForResult.launch(intent)
@@ -98,6 +97,5 @@ class WaitingFragment : BaseFragment<WaitingViewModel>(){
         }
 
     }
-
 
 }
