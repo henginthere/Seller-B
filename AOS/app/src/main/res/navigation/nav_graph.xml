@@ -82,4 +82,12 @@
             app:destination="@id/item_home"/>
     </dialog>
 
+    <fragment
+        android:id="@+id/item_consulting_history"
+        android:name="com.ssafy.sellerb.ui.consulting.history.ConsultingHistoryFragment"
+        android:label="fragment_consulting_history"
+        tools:layout="@layout/fragment_consulting_history">
+
+    </fragment>
+
 </navigation>

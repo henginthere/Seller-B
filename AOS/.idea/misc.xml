@@ -29,11 +29,13 @@
         <entry key="app/src/main/res/layout/activity_qr_scan.xml" value="0.34148550724637683" />
         <entry key="app/src/main/res/layout/dialog_consulting_review.xml" value="0.265625" />
         <entry key="app/src/main/res/layout/dialog_cosulting_review.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_consulting_history.xml" value="0.26458333333333334" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2512664640324215" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.34148550724637683" />
         <entry key="app/src/main/res/layout/fragment_my_page.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_waiting.xml" value="0.33" />
         <entry key="app/src/main/res/layout/peer_video.xml" value="0.23731884057971014" />
+        <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.265625" />
       </map>
     </option>
   </component>
