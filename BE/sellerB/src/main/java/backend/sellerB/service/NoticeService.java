@@ -2,7 +2,9 @@ package backend.sellerB.service;
 
 import backend.sellerB.dto.NoticeDto;
 import backend.sellerB.dto.NoticeReq;
+import backend.sellerB.entity.Brand;
 import backend.sellerB.entity.Notice;
+import backend.sellerB.repository.BrandRepository;
 import backend.sellerB.repository.NoticeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,12 +20,16 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class NoticeService {
     private final NoticeRepository noticeRepository;
+    private final BrandRepository brandRepository;
 
     @Transactional
     public NoticeReq create(NoticeReq noticeReq) {
+        Optional<Brand> brandOptional = brandRepository.findById(noticeReq.getBrandSeq());
+        Brand brand = brandOptional.get();
 
         //dto를 엔티티로
         Notice notice = Notice.builder()
+                .brandSeq(brand)
                 .noticeTitle(noticeReq.getNoticeTitle())
                 .noticeContent(noticeReq.getNoticeContent())
                 .build();
@@ -34,6 +40,9 @@ public class NoticeService {
 
     public List<NoticeDto> getNoticeList() {
         return NoticeDto.fromList(noticeRepository.findAll());
+    }
+    public List<NoticeDto> getNoticeListByBrand(Long brandSeq) {
+        return NoticeDto.fromList(noticeRepository.findNoticesByBrandSeq_BrandSeq(brandSeq));
     }
 
     public NoticeDto getNoticeDetail(Long seq) {
