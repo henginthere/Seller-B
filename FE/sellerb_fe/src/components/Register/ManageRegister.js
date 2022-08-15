@@ -88,7 +88,7 @@ function ManageRegister() {
       .then((res) => {
         console.log(res.data);
 
-        navigate("/");
+        navigate("/main");
       })
       .catch((err) => {
         console.log(err);
