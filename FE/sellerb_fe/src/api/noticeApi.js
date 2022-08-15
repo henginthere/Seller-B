@@ -23,11 +23,11 @@ export const searchNoticeApi = async (noticeTitle, success, fail) => {
     .catch(fail);
 };
 
-export const modifyNoticeApi = async (notice, success, fail) => {
-  console.log("inAPI:" + JSON.stringify(notice));
-  
+export const modifyNoticeApi = async (Info, success, fail) => {
+  console.log("inAPI:" + JSON.stringify(Info.post));
+  console.log("inAPI: id :" + Info.noticeSeq);
   return await api
-    .put(`/notice/${notice.noticeSeq}`, notice)
+    .put(`/notice/${Info.noticeSeq}`, Info.post)
     .then(success)
     .catch(fail);
 };

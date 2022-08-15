@@ -35,13 +35,21 @@ function NoticeEdit() {
 
   // 수정사항 제출 버튼
   const onEditSubmitBtn = () => {
-    modifyNoticeApi(noticeData)
+    const Info = {
+      noticeSeq: id,
+      post :{
+        noticeTitle: noticeData.noticeTitle,
+        noticeContent: noticeData.noticeContent
+      }
+    }
+
+    modifyNoticeApi(Info)
       .then((res) => {
         console.log(res.data);
         navigate("/manager/noticeList");
       })
       .catch((err) => {
-        console.log(err.data);
+        console.log(JSON.stringify(err.data));
       });
   };
 
@@ -102,7 +110,8 @@ function NoticeEdit() {
             <div>
               <pre>
                 <input
-                  className='row-right'
+                  style={{"width":"100%"}}
+                  // className='row-right'
                   name='noticeContent'
                   defaultValue={noticeData.noticeContent}
                   onChange={onChange}
