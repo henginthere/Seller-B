@@ -3,10 +3,14 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 
 import "./ProductRegister.css";
 import axios from "axios";
-import styles from './WaitingPage.module.css'
+import styles from "./WaitingPage.module.css";
 import { Footer, NavBar } from "../../../components/index";
-import { productRegisterApi, registerWaitingPageApi, waitingPageApi } from "../../../api/productApi";
-import {productDetailApi } from "../../../api/productApi";
+import {
+  productRegisterApi,
+  registerWaitingPageApi,
+  waitingPageApi,
+} from "../../../api/productApi";
+import { productDetailApi } from "../../../api/productApi";
 import { SmallButton } from "../../../components/Common/SmallButton";
 import { MediButton } from "../../../components/Common/MediButton";
 
@@ -18,46 +22,47 @@ function WaitingPage() {
   const [resImg, setResImg] = useState("");
   const [imgBase64, setImgBase64] = useState([]); // 미리보기를 구현할 state
   const [imgFile, setImgFile] = useState("");
-  const [previewUrl, setPreviewUrl] = useState(`${process.env.PUBLIC_URL}/img/default_img.png`);
+  const [previewUrl, setPreviewUrl] = useState(
+    `${process.env.PUBLIC_URL}/img/default_img.png`
+  );
 
   // 대기화면
   const [product, setProduct] = useState({
-    productSeq:"",
+    productSeq: "",
     productId: "",
     productName: "",
     productPrice: "",
-    customerWaitingPageImage:""
+    customerWaitingPageImage: "",
   });
-
 
   const [waitingImg, setWaitingImg] = useState("");
   const [waitingMent, setWaitingMent] = useState("");
 
   /* 해당 seq에 맞는 Product 정보 먼저 가져오기 */
-  useEffect(()=>{
+  useEffect(() => {
     console.log("WaitingPage Seq: " + id);
     productDetailApi(id)
-    .then((res)=>{
+      .then((res) => {
         console.log(res.data);
         setProduct(res.data);
-        console.log("가져온 제품정보: " + product)
-    })
-    .catch((err)=>{
-        console.log(err.data)
-    })
-  }, [])
+        console.log("가져온 제품정보: " + product);
+      })
+      .catch((err) => {
+        console.log(err.data);
+      });
+  }, []);
 
-
-  useEffect(()=>{
+  useEffect(() => {
     waitingPageApi(id)
-    .then((res)=>{
-      console.log("in UseEffect waitingPageApi: " + JSON.stringify(res.data));
-      setWaitingImg(res.data.customerWaitingPageImage);
-    })
-    .catch((err)=>{
-      console.log("가져온 대기화면 정보 없음")
-    })
-  }, [])
+      .then((res) => {
+        console.log("in UseEffect waitingPageApi: " + JSON.stringify(res.data));
+        setWaitingImg(res.data.customerWaitingPageImage);
+        setWaitingMent(res.data.customerWaitingPageMent);
+      })
+      .catch((err) => {
+        console.log("가져온 대기화면 정보 없음");
+      });
+  }, []);
 
   const onHandleChangeFile = (event) => {
     setImgFile(event.target.files);
@@ -81,80 +86,92 @@ function WaitingPage() {
     }
   };
 
-  const onResetFile = () => {
+  const onChangeMent = (e)=>{
+    console.log(e.target.value);
 
+    setWaitingMent(e.target.value);
+  }
+
+  const onResetFile = () => {
+    setImgFile("");
+    setWaitingImg("");
   };
 
-    const onRegisterBtn = () => {
-      // console.log("in RegisterBtn API : " + resImg)
-  
-      // 선택한 그룹군에 대해, productGroupSeq찾기 
-      // console.log("제출 전 seq : " + selectSeq)
-  
-      const Info = {
-        productSeq: product.productSeq,
-        customerWaitingPageMent: "준비중",
-        customerWaitingPageImage: resImg
-      };
-  
-      console.log("등록 전, WaitingPage Info: " + JSON.stringify(Info))
-  
-      registerWaitingPageApi(Info)
-      .then((res)=>{
-        console.log(res.data);
-      })
-      .catch((err)=>{
-        console.log(err.data);
-      })
+  const onRegisterBtn = () => {
+    // console.log("in RegisterBtn API : " + resImg)
+
+    // 선택한 그룹군에 대해, productGroupSeq찾기
+    // console.log("제출 전 seq : " + selectSeq)
+
+    const Info = {
+      productSeq: product.productSeq,
+      customerWaitingPageMent: waitingMent,
+      customerWaitingPageImage: resImg,
     };
 
-    const onImgRegisterBtn = async() => {
-      const fd = new FormData(); 
-      // imgFile의 파일들을 읽어와서, file이라는 이름으로 저장하기 
-      // -> FormData에 file이라는 이름의 파일 배열이 들어감 
-      Object.values(imgFile).forEach((file) => fd.append("data", file));
-  
-      // fd.append(
-      //   "comment",)
-      console.log("보낼 fd: " + fd);
-  
-      await axios.post('https://i7d105.p.ssafy.io/api/file/waiting-page', fd, {
+    console.log("등록 전, WaitingPage Info: " + JSON.stringify(Info));
+
+    registerWaitingPageApi(Info)
+      .then((res) => {
+        console.log(res.data);
+        navigate(`/manager/productDetail/${id}`);
+      })
+      .catch((err) => {
+        console.log(err.data);
+      });
+  };
+
+  const onImgRegisterBtn = async () => {
+    const fd = new FormData();
+    // imgFile의 파일들을 읽어와서, file이라는 이름으로 저장하기
+    // -> FormData에 file이라는 이름의 파일 배열이 들어감
+    Object.values(imgFile).forEach((file) => fd.append("data", file));
+
+    // fd.append(
+    //   "comment",)
+    console.log("보낼 fd: " + fd);
+
+    await axios
+      .post("https://i7d105.p.ssafy.io/api/file/waiting-page", fd, {
         header: {
-          "Content-Type": `multipart/form-data`
-        }
+          "Content-Type": `multipart/form-data`,
+        },
       })
       .then((response) => {
-        if(response.data){
-          console.log(response.data)
+        if (response.data) {
+          console.log(response.data);
           setResImg(response.data);
         }
       })
-      .catch((error)=>{
+      .catch((error) => {
         console.log("Error");
-      })
-    };
+      });
+  };
 
   return (
     <>
       <NavBar />
       {/* <h4 className="page-title">대기화면 등록</h4> */}
-    <div className="register-main-wrapper">
-      <div className="register-sub-wrapper">
-        <div className="register-area-wrapper">
-          {/*  */}
-          <div className="left-img">
-            {imgFile === "" && waitingImg === "" ? (
+      <div className="register-main-wrapper">
+        <div className="register-sub-wrapper">
+          <div className="register-area-wrapper">
+            {/*  */}
+            <div className="left-img">
+              {waitingImg === "" && imgFile === "" 
+              ? (
                 <img
                   className="product-register-img"
                   alt="#"
                   src={previewUrl}
                 />
-              ) : <img
-              className="product-register-img"
-              alt="#"
-              src={waitingImg}
+              ) 
+              : (
+                <img
+                  className="product-register-img"
+                  alt="###"
+                  src={waitingImg}
                 />
-            }
+              )}
               {imgBase64.map((item) => {
                 return (
                   <div>
@@ -175,14 +192,14 @@ function WaitingPage() {
                   id="file"
                   onChange={onHandleChangeFile}
                 />
-              <div className="product-register-small-btn">
-                <SmallButton label="업로드 완료" onClick={onImgRegisterBtn} />
-              </div> 
+                <div className="product-register-small-btn">
+                  <SmallButton label="업로드 완료" onClick={onImgRegisterBtn} />
+                  <SmallButton label="이미지 초기화" onClick={onResetFile} />
+                </div>
               </div>
-
-          </div>
-          {/*  */}
-          <div className="right-input">
+            </div>
+            {/*  */}
+            <div className="right-input">
               <div className="input-sub-content-wrapper">
                 {/*  */}
                 <div className="input-ele">
@@ -221,7 +238,7 @@ function WaitingPage() {
                   </div>
                 </div>
                 {/*  */}
-                <div className="input-ele">
+                {/* <div className="input-ele">
                   <p>제품군</p>
                   <div className="product-id-input-wrapper">
                     <input
@@ -231,78 +248,40 @@ function WaitingPage() {
                       variant="outlined"
                     />
                   </div>
+                </div> */}
+                {/*  */}
+                <div className="input-ele">
+                  <p>대기화면 멘트</p>
+                  <div className="product-id-input-wrapper">
+                    {
+                      waitingMent === "" 
+                      ? <input
+                        className="product-id-input"
+                        name="productGroup"
+                        placeholder="출력 멘트를 입력해주세요"
+                        variant="outlined"
+                      />
+                    : <input
+                        className="product-id-input"
+                        name="productGroup"
+                        defaultValue={waitingMent}
+                        variant="outlined"
+                      />
+                    }
+                    
+                  </div>
                 </div>
-              {/*  */}
-              <div className="product-register-medi-btn">
-                <MediButton label="등록하기" onClick={onRegisterBtn} />
-                <MediButton label="이미지 초기화" onClick={onResetFile} />
-              </div>             
+                {/*  */}
+                <div className="product-register-medi-btn">
+                  <MediButton label="등록하기" onClick={onRegisterBtn} />
+                  {/* <MediButton label="이미지 초기화" onClick={onResetFile} /> */}
+                </div>
               </div>
             </div>
             {/*  */}
+          </div>
         </div>
       </div>
-    </div>
-
-
-
-{/* 
-      <div className="mainContent-wrapper">
-        <div className="left-img">
-          { 
-            imgFile === ""
-            ?    <img
-            className="preview-img" 
-            alt="#" src={previewUrl} />
-            : <img alt="#" src={imgFile} />
-          }
-          {imgBase64.map((item) => {
-            return (
-              <div className="img-wrapper">
-                <img src={item} alt="Frist Slide" />
-              </div>
-            );
-          })} */}
-{/* 
-          <div className="product-info">
-            <h5>품번 : </h5>
-            {product.productId}
-          </div>
-          <div className="product-info">
-            <h5>제품명 : </h5>
-            {product.productName}
-          </div>
-          <div className="product-info">
-            <h5>가격 : </h5>
-            {product.productPrice}
-          </div>
-        </div> */}
-        {/* right content START */}
-        {/* <div className="styles.right-waiting-img">
-          {imgFile.image_file === "" ? (
-            <img className="preview-img" alt="#" src={imgFile.preview_URL} />
-          ) : null}
-          {imgBase64.map((item) => {
-            return (
-              <div className="img-wrapper">
-                <img src={item} alt="Frist Slide" />
-              </div>
-            );
-          })}
-        </div> */}
-        {/* <div className="bottomContent-wrapper">
-        <input
-          className="img-btn"
-          type="file"
-          accept="image/*"
-          id="file"
-          onChange={handleChangeFile}
-        />
-        <button onClick={onImgRegisterBtn}>이미지등록하기</button>
-        <button onClick={onRegisterBtn }>제품 등록하기</button>
-      </div>
-      </div> */}
-
       <Footer />
     </>
   );
