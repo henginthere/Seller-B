@@ -25,13 +25,16 @@ import {
   WaitingPage,
   MeetingManCon,
   ConsultingMain,
+
+  MainTwo,
 } from "./pages/index";
 
 function App() {
   return (
     <>
       <Routes>
-        <Route path='/' element={<Main />} />
+        <Route path='/' element={<MainTwo />} />
+        <Route path="/main" element={<Main />} />
         <Route path='/manager/main' element={<ManagerMain />} />
         <Route path='/consultant/main' element={<ConsultantMain />} />
         <Route path='/manager/mypage/:id' element={<ManagerMyPage />} />
