@@ -16,6 +16,27 @@ import { MediButton } from "../../../components/Common/MediButton";
 
 function ProductRegister() {
   const navigate = useNavigate();
+
+  const [price, setPrice] = useState(0);
+  const [toIntPrice, setToIntPrice] = useState(0);
+
+  const inputPriceFormat = (str) => {
+    console.log("s", str);
+    const comma = (str) => {
+      str = String(str); 
+      
+      return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, "$1,");
+    };
+
+    const uncomma = (str) => {
+      str = String(str); 
+      
+      return str.replace(/[^\d]+/g, "");
+    };
+
+    return comma(uncomma(str)); 
+  }
+
   const [resImg, setResImg] = useState("");
   const [product, setProduct] = useState({
     productGroupName: "",
@@ -119,7 +140,7 @@ function ProductRegister() {
 
     // 선택한 그룹군에 대해, productGroupSeq찾기
     console.log("제출 전 seq : " + selectSeq);
-
+    
     const Info = {
       productGroupName: product.productGroupName,
       productGroupSeq: selectSeq,
@@ -127,7 +148,7 @@ function ProductRegister() {
       productName: product.productName,
       productPrice: product.productPrice,
       productManual: product.productManual,
-      productThumbnailUrl: resImg,
+      productThumbnailUrl: resImg
     };
 
     console.log("등록 전 Product: " + JSON.stringify(Info));
@@ -266,6 +287,7 @@ function ProductRegister() {
                   <div className="product-id-input-wrapper">
                     <input
                       className="product-id-input"
+                      type="text"
                       name="productPrice"
                       onChange={onChange}
                       value={productPrice}
@@ -273,6 +295,19 @@ function ProductRegister() {
                     />
                   </div>
                 </div>
+
+                {/* <div className="input-ele">
+                  <p>가격</p>
+                  <div className="product-id-input-wrapper">
+                    <input
+                      className="product-id-input"
+                      name="productPrice"
+                      onChange={onChange}
+                      value={productPrice}
+                      variant="outlined"
+                    />
+                  </div>
+                </div> */}
 
                 <div className="input-ele">
                   <p>제품군</p>

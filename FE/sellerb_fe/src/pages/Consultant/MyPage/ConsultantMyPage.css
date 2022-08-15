@@ -60,7 +60,10 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 10px;
+  margin-top: 20px;
+  margin-left: 20px;
+  width: 200px;
+  height: 50px;
 }
 
 .topText {
@@ -80,8 +83,9 @@
 }
 
 .con-mypage-left-wrapper .con-mypage-default-img {
-  width: 300px;
-  height: 200px;
+  width: 240px;
+  height: auto;
+  border-radius: 45%;
 }
 .profile-right {
   width: 100%;
