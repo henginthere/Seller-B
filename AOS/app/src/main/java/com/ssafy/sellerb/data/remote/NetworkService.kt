@@ -1,10 +1,7 @@
 package com.ssafy.sellerb.data.remote
 
 import com.ssafy.sellerb.data.model.Product
-import com.ssafy.sellerb.data.remote.request.ConsultingStartRequest
-import com.ssafy.sellerb.data.remote.request.LoginRequest
-import com.ssafy.sellerb.data.remote.request.SignupRequest
-import com.ssafy.sellerb.data.remote.request.WaitingRequest
+import com.ssafy.sellerb.data.remote.request.*
 import com.ssafy.sellerb.data.remote.response.*
 import retrofit2.http.*
 import javax.inject.Singleton
@@ -30,8 +27,8 @@ interface NetworkService {
 
     @POST(Endpoints.GOOGLE_LOGIN)
     suspend fun doGoogleLoginCall(
-        @Body request: String
-    ):String
+        @Body request: SimpleLoginRequest
+    ):LoginResponse
 
     @GET(Endpoints.GET_PRODUCT_INFO)
     suspend fun getProductInfo(
