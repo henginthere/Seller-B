@@ -87,10 +87,16 @@ function WaitingPage() {
     }
   };
 
-  const onChangeMent = (e)=>{
-    console.log(e.target.value);
+  const onChangeInputMent = (e)=>{
+    console.log("on Change Ment :" + e.target.value);
 
     setInputWaitingMent(e.target.value);
+  }
+
+  const onChangeMent = (e)=>{
+    console.log("on Change Ment :" + e.target.value);
+
+    setWaitingMent(e.target.value);
   }
 
   const onResetFile = () => {
@@ -99,16 +105,18 @@ function WaitingPage() {
   };
 
   const onRegisterBtn = () => {
-    // console.log("in RegisterBtn API : " + resImg)
 
-    // 선택한 그룹군에 대해, productGroupSeq찾기
-    // console.log("제출 전 seq : " + selectSe
     console.log("등록할 멘트 : " + waitingMent)
+    let infoMent = "";
+    if(inputWaitingMent === ""){
+      infoMent = waitingMent;
+    }else{
+      infoMent = inputWaitingMent;
+    }
     
-
     const Info = {
       productSeq: product.productSeq,
-      customerWaitingPageMent: inputWaitingMent,
+      customerWaitingPageMent: infoMent,
       customerWaitingPageImage: resImg
     };
 
@@ -269,7 +277,7 @@ function WaitingPage() {
                       waitingMent === "" 
                       ? <input
                         className="product-id-input"
-                        onChange={onChangeMent}
+                        onChange={onChangeInputMent}
                         // name="productGroup"
                         value={inputWaitingMent}
                         placeholder="출력 멘트를 입력해주세요"
@@ -279,6 +287,7 @@ function WaitingPage() {
                         className="product-id-input"
                         name="productGroup"
                         value={waitingMent}
+                        onChange={onChangeMent}
                         variant="outlined"
                       />
                     }
