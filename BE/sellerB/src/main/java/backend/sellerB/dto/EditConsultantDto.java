@@ -12,7 +12,7 @@ public class EditConsultantDto {
     private String consultantPass;
     private String consultantEmail;
     private String consultantTel;
-    private ProductGroup productGroup;
+    private Long productGroupSeq;
     private String consultantImageUrl;
 //    private MultipartFile consultantImageFile;
 }
