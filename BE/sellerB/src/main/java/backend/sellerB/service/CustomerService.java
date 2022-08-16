@@ -122,6 +122,40 @@ public class CustomerService {
 //        }
     }
 
+    public LoginResponseDto naverLogin(CustomerDto customerDto)  {
+
+        String id = customerDto.getCustomerId();
+        String pw = customerDto.getCustomerPass();
+
+        Optional<Customer> optionalCustomer = customerRepository.findBycustomerId(id);
+        if(!optionalCustomer.isPresent()){
+            System.out.println("가입된 정보 없음");
+            //회원가입
+            signup(customerDto);
+        }
+
+        LoginResponseDto loginResponseDto = authService.authorize(id,pw);
+
+        return loginResponseDto;
+    }
+
+    public LoginResponseDto kakaoLogin(CustomerDto customerDto)  {
+
+        String id = customerDto.getCustomerId();
+        String pw = customerDto.getCustomerPass();
+
+        Optional<Customer> optionalCustomer = customerRepository.findBycustomerId(id);
+        if(!optionalCustomer.isPresent()){
+            System.out.println("가입된 정보 없음");
+            //회원가입
+            signup(customerDto);
+        }
+
+        LoginResponseDto loginResponseDto = authService.authorize(id,pw);
+
+        return loginResponseDto;
+    }
+
     public List<CustomerDto> getCustomerList() { return CustomerDto.fromList(customerRepository.findAll());}
 
     public CustomerDto getCustomerDetail(Long seq) {
