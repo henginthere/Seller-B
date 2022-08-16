@@ -6,7 +6,9 @@ import com.ssafy.sellerb.data.model.Waiting
 import com.ssafy.sellerb.data.remote.NetworkService
 import com.ssafy.sellerb.data.remote.request.LoginRequest
 import com.ssafy.sellerb.data.remote.request.SignupRequest
+import com.ssafy.sellerb.data.remote.request.SimpleLoginRequest
 import com.ssafy.sellerb.data.remote.response.GeneralResponse
+import com.ssafy.sellerb.data.remote.response.LoginResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -94,12 +96,16 @@ class UserRepository @Inject constructor(
         }.flowOn(Dispatchers.IO)
     }
 
-    fun doGoogleLogin(idToken: String) : Flow<String>{
+    fun doGoogleLogin(request: SimpleLoginRequest) : Flow<User>{
         return flow {
-            val response = networkService.doGoogleLoginCall(idToken)
-            if( response != null){
-                emit(response)
-            }
+            val response = networkService.doGoogleLoginCall(request)
+            val userInfoResponse = networkService.getUserInfoCall(
+                response.seq, response.token.accessToken )
+
+            emit(User(request.id, response.token.accessToken, response.token.refreshToken,
+                response.authority, response.seq, userInfoResponse.name ?: "",
+                userInfoResponse.email ?: "", userInfoResponse.birth ?: ""
+                , userInfoResponse.token ?: ""))
         }.flowOn(Dispatchers.IO)
     }
 }

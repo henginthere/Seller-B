@@ -3,10 +3,11 @@ package com.ssafy.sellerb.data.remote.request
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class SignupRequest(
+data class SimpleLoginRequest (
+
     @Expose
     @SerializedName("customerId")
-    private val id : String,
+    val id : String,
 
     @Expose
     @SerializedName("customerPass")
@@ -14,5 +15,5 @@ data class SignupRequest(
 
     @Expose
     @SerializedName("customerName")
-    private val name : String,
+    private val name: String
 )

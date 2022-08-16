@@ -2,11 +2,14 @@ package com.ssafy.sellerb.ui.login
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.google.android.gms.auth.api.identity.SignInCredential
+import com.ssafy.sellerb.data.remote.request.SimpleLoginRequest
 import com.ssafy.sellerb.data.repository.UserRepository
 import com.ssafy.sellerb.ui.base.BaseViewModel
 import com.ssafy.sellerb.util.coroutine.CoroutineDispatchers
 import com.ssafy.sellerb.util.Event
 import com.ssafy.sellerb.util.network.NetworkHelper
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import java.lang.Exception
@@ -24,6 +27,7 @@ class LoginViewModel(
     val idField : MutableLiveData<String> = MutableLiveData()
     val pwField : MutableLiveData<String> = MutableLiveData()
     val loginFail: MutableLiveData<Event<Boolean>> = MutableLiveData()
+    val googleCredential: MutableLiveData<SignInCredential> = MutableLiveData()
 
     override fun onCreate() {}
 
@@ -49,6 +53,23 @@ class LoginViewModel(
                 }
             }
         }
+    }
+
+    fun doGoogleLogin(id: String, pw: String, name: String){
+        viewModelScope.launch(ioContext){
+            try {
+                userRepository.doGoogleLogin(SimpleLoginRequest(id,pw,name))
+                    .onStart {  }
+                    .collect{
+                        userRepository.saveCurrentUser(user = it)
+                        launchMain.postValue(Event(emptyMap()))
+                    }
+            }catch (ex: Exception){
+                handleNetworkError(ex)
+                loginFail.postValue(Event(true))
+            }
+        }
+
     }
 
 }

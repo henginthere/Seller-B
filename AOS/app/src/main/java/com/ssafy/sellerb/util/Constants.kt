@@ -5,7 +5,10 @@ object Constants {
     const val OPENVIDU_URL = "https://i7d105.p.ssafy.io:8443/"
     const val OPENVIDU_SECRET = "SELLERB"
     const val CHANNEL_ID = "seller_b_channel"
-    const val CLIENT_ID = "1003695658833-bjoh77qv1hpu9kpt8q9udc6ie2cd4aim.apps.googleusercontent.com"
+    const val CLIENT_ID = "491941720865-869tela9s5sfc205do15omjqdc1f65f8.apps.googleusercontent.com"
     const val EXTRA_KEY_CONSULTING_SEQ = "consultingSeq"
     const val EXTRA_KEY_CONSULTING_INFO = "consultingInfo"
+    const val NAVER_CLIENT_ID = "wQ_Bczxsj1ePRUghpI3f"
+    const val NAVER_CLINET_SECRET = "945I6Irc7L"
+    const val NAVER_CLINET_NAME ="SELLERB"
 }
