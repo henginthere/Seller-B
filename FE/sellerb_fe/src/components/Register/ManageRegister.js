@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { registerApi } from "../../api/userApi";
 import { listBrandApi } from "../../api/brandApi";
 import { SmallButton } from "../../components/Common/SmallButton"
+import { MediButton } from "../../components/Common/MediButton"
 
 import { Footer, NavBar } from "../index";
 import "./ManageRegister.css";
@@ -183,15 +184,18 @@ function ManageRegister() {
   return (
     <div className="manage-register-page">
       <div className="login">
+        <div className="login-title-wrapper">
         <h3 className="login-title">Sign Up</h3>
+        </div>
         <hr />
+        <div className="signup-profile-img-wrapper">
         <div className="signUp-row">
           <div className="row-left-label">
             <div className="left-label-text">프로필</div>
           </div>
-          <div className="row-right">
-            <div className="right-wrapper">
-              <div className="right-content">
+          <div className="row-right-profile">
+            <div className="right-profile-wrapper">
+              <div className="right-profile-content">
                 {imgFile === "" ? (
                   <img
                     className="manage-preview-img"
@@ -232,6 +236,7 @@ function ManageRegister() {
               </div>
             </div>
           </div>
+        </div>
         </div>
         <Formik
           initialValues={{
@@ -406,7 +411,7 @@ function ManageRegister() {
                   </div>
                 </div>
 
-                <Button
+                {/* <Button
                   color="primary"
                   variant="contained"
                   fullWidth
@@ -414,7 +419,11 @@ function ManageRegister() {
                   onClick={() => registerBtn(values)}
                 >
                   회원가입
-                </Button>
+                </Button> */}
+                <MediButton 
+                  label="회원가입"
+                  onClick={registerBtn(values)}
+                />
               </form>
             </div>
           )}
