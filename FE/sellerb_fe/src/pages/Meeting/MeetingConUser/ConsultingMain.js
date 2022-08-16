@@ -96,6 +96,11 @@ function ConsultingMain() {
                         productDetailApi(values.productSeq)
                           .then((res) => {
                             setProduct(res.data);
+                            if (product.productName === "") {
+                              setProduct(res.data);
+                              console.log("PRODUCT API CALL");
+                              console.log(product);
+                            }
                           })
                           .catch((err) => {
                             alert("제품정보 로드 실패! : " + err);
@@ -118,6 +123,7 @@ function ConsultingMain() {
                         alert("상담을 시작합니다.");
                         startSession();
                       }}
+                      variant='contained'
                     >
                       상담 시작
                     </Button>

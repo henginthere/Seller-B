@@ -76,6 +76,10 @@ function NoticeList() {
     var dd = parsedDate.getDate();
     var hh = parsedDate.getHours() + 9;
     var mm = parsedDate.getMinutes();
+    if (hh > 24) {
+      hh = hh - 24;
+      dd = dd + 1;
+    }
     return (
       yyyy +
       "-" +
