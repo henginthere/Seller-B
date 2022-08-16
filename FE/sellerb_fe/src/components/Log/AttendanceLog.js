@@ -67,12 +67,12 @@ function AttendanceLog({ consultant_id }) {
 
     listAttendanceApi(consultant_id)
       .then((res) => {
-        console.log(JSON.stringify(res.data));
+        // console.log(JSON.stringify(res.data));
 
         setInitData(res.data);
 
         let list = initData.map((ele) => ele.loginTime);
-        console.log("반환된 list : " + list);
+        // console.log("반환된 list : " + list);
         list = list.slice();
       })
       .catch((err) => {
@@ -81,8 +81,7 @@ function AttendanceLog({ consultant_id }) {
   }, []);
 
   useEffect(() => {
-    console.log(" 출결 initData: " + JSON.stringify(initData));
-
+    // console.log(" 출결 initData: " + JSON.stringify(initData));
     // loginTime = initData.map((ele)=>{
     //   return (
     //     <>
