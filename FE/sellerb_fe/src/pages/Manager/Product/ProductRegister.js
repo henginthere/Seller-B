@@ -27,10 +27,8 @@ function ProductRegister() {
       
       return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, "$1,");
     };
-
     const uncomma = (str) => {
       str = String(str); 
-      
       return str.replace(/[^\d]+/g, "");
     };
 
@@ -43,7 +41,7 @@ function ProductRegister() {
     productId: "",
     productName: "",
     productPrice: "",
-    productManual: "준비중",
+    productManual: "",
     productThumbnail: resImg,
   });
   const [selectSeq, setSelectSeq] = useState([]);
@@ -291,6 +289,20 @@ function ProductRegister() {
                       name="productPrice"
                       onChange={onChange}
                       value={productPrice}
+                      variant="outlined"
+                    />
+                  </div>
+                </div>
+                
+                <div className="input-ele">
+                  <p>제품 메뉴얼</p>
+                  <div className="product-id-input-wrapper">
+                    <input
+                      className="product-id-input"
+                      type="text"
+                      name="productManual"
+                      onChange={onChange}
+                      value={productManual}
                       variant="outlined"
                     />
                   </div>
