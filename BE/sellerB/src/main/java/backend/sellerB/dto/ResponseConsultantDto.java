@@ -64,8 +64,22 @@ public class ResponseConsultantDto {
                 }
             }
         }
-        System.out.println("666666");
         return "제품군 없음";
+    }
+
+
+    public static Long getProductGroupSeq(Consultant consultant) {
+        if (consultant != null) {
+            ProductGroup productGroup = consultant.getProductGroup();
+            if (productGroup != null) {
+                Long productGroupSeq = productGroup.getProductGroupSeq();
+                if (productGroupSeq != null) {
+                    return productGroupSeq;
+                }
+            }
+        }
+        return -1L;
+
     }
 
     //엔티티를 dto로
@@ -81,7 +95,7 @@ public class ResponseConsultantDto {
                 .consultantTel(consultant.getConsultantTel())
                 .brandName(getBrandName(consultant))
                 .productGroupName(getProductGroupName(consultant))
-                .productGroupSeq(consultant.getProductGroup().getProductGroupSeq())
+                .productGroupSeq(getProductGroupSeq(consultant))
                 .consultantImageUrl(consultant.getConsultantImageUrl())
                 .consultantDelYn(consultant.getConsultantDelYn())
                 .authorityDtoSet(consultant.getAuthorities().stream()
@@ -102,7 +116,7 @@ public class ResponseConsultantDto {
                     .consultantTel(consultantList.get(i).getConsultantTel())
                     .consultantImageUrl(consultantList.get(i).getConsultantImageUrl())
                     .brandName(getBrandName(consultantList.get(i)))
-                    .productGroupSeq(consultantList.get(i).getProductGroup().getProductGroupSeq())
+                    .productGroupSeq(getProductGroupSeq(consultantList.get(i)))
 //                    .consultantDelYn(consultantList.get(i).getConsultantDelYn())
                     .productGroupName(getProductGroupName(consultantList.get(i)))
 //                    .authorityDtoSet(consultantList.get(i).getAuthorities().stream()
