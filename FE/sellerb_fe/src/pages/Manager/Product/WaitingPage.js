@@ -13,6 +13,7 @@ import {
 import { productDetailApi } from "../../../api/productApi";
 import { SmallButton } from "../../../components/Common/SmallButton";
 import { MediButton } from "../../../components/Common/MediButton";
+import { BackSmallButton } from "../../../components/Common/BackSmallButton";
 
 function WaitingPage() {
   const navigate = useNavigate();
@@ -214,7 +215,7 @@ function WaitingPage() {
                 />
                 <div className="product-register-small-btn">
                   <SmallButton label="업로드 완료" onClick={onImgRegisterBtn} />
-                  <SmallButton label="이미지 초기화" onClick={onResetFile} />
+                  <BackSmallButton label="이미지 초기화" onClick={onResetFile} />
                 </div>
               </div>
             </div>
