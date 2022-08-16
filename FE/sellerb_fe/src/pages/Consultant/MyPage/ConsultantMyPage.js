@@ -93,8 +93,6 @@ function ConsultantMyPage() {
   const onMoveEditBtn = () => {
     console.log(`/consultant/mypage/edit/${seq}`);
     navigate(`/consultant/mypage/edit/${seq}`);
-    // navigate(`/manager/productEdit/${product.productSeq}`);
-    // <Route path='/consultant/mypage/edit/:id' element={<ConsultantMyPageEdit />} />
   };
 
   return (
