@@ -7,6 +7,7 @@ import { Footer, NavBar } from "../../../components/index";
 import AttendanceLog from "../../../components/Log/AttendanceLog";
 import ConsultingLog from "../../../components/Log/ConsultingLog";
 import { SmallButton } from '../../../components/Common/SmallButton'
+import { DangerSmallButton } from '../../../components/Common/DangerSmallButton'
 // import Test from '../../../components/Log/Test'
 
 import {
@@ -84,6 +85,7 @@ function ConsultantDetail() {
       <NavBar />
       <div className="notice-title">상담사 프로필</div>
       <div className="profile-wrapper">
+        {/*  */}
         <div className="profile-left">
           <div className="profile-element">
             <p>사번</p>
@@ -105,19 +107,16 @@ function ConsultantDetail() {
             <p>제품군</p>
             <div>{consultant.productGroupName}</div>
           </div>
-          <div style={{display: "flex"}}>
-            {/* <button onClick={(e)=> navigate(`/manager/consultantModify/${consultant.consultantSeq}`)}> */}
-              {/* 수정하기 */}
-            {/* </button> */}
+          <div style={{display: "flex", marginLeft:"5px"}}>
+
             <SmallButton label="수정하기" onClick={onEditBtn} />
-            <SmallButton label="삭제하기" onClick={onDeleteBtn} />
-            {/* <button onClick={(e)=>onDeleteBtn()}>
-              삭제하기
-            </button> */}
+            < DangerSmallButton label="삭제하기" onClick={onDeleteBtn} />
+
           </div>
         </div>
+        {/*  */}
         <div className="profile-right">
-          <div className="select-wrapper">
+          <div className="consultant-detail-select-wrapper">
             <select onChange={onHandleLogOption} value={logOption}>
               <option >출결이력</option>
               <option>상담이력</option>

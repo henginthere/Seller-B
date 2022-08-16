@@ -20,3 +20,5 @@ export { default as ProductEdit } from "./Manager/Product/ProductEdit";
 export { default as WaitingPage } from "./Manager/Product/WaitingPage";
 export { default as MeetingManCon } from "./Meeting/MeetingManCon/MeetingManCon";
 export { default as ConsultingMain } from "./Meeting/MeetingConUser/ConsultingMain";
+
+export { default as MainTwo } from './Main/MainTwo';

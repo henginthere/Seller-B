@@ -117,7 +117,6 @@ function ConsultantRegister() {
         console.log(err.data);
       });
   };
-
  
   const onImgRegisterBtn = async() => {
     const fd = new FormData(); 
@@ -148,7 +147,6 @@ function ConsultantRegister() {
         it.brandName === managerBrand &&
         it.productGroupName === e.target.value
     );
-
     setSeqTest(item.productGroupSeq); 
   };
 
@@ -164,8 +162,8 @@ function ConsultantRegister() {
       <div className="wrapper">
         <div id="left">
           <div className="imageWrapper">
-            {imgFile.image_file === "" ? (
-              <img className="preview-img" alt="#" src={consultant.consultantImageUrl} />
+            {imgFile === "" ? (
+              <img className="preview-img" alt="#" src={previewUrl} />
             ) : null}
 
             {imgBase64.map((item) => {
@@ -176,7 +174,7 @@ function ConsultantRegister() {
               );
             })}
           </div>
-
+        <div className="product-img-bottom-wrapper">
           <input
             className="img-btn"
             type="file"
@@ -184,10 +182,10 @@ function ConsultantRegister() {
             id="file"
             onChange={onHandleChangeFile}
           />
+          <SmallButton label="이미지 등록" onClick={onImgRegisterBtn} />
+        </div>
 
-          <button className="bottom-btn" onClick={onImgRegisterBtn}>
-            이미지 등록
-          </button>
+
         </div>
         <div id="right">
           <div className="topText" onClick={onRegisterBtn }>

@@ -59,23 +59,9 @@ function Main() {
         sessionStorage.setItem("accessToken", res.data.tokenDto.accessToken);
         sessionStorage.setItem("refreshToken", res.data.tokenDto.refreshToken);
         sessionStorage.setItem("seq", res.data.seq);
+        sessionStorage.setItem("brandSeq", res.data.brandSeq);
         console.log(sessionStorage.getItem("seq"));
 
-        // axios
-        //   .get(`/api/brand/${brandSeq}`)
-        //   .then((res) => {
-        //     console.log("LOGIN: " + JSON.stringify(res.data));
-
-        //     sessionStorage.setItem("brandNameKor", res.data.brandNameKor);
-        //     sessionStorage.setItem("brandNameEng", res.data.brandNameEng);
-        //     console.log("manager's brand:" + res.data.brandNameKor);
-
-        //     console.log("manager's brand:" + sessionStorage.getItem("brandNameEng"));
-        //     sessionStorage.getItem("accessToken");
-
-        //     console.log(sessionStorage.getItem("brandNameKor"));
-        //   })
-        //   .catch((err) => {});
 
         // isAdmin이라면, Redux isAdmin 값 true로 전환
         dispatch(CHECK_ADMIN());

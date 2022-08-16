@@ -6,6 +6,7 @@ import { Footer, NavBar } from "../../../components/index";
 import { productDetailApi, productDelApi } from "../../../api/productApi";
 import { SmallButton } from "../../../components/Common/SmallButton";
 import { MediButton } from "../../../components/Common/MediButton";
+import { DangerMediButton} from '../../../components/Common/DangerMediButton'
 
 function ProductDetail() {
   const { seq } = useParams();
@@ -128,8 +129,8 @@ function ProductDetail() {
                 {/* 하단 버튼 */}
               <div className="product-register-medi-btn">
                 <MediButton label="수정하기" onClick={onEditBtn} />
-                <MediButton label="삭제하기" onClick={onDeleteBtn} />
                 <MediButton label="대기화면 등록" onClick={goWaitingPage} />
+                <DangerMediButton label="삭제하기" onClick={onDeleteBtn} />
               </div>
               {/* <div className="product-register-medi-btn">
                 

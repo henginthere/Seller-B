@@ -33,7 +33,7 @@ function NavBar() {
 
   const onLogOutBtn = () => {
     sessionStorage.clear();
-    navigate("/");
+    navigate("/main");
   };
 
   const onGoMain = () => {

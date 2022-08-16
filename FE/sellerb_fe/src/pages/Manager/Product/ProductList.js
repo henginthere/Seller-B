@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import "./ProductList.css";
-import { Footer, NavBar, ProdcutOption } from "../../../components/index";
+import { Footer, NavBar, ProductOption } from "../../../components/index";
 import {
   productGroupListApi,
   productGroupItemsApi,
@@ -92,7 +92,7 @@ function ProductList() {
 
   // 선택한 제품군 option에 따라, 나타낼 해당 제품군 리스트 컴포넌트
   function GroupOptionList({ props }) {
-    return <ProdcutOption items={props} />;
+    return <ProductOption items={props} />;
     if (searchWord !== "") {
       setSearchWord("");
     }

@@ -142,14 +142,14 @@
 }
 .notice-title {
   /* border: solid 2px #f9f1e2; */
-  width: 100%;
+  width: 50%;
 
   /* 위치 조절 */
-
+  margin-left: 10%;
   margin-bottom: 30px;
   padding: 10px;
   /* font */
-  font-size: 20px;
+  font-size: 25px;
   border-radius: 10px;
 }
 
