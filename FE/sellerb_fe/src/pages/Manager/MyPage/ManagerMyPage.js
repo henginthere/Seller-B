@@ -252,10 +252,12 @@ function ManagerMyPage() {
           </div>
           <div className='imageWrapper'>
             <img
-              src={`${process.env.PUBLIC_URL}/img/ManagerImage.png`}
+              src={info.managerImageUrl}
               alt='NOIMAGE'
             ></img>
           </div>
+          {/* 이미지 업로듭 부분 */}
+          
         </div>
         {/* 오른쪽 */}
         <div id='right'>

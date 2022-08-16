@@ -37,6 +37,25 @@
   height: 48px;
 }
 
+/* 프로필 이미지 부분 */
+.right-content .manage-preview-img {
+  border-radius: 45%;
+  width:40px;
+  height: auto;
+  
+}
+
+.right-content .manage-profile-img {
+  border-radius: 45%;
+  width:40px;
+  height: auto;
+  object-fit: cover;
+  
+}
+
+
+
+/* 제품군 선택  */
 .right-content > select {
   text-align: center;
   margin-left: -20px;
