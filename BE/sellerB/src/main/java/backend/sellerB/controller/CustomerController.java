@@ -57,6 +57,15 @@ public class CustomerController {
         return ResponseEntity.ok(customerService.googleLogin(customerDto));
     }
 
+    @PostMapping("oauth/login/naver")
+    public ResponseEntity<LoginResponseDto> naverLoginCustomer(@Valid @RequestBody CustomerDto customerDto) {
+        return ResponseEntity.ok(customerService.naverLogin(customerDto));
+    }
+
+    @PostMapping("oauth/login/kakao")
+    public ResponseEntity<LoginResponseDto> kakaoLoginCustomer(@Valid @RequestBody CustomerDto customerDto) {
+        return ResponseEntity.ok(customerService.kakaoLogin(customerDto));
+    }
 
     @DeleteMapping("/{seq}")
     public ResponseEntity<CustomerDto> deleteCustomer(@PathVariable Long seq) {
