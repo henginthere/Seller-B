@@ -3,27 +3,21 @@ import "./ConsultantModify.css";
 import { Footer, NavBar } from "../../../components/index";
 import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
-import { SmallButton } from '../../../components/Common/SmallButton'
-import { MediButton } from '../../../components/Common/MediButton'
+import { SmallButton } from "../../../components/Common/SmallButton";
+import { MediButton } from "../../../components/Common/MediButton";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
-import { modifyConsultantApi, detailConsultantApi } from "../../../api/consultantApi"
+import {
+  modifyConsultantApi,
+  detailConsultantApi,
+} from "../../../api/consultantApi";
 
 function ConsultantModify() {
   const navigate = useNavigate();
   const { id } = useParams();
-  const seq = id; 
+  const seq = id;
 
-  const [consultant, setConsultant] = useState({
-    consultantId: "",
-    consultantName: "",
-    consultantEmail:"",
-    consultantTel :"",
-    productGroupName: "",
-    productGroupSeq: "",
-    consultantImageUrl: "",
-    brandName: ""
-  });
+  const [consultant, setConsultant] = useState({});
 
   const product_list = [
     { value: "TV", label: "TV" },
@@ -35,45 +29,34 @@ function ConsultantModify() {
 
   useEffect(() => {
     detailConsultantApi(seq)
-    .then((res)=>{
+      .then((res) => {
         console.log("res.data:" + res.data.consultantId);
-        
+
         // consultant = res.data;
-        setConsultant(res.data); 
-        console.log("img: "+ res.data.consultantImageUrl)
+        setConsultant(res.data);
+        console.log("img: " + res.data.consultantImageUrl);
         console.log("consultant:" + consultant.consultantId);
-    })
-    .catch((err)=>{
+      })
+      .catch((err) => {
         console.log(err);
-    })
+      });
   }, []);
 
   // 최종적으로 수정 완료 버튼을 누르면 api로 DB에 반영하기 위한 함수
   const onHandleSubmit = (e) => {
     e.preventDefault();
 
-    const info = {
-      "consultantId" : consultant.consultantId,
-      "consultantName": consultant.consultantId,
-      "consultantEmail": consultant.consultantEmail,
-      "consultantTel": consultant.consultantTel,
-      "consultantPass": consultant.consultantPass,
-      "productGroupSeq": "",
-      "consultantImageUrl": ""
-    }
-
-    modifyConsultantApi(info)
-    .then((res)=>{
-      console.log(res.data);
-    })
-    .catch((err)=>{
-      console.log("Error");
-    })
+    modifyConsultantApi(consultant.consultantSeq, consultant)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log("Error");
+      });
 
     alert("수정하시겠습니까?");
 
     navigate(`/manager/consultantDetail/${seq}`);
-
   };
   // 바뀔때마다 setData로 수정된 데이터로 바꿔줌
   const onChange = (e) => {
@@ -83,9 +66,8 @@ function ConsultantModify() {
 
     setConsultant({
       ...consultant,
-      [name] : value,
+      [name]: value,
     });
-
   };
   return (
     <>
@@ -93,10 +75,7 @@ function ConsultantModify() {
       <div className='wrapper'>
         <div id='left'>
           <div className='imageWrapper'>
-            <img
-              src={consultant.consultantImageUrl}
-              alt='NOIMAGE'
-            ></img>
+            <img src={consultant.consultantImageUrl} alt='NOIMAGE'></img>
           </div>
         </div>
         <div id='right'>
@@ -142,7 +121,7 @@ function ConsultantModify() {
                 onChange={onChange}
                 fullWidth='true'
                 name='consultantPass'
-                autocomplete="on"
+                autocomplete='on'
               />
             </div>
 
@@ -170,18 +149,24 @@ function ConsultantModify() {
                 }}
                 onChange={onChange}
               >
-                {product_list.map((option) => (
-                  option.value === consultant.productGroupName 
-                  ? ""
-                  :
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
+                {product_list.map((option) =>
+                  option.value === consultant.productGroupName ? (
+                    ""
+                  ) : (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ),
+                )}
               </TextField>
             </div>
             <div className='Button'>
-              <Button onClick={onHandleSubmit} className='registerBtn' variant='contained' type='submit'>
+              <Button
+                onClick={onHandleSubmit}
+                className='registerBtn'
+                variant='contained'
+                type='submit'
+              >
                 수정완료
               </Button>
               <Button className='registerBtn' variant='contained' color='error'>

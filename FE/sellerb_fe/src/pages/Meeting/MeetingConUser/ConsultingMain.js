@@ -5,9 +5,10 @@ import {
   startConsultingApi,
   endConsultingApi,
 } from "../../../api/consultingApi";
+import { productDetailApi } from "../../../api/productApi";
 
 import { List, ListItem, ListItemText, Button, Skeleton } from "@mui/material";
-import VideoRoomComponent from "../../../components/VideoRoomComponent";
+import ConsultingVideoRoomComponent from "../../../components/ConsultingVideoRoomComponent";
 
 function ConsultingMain() {
   const style_Container = {
@@ -33,6 +34,7 @@ function ConsultingMain() {
   const sessionUserName = sessionStorage.getItem("consultantName");
   const [sessionId, setSessionId] = useState("");
   const [consultingSeq, setConsultingSeq] = useState();
+  const [product, setProduct] = useState([]);
 
   const productGroupSeq = sessionStorage.getItem("productGroupSeq");
   useEffect(() => {
@@ -91,6 +93,13 @@ function ConsultingMain() {
                     ></ListItemText>
                     <Button
                       onClick={() => {
+                        productDetailApi(values.productSeq)
+                          .then((res) => {
+                            setProduct(res.data);
+                          })
+                          .catch((err) => {
+                            alert("제품정보 로드 실패! : " + err);
+                          });
                         setSessionId(values.customerId + "-session");
                         startConsultingApi({
                           customerId: values.customerId,
@@ -106,6 +115,7 @@ function ConsultingMain() {
                           .catch((err) => {
                             console.log("상담 정보 입력 실패!   " + err);
                           });
+                        alert("상담을 시작합니다.");
                         startSession();
                       }}
                     >
@@ -119,10 +129,11 @@ function ConsultingMain() {
           </div>
         ) : (
           // 상담중일 경우
-          <VideoRoomComponent
+          <ConsultingVideoRoomComponent
             user={sessionUserName}
             sessionName={sessionId}
             leaveSession={endConsulting}
+            product={product}
           />
         )}
       </div>
