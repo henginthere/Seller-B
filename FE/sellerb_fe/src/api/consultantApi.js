@@ -26,9 +26,9 @@ export const registerConsultantApi = async ( consultant, success, fail ) => {
 }
 
 // PUT : Modify : ConsultantModify.js
-export const modifyConsultantApi = async ( consultant, success, fail ) => {
+export const modifyConsultantApi = async ( consultant, seq, success, fail ) => {
     console.log("in API: " + JSON.stringify(consultant));
-    return await api.put(`/consultant/${consultant.consultantSeq}`, consultant).then(success).catch(fail);
+    return await api.put(`/consultant/${seq}`, consultant).then(success).catch(fail);
 }
 
 // DELTE 
