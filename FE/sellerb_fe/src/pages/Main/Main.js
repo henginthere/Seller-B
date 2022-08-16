@@ -159,15 +159,11 @@ function Main() {
               />
               관리자 로그인
               </div> */}
-              <div className='register-resetPassword'>
+              <div className='manager-register-btn-wrapper'>
                 <Link to='/manager/register' className='link-to'>
                   <div className='manager-register'>관리자 회원가입</div>
                 </Link>
-                <div className='reset-pssword'>
-                  <Link to='#' className='link-to'>
-                    비밀번호 재설정
-                  </Link>
-                </div>
+        
               </div>
             </form>
             {/* Form end */}

@@ -6,5 +6,6 @@ export const LoginApi = async (userInfo, success, fail) => {
 }
 
 export const registerApi = async(userInfo, success, fail) => {
+    console.timeLog("in registerAPI :" + JSON.stringify(userInfo))
     return await api.post("/manager/register", userInfo).then(success).catch(fail);
 }
