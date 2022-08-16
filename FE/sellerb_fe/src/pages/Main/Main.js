@@ -62,7 +62,6 @@ function Main() {
         sessionStorage.setItem("brandSeq", res.data.brandSeq);
         console.log(sessionStorage.getItem("seq"));
 
-
         // isAdmin이라면, Redux isAdmin 값 true로 전환
         dispatch(CHECK_ADMIN());
 
@@ -164,7 +163,6 @@ function Main() {
                 <Link to='/manager/register' className='link-to'>
                   <div className='manager-register'>관리자 회원가입</div>
                 </Link>
-        
               </div>
             </form>
             {/* Form end */}
