@@ -25,7 +25,7 @@ function ConsultingLog({ consultant_id }) {
   // pagination
   const [page, setPage] = useState(1);
   const handlePageChange = (page) => {
-    console.log("현재 페이지: " + page);
+    // console.log("현재 페이지: " + page);
     setPage(page);
   };
   const [it, setIt] = useState(9);
@@ -34,7 +34,7 @@ function ConsultingLog({ consultant_id }) {
   useEffect(() => {
     listConsultingApi(consultant_id)
       .then((res) => {
-        console.log(JSON.stringify(res.data));
+        // console.log(JSON.stringify(res.data));
 
         // attendance = res.data;
         setLogData(res.data);

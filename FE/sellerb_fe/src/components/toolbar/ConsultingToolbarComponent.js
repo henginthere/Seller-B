@@ -17,12 +17,13 @@ import StopScreenShare from "@material-ui/icons/StopScreenShare";
 import Tooltip from "@material-ui/core/Tooltip";
 import PowerSettingsNew from "@material-ui/icons/PowerSettingsNew";
 import QuestionAnswer from "@material-ui/icons/QuestionAnswer";
+import Inventory2Icon from "@mui/icons-material/Inventory2";
 
 import IconButton from "@material-ui/core/IconButton";
 
 const logo = require("../../assets/images/sellerB_Logo.png");
 
-export default class ToolbarComponent extends Component {
+export default class ConsultingToolbarComponent extends Component {
   constructor(props) {
     super(props);
     this.state = { fullscreen: false };
@@ -163,7 +164,7 @@ export default class ToolbarComponent extends Component {
             >
               {this.props.showNotification && <div id='point' className='' />}
               <Tooltip title='Chat'>
-                <QuestionAnswer />
+                <Inventory2Icon />
               </Tooltip>
             </IconButton>
           </div>
