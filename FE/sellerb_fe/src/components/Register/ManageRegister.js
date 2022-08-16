@@ -81,7 +81,6 @@ function ManageRegister() {
   const onHandleChangeFile = (event) => {
     console.log(event.target.files);
     setImgFile(event.target.files);
-    // const file = event.target.files;
 
     // 미리보기 state
     setImgBase64([]);
@@ -123,7 +122,7 @@ function ManageRegister() {
     console.log("보낼 fd: " + fd);
 
     await axios
-      .post("https://i7d105.p.ssafy.io/api/file/product", fd, {
+      .post("https://i7d105.p.ssafy.io/api/file/manager", fd, {
         header: {
           "Content-Type": `multipart/form-data`,
         },
@@ -176,10 +175,10 @@ function ManageRegister() {
   };
 
   // Axios
-  const submit = async (values) => {
-    const { brand, managerName, id, password, phone, email } = values;
-    console.log(values.brand);
-  };
+  // const submit = async (values) => {
+  //   const { brand, managerName, id, password, phone, email } = values;
+  //   console.log(values.brand);
+  // };
 
   return (
     <div className="manage-register-page">
@@ -249,14 +248,14 @@ function ManageRegister() {
             email: "",
           }}
           validationSchema={validationSchema}
-          onSubmit={submit}
+          // onSubmit={submit}
           validateOnMount={true}
         >
-          {({ values, handleSubmit, handleChange, errors }) => (
+          {({ values, handleChange, errors }) => (
             <div className="signup-wrapper">
               {/* <ToastContainer /> */}
               <form
-                onSubmit={handleSubmit}
+                // onSubmit={handleSubmit}
                 autoComplete="off"
                 className="login-form"
               >
@@ -297,7 +296,7 @@ function ManageRegister() {
                         />
                       </div>
                     </div>
-                    <div className="error-message">{errors.id}</div>
+               
                   </div>
                 </div>
 
@@ -411,7 +410,7 @@ function ManageRegister() {
                   </div>
                 </div>
 
-                {/* <Button
+                <Button
                   color="primary"
                   variant="contained"
                   fullWidth
@@ -419,11 +418,11 @@ function ManageRegister() {
                   onClick={() => registerBtn(values)}
                 >
                   회원가입
-                </Button> */}
-                <MediButton 
+                </Button>
+                {/* <MediButton 
                   label="회원가입"
-                  onClick={registerBtn(values)}
-                />
+                  // onClick={registerBtn(values)}
+                /> */}
               </form>
             </div>
           )}
