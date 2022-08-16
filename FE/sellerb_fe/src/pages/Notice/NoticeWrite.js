@@ -33,8 +33,10 @@ function NotieWriteTwo() {
     // event.preventDefault(); 
 
     // const parseResult = noticeContent.
+    const brandSeq = sessionStorage.getItem("brandSeq");
 
     let noticePostBody = {
+      brandSeq: brandSeq,
       noticeTitle: noticeTitle,
       noticeContent: noticeContent
     };
