@@ -17,86 +17,65 @@ import "./ConsultantMyPage.css";
 import AttendanceLog from "../../../components/Log/AttendanceLog";
 import ConsultingLog from "../../../components/Log/ConsultingLog";
 import { MediButton } from "../../../components/Common/MediButton";
-import { SmallButton } from '../../../components/Common/SmallButton'
-import { DangerSmallButton } from '../../../components/Common/DangerSmallButton'
-import { detailConsultantApi } from "../../../api/consultantApi";
+import {detailConsultantApi, deleteConsultant, modifyConsultantApi } from "../../../api/consultantApi";
 
-function ConsultantMyPage() {
-  const navigate = useNavigate();
-  const { id } = useParams();
-  const seq = id;
+function ConsultantMyPageEdit() {
+    const { seq } = useParams();
+    console.log("params 확인 : " + seq);
+    const navigate = useNavigate();
 
-  const [consultant, setConsultant] = useState([]);
-  const [logOption, setLogOption] = useState("출결이력");
+    const [consultant, setConsultant] = useState([]);
 
-  const [imgBase64, setImgBase64] = useState([]); // 미리보기를 구현할 state
-  const [imgFile, setImgFile] = useState("");
-  const [previewUrl, setPreviewUrl] = useState(
-    `${process.env.PUBLIC_URL}/img/default_img.png`
-  );
+    const [editPass, setEditPass] = useState("");
+    const [groupName, setGroupName] = useState("");
 
-  useEffect(() => {
-    detailConsultantApi(seq)
-      .then((res) => {
-        console.log(JSON.stringify(res.data));
-        setConsultant(res.data);
-      })
-      .catch((err) => {
-        console.log("Error");
-      });
-  }, []);
+    useEffect(() => {
+        detailConsultantApi(seq)
+        .then((res)=>{
+          setConsultant(res.data); 
+          //////////////////////////////////////////////////////////////
+          console.log(JSON.stringify(res.data));
+  
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
+      }, []);
 
-  const onHandleLogOption = (event) => {
-    setLogOption(event.currentTarget.value);
-  };
+      const onDeleteBtn = ()=>{
+        deleteConsultant(seq)
+        .then((res)=>{
+          console.log("onDelete Btn:" + res.data);
+    
+          navigate("/manager/main");
+    
+        })
+        .catch((err)=>{
+          console.log("Error")
+        })
+     }
+     
+     const onEdiCompleteBtn = () => {
+        
+        const EditInfo = {
+            consultantPass: editPass,
+            consultantEmail:"",
+            consultantTel:"",
+            productGroupSeq:"",
+            consultantImageUrl:""
+        }
 
-  // 출결이력 or 상담이력
-  function ConsultantLog(props) {
-    if (logOption === "출결이력") {
-      // console.log(params.consultants
-      return <AttendanceLog consultant_id={seq} />;
-    } else {
-      return <ConsultingLog consultant_id={consultant.consultantId} />;
+
+
+
+        modifyConsultantApi()
+        .then((res)=>{
+            console.log(JSON.stringify(res.data));
+        })
+        .catch((err)=>{
+            console.log("Error");
+        })
     }
-  }
-
-  // 이미지 파일 관련
-  const handleChangeFile = (event) => {
-    setImgFile(event.target.files);
-
-    setImgBase64([]);
-    for (var i = 0; i < event.target.files.length; i++) {
-      if (event.target.files[i]) {
-        let reader = new FileReader();
-        reader.readAsDataURL(event.target.files[i]); // 파일을 읽어서 버퍼에 저장중
-
-        // 파일 상태업데이트
-        reader.onloadend = () => {
-          const base64 = reader.result;
-          console.log(base64);
-          if (base64) {
-            var base64Sub = base64.toString();
-
-            setImgBase64((imgBase64) => [...imgBase64, base64Sub]);
-          }
-        };
-      }
-    }
-  };
-
-  const deleteImage = () => {
-    setImgFile("");
-    setImgBase64("");
-  };
-
-
-  // 수정 페이지로 이동
-  const onMoveEditBtn = () => {
-    console.log(`/consultant/mypage/edit/${seq}`);
-    navigate(`/consultant/mypage/edit/${seq}`);
-    // navigate(`/manager/productEdit/${product.productSeq}`);
-    // <Route path='/consultant/mypage/edit/:id' element={<ConsultantMyPageEdit />} />
-  };
 
   return (
     <>
@@ -154,7 +133,7 @@ function ConsultantMyPage() {
       </div>
       <Footer />
     </>
-    );
-  }
+  )
+}
 
-export default ConsultantMyPage;
+export default ConsultantMyPageEdit
