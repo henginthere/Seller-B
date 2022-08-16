@@ -30,13 +30,12 @@ function ConsultantMyPage() {
   const [previewUrl, setPreviewUrl] = useState(
     `${process.env.PUBLIC_URL}/img/default_img.png`,
   );
-  const [modifyConsultantData, setModifyConsultantData] = useState(consultant);
 
   useEffect(() => {
     detailConsultantApi(seq)
       .then((res) => {
         console.log(JSON.stringify(res.data));
-        setConsultant(res.data);
+        setConsultant({ ...res.data, consultantPass: "" });
       })
       .catch((err) => {
         console.log("Error");
@@ -105,12 +104,14 @@ function ConsultantMyPage() {
     e.preventDefault();
 
     alert("수정하시겠습니까?");
-    modifyConsultantApi(consultant)
+    modifyConsultantApi(seq, consultant)
       .then((res) => {
         alert("수정완료!");
       })
       .catch((err) => {
         alert("수정실패! ERROR CODE : " + err);
+        console.log("ERROR!!!!!!!!!!!!!!!!!");
+        console.error(err);
       });
     ChangeToModify();
   };
@@ -162,7 +163,7 @@ function ConsultantMyPage() {
           <div className='InfoTextField'>
             <TextField
               label='PW'
-              defaultValue=''
+              defaultValue={consultant.consultantPass}
               fullWidth={true}
               InputProps={{ readOnly: true }}
             />
@@ -177,84 +178,12 @@ function ConsultantMyPage() {
           </div>
           <div className='Button'>
             <MediButton label='수정하기' onClick={ChangeToModify} />
-            {/* <Button variant='contained' size='large' onClick={ChangeToModify}>
-              수정
-            </Button> */}
           </div>
         </div>
       </>
     );
   };
 
-  const Modify = () => {
-    return (
-      <>
-        <form onSubmit={handleSubmit}>
-          <div className='InfoTextField'>
-            <TextField
-              id='outlined-read-only-input'
-              label='사번'
-              value={consultant.consultantId}
-              fullWidth={true}
-              InputProps={{ readOnly: true }}
-              disabled='true'
-              variant='filled'
-            />
-          </div>
-          <div className='InfoTextField'>
-            <TextField
-              label='사원명'
-              value={consultant.consultantName}
-              fullWidth={true}
-              InputProps={{ readOnly: true }}
-              disabled='true'
-              variant='filled'
-            />
-          </div>
-          <div className='InfoTextField'>
-            <TextField
-              label='사원 Email'
-              value={consultant.consultantEmail}
-              fullWidth={true}
-              onChange={handleChange}
-              name='consultantEmail'
-            />
-          </div>
-          <div className='InfoTextField'>
-            <TextField
-              label='PW'
-              value=''
-              fullWidth={true}
-              onChange={handleChange}
-              name='consultantPass'
-            />
-          </div>
-          <div className='InfoTextField'>
-            <TextField
-              label='제품군'
-              value={consultant.productGroupName}
-              fullWidth={true}
-              onChange={handleChange}
-              name='productGroup.productGroupName'
-            />
-          </div>
-          <div className='Button'>
-            <Button variant='contained' size='large' type='submit'>
-              수정 완료
-            </Button>
-            <Button
-              variant='contained'
-              color='error'
-              size='large'
-              onClick={cancelModify}
-            >
-              취소
-            </Button>
-          </div>
-        </form>
-      </>
-    );
-  };
   return (
     <>
       <NavBar />
