@@ -4,33 +4,43 @@ import axios from "axios";
 
 import "./ProductRegister.css";
 import { Footer, NavBar } from "../../../components/index";
-import { productEditApi, productDetailApi } from "../../../api/productApi";
+import { productEditApi, productDetailApi,  productGroupListApi } from "../../../api/productApi";
 import { SmallButton } from "../../../components/Common/SmallButton";
 import { MediButton } from "../../../components/Common/MediButton";
 
 function ProductEdit() {
   const { seq } = useParams();
   const navigate = useNavigate();
+
+  const [groupList, setGroupList] = useState([]);
+
+  const [managerBrand, setManagerBrand] = useState(
+    sessionStorage.getItem("brandNameKor")
+  );
+  const [selectSeq, setSelectSeq] = useState([]);
   const [readOnly, setReadOnly] = useState(true);
+  
   const [resImg, setResImg] = useState("");
   const [product, setProduct] = useState({
-    productSeq: "",
+    productSeq: seq,
+    productGroupName: "",
+    productGroupSeq: 0,
     productId: "",
     productName: "",
-    productPrice: "",
-    // product_thumbnail : 서버에서 url로 받아옴
+    productPrice: 0,
+    productManual:"준비중",
     productThumbnail: "",
-    productGroup: {
-      productGroupName: "",
-    },
   });
 
   const {
+    productSeq,
+    productGroupName,
+    productGroupSeq,
     productId,
     productName,
     productPrice,
-    productGroup,
-    productGroupName,
+    productManual,
+    productThumbnail
   } = product;
 
   const [imgBase64, setImgBase64] = useState([]);
@@ -53,15 +63,27 @@ function ProductEdit() {
       });
   }, []);
 
+  // 매니저가 속한 브랜드의 제품군 리스트 받아오기
+  useEffect(() => {
+    productGroupListApi()
+      .then((res) => {
+        setGroupList(res.data); // groupList
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   const onEditCompleteBtn = () => {
+    console.log(seq);
     const editData = {
-      productSeq: seq,
-      productGroupName: product.productGroup.productGroupName,
+      productSeq: product.productSeq,
       productId: product.productId,
       productName: product.productName,
       productPrice: product.productPrice,
-      productManual: "",
-      productThumbnail: "",
+      productManual: product.productManual,
+      productThumbnailUrl: resImg
+      // productGroupName: product.productGroupName,
     };
 
     productEditApi(editData)
@@ -132,8 +154,17 @@ function ProductEdit() {
       ...product,
       [name]: value,
     });
+  };
 
-    console.log(productId);
+  const onGroupChange = (e) => {
+    e.preventDefault();
+
+    const item = groupList.find(
+      (it) =>
+        it.brandName === managerBrand && it.productGroupName === e.target.value
+    );
+
+    setSelectSeq(item.productGroupSeq);
   };
 
   const onResetFile = () => {
@@ -237,11 +268,29 @@ function ProductEdit() {
                 {/*  */}
                 <div className="input-ele">
                   <p>제품군</p>
+                  {/* <select
+                    onChange={onGroupChange}
+                    className="product-select-option"
+                    defaultValue={product.productGroupName}
+                    name="productGroupName"
+                  >
+                  <option>---제품군 선택--</option>
+                    {groupList.map((option) =>
+                      option.brandName === managerBrand ? (
+                        <option value={option.productGroupName}>
+                          {option.productGroupName}
+                        </option>
+                      ) : (
+                        ""
+                      )
+                    )}
+                  </select> */}
                   <div className="product-id-input-wrapper">
                     <input
                       className="product-id-input"
                       name="productGroup"
-                      // value={product.productGroup.productGroupName}
+                      value={product.productGroupName}
+                      readOnly="true"
                       onChange={onChange}
                       variant="outlined"
                     />
