@@ -47,8 +47,6 @@ function ConsultantMyPage() {
 
   const onHandleLogOption = (event) => {
     setLogOption(event.currentTarget.value);
-
-    console.log(logOption);
   };
 
   function ConsultantLog(props) {
