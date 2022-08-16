@@ -27,6 +27,7 @@ import {
   ConsultingMain,
 
   MainTwo,
+  ConsultantMyPageEdit
 } from "./pages/index";
 
 function App() {
@@ -57,6 +58,8 @@ function App() {
           element={<ConsultantModify />}
         />
         <Route path='/consultant/mypage/:id' element={<ConsultantMyPage />} />
+        <Route path='/consultant/mypage/edit/:id' element={<ConsultantMyPageEdit />} />
+
         <Route path='/manager/productList' element={<ProductList />} />
         <Route path='/manager/productRegister' element={<ProductRegister />} />
         <Route path='/manager/productDetail/:seq' element={<ProductDetail />} />
