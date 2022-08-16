@@ -1,10 +1,7 @@
 package backend.sellerB.service;
 
 import backend.sellerB.dto.*;
-import backend.sellerB.entity.Authority;
-import backend.sellerB.entity.Consultant;
-import backend.sellerB.entity.MemberAuth;
-import backend.sellerB.entity.Notice;
+import backend.sellerB.entity.*;
 import backend.sellerB.exception.DuplicateUserException;
 import backend.sellerB.repository.*;
 import backend.sellerB.util.SecurityUtil;
@@ -104,6 +101,8 @@ public class ConsultantService {
     public ConsultantDto update(EditConsultantDto editConsultantDto, Long consultantSeq) throws IOException {
         Optional<Consultant> consultantOptional = consultantRepository.findById(consultantSeq);
         Consultant consultant = consultantOptional.get();
+        Optional<ProductGroup> productGroupOptional = productGroupRepository.findById(editConsultantDto.getProductGroupSeq());
+        ProductGroup productGroup = productGroupOptional.get();
 
 //        String consultantImageUrl = awsS3Service.upload(editConsultantDto.getConsultantImageFile(), "static");
 
@@ -118,7 +117,7 @@ public class ConsultantService {
         consultant.setConsultantEmail(editConsultantDto.getConsultantEmail());
         consultant.setConsultantImageUrl(editConsultantDto.getConsultantImageUrl());
         consultant.setConsultantTel(editConsultantDto.getConsultantTel());
-        consultant.setProductGroup(editConsultantDto.getProductGroup());
+        consultant.setProductGroup(productGroup);
 
         consultant = consultantRepository.saveAndFlush(consultant);
 

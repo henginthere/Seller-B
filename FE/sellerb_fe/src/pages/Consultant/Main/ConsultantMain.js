@@ -27,7 +27,7 @@ function ConsultantMain() {
   const [today, setToday] = useState(new Date());
   const [items, setItems] = useState([]);
   const [noticeList, setNoticeList] = useState([]); //
-
+  var date = new Date();
   useEffect(() => {
     const val = sessionStorage.getItem("seq");
     setConSeq(val);
@@ -47,16 +47,20 @@ function ConsultantMain() {
     console.log("Today : " + today);
     listNoticeApi()
       .then((res) => {
-        // console.log(res.data);
-        setItems(res.data);
+        setItems(res.data.reverse());
 
+        // const items = res.data.filter(
+        //   (it) => it.noticeRegDate.getDate() === today.getDate(),
+        // );
+        // console.log("오늘 새로운 공지사항 갯수:");
         // console.log(items);
+        console.log(res.data[0].noticeRegDate);
+        var newDate = new Date(res.data[0].noticeRegDate);
 
-        const items = res.data.filter(
-          (it) => it.noticeRegDate.getDate() === today.getDate(),
+        console.log(
+          "TIMESTAMP 변환 DATA : " +
+            newDate.toLocaleString("ko-KR", { timeZone: "Asia/Seoul" }),
         );
-        console.log("오늘 새로운 공지사항 갯수:");
-        console.log(items);
       })
       .catch((err) => {});
   }, []);
@@ -87,6 +91,28 @@ function ConsultantMain() {
         console.log("Error");
       });
   };
+  const parsingDate = (date) => {
+    var parsedDate = new Date(date);
+    var yyyy = parsedDate.getFullYear();
+    var MM = parsedDate.getMonth() + 1;
+    var dd = parsedDate.getDate();
+    var hh = parsedDate.getHours() + 9;
+    var mm = parsedDate.getMinutes();
+    return (
+      yyyy +
+      "-" +
+      addZero(MM) +
+      "-" +
+      addZero(dd) +
+      "-" +
+      addZero(hh) +
+      ":" +
+      addZero(mm)
+    );
+  };
+  const addZero = (n) => {
+    return n < 10 ? "0" + n : n;
+  };
 
   return (
     <>
@@ -116,7 +142,14 @@ function ConsultantMain() {
         </div>
         <div className='notice-consulting-wrapper'>
           <div className='notice'>
-            <div className='notice-title'>공지사항</div>
+            <div
+              className='notice-title'
+              onClick={() => {
+                navigate("/manager/noticeList");
+              }}
+            >
+              공지사항
+            </div>
             <hr />
             <div>
               <TableContainer>
@@ -152,7 +185,7 @@ function ConsultantMain() {
                                 navigate(`/noticeDetail/${value.noticeSeq}`);
                               }}
                             >
-                              {value.noticeRegDate}
+                              {parsingDate(value.noticeRegDate)}
                             </TableCell>
                           </TableRow>
                         </>

@@ -52,11 +52,20 @@ public class CustomerController {
     public ResponseEntity<CustomerDto> updateCustomer(@Valid @RequestBody EditCustomerDto editCustomerDto, @PathVariable Long seq) {
         return ResponseEntity.ok(customerService.updateCustomer(seq, editCustomerDto));
     }
-    @PutMapping("oauth/login/google")
-    public ResponseEntity<LoginResponseDto> googleLoginCustomer(@Valid @RequestBody GoogleLoginDto googleLoginDto) throws GeneralSecurityException, IOException {
-        return ResponseEntity.ok(customerService.googleLogin(googleLoginDto));
+    @PostMapping("oauth/login/google")
+    public ResponseEntity<LoginResponseDto> googleLoginCustomer(@Valid @RequestBody CustomerDto customerDto) {
+        return ResponseEntity.ok(customerService.googleLogin(customerDto));
     }
 
+    @PostMapping("oauth/login/naver")
+    public ResponseEntity<LoginResponseDto> naverLoginCustomer(@Valid @RequestBody CustomerDto customerDto) {
+        return ResponseEntity.ok(customerService.naverLogin(customerDto));
+    }
+
+    @PostMapping("oauth/login/kakao")
+    public ResponseEntity<LoginResponseDto> kakaoLoginCustomer(@Valid @RequestBody CustomerDto customerDto) {
+        return ResponseEntity.ok(customerService.kakaoLogin(customerDto));
+    }
 
     @DeleteMapping("/{seq}")
     public ResponseEntity<CustomerDto> deleteCustomer(@PathVariable Long seq) {
