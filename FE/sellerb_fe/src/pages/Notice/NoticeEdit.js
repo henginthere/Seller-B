@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "./NoticeDetail.css";
 import { Footer, NavBar } from "../../components/index";
+import { DangerMediButton} from '../../components/Common/DangerMediButton'
 
 import {
   detailNoticeApi,
@@ -20,6 +21,8 @@ function NoticeEdit() {
     noticeContent: "",
   });
 
+  const [bSeq, setBSeq] = useState(sessionStorage.getItem("brandSeq"));
+
   // 공지사항 내용 수정사항 반영
   const onChange = (e) => {
     e.preventDefault();
@@ -35,13 +38,26 @@ function NoticeEdit() {
 
   // 수정사항 제출 버튼
   const onEditSubmitBtn = () => {
-    modifyNoticeApi(noticeData)
+    setBSeq(parseInt(bSeq));
+   
+    // console.log("")
+
+    const Info = {
+      noticeSeq: id,
+      post :{
+        brandSeq: bSeq,
+        noticeTitle: noticeData.noticeTitle,
+        noticeContent: noticeData.noticeContent
+      }
+    }
+
+    modifyNoticeApi(Info)
       .then((res) => {
         console.log(res.data);
         navigate("/manager/noticeList");
       })
       .catch((err) => {
-        console.log(err.data);
+        console.log(JSON.stringify(err.data));
       });
   };
 
@@ -125,7 +141,8 @@ function NoticeEdit() {
             <div>
               <pre>
                 <input
-                  className='row-right'
+                  style={{"width":"100%"}}
+                  // className='row-right'
                   name='noticeContent'
                   defaultValue={noticeData.noticeContent}
                   onChange={onChange}
@@ -138,9 +155,10 @@ function NoticeEdit() {
             <button className='detail-button' onClick={onEditSubmitBtn}>
               수정완료
             </button>
-            <button className='detail-button' onClick={onDeleteSubmitBtn}>
+            <DangerMediButton label="삭제하기" onClick={onDeleteSubmitBtn} />
+            {/* <button className='detail-button' onClick={onDeleteSubmitBtn}>
               삭제하기
-            </button>
+            </button> */}
           </div>
         </div>
       </div>

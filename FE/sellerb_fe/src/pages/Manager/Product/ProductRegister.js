@@ -16,6 +16,27 @@ import { MediButton } from "../../../components/Common/MediButton";
 
 function ProductRegister() {
   const navigate = useNavigate();
+
+  const [price, setPrice] = useState(0);
+  const [toIntPrice, setToIntPrice] = useState(0);
+
+  const inputPriceFormat = (str) => {
+    console.log("s", str);
+    const comma = (str) => {
+      str = String(str); 
+      
+      return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, "$1,");
+    };
+
+    const uncomma = (str) => {
+      str = String(str); 
+      
+      return str.replace(/[^\d]+/g, "");
+    };
+
+    return comma(uncomma(str)); 
+  }
+
   const [resImg, setResImg] = useState("");
   const [product, setProduct] = useState({
     productGroupName: "",
@@ -27,6 +48,8 @@ function ProductRegister() {
   });
   const [selectSeq, setSelectSeq] = useState([]);
   const [groupList, setGroupList] = useState([]);
+  const [groupOption, setGroupOption] = useState("");
+
   const [managerBrand, setManagerBrand] = useState(
     sessionStorage.getItem("brandNameKor")
   );
@@ -117,7 +140,7 @@ function ProductRegister() {
 
     // 선택한 그룹군에 대해, productGroupSeq찾기
     console.log("제출 전 seq : " + selectSeq);
-
+    
     const Info = {
       productGroupName: product.productGroupName,
       productGroupSeq: selectSeq,
@@ -125,7 +148,7 @@ function ProductRegister() {
       productName: product.productName,
       productPrice: product.productPrice,
       productManual: product.productManual,
-      productThumbnailUrl: resImg,
+      productThumbnailUrl: resImg
     };
 
     console.log("등록 전 Product: " + JSON.stringify(Info));
@@ -134,8 +157,7 @@ function ProductRegister() {
       .then((res) => {
         console.log(res.data);
         
-        
-        navigate('manager/productList')
+        navigate('/manager/productList')
       })
       .catch((err) => {
         toast.error("내용을 채워주세요!", {
@@ -211,14 +233,19 @@ function ProductRegister() {
               })}
               <div className="product-img-bottom-wrapper">
                 <input
-                  className="img-btn"
+                  // className="img-btn"
                   multiple="multiple"
                   type="file"
-                  accept="image/*"
                   id="file"
+                  name="file"
+                  accept="image/*"
                   onChange={onHandleChangeFile}
+                  style={{"display":"none"}}
                 />
                 <div className="product-register-small-btn">
+                  <label for="file">
+                    <div className="find-file-btn">파일찾기</div>
+                  </label>
                   <SmallButton label="이미지 등록" onClick={onImgRegisterBtn} />
                   <ToastContainer />
                 </div>
@@ -260,6 +287,7 @@ function ProductRegister() {
                   <div className="product-id-input-wrapper">
                     <input
                       className="product-id-input"
+                      type="text"
                       name="productPrice"
                       onChange={onChange}
                       value={productPrice}
@@ -268,18 +296,33 @@ function ProductRegister() {
                   </div>
                 </div>
 
+                {/* <div className="input-ele">
+                  <p>가격</p>
+                  <div className="product-id-input-wrapper">
+                    <input
+                      className="product-id-input"
+                      name="productPrice"
+                      onChange={onChange}
+                      value={productPrice}
+                      variant="outlined"
+                    />
+                  </div>
+                </div> */}
+
                 <div className="input-ele">
                   <p>제품군</p>
                   <select
-                    className="product-select-option"
                     onChange={onGroupChange}
-                    value={productGroupName}
+                    className="product-select-option"
+                    defaultValue={product.productGroupName}
                     name="productGroupName"
                   >
-                    <option value=""></option>
+                    <option>---제품군 선택--</option>
                     {groupList.map((option) =>
                       option.brandName === managerBrand ? (
-                        <option>{option.productGroupName}</option>
+                        <option value={option.productGroupName}>
+                          {option.productGroupName}
+                        </option>
                       ) : (
                         ""
                       )

@@ -135,3 +135,12 @@
     width: 175px;
     height: 30px;
 }
+
+/* 파일 업로드 버튼 디자인 */
+.find-file-btn {
+    margin-right: 20px;
+}
+
+.find-file-btn:hover {
+    background-color: beige;
+}

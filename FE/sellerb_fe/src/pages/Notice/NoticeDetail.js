@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "./NoticeDetail.css";
@@ -72,10 +73,53 @@ function NoticeDetail() {
   return (
     <>
       <NavBar />
+<<<<<<< HEAD
       <div className='board-wrap'>
         <div className='detail-head'>
           <div className='notice-detail-title'>공지사항</div>
           <div className='notice-detail-subTitle'>sellerB의 공지사항</div>
+=======
+        <div className="board-wrap">
+            <div className="detail-head">
+                <div className="notice-detail-title">공지사항</div>
+                <div className="notice-detail-subTitle">sellerB의 공지사항</div>
+            </div>
+
+            <div className="notice-detail-content-header">
+                <div className="content-header-row">
+                    <div className="row-left">제목</div>
+                    <div className="row-right">{noticeData.noticeTitle}</div>
+                </div>
+          
+          
+                <div className="content-header-row">
+                    <div className="row-left">작성일</div>
+                    <div className="row-right">{noticeData.noticeRegDate}</div>
+                </div>
+            
+            
+            <div className="notice-detail-content-detail">
+                <div>
+                    <pre dangerouslySetInnerHTML={ {__html: noticeData.noticeContent}}>
+                        {/* {noticeData.noticeContent} */}
+                    </pre>
+                </div>
+            </div>
+            {/* content하단 */}
+            <div className="notice-detail-bottom">
+                <button 
+                  className="detail-button"
+                  onClick={(e)=> navigate("/manager/noticeList")}
+                  >목록</button>
+                <button 
+                className="detail-button"
+                onClick={(e)=> onModifyBtn()}
+                >수정하기</button>
+            </div>
+     
+
+            </div>
+>>>>>>> develop
         </div>
 
         <div className='notice-detail-content-header'>
