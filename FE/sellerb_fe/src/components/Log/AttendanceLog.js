@@ -28,6 +28,28 @@ const styleObj_center = {
 //     }
 //  }
 
+const parsingDate = (date) => {
+  var parsedDate = new Date(date);
+  var yyyy = parsedDate.getFullYear();
+  var MM = parsedDate.getMonth() + 1;
+  var dd = parsedDate.getDate();
+  var hh = parsedDate.getHours() + 9;
+  var mm = parsedDate.getMinutes();
+  return (
+    yyyy +
+    "-" +
+    addZero(MM) +
+    "-" +
+    addZero(dd) +
+    "-" +
+    addZero(hh) +
+    ":" +
+    addZero(mm)
+  );
+};
+const addZero = (n) => {
+  return n < 10 ? "0" + n : n;
+};
 function AttendanceLog({ consultant_id }) {
   console.log(consultant_id);
   const params = useParams();
@@ -45,12 +67,12 @@ function AttendanceLog({ consultant_id }) {
 
     listAttendanceApi(consultant_id)
       .then((res) => {
-        console.log(JSON.stringify(res.data));
+        // console.log(JSON.stringify(res.data));
 
         setInitData(res.data);
 
         let list = initData.map((ele) => ele.loginTime);
-        console.log("반환된 list : " + list);
+        // console.log("반환된 list : " + list);
         list = list.slice();
       })
       .catch((err) => {
@@ -59,8 +81,7 @@ function AttendanceLog({ consultant_id }) {
   }, []);
 
   useEffect(() => {
-    console.log(" 출결 initData: " + JSON.stringify(initData));
-
+    // console.log(" 출결 initData: " + JSON.stringify(initData));
     // loginTime = initData.map((ele)=>{
     //   return (
     //     <>
@@ -94,9 +115,15 @@ function AttendanceLog({ consultant_id }) {
                   <>
                     <TableRow>
                       {/* <td  onClick={() => navigate(`/noticeDetail/${ele.notice_seq}`)}>{ele.notice_title}</td> */}
-                      <TableCell>{ele.loginTime.slice(0, 10)}</TableCell>
-                      <TableCell>{ele.loginTime.slice(11, 19)} </TableCell>
-                      <TableCell>{ele.logoutTime.slice(11, 19)}</TableCell>
+                      <TableCell>
+                        {parsingDate(ele.loginTime).slice(0, 10)}
+                      </TableCell>
+                      <TableCell>
+                        {parsingDate(ele.loginTime).slice(11)}{" "}
+                      </TableCell>
+                      <TableCell>
+                        {parsingDate(ele.logoutTime).slice(11)}
+                      </TableCell>
                     </TableRow>
                   </>
                 );

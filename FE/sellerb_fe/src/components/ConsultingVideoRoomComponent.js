@@ -4,15 +4,21 @@ import "./VideoRoomComponent.css";
 import { OpenVidu } from "openvidu-browser";
 import StreamComponent from "./stream/StreamComponent";
 import DialogExtensionComponent from "./dialog-extension/DialogExtension";
-import ChatComponent from "./chat/ChatComponent";
 
 import OpenViduLayout from "../layout/openvidu-layout";
 import UserModel from "../models/user-model";
 import ConsultingToolbarComponent from "./toolbar/ConsultingToolbarComponent";
+import {
+  Table,
+  TableBody,
+  TableHead,
+  TableRow,
+  TableCell,
+} from "@mui/material";
 
 var localUser = new UserModel();
 
-class VideoRoomComponent extends Component {
+class ConsultingVideoRoomComponent extends Component {
   constructor(props) {
     super(props);
     this.OPENVIDU_SERVER_URL = this.props.openviduServerUrl
@@ -37,6 +43,12 @@ class VideoRoomComponent extends Component {
       subscribers: [],
       chatDisplay: "none",
       currentVideoDevice: undefined,
+
+      productSeq: this.props.product.productSeq,
+      productGroupName: this.props.product.productGroupName,
+      productName: this.props.product.productName,
+      productPrice: this.props.product.productPrice,
+      productThumbnail: this.props.product.productThumbnail,
     };
 
     this.joinSession = this.joinSession.bind(this);
@@ -93,7 +105,6 @@ class VideoRoomComponent extends Component {
 
   joinSession() {
     this.OV = new OpenVidu();
-
     this.setState(
       {
         session: this.OV.initSession(),
@@ -548,6 +559,18 @@ class VideoRoomComponent extends Component {
     const mySessionId = this.state.mySessionId;
     const localUser = this.state.localUser;
     var chatDisplay = { display: this.state.chatDisplay };
+    const productInfoDiv = {
+      backgroundColor: "white",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      flexDirection: "column",
+      height: "100%",
+    };
+    const imageDisplay = {
+      width: "200px",
+      height: "200px",
+    };
 
     return (
       <div className='container' id='container'>
@@ -592,18 +615,38 @@ class VideoRoomComponent extends Component {
               />
             </div>
           ))}
+
           {localUser !== undefined &&
             localUser.getStreamManager() !== undefined && (
               <div
+                id='myDetailComponent'
                 className='OT_root OT_publisher custom-class'
                 style={chatDisplay}
               >
-                <ChatComponent
-                  user={localUser}
-                  chatDisplay={this.state.chatDisplay}
-                  close={this.toggleChat}
-                  messageReceived={this.checkNotification}
-                />
+                <div style={productInfoDiv}>
+                  <div>제품 정보 출력</div>
+                  <img
+                    src={this.state.productThumbnail}
+                    alt='#'
+                    style={imageDisplay}
+                  />
+                  <Table>
+                    <TableBody>
+                      <TableRow>
+                        <TableCell>제품 이름</TableCell>
+                        <TableCell>{this.state.productName}</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell>제품 가격</TableCell>
+                        <TableCell>{this.state.productPrice}</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell>제품군</TableCell>
+                        <TableCell>{this.state.productGroupName}</TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </div>
               </div>
             )}
         </div>
@@ -687,4 +730,4 @@ class VideoRoomComponent extends Component {
     });
   }
 }
-export default VideoRoomComponent;
+export default ConsultingVideoRoomComponent;
