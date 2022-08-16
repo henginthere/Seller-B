@@ -9,7 +9,10 @@ import "./ConsultantMyPage.css";
 import AttendanceLog from "../../../components/Log/AttendanceLog";
 import ConsultingLog from "../../../components/Log/ConsultingLog";
 import { MediButton } from "../../../components/Common/MediButton";
-import { detailConsultantApi } from "../../../api/consultantApi";
+import {
+  detailConsultantApi,
+  modifyConsultantApi,
+} from "../../../api/consultantApi";
 
 function ConsultantMyPage() {
   const { id } = useParams();
@@ -24,7 +27,10 @@ function ConsultantMyPage() {
 
   const [imgBase64, setImgBase64] = useState([]); // 미리보기를 구현할 state
   const [imgFile, setImgFile] = useState("");
-  const [previewUrl, setPreviewUrl] = useState(`${process.env.PUBLIC_URL}/img/default_img.png`)
+  const [previewUrl, setPreviewUrl] = useState(
+    `${process.env.PUBLIC_URL}/img/default_img.png`,
+  );
+  const [modifyConsultantData, setModifyConsultantData] = useState(consultant);
 
   useEffect(() => {
     detailConsultantApi(seq)
@@ -99,14 +105,21 @@ function ConsultantMyPage() {
     e.preventDefault();
 
     alert("수정하시겠습니까?");
-
+    modifyConsultantApi(consultant)
+      .then((res) => {
+        alert("수정완료!");
+      })
+      .catch((err) => {
+        alert("수정실패! ERROR CODE : " + err);
+      });
     ChangeToModify();
   };
 
   const handleChange = (e) => {
-    e.preventDefault();
-
-    // [e.target.name] = e.target.value;
+    setConsultant({
+      ...consultant,
+      [e.target.name]: e.target.value,
+    });
   };
 
   const Main = () => {
@@ -114,11 +127,11 @@ function ConsultantMyPage() {
       <>
         <div className='con-mypage-wrapper'>
           <div className='con-mypage-left-wrapper'>
-              <img
-                className='con-mypage-default-img'
-                alt='#'
-                src={consultant.consultantImageUrl}
-              />
+            <img
+              className='con-mypage-default-img'
+              alt='#'
+              src={consultant.consultantImageUrl}
+            />
           </div>
 
           <div className='InfoTextField'>
@@ -163,7 +176,7 @@ function ConsultantMyPage() {
             />
           </div>
           <div className='Button'>
-            <MediButton label="수정하기" onClick={ChangeToModify} />
+            <MediButton label='수정하기' onClick={ChangeToModify} />
             {/* <Button variant='contained' size='large' onClick={ChangeToModify}>
               수정
             </Button> */}
@@ -181,7 +194,7 @@ function ConsultantMyPage() {
             <TextField
               id='outlined-read-only-input'
               label='사번'
-              defaultValue={consultant.consultantId}
+              value={consultant.consultantId}
               fullWidth={true}
               InputProps={{ readOnly: true }}
               disabled='true'
@@ -191,7 +204,7 @@ function ConsultantMyPage() {
           <div className='InfoTextField'>
             <TextField
               label='사원명'
-              defaultValue={consultant.consultantName}
+              value={consultant.consultantName}
               fullWidth={true}
               InputProps={{ readOnly: true }}
               disabled='true'
@@ -201,25 +214,28 @@ function ConsultantMyPage() {
           <div className='InfoTextField'>
             <TextField
               label='사원 Email'
-              defaultValue={consultant.consultantEmail}
+              value={consultant.consultantEmail}
               fullWidth={true}
               onChange={handleChange}
+              name='consultantEmail'
             />
           </div>
           <div className='InfoTextField'>
             <TextField
               label='PW'
-              defaultValue=''
+              value=''
               fullWidth={true}
               onChange={handleChange}
+              name='consultantPass'
             />
           </div>
           <div className='InfoTextField'>
             <TextField
               label='제품군'
-              defaultValue={consultant.productGroup}
+              value={consultant.productGroupName}
               fullWidth={true}
               onChange={handleChange}
+              name='productGroup.productGroupName'
             />
           </div>
           <div className='Button'>
@@ -246,14 +262,80 @@ function ConsultantMyPage() {
       <div className='wrapper'>
         {/* 왼쪽 */}
         <div id='left'>
-          <div className='topText'>
-            {/* <h2>My Page</h2> */}
-          </div>
+          <div className='topText'>{/* <h2>My Page</h2> */}</div>
           {/* 상담사 이미지 */}
 
           {/* 상담사 Info */}
           <div>
-            <div>{isModify ? <Modify /> : <Main />}</div>
+            <div>
+              {isModify ? (
+                <form onSubmit={handleSubmit}>
+                  <div className='InfoTextField'>
+                    <TextField
+                      id='outlined-read-only-input'
+                      label='사번'
+                      value={consultant.consultantId}
+                      fullWidth={true}
+                      InputProps={{ readOnly: true }}
+                      disabled='true'
+                      variant='filled'
+                    />
+                  </div>
+                  <div className='InfoTextField'>
+                    <TextField
+                      label='사원명'
+                      value={consultant.consultantName}
+                      fullWidth={true}
+                      InputProps={{ readOnly: true }}
+                      disabled='true'
+                      variant='filled'
+                    />
+                  </div>
+                  <div className='InfoTextField'>
+                    <TextField
+                      label='사원 Email'
+                      value={consultant.consultantEmail}
+                      fullWidth={true}
+                      onChange={handleChange}
+                      name='consultantEmail'
+                    />
+                  </div>
+                  <div className='InfoTextField'>
+                    <TextField
+                      label='PW'
+                      value=''
+                      fullWidth={true}
+                      onChange={handleChange}
+                      name='consultantPass'
+                    />
+                  </div>
+                  <div className='InfoTextField'>
+                    <TextField
+                      label='제품군'
+                      value={consultant.productGroupName}
+                      fullWidth={true}
+                      onChange={handleChange}
+                      readOnly={true}
+                    />
+                  </div>
+                  <div className='Button'>
+                    <Button variant='contained' size='large' type='submit'>
+                      수정 완료
+                    </Button>
+                    <Button
+                      variant='contained'
+                      color='error'
+                      size='large'
+                      onClick={cancelModify}
+                    >
+                      취소
+                    </Button>
+                  </div>
+                </form>
+              ) : (
+                <Main />
+              )}
+            </div>
           </div>
         </div>
         {/* 오른쪽 */}
