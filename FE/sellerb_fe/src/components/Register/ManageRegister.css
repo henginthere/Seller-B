@@ -1,9 +1,10 @@
 .manage-register-page {
   margin: 0 auto;
+  max-height: 1000px;
 }
 
 .signup-wrapper {
-  margin-top: 50px;
+  margin-top: 10px;
 }
 
 .signUp-row {
@@ -12,6 +13,7 @@
   padding: 10px 20px;
 }
 
+/* Left */
 .signUp-row .row-left-label {
   width: 139px;
   padding-top: 12px;
@@ -23,6 +25,7 @@
   line-height: 20px;
 }
 
+/* Right */
 .row-right {
   flex: 1 1 0%;
 }
@@ -35,22 +38,39 @@
   position: relative;
   margin-bottom: -10px;
   height: 48px;
+  /* display: flex; */
 }
 
 /* 프로필 이미지 부분 */
-.right-content .manage-preview-img {
+.signup-profile-img-wrapper {
+  padding: 15px;
+}
+
+.row-right-profile {
+  display: flex;
+}
+
+.right-profile-wrapper {
+  display: flex;
+}
+
+.right-profile-content {
+  display: flex;
+  margin-right: 10px;
+}
+
+.right-profile-content .manage-preview-img {
   border-radius: 45%;
   width:40px;
   height: auto;
   
 }
 
-.right-content .manage-profile-img {
+.right-profile-content .manage-profile-img {
   border-radius: 45%;
   width:40px;
   height: auto;
-  object-fit: cover;
-  
+  object-fit: cover; 
 }
 
 
@@ -62,6 +82,7 @@
   width: 130px;
 }
 
+/* 에러메세지 출력 style */
 .error-message {
   margin-top: 0;
   font-size: 11px;
@@ -70,16 +91,13 @@
 
 .login {
   width: 500px;
-  height: 600px;
+  max-height: 900px;
   margin: 0 auto;
-  /* position: relative; */
-  /* background:#ddd; */
+  border: 2px solid #333;
 }
 
 .login-form {
-  /* background: #FDFDFD;  */
-  /* background-color: #FBF9F4; */
-  padding: 20px;
+  padding: 15px;
 }
 
 .hr-in-manager-register {
@@ -91,6 +109,10 @@
   color: black;
 }
 
+.login-title-wrapper {
+
+}
+
 .login-title {
   /* font-size:25px;
     font-weight: 900;
@@ -98,16 +120,11 @@
     letter-spacing: -1px;
     text-align: center; */
   color: #324e66;
-
+  text-align: center;
   font-family: "Bree Serif", cursive;
   font-size: 60px;
-
-  margin-left: 100px;
 }
 
-/* input {
-    background-color: #217Af0;
-} */
 
 p {
   text-align: left;

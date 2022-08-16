@@ -13,21 +13,20 @@ function ProductDetail() {
   const [readOnly, setReadOnly] = useState(true);
   const [product, setProduct] = useState({
     productSeq: "",
-    productId: "",
-    productName: "",
-    productPrice: "",
-    // product_thumbnail : 서버에서 url로 받아옴
-    productThumbnailUrl: "",
-    productGroup: {
-      productGroupName: "",
-    },
+    productGroupName:"",
+    productGroupSeq: "",
+    productId:0,
+    productName:"",
+    productPrice:0,
+    productManual:"",
+    productThumbnail:""
   });
 
   /* 해당 seq에 맞는 Product 정보 먼저 가져오기 */
   useEffect(() => {
     productDetailApi(seq)
       .then((res) => {
-        console.log(res.data);
+        console.log(JSON.stringify(res.data));
         setProduct(res.data);
       })
       .catch((err) => {
@@ -45,7 +44,6 @@ function ProductDetail() {
   };
 
   const onDeleteBtn = () =>{
-
     productDelApi(seq)
     .then((res)=>{
       console.log(res.data);
@@ -94,7 +92,7 @@ function ProductDetail() {
                   <p>제품명</p>
                   <div className="product-id-input-wrapper">
                     <input
-                      name="product_name"
+                      name="productName"
                       value={product.productName}
                       variant="outlined"
                     />
@@ -106,10 +104,25 @@ function ProductDetail() {
                   <div className="product-id-input-wrapper">
                     <input
                       className="product-id-input"
-                      name="product_price"
+                      name="productPrice"
                       value={product.productPrice}
                       variant="outlined"
                     />
+                  </div>
+                </div>
+                {/* */}
+                <div className="input-ele">
+                  <p>제품메뉴얼</p>
+                  <div className="product-id-input-wrapper">
+                    <a>
+                      {product.productManual}
+                    </a>
+                    {/* <input
+                      className="product-id-input"
+                      name="productManual"
+                      value={product.productManual}
+                      variant="outlined"
+                    /> */}
                   </div>
                 </div>
                 {/*  */}
@@ -118,7 +131,7 @@ function ProductDetail() {
                   <div className="product-id-input-wrapper">
                     <input
                       className="product-id-input"
-                      name="product_line"
+                      name="productGroupName"
                       value={product.productGroupName}
                       variant="outlined"
                       readOnly={readOnly ? false : true}
