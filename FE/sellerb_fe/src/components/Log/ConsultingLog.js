@@ -13,7 +13,7 @@ import { PaginationBox } from "../../components/Common/PaginationBox";
 import Pagination from "react-js-pagination";
 const styleObj_center = {
   display: "flex",
-  margin: "50px",
+  margin: "20px",
   justifyContent: "flex-start",
   flexDirection: "column",
 };
@@ -25,7 +25,7 @@ function ConsultingLog({ consultant_id }) {
   // pagination
   const [page, setPage] = useState(1);
   const handlePageChange = (page) => {
-    console.log("현재 페이지: " + page);
+    // console.log("현재 페이지: " + page);
     setPage(page);
   };
   const [it, setIt] = useState(9);
@@ -34,7 +34,7 @@ function ConsultingLog({ consultant_id }) {
   useEffect(() => {
     listConsultingApi(consultant_id)
       .then((res) => {
-        console.log(JSON.stringify(res.data));
+        // console.log(JSON.stringify(res.data));
 
         // attendance = res.data;
         setLogData(res.data);
@@ -43,6 +43,28 @@ function ConsultingLog({ consultant_id }) {
         console.log(err);
       });
   }, []);
+  const parsingDate = (date) => {
+    var parsedDate = new Date(date);
+    var yyyy = parsedDate.getFullYear();
+    var MM = parsedDate.getMonth() + 1;
+    var dd = parsedDate.getDate();
+    var hh = parsedDate.getHours() + 9;
+    var mm = parsedDate.getMinutes();
+    return (
+      yyyy +
+      "-" +
+      addZero(MM) +
+      "-" +
+      addZero(dd) +
+      "-" +
+      addZero(hh) +
+      ":" +
+      addZero(mm)
+    );
+  };
+  const addZero = (n) => {
+    return n < 10 ? "0" + n : n;
+  };
 
   return (
     <>
@@ -67,13 +89,13 @@ function ConsultingLog({ consultant_id }) {
                     <>
                       <TableRow>
                         <TableCell>
-                          {ele.consultingStartDate.slice(0, 10)}
+                          {parsingDate(ele.consultingStartDate).slice(0, 10)}
                         </TableCell>
                         <TableCell>
-                          {ele.consultingStartDate.slice(11, 19)}
+                          {parsingDate(ele.consultingStartDate).slice(11, 19)}
                         </TableCell>
                         <TableCell>
-                          {ele.consultingEndDate.slice(11, 19)}
+                          {parsingDate(ele.consultingEndDate).slice(11, 19)}
                         </TableCell>
                         <TableCell>{ele.product.productName}</TableCell>
                         <TableCell>{ele.customer.customerName}</TableCell>
