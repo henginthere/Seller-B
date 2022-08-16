@@ -15,6 +15,8 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.core.util.PasswordDecryptor;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +25,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.PreUpdate;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.security.GeneralSecurityException;
 import java.util.Collections;
 import java.util.List;
@@ -75,66 +81,45 @@ public class CustomerService {
         return CustomerDto.from(customerRepository.save(customer));
     }
 
-    public LoginResponseDto googleLogin(GoogleLoginDto googleLoginDto) throws GeneralSecurityException, IOException {
-        HttpTransport transport = new NetHttpTransport();
-        JsonFactory jsonFactory = JacksonFactory.getDefaultInstance();
+    public LoginResponseDto googleLogin(CustomerDto customerDto)  {
 
-        GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(transport, jsonFactory)
-                // Specify the CLIENT_ID of the app that accesses the backend:
-                .setAudience(Collections.singletonList(CLIENT_ID))
-                // Or, if multiple clients access the backend:
-                //.setAudience(Arrays.asList(CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3))
-                .build();
-
-// (Receive idTokenString by HTTPS POST)
-
-        GoogleIdToken idToken = verifier.verify(googleLoginDto.getGoogleIdToken());
-        if (idToken != null) {
-            Payload payload = idToken.getPayload();
-
-            // Print user identifier
-            String userId = payload.getSubject();
-            System.out.println("User ID: " + userId);
-
-            // Get profile information from payload
-            String email = payload.getEmail();
-            boolean emailVerified = Boolean.valueOf(payload.getEmailVerified());
-            String name = (String) payload.get("name");
-            String pictureUrl = (String) payload.get("picture");
-            String locale = (String) payload.get("locale");
-            String familyName = (String) payload.get("family_name");
-            String givenName = (String) payload.get("given_name");
-
+        String id = customerDto.getCustomerId();
+        String pw = customerDto.getCustomerPass();
 
             // Use or store profile information
             // ...
-            Optional<Customer> optionalCustomer = customerRepository.findBycustomerId(userId);
+            Optional<Customer> optionalCustomer = customerRepository.findBycustomerId(id);
             if(!optionalCustomer.isPresent()){
+                System.out.println("가입된 정보 없음");
                 //회원가입
                 // 권한 정보를 만듦
-                Authority authority = Authority.builder()
-                        .authorityName("ROLE_CUSTOMER")
-                        .build();
-
-                authorityRepository.save(authority);
-
-                Customer customer = Customer.builder()
-                        .customerId(userId)
-                        .customerPass(email)
-                        .customerName(name)
-                        .authorities(Collections.singleton(authority))
-                        .build();
-
-                customerRepository.save(customer);
+                signup(customerDto);
+//                Authority authority = Authority.builder()
+//                        .authorityName("ROLE_CUSTOMER")
+//                        .build();
+//
+//                authorityRepository.save(authority);
+//
+//                Customer customer = Customer.builder()
+//                        .customerId(id)
+//                        .customerName(name)
+//                        .customerPass(pw)
+//                        .customerEmail(customerDto.getCustomerEmail())
+//                        .customerBirth(customerDto.getCustomerBirth())
+//                        .customerToken(customerDto.getCustomerToken())
+//                        .authorities(Collections.singleton(authority))
+//                        .build();
+//                customerRepository.save(customer);
             }
-            LoginResponseDto loginResponseDto = authService.authorize(userId,email);
+
+            LoginResponseDto loginResponseDto = authService.authorize(id,pw);
 
             return loginResponseDto;
 
-        } else {
-            System.out.println("Invalid ID token.");
-            return null;
-        }
+//        } else {
+//            System.out.println("Invalid ID token.");
+//            return null;
+//        }
     }
 
     public List<CustomerDto> getCustomerList() { return CustomerDto.fromList(customerRepository.findAll());}
