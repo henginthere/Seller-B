@@ -91,7 +91,7 @@ function ConsultantMyPageEdit() {
       {/* Left Content */}
       <div className="consultant-profile-container">
         <div className="profile-wrapper">
-      <div className="con-mypage-left-wrapper">
+        <div className="con-mypage-left-wrapper">
             <img
               className="con-mypage-default-img"
               alt="#"
@@ -112,7 +112,6 @@ function ConsultantMyPageEdit() {
           </div>
           <div className="con-profile-element">
             <p>사원 Email</p>
-           
               <input
                 defaultValue={consultant.consultantEmail}
                 name="consultantEmail"
