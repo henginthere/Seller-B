@@ -7,6 +7,8 @@ import { Footer, NavBar } from "../../../components/index";
 import { productEditApi, productDetailApi,  productGroupListApi } from "../../../api/productApi";
 import { SmallButton } from "../../../components/Common/SmallButton";
 import { MediButton } from "../../../components/Common/MediButton";
+import { BackMediButton } from "../../../components/Common/BackMediButton";
+import { BackSmallButton } from "../../../components/Common/BackSmallButton";
 
 function ProductEdit() {
   const { seq } = useParams();
@@ -28,7 +30,7 @@ function ProductEdit() {
     productId: "",
     productName: "",
     productPrice: 0,
-    productManual:"준비중",
+    productManual:"",
     productThumbnail: "",
   });
 
@@ -56,7 +58,7 @@ function ProductEdit() {
       .then((res) => {
         console.log(res.data);
         setProduct(res.data);
-        console.log("수정된 제품정보: " + product);
+        // console.log("수정된 제품정보: " + pro);
       })
       .catch((err) => {
         console.log(err.data);
@@ -74,9 +76,9 @@ function ProductEdit() {
       });
   }, []);
 
-  const onEditCompleteBtn = () => {
+  const onEditCompleteBtn = async () => {
     console.log(seq);
-    const editData = {
+    const EditInfo = {
       productSeq: product.productSeq,
       productId: product.productId,
       productName: product.productName,
@@ -86,12 +88,19 @@ function ProductEdit() {
       // productGroupName: product.productGroupName,
     };
 
-    productEditApi(editData)
-      .then((res) => {
-        console.log("Edit Success");
+
+
+    await axios
+      .put(`https://i7d105.p.ssafy.io/api/product/${seq}` , EditInfo, {
+        header: {
+          "Content-Type": `multipart/form-data`,
+        },
       })
-      .catch((err) => {
-        console.log(err.data);
+      .then((response) => {
+        console.log("success");
+      })
+      .catch((error) => {
+        console.log("Error!!!");
       });
 
     navigate("/manager/productList");
@@ -219,7 +228,7 @@ function ProductEdit() {
                 />
                 <div className="product-register-small-btn">
                   <SmallButton label="이미지 등록" onClick={onImgRegisterBtn} />
-                  <SmallButton label="이미지 초기화" onClick={onResetFile} />
+                  <BackSmallButton label="이미지 초기화" onClick={onResetFile} />
                 </div>
               </div>
             </div>
@@ -267,6 +276,21 @@ function ProductEdit() {
                 </div>
                 {/*  */}
                 <div className="input-ele">
+                  <p>제품메뉴얼</p>
+                  <div className="product-id-input-wrapper">
+                    <input
+                      className="product-id-input"
+                      name="productManual"
+                      value={product.productManual}
+                      onChange={onChange}
+                      variant="outlined"
+                    />
+                  </div>
+                </div>
+
+
+                {/*  */}
+                <div className="input-ele">
                   <p>제품군</p>
                   {/* <select
                     onChange={onGroupChange}
@@ -300,7 +324,7 @@ function ProductEdit() {
               <div className="product-register-medi-btn">
                 <MediButton label="수정완료" onClick={onEditCompleteBtn} />
                 <MediButton label="대기화면 보기" onClick={goWaitingPage} />
-                <MediButton label="돌아가기" onClick={onBackBtn} />
+                <BackMediButton label="돌아가기" onClick={onBackBtn} />
               </div>             
 
               </div>
