@@ -117,8 +117,6 @@ function NoticeDetail() {
         </div>
       </div>
 
-<<<<<<< HEAD
-=======
       {/* <div className='notice-detail-content-header'>
         <div className='content-header-row'>
           <div className='row-left'>제목</div>
@@ -150,7 +148,6 @@ function NoticeDetail() {
         </button>
       </div> */}
 
->>>>>>> feature-ui-FinalFIx
       <Footer />
     </>
   );

@@ -2,14 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "./NoticeDetail.css";
 import { Footer, NavBar } from "../../components/index";
-<<<<<<< HEAD
-import { DangerMediButton} from '../../components/Common/DangerMediButton'
-import axios from "axios";
-=======
+
 import { DangerMediButton } from "../../components/Common/DangerMediButton";
 import axios from "axios";
 
->>>>>>> 96376293e59ced092643372075f992b07c8a2e10
 import {
   detailNoticeApi,
   modifyNoticeApi,
@@ -46,39 +42,19 @@ function NoticeEdit() {
     setBSeq(parseInt(bSeq));
     console.log("bSeq : " + bSeq);
 
-<<<<<<< HEAD
-    // const EditInfo = {
-    //   noticeSeq: id,
-    //   post :{
-    //     brandSeq: bSeq,
-    //     noticeTitle: noticeData.noticeTitle,
-    //     noticeContent: noticeData.noticeContent
-    //   }
-    // }
-    const EditSeq = noticeData.noticeSeq;
-    const EditInfo = {
-        brandSeq: bSeq,
-        noticeTitle: noticeData.noticeTitle,
-        noticeContent: noticeData.noticeContent
-    }
-=======
     const Info = {
       brandSeq: bSeq,
       noticeTitle: noticeData.noticeTitle,
       noticeContent: noticeData.noticeContent,
     };
-<<<<<<< HEAD
->>>>>>> 96376293e59ced092643372075f992b07c8a2e10
 
-    modifyNoticeApi(EditInfo, EditSeq)
-=======
     axios
       .put(`https://i7d105.p.ssafy.io/api/notice/${id}`, Info, {
         header: {
           "Content-Type": `multipart/form-data`,
         },
       })
->>>>>>> feature-ui-FinalFIx
+
       .then((res) => {
         console.log("수정 완료!");
         alert("수정 완료!");
@@ -88,35 +64,6 @@ function NoticeEdit() {
         alert("수정 하는데 실패 했습니다!");
         console.log("수정 에러" + err);
       });
-
-<<<<<<< HEAD
-    // await axios
-    //   .put(`https://i7d105.p.ssafy.io/api/notice/${EditSeq}`, EditInfo, {
-    //     header: {
-    //       "Content-Type": `multipart/form-data`,
-    //     },
-    //   })
-    //   .then((response) => {
-    //     console.log("notice Edit success");
-
-    //     navigate("/manager/noticeList")
-    //   })
-    //   .catch((error) => {
-    //     console.log("Error!!!");
-    //   });
-
-
-
-=======
-    // modifyNoticeApi(Info)
-    //   .then((res) => {
-    //     console.log(res.data);
-    //     navigate("/manager/noticeList");
-    //   })
-    //   .catch((err) => {
-    //     console.log(JSON.stringify(err.data));
-    //   });
->>>>>>> feature-ui-FinalFIx
   };
 
   // 삭제 버튼

@@ -45,16 +45,11 @@ export const productEditApi = async (product, success, fail) => {
   // console.log("in productEdit API: " + product.productSeq);
   // console.log("in productEdit API: " + JSON.stringify(product));
 
-<<<<<<< HEAD
-    return await fileapi.put(`/product/${product.productSeq}`, product).then(success).catch(fail);
-}
-=======
   return await api
     .put(`/product/${product.productSeq}`, product)
     .then(success)
     .catch(fail);
 };
->>>>>>> 96376293e59ced092643372075f992b07c8a2e10
 
 // POST : WaitingPage.js : 해당 제품의 대기화면 등록하기
 export const registerWaitingPageApi = async (waitingPage, success, fail) => {
