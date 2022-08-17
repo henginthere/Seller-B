@@ -15,24 +15,40 @@ function ManagerMainLeft() {
   const [managerName, setManagerName] = useState("");
 
   const navigate = useNavigate();
+
+  const styleObj = {
+    width: "120%",
+    border: "solid 2px black",
+    borderRadius: "10px",
+    margin: "10px",
+    marginLeft:"20%",
+    marginTop: "10%",
+  };
+
   const styleObj_WrapDiv = {
     width: "35%",
+    
   };
+
   const styleObj_Button = {
     textAlign: "center",
     margin: "40px",
     // marginTop: "-10px",
   };
+
   const welcome_text = {
     display: "flex",
     textAlign: "center",
     size: "20px",
     justifyContent: "center",
-    marginTop: "30px"
+    marginTop: "30px",
+    marginLeft: "10%"
   };
+  
   const blue = {
     color: "blue",
   };
+
   const mvMeetingManCon = () => {
     navigate("/meeting/mancon");
   };
@@ -48,7 +64,6 @@ function ManagerMainLeft() {
     .catch((err)=>{
       console.log("Error");
     })
-    
   })
 
   return (
@@ -60,6 +75,7 @@ function ManagerMainLeft() {
           <h2>님 환영합니다!</h2>
         </div>
         {/* 달력 */}
+        <div style={styleObj}>  
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <StaticDatePicker
             displayStaticWrapperAs='desktop'
@@ -72,16 +88,14 @@ function ManagerMainLeft() {
             renderInput={(params) => <TextField {...params} />}
           />
         </LocalizationProvider>
+        </div>
         {/* 달력 END */}
-        <div style={styleObj_Button}>
+        {/* <div style={styleObj_Button}>
           <MediButton 
             label="회의 생성" 
             onClick={mvMeetingManCon} 
           />
-          {/* <Button variant='contained' onClick={mvMeetingManCon}>
-            회의 생성
-          </Button> */}
-        </div>
+        </div> */}
       </div>
     </>
   );

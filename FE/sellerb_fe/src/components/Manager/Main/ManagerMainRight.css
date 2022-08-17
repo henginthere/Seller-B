@@ -14,7 +14,7 @@
     border-top: 2px solid #333;
 }
 
-.con-table-th-tr .notice-th-tr-name {
+.con-th-tr .con-th-tr-name {
     width: 50px;
     padding: 20px 0;
     text-align: center;
@@ -24,7 +24,7 @@
     font-size: 12px;
 }
 
-.con-th-tr .notice-th-tr-id {
+.con-th-tr .con-th-tr-id {
     padding: 20px 0;
     text-align: center;
     line-height: 20px;
@@ -52,3 +52,13 @@
     cursor: pointer;
     font-size: 12px;
 }
+
+.manager-main-right-bottom-wrapper {
+    display: flex;
+}
+
+.manager-main-right-pagination {
+    width: 50%;
+    margin-left: 7%;
+}
+
