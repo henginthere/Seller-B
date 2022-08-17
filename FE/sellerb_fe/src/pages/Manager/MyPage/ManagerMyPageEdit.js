@@ -65,7 +65,6 @@ function ManagerMyPageEdit() {
       managerImageUrl: manager.managerImageUrl,
     };
 
-<<<<<<< HEAD
     modifyManagerApi(EditInfo, managerSeq)
     .then((res)=>{
       console.log(JSON.stringify(res.data));
@@ -93,39 +92,16 @@ function ManagerMyPageEdit() {
     //     console.log("Error!!!");
     //   });
 
-=======
-    await axios
-      .put(`https://i7d105.p.ssafy.io/api/manager/${managerSeq}`, EditInfo, {
-        header: {
-          "Content-Type": `multipart/form-data`,
-        },
-      })
-      .then((response) => {
-        console.log("success");
 
-        navigate("/main");
-      })
-      .catch((error) => {
-        console.log("Error!!!");
-      });
->>>>>>> 96376293e59ced092643372075f992b07c8a2e10
   };
 
   return (
     <>
-<<<<<<< HEAD
     <NavBar />
     <div className="manager-profile-title">매니저 프로필</div>
         <div className="consultant-profile-container">
         <div className="manager-profile-wrapper">
           <div className="con-mypage-left-wrapper">
-=======
-      <NavBar />
-      <div className='notice-title'>매니저 프로필</div>
-      <div className='consultant-profile-container'>
-        <div className='profile-wrapper'>
-          <div className='con-mypage-left-wrapper'>
->>>>>>> 96376293e59ced092643372075f992b07c8a2e10
             <img
               className='con-mypage-default-img'
               alt='#'
@@ -158,21 +134,13 @@ function ManagerMyPageEdit() {
                 onChange={onHandleChange}
               />
             </div>
-<<<<<<< HEAD
             <div className="con-profile-element">
             <p>비밀번호</p>
               <input type="password" value={editPass} onChange={onChangePass} />
           </div>         
             <div style={{ display: "flex", marginLeft: "5px", marginTop:"10%" }}>
               <MediButton label="수정완료" onClick={onEditCompleteBtn} />
-=======
-            <div className='con-profile-element'>
-              <p>비밀번호</p>
-              <input type='password' value={editPass} onChange={onChangePass} />
-            </div>
-            <div style={{ display: "flex", marginLeft: "5px" }}>
-              <SmallButton label='수정완료' onClick={onEditCompleteBtn} />
->>>>>>> 96376293e59ced092643372075f992b07c8a2e10
+
             </div>
           </div>
 
