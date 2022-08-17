@@ -111,7 +111,7 @@ function ProductList() {
   return (
     <>
       <NavBar />
-      <div className='page-title'>제품 목록</div>
+      {/* <div className='page-title'>제품 목록</div> */}
       <div className='product-list'>
         <div className='page-navi-wrapper'>
           <div className='navi-left'>
