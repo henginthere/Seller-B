@@ -235,7 +235,7 @@ function ManagerMainRight() {
                           {ele.consultantName}
                         </td>
                         <td className='con-id'>{ele.consultantId}</td>
-                        <td className='con-seq'>{ele.consultantSeq}</td>
+                        <td className='con-seq'>{ele.productGroupName}</td>
                       </tr>
                     </>
                   );
