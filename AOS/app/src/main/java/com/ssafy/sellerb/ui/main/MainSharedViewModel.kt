@@ -17,6 +17,8 @@ class MainSharedViewModel(
 
     val consultingSeq = MutableLiveData<Long>()
 
+    val token: MutableLiveData<String> = MutableLiveData()
+
     init {
         consultingSeq.postValue(0L)
     }

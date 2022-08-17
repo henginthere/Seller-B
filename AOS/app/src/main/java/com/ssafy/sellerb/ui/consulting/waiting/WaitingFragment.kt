@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.view.View
 import android.view.animation.AnimationUtils
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
@@ -15,7 +14,6 @@ import com.ssafy.sellerb.ui.base.BaseFragment
 import com.ssafy.sellerb.ui.consulting.ConsultingActivity
 import com.ssafy.sellerb.ui.main.MainSharedViewModel
 import com.ssafy.sellerb.util.Constants.EXTRA_KEY_CONSULTING_INFO
-import com.ssafy.sellerb.util.GlideHelper
 import javax.inject.Inject
 
 class WaitingFragment : BaseFragment<WaitingViewModel>() {
@@ -92,6 +90,8 @@ class WaitingFragment : BaseFragment<WaitingViewModel>() {
             if (it) {
                 val intent = Intent(requireContext(), ConsultingActivity::class.java)
                 intent.putExtra(EXTRA_KEY_CONSULTING_INFO, viewModel.consultingInfo.value)
+                intent.putExtra("customerId", viewModel.user!!.id!!)
+                intent.putExtra("customerName", viewModel.user!!.name!!)
                 startForResult.launch(intent)
             }
         }

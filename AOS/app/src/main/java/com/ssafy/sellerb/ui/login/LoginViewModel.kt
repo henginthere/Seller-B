@@ -2,14 +2,13 @@ package com.ssafy.sellerb.ui.login
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.google.android.gms.auth.api.identity.SignInCredential
 import com.ssafy.sellerb.data.remote.request.SimpleLoginRequest
+import com.ssafy.sellerb.data.remote.request.TokenUploadRequest
 import com.ssafy.sellerb.data.repository.UserRepository
 import com.ssafy.sellerb.ui.base.BaseViewModel
 import com.ssafy.sellerb.util.coroutine.CoroutineDispatchers
 import com.ssafy.sellerb.util.Event
 import com.ssafy.sellerb.util.network.NetworkHelper
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import java.lang.Exception
@@ -27,7 +26,7 @@ class LoginViewModel(
     val idField : MutableLiveData<String> = MutableLiveData()
     val pwField : MutableLiveData<String> = MutableLiveData()
     val loginFail: MutableLiveData<Event<Boolean>> = MutableLiveData()
-    val googleCredential: MutableLiveData<SignInCredential> = MutableLiveData()
+    val isLogin: MutableLiveData<Event<Boolean>> = MutableLiveData()
 
     override fun onCreate() {}
 
@@ -45,7 +44,7 @@ class LoginViewModel(
                         .onStart {  }
                         .collect{
                             userRepository.saveCurrentUser(user = it)
-                            launchMain.postValue(Event(emptyMap()))
+                            isLogin.postValue(Event(true))
                         }
                 }catch (ex: Exception){
                     handleNetworkError(ex)
@@ -62,7 +61,7 @@ class LoginViewModel(
                     .onStart {  }
                     .collect{
                         userRepository.saveCurrentUser(user = it)
-                        launchMain.postValue(Event(emptyMap()))
+                        isLogin.postValue(Event(true))
                     }
             }catch (ex: Exception){
                 handleNetworkError(ex)
@@ -70,6 +69,22 @@ class LoginViewModel(
             }
         }
 
+    }
+
+    fun uploadToken(token: String) {
+        viewModelScope.launch(coroutineDispatchers.io()){
+            try {
+                    val user = userRepository.getCurrentUser()!!
+                    val request = TokenUploadRequest(token, user.id)
+                    userRepository.uploadToken(request, user.seq, user.accessToken)
+                        .onStart {  }
+                        .collect{
+                            launchMain.postValue(Event(emptyMap()))
+                        }
+            } catch(ex: Exception){
+
+            }
+        }
     }
 
 }

@@ -22,7 +22,7 @@ class WaitingViewModel(
     private val consultingRepository: ConsultingRepository
 ) : BaseViewModel(coroutineDispatchers, networkHelper) {
 
-    private val user: User? = userRepository.getCurrentUser()
+    val user: User? = userRepository.getCurrentUser()
     val waiting: MutableLiveData<Waiting> = MutableLiveData()
     val waitingCancel: MutableLiveData<Boolean> = MutableLiveData()
     private var waitingSeq: Long = userRepository.getWaitingSeq()

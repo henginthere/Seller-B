@@ -1,6 +1,7 @@
 package com.ssafy.sellerb.data.remote
 
 import com.ssafy.sellerb.data.model.Product
+import com.ssafy.sellerb.data.model.Token
 import com.ssafy.sellerb.data.remote.request.*
 import com.ssafy.sellerb.data.remote.response.*
 import retrofit2.http.*
@@ -69,4 +70,13 @@ interface NetworkService {
         @Path("customer-id") id: String,
         @Header(Networking.HEADER_ACCESS_TOKEN) accessToken: String
     ):List<ConsultingStateResponse>
+
+    @PUT(Endpoints.UPLOAD_TOKEN)
+    suspend fun uploadToken(
+        @Path("seq") seq: Long,
+        @Header(Networking.HEADER_ACCESS_TOKEN) accessToken: String,
+        @Body request: TokenUploadRequest
+    ):GeneralResponse
+
+
 }

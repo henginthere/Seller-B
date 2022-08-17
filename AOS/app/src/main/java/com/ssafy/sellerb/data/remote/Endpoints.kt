@@ -15,5 +15,5 @@ object Endpoints {
     const val GET_WAITING_INFO = "waiting/{seq}"
     const val GET_CONSULTING_STATE = "consulting/customer/day/{customer-id}"
     const val GOOGLE_LOGIN = "customer/oauth/login/google"
-
+    const val UPLOAD_TOKEN = "customer/token/{seq}"
 }

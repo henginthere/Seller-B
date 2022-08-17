@@ -17,16 +17,13 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.navercorp.nid.NaverIdLoginSDK
-import com.navercorp.nid.oauth.view.NidOAuthLoginButton
 import com.ssafy.sellerb.R
 import com.ssafy.sellerb.databinding.FragmentLoginBinding
 import com.ssafy.sellerb.di.component.FragmentComponent
 import com.ssafy.sellerb.ui.base.BaseFragment
+import com.ssafy.sellerb.ui.main.MainSharedViewModel
 import com.ssafy.sellerb.util.Constants.CLIENT_ID
-import com.ssafy.sellerb.util.Constants.NAVER_CLIENT_ID
-import com.ssafy.sellerb.util.Constants.NAVER_CLINET_NAME
-import com.ssafy.sellerb.util.Constants.NAVER_CLINET_SECRET
+import javax.inject.Inject
 
 class LoginFragment : BaseFragment<LoginViewModel>() {
 
@@ -37,12 +34,14 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
     private val binding get() = _binding!!
 
     private lateinit var auth: FirebaseAuth
-
     private lateinit var oneTapClient: SignInClient
     private lateinit var signInRequest: BeginSignInRequest
 
+    @Inject
+    lateinit var mainSharedViewModel: MainSharedViewModel
+
     companion object{
-        const val GOOGLE_LOGIN_REQ = 1001
+        const val GOOGLE_LOGIN_REQ = 2
         const val TAG = "LoginFragment"
     }
 
@@ -52,7 +51,7 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
     override fun setupView(view: View) {
 
         auth = Firebase.auth
-        NaverIdLoginSDK.initialize(context!!, NAVER_CLIENT_ID, NAVER_CLINET_SECRET, NAVER_CLINET_NAME)
+        //NaverIdLoginSDK.initialize(context!!, NAVER_CLIENT_ID, NAVER_CLINET_SECRET, NAVER_CLINET_NAME)
 
 
         _binding = FragmentLoginBinding.bind(view)
@@ -98,6 +97,8 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
                     .build())
             .setAutoSelectEnabled(true)
             .build()
+
+
         binding.signInButton.setSize(SignInButton.SIZE_WIDE)
         binding.signInButton.setOnClickListener{
             oneTapClient.beginSignIn(signInRequest)
@@ -130,6 +131,13 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
             }
         }
 
+        viewModel.isLogin.observe(this){
+            it.getIfNotHandled()?.run {
+                val token = mainSharedViewModel.token.value
+                viewModel.uploadToken(token!!)
+            }
+        }
+
         viewModel.idField.observe(this){
             if(binding.etEmail.text.toString() != it){
                 binding.etEmail.setText(it.toString())
@@ -158,12 +166,13 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+
         when (requestCode) {
             GOOGLE_LOGIN_REQ -> {
                 try {
                     val credential = oneTapClient.getSignInCredentialFromIntent(data)
                     val idToken = credential.googleIdToken
-
+                    Log.e(TAG, idToken.toString())
                     when {
                         idToken != null -> {
                             val firebaseCredential = GoogleAuthProvider.getCredential(idToken, null)
@@ -184,7 +193,7 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
                         }
                     }
                 } catch (e: ApiException) {
-
+                    Log.e(TAG,e.message.toString())
                 }
             }
 
