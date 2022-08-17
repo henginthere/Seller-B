@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 import "./ProductRegister.css";
+import "./ProductDetail.css";
 import { Footer, NavBar } from "../../../components/index";
 import { productDetailApi, productDelApi } from "../../../api/productApi";
 import { SmallButton } from "../../../components/Common/SmallButton";
@@ -114,9 +115,13 @@ function ProductDetail() {
                 <div className="input-ele">
                   <p>제품메뉴얼</p>
                   <div className="product-id-input-wrapper">
-                    <a>
-                      {product.productManual}
+                    <div className="product-detail-manual-wrapper">
+                    <a
+                      className="product-detail-manual-link" 
+                      href={product.productManual}>
+                      {product.productManual.slice(0,30)}...
                     </a>
+                    </div>
                     {/* <input
                       className="product-id-input"
                       name="productManual"
