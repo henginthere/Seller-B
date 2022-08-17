@@ -4,7 +4,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import "./NoticeDetail.css";
 import { Footer, NavBar } from "../../components/index";
 import { DangerMediButton} from '../../components/Common/DangerMediButton'
-
+import axios from "axios";
 import {
   detailNoticeApi,
   modifyNoticeApi,
@@ -37,21 +37,27 @@ function NoticeEdit() {
   };
 
   // 수정사항 제출 버튼
-  const onEditSubmitBtn = () => {
+  const onEditSubmitBtn = async () => {
     setBSeq(parseInt(bSeq));
    
     // console.log("")
 
-    const Info = {
-      noticeSeq: id,
-      post :{
+    // const EditInfo = {
+    //   noticeSeq: id,
+    //   post :{
+    //     brandSeq: bSeq,
+    //     noticeTitle: noticeData.noticeTitle,
+    //     noticeContent: noticeData.noticeContent
+    //   }
+    // }
+    const EditSeq = noticeData.noticeSeq;
+    const EditInfo = {
         brandSeq: bSeq,
         noticeTitle: noticeData.noticeTitle,
         noticeContent: noticeData.noticeContent
-      }
     }
 
-    modifyNoticeApi(Info)
+    modifyNoticeApi(EditInfo, EditSeq)
       .then((res) => {
         console.log(res.data);
         navigate("/manager/noticeList");
@@ -59,6 +65,24 @@ function NoticeEdit() {
       .catch((err) => {
         console.log(JSON.stringify(err.data));
       });
+
+    // await axios
+    //   .put(`https://i7d105.p.ssafy.io/api/notice/${EditSeq}`, EditInfo, {
+    //     header: {
+    //       "Content-Type": `multipart/form-data`,
+    //     },
+    //   })
+    //   .then((response) => {
+    //     console.log("notice Edit success");
+
+    //     navigate("/manager/noticeList")
+    //   })
+    //   .catch((error) => {
+    //     console.log("Error!!!");
+    //   });
+
+
+
   };
 
   // 삭제 버튼

@@ -5,6 +5,8 @@ import axios from "axios";
 import "./ProductRegister.css";
 import { Footer, NavBar } from "../../../components/index";
 import { productEditApi, productDetailApi,  productGroupListApi } from "../../../api/productApi";
+
+import { toast, ToastContainer } from "react-toastify";
 import { SmallButton } from "../../../components/Common/SmallButton";
 import { MediButton } from "../../../components/Common/MediButton";
 import { BackMediButton } from "../../../components/Common/BackMediButton";
@@ -88,7 +90,13 @@ function ProductEdit() {
       // productGroupName: product.productGroupName,
     };
 
-
+    // await productEditApi(EditInfo)
+    //   .then((res) => {
+    //     console.log("수정 Edit API Success!!!!!");
+    //   })
+    //   .catch((err) => {
+    //     console.log(err.data);
+    //   });
 
     await axios
       .put(`https://i7d105.p.ssafy.io/api/product/${seq}` , EditInfo, {
@@ -98,12 +106,18 @@ function ProductEdit() {
       })
       .then((response) => {
         console.log("success");
+
+        toast.success("제품수정 완료!", {
+          autoClose: 700,
+          position: toast.POSITION.TOP_CENTER
+        });
       })
       .catch((error) => {
         console.log("Error!!!");
       });
 
     navigate("/manager/productList");
+
   };
 
   const onHandleChangeFile = (event) => {
@@ -150,6 +164,10 @@ function ProductEdit() {
         if (response.data) {
           console.log(response.data);
           setResImg(response.data);
+          toast.success("이미지 등록 완료!", {
+            autoClose: 700,
+            position: toast.POSITION.TOP_CENTER
+          });
         }
       })
       .catch((error) => {
@@ -177,10 +195,7 @@ function ProductEdit() {
   };
 
   const onResetFile = () => {
-    setProduct({
-      ...product,
-      product_thumbnail: "",
-    });
+    setImgFile("");
   };
 
   const onBackBtn = () => {
@@ -199,14 +214,13 @@ function ProductEdit() {
         <div className="register-sub-wrapper">
           <div className="register-area-wrapper">
             <div className="left-img">
-              {imgFile === "" ? (
+              {imgFile === "" ? (       // 아직 업로드한 파일이 없으면
                 <img
                   className="product-register-img"
                   alt="#"
                   src={previewUrl}
                 />
-              ) : null}
-              {imgBase64.map((item) => {
+              ) : imgBase64.map((item) => {
                 return (
                   <div>
                     <img
@@ -217,6 +231,17 @@ function ProductEdit() {
                   </div>
                 );
               })}
+              {/* {imgBase64.map((item) => {
+                return (
+                  <div>
+                    <img
+                      className="product-register-img"
+                      src={item}
+                      alt="First Slide"
+                    />
+                  </div>
+                );
+              })} */}
               <div className="product-img-bottom-wrapper">
                 <input
                   className="img-btn"
@@ -228,6 +253,7 @@ function ProductEdit() {
                 />
                 <div className="product-register-small-btn">
                   <SmallButton label="이미지 등록" onClick={onImgRegisterBtn} />
+                  <ToastContainer />
                   <BackSmallButton label="이미지 초기화" onClick={onResetFile} />
                 </div>
               </div>

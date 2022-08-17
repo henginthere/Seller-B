@@ -7,6 +7,8 @@ import { SmallButton } from "../../../components/Common/SmallButton";
 import { MediButton } from "../../../components/Common/MediButton";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
+import { DangerMediButton} from '../../../components/Common/DangerMediButton'
+
 import {
   modifyConsultantApi,
   detailConsultantApi,
@@ -161,17 +163,14 @@ function ConsultantModify() {
               </TextField>
             </div>
             <div className='Button'>
-              <Button
+              <MediButton
+                label="수정완료"
                 onClick={onHandleSubmit}
                 className='registerBtn'
                 variant='contained'
-                type='submit'
-              >
-                수정완료
-              </Button>
-              <Button className='registerBtn' variant='contained' color='error'>
-                취소
-              </Button>
+               />
+             
+              <DangerMediButton className='registerBtn' label="취소" variant='contained' color='error' />
             </div>
           </form>
         </div>

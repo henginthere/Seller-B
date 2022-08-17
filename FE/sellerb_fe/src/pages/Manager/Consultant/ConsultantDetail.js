@@ -8,7 +8,7 @@ import AttendanceLog from "../../../components/Log/AttendanceLog";
 import ConsultingLog from "../../../components/Log/ConsultingLog";
 import { SmallButton } from '../../../components/Common/SmallButton'
 import { DangerSmallButton } from '../../../components/Common/DangerSmallButton'
-// import Test from '../../../components/Log/Test'
+
 
 import {
   detailConsultantApi, deleteConsultant
@@ -69,7 +69,6 @@ function ConsultantDetail() {
       console.log("onDelete Btn:" + res.data);
 
       navigate("/manager/main");
-
     })
     .catch((err)=>{
       console.log("Error")
@@ -84,37 +83,45 @@ function ConsultantDetail() {
     <>
       <NavBar />
       <div className="notice-title">상담사 프로필</div>
-      <div className="profile-wrapper">
         {/*  */}
-        <div className="profile-left">
-          <div className="profile-element">
+      <div className="consultant-profile-container">
+        <div className="profile-wrapper">
+        <div className="con-mypage-left-wrapper">
+            <img
+              className="con-mypage-default-img"
+              alt="#"
+              src={consultant.consultantImageUrl}
+            />
+          </div>
+      {/*  */}
+      <div className="con-mypage-profile-left">
+      <div className="con-profile-element">
             <p>사번</p>
             <div>{consultant.consultantId}</div>
           </div>
-          <div className="profile-element">
+          <div className="con-profile-element">
             <p>사원명</p>
             <div>{consultant.consultantName}</div>
           </div>
-          <div className="profile-element">
+          <div className="con-profile-element">
             <p>사원 Email</p>
             <div>{consultant.consultantEmail}</div>
           </div>
-          <div className="profile-element">
+          <div className="con-profile-element">
            <p>사원 Pnum</p>
             <div>{consultant.consultantTel}</div>
           </div>
-          <div className="profile-element">
+          <div className="con-profile-element">
             <p>제품군</p>
             <div>{consultant.productGroupName}</div>
           </div>
-          <div style={{display: "flex", marginLeft:"5px"}}>
-
+          <div style={{display:"flex", width:"300px"}}>
             <SmallButton label="수정하기" onClick={onEditBtn} />
-            < DangerSmallButton label="삭제하기" onClick={onDeleteBtn} />
-
+            <DangerSmallButton label="삭제하기" onClick={onDeleteBtn} />
           </div>
         </div>
         {/*  */}
+        </div>
         <div className="profile-right">
           <div className="consultant-detail-select-wrapper">
             <select onChange={onHandleLogOption} value={logOption}>
@@ -125,7 +132,8 @@ function ConsultantDetail() {
           <div className="attendance-log">
             <ConsultantLog consultant_id = {seq} />
           </div>
-        </div>
+        
+      </div>
       </div>
       <Footer />
     </>

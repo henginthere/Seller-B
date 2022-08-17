@@ -9,6 +9,9 @@ import { getManagerInfoApi } from "../../../api/managerApi";
 import { indigo } from "@mui/material/colors";
 
 import axios from "axios";
+import fileapi from "../../../api/fileapi";
+import { modifyManagerApi } from '../../../api/userApi'
+
 import { SmallButton } from "../../../components/Common/SmallButton";
 import { MediButton } from "../../../components/Common/MediButton";
 
@@ -60,29 +63,42 @@ const onHandleChange = (e) => {
       managerImageUrl: manager.managerImageUrl,
     };
 
-    await axios
-      .put(`https://i7d105.p.ssafy.io/api/manager/${managerSeq}`, EditInfo, {
-        header: {
-          "Content-Type": `multipart/form-data`,
-        },
-      })
-      .then((response) => {
-        console.log("success");
+    modifyManagerApi(EditInfo, managerSeq)
+    .then((res)=>{
+      console.log(JSON.stringify(res.data));
+      console.log("success");
+    })
+    .catch((err)=>{
+
+      console.log("Error");
+    })
+
+    navigate("/main");
+
+    // await axios
+    //   .put(`https://i7d105.p.ssafy.io/api/manager/${managerSeq}`, EditInfo, {
+    //     header: {
+    //       "Content-Type": `multipart/form-data`,
+    //     },
+    //   })
+    //   .then((response) => {
+    //     console.log("success");
         
-        navigate("/main")
-      })
-      .catch((error) => {
-        console.log("Error!!!");
-      });
+    //     navigate("/main")
+    //   })
+    //   .catch((error) => {
+    //     console.log("Error!!!");
+    //   });
+
   };
 
 
   return (
     <>
     <NavBar />
-    <div className="notice-title">매니저 프로필</div>
+    <div className="manager-profile-title">매니저 프로필</div>
         <div className="consultant-profile-container">
-        <div className="profile-wrapper">
+        <div className="manager-profile-wrapper">
           <div className="con-mypage-left-wrapper">
             <img
               className="con-mypage-default-img"
@@ -120,8 +136,8 @@ const onHandleChange = (e) => {
             <p>비밀번호</p>
               <input type="password" value={editPass} onChange={onChangePass} />
           </div>         
-            <div style={{ display: "flex", marginLeft: "5px" }}>
-              <SmallButton label="수정완료" onClick={onEditCompleteBtn} />
+            <div style={{ display: "flex", marginLeft: "5px", marginTop:"10%" }}>
+              <MediButton label="수정완료" onClick={onEditCompleteBtn} />
             </div>
           </div>
 
