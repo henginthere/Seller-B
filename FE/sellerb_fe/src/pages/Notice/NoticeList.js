@@ -166,8 +166,7 @@ function NoticeList() {
                 ></Pagination>
               </PaginationBox>
               </div>
-              <div>
-
+              <div className="notice-list-bottom-small-btn">
               <SmallButton onClick={goWriteBtn} size='sm' label='글작성하기' />
               </div>
             </div>  
