@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import { SmallButton } from "../../../components/Common/SmallButton";
 import { MediButton } from "../../../components/Common/MediButton";
 import { Link, useNavigate, useParams } from "react-router-dom";
-
+import { productGroupListApi } from "../../../api/productApi";
 import { DangerMediButton} from '../../../components/Common/DangerMediButton'
 
 import {
@@ -20,14 +20,10 @@ function ConsultantModify() {
   const seq = id;
 
   const [consultant, setConsultant] = useState({});
-
-  const product_list = [
-    { value: "TV", label: "TV" },
-    { value: "phone", label: "Phone" },
-    { value: "airConditioner", label: "에어컨" },
-    { value: "Refrigerator", label: "냉장고" },
-    { value: "airCleaner", label: "공기청정기" },
-  ];
+  const [groupList, setGroupList] = useState([]);
+  const [managerBrand, setManagerBrand] = useState(
+    sessionStorage.getItem("brandNameKor"),
+  );
 
   useEffect(() => {
     if (sessionStorage.getItem("accessToken") === null) {
@@ -48,6 +44,16 @@ function ConsultantModify() {
       });
   }, []);
 
+  useEffect(()=>{
+    productGroupListApi()
+    .then((res) => {
+      setGroupList(res.data); // groupList
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }, [])
+
   // 최종적으로 수정 완료 버튼을 누르면 api로 DB에 반영하기 위한 함수
   const onHandleSubmit = (e) => {
     e.preventDefault();
@@ -64,10 +70,9 @@ function ConsultantModify() {
 
     navigate(`/manager/consultantDetail/${seq}`);
   };
-  // 바뀔때마다 setData로 수정된 데이터로 바꿔줌
+
   const onChange = (e) => {
     e.preventDefault();
-
     const { value, name } = e.target;
 
     setConsultant({
@@ -146,22 +151,17 @@ function ConsultantModify() {
                 required
                 select
                 fullWidth='true'
-                name='productGroupSeq'
+                name='productGroupName'
                 value={consultant.productGroupName}
                 selected={consultant.productGroupName}
-                // defaultValue={consultant.productGroupName}
-                SelectProps={{
-                  native: true,
-                }}
                 onChange={onChange}
               >
-                {product_list.map((option) =>
-                  option.value === consultant.productGroupName ? (
-                    ""
+                <option value='' />
+                {groupList.map((option) =>
+                  option.brandName === managerBrand ? (
+                    <option>{option.productGroupName}</option>
                   ) : (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
+                    ""
                   ),
                 )}
               </TextField>
@@ -173,7 +173,6 @@ function ConsultantModify() {
                 className='registerBtn'
                 variant='contained'
                />
-             
               <DangerMediButton className='registerBtn' label="취소" variant='contained' color='error' />
             </div>
           </form>

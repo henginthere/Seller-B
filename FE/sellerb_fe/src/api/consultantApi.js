@@ -42,7 +42,11 @@ export const registerConsultantApi = async (consultant, success, fail) => {
 export const modifyConsultantApi = async (consultant, seq, success, fail) => {
   //   console.log("in API: " + JSON.stringify(consultant));
   return await api
-    .put(`/consultant/${seq}`, consultant)
+    .put(`/consultant/${seq}`, consultant, {
+      header: {
+        "Content-Type": `application/json`,
+      },
+    })
     .then(success)
     .catch(fail);
 };

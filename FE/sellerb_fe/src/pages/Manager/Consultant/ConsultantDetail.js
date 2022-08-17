@@ -45,7 +45,6 @@ function ConsultantDetail() {
     detailConsultantApi(seq)
       .then((res) => {
         setConsultant(res.data);
-        //////////////////////////////////////////////////////////////
         console.log(JSON.stringify(res.data));
         const test = consultant.productGroupName;
 
@@ -81,7 +80,6 @@ function ConsultantDetail() {
  const onEditBtn = () => {
   navigate(`/manager/consultantModify/${consultant.consultantSeq}`)
  }
-
 
   return (
     <>

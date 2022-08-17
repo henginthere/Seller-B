@@ -47,10 +47,11 @@
     position: relative;
 }
 
-.con-list-body > tr {
+.con-tbody-tr {
+    height: 30px;
     border-bottom: 1px solid rgb(244, 244, 244);
     cursor: pointer;
-    font-size: 12px;
+    font-size: 13px;
 }
 
 .manager-main-right-bottom-wrapper {
@@ -62,3 +63,10 @@
     margin-left: 7%;
 }
 
+.manager-main-right-reset-icon {
+
+}
+
+.manager-main-right-reset-icon:hover {
+    background-color: rgb(244, 244, 244);
+}
