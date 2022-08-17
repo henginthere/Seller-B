@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "./NoticeDetail.css";
 import { Footer, NavBar } from "../../components/index";
 import { DangerMediButton } from "../../components/Common/DangerMediButton";
+import axios from "axios";
 
 import {
   detailNoticeApi,
@@ -39,38 +39,51 @@ function NoticeEdit() {
   // 수정사항 제출 버튼
   const onEditSubmitBtn = () => {
     setBSeq(parseInt(bSeq));
-
-    // console.log("")
+    console.log("bSeq : " + bSeq);
 
     const Info = {
-      noticeSeq: id,
-      post: {
-        brandSeq: bSeq,
-        noticeTitle: noticeData.noticeTitle,
-        noticeContent: noticeData.noticeContent,
-      },
+      brandSeq: bSeq,
+      noticeTitle: noticeData.noticeTitle,
+      noticeContent: noticeData.noticeContent,
     };
-
-    modifyNoticeApi(Info)
+    axios
+      .put(`https://i7d105.p.ssafy.io/api/notice/${id}`, Info, {
+        header: {
+          "Content-Type": `multipart/form-data`,
+        },
+      })
       .then((res) => {
-        console.log(res.data);
+        console.log("수정 완료!");
+        alert("수정 완료!");
         navigate("/manager/noticeList");
       })
       .catch((err) => {
-        console.log(JSON.stringify(err.data));
+        alert("수정 하는데 실패 했습니다!");
+        console.log("수정 에러" + err);
       });
+
+    // modifyNoticeApi(Info)
+    //   .then((res) => {
+    //     console.log(res.data);
+    //     navigate("/manager/noticeList");
+    //   })
+    //   .catch((err) => {
+    //     console.log(JSON.stringify(err.data));
+    //   });
   };
 
   // 삭제 버튼
   const onDeleteSubmitBtn = () => {
-    delNoticeApi(id)
-      .then((res) => {
-        console.log(res.data);
-        navigate("/manager/noticeList");
-      })
-      .catch((err) => {
-        console.log(err.data);
-      });
+    if (window.confirm("삭제하시겠습니까?")) {
+      delNoticeApi(id)
+        .then((res) => {
+          console.log(res.data);
+          navigate("/manager/noticeList");
+        })
+        .catch((err) => {
+          console.log(err.data);
+        });
+    }
   };
 
   // 게시글의 상세정보 받아와서 setState
