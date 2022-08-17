@@ -28,6 +28,10 @@ function ConsultantModify() {
   ];
 
   useEffect(() => {
+    if (sessionStorage.getItem("accessToken") === null) {
+      alert("접근 권한이 없습니다.");
+      navigate("/");
+    }
     detailConsultantApi(seq)
       .then((res) => {
         console.log("res.data:" + res.data.consultantId);
