@@ -22,3 +22,7 @@ export { default as MeetingManCon } from "./Meeting/MeetingManCon/MeetingManCon"
 export { default as ConsultingMain } from "./Meeting/MeetingConUser/ConsultingMain";
 
 export { default as MainTwo } from './Main/MainTwo';
+
+export { default as ConsultantMyPageEdit} from './Consultant/MyPage/ConsultantMyPageEdit';
+
+export { default as ManagerMyPageEdit } from './Manager/MyPage/ManagerMyPageEdit';

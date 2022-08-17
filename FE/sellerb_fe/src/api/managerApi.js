@@ -9,7 +9,7 @@ export const managerRegisterApi = async (managerData, success, fail) => {
 
 // GET : 관리자 마이페이지 
 export const getManagerInfoApi = async (managerSeq, success, fail) => {
-  console.log("API method: " + managerSeq)
+  // console.log("API method: " + managerSeq)
   return await api.get(`/manager/${managerSeq}`)
   .then(success)
   .catch(fail);
