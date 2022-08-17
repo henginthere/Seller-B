@@ -26,6 +26,7 @@ const styleObj = {
   border: "solid 2px black",
   borderRadius: "10px",
   margin: "10px",
+  marginTop: "10%",
 };
 const styleObj_center = {
   textAlign: "center",
