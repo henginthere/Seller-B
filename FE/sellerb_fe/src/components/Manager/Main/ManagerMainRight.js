@@ -51,6 +51,10 @@ const tableData = {
 };
 
 function ManagerMainRight() {
+  const btnStyle = {
+    display: "flex",
+    justifyContent: "flex-end",
+  };
   const navigate = useNavigate();
 
   const [groupList, setGroupList] = useState([]); // api에서 받아올 전~체 제품군 리스트
@@ -96,7 +100,6 @@ function ManagerMainRight() {
       .then((res) => {
         // const item = brandList.find((it) => it.brandNameKor === value)
         setGroupList(res.data); // groupList
-
       })
       .catch((err) => {
         console.log(err);
@@ -201,9 +204,6 @@ function ManagerMainRight() {
       </div>
 
       <div style={styleObj_center}>
-        <Link to='/manager/consultantRegister'>
-          <MediButton size='md' label='상담사추가' />
-        </Link>
         <table className='con-table-list'>
           <thead className='con-table-thead'>
             <tr className='con-th-tr'>
@@ -264,6 +264,11 @@ function ManagerMainRight() {
             onChange={handlePageChange}
           ></Pagination>
         </PaginationBox>
+        <div style={btnStyle}>
+          <Link to='/manager/consultantRegister'>
+            <MediButton size='md' label='상담사추가' />
+          </Link>
+        </div>
       </div>
     </div>
   );
