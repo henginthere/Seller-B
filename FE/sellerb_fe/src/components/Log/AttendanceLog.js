@@ -28,30 +28,6 @@ const styleObj_center = {
 //     }
 //  }
 
-const parsingDate = (date) => {
-  var parsedDate = new Date(date);
-  var yyyy = parsedDate.getFullYear();
-  var MM = parsedDate.getMonth() + 1;
-  var dd = parsedDate.getDate();
-  var hh = parsedDate.getHours() + 9;
-  var mm = parsedDate.getMinutes();
-  if (hh > 24) {
-    hh = hh - 24;
-    dd = dd + 1;
-  }
-
-  return (
-    yyyy +
-    "-" +
-    addZero(MM) +
-    "-" +
-    addZero(dd) +
-    "-" +
-    addZero(hh) +
-    ":" +
-    addZero(mm)
-  );
-};
 const addZero = (n) => {
   return n < 10 ? "0" + n : n;
 };
@@ -94,7 +70,31 @@ function AttendanceLog({ consultant_id }) {
     //   )
     // })
   });
+  const parsingDate = (date) => {
+    var parsedDate = new Date(date);
+    var yyyy = parsedDate.getFullYear();
+    var MM = parsedDate.getMonth() + 1;
+    var dd = parsedDate.getDate();
+    var hh = parsedDate.getHours() + 9;
+    var mm = parsedDate.getMinutes();
+    if (hh > 24) {
+      hh = hh - 24;
+      dd = dd + 1;
+      setDate(date + 1);
+    }
 
+    return (
+      yyyy +
+      "-" +
+      addZero(MM) +
+      "-" +
+      addZero(dd) +
+      "-" +
+      addZero(hh) +
+      ":" +
+      addZero(mm)
+    );
+  };
   function CalLoginTime(props) {
     const time = props.getHours();
     console.log("in callLoginTime: " + time);
