@@ -83,7 +83,7 @@ function ManagerMainRight() {
     const name = sessionStorage.getItem("brandNameKor");
     brandConsultantListApi(name)
       .then((res) => {
-        console.log("전체컨설턴트 :" + JSON.stringify(res.data));
+        // console.log("전체컨설턴트 :" + JSON.stringify(res.data));
         setConsultantList(res.data);
       })
       .catch((err) => {
@@ -97,7 +97,6 @@ function ManagerMainRight() {
         // const item = brandList.find((it) => it.brandNameKor === value)
         setGroupList(res.data); // groupList
 
-        console.log("찐 grouplist:" + groupList);
       })
       .catch((err) => {
         console.log(err);
