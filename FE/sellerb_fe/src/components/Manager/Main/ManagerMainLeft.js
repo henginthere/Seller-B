@@ -20,14 +20,15 @@ function ManagerMainLeft() {
   };
   const styleObj_Button = {
     textAlign: "center",
-    margin: "50px",
+    margin: "40px",
+    // marginTop: "-10px",
   };
   const welcome_text = {
     display: "flex",
     textAlign: "center",
     size: "20px",
     justifyContent: "center",
-    marginTop: "20px"
+    marginTop: "30px"
   };
   const blue = {
     color: "blue",
@@ -53,6 +54,7 @@ function ManagerMainLeft() {
   return (
     <>
       <div style={styleObj_WrapDiv}>
+        {/*  */}
         <div style={welcome_text}>
           <h2 style={blue}>{managerName}</h2>
           <h2>님 환영합니다!</h2>
