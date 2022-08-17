@@ -28,13 +28,15 @@ function ProductList() {
   const [searchState, setSearchState] = useState(false);
   const [searchItems, setSearchItems] = useState([]);
   const [groupOption, setGroupOption] = useState("제품 전체보기");
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     brandProductListApi(brandSeq).then((res) => {
       setTotalItems(res.data);
+      setIsLoaded(true);
       // console.log("처음 전체 아이템들 : " + JSON.stringify(res.data));
     });
-  }, []);
+  }, [isLoaded]);
 
   useEffect(() => {
     if (sessionStorage.getItem("accessToken") === null) {
