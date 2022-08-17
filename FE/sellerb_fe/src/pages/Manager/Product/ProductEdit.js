@@ -23,6 +23,8 @@ function ProductEdit() {
   );
   const [selectSeq, setSelectSeq] = useState([]);
   const [readOnly, setReadOnly] = useState(true);
+
+  const [productImg, setProductImg] = useState("");
   
   const [resImg, setResImg] = useState("");
   const [product, setProduct] = useState({
@@ -60,6 +62,7 @@ function ProductEdit() {
       .then((res) => {
         console.log(res.data);
         setProduct(res.data);
+        setProductImg(res.data.productThumbnail);
         // console.log("수정된 제품정보: " + pro);
       })
       .catch((err) => {
@@ -196,6 +199,9 @@ function ProductEdit() {
 
   const onResetFile = () => {
     setImgFile("");
+    setProductImg("");
+
+    console.log(product.productThumbnail)
   };
 
   const onBackBtn = () => {
@@ -214,23 +220,37 @@ function ProductEdit() {
         <div className="register-sub-wrapper">
           <div className="register-area-wrapper">
             <div className="left-img">
-              {imgFile === "" ? (       // 아직 업로드한 파일이 없으면
+              { productImg === "" && imgFile === "" 
+              ? (       // 아직 업로드한 파일이 없으면
                 <img
                   className="product-register-img"
                   alt="#"
                   src={previewUrl}
                 />
-              ) : imgBase64.map((item) => {
-                return (
-                  <div>
-                    <img
-                      className="product-register-img"
-                      src={item}
-                      alt="First Slide"
-                    />
-                  </div>
-                );
-              })}
+                ) 
+              : productImg !== ""
+              ? (
+                <img
+                    className='product-register-img'
+                    alt='###'
+                    src={product.productThumbnail}
+                  />
+                )
+              : (
+                imgBase64.map((item) => {
+                  return (
+                    <div>
+                      <img
+                        className="product-register-img"
+                        src={item}
+                        alt="First Slide"
+                      />
+                    </div>
+                  );
+                })
+              )
+              
+              }
               {/* {imgBase64.map((item) => {
                 return (
                   <div>
