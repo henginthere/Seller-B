@@ -182,5 +182,10 @@
 
 .notice-list-paginationBox {
   justify-content: center;
+  width: 75%;
+
+}
+
+.notice-list-bottom-small-btn {
 
 }
