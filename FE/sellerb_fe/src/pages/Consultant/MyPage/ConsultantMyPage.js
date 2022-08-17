@@ -32,10 +32,14 @@ function ConsultantMyPage() {
   const [imgBase64, setImgBase64] = useState([]); // 미리보기를 구현할 state
   const [imgFile, setImgFile] = useState("");
   const [previewUrl, setPreviewUrl] = useState(
-    `${process.env.PUBLIC_URL}/img/default_img.png`
+    `${process.env.PUBLIC_URL}/img/default_img.png`,
   );
 
   useEffect(() => {
+    if (sessionStorage.getItem("accessToken") === null) {
+      alert("접근 권한이 없습니다.");
+      navigate("/");
+    }
     detailConsultantApi(seq)
       .then((res) => {
         console.log(JSON.stringify(res.data));
@@ -98,54 +102,54 @@ function ConsultantMyPage() {
   return (
     <>
       <NavBar />
-      <div className="notice-title">상담사 프로필</div>
+      <div className='notice-title'>상담사 프로필</div>
       {/* Left Content */}
-      <div className="consultant-profile-container">
-        <div className="profile-wrapper">
-          <div className="con-mypage-left-wrapper">
+      <div className='consultant-profile-container'>
+        <div className='profile-wrapper'>
+          <div className='con-mypage-left-wrapper'>
             <img
-              className="con-mypage-default-img"
-              alt="#"
+              className='con-mypage-default-img'
+              alt='#'
               src={consultant.consultantImageUrl}
             />
           </div>
 
           {/*  */}
-          <div className="con-mypage-profile-left">
-            <div className="con-profile-element">
+          <div className='con-mypage-profile-left'>
+            <div className='con-profile-element'>
               <p>사번</p>
               <div>{consultant.consultantId}</div>
             </div>
-            <div className="con-profile-element">
+            <div className='con-profile-element'>
               <p>사원명</p>
               <div>{consultant.consultantName}</div>
             </div>
-            <div className="con-profile-element">
+            <div className='con-profile-element'>
               <p>사원 Email</p>
               <div>{consultant.consultantEmail}</div>
             </div>
-            <div className="con-profile-element">
+            <div className='con-profile-element'>
               <p>사원 Pnum</p>
               <div>{consultant.consultantTel}</div>
             </div>
-            <div className="con-profile-element">
+            <div className='con-profile-element'>
               <p>제품군</p>
               <div>{consultant.productGroupName}</div>
             </div>
             <div style={{ display: "flex", marginLeft: "5px" }}>
-              <SmallButton label="수정하기" onClick={onMoveEditBtn} />
+              <SmallButton label='수정하기' onClick={onMoveEditBtn} />
             </div>
           </div>
           {/*  */}
         </div>
-        <div className="profile-right">
-          <div className="consultant-detail-select-wrapper">
+        <div className='profile-right'>
+          <div className='consultant-detail-select-wrapper'>
             <select onChange={onHandleLogOption} value={logOption}>
               <option>출결이력</option>
               <option>상담이력</option>
             </select>
           </div>
-          <div className="attendance-log">
+          <div className='attendance-log'>
             <ConsultantLog consultant_id={seq} />
           </div>
         </div>
