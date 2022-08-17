@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "./NoticeDetail.css";
 import { Footer, NavBar } from "../../components/index";
-import { DangerMediButton} from '../../components/Common/DangerMediButton'
+import { DangerMediButton } from "../../components/Common/DangerMediButton";
 
 import {
   detailNoticeApi,
@@ -39,17 +39,17 @@ function NoticeEdit() {
   // 수정사항 제출 버튼
   const onEditSubmitBtn = () => {
     setBSeq(parseInt(bSeq));
-   
+
     // console.log("")
 
     const Info = {
       noticeSeq: id,
-      post :{
+      post: {
         brandSeq: bSeq,
         noticeTitle: noticeData.noticeTitle,
-        noticeContent: noticeData.noticeContent
-      }
-    }
+        noticeContent: noticeData.noticeContent,
+      },
+    };
 
     modifyNoticeApi(Info)
       .then((res) => {
@@ -91,6 +91,10 @@ function NoticeEdit() {
     var dd = parsedDate.getDate();
     var hh = parsedDate.getHours() + 9;
     var mm = parsedDate.getMinutes();
+    if (hh > 24) {
+      hh = hh - 24;
+      dd = dd + 1;
+    }
     return (
       yyyy +
       "-" +
@@ -141,7 +145,7 @@ function NoticeEdit() {
             <div>
               <pre>
                 <input
-                  style={{"width":"100%"}}
+                  style={{ width: "100%" }}
                   // className='row-right'
                   name='noticeContent'
                   defaultValue={noticeData.noticeContent}
@@ -155,7 +159,7 @@ function NoticeEdit() {
             <button className='detail-button' onClick={onEditSubmitBtn}>
               수정완료
             </button>
-            <DangerMediButton label="삭제하기" onClick={onDeleteSubmitBtn} />
+            <DangerMediButton label='삭제하기' onClick={onDeleteSubmitBtn} />
             {/* <button className='detail-button' onClick={onDeleteSubmitBtn}>
               삭제하기
             </button> */}

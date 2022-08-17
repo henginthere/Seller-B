@@ -7,24 +7,28 @@ import { Footer, NavBar } from "../../../components/index";
 import { productDetailApi, productDelApi } from "../../../api/productApi";
 import { SmallButton } from "../../../components/Common/SmallButton";
 import { MediButton } from "../../../components/Common/MediButton";
-import { DangerMediButton} from '../../../components/Common/DangerMediButton'
+import { DangerMediButton } from "../../../components/Common/DangerMediButton";
 
 function ProductDetail() {
   const { seq } = useParams();
   const [readOnly, setReadOnly] = useState(true);
   const [product, setProduct] = useState({
     productSeq: "",
-    productGroupName:"",
+    productGroupName: "",
     productGroupSeq: "",
-    productId:0,
-    productName:"",
-    productPrice:0,
-    productManual:"",
-    productThumbnail:""
+    productId: 0,
+    productName: "",
+    productPrice: 0,
+    productManual: "",
+    productThumbnail: "",
   });
 
   /* 해당 seq에 맞는 Product 정보 먼저 가져오기 */
   useEffect(() => {
+    if (sessionStorage.getItem("accessToken") === null) {
+      alert("접근 권한이 없습니다.");
+      navigate("/");
+    }
     productDetailApi(seq)
       .then((res) => {
         console.log(JSON.stringify(res.data));
@@ -44,83 +48,83 @@ function ProductDetail() {
     navigate(`/manager/productEdit/${product.productSeq}`);
   };
 
-  const onDeleteBtn = () =>{
+  const onDeleteBtn = () => {
     productDelApi(seq)
-    .then((res)=>{
-      console.log(res.data);
-    })
-    .catch((err)=>{
-      console.log("Error");
-    })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log("Error");
+      });
 
     navigate("/manager/productList");
-  }
+  };
 
   return (
     <>
       <NavBar />
       {/* <h4 className="page-title">제품 상세</h4> */}
 
-      <div className="register-main-wrapper">
-        <div className="register-sub-wrapper">
-          <div className="register-area-wrapper">
-            <div className="left-img">
+      <div className='register-main-wrapper'>
+        <div className='register-sub-wrapper'>
+          <div className='register-area-wrapper'>
+            <div className='left-img'>
               <img
-                className="product-register-img"
-                alt="#"
+                className='product-register-img'
+                alt='#'
                 src={product.productThumbnail}
               />
             </div>
 
             {/* 오른쪽 영역 */}
-            <div className="right-input">
-              
-              <div className="input-sub-content-wrapper">
+            <div className='right-input'>
+              <div className='input-sub-content-wrapper'>
                 {/*  */}
-                <div className="input-ele">
+                <div className='input-ele'>
                   <p>품번</p>
-                  <div className="product-id-input-wrapper">
+                  <div className='product-id-input-wrapper'>
                     <input
-                      className="product-id-input"
-                      name="productId"
+                      className='product-id-input'
+                      name='productId'
                       value={product.productId}
-                      variant="outlined"
+                      variant='outlined'
                     />
                   </div>
                 </div>
                 {/*  */}
-                <div className="input-ele">
+                <div className='input-ele'>
                   <p>제품명</p>
-                  <div className="product-id-input-wrapper">
+                  <div className='product-id-input-wrapper'>
                     <input
-                      name="productName"
+                      name='productName'
                       value={product.productName}
-                      variant="outlined"
+                      variant='outlined'
                     />
                   </div>
                 </div>
                 {/* */}
-                <div className="input-ele">
+                <div className='input-ele'>
                   <p>가격</p>
-                  <div className="product-id-input-wrapper">
+                  <div className='product-id-input-wrapper'>
                     <input
-                      className="product-id-input"
-                      name="productPrice"
+                      className='product-id-input'
+                      name='productPrice'
                       value={product.productPrice}
-                      variant="outlined"
+                      variant='outlined'
                     />
                   </div>
                 </div>
                 {/* */}
-                <div className="input-ele">
+                <div className='input-ele'>
                   <p>제품메뉴얼</p>
-                  <div className="product-id-input-wrapper">
-                    <div className="product-detail-manual-wrapper">
-                    <a
-                      className="product-detail-manual-link" 
-                      href={product.productManual}>
-                      {product.productManual.slice(0,30)}...
-                    </a>
+                  <div className='product-id-input-wrapper'>
+                    <div className='product-detail-manual-wrapper'>
+                      <a
+                        className='product-detail-manual-link'
+                        href={product.productManual}
+                      >
+                        {product.productManual.slice(0, 30)}...
+                      </a>
                     </div>
                     {/* <input
                       className="product-id-input"
@@ -131,26 +135,26 @@ function ProductDetail() {
                   </div>
                 </div>
                 {/*  */}
-                <div className="input-ele">
+                <div className='input-ele'>
                   <p>제품군</p>
-                  <div className="product-id-input-wrapper">
+                  <div className='product-id-input-wrapper'>
                     <input
-                      className="product-id-input"
-                      name="productGroupName"
+                      className='product-id-input'
+                      name='productGroupName'
                       value={product.productGroupName}
-                      variant="outlined"
+                      variant='outlined'
                       readOnly={readOnly ? false : true}
                     />
                   </div>
                 </div>
 
                 {/* 하단 버튼 */}
-              <div className="product-register-medi-btn">
-                <MediButton label="수정하기" onClick={onEditBtn} />
-                <MediButton label="대기화면 등록" onClick={goWaitingPage} />
-                <DangerMediButton label="삭제하기" onClick={onDeleteBtn} />
-              </div>
-              {/* <div className="product-register-medi-btn">
+                <div className='product-register-medi-btn'>
+                  <MediButton label='수정하기' onClick={onEditBtn} />
+                  <MediButton label='대기화면 등록' onClick={goWaitingPage} />
+                  <DangerMediButton label='삭제하기' onClick={onDeleteBtn} />
+                </div>
+                {/* <div className="product-register-medi-btn">
                 
               </div> */}
                 {/* <button
