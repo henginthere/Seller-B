@@ -37,18 +37,18 @@ const styleObj_right = {
   margin: "50px",
 };
 
-const tableHeader = {
-  display: "flex",
-  // textAlign: "center",
-  // justifyContent: "center",
-  backgroundColor: "grey",
-};
+// const tableHeader = {
+//   display: "flex",
+//   // textAlign: "center",
+//   // justifyContent: "center",
+//   backgroundColor: "grey",
+// };
 
-const tableRow = {};
+// const tableRow = {};
 
-const tableData = {
-  justifyContent: "start",
-};
+// const tableData = {
+//   justifyContent: "start",
+// };
 
 function ManagerMainRight() {
   const btnStyle = {
@@ -83,32 +83,47 @@ function ManagerMainRight() {
   // 검색된 상담사를 보일 건지, 상담사 목록리스트를 보일건지 관리하는 state
   const [listState, setListState] = useState(true);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoadedSecond, setIsLoadedSecond] = useState(false);
 
   const getBrandConsultantList = async () => {
     const name = sessionStorage.getItem("brandNameKor");
-    console.log("LOADING");
+    // console.log("LOADING");
     await brandConsultantListApi(name)
       .then((res) => {
         // console.log("전체컨설턴트 :" + JSON.stringify(res.data));
         setConsultantList(res.data);
+        setIsLoadedSecond(true);
       })
       .catch((err) => {
         console.log("err:" + err.data);
       });
+    // await productGroupListApi()
+    //   .then((res) => {
+    //     // const item = brandList.find((it) => it.brandNameKor === value)
+    //     setGroupList(res.data); // groupList
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   };
-
-  useEffect(() => {
-    getBrandConsultantList();
-    productGroupListApi()
+  const getProductGroupList = async () => {
+    console.log("LOADING ProductGroupList");
+    await productGroupListApi()
       .then((res) => {
         // const item = brandList.find((it) => it.brandNameKor === value)
         setGroupList(res.data); // groupList
+        setIsLoaded(isLoaded);
         setIsLoaded(true);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [isLoaded]);
+  };
+
+  useEffect(() => {
+    getBrandConsultantList();
+    getProductGroupList();
+  }, [isLoaded, isLoadedSecond]);
 
   const onGroupChange = (e) => {
     e.preventDefault();
@@ -140,7 +155,7 @@ function ManagerMainRight() {
           // const item = brandList.find((it) => it.brandNameKor === value)
           setGroupList(res.data); // groupList
 
-          console.log("찐 grouplist:" + groupList);
+          // console.log("찐 grouplist:" + groupList);
         })
         .catch((err) => {
           console.log(err);
@@ -148,13 +163,19 @@ function ManagerMainRight() {
     } else {
       searchConsultantApi(searchName)
         .then((res) => {
-          console.log(res.data);
-          // 받아온 해당 컨설턴트 출력하기
-          setSearchCon(res.data);
-          setListState(false);
+          console.log("searchConsultant : " + res.data);
+          if (res.data === null) {
+            setSearchCon([]);
+          } else {
+            // 받아온 해당 컨설턴트 출력하기
+            setSearchCon(res.data);
+            setListState(false);
+          }
         })
         .catch((err) => {
           console.log(err);
+          alert("검색된 상담사가 없습니다!");
+          return;
         });
     }
   };
