@@ -24,8 +24,6 @@ function Main() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // const URL = '/api/auth/login'
-
   // const MyTextField = style
   let [id, setId] = useState("");
   let [pass, setPass] = useState("");
@@ -44,6 +42,8 @@ function Main() {
       id,
       pass,
     };
+
+    console.log(JSON.stringify(data));
 
     axios
       .post("/api/auth/login", data)
