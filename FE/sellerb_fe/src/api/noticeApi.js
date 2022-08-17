@@ -33,7 +33,8 @@ export const modifyNoticeApi = async (Info, noticeSeq, success, fail) => {
           header: {
             "Content-Type": `application/json`,
           },
-        })
+        }
+    )
     .then(success)
     .catch(fail);
 };

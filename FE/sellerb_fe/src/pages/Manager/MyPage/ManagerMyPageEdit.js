@@ -77,22 +77,6 @@ function ManagerMyPageEdit() {
 
     navigate("/main");
 
-    // await axios
-    //   .put(`https://i7d105.p.ssafy.io/api/manager/${managerSeq}`, EditInfo, {
-    //     header: {
-    //       "Content-Type": `multipart/form-data`,
-    //     },
-    //   })
-    //   .then((response) => {
-    //     console.log("success");
-        
-    //     navigate("/main")
-    //   })
-    //   .catch((error) => {
-    //     console.log("Error!!!");
-    //   });
-
-
   };
 
   return (
