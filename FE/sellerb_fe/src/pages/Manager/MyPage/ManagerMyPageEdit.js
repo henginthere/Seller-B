@@ -17,14 +17,18 @@ import { MediButton } from "../../../components/Common/MediButton";
 
 function ManagerMyPageEdit() {
   const { id } = useParams();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const [managerSeq, setManagerSeq] = useState(sessionStorage.getItem("seq"));
   const [brandNameKor, setBrandNameKor] = useState("");
 
   const [manager, setManager] = useState([]);
-  const [editPass, setEditPass] = useState(); 
+  const [editPass, setEditPass] = useState();
 
   useEffect(() => {
+    if (sessionStorage.getItem("accessToken") === null) {
+      alert("접근 권한이 없습니다.");
+      navigate("/");
+    }
     console.log("useEffect:" + sessionStorage.getItem("seq"));
     getManagerInfoApi(managerSeq)
       .then((res) => {
@@ -35,24 +39,22 @@ function ManagerMyPageEdit() {
       .catch((err) => {
         console.log(err);
       });
-}, []);
+  }, []);
 
-
-const onHandleChange = (e) => {
-  e.preventDefault();
-  const { value, name } = e.target;
-  console.log("[value, name] : " + " [" + value + ", " + name + "]");
-  setManager({
+  const onHandleChange = (e) => {
+    e.preventDefault();
+    const { value, name } = e.target;
+    // console.log("[value, name] : " + " [" + value + ", " + name + "]");
+    setManager({
       ...manager,
       [name]: value,
-  });
-};
+    });
+  };
 
   // editPass Handling
   const onChangePass = (e) => {
     setEditPass(e.target.value);
   };
-
 
   // 수정완료
   const onEditCompleteBtn = async () => {
@@ -63,6 +65,7 @@ const onHandleChange = (e) => {
       managerImageUrl: manager.managerImageUrl,
     };
 
+<<<<<<< HEAD
     modifyManagerApi(EditInfo, managerSeq)
     .then((res)=>{
       console.log(JSON.stringify(res.data));
@@ -90,64 +93,96 @@ const onHandleChange = (e) => {
     //     console.log("Error!!!");
     //   });
 
-  };
+=======
+    await axios
+      .put(`https://i7d105.p.ssafy.io/api/manager/${managerSeq}`, EditInfo, {
+        header: {
+          "Content-Type": `multipart/form-data`,
+        },
+      })
+      .then((response) => {
+        console.log("success");
 
+        navigate("/main");
+      })
+      .catch((error) => {
+        console.log("Error!!!");
+      });
+>>>>>>> 96376293e59ced092643372075f992b07c8a2e10
+  };
 
   return (
     <>
+<<<<<<< HEAD
     <NavBar />
     <div className="manager-profile-title">매니저 프로필</div>
         <div className="consultant-profile-container">
         <div className="manager-profile-wrapper">
           <div className="con-mypage-left-wrapper">
+=======
+      <NavBar />
+      <div className='notice-title'>매니저 프로필</div>
+      <div className='consultant-profile-container'>
+        <div className='profile-wrapper'>
+          <div className='con-mypage-left-wrapper'>
+>>>>>>> 96376293e59ced092643372075f992b07c8a2e10
             <img
-              className="con-mypage-default-img"
-              alt="#"
+              className='con-mypage-default-img'
+              alt='#'
               src={manager.managerImageUrl}
             />
           </div>
           {/*  */}
-          <div className="con-mypage-profile-left">
-            <div className="con-profile-element">
+          <div className='con-mypage-profile-left'>
+            <div className='con-profile-element'>
               <p>아이디</p>
               <div>{manager.managerId}</div>
             </div>
-            <div className="con-profile-element">
+            <div className='con-profile-element'>
               <p>이름</p>
               <div>{manager.managerName}</div>
             </div>
-            <div className="con-profile-element">
+            <div className='con-profile-element'>
               <p>Email</p>
               <input
                 defaultValue={manager.managerEmail}
-                name="managerEmail"
+                name='managerEmail'
                 onChange={onHandleChange}
               />
             </div>
-            <div className="con-profile-element">
+            <div className='con-profile-element'>
               <p>Pnum</p>
               <input
                 defaultValue={manager.managerTel}
-                name="managerTel"
+                name='managerTel'
                 onChange={onHandleChange}
               />
             </div>
+<<<<<<< HEAD
             <div className="con-profile-element">
             <p>비밀번호</p>
               <input type="password" value={editPass} onChange={onChangePass} />
           </div>         
             <div style={{ display: "flex", marginLeft: "5px", marginTop:"10%" }}>
               <MediButton label="수정완료" onClick={onEditCompleteBtn} />
+=======
+            <div className='con-profile-element'>
+              <p>비밀번호</p>
+              <input type='password' value={editPass} onChange={onChangePass} />
+            </div>
+            <div style={{ display: "flex", marginLeft: "5px" }}>
+              <SmallButton label='수정완료' onClick={onEditCompleteBtn} />
+>>>>>>> 96376293e59ced092643372075f992b07c8a2e10
             </div>
           </div>
 
           {/*  */}
-          </div>
-          </div>
-    
-    <Footer />
+        </div>
+      </div>
+
+      <Footer />
     </>
-  )
+  );
 }
 
-export default ManagerMyPageEdit
+export default ManagerMyPageEdit;

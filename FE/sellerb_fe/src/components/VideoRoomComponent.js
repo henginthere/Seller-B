@@ -8,7 +8,7 @@ import ChatComponent from "./chat/ChatComponent";
 
 import OpenViduLayout from "../layout/openvidu-layout";
 import UserModel from "../models/user-model";
-import ConsultingToolbarComponent from "./toolbar/ConsultingToolbarComponent";
+import ToolbarComponent from "./toolbar/ToolbarComponent";
 
 var localUser = new UserModel();
 
@@ -551,7 +551,7 @@ class VideoRoomComponent extends Component {
 
     return (
       <div className='container' id='container'>
-        <ConsultingToolbarComponent
+        <ToolbarComponent
           sessionId={mySessionId}
           user={localUser}
           showNotification={this.state.messageReceived}

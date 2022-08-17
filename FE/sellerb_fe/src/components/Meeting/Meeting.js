@@ -46,7 +46,7 @@ class Meeting extends Component {
         .then((res) => {
           this.setState({
             myUserName: res.data.consultantName,
-            mySessionId: res.data.brandName,
+            mySessionId: res.data.brandName + "-session",
           });
         })
         .catch((err) => {

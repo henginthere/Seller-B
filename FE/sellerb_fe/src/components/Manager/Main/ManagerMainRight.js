@@ -51,6 +51,10 @@ const tableData = {
 };
 
 function ManagerMainRight() {
+  const btnStyle = {
+    display: "flex",
+    justifyContent: "flex-end",
+  };
   const navigate = useNavigate();
 
   const [groupList, setGroupList] = useState([]); // api에서 받아올 전~체 제품군 리스트
@@ -78,10 +82,12 @@ function ManagerMainRight() {
 
   // 검색된 상담사를 보일 건지, 상담사 목록리스트를 보일건지 관리하는 state
   const [listState, setListState] = useState(true);
+  const [isLoaded, setIsLoaded] = useState(false);
 
-  useEffect(() => {
+  const getBrandConsultantList = async () => {
     const name = sessionStorage.getItem("brandNameKor");
-    brandConsultantListApi(name)
+    console.log("LOADING");
+    await brandConsultantListApi(name)
       .then((res) => {
         // console.log("전체컨설턴트 :" + JSON.stringify(res.data));
         setConsultantList(res.data);
@@ -89,19 +95,20 @@ function ManagerMainRight() {
       .catch((err) => {
         console.log("err:" + err.data);
       });
-  }, []);
+  };
 
   useEffect(() => {
+    getBrandConsultantList();
     productGroupListApi()
       .then((res) => {
         // const item = brandList.find((it) => it.brandNameKor === value)
         setGroupList(res.data); // groupList
-
+        setIsLoaded(true);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [isLoaded]);
 
   const onGroupChange = (e) => {
     e.preventDefault();
@@ -201,9 +208,6 @@ function ManagerMainRight() {
       </div>
 
       <div style={styleObj_center}>
-        <Link to='/manager/consultantRegister'>
-          <MediButton size='md' label='상담사추가' />
-        </Link>
         <table className='con-table-list'>
           <thead className='con-table-thead'>
             <tr className='con-th-tr'>
@@ -231,7 +235,7 @@ function ManagerMainRight() {
                           {ele.consultantName}
                         </td>
                         <td className='con-id'>{ele.consultantId}</td>
-                        <td className='con-seq'>{ele.consultantSeq}</td>
+                        <td className='con-seq'>{ele.productGroupName}</td>
                       </tr>
                     </>
                   );
@@ -264,6 +268,11 @@ function ManagerMainRight() {
             onChange={handlePageChange}
           ></Pagination>
         </PaginationBox>
+        <div style={btnStyle}>
+          <Link to='/manager/consultantRegister'>
+            <MediButton size='md' label='상담사추가' />
+          </Link>
+        </div>
       </div>
     </div>
   );

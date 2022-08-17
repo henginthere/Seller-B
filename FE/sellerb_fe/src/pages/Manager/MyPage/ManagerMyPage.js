@@ -12,6 +12,7 @@ import { SmallButton } from "../../../components/Common/SmallButton";
 import { MediButton } from "../../../components/Common/MediButton";
 
 function ManagerMyPage() {
+<<<<<<< HEAD
     const navigate = useNavigate(); 
     const [manager, setManager] = useState([]);
     const [managerSeq, setManagerSeq] = useState(sessionStorage.getItem("seq"));
@@ -28,7 +29,29 @@ function ManagerMyPage() {
             console.log(err);
           });
     }, []);
+=======
+  const navigate = useNavigate();
+  const [manager, setManager] = useState([]);
+  const [managerSeq, setManagerSeq] = useState(sessionStorage.getItem("seq"));
+  const [brandNameKor, setBrandNameKor] = useState("");
+>>>>>>> 96376293e59ced092643372075f992b07c8a2e10
 
+  useEffect(() => {
+    if (sessionStorage.getItem("accessToken") === null) {
+      alert("접근 권한이 없습니다.");
+      navigate("/");
+    }
+    console.log("useEffect:" + sessionStorage.getItem("seq"));
+    getManagerInfoApi(managerSeq)
+      .then((res) => {
+        // console.log(JSON.stringify(res.data));
+        setManager(res.data);
+        setBrandNameKor(res.data.brand.brandNameKor);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   // 수정 페이지로 이동
   const onMoveEditBtn = () => {
@@ -37,47 +60,61 @@ function ManagerMyPage() {
 
   return (
     <>
+<<<<<<< HEAD
         <NavBar />
         <div className="manager-profile-title">매니저 프로필</div>
         <div className="consultant-profile-container">
         <div className="manager-profile-wrapper">
           <div className="con-mypage-left-wrapper">
+=======
+      <NavBar />
+      <div className='notice-title'>매니저 프로필</div>
+      <div className='consultant-profile-container'>
+        <div className='profile-wrapper'>
+          <div className='con-mypage-left-wrapper'>
+>>>>>>> 96376293e59ced092643372075f992b07c8a2e10
             <img
-              className="con-mypage-default-img"
-              alt="#"
+              className='con-mypage-default-img'
+              alt='#'
               src={manager.managerImageUrl}
             />
           </div>
           {/*  */}
-          <div className="con-mypage-profile-left">
-            <div className="con-profile-element">
+          <div className='con-mypage-profile-left'>
+            <div className='con-profile-element'>
               <p>아이디</p>
               <div>{manager.managerId}</div>
             </div>
-            <div className="con-profile-element">
+            <div className='con-profile-element'>
               <p>이름</p>
               <div>{manager.managerName}</div>
             </div>
-            <div className="con-profile-element">
+            <div className='con-profile-element'>
               <p>Email</p>
               <div>{manager.managerEmail}</div>
             </div>
-            <div className="con-profile-element">
+            <div className='con-profile-element'>
               <p>Pnum</p>
               <div>{manager.managerTel}</div>
             </div>
+<<<<<<< HEAD
      
             <div style={{ display: "flex", marginLeft: "15px" }}>
               <MediButton label="수정하기" onClick={onMoveEditBtn} />
+=======
+
+            <div style={{ display: "flex", marginLeft: "5px" }}>
+              <SmallButton label='수정하기' onClick={onMoveEditBtn} />
+>>>>>>> 96376293e59ced092643372075f992b07c8a2e10
             </div>
           </div>
 
           {/*  */}
-          </div>
-          </div>
-        <Footer />
+        </div>
+      </div>
+      <Footer />
     </>
-  )
+  );
 }
 
-export default ManagerMyPage
+export default ManagerMyPage;
