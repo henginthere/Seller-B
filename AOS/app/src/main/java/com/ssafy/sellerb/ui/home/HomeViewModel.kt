@@ -36,6 +36,10 @@ class HomeViewModel(
         }
     }
 
+    fun updateToken(){
+
+    }
+
     override fun onCreate() {
     }
 

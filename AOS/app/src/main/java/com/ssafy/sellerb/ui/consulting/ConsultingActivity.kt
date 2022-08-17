@@ -1,22 +1,20 @@
 package com.ssafy.sellerb.ui.consulting
 
 import android.Manifest
-import android.app.ActionBar
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
+import android.media.AudioManager
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.util.TypedValue
-import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.google.android.material.appbar.AppBarLayout
 import com.ssafy.sellerb.data.remote.response.ConsultingStateResponse
 import com.ssafy.sellerb.databinding.ActivityConsultingBinding
 import com.ssafy.sellerb.util.Constants.EXTRA_KEY_CONSULTING_INFO
@@ -41,6 +39,10 @@ class ConsultingActivity : AppCompatActivity() {
     private lateinit var httpClient: CustomHttpClient
     private var toggle = true
     private lateinit var consultingInfo: ConsultingStateResponse
+    private lateinit var customerId: String
+    private lateinit var customerName: String
+    private lateinit var audioManager: AudioManager
+    private var isSpeaker = false
 
     companion object{
         const val TAG = "ConsultingActivity"
@@ -65,6 +67,9 @@ class ConsultingActivity : AppCompatActivity() {
         consultingInfo = intent.getSerializableExtra(EXTRA_KEY_CONSULTING_INFO)
                 as ConsultingStateResponse
 
+        customerId = intent.getStringExtra("customerId").toString()
+        customerName = intent.getStringExtra("customerName").toString()
+
         if(consultingInfo != null){
             val consultantName = binding.tvConsultantName.text.toString()
             val productPrice = binding.tvProductPrice.text.toString()
@@ -76,6 +81,9 @@ class ConsultingActivity : AppCompatActivity() {
             binding.tvProductPrice.text =
                 productPrice + consultingInfo.product.price.toString()
         }
+        audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        audioManager.mode = AudioManager.MODE_IN_CALL
+
         binding.btnSwitchCamera.setOnClickListener {
             session.getLocalParticipant()!!.switchCamera()
         }
@@ -88,9 +96,11 @@ class ConsultingActivity : AppCompatActivity() {
         binding.viewsContainer.setOnClickListener {
             resizeView()
         }
+        binding.btnSpeakerMode.isActivated = false
 
         binding.btnSpeakerMode.setOnClickListener {
             it.isActivated = !it.isActivated
+            audioManager.isSpeakerphoneOn = !audioManager.isSpeakerphoneOn
         }
     }
 
@@ -122,7 +132,7 @@ class ConsultingActivity : AppCompatActivity() {
                     "OPENVIDUAPP:$OPENVIDU_SECRET".toByteArray(),android.util.Base64.DEFAULT
                 ).trim())
 
-            val sessionId = "kiddo-session"
+            val sessionId = customerId + "-session"
             getToken(sessionId)
 
         } else {
@@ -206,7 +216,7 @@ class ConsultingActivity : AppCompatActivity() {
         session = Session(sessionId, token, this, binding.viewsContainer)
 
         // Initialize our local participant and start local camera
-        val participantName: String = "kiddo"
+        val participantName: String = customerName
         val localParticipant =
             LocalParticipant(participantName, session, this.applicationContext, binding.localGlSurfaceView)
         localParticipant.startCamera()

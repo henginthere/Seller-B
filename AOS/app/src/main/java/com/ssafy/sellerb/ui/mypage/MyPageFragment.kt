@@ -2,6 +2,8 @@ package com.ssafy.sellerb.ui.mypage
 
 import android.view.View
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.ssafy.sellerb.R
 import com.ssafy.sellerb.databinding.FragmentMyPageBinding
 import com.ssafy.sellerb.di.component.FragmentComponent
@@ -30,6 +32,7 @@ class MyPageFragment : BaseFragment<MyPageViewModel>() {
 
         binding.btnLogout.setOnClickListener{
             viewModel.doLogout()
+            Firebase.auth.signOut()
         }
 
         binding.tvUserName.text = ( viewModel.user!!.name ?: "미등록" ) + " 님"

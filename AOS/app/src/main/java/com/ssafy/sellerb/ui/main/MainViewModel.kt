@@ -9,11 +9,11 @@ class MainViewModel(
     coroutineDispatchers: CoroutineDispatchers,
     networkHelper: NetworkHelper,
     private val userRepository: UserRepository
-) :BaseViewModel(coroutineDispatchers, networkHelper){
-
+) : BaseViewModel(coroutineDispatchers, networkHelper) {
 
     override fun onCreate() {
 
     }
+
 
 }
