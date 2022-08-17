@@ -82,10 +82,12 @@ function ManagerMainRight() {
 
   // 검색된 상담사를 보일 건지, 상담사 목록리스트를 보일건지 관리하는 state
   const [listState, setListState] = useState(true);
+  const [isLoaded, setIsLoaded] = useState(false);
 
-  useEffect(() => {
+  const getBrandConsultantList = async () => {
     const name = sessionStorage.getItem("brandNameKor");
-    brandConsultantListApi(name)
+    console.log("LOADING");
+    await brandConsultantListApi(name)
       .then((res) => {
         // console.log("전체컨설턴트 :" + JSON.stringify(res.data));
         setConsultantList(res.data);
@@ -93,18 +95,20 @@ function ManagerMainRight() {
       .catch((err) => {
         console.log("err:" + err.data);
       });
-  }, []);
+  };
 
   useEffect(() => {
+    getBrandConsultantList();
     productGroupListApi()
       .then((res) => {
         // const item = brandList.find((it) => it.brandNameKor === value)
         setGroupList(res.data); // groupList
+        setIsLoaded(true);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [isLoaded]);
 
   const onGroupChange = (e) => {
     e.preventDefault();

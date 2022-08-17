@@ -44,7 +44,6 @@ class ConsultingVideoRoomComponent extends Component {
       chatDisplay: "none",
       currentVideoDevice: undefined,
 
-      productSeq: this.props.product.productSeq,
       productGroupName: this.props.product.productGroupName,
       productName: this.props.product.productName,
       productPrice: this.props.product.productPrice,
@@ -96,6 +95,7 @@ class ConsultingVideoRoomComponent extends Component {
     window.removeEventListener("beforeunload", this.onbeforeunload);
     window.removeEventListener("resize", this.updateLayout);
     window.removeEventListener("resize", this.checkSize);
+
     this.leaveSession();
   }
 
@@ -253,6 +253,7 @@ class ConsultingVideoRoomComponent extends Component {
       myUserName: "",
       localUser: undefined,
     });
+
     if (this.props.leaveSession) {
       this.props.leaveSession();
     }
@@ -448,7 +449,7 @@ class ConsultingVideoRoomComponent extends Component {
 
   screenShare() {
     const videoSource =
-      navigator.userAgent.indexOf("Firefox") !== -1 ? "window" : "screen";
+      navigator.userAgent.indexOf("Chrome") !== -1 ? "window" : "screen";
     const publisher = this.OV.initPublisher(
       undefined,
       {
