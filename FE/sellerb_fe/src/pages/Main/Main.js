@@ -48,9 +48,7 @@ function Main() {
     axios
       .post("/api/auth/login", data)
       .then((res) => {
-        // 데이터 자체만 뽑기
-        // const accessToken = res.data.tokenDto.accessToken;
-        // const refreshToken = res.data.tokenDto.refreshToken;
+
         const adminCheck = res.data.authority;
         // const managerSeq = res.data.seq;
         // const brandSeq = res.data.brandSeq;

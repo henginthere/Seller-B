@@ -31,7 +31,7 @@ const styleObj = {
 
 const styleObj_center = {
   textAlign: "center",
-  margin: "50px",
+  margin: "30px",
 };
 
 const styleObj_right = {
@@ -39,19 +39,6 @@ const styleObj_right = {
   justifyContent: "flex-end",
   margin: "50px",
 };
-
-// const tableHeader = {
-//   display: "flex",
-//   // textAlign: "center",
-//   // justifyContent: "center",
-//   backgroundColor: "grey",
-// };
-
-// const tableRow = {};
-
-// const tableData = {
-//   justifyContent: "start",
-// };
 
 function ManagerMainRight() {
   const btnStyle = {
@@ -229,10 +216,10 @@ function ManagerMainRight() {
           />
           {/* <button onClick={(e) => onSearchBtn()}>검색하기</button> */}
           <SmallButton onClick={onSearchBtn} size="sm" label="검색" />
-          <select onChange={onGroupChange} defaultValue={selectGroup}>
+          {/* <select onChange={onGroupChange} defaultValue={selectGroup}>
             <option />
             {groupList.map((option) =>
-              option.brandName === managerBrandKor ? ( // grouplist정보에는 각 ele마다 한글이름으로 들어있음
+              option.brandName === managerBrandKor ? ( 
                 <option value={option.productGroupName}>
                   {option.productGroupName}
                 </option>
@@ -240,11 +227,13 @@ function ManagerMainRight() {
                 ""
               )
             )}
-          </select>
-          <SyncOutlined
-            style={{ fontSize: "20px", marginLeft: "15px", marginTop: "5px" }}
-            onClick={ResetConsultantList}
-          />
+          </select> */}
+          <div className="manager-main-right-reset-icon">
+            <SyncOutlined
+              style={{ fontSize: "20px", marginLeft: "5px", marginTop: "5px" }}
+              onClick={ResetConsultantList}
+            />
+          </div>
         </div>
 
         <div style={styleObj_center}>
