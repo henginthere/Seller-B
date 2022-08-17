@@ -85,10 +85,13 @@ public class CustomerService {
 
         String id = customerDto.getCustomerId();
         String pw = customerDto.getCustomerPass();
-
+        String g_id[] = id.split("@");
+        String tmp_googleId = String.join("",g_id[0]);
+        String googleId = "G"+tmp_googleId;
             // Use or store profile information
             // ...
-            Optional<Customer> optionalCustomer = customerRepository.findBycustomerId(id);
+            Optional<Customer> optionalCustomer = customerRepository.findBycustomerId(googleId);
+            customerDto.setCustomerId(googleId);
             if(!optionalCustomer.isPresent()){
                 System.out.println("가입된 정보 없음");
                 //회원가입
@@ -112,7 +115,7 @@ public class CustomerService {
 //                customerRepository.save(customer);
             }
 
-            LoginResponseDto loginResponseDto = authService.authorize(id,pw);
+            LoginResponseDto loginResponseDto = authService.authorize(googleId,pw);
 
             return loginResponseDto;
 
@@ -126,15 +129,18 @@ public class CustomerService {
 
         String id = customerDto.getCustomerId();
         String pw = customerDto.getCustomerPass();
-
-        Optional<Customer> optionalCustomer = customerRepository.findBycustomerId(id);
+        String n_id[] = id.split("@");
+        String tmp_naverId = String.join("",n_id[0]);
+        String naverId = "N"+tmp_naverId;
+        Optional<Customer> optionalCustomer = customerRepository.findBycustomerId(naverId);
+        customerDto.setCustomerId(naverId);
         if(!optionalCustomer.isPresent()){
             System.out.println("가입된 정보 없음");
             //회원가입
             signup(customerDto);
         }
 
-        LoginResponseDto loginResponseDto = authService.authorize(id,pw);
+        LoginResponseDto loginResponseDto = authService.authorize(naverId,pw);
 
         return loginResponseDto;
     }
@@ -143,15 +149,18 @@ public class CustomerService {
 
         String id = customerDto.getCustomerId();
         String pw = customerDto.getCustomerPass();
-
-        Optional<Customer> optionalCustomer = customerRepository.findBycustomerId(id);
+        String k_id[] = id.split("@");
+        String tmp_kakaoId = String.join("",k_id[0]);
+        String kakaoId = "K"+tmp_kakaoId;
+        customerDto.setCustomerId(kakaoId);
+        Optional<Customer> optionalCustomer = customerRepository.findBycustomerId(kakaoId);
         if(!optionalCustomer.isPresent()){
             System.out.println("가입된 정보 없음");
             //회원가입
             signup(customerDto);
         }
 
-        LoginResponseDto loginResponseDto = authService.authorize(id,pw);
+        LoginResponseDto loginResponseDto = authService.authorize(kakaoId,pw);
 
         return loginResponseDto;
     }

@@ -20,7 +20,7 @@ function ProductList() {
 
   const [groupList, setGroupList] = useState([]);
   const [managerBrand, setManagerBrand] = useState(
-    sessionStorage.getItem("brandNameKor")
+    sessionStorage.getItem("brandNameKor"),
   );
   const [brandSeq, setBrandSeq] = useState(sessionStorage.getItem("brandSeq"));
 
@@ -28,15 +28,21 @@ function ProductList() {
   const [searchState, setSearchState] = useState(false);
   const [searchItems, setSearchItems] = useState([]);
   const [groupOption, setGroupOption] = useState("제품 전체보기");
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     brandProductListApi(brandSeq).then((res) => {
       setTotalItems(res.data);
+      setIsLoaded(true);
       // console.log("처음 전체 아이템들 : " + JSON.stringify(res.data));
     });
-  }, []);
+  }, [isLoaded]);
 
   useEffect(() => {
+    if (sessionStorage.getItem("accessToken") === null) {
+      alert("접근 권한이 없습니다.");
+      navigate("/");
+    }
     productGroupListApi()
       .then((res) => {
         // console.log(JSON.stringify(res.data));
@@ -55,7 +61,7 @@ function ProductList() {
     // option에 해당하는 제품군의 제품들 불러오기
     const selectGroupSeq = groupList.find(
       (it) =>
-        it.brandName === managerBrand && it.productGroupName === e.target.value
+        it.brandName === managerBrand && it.productGroupName === e.target.value,
     );
 
     productGroupItemsApi(selectGroupSeq.productGroupSeq)
@@ -80,7 +86,7 @@ function ProductList() {
     setSearchState(false);
 
     const search = totalItems.filter((ele) =>
-      ele.productId.includes(searchWord)
+      ele.productId.includes(searchWord),
     );
     console.log("After search Filter : " + JSON.stringify(search));
     setSearchItems(search);
@@ -98,19 +104,17 @@ function ProductList() {
     }
   }
 
-  const onChangeImage = () => {};
-
   const onMoveProductRegister = () => {
     navigate("/manager/productRegister");
-  }
+  };
 
   return (
     <>
       <NavBar />
-      <div className="page-title">제품 목록</div>
-      <div className="product-list">
-        <div className="page-navi-wrapper">
-          <div className="navi-left">
+      <div className='page-title'>제품 목록</div>
+      <div className='product-list'>
+        <div className='page-navi-wrapper'>
+          <div className='navi-left'>
             <select onChange={onGroupChange} defaultValue={groupOption}>
               <option>제품 전체보기</option>
               {groupList.map((option) =>
@@ -120,23 +124,23 @@ function ProductList() {
                   </option>
                 ) : (
                   ""
-                )
+                ),
               )}
             </select>
           </div>
           {searchWord === "" ? (
-            <div className="navi-center"></div>
+            <div className='navi-center'></div>
           ) : (
-            <div className="navi-center">
-              <div className="navi-center-search-word">{searchWord}</div>
-              <div className="navi-center-result-word">
+            <div className='navi-center'>
+              <div className='navi-center-search-word'>{searchWord}</div>
+              <div className='navi-center-result-word'>
                 에 대한 검색결과입니다
               </div>
             </div>
           )}
-          <div className="navi-right">
+          <div className='navi-right'>
             <input
-              placeholder="제품명으로 검색"
+              placeholder='제품명으로 검색'
               value={searchWord}
               onChange={onSearchWordHandler}
               onKeyPress={(e) => {
@@ -146,8 +150,11 @@ function ProductList() {
               }}
             />
 
-            <div className="navi-prod-register-btn">
-              <SmallButton label="제품 등록하기" onClick={onMoveProductRegister}/>
+            <div className='navi-prod-register-btn'>
+              <SmallButton
+                label='제품 등록하기'
+                onClick={onMoveProductRegister}
+              />
               {/* <PlusCircleOutlined
                 id="prod-create-btn"
                 onClick={() => navigate("/manager/productRegister")}
@@ -155,7 +162,7 @@ function ProductList() {
             </div>
           </div>
         </div>
-        <div className="product-list-wrapper">
+        <div className='product-list-wrapper'>
           {groupOption === "제품 전체보기" && searchWord === "" ? (
             <GroupOptionList props={totalItems} />
           ) : groupOption !== "제품 전체보기" || searchWord === "" ? (

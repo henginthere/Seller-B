@@ -24,7 +24,7 @@ function WaitingPage() {
   const [imgBase64, setImgBase64] = useState([]); // 미리보기를 구현할 state
   const [imgFile, setImgFile] = useState("");
   const [previewUrl, setPreviewUrl] = useState(
-    `${process.env.PUBLIC_URL}/img/default_img.png`
+    `${process.env.PUBLIC_URL}/img/default_img.png`,
   );
 
   // 대기화면
@@ -42,6 +42,10 @@ function WaitingPage() {
 
   /* 해당 seq에 맞는 Product 정보 먼저 가져오기 */
   useEffect(() => {
+    if (sessionStorage.getItem("accessToken") === null) {
+      alert("접근 권한이 없습니다.");
+      navigate("/");
+    }
     console.log("WaitingPage Seq: " + id);
     productDetailApi(id)
       .then((res) => {
@@ -88,17 +92,17 @@ function WaitingPage() {
     }
   };
 
-  const onChangeInputMent = (e)=>{
+  const onChangeInputMent = (e) => {
     console.log("on Change Ment :" + e.target.value);
 
     setInputWaitingMent(e.target.value);
-  }
+  };
 
-  const onChangeMent = (e)=>{
+  const onChangeMent = (e) => {
     console.log("on Change Ment :" + e.target.value);
 
     setWaitingMent(e.target.value);
-  }
+  };
 
   const onResetFile = () => {
     setImgFile("");
@@ -106,19 +110,18 @@ function WaitingPage() {
   };
 
   const onRegisterBtn = () => {
-
-    console.log("등록할 멘트 : " + waitingMent)
+    console.log("등록할 멘트 : " + waitingMent);
     let infoMent = "";
-    if(inputWaitingMent === ""){
+    if (inputWaitingMent === "") {
       infoMent = waitingMent;
-    }else{
+    } else {
       infoMent = inputWaitingMent;
     }
-    
+
     const Info = {
       productSeq: product.productSeq,
       customerWaitingPageMent: infoMent,
-      customerWaitingPageImage: resImg
+      customerWaitingPageImage: resImg,
     };
 
     console.log("등록 전, WaitingPage Info: " + JSON.stringify(Info));
@@ -164,97 +167,94 @@ function WaitingPage() {
     <>
       <NavBar />
       {/* <h4 className="page-title">대기화면 등록</h4> */}
-      <div className="register-main-wrapper">
-        <div className="register-sub-wrapper">
-          <div className="register-area-wrapper">
+      <div className='register-main-wrapper'>
+        <div className='register-sub-wrapper'>
+          <div className='register-area-wrapper'>
             {/*  */}
-            <div className="left-img">
+            <div className='left-img'>
               {
-                // 기존이미지도 없고, 새로 올린 파일도 없으면, Preview 이미지  
-                waitingImg === "" && imgFile === ""
-                ? (
+                // 기존이미지도 없고, 새로 올린 파일도 없으면, Preview 이미지
+                waitingImg === "" && imgFile === "" ? (
                   <img
-                    className="product-register-img"
-                    alt="#"
+                    className='product-register-img'
+                    alt='#'
                     src={previewUrl}
                   />
-                  ) 
-              : ( 
-                waitingImg !=="" // 만약에 기존등록이미지가 있으면 고걸 보여줘
-                  ? (   
-                    <img
-                      className="product-register-img"
-                      alt="###"
-                      src={waitingImg}
-                    />
-                    )
-                : (
+                ) : waitingImg !== "" ? ( // 만약에 기존등록이미지가 있으면 고걸 보여줘
+                  <img
+                    className='product-register-img'
+                    alt='###'
+                    src={waitingImg}
+                  />
+                ) : (
                   imgBase64.map((item) => {
                     return (
                       <div>
                         <img
-                          className="product-register-img"
+                          className='product-register-img'
                           src={item}
-                          alt="First Slide"
+                          alt='First Slide'
                         />
                       </div>
                     );
                   })
                 )
-                
-              )}
-              
-              <div className="product-img-bottom-wrapper">
+              }
+
+              <div className='product-img-bottom-wrapper'>
                 <input
-                  className="img-btn"
-                  multiple="multiple"
-                  type="file"
-                  accept="image/*"
-                  id="file"
+                  className='img-btn'
+                  multiple='multiple'
+                  type='file'
+                  accept='image/*'
+                  id='file'
                   onChange={onHandleChangeFile}
                 />
-                <div className="product-register-small-btn">
-                  <SmallButton label="업로드 완료" onClick={onImgRegisterBtn} />
-                  <BackSmallButton label="이미지 초기화" onClick={onResetFile} />
+                <div className='product-register-small-btn'>
+                  <SmallButton label='업로드 완료' onClick={onImgRegisterBtn} />
+                  <BackSmallButton
+                    label='이미지 초기화'
+                    onClick={onResetFile}
+                  />
                 </div>
               </div>
             </div>
             {/*  */}
-            <div className="right-input">
-              <div className="input-sub-content-wrapper">
+            <div className='right-input'>
+              <div className='input-sub-content-wrapper'>
                 {/*  */}
-                <div className="input-ele">
+                <div className='input-ele'>
                   <p>품번</p>
-                  <div className="product-id-input-wrapper">
+                  <div className='product-id-input-wrapper'>
                     <input
-                      className="product-id-input"
-                      name="productId"
+                      className='product-id-input'
+                      name='productId'
                       value={product.productId}
-                      variant="outlined"
+                      variant='outlined'
                     />
                   </div>
                 </div>
                 {/*  */}
-                <div className="input-ele">
+                <div className='input-ele'>
                   <p>제품명</p>
-                  <div className="product-id-input-wrapper">
+                  <div className='product-id-input-wrapper'>
                     <input
-                      className="product-id-input"
-                      name="productName"
+                      className='product-id-input'
+                      name='productName'
                       value={product.productName}
-                      variant="outlined"
+                      variant='outlined'
                     />
                   </div>
                 </div>
                 {/*  */}
-                <div className="input-ele">
+                <div className='input-ele'>
                   <p>가격</p>
-                  <div className="product-id-input-wrapper">
+                  <div className='product-id-input-wrapper'>
                     <input
-                      className="product-id-input"
-                      name="productPrice"
+                      className='product-id-input'
+                      name='productPrice'
                       value={product.productPrice}
-                      variant="outlined"
+                      variant='outlined'
                     />
                   </div>
                 </div>
@@ -271,33 +271,32 @@ function WaitingPage() {
                   </div>
                 </div> */}
                 {/*  */}
-                <div className="input-ele">
+                <div className='input-ele'>
                   <p>대기화면 멘트</p>
-                  <div className="product-id-input-wrapper">
-                    {
-                      waitingMent === "" 
-                      ? <input
-                        className="product-id-input"
+                  <div className='product-id-input-wrapper'>
+                    {waitingMent === "" ? (
+                      <input
+                        className='product-id-input'
                         onChange={onChangeInputMent}
                         // name="productGroup"
                         value={inputWaitingMent}
-                        placeholder="출력 멘트를 입력해주세요"
-                        variant="outlined"
+                        placeholder='출력 멘트를 입력해주세요'
+                        variant='outlined'
                       />
-                    : <input
-                        className="product-id-input"
-                        name="productGroup"
+                    ) : (
+                      <input
+                        className='product-id-input'
+                        name='productGroup'
                         value={waitingMent}
                         onChange={onChangeMent}
-                        variant="outlined"
+                        variant='outlined'
                       />
-                    }
-                    
+                    )}
                   </div>
                 </div>
                 {/*  */}
-                <div className="product-register-medi-btn">
-                  <MediButton label="등록하기" onClick={onRegisterBtn} />
+                <div className='product-register-medi-btn'>
+                  <MediButton label='등록하기' onClick={onRegisterBtn} />
                   {/* <MediButton label="이미지 초기화" onClick={onResetFile} /> */}
                 </div>
               </div>

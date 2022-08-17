@@ -3,7 +3,8 @@
  *  관리자 Main
  *
  *  */
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import ManagerMainLeft from "../../../components/Manager/Main/ManagerMainLeft";
 import ManagerMainRight from "../../../components/Manager/Main/ManagerMainRight";
 import ManagerMainCenter from "../../../components/Manager/Main/ManagerMainCenter";
@@ -14,6 +15,14 @@ import "./ManagerMain.css";
 
 function ManagerMain() {
   // const [list, setList] = useState([]);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (sessionStorage.getItem("accessToken") === null) {
+      alert("접근 권한이 없습니다.");
+      navigate("/");
+    }
+    return () => {};
+  }, []);
 
   return (
     <div className='center'>
