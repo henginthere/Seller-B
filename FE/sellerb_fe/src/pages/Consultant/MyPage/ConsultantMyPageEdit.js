@@ -36,6 +36,10 @@ function ConsultantMyPageEdit() {
   const [groupName, setGroupName] = useState("");
 
   useEffect(() => {
+    if (sessionStorage.getItem("accessToken") === null) {
+      alert("접근 권한이 없습니다.");
+      navigate("/");
+    }
     detailConsultantApi(id)
       .then((res) => {
         setConsultant(res.data);
@@ -87,60 +91,59 @@ function ConsultantMyPageEdit() {
   return (
     <>
       <NavBar />
-      <div className="notice-title">상담사 프로필</div>
+      <div className='notice-title'>상담사 프로필</div>
       {/* Left Content */}
-      <div className="consultant-profile-container">
-        <div className="profile-wrapper">
-        <div className="con-mypage-left-wrapper">
+      <div className='consultant-profile-container'>
+        <div className='profile-wrapper'>
+          <div className='con-mypage-left-wrapper'>
             <img
-              className="con-mypage-default-img"
-              alt="#"
+              className='con-mypage-default-img'
+              alt='#'
               src={consultant.consultantImageUrl}
             />
           </div>
 
-        {/*  */}
-        <div className="con-mypage-profile-left">
-
-        <div className="con-profile-element">
-            <p>사번</p>
-            <div>{consultant.consultantId}</div>
-          </div>
-          <div className="con-profile-element">
-            <p>사원명</p>
-            <div>{consultant.consultantName}</div>
-          </div>
-          <div className="con-profile-element">
-            <p>사원 Email</p>
+          {/*  */}
+          <div className='con-mypage-profile-left'>
+            <div className='con-profile-element'>
+              <p>사번</p>
+              <div>{consultant.consultantId}</div>
+            </div>
+            <div className='con-profile-element'>
+              <p>사원명</p>
+              <div>{consultant.consultantName}</div>
+            </div>
+            <div className='con-profile-element'>
+              <p>사원 Email</p>
               <input
                 defaultValue={consultant.consultantEmail}
-                name="consultantEmail"
+                name='consultantEmail'
                 onChange={onChangeInfo}
               />
-          </div>
-          <div className="con-profile-element">
-            <p>사원 Pnum</p>
+            </div>
+            <div className='con-profile-element'>
+              <p>사원 Pnum</p>
               <input
                 defaultValue={consultant.consultantTel}
-                name="consultantTel"
+                name='consultantTel'
                 onChange={onChangeInfo}
               />
-          </div>
-          <div className="con-profile-element">
-            <p>비밀번호</p>
+            </div>
+            <div className='con-profile-element'>
+              <p>비밀번호</p>
               <input value={editPass} onChange={onChangePass} />
-          </div>
-          <div className="con-profile-element">
-            <p>제품군</p>
-            <div>{consultant.productGroupName}</div>
-          </div>
-          <div style={{ display: "flex", marginLeft: "5px" }}>
-            <SmallButton label="수정완료" onClick={onEditCompleteBtn} />
-          </div>
+            </div>
+            <div className='con-profile-element'>
+              <p>제품군</p>
+              <div>{consultant.productGroupName}</div>
+            </div>
+            <div style={{ display: "flex", marginLeft: "5px" }}>
+              <SmallButton label='수정완료' onClick={onEditCompleteBtn} />
+            </div>
 
-        {/*  */}
-      </div>
-      </div>
+            {/*  */}
+          </div>
+        </div>
       </div>
       <Footer />
     </>
