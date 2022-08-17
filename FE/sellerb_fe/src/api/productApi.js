@@ -39,7 +39,7 @@ export const productEditApi = async (product, success, fail) =>{
     console.log("in productEdit API: " + product.productSeq);
     console.log("in productEdit API: " + JSON.stringify(product));
 
-    return await api.put(`/product/${product.productSeq}`, product).then(success).catch(fail);
+    return await fileapi.put(`/product/${product.productSeq}`, product).then(success).catch(fail);
 }
 
 // POST : WaitingPage.js : 해당 제품의 대기화면 등록하기

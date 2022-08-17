@@ -9,8 +9,10 @@ import { registerConsultantApi } from "../../../api/consultantApi";
 import { productGroupListApi } from "../../../api/productApi";
 import axios from "axios";
 
+import { toast, ToastContainer } from "react-toastify";
 import { SmallButton } from "../../../components/Common/SmallButton";
 import { MediButton } from "../../../components/Common/MediButton";
+import { BackMediButton } from "../../../components/Common/BackMediButton"
 
 function ConsultantRegister() {
   const navigate = useNavigate();
@@ -131,6 +133,10 @@ function ConsultantRegister() {
     .then((response) => {
       if(response.data){
         console.log(response.data)
+        toast.success("이미지 등록 완료!", {
+          autoClose: 800,
+          position: toast.POSITION.TOP_CENTER
+        });
         setResImg(response.data);
       }
     })
@@ -183,6 +189,7 @@ function ConsultantRegister() {
             onChange={onHandleChangeFile}
           />
           <SmallButton label="이미지 등록" onClick={onImgRegisterBtn} />
+          <ToastContainer />
         </div>
 
 
@@ -280,7 +287,7 @@ function ConsultantRegister() {
                 variant="contained"
                 label="등록"
               />
-              <MediButton
+              <BackMediButton
                 onClick={onCancleBtn}
                 label="취소"
               />

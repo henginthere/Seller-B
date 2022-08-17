@@ -11,7 +11,6 @@ import { indigo } from "@mui/material/colors";
 import { SmallButton } from "../../../components/Common/SmallButton";
 import { MediButton } from "../../../components/Common/MediButton";
 
-
 function ManagerMyPage() {
     const navigate = useNavigate(); 
     const [manager, setManager] = useState([]);
@@ -22,7 +21,6 @@ function ManagerMyPage() {
         console.log("useEffect:" + sessionStorage.getItem("seq"));
         getManagerInfoApi(managerSeq)
           .then((res) => {
-            // console.log(JSON.stringify(res.data));
             setManager(res.data);
             setBrandNameKor(res.data.brand.brandNameKor);
           })
@@ -40,9 +38,9 @@ function ManagerMyPage() {
   return (
     <>
         <NavBar />
-        <div className="notice-title">매니저 프로필</div>
+        <div className="manager-profile-title">매니저 프로필</div>
         <div className="consultant-profile-container">
-        <div className="profile-wrapper">
+        <div className="manager-profile-wrapper">
           <div className="con-mypage-left-wrapper">
             <img
               className="con-mypage-default-img"
@@ -69,8 +67,8 @@ function ManagerMyPage() {
               <div>{manager.managerTel}</div>
             </div>
      
-            <div style={{ display: "flex", marginLeft: "5px" }}>
-              <SmallButton label="수정하기" onClick={onMoveEditBtn} />
+            <div style={{ display: "flex", marginLeft: "15px" }}>
+              <MediButton label="수정하기" onClick={onMoveEditBtn} />
             </div>
           </div>
 
