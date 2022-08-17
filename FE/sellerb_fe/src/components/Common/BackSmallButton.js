@@ -33,8 +33,8 @@ const StyledButton = styled.button`
 
 
   border-radius: 0px;
-  color: #324E66;
-  background-color: #E1EAFF;
+  color: #132506;
+  background-color: #e0d5ed;
   border: 0px none;
   margin-right: 10px;
 
@@ -44,15 +44,14 @@ const StyledButton = styled.button`
 
   &:hover {
     transform: scale(1.04);
-    background-color: #CDD4E7;
+    background-color: #e9d9ee;
     cursor: pointer;
   }
 
 
 `;
 
-export const SmallButton = ({disabled, size, label, onClick}) => {
-
+export const BackSmallButton = ({disabled, size, label, onClick}) => {
   // 상단 사이즈 리스트에서 해당하는 것 가져옴
   const sizeStyle= SIZE[size];
 
