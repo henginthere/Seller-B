@@ -3,13 +3,10 @@ import styled from "styled-components";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "./NoticeDetail.css";
 import { Footer, NavBar } from "../../components/index";
-<<<<<<< HEAD
+
 import { DangerMediButton} from '../../components/Common/DangerMediButton'
 import axios from "axios";
-=======
-import { DangerMediButton } from "../../components/Common/DangerMediButton";
 
->>>>>>> 96376293e59ced092643372075f992b07c8a2e10
 import {
   detailNoticeApi,
   modifyNoticeApi,
@@ -47,7 +44,7 @@ function NoticeEdit() {
 
     // console.log("")
 
-<<<<<<< HEAD
+
     // const EditInfo = {
     //   noticeSeq: id,
     //   post :{
@@ -62,16 +59,6 @@ function NoticeEdit() {
         noticeTitle: noticeData.noticeTitle,
         noticeContent: noticeData.noticeContent
     }
-=======
-    const Info = {
-      noticeSeq: id,
-      post: {
-        brandSeq: bSeq,
-        noticeTitle: noticeData.noticeTitle,
-        noticeContent: noticeData.noticeContent,
-      },
-    };
->>>>>>> 96376293e59ced092643372075f992b07c8a2e10
 
     modifyNoticeApi(EditInfo, EditSeq)
       .then((res) => {
