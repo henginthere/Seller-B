@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./NavBar.css";
-import { getManagerInfoApi } from "../../../api/managerApi";
-import { detailConsultantApi } from "../../../api/consultantApi";
-import styled from "styled-components";
+// import { getManagerInfoApi } from "../../../api/managerApi";
+// import { detailConsultantApi } from "../../../api/consultantApi";
+// import styled from "styled-components";
 import {
   NotificationOutlined,
   YoutubeOutlined,
-  DatabaseOutlined,
   LogoutOutlined,
   BuildOutlined,
   CustomerServiceOutlined,

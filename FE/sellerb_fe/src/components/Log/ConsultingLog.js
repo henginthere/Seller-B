@@ -50,6 +50,14 @@ function ConsultingLog({ consultant_id }) {
     var dd = parsedDate.getDate();
     var hh = parsedDate.getHours() + 9;
     var mm = parsedDate.getMinutes();
+    const thirtyFirst = [1, 3, 5, 7, 8, 10, 12];
+    const thirty = [4, 6, 9, 11];
+
+    if (hh > 24) {
+      hh = hh - 24;
+      dd = dd + 1;
+    }
+
     return (
       yyyy +
       "-" +
