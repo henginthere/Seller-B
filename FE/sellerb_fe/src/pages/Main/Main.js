@@ -4,21 +4,21 @@ import "./Main.css";
 
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { LOGIN } from "../../slices/userSlice";
+// import { LOGIN } from "../../slices/userSlice";
 
 // import { loginUser }
 
-import { LoginApi } from "../../api/userApi";
+// import { LoginApi } from "../../api/userApi";
 import { getManagerInfoApi } from "../../api/managerApi";
-import { setRefreshToken, getCookieToken } from "../../storage/Cookie";
+// import { setRefreshToken, getCookieToken } from "../../storage/Cookie";
 import { SET_TOKEN, CHECK_ADMIN } from "../../slices/authSlice";
 
 // import material ui
-import { styled } from "@mui/material/styles";
+// import { styled } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import Checkbox from "@mui/material/Checkbox";
-import FormControlLabel from "@mui/material/Checkbox";
+// import Checkbox from "@mui/material/Checkbox";
+// import FormControlLabel from "@mui/material/Checkbox";
 
 function Main() {
   const navigate = useNavigate();
@@ -49,11 +49,11 @@ function Main() {
       .post("/api/auth/login", data)
       .then((res) => {
         // 데이터 자체만 뽑기
-        const accessToken = res.data.tokenDto.accessToken;
-        const refreshToken = res.data.tokenDto.refreshToken;
+        // const accessToken = res.data.tokenDto.accessToken;
+        // const refreshToken = res.data.tokenDto.refreshToken;
         const adminCheck = res.data.authority;
-        const managerSeq = res.data.seq;
-        const brandSeq = res.data.brandSeq;
+        // const managerSeq = res.data.seq;
+        // const brandSeq = res.data.brandSeq;
 
         // sessionStorage에 저장
         sessionStorage.setItem("accessToken", res.data.tokenDto.accessToken);

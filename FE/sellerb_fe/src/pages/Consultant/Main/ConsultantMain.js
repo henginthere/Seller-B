@@ -44,16 +44,15 @@ function ConsultantMain() {
   }, []);
 
   useEffect(() => {
-    console.log("Today : " + today);
+    if (sessionStorage.getItem("accessToken") === null) {
+      alert("접근 권한이 없습니다.");
+      navigate("/");
+    }
+    // console.log("Today : " + today);
     listNoticeApi()
       .then((res) => {
         setItems(res.data.reverse());
 
-        // const items = res.data.filter(
-        //   (it) => it.noticeRegDate.getDate() === today.getDate(),
-        // );
-        // console.log("오늘 새로운 공지사항 갯수:");
-        // console.log(items);
         console.log(res.data[0].noticeRegDate);
         var newDate = new Date(res.data[0].noticeRegDate);
 
