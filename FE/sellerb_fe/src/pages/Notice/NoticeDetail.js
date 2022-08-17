@@ -117,6 +117,40 @@ function NoticeDetail() {
         </div>
       </div>
 
+<<<<<<< HEAD
+=======
+      {/* <div className='notice-detail-content-header'>
+        <div className='content-header-row'>
+          <div className='row-left'>제목</div>
+          <div className='row-right'>{noticeData.noticeTitle}</div>
+        </div>
+
+        <div className='content-header-row'>
+          <div className='row-left'>작성일</div>
+          <div className='row-right'>
+            {parsingDate(noticeData.noticeRegDate)}
+          </div>
+        </div>
+
+        <div className='notice-detail-content-detail'>
+          <div>
+            <pre>{noticeData.noticeContent}</pre>
+          </div>
+        </div>
+        {/* content하단 */}
+      {/* <div className='notice-detail-bottom'>
+        <button
+          className='detail-button'
+          onClick={(e) => navigate("/manager/noticeList")}
+        >
+          목록
+        </button>
+        <button className='detail-button' onClick={(e) => onModifyBtn()}>
+          수정하기
+        </button>
+      </div> */}
+
+>>>>>>> feature-ui-FinalFIx
       <Footer />
     </>
   );
