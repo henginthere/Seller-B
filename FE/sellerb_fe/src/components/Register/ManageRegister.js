@@ -163,7 +163,6 @@ function ManageRegister() {
         console.log("가입 완료")
         
         // navigate("/");
- 
       })
       .catch((err) => {
         console.log(err);
