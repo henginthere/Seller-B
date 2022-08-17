@@ -25,6 +25,9 @@ function NotieWriteTwo() {
   };
 
   const onNoticeContentHandler = (e) => {
+
+    // dangerouslySetInnerHTML={{__html: "<h1>hi</h1>"}};
+
     setNoticeContent(e.target.value);
     console.log("바뀐 Content: " + noticeContent);
   };
