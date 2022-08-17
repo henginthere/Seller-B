@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Meeting from "../../../components/Meeting/Meeting";
 
 import { NavBar, Footer } from "../../../components/index";
@@ -9,6 +10,13 @@ function MeetingManCon() {
     minHeight: "555px",
     height: "100%",
   };
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (sessionStorage.getItem("accessToken") === null) {
+      alert("접근 권한이 없습니다.");
+      navigate("/");
+    }
+  }, []);
   return (
     <div style={wrapper}>
       <NavBar />

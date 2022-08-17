@@ -31,15 +31,16 @@ export const startConsultingApi = async (consultingData, success, fail) => {
     .catch(fail);
 };
 
-// 상담 종료시 state -> end로 변경w
-export const endConsultingApi = async (
-  consultingSeq,
-  consultingStatus,
-  success,
-  fail,
-) => {
+// 상담 종료시 state -> end로 변경
+export const endConsultingApi = async (consultingSeq, success, fail) => {
   return await api
-    .put(`/consulting/state/${consultingSeq}`, consultingStatus)
+    .put(
+      `/consulting/state/${consultingSeq}`,
+      {
+        consultingState: "end",
+      },
+      { header: { "Content-Type": "application/json" } },
+    )
     .then(success)
     .catch(fail);
 };
