@@ -32,7 +32,7 @@ const addZero = (n) => {
   return n < 10 ? "0" + n : n;
 };
 function AttendanceLog({ consultant_id }) {
-  console.log(consultant_id);
+  // console.log(consultant_id);
   const params = useParams();
 
   const [initData, setInitData] = useState([]);
