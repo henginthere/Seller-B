@@ -10,7 +10,7 @@ import com.ssafy.sellerb.data.repository.ProductRepository
 import com.ssafy.sellerb.data.repository.UserRepository
 import com.ssafy.sellerb.di.ApplicationContext
 import com.ssafy.sellerb.di.module.ApplicationModule
-import com.ssafy.sellerb.util.CoroutineDispatchers
+import com.ssafy.sellerb.util.coroutine.CoroutineDispatchers
 import com.ssafy.sellerb.util.network.NetworkHelper
 import dagger.Component
 import javax.inject.Singleton

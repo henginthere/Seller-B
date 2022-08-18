@@ -90,9 +90,11 @@ dependencies {
 
     //fcm
     implementation 'com.google.firebase:firebase-messaging:20.1.0'
-    implementation platform('com.google.firebase:firebase-bom:30.3.1')
-    implementation 'com.google.firebase:firebase-analytics'
+    implementation platform('com.google.firebase:firebase-bom:30.2.0')
+    implementation 'com.google.firebase:firebase-auth-ktx:21.0.7'
     implementation 'com.google.android.gms:play-services-auth:20.2.0'
+    implementation 'com.google.firebase:firebase-analytics:21.1.0'
+
 
     // Image
     implementation "com.github.bumptech.glide:glide:4.12.0"
@@ -101,6 +103,9 @@ dependencies {
         // Excludes the support library because it's already included by Glide.
         transitive = false
     }
+
+    // Naver
+    implementation 'com.navercorp.nid:oauth-jdk8:5.1.1'
 
     implementation project(":webrtc")
 }

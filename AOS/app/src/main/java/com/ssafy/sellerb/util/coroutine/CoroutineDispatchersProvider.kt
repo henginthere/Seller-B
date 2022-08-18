@@ -1,4 +1,4 @@
-package com.ssafy.sellerb.util
+package com.ssafy.sellerb.util.coroutine
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers

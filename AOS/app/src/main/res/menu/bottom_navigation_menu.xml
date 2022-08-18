@@ -8,14 +8,14 @@
         android:icon="@drawable/selector_my_page"
         app:showAsAction="always"/>
 
-    <item android:id="@+id/item_empty"
+    <item android:id="@+id/item_home"
         android:title=""
         android:enabled="false"
         android:checkable="false"/>
 
-    <item android:id="@+id/item_home"
-        android:title="@string/menu_home"
-        android:titleCondensed="@string/menu_home"
+    <item android:id="@+id/item_consulting_history"
+        android:title="@string/menu_history"
+        android:titleCondensed="@string/menu_history"
         android:icon="@drawable/selector_consulting"
         app:showAsAction="always"/>
 
