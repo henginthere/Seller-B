@@ -2,7 +2,6 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import React from "react";
 
-// import Main from './pages/Main/Main';
 import {
   Main,
   ManagerMain,

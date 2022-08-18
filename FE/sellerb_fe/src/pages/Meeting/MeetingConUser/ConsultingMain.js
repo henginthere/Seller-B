@@ -123,16 +123,12 @@ function ConsultingMain() {
                             setProduct({ ...res.data }, function () {
                               alert("제품명 : " + product.productName);
                               console.log("!!!ON CLICKsetProduct CALL!!!");
-                              // console.log(product);
                             });
                           })
                           .catch((err) => {
                             alert("제품정보 로드 실패! in onClick : " + err);
                           });
 
-                        // console.log(
-                        //   "ONCLICK!!!!product Seq : " + values.productSeq,
-                        // );
                         setSessionId(values.customerId + "-session");
                         startConsultingApi({
                           customerId: values.customerId,
@@ -141,8 +137,6 @@ function ConsultingMain() {
                           consultingState: "waiting",
                         })
                           .then((res) => {
-                            // console.log("Starting Consult... ");
-                            // console.log(res);
                             setConsultingSeq(res.data.consultingSeq);
                           })
                           .catch((err) => {

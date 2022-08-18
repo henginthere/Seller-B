@@ -142,8 +142,6 @@ function WaitingPage() {
     // -> FormData에 file이라는 이름의 파일 배열이 들어감
     Object.values(imgFile).forEach((file) => fd.append("data", file));
 
-    // fd.append(
-    //   "comment",)
     console.log("보낼 fd: " + fd);
 
     await axios
@@ -166,11 +164,9 @@ function WaitingPage() {
   return (
     <>
       <NavBar />
-      {/* <h4 className="page-title">대기화면 등록</h4> */}
       <div className='register-main-wrapper'>
         <div className='register-sub-wrapper'>
           <div className='register-area-wrapper'>
-            {/*  */}
             <div className='left-img'>
               {
                 // 기존이미지도 없고, 새로 올린 파일도 없으면, Preview 이미지
@@ -219,10 +215,8 @@ function WaitingPage() {
                 </div>
               </div>
             </div>
-            {/*  */}
             <div className='right-input'>
               <div className='input-sub-content-wrapper'>
-                {/*  */}
                 <div className='input-ele'>
                   <p>품번</p>
                   <div className='product-id-input-wrapper'>
@@ -234,7 +228,6 @@ function WaitingPage() {
                     />
                   </div>
                 </div>
-                {/*  */}
                 <div className='input-ele'>
                   <p>제품명</p>
                   <div className='product-id-input-wrapper'>
@@ -246,7 +239,6 @@ function WaitingPage() {
                     />
                   </div>
                 </div>
-                {/*  */}
                 <div className='input-ele'>
                   <p>가격</p>
                   <div className='product-id-input-wrapper'>
@@ -258,19 +250,6 @@ function WaitingPage() {
                     />
                   </div>
                 </div>
-                {/*  */}
-                {/* <div className="input-ele">
-                  <p>제품군</p>
-                  <div className="product-id-input-wrapper">
-                    <input
-                      className="product-id-input"
-                      name="productGroup"
-                      // value={product.productGroup.productGroupName}
-                      variant="outlined"
-                    />
-                  </div>
-                </div> */}
-                {/*  */}
                 <div className='input-ele'>
                   <p>대기화면 멘트</p>
                   <div className='product-id-input-wrapper'>
@@ -278,7 +257,6 @@ function WaitingPage() {
                       <input
                         className='product-id-input'
                         onChange={onChangeInputMent}
-                        // name="productGroup"
                         value={inputWaitingMent}
                         placeholder='출력 멘트를 입력해주세요'
                         variant='outlined'
@@ -294,14 +272,11 @@ function WaitingPage() {
                     )}
                   </div>
                 </div>
-                {/*  */}
                 <div className='product-register-medi-btn'>
                   <MediButton label='등록하기' onClick={onRegisterBtn} />
-                  {/* <MediButton label="이미지 초기화" onClick={onResetFile} /> */}
                 </div>
               </div>
             </div>
-            {/*  */}
           </div>
         </div>
       </div>

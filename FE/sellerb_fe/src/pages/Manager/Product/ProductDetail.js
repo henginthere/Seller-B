@@ -63,8 +63,6 @@ function ProductDetail() {
   return (
     <>
       <NavBar />
-      {/* <h4 className="page-title">제품 상세</h4> */}
-
       <div className='register-main-wrapper'>
         <div className='register-sub-wrapper'>
           <div className='register-area-wrapper'>
@@ -79,7 +77,6 @@ function ProductDetail() {
             {/* 오른쪽 영역 */}
             <div className='right-input'>
               <div className='input-sub-content-wrapper'>
-                {/*  */}
                 <div className='input-ele'>
                   <p>품번</p>
                   <div className='product-id-input-wrapper'>
@@ -91,7 +88,6 @@ function ProductDetail() {
                     />
                   </div>
                 </div>
-                {/*  */}
                 <div className='input-ele'>
                   <p>제품명</p>
                   <div className='product-id-input-wrapper'>
@@ -102,7 +98,6 @@ function ProductDetail() {
                     />
                   </div>
                 </div>
-                {/* */}
                 <div className='input-ele'>
                   <p>가격</p>
                   <div className='product-id-input-wrapper'>
@@ -114,7 +109,6 @@ function ProductDetail() {
                     />
                   </div>
                 </div>
-                {/* */}
                 <div className='input-ele'>
                   <p>제품메뉴얼</p>
                   <div className='product-id-input-wrapper'>
@@ -126,15 +120,8 @@ function ProductDetail() {
                         {product.productManual.slice(0, 30)}...
                       </a>
                     </div>
-                    {/* <input
-                      className="product-id-input"
-                      name="productManual"
-                      value={product.productManual}
-                      variant="outlined"
-                    /> */}
                   </div>
                 </div>
-                {/*  */}
                 <div className='input-ele'>
                   <p>제품군</p>
                   <div className='product-id-input-wrapper'>
@@ -154,76 +141,11 @@ function ProductDetail() {
                   <MediButton label='대기화면 등록' onClick={goWaitingPage} />
                   <DangerMediButton label='삭제하기' onClick={onDeleteBtn} />
                 </div>
-                {/* <div className="product-register-medi-btn">
-                
-              </div> */}
-                {/* <button
-                  className="bottom-btn"
-                  onClick={() => navigate(`/manager/productEdit/${seq}`)}>수정하기
-                </button>
-                <button className="bottom-btn" onClick={goWaitingPage}>
-                  제품 대기화면 보기
-                </button> */}
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      {/* <div className="mainContent-wrapper">
-        <div className="left-img">
-  
-          <img cclassName="product-register-img" alt="#" src={product.productThumbnail} />
-        </div>
-
-
-        <div className="right-input">
-          <div className="input-ele">
-            <p>품번</p>
-            <input
-              name="productId"
-              value={product.productId}
-              variant="outlined"
-            />
-          </div>
-          <div className="input-ele">
-            <p>제품명</p>
-            <input
-              name="product_name"
-              value={product.productName}
-              variant="outlined"
-            />
-          </div>
-          <div className="input-ele">
-            <p>가격</p>
-            <input
-              name="product_price"
-              value={product.productPrice}
-              variant="outlined"
-            />
-          </div>
-          <div className="input-ele">
-            <p>제품군</p>
-            <input
-              name="product_line"
-              value={product.productGroupName}
-              variant="outlined"
-              readOnly={readOnly ? false : true}
-            />
-          </div>
-        </div>
-      </div> */}
-
-      {/* Btn */}
-      {/* <div className="bottomContent-wrapper">
-    <button className="bottom-btn" onClick={()=>
-      navigate(`/manager/productEdit/${seq}`)}>
-            수정하기
-        </button>
-        <button className="bottom-btn" onClick={goWaitingPage}>
-            제품 대기화면 보기
-        </button>
-    </div> */}
 
       <Footer />
     </>
