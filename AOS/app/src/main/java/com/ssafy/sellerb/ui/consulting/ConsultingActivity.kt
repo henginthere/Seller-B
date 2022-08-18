@@ -30,12 +30,13 @@ import org.json.JSONException
 import org.json.JSONObject
 import org.webrtc.EglBase
 import java.io.IOException
+import java.text.DecimalFormat
 
 class ConsultingActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityConsultingBinding
 
-    private lateinit var session : Session
+    private lateinit var session: Session
     private lateinit var httpClient: CustomHttpClient
     private var toggle = true
     private lateinit var consultingInfo: ConsultingStateResponse
@@ -44,12 +45,12 @@ class ConsultingActivity : AppCompatActivity() {
     private lateinit var audioManager: AudioManager
     private var isSpeaker = false
 
-    companion object{
+    companion object {
         const val TAG = "ConsultingActivity"
 
         private const val REQUEST_CODE_PERMISSIONS = 10
         private val REQUIRED_PERMISSIONS =
-            mutableListOf (
+            mutableListOf(
                 Manifest.permission.CAMERA,
                 Manifest.permission.RECORD_AUDIO,
                 Manifest.permission.MODIFY_AUDIO_SETTINGS
@@ -70,7 +71,7 @@ class ConsultingActivity : AppCompatActivity() {
         customerId = intent.getStringExtra("customerId").toString()
         customerName = intent.getStringExtra("customerName").toString()
 
-        if(consultingInfo != null){
+        if (consultingInfo != null) {
             val consultantName = binding.tvConsultantName.text.toString()
             val productPrice = binding.tvProductPrice.text.toString()
             val productName = binding.tvProductName.text.toString()
@@ -78,11 +79,12 @@ class ConsultingActivity : AppCompatActivity() {
                 consultantName + consultingInfo.consultant.consultantName
             binding.tvProductName.text =
                 productName + consultingInfo.product.name
+            val dec = DecimalFormat("#,###")
             binding.tvProductPrice.text =
-                productPrice + consultingInfo.product.price.toString()
+                productPrice + dec.format(consultingInfo.product.price) + "원"
         }
         audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
-        audioManager.mode = AudioManager.MODE_IN_CALL
+        audioManager.mode = AudioManager.MODE_NORMAL
 
         binding.btnSwitchCamera.setOnClickListener {
             session.getLocalParticipant()!!.switchCamera()
@@ -104,24 +106,29 @@ class ConsultingActivity : AppCompatActivity() {
         }
     }
 
-    private fun resizeView(){
+    private fun resizeView() {
         var width: Int
         var height: Int
 
-        if(toggle){
-            width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                90f, resources.displayMetrics).toInt()
-            height = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                120f, resources.displayMetrics).toInt()
+        if (toggle) {
+            width = TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                90f, resources.displayMetrics
+            ).toInt()
+            height = TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                120f, resources.displayMetrics
+            ).toInt()
 
-        }else{
+        } else {
             width = RelativeLayout.LayoutParams.MATCH_PARENT
-            height =  RelativeLayout.LayoutParams.MATCH_PARENT
+            height = RelativeLayout.LayoutParams.MATCH_PARENT
         }
-        binding.peerContainerRemote.layoutParams = RelativeLayout.LayoutParams(width,height)
+        binding.peerContainerRemote.layoutParams = RelativeLayout.LayoutParams(width, height)
 
         toggle = !toggle
     }
+
     override fun onResume() {
         super.onResume()
 
@@ -129,8 +136,9 @@ class ConsultingActivity : AppCompatActivity() {
             initViews()
             httpClient = CustomHttpClient(
                 OPENVIDU_URL, "Basic " + android.util.Base64.encodeToString(
-                    "OPENVIDUAPP:$OPENVIDU_SECRET".toByteArray(),android.util.Base64.DEFAULT
-                ).trim())
+                    "OPENVIDUAPP:$OPENVIDU_SECRET".toByteArray(), android.util.Base64.DEFAULT
+                ).trim()
+            )
 
             val sessionId = customerId + "-session"
             getToken(sessionId)
@@ -161,7 +169,10 @@ class ConsultingActivity : AppCompatActivity() {
 
                         // Token Request
                         val tokenBody: RequestBody =
-                            RequestBody.create("application/json; charset=utf-8".toMediaTypeOrNull(), "{}")
+                            RequestBody.create(
+                                "application/json; charset=utf-8".toMediaTypeOrNull(),
+                                "{}"
+                            )
                         httpClient.httpCall(
                             "/openvidu/api/sessions/$sessionId/connection",
                             "POST",
@@ -193,6 +204,7 @@ class ConsultingActivity : AppCompatActivity() {
                                 }
                             })
                     }
+
                     override fun onFailure(call: Call, e: IOException) {
                         Log.e(TAG, "Error POST /api/sessions", e)
                         viewToDisconnectedState()
@@ -204,13 +216,15 @@ class ConsultingActivity : AppCompatActivity() {
             viewToDisconnectedState()
         }
     }
-    private fun initViews(){
+
+    private fun initViews() {
         val rootEgleBase = EglBase.create()
         binding.localGlSurfaceView.init(rootEgleBase.eglBaseContext, null)
         binding.localGlSurfaceView.setMirror(true)
         binding.localGlSurfaceView.setEnableHardwareScaler(true)
         binding.localGlSurfaceView.setZOrderMediaOverlay(true)
     }
+
     private fun getTokenSuccess(token: String, sessionId: String) {
         // Initialize our session
         session = Session(sessionId, token, this, binding.viewsContainer)
@@ -218,14 +232,20 @@ class ConsultingActivity : AppCompatActivity() {
         // Initialize our local participant and start local camera
         val participantName: String = customerName
         val localParticipant =
-            LocalParticipant(participantName, session, this.applicationContext, binding.localGlSurfaceView)
+            LocalParticipant(
+                participantName,
+                session,
+                this.applicationContext,
+                binding.localGlSurfaceView
+            )
         localParticipant.startCamera()
 
         // Initialize and connect the websocket to OpenVidu Server
         startWebSocket()
     }
-    fun viewToDisconnectedState(){
-        runOnUiThread{
+
+    fun viewToDisconnectedState() {
+        runOnUiThread {
             binding.localGlSurfaceView.clearImage()
             binding.localGlSurfaceView.release()
 //            binding.remoteGlSurfaceView.clearImage()
@@ -234,7 +254,7 @@ class ConsultingActivity : AppCompatActivity() {
     }
 
 
-    private fun startWebSocket(){
+    private fun startWebSocket() {
         val webSocket = CustomWebSocket(session, OPENVIDU_URL, this)
         webSocket.execute()
         session.setWebSocket(webSocket)
@@ -242,19 +262,23 @@ class ConsultingActivity : AppCompatActivity() {
 
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(
-            baseContext, it) == PackageManager.PERMISSION_GRANTED
+            baseContext, it
+        ) == PackageManager.PERMISSION_GRANTED
     }
 
     override fun onRequestPermissionsResult(
         requestCode: Int, permissions: Array<String>, grantResults:
-        IntArray) {
+        IntArray
+    ) {
         if (requestCode == REQUEST_CODE_PERMISSIONS) {
             if (allPermissionsGranted()) {
                 //시작
             } else {
-                Toast.makeText(this,
+                Toast.makeText(
+                    this,
                     "권한 설정을 확인해주세요.",
-                    Toast.LENGTH_SHORT).show()
+                    Toast.LENGTH_SHORT
+                ).show()
                 finish()
             }
         }
@@ -263,7 +287,7 @@ class ConsultingActivity : AppCompatActivity() {
     private fun leaveSession() {
         this.session.leaveSession()
         this.httpClient.dispose()
-        runOnUiThread{
+        runOnUiThread {
             binding.localGlSurfaceView.clearImage()
             binding.localGlSurfaceView.release()
 //            binding.remoteGlSurfaceView.clearImage()

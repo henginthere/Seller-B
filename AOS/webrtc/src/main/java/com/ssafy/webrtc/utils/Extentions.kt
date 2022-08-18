@@ -40,9 +40,9 @@ fun AppCompatActivity.createRemoteParticipantVideo(
         val rootEglBase = EglBase.create()
         videoView.init(rootEglBase.eglBaseContext, null)
         videoView.setZOrderMediaOverlay(true)
-//        val containerViewId = baseContext.resources.getIdentifier(containerViewRes,"id",baseContext.packageName)
-//        val containerView = findViewById<FrameLayout>(containerViewId)
-//        remoteParticipant.setView(containerView)
+        val containerViewId = baseContext.resources.getIdentifier(containerViewRes,"id",baseContext.packageName)
+        val containerView = findViewById<FrameLayout>(containerViewId)
+        remoteParticipant.setView(containerView)
     }
     mainHandler.post(myRunnable)
 }
@@ -68,7 +68,7 @@ fun AppCompatActivity.createRemoteScreenVideo(
         rowView.layoutParams = rp
         val rowId = View.generateViewId()
         rowView.id = rowId
-        //rowView.translationZ = num.toFloat()
+        rowView.translationZ = num.toFloat()
         containerView.addView(rowView)
         containerView.bringChildToFront(rowView)
         val videoView = (rowView as ViewGroup).getChildAt(0) as SurfaceViewRenderer
@@ -76,7 +76,7 @@ fun AppCompatActivity.createRemoteScreenVideo(
         videoView.setMirror(false)
         val rootEglBase = EglBase.create()
         videoView.init(rootEglBase.eglBaseContext, null)
-        videoView.setZOrderMediaOverlay(true)
+        //videoView.setZOrderMediaOverlay(true)
         remoteParticipant.setView(rowView)
     }
     mainHandler.post(myRunnable)

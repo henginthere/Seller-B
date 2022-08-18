@@ -1,11 +1,9 @@
-package com.ssafy.sellerb.data.remote.response
+package com.ssafy.sellerb.data.model
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import com.ssafy.sellerb.data.model.Product
-import java.io.Serializable
 
-data class ConsultingInfoResponse (
+data class Consulting(
     @Expose
     @SerializedName("consultingSeq")
     val consultingSeq: Long,
@@ -22,12 +20,11 @@ data class ConsultingInfoResponse (
     @SerializedName("product")
     val product: Product,
 
-
     @Expose
     @SerializedName("consultant")
     val consultant: Consultant
 
-): Serializable {
+) {
     data class Consultant(
         @Expose
         @SerializedName("consultantSeq")
@@ -41,5 +38,5 @@ data class ConsultingInfoResponse (
         @SerializedName("consultantImageUrl")
         val consultantThumbnail: String
 
-    ) : Serializable
+    )
 }

@@ -199,4 +199,5 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
 
         }
     }
+
 }

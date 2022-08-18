@@ -401,14 +401,14 @@ class CustomWebSocket(session: Session, openviduUrl: String, activity: AppCompat
         val remoteParticipant = RemoteParticipant(connectionId, participantName!!, session!!)
 
 
-//        if(participantName.contains("SCREEN")){
-//            activity?.createRemoteScreenVideo(
-//                remoteParticipant, CONTAINER_VIEW, PEER_LAYOUT, num++)
-//            activity?.resizeView(true, REMOTE_CONTAINER_VIEW)
-//        }else{
+        if(participantName.contains("SCREEN")){
+            activity?.createRemoteScreenVideo(
+                remoteParticipant, CONTAINER_VIEW, PEER_LAYOUT, num++)
+            activity?.resizeView(true, REMOTE_CONTAINER_VIEW)
+        }else{
             activity?.createRemoteParticipantVideo(
                 remoteParticipant,REMOTE_VIDEO_VIEW, REMOTE_CONTAINER_VIEW)
-//        }
+        }
         session?.createRemotePeerConnection(remoteParticipant.getConnectionId())
         return remoteParticipant
     }
