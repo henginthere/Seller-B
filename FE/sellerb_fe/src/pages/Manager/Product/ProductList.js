@@ -140,7 +140,7 @@ function ProductList() {
           )}
           <div className='navi-right'>
             <input
-              placeholder='제품명으로 검색'
+              placeholder='제품품번으로 검색'
               value={searchWord}
               onChange={onSearchWordHandler}
               onKeyPress={(e) => {
