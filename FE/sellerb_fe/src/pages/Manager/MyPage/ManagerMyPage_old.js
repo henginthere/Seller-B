@@ -18,7 +18,7 @@ function ManagerMyPage() {
   // 비동기로 처리하기 위함. useState로 바로바로 적용!
   const [isModify, setModify] = useState(false);
   // 수정된 데이터  --> data
-  // var data = { ...dummy_data };
+
   // 수정 페이지 인지 아닌지 바꿔주는 함수
   const ChangeToModify = () => {
     setModify(!isModify);
@@ -28,7 +28,6 @@ function ManagerMyPage() {
   const cancelModify = () => {
     getManagerInfoApi(managerSeq)
       .then((res) => {
-        // console.log(JSON.stringify(res.data));
         setInfo(res.data);
         setBrandNameKor(res.data.brand.brandNameKor);
       })
@@ -64,7 +63,6 @@ function ManagerMyPage() {
     console.log("useEffect:" + sessionStorage.getItem("seq"));
     getManagerInfoApi(managerSeq)
       .then((res) => {
-        // console.log(JSON.stringify(res.data));
         setInfo(res.data);
         setBrandNameKor(res.data.brand.brandNameKor);
       })
@@ -73,7 +71,6 @@ function ManagerMyPage() {
       });
   }, []);
 
-  // 그냥 My Page 컴포넌트
   const Main = () => {
     return (
       <>
@@ -102,19 +99,6 @@ function ManagerMyPage() {
               fullWidth='true'
             />
           </div>
-          {/* <div className='InfoTextField'>
-            <TextField
-              label='PW'
-              value={info.pass}
-              InputProps={{
-                readOnly: true,
-              }}
-              type='password'
-              fullWidth='true'
-              name='pass'
-              onChange={handleChange}
-            />
-          </div> */}
           <div className='InfoTextField'>
             <TextField
               label='Tel.'
@@ -159,7 +143,6 @@ function ManagerMyPage() {
         </div>
         <form className='InfoWrapper' onSubmit={handleSubmit}>
           <div className='InfoTextField'>
-            {/* 이 부분 Form 으로 바꿔주기 */}
             <TextField
               label='담당 브랜드'
               defaultValue={brandNameKor}
@@ -184,17 +167,6 @@ function ManagerMyPage() {
               variant='filled'
             />
           </div>
-          {/* <div className='InfoTextField'>
-            <TextField
-              required
-              label='PW'
-              value={info.pass}
-              type='password'
-              fullWidth='true'
-              name='managerPass'
-              onChange={handleChange}
-            />
-          </div> */}
           <div className='InfoTextField'>
             <TextField
               required

@@ -24,13 +24,6 @@ function ConsultantModify() {
   const [consultant, setConsultant] = useState([]);
   const [groupList, setGroupList] = useState([]);
   const [logOption, setLogOption] = useState("출결이력");
-  const product_list = [
-    { value: "TV", label: "TV" },
-    { value: "phone", label: "Phone" },
-    { value: "airConditioner", label: "에어컨" },
-    { value: "Refrigerator", label: "냉장고" },
-    { value: "airCleaner", label: "공기청정기" },
-  ];
 
   useEffect(() => {
     if (sessionStorage.getItem("accessToken") === null) {
@@ -41,7 +34,6 @@ function ConsultantModify() {
       .then((res) => {
         console.log("res.data:" + res.data.consultantId);
 
-        // consultant = res.data;
         setConsultant(res.data);
         console.log("img: " + res.data.consultantImageUrl);
         console.log("consultant:" + consultant.consultantId);
@@ -54,32 +46,13 @@ function ConsultantModify() {
   useEffect(()=>{
     productGroupListApi()
       .then((res) => {
-        setGroupList(res.data); // groupList
+        setGroupList(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, [])
 
-  // 최종적으로 수정 완료 버튼을 누르면 api로 DB에 반영하기 위한 함수
-  // const onHandleSubmit = (e) => {
-  //   e.preventDefault();
-    
-  //   console.log("컨설턴트 수정 :" + JSON.stringify(consultant))
-
-  //   modifyConsultantApi(consultant.consultantSeq, consultant)
-  //     .then((res) => {
-  //       console.log(res.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log("Error");
-  //     });
-
-  //   alert("수정하시겠습니까?");
-
-  //   navigate(`/manager/consultantDetail/${seq}`);
-  // };
-  // 바뀔때마다 setData로 수정된 데이터로 바꿔줌
   const onChange = (e) => {
     e.preventDefault();
 
@@ -92,14 +65,12 @@ function ConsultantModify() {
 
   function ConsultantLog(props) {
     if (logOption === "출결이력") {
-      // console.log(params.consultants
       return <AttendanceLog consultant_id={seq} />;
     } else {
       return <ConsultingLog consultant_id={seq} />;
     }
   }
 
-  // 수정완료
   const onEditCompleteBtn = async () => {
     const EditInfo = {
       consultantPass: editPass,
@@ -159,7 +130,6 @@ function ConsultantModify() {
     <>
       <NavBar />
       <div className="notice-title">상담사 프로필</div>
-      {/*  */}
       <div className="consultant-profile-container">
         <div className="profile-wrapper">
           <div className="con-mypage-left-wrapper">
@@ -169,7 +139,6 @@ function ConsultantModify() {
               src={consultant.consultantImageUrl}
             />
           </div>
-        {/*  */}
         <div className="con-mypage-profile-left">
         <div className="con-profile-element">
             <p>사번</p>
@@ -204,7 +173,6 @@ function ConsultantModify() {
             <DangerSmallButton label="삭제하기" onClick={onDeleteBtn} />
           </div>
         </div>
-        {/*  */}
         </div>
         <div className="profile-right">
           <div className="consultant-detail-select-wrapper">
