@@ -21,8 +21,7 @@ const SIZE = {
     --button-radius: 12px;
   `,
 };
-// width: 148px;
-// height: 42px;
+
 const StyledButton = styled.button`
   ${(p) => p.sizeStyle}
 
@@ -49,7 +48,6 @@ const StyledButton = styled.button`
 `;
 
 export const SmallButton = ({ disabled, size, label, onClick }) => {
-  // 상단 사이즈 리스트에서 해당하는 것 가져옴
   const sizeStyle = SIZE[size];
 
   return (
@@ -63,4 +61,3 @@ export const SmallButton = ({ disabled, size, label, onClick }) => {
   );
 };
 
-// export default MyButton;

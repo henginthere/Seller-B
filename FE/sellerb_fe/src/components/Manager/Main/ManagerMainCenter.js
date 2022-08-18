@@ -25,8 +25,6 @@ const styleObj = {
   
   const tableHeader = {
     display: "flex",
-    // textAlign: "center",
-    // justifyContent: "center",
     backgroundColor: "grey",
   }
   

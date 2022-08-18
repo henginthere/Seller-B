@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-// import Axiso from "axios";
 
 import "./ConsultantDetail.css";
 import { Footer, NavBar } from "../../../components/index";
@@ -18,7 +17,6 @@ function ConsultantDetail() {
   const { id } = useParams();
   const seq = id;
   console.log(seq);
-  // console.log("params:" + params.consultantSeq)
 
   const navigate = useNavigate();
 
@@ -57,7 +55,6 @@ function ConsultantDetail() {
 
   function ConsultantLog(props) {
     if (logOption === "출결이력") {
-      // console.log(params.consultants
       return <AttendanceLog consultant_id={seq} />;
     } else {
       return <ConsultingLog consultant_id={seq} />;
@@ -84,7 +81,6 @@ function ConsultantDetail() {
     <>
       <NavBar />
       <div className="notice-title">상담사 프로필</div>
-        {/*  */}
       <div className="consultant-profile-container">
         <div className="profile-wrapper">
           <div className="con-mypage-left-wrapper">
@@ -94,7 +90,6 @@ function ConsultantDetail() {
               src={consultant.consultantImageUrl}
             />
           </div>
-      {/*  */}
       <div className="con-mypage-profile-left">
       <div className="con-profile-element">
             <p>사번</p>
@@ -118,10 +113,8 @@ function ConsultantDetail() {
           </div>
           <div style={{display:"flex", width:"300px"}}>
             <SmallButton label="수정하기" onClick={onEditBtn} />
-            {/* <DangerSmallButton label="삭제하기" onClick={onDeleteBtn} /> */}
           </div>
         </div>
-        {/*  */}
         </div>
         <div className="profile-right">
           <div className="consultant-detail-select-wrapper">
