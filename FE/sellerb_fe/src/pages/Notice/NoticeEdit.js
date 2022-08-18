@@ -153,7 +153,6 @@ function NoticeEdit() {
               <pre>
                 <input
                   style={{ width: "100%" }}
-                  // className='row-right'
                   name='noticeContent'
                   defaultValue={noticeData.noticeContent}
                   onChange={onChange}
@@ -167,9 +166,6 @@ function NoticeEdit() {
               수정완료
             </button>
             <DangerMediButton label='삭제하기' onClick={onDeleteSubmitBtn} />
-            {/* <button className='detail-button' onClick={onDeleteSubmitBtn}>
-              삭제하기
-            </button> */}
           </div>
         </div>
       </div>
