@@ -19,9 +19,8 @@ function ProductList() {
   const [totalItems, setTotalItems] = useState([]);
 
   const [groupList, setGroupList] = useState([]);
-  const [managerBrand, setManagerBrand] = useState(
-    sessionStorage.getItem("brandNameKor"),
-  );
+  const [managerBrand, setManagerBrand] = useState(sessionStorage.getItem("brandNameKor"),);
+
   const [brandSeq, setBrandSeq] = useState(sessionStorage.getItem("brandSeq"));
 
   const [searchWord, setSearchWord] = useState(""); // 제품 검색어
@@ -37,12 +36,13 @@ function ProductList() {
       // console.log("처음 전체 아이템들 : " + JSON.stringify(res.data));
     });
   }, [isLoaded]);
-
+    
   useEffect(() => {
     if (sessionStorage.getItem("accessToken") === null) {
       alert("접근 권한이 없습니다.");
       navigate("/");
     }
+    
     productGroupListApi()
       .then((res) => {
         // console.log(JSON.stringify(res.data));
@@ -60,8 +60,7 @@ function ProductList() {
 
     // option에 해당하는 제품군의 제품들 불러오기
     const selectGroupSeq = groupList.find(
-      (it) =>
-        it.brandName === managerBrand && it.productGroupName === e.target.value,
+      (it) => it.brandName === managerBrand && it.productGroupName === e.target.value
     );
 
     productGroupItemsApi(selectGroupSeq.productGroupSeq)
@@ -84,7 +83,7 @@ function ProductList() {
     // 제품리스트 안에서, 이 브랜드이면서 & productName이 일치하는거 찾아서 return
     // -> 여러개일 수 있겠다
     setSearchState(false);
-
+    console.log("onSearchBtn : " + searchWord)
     const search = totalItems.filter((ele) =>
       ele.productId.includes(searchWord),
     );
