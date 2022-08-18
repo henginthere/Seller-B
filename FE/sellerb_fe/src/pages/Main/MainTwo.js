@@ -2,7 +2,6 @@ import "./MainTwo.scss";
 import { useNavigate } from "react-router-dom";
 import { RightCircleOutlined, DoubleRightOutlined } from "@ant-design/icons";
 
-// viewBox="<min-x> <min-y> <width> <height>"
 function MainTwo() {
   const navigate = useNavigate();
 

@@ -50,8 +50,6 @@ function Main() {
       .then((res) => {
 
         const adminCheck = res.data.authority;
-        // const managerSeq = res.data.seq;
-        // const brandSeq = res.data.brandSeq;
 
         // sessionStorage에 저장
         sessionStorage.setItem("accessToken", res.data.tokenDto.accessToken);
@@ -75,7 +73,6 @@ function Main() {
       })
       .then((res) => {
         const seq = sessionStorage.getItem("seq");
-        // axios
 
         getManagerInfoApi(seq)
           .then((res) => {
@@ -150,20 +147,12 @@ function Main() {
                 Login
               </Button>
 
-              {/* <div className='FormControlLabel-wrapper'>
-              <FormControlLabel 
-                style={{ marginLeft: '90px'}} 
-                label="checkManagerLogin" 
-              />
-              관리자 로그인
-              </div> */}
               <div className='manager-register-btn-wrapper'>
                 <Link to='/manager/register' className='link-to'>
                   <div className='manager-register'>관리자 회원가입</div>
                 </Link>
               </div>
             </form>
-            {/* Form end */}
           </div>
         </div>
 
