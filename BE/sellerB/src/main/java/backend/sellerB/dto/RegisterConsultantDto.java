@@ -31,12 +31,11 @@ public class RegisterConsultantDto {
     private String consultantTel;
     private Long productGroupSeq;
     private String consultantImageUrl;
-//    private MultipartFile consultantImageFile;
 
 
     private Set<AuthorityDto> authorityDtoSet;
 
-    //엔티티를 dto로
+
     public static RegisterConsultantDto from(Consultant consultant) {
 
         if(consultant == null) return null;

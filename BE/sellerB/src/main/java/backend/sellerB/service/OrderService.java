@@ -48,7 +48,6 @@ public class OrderService {
         return OrderDto.from(orderRepository.save(order));
     }
 
-    //고객 자신만의 주문 목록을 조회해야한다
     public List<OrderDto> getOrderList(Long seq) {
         String cutomerId = customerRepository.findById(seq).get().getCustomerId();
         Optional<List<Order>> orderOptionalList = orderRepository.findByOrderRegUser(cutomerId);
@@ -73,7 +72,6 @@ public class OrderService {
     public OrderDto deleteOrder(Long seq) {
         Optional<Order> orderOptional = orderRepository.findById(seq);
         Order order = orderOptional.get();
-//        order.setOrderDelYn(true);
         orderRepository.deleteById(seq);
         return OrderDto.from(order);
     }
