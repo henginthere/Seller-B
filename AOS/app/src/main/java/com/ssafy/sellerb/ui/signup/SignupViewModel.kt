@@ -5,10 +5,9 @@ import androidx.lifecycle.viewModelScope
 import com.ssafy.sellerb.data.remote.request.SignupRequest
 import com.ssafy.sellerb.data.repository.UserRepository
 import com.ssafy.sellerb.ui.base.BaseViewModel
-import com.ssafy.sellerb.util.CoroutineDispatchers
+import com.ssafy.sellerb.util.coroutine.CoroutineDispatchers
 import com.ssafy.sellerb.util.Event
 import com.ssafy.sellerb.util.network.NetworkHelper
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
