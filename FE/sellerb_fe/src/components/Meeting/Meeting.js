@@ -23,7 +23,6 @@ class Meeting extends Component {
 
     this.onbeforeunload = this.onbeforeunload.bind(this);
 
-    // this.handlerJoinSessionEvent = this.handlerJoinSessionEvent.bind(this);
     this.handlerLeaveSessionEvent = this.handlerLeaveSessionEvent.bind(this);
   }
 
@@ -66,7 +65,6 @@ class Meeting extends Component {
   }
 
   handlerLeaveSessionEvent() {
-    // console.log("Leave session");
     this.setState({
       session: undefined,
     });
