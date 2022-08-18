@@ -10,6 +10,7 @@ import { indigo } from "@mui/material/colors";
 
 import { SmallButton } from "../../../components/Common/SmallButton";
 import { MediButton } from "../../../components/Common/MediButton";
+import { BackMediButton } from "../../../components/Common/BackMediButton"
 
 function ManagerMyPage() {
     const navigate = useNavigate(); 
@@ -84,7 +85,7 @@ function ManagerMyPage() {
               <div>{manager.managerTel}</div>
             </div>
             <div style={{ display: "flex", marginLeft: "15px" }}>
-              <MediButton label="수정하기" onClick={onMoveEditBtn} />
+              <BackMediButton label="수정하기" onClick={onMoveEditBtn} />
             </div>
           </div>
 
