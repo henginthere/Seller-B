@@ -20,7 +20,7 @@ const styleObj_center = {
 
 function ConsultingLog({ consultant_id }) {
   // console.log(consultant_id)
-  const params = useParams();
+  // const params = useParams();
   const [logData, setLogData] = useState([]);
   // pagination
   const [page, setPage] = useState(1);
@@ -50,8 +50,8 @@ function ConsultingLog({ consultant_id }) {
     var dd = parsedDate.getDate();
     var hh = parsedDate.getHours() + 9;
     var mm = parsedDate.getMinutes();
-    const thirtyFirst = [1, 3, 5, 7, 8, 10, 12];
-    const thirty = [4, 6, 9, 11];
+    // const thirtyFirst = [1, 3, 5, 7, 8, 10, 12];
+    // const thirty = [4, 6, 9, 11];
 
     if (hh > 24) {
       hh = hh - 24;
