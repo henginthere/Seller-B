@@ -203,7 +203,10 @@ function ConsultantRegister() {
           <ToastContainer />
 
         </div>
-        <div id='right'>
+        {/*  */}
+
+      </div>
+      <div id='right'>
           <div className='topText' onClick={onRegisterBtn}>
             <h2>상담사 등록</h2>
           </div>
@@ -296,15 +299,10 @@ function ConsultantRegister() {
                 variant="contained"
                 label="등록"
               />
-              <BackMediButton
-                onClick={onCancleBtn}
-                label="취소"
-              />
-              <MediButton onClick={onCancleBtn} label='취소' />
+              <BackMediButton onClick={onCancleBtn} label='취소' />
             </div>
           </form>
         </div>
-      </div>
     </div>
       <Footer />
     </>
