@@ -1,6 +1,10 @@
 import api from "./api";
+<<<<<<< HEAD
 import fileapi from "./fileapi";
 import axios from 'axios';
+=======
+// import axios from "axios";
+>>>>>>> feature-ui-FinalFIx
 
 export const LoginApi = async (userInfo, success, fail) => {
   return await api.post("/auth/login");
