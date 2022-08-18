@@ -274,8 +274,6 @@ function ConsultantRegister() {
                 select
                 fullWidth='true'
                 name='productGroupName'
-                // value={consultant.productGroupName}
-                // onChange={onChange}
                 onChange={onGroupChange}
                 SelectProps={{
                   native: true,

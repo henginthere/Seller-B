@@ -26,16 +26,12 @@ function NotieWriteTwo() {
 
   const onNoticeContentHandler = (e) => {
 
-    // dangerouslySetInnerHTML={{__html: "<h1>hi</h1>"}};
-
     setNoticeContent(e.target.value);
     console.log("바뀐 Content: " + noticeContent);
   };
 
   const onSubmitBtnHandler = (event) =>{
-    // event.preventDefault(); 
 
-    // const parseResult = noticeContent.
     const brandSeq = sessionStorage.getItem("brandSeq");
 
     let noticePostBody = {
@@ -74,7 +70,6 @@ function NotieWriteTwo() {
           />
           <hr />
         </div>
-        {/*  */}
         <div className="ckeditor-wrapper">
         <CKEditor
           className="ckeditor"
@@ -94,7 +89,6 @@ function NotieWriteTwo() {
           }}
         />
         </div>
-        {/*  */}
     <div className="notice-write-bottom-wrapper" >
         <MediButton onClick={onSubmitBtnHandler} label='등록' size='sm' />
         <MediButton onClick={onCancleBtnHandler} label='뒤로가기' />

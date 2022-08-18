@@ -39,7 +39,6 @@ function ManagerMyPage() {
     console.log("useEffect:" + sessionStorage.getItem("seq"));
     getManagerInfoApi(managerSeq)
       .then((res) => {
-        // console.log(JSON.stringify(res.data));
         setManager(res.data);
         setBrandNameKor(res.data.brand.brandNameKor);
       })
@@ -66,7 +65,6 @@ function ManagerMyPage() {
               src={manager.managerImageUrl}
             />
           </div>
-          {/*  */}
           <div className='con-mypage-profile-left'>
             <div className='con-profile-element'>
               <p>아이디</p>
@@ -89,7 +87,6 @@ function ManagerMyPage() {
             </div>
           </div>
 
-          {/*  */}
         </div>
       </div>
       <Footer />

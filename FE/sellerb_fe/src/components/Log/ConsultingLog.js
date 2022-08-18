@@ -19,13 +19,9 @@ const styleObj_center = {
 };
 
 function ConsultingLog({ consultant_id }) {
-  // console.log(consultant_id)
-  // const params = useParams();
   const [logData, setLogData] = useState([]);
-  // pagination
   const [page, setPage] = useState(1);
   const handlePageChange = (page) => {
-    // console.log("현재 페이지: " + page);
     setPage(page);
   };
   const [it, setIt] = useState(9);
@@ -34,9 +30,6 @@ function ConsultingLog({ consultant_id }) {
   useEffect(() => {
     listConsultingApi(consultant_id)
       .then((res) => {
-        // console.log(JSON.stringify(res.data));
-
-        // attendance = res.data;
         setLogData(res.data);
       })
       .catch((err) => {
@@ -50,8 +43,6 @@ function ConsultingLog({ consultant_id }) {
     var dd = parsedDate.getDate();
     var hh = parsedDate.getHours() + 9;
     var mm = parsedDate.getMinutes();
-    // const thirtyFirst = [1, 3, 5, 7, 8, 10, 12];
-    // const thirty = [4, 6, 9, 11];
 
     if (hh > 24) {
       hh = hh - 24;
@@ -81,12 +72,12 @@ function ConsultingLog({ consultant_id }) {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>상담 날짜</TableCell>
-                <TableCell>상담 시작시각 </TableCell>
-                <TableCell>상담 종료시각</TableCell>
-                <TableCell>상담 제품</TableCell>
-                <TableCell>상담 고객 이름</TableCell>
-                <TableCell>상담 고객 ID</TableCell>
+                <TableCell style={{fontSize:"13px"}}>상담 날짜</TableCell>
+                <TableCell style={{fontSize:"13px"}}>상담 시작시각 </TableCell>
+                <TableCell style={{fontSize:"13px"}}>상담 종료시각</TableCell>
+                <TableCell style={{fontSize:"13px"}}>상담 제품</TableCell>
+                <TableCell style={{fontSize:"13px"}}>상담 고객 이름</TableCell>
+                <TableCell style={{fontSize:"13px"}}>상담 고객 ID</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

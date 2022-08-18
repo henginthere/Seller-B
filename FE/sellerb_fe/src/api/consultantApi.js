@@ -11,7 +11,6 @@ export const listGroupConsultantApi = async (
   success,
   fail,
 ) => {
-  // console.log("listGroup API : " + productGroupName)
   return await api
     .get(`/consultant/list/${productGroupName}`)
     .then(success)
@@ -20,7 +19,6 @@ export const listGroupConsultantApi = async (
 
 // get : Detail : ConsultantDetail.js : 상담사
 export const detailConsultantApi = async (consultantSeq, success, fail) => {
-  // console.log("in con deatil API: "+ consultantSeq)
 
   return await api
     .get(`/consultant/${consultantSeq}`)
@@ -30,7 +28,6 @@ export const detailConsultantApi = async (consultantSeq, success, fail) => {
 
 // post : Register : ConsultantWrite.js
 export const registerConsultantApi = async (consultant, success, fail) => {
-  //   console.log("in Register API: " + JSON.stringify(consultant));
 
   return await api
     .post("/consultant/register", consultant)
@@ -40,7 +37,6 @@ export const registerConsultantApi = async (consultant, success, fail) => {
 
 // PUT : Modify : ConsultantModify.js
 export const modifyConsultantApi = async (seq, consultant, success, fail) => {
-  //   console.log("in API: " + JSON.stringify(consultant));
   return await api
     .put(`/consultant/${seq}`, consultant, {
       header: {
@@ -65,7 +61,6 @@ export const deleteConsultantApi = async (consultantSeq, success, fail) => {
 
 // GET : Search : ManagerMainRight.js
 export const searchConsultantApi = async (consultantName, success, fail) => {
-  //   console.log("SEARCH API: " + consultantName);
   return await api
     .get(`/consultant/search/${consultantName}`)
     .then(success)
@@ -74,7 +69,6 @@ export const searchConsultantApi = async (consultantName, success, fail) => {
 
 // GET : List : ManagerMainRight.js : 소속 브랜드에 해당하는 상담사들만 보여주기
 export const brandConsultantListApi = async (brandName, success, fail) => {
-  //   console.log("in BRAND CON API: " + brandName);
 
   return await api
     .get(`/consultant/list/brand/${brandName}`)
@@ -117,8 +111,3 @@ export const listConsultingApi = async (consultantSeq, success, fail) => {
     .then(success)
     .catch(fail);
 };
-
-// get : List : AttendanceLog.js
-// export const listConsultantAttendanceApi = async ( success, fail) => {
-//     return await api.post("/consultant-attendance/list").then(success).catch(fail);
-// }

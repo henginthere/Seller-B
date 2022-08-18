@@ -18,15 +18,6 @@ const styleObj_center = {
   margin: "50px",
 };
 
-//   function ConsultantLog (props) {
-//     if(logOption === '출결이력'){
-//         // console.log(params.consultants
-//         return <AttendanceLog consultant_id = {seq} />
-//     }
-//     else{
-//         return <ConsultingLog consultant_id = {seq} />
-//     }
-//  }
 
 const addZero = (n) => {
   return n < 10 ? "0" + n : n;
@@ -48,12 +39,10 @@ function AttendanceLog({ consultant_id }) {
 
     listAttendanceApi(consultant_id)
       .then((res) => {
-        // console.log(JSON.stringify(res.data));
 
         setInitData(res.data);
 
         let list = initData.map((ele) => ele.loginTime);
-        // console.log("반환된 list : " + list);
         list = list.slice();
       })
       .catch((err) => {
@@ -61,15 +50,7 @@ function AttendanceLog({ consultant_id }) {
       });
   }, []);
 
-  useEffect(() => {
-    // console.log(" 출결 initData: " + JSON.stringify(initData));
-    // loginTime = initData.map((ele)=>{
-    //   return (
-    //     <>
-    //     </>
-    //   )
-    // })
-  });
+
   const parsingDate = (date) => {
     var parsedDate = new Date(date);
     var yyyy = parsedDate.getFullYear();
@@ -119,7 +100,7 @@ function AttendanceLog({ consultant_id }) {
                 return (
                   <>
                     <TableRow>
-                      {/* <td  onClick={() => navigate(`/noticeDetail/${ele.notice_seq}`)}>{ele.notice_title}</td> */}
+                      {}
                       <TableCell>
                         {parsingDate(ele.loginTime).slice(0, 10)}
                       </TableCell>
