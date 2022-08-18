@@ -29,7 +29,6 @@ public class RegisterManagerDto {
     private String managerPass;
     private String managerTel;
     private String managerEmail;
-//    private MultipartFile managerImageFile;
     private String managerImageUrl;
 
     public static RegisterManagerDto from(Manager manager) {
