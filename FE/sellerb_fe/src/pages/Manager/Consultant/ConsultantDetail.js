@@ -10,7 +10,8 @@ import { SmallButton } from '../../../components/Common/SmallButton'
 import { DangerSmallButton } from '../../../components/Common/DangerSmallButton'
 
 import {
-  detailConsultantApi
+  detailConsultantApi,
+  deleteConsultantApi
 } from "../../../api/consultantApi";
 
 function ConsultantDetail() {
@@ -28,7 +29,6 @@ function ConsultantDetail() {
   const [logOption, setLogOption] = useState("출결이력");
   const [groupName, setGroupName] = useState("");
 
-  const [modal, setModal] = useState(false);
 
   const onHandleLogOption = (event) => {
     setLogOption(event.currentTarget.value);
@@ -65,7 +65,7 @@ function ConsultantDetail() {
   }
 
   const onDeleteBtn = () => {
-    deleteConsultant(seq)
+    deleteConsultantApi(seq)
       .then((res) => {
         console.log("onDelete Btn:" + res.data);
 
