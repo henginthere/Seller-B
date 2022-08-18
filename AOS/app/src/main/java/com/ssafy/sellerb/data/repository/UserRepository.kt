@@ -6,7 +6,10 @@ import com.ssafy.sellerb.data.model.Waiting
 import com.ssafy.sellerb.data.remote.NetworkService
 import com.ssafy.sellerb.data.remote.request.LoginRequest
 import com.ssafy.sellerb.data.remote.request.SignupRequest
+import com.ssafy.sellerb.data.remote.request.SimpleLoginRequest
+import com.ssafy.sellerb.data.remote.request.TokenUploadRequest
 import com.ssafy.sellerb.data.remote.response.GeneralResponse
+import com.ssafy.sellerb.data.remote.response.LoginResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -18,8 +21,8 @@ import javax.inject.Singleton
 class UserRepository @Inject constructor(
     private val userPreferences: UserPreferences,
     private val networkService: NetworkService
-){
-    fun saveCurrentUser(user :User){
+) {
+    fun saveCurrentUser(user: User) {
         userPreferences.setUserId(user.id)
         userPreferences.setAccessesToken(user.accessToken)
         userPreferences.setRefreshToken(user.refreshToken)
@@ -54,14 +57,17 @@ class UserRepository @Inject constructor(
         val userBirth = userPreferences.getUserBirth()
         val userToken = userPreferences.getUserToken()
         return if (userId != null && accessToken != null && refreshToken != null
-            && authority != null && userSeq != null)
-            User(userId,accessToken,refreshToken,authority, userSeq, userName,
-                userEmail, userBirth, userToken)
+            && authority != null && userSeq != null
+        )
+            User(
+                userId, accessToken, refreshToken, authority, userSeq, userName,
+                userEmail, userBirth, userToken
+            )
         else
             null
     }
 
-    fun setWaitingSeq(waitingSeq: Long){
+    fun setWaitingSeq(waitingSeq: Long) {
         userPreferences.setWaitingSeq(waitingSeq)
     }
 
@@ -69,37 +75,69 @@ class UserRepository @Inject constructor(
 
     fun getWaitingSeq() = userPreferences.getWaitingSeq()
 
-    fun doUserLogin(id : String, pass : String) : Flow<User> {
+    fun doUserLogin(id: String, pass: String): Flow<User> {
         return flow {
-            val response = networkService.doLoginCall(LoginRequest(id,pass))
+            val response = networkService.doLoginCall(LoginRequest(id, pass))
             val userInfoResponse = networkService.getUserInfoCall(
-                response.seq, response.token.accessToken )
+                response.seq, response.token.accessToken
+            )
 
-            emit(User(id, response.token.accessToken, response.token.refreshToken,
-                response.authority, response.seq, userInfoResponse.name ?: "",
-                userInfoResponse.email ?: "", userInfoResponse.birth ?: ""
-                , userInfoResponse.token ?: ""))
+            emit(
+                User(
+                    id,
+                    response.token.accessToken,
+                    response.token.refreshToken,
+                    response.authority,
+                    response.seq,
+                    userInfoResponse.name ?: "",
+                    userInfoResponse.email ?: "",
+                    userInfoResponse.birth ?: "",
+                    userInfoResponse.token ?: ""
+                )
+            )
         }.flowOn(Dispatchers.IO)
     }
 
-    fun doUserSignup(request : SignupRequest) : Flow<GeneralResponse>{
+    fun doUserSignup(request: SignupRequest): Flow<GeneralResponse> {
         return flow {
             val response = networkService.doSignupCall(request)
-            if(response.name != null){
-                emit(GeneralResponse("200","OK"))
-            }else{
-                emit(GeneralResponse("500","Fail"))
+            if (response.name != null) {
+                emit(GeneralResponse("200", "OK"))
+            } else {
+                emit(GeneralResponse("500", "Fail"))
             }
 
         }.flowOn(Dispatchers.IO)
     }
 
-    fun doGoogleLogin(idToken: String) : Flow<String>{
+    fun doGoogleLogin(request: SimpleLoginRequest): Flow<User> {
         return flow {
-            val response = networkService.doGoogleLoginCall(idToken)
-            if( response != null){
-                emit(response)
-            }
+            val response = networkService.doGoogleLoginCall(request)
+            val userInfoResponse = networkService.getUserInfoCall(
+                response.seq, response.token.accessToken
+            )
+
+            emit(
+                User(
+                    userInfoResponse.id,
+                    response.token.accessToken,
+                    response.token.refreshToken,
+                    response.authority,
+                    response.seq,
+                    userInfoResponse.name ?: "",
+                    userInfoResponse.email ?: "",
+                    userInfoResponse.birth ?: "",
+                    userInfoResponse.token ?: ""
+                )
+            )
+        }.flowOn(Dispatchers.IO)
+    }
+
+    fun uploadToken(request: TokenUploadRequest, seq: Long, accessToken: String): Flow<Boolean> {
+        return flow {
+            val response = networkService.uploadToken(seq, accessToken, request)
+
+            emit(response.statusCode == "200")
         }.flowOn(Dispatchers.IO)
     }
 }

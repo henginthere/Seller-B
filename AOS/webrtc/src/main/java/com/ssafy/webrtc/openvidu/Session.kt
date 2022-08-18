@@ -129,7 +129,7 @@ class Session(
                         super.onAddTrack(rtpReceiver, mediaStreams)
                         if(mediaStreams != null && mediaStreams[0] != null
                             && remoteParticipants != null){
-                            activity!!.setRemoteMediaStream(
+                            activity?.setRemoteMediaStream(
                                 mediaStreams[0]!!,
                                 remoteParticipants[connectionId]!!)
                         }
@@ -262,7 +262,7 @@ class Session(
                     viewContainer?.removeView(remoteParticipant.getView())
                 }
             }
-            viewContainer = null
+            //viewContainer = null
         }
         AsyncTask.execute {
             if (peerConnectionFactory != null) {
