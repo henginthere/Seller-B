@@ -8,17 +8,9 @@ server:
       force: true
 
 spring:
-  datasource:
-    driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://i7d105.p.ssafy.io:3306/sellerB?serverTimezone=Asia/Seoul
-    username: sellerb
-    password: hy1234
   profiles:
     include: oauth
-  servlet:
-    multipart:
-      max-file-size: 5MB
-      max-request-size: 5MB
+
 
 
   jpa:

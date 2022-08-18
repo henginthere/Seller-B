@@ -100,6 +100,7 @@
 
   /* border-left: thick solid #F8F0DE; */
   /* border-right: 2px solid grey; */
+  margin-left: 15%;
   width: 30%;
   justify-content: left;
   height : 400px;
@@ -135,13 +136,16 @@
 }
 
 .con-mypage-left-wrapper {
-  width: 35%;
+  width: 40%;
 }
 
 .con-mypage-left-wrapper .con-mypage-default-img {
-  width: 150px;
+  width: 200px;
   height: auto;
   border-radius: 45%;
+
+  margin-top: 50%;
+  
 }
 .profile-right {
   width: 100%;

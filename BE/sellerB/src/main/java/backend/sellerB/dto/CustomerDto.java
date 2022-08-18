@@ -20,7 +20,6 @@ import java.util.stream.Collectors;
 @Builder
 @AllArgsConstructor
 public class CustomerDto {
-    //token이랑 password 따로 처리 필요
     private Long customerSeq;
     private String customerId;
     private String customerName;

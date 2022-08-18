@@ -20,7 +20,6 @@ public class BrandService {
     private final AwsS3Service awsS3Service;
 
     public ResponseBrandDto create(BrandDto brandDto) throws IOException {
-//        String brandLogo = awsS3Service.upload(brandDto.getBrandLogoFile(), "static");
         Brand brand = Brand.builder()
                 .brandNameKor(brandDto.getBrandNameKor())
                 .brandNameEng(brandDto.getBrandNameEng())
@@ -40,7 +39,6 @@ public class BrandService {
     }
 
     public ResponseBrandDto update(Long seq, BrandDto brandDto) throws IOException {
-//        String brandLogo = awsS3Service.upload(brandDto.getBrandLogoFile(), "static");
         Optional<Brand> brandOptional = brandRepository.findById(seq);
         Brand brand = brandOptional.get();
         brand.setBrandNameKor(brandDto.getBrandNameKor());
@@ -52,7 +50,6 @@ public class BrandService {
     public BrandDto deleteBrand(Long seq) {
         Optional<Brand> brandOptional = brandRepository.findById(seq);
         Brand brand = brandOptional.get();
-//        brand.setBrandDelYn(true);
         brandRepository.deleteById(seq);
         return BrandDto.from(brand);
     }

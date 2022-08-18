@@ -56,9 +56,7 @@ public class ManagerService {
         System.out.println("프론트에서 받아온 dto의 브랜드 번호: "+registerManagerDto.getBrandSeq());
         System.out.println("프론트에서 받아온 id : "+registerManagerDto.getManagerId());
 
-//        String managerImageUrl = awsS3Service.upload(registerManagerDto.getManagerImageFile(), "static");
 
-        //dto를 엔티티로
         Manager manager = Manager.builder()
                 .managerSeq(registerManagerDto.getManagerSeq())
                 .brand(brandRepository.findById(registerManagerDto.getBrandSeq()).get())
@@ -96,7 +94,6 @@ public class ManagerService {
             manager.setManagerPass(passwordEncoder.encode(editManagerDto.getManagerPass()));
         }
 
-//        String managerImageUrl = awsS3Service.upload(editManagerDto.getManagerImageFile(), "static");
         manager.setManagerEmail(editManagerDto.getManagerEmail());
         manager.setManagerTel(editManagerDto.getManagerTel());
         manager.setManagerImageUrl(editManagerDto.getManagerImageUrl());

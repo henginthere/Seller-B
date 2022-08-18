@@ -5,7 +5,7 @@ import { Formik, ErrorMessage } from "formik";
 import { toast, ToastContainer } from "react-toastify";
 import { Button, TextField } from "@mui/material";
 import * as Yup from "yup";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import { registerApi } from "../../api/userApi";
 import { listBrandApi } from "../../api/brandApi";
 import { SmallButton } from "../../components/Common/SmallButton"
@@ -19,6 +19,18 @@ function ManageRegister() {
   const [brandList, setBrandList] = useState([]); // API로 받아올 현재 브랜드 목록
   const [selectBrand, setSelectBrand] = useState("브랜드"); // 관리자가 선택하는 brand option
   const [selectedBrandSeq, setSelectedBrandSeq] = useState("");
+
+  const [password2, setPassWord2] = useState("");
+
+  const [newInfo, setNewInfo] = useState({
+      brandSeq: selectedBrandSeq,
+      managerId: "",
+      managerName: "",
+      managerPass: "",
+      managerTel: "",
+      managerEmail: "",
+      managerImageUrl: ""
+  });
 
   const [resImg, setResImg] = useState("");
   const [imgBase64, setImgBase64] = useState([]); // 미리보기를 구현할 state
@@ -49,33 +61,16 @@ function ManageRegister() {
     setSelectedBrandSeq(item.brandSeq);
   };
 
-  // 유효성 체크 설정
-  const validationSchema = Yup.object().shape({
-    brand: Yup.string().min(1).required("브랜드명을 입력하세요"),
-    id: Yup.string()
-      .min(2, "아이디는 최소 2글자 이상입니다!")
-      .max(10, "아이디 최대 10글자입니다!")
-      .matches(
-        /^[가-힣a-zA-Z][^!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?\s]*$/,
-        "닉네임에 특수문자가 포함되면 안되고 숫자로 시작하면 안됩니다!"
-      )
-      .required("아이디를 입력하세요!"),
-    password: Yup.string()
-      .min(8, "비밀번호는 최소 8자리 이상입니다")
-      .max(15, "비밀번호는 최대 15자리입니다!")
-      .required("패스워드를 입력하세요!")
-      .matches(
-        /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])[^\s]*$/,
-        "알파벳, 숫자, 공백을 제외한 특수문자를 모두 포함해야 합니다!"
-      ),
-    password2: Yup.string()
-      .oneOf([Yup.ref("password"), null], "비밀번호가 일치하지 않습니다!")
-      .required("필수 입력 값입니다!"),
-    // phone: Yup.string().matches(/^01(?:0|1|[6-9])(?:\d{3}|\d{4})\d{4}$/),
-    email: Yup.string()
-      .email("올바른 이메일 형식이 아닙니다!")
-      .required("이메일을 입력하세요!"),
-  });
+  // 가입 데이터 info
+  const onHandleChange = (e) => {
+    const { value, name } = e.target; 
+
+    setNewInfo({
+      ...newInfo,
+      [name] : value
+    })
+
+  }
 
   // 이미지 관련
   const onHandleChangeFile = (event) => {
@@ -113,12 +108,9 @@ function ManageRegister() {
 
   const onImgRegisterBtn = async () => {
     const fd = new FormData();
-    // imgFile의 파일들을 읽어와서, file이라는 이름으로 저장하기
-    // -> FormData에 file이라는 이름의 파일 배열이 들어감
+
     Object.values(imgFile).forEach((file) => fd.append("data", file));
 
-    // fd.append(
-    //   "comment",)
     console.log("보낼 fd: " + fd);
 
     await axios
@@ -133,7 +125,7 @@ function ManageRegister() {
           setResImg(response.data);
 
           toast.success("이미지 등록 완료!", {
-            autoClose: 1000,
+            autoClose: 800,
             position: toast.POSITION.TOP_CENTER
           });
 
@@ -146,32 +138,39 @@ function ManageRegister() {
         });
         console.log("Error");
       });
+
+
+
   };
 
   // 회원가입 버튼
-  const registerBtn = async (values) => {
-    const { brand, managerName, id, password, phone, email } = values;
-    console.log(values.brand);
+  const registerBtn = () => {
 
     const userInfo = {
       brandSeq: selectedBrandSeq,
-      managerId: id,
-      managerName: managerName,
-      managerPass: password,
-      managerTel: phone,
-      managerEmail: email,
+      managerId: newInfo.managerId,
+      managerName: newInfo.managerName,
+      managerPass: newInfo.managerPass,
+      managerTel: newInfo.managerTel,
+      managerEmail: newInfo.managerEmail,
       managerImageUrl: resImg
     };
 
     registerApi(userInfo)
       .then((res) => {
-        console.log(res.data);
+        console.log(res.data);  
 
-        navigate("/main");
+        console.log("가입 완료")
+        
+        // navigate("/");
       })
       .catch((err) => {
         console.log(err);
       });
+
+    // navigate("/main");
+    navigate("/");
+
   };
 
   // Axios
@@ -223,7 +222,7 @@ function ManageRegister() {
                   name="file"
                   accept="image/*"
                   onChange={onHandleChangeFile}
-                  style={{"display":"none"}}
+                  style={{display:"none"}}
                 />
                 <div className="product-register-small-btn">
                   <label for="file">
@@ -237,21 +236,8 @@ function ManageRegister() {
           </div>
         </div>
         </div>
-        <Formik
-          initialValues={{
-            brand: "",
-            managerName:"",
-            id: "",
-            password: "",
-            password2: "",
-            phone: "",
-            email: "",
-          }}
-          validationSchema={validationSchema}
-          // onSubmit={submit}
-          validateOnMount={true}
-        >
-          {({ values, handleChange, errors }) => (
+
+
             <div className="signup-wrapper">
               {/* <ToastContainer /> */}
               <form
@@ -267,14 +253,14 @@ function ManageRegister() {
                     <div className="right-wrapper">
                       <div className="right-content">
                         <select onChange={onBrandChange} value={selectBrand}>
+                          <option>--브랜드 선택--</option>
                           {brandList.map((ele, i) => {
-                            return <option>{ele.brandNameKor}</option>;
+                            return <option value={ele.brandNameKor} >{ele.brandNameKor}</option>;
                           })}
                         </select>
                       </div>
                     </div>
                   </div>
-                  <div className="error-message">{errors.brand}</div>
                   {/* </label> */}
                 </div>
 
@@ -286,11 +272,11 @@ function ManageRegister() {
                     <div className="right-wrapper">
                       <div className="right-content">
                         <input
-                          value={values.managerName}
+                          value={newInfo.managerName}
                           name="managerName"
                           type="text"
                           variant="outlined"
-                          onChange={handleChange}
+                          onChange={onHandleChange}
                           placeholder="이름"
                           className="size"
                         />
@@ -308,17 +294,16 @@ function ManageRegister() {
                     <div className="right-wrapper">
                       <div className="right-content">
                         <input
-                          value={values.id}
-                          name="id"
+                          value={newInfo.managerId}
+                          name="managerId"
                           type="text"
                           variant="outlined"
-                          onChange={handleChange}
+                          onChange={onHandleChange}
                           placeholder="아이디"
                           className="size"
                         />
                       </div>
                     </div>
-                    <div className="error-message">{errors.id}</div>
                   </div>
                 </div>
 
@@ -330,41 +315,39 @@ function ManageRegister() {
                     <div className="right-wrapper">
                       <div className="right-content">
                         <input
-                          value={values.password}
-                          name="password"
-                          type="text"
+                          value={newInfo.managerPass}
+                          name="managerPass"
                           variant="outlined"
-                          onChange={handleChange}
+                          onChange={onHandleChange}
                           placeholder="비밀번호"
                           className="size"
                         />
                       </div>
                     </div>
-                    <div className="error-message">{errors.password}</div>
                   </div>
                 </div>
 
-                <div className="signUp-row">
+                {/* <div className="signUp-row">
                   <div className="row-left-label">
                     <div className="left-label-text">비밀번호 확인</div>
-                  </div>
-                  <div className="row-right">
+                  </div> */}
+                  {/* <div className="row-right">
                     <div className="right-wrapper">
                       <div className="right-content">
                         <input
-                          value={values.password2}
+                          value={password2}
                           name="password2"
                           type="text"
                           variant="outlined"
-                          onChange={handleChange}
+                          onChange={onHandleChange}
                           placeholder="비밀번호 확인"
                           className="size"
                         />
                       </div>
                     </div>
-                    <div className="error-message">{errors.password2}</div>
-                  </div>
-                </div>
+                  </div> */}
+                  {/*  */}
+                {/* </div> */}
 
                 <div className="signUp-row">
                   <div className="row-left-label">
@@ -374,17 +357,16 @@ function ManageRegister() {
                     <div className="right-wrapper">
                       <div className="right-content">
                         <input
-                          value={values.phone}
-                          name="phone"
+                          value={newInfo.managerTel}
+                          name="managerTel"
                           type="text"
                           variant="outlined"
-                          onChange={handleChange}
+                          onChange={onHandleChange}
                           placeholder="핸드폰번호"
                           className="size"
                         />
                       </div>
                     </div>
-                    <div className="error-message">{errors.phone}</div>
                   </div>
                 </div>
 
@@ -396,17 +378,16 @@ function ManageRegister() {
                     <div className="right-wrapper">
                       <div className="right-content">
                         <input
-                          value={values.email}
-                          name="email"
+                          value={newInfo.managerEmail}
+                          name="managerEmail"
                           type="text"
                           variant="outlined"
-                          onChange={handleChange}
+                          onChange={onHandleChange}
                           placeholder="Email"
                           className="size"
                         />
                       </div>
                     </div>
-                    <div className="error-message">{errors.email}</div>
                   </div>
                 </div>
 
@@ -415,7 +396,7 @@ function ManageRegister() {
                   variant="contained"
                   fullWidth
                   type="submit"
-                  onClick={() => registerBtn(values)}
+                  onClick={registerBtn}
                 >
                   회원가입
                 </Button>
@@ -425,8 +406,7 @@ function ManageRegister() {
                 /> */}
               </form>
             </div>
-          )}
-        </Formik>
+     
       </div>
       <Footer />
     </div>

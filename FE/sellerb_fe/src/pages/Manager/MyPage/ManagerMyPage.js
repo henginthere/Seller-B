@@ -10,12 +10,26 @@ import { indigo } from "@mui/material/colors";
 
 import { SmallButton } from "../../../components/Common/SmallButton";
 import { MediButton } from "../../../components/Common/MediButton";
+import { BackMediButton } from "../../../components/Common/BackMediButton"
 
 function ManagerMyPage() {
-  const navigate = useNavigate();
-  const [manager, setManager] = useState([]);
-  const [managerSeq, setManagerSeq] = useState(sessionStorage.getItem("seq"));
-  const [brandNameKor, setBrandNameKor] = useState("");
+    const navigate = useNavigate(); 
+    const [manager, setManager] = useState([]);
+    const [managerSeq, setManagerSeq] = useState(sessionStorage.getItem("seq"));
+    const [brandNameKor, setBrandNameKor] = useState("");
+
+    useEffect(() => {
+        console.log("useEffect:" + sessionStorage.getItem("seq"));
+        getManagerInfoApi(managerSeq)
+          .then((res) => {
+            setManager(res.data);
+            setBrandNameKor(res.data.brand.brandNameKor);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+    }, []);
+
 
   useEffect(() => {
     if (sessionStorage.getItem("accessToken") === null) {
@@ -41,11 +55,11 @@ function ManagerMyPage() {
 
   return (
     <>
-      <NavBar />
-      <div className='notice-title'>매니저 프로필</div>
-      <div className='consultant-profile-container'>
-        <div className='profile-wrapper'>
-          <div className='con-mypage-left-wrapper'>
+        <NavBar />
+        <div className="manager-profile-title">매니저 프로필</div>
+        <div className="consultant-profile-container">
+        <div className="manager-profile-wrapper">
+          <div className="con-mypage-left-wrapper">
             <img
               className='con-mypage-default-img'
               alt='#'
@@ -70,9 +84,8 @@ function ManagerMyPage() {
               <p>Pnum</p>
               <div>{manager.managerTel}</div>
             </div>
-
-            <div style={{ display: "flex", marginLeft: "5px" }}>
-              <SmallButton label='수정하기' onClick={onMoveEditBtn} />
+            <div style={{ display: "flex", marginLeft: "15px" }}>
+              <BackMediButton label="수정하기" onClick={onMoveEditBtn} />
             </div>
           </div>
 

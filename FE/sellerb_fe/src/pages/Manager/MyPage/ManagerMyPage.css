@@ -64,3 +64,41 @@
   justify-content: flex-start;
   align-items: flex-start;
 }
+
+/* ManagerMyPageEdit */
+
+.manager-profile-title {
+    /* border: solid 2px #f9f1e2; */
+    width: 50%;
+
+  
+    /* 위치 조절 */
+    margin-left: 45%;
+    margin-bottom: 30px;
+    margin-top: 20px;
+    padding: 10px;
+    /* font */
+    font-size: 25px;
+    border-radius: 10px;
+  }
+
+.manager-profile-wrapper {
+  display: flex;
+  width: 40%;
+  min-height: 500px;
+
+  margin-left: 30%;
+
+  padding: 30px;
+
+  border: 1px solid grey;
+}
+
+
+.con-mypage-wrapper {
+  width: 80%;
+}
+
+.con-mypage-left-wrapper {
+  width: 35%;
+}
