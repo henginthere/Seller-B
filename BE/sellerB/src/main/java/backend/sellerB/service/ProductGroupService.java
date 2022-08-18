@@ -56,7 +56,6 @@ public class ProductGroupService {
     public ProductGroupDto deleteProductGroup(Long seq) {
         Optional<ProductGroup> productGroupOptional = productGroupRepository.findById(seq);
         ProductGroup productGroup = productGroupOptional.get();
-//        productGroup.setProductGroupDelYn(true);
         productGroupRepository.deleteById(seq);
         return ProductGroupDto.from(productGroup);
     }

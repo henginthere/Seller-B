@@ -17,7 +17,6 @@ public class BrandDto {
 
     private String brandNameKor;
     private String brandNameEng;
-//    private MultipartFile brandLogoFile;
     private String brandLogoUrl;
     public static BrandDto from(Brand brand) {
         if(brand == null) return null;

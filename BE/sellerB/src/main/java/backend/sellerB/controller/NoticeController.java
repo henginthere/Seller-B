@@ -74,12 +74,6 @@ public class NoticeController {
         return ResponseEntity.ok(noticeService.update(seq, noticeReq));
     }
 
-//    @DeleteMapping ("/{seq}")
-//    public Integer deleteNotice(@PathVariable Integer seq) {
-//        Integer res = noticeService.delete(seq);
-//        if(res)
-//        return ResponseEntity.ok(noticeService.delete(seq));
-//    }
 
     //soft delete
     @DeleteMapping("/{seq}")

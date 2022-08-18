@@ -119,6 +119,7 @@ function NoticeList() {
             <SmallButton label='검색' onClick={submitBtnSearchByTitle} />
           </div>
           <br />
+          {/*  */}
           <table className='notice-table-list'>
             <thead className='notice-table-thead'>
               <tr className='notice-th-tr'>
@@ -127,6 +128,7 @@ function NoticeList() {
                 <th className='notice-th-tr-date'>Date</th>
               </tr>
             </thead>
+            {/* body 시작 */}
             <tbody className='notice-body'>
               {noticeList
                 .slice(it * (page - 1), it * (page - 1) + it)
@@ -135,7 +137,7 @@ function NoticeList() {
                     <tr className='notice-tbody-tr'>
                       <td className='notice-seq'>{list.noticeSeq}</td>
                       <td
-                        className='notice-title'
+                        className='notice-list-title'
                         onClick={() =>
                           navigate(`/noticeDetail/${list.noticeSeq}`)
                         }
@@ -151,8 +153,9 @@ function NoticeList() {
             </tbody>
           </table>
 
-          <div className='notice-write-wrapper'>
-            <div className='notice-detail-bottom'>
+          {/* <div className='notice-write-wrapper'> */}
+            <div className='notice-list-bottom-wrapper'>
+              <div className="notice-list-paginationBox">
               <PaginationBox>
                 <Pagination
                   activePage={page}
@@ -162,15 +165,20 @@ function NoticeList() {
                   onChange={handlePageChange}
                 ></Pagination>
               </PaginationBox>
+              </div>
+              <div className="notice-list-bottom-small-btn">
               <SmallButton onClick={goWriteBtn} size='sm' label='글작성하기' />
-            </div>
+              </div>
+            </div>  
 
             {/* {isManager ? (
               <Link to="/manager/noticeWrite">
                 <button className="write-btn">글작성</button>
               </Link>
             ) : null} */}
-          </div>
+          {/* </div> */}
+
+
         </div>
       </div>
       <Footer />

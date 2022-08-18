@@ -17,6 +17,7 @@ import {
   detailConsultantApi,
 } from "../../../api/consultantApi";
 import { listNoticeApi } from "../../../api/noticeApi";
+import axios from "axios";
 
 function ConsultantMain() {
   const navigate = useNavigate();
@@ -80,14 +81,13 @@ function ConsultantMain() {
   };
 
   const leaveWorkBtn = () => {
-    leaveWorkApi(conSeq)
+    axios
+      .put(`https://i7d105.p.ssafy.io/api/consultant-attendance/${conSeq}`)
       .then((res) => {
-        console.log("Success");
-
         alert("퇴근완료!");
       })
       .catch((err) => {
-        console.log("Error");
+        alert("퇴근오류");
       });
   };
   const parsingDate = (date) => {
