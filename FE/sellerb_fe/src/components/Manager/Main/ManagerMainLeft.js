@@ -33,7 +33,6 @@ function ManagerMainLeft() {
   const styleObj_Button = {
     textAlign: "center",
     margin: "40px",
-    // marginTop: "-10px",
   };
 
   const welcome_text = {
@@ -90,12 +89,6 @@ function ManagerMainLeft() {
         </LocalizationProvider>
         </div>
         {/* 달력 END */}
-        {/* <div style={styleObj_Button}>
-          <MediButton 
-            label="회의 생성" 
-            onClick={mvMeetingManCon} 
-          />
-        </div> */}
       </div>
     </>
   );
