@@ -106,7 +106,6 @@ function ProductRegister() {
   const onHandleChangeFile = (event) => {
     console.log(event.target.files);
     setImgFile(event.target.files);
-    // const file = event.target.files;
 
     // 미리보기 state
     setImgBase64([]);
@@ -176,8 +175,7 @@ function ProductRegister() {
     // -> FormData에 file이라는 이름의 파일 배열이 들어감
     Object.values(imgFile).forEach((file) => fd.append("data", file));
 
-    // fd.append(
-    //   "comment",)
+
     console.log("보낼 fd: " + fd);
 
     await axios
@@ -209,7 +207,6 @@ function ProductRegister() {
   return (
     <>
       <NavBar />
-      {/* <h4 className="page-title">제품 등록</h4> */}
       <div className='register-main-wrapper'>
         <div className='register-sub-wrapper'>
           <div className='register-area-wrapper'>
@@ -234,7 +231,6 @@ function ProductRegister() {
               })}
               <div className='product-img-bottom-wrapper'>
                 <input
-                  // className="img-btn"
                   multiple='multiple'
                   type='file'
                   id='file'
@@ -309,19 +305,6 @@ function ProductRegister() {
                     />
                   </div>
                 </div>
-
-                {/* <div className="input-ele">
-                  <p>가격</p>
-                  <div className="product-id-input-wrapper">
-                    <input
-                      className="product-id-input"
-                      name="productPrice"
-                      onChange={onChange}
-                      value={productPrice}
-                      variant="outlined"
-                    />
-                  </div>
-                </div> */}
 
                 <div className='input-ele'>
                   <p>제품군</p>

@@ -33,7 +33,6 @@ function ProductList() {
     brandProductListApi(brandSeq).then((res) => {
       setTotalItems(res.data);
       setIsLoaded(true);
-      // console.log("처음 전체 아이템들 : " + JSON.stringify(res.data));
     });
   }, [isLoaded]);
     
@@ -45,9 +44,7 @@ function ProductList() {
     
     productGroupListApi()
       .then((res) => {
-        // console.log(JSON.stringify(res.data));
         setGroupList(res.data); // groupList
-        // console.log("groupList: " + groupList);
       })
       .catch((err) => {
         console.log(err);
@@ -79,7 +76,7 @@ function ProductList() {
   };
 
   const onSearchBtn = () => {
-    // searchWord state가 바뀌고 나서,,
+    // searchWord state가 바뀌고 나서,
     // 제품리스트 안에서, 이 브랜드이면서 & productName이 일치하는거 찾아서 return
     // -> 여러개일 수 있겠다
     setSearchState(false);
@@ -110,7 +107,6 @@ function ProductList() {
   return (
     <>
       <NavBar />
-      {/* <div className='page-title'>제품 목록</div> */}
       <div className='product-list'>
         <div className='page-navi-wrapper'>
           <div className='navi-left'>
@@ -154,10 +150,6 @@ function ProductList() {
                 label='제품 등록하기'
                 onClick={onMoveProductRegister}
               />
-              {/* <PlusCircleOutlined
-                id="prod-create-btn"
-                onClick={() => navigate("/manager/productRegister")}
-              /> */}
             </div>
           </div>
         </div>
@@ -170,7 +162,6 @@ function ProductList() {
             <GroupOptionList props={searchItems} />
           )}
         </div>
-        {/* end : page-navi-wrapper */}
       </div>
       <Footer />
     </>
