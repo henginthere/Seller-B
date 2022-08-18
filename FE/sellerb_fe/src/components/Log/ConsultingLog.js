@@ -72,12 +72,12 @@ function ConsultingLog({ consultant_id }) {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>상담 날짜</TableCell>
-                <TableCell>상담 시작시각 </TableCell>
-                <TableCell>상담 종료시각</TableCell>
-                <TableCell>상담 제품</TableCell>
-                <TableCell>상담 고객 이름</TableCell>
-                <TableCell>상담 고객 ID</TableCell>
+                <TableCell style={{fontSize:"13px"}}>상담 날짜</TableCell>
+                <TableCell style={{fontSize:"13px"}}>상담 시작시각 </TableCell>
+                <TableCell style={{fontSize:"13px"}}>상담 종료시각</TableCell>
+                <TableCell style={{fontSize:"13px"}}>상담 제품</TableCell>
+                <TableCell style={{fontSize:"13px"}}>상담 고객 이름</TableCell>
+                <TableCell style={{fontSize:"13px"}}>상담 고객 ID</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
