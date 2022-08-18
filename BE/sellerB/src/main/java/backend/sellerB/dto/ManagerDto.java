@@ -38,7 +38,7 @@ public class ManagerDto {
 
 
 
-    //엔티티를 dto로
+
     public static ManagerDto from(Manager manager) {
         logger.info(manager.getManagerId());
         if(manager == null) return null;

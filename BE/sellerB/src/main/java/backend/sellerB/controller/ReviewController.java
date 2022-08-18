@@ -49,7 +49,6 @@ public class ReviewController {
 
     @DeleteMapping("/{seq}")
     public ResponseEntity<ReviewDto> deleteReview(@PathVariable Long seq) {
-        // Access the DB and delete the order
         return ResponseEntity.ok(reviewService.deleteReview(seq));
     }
 }

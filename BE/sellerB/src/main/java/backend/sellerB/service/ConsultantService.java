@@ -30,7 +30,6 @@ public class ConsultantService {
     private final PasswordEncoder passwordEncoder;
     private final AuthorityRepository authorityRepository;
     private final ProductGroupRepository productGroupRepository;
-//    private final AwsS3Service awsS3Service;
 
     @Transactional
     public ConsultantDto signup(RegisterConsultantDto registerConsultantDto) throws IOException {
@@ -46,10 +45,7 @@ public class ConsultantService {
                 .build();
         authorityRepository.save(authority);
 
-        // 이미지 업로드
-//        String consultantImageUrl = awsS3Service.upload(registerConsultantDto.getConsultantImageFile(), "static");
 
-        //dto를 엔티티로
         Consultant consultant = Consultant.builder()
                 .consultantId(registerConsultantDto.getConsultantId())
                 .consultantName(registerConsultantDto.getConsultantName())
@@ -82,10 +78,6 @@ public class ConsultantService {
         return ResponseConsultantDto.fromList(consultantRepository.findByConsultantNameContaining(consultantName));
     }
 
-//    public List<ConsultantDto> searchByConsultantId(String consultantId) {
-//
-//        return ConsultantDto.fromList(consultantRepository.findByConsultantIdContaining(consultantId));
-//    }
 
     public List<ResponseConsultantDto> searchByProductGroupSeq(Long productGroupSeq) {
 
@@ -103,8 +95,6 @@ public class ConsultantService {
         Consultant consultant = consultantOptional.get();
         Optional<ProductGroup> productGroupOptional = productGroupRepository.findById(editConsultantDto.getProductGroupSeq());
         ProductGroup productGroup = productGroupOptional.get();
-
-//        String consultantImageUrl = awsS3Service.upload(editConsultantDto.getConsultantImageFile(), "static");
 
         String pass;
         if(editConsultantDto.getConsultantPass()==null || editConsultantDto.getConsultantPass()==""){
@@ -127,7 +117,6 @@ public class ConsultantService {
     public ConsultantDto delete(Long consultantSeq) {
         Optional<Consultant> consultantOptional = consultantRepository.findById(consultantSeq);
         Consultant consultant = consultantOptional.get();
-//        consultant.setConsultantDelYn(true);
         consultantRepository.deleteById(consultantSeq);
         return ConsultantDto.from(consultant);
     }

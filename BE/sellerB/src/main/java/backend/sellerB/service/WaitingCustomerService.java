@@ -32,7 +32,6 @@ public class WaitingCustomerService {
         Optional<ProductGroup> productGroupOptional = productGroupRepository.findById(product.getProductGroup().getProductGroupSeq());
         ProductGroup productGroup = productGroupOptional.get();
 
-        //dto를 엔티티로
         WaitingCustomer waitingCustomer = WaitingCustomer.builder()
                 .customer(customer)
                 .product(product)
@@ -62,9 +61,7 @@ public class WaitingCustomerService {
     public WaitingCustomerDto deleteWaitingCustomer(Long seq) {
         Optional<WaitingCustomer> waitingCustomerOptional = waitingCustomerRepository.findById(seq);
         WaitingCustomer waitingCustomer = waitingCustomerOptional.get();
-//        waitingCustomer.setWatingCustomerGroupDelYn(true);
         waitingCustomerRepository.deleteById(seq);
-        // 대기 고객 삭제 -> 상담 생성으로 이어지게?
         return WaitingCustomerDto.from(waitingCustomer);
     }
 
