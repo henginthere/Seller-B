@@ -121,12 +121,7 @@ function ConsultantModify() {
       .catch((error) => {
         console.log("Error!!!");
       });
-  
-
-
-
     navigate("/main");
-
 
   };
 
