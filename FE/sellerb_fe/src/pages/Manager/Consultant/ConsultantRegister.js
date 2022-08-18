@@ -9,8 +9,10 @@ import { registerConsultantApi } from "../../../api/consultantApi";
 import { productGroupListApi } from "../../../api/productApi";
 import axios from "axios";
 
+import { toast, ToastContainer } from "react-toastify";
 import { SmallButton } from "../../../components/Common/SmallButton";
 import { MediButton } from "../../../components/Common/MediButton";
+import { BackMediButton } from "../../../components/Common/BackMediButton"
 
 function ConsultantRegister() {
   const navigate = useNavigate();
@@ -137,22 +139,25 @@ function ConsultantRegister() {
 
     Object.values(imgFile).forEach((file) => fd.append("data", file));
 
-    await axios
-      .post("https://i7d105.p.ssafy.io/api/file/consultant", fd, {
-        header: {
-          "Content-Type": `multipart/form-data`,
-        },
-      })
-      .then((response) => {
-        if (response.data) {
-          console.log(response.data);
-          setResImg(response.data);
-        }
-      })
-      .catch((error) => {
-        console.log("Error");
-      });
-  };
+    await axios.post('https://i7d105.p.ssafy.io/api/file/consultant', fd, {
+      header: {
+        "Content-Type": `multipart/form-data`
+      }
+    })
+    .then((response) => {
+      if(response.data){
+        console.log(response.data)
+        toast.success("이미지 등록 완료!", {
+          autoClose: 800,
+          position: toast.POSITION.TOP_CENTER
+        });
+        setResImg(response.data);
+      }
+    })
+    .catch((error)=>{
+      console.log("Error");
+    })
+  }
 
   const onGroupChange = (e) => {
     e.preventDefault();
@@ -171,7 +176,6 @@ function ConsultantRegister() {
   return (
     <>
       <NavBar />
-
       <div className='wrapper'>
         <div id='left'>
           <div className='imageWrapper'>
@@ -187,18 +191,22 @@ function ConsultantRegister() {
               );
             })}
           </div>
-          <div className='product-img-bottom-wrapper'>
-            <input
-              className='img-btn'
-              type='file'
-              accept='image/*'
-              id='file'
-              onChange={onHandleChangeFile}
-            />
-            <SmallButton label='이미지 등록' onClick={onImgRegisterBtn} />
-          </div>
+        <div className="product-img-bottom-wrapper">
+          <input
+            className="img-btn"
+            type="file"
+            accept="image/*"
+            id="file"
+            onChange={onHandleChangeFile}
+          />
+          <SmallButton label="이미지 등록" onClick={onImgRegisterBtn} />
+          <ToastContainer />
+
         </div>
-        <div id='right'>
+        {/*  */}
+
+      </div>
+      <div id='right'>
           <div className='topText' onClick={onRegisterBtn}>
             <h2>상담사 등록</h2>
           </div>
@@ -287,16 +295,15 @@ function ConsultantRegister() {
             <div className='Button'>
               <MediButton
                 onClick={onRegisterBtn}
-                className='registerBtn'
-                variant='contained'
-                label='등록'
+                className="registerBtn"
+                variant="contained"
+                label="등록"
               />
-              <MediButton onClick={onCancleBtn} label='취소' />
+              <BackMediButton onClick={onCancleBtn} label='취소' />
             </div>
           </form>
         </div>
-      </div>
-
+    </div>
       <Footer />
     </>
   );

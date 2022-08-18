@@ -24,8 +24,6 @@ function Main() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // const URL = '/api/auth/login'
-
   // const MyTextField = style
   let [id, setId] = useState("");
   let [pass, setPass] = useState("");
@@ -45,12 +43,12 @@ function Main() {
       pass,
     };
 
+    console.log(JSON.stringify(data));
+
     axios
       .post("/api/auth/login", data)
       .then((res) => {
-        // 데이터 자체만 뽑기
-        // const accessToken = res.data.tokenDto.accessToken;
-        // const refreshToken = res.data.tokenDto.refreshToken;
+
         const adminCheck = res.data.authority;
         // const managerSeq = res.data.seq;
         // const brandSeq = res.data.brandSeq;

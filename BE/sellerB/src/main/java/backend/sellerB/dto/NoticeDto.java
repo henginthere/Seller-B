@@ -24,7 +24,7 @@ public class NoticeDto {
     private LocalDateTime noticeModDate;
     private Boolean noticeDelYn;
 
-    //엔티티를 dto로
+
     public static NoticeDto from(Notice notice) {
         if(notice == null) return null;
         return NoticeDto.builder()

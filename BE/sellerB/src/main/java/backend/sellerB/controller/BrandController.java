@@ -42,7 +42,6 @@ public class BrandController {
 
     @DeleteMapping("/{seq}")
     public ResponseEntity<BrandDto> deleteBrand(@PathVariable Long seq) {
-        // Access the DB and delete the order
         return ResponseEntity.ok(brandService.deleteBrand(seq));
     }
 }

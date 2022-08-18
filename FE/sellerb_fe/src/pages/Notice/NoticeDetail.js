@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "./NoticeDetail.css";
 import { Footer, NavBar } from "../../components/index";
+import { BackMediButton } from "../../components/Common/BackMediButton";
 
 import {
   detailNoticeApi,
@@ -117,7 +118,7 @@ function NoticeDetail() {
         </div>
       </div>
 
-      <div className='notice-detail-content-header'>
+      {/* <div className='notice-detail-content-header'>
         <div className='content-header-row'>
           <div className='row-left'>제목</div>
           <div className='row-right'>{noticeData.noticeTitle}</div>
@@ -136,18 +137,18 @@ function NoticeDetail() {
           </div>
         </div>
         {/* content하단 */}
-        <div className='notice-detail-bottom'>
-          <button
-            className='detail-button'
-            onClick={(e) => navigate("/manager/noticeList")}
-          >
-            목록
-          </button>
-          <button className='detail-button' onClick={(e) => onModifyBtn()}>
-            수정하기
-          </button>
-        </div>
-      </div>
+      {/* <div className='notice-detail-bottom'>
+        <button
+          className='detail-button'
+          onClick={(e) => navigate("/manager/noticeList")}
+        >
+          목록
+        </button>
+        <button className='detail-button' onClick={(e) => onModifyBtn()}>
+          수정하기
+        </button>
+      </div> */}
+
       <Footer />
     </>
   );

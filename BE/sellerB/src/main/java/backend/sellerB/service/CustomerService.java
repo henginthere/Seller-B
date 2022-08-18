@@ -212,7 +212,6 @@ public class CustomerService {
     public CustomerDto deleteCustomer(Long seq) {
         Optional<Customer> customerOptional = customerRepository.findById(seq);
         Customer customer = customerOptional.get();
-//        customer.setCustomerDelYn(true);
         customerRepository.delete(customer);
         return CustomerDto.from(customer);
     }
