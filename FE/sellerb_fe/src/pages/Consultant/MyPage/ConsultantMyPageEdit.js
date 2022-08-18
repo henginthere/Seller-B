@@ -105,7 +105,6 @@ function ConsultantMyPageEdit() {
             />
           </div>
 
-          {/*  */}
           <div className='con-mypage-profile-left'>
             <div className='con-profile-element'>
               <p>사번</p>
@@ -143,7 +142,6 @@ function ConsultantMyPageEdit() {
               <SmallButton label='수정완료' onClick={onEditCompleteBtn} />
             </div>
 
-            {/*  */}
           </div>
         </div>
       </div>
