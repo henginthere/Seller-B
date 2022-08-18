@@ -41,7 +41,6 @@ public class ProductGroupController {
 
     @DeleteMapping("/{seq}")
     public ResponseEntity<ProductGroupDto> deleteProductGroup(@PathVariable Long seq) {
-        // Access the DB and delete the order
         return ResponseEntity.ok(productGroupService.deleteProductGroup(seq));
     }
 }
