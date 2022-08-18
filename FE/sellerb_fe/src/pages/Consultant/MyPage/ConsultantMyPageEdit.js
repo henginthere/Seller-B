@@ -86,7 +86,9 @@ function ConsultantMyPageEdit() {
       .catch((error) => {
         console.log("Error!!!");
       });
-  };
+  
+  
+    };
 
   return (
     <>
