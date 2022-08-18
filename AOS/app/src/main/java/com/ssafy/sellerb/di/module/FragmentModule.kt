@@ -6,6 +6,7 @@ import com.ssafy.sellerb.ViewModelProviderFactory
 import com.ssafy.sellerb.data.repository.ConsultingRepository
 import com.ssafy.sellerb.data.repository.UserRepository
 import com.ssafy.sellerb.ui.base.BaseFragment
+import com.ssafy.sellerb.ui.consulting.history.ConsultingAdapter
 import com.ssafy.sellerb.ui.consulting.history.ConsultingHistoryViewModel
 import com.ssafy.sellerb.ui.consulting.waiting.WaitingViewModel
 import com.ssafy.sellerb.ui.home.HomeViewModel
@@ -23,6 +24,9 @@ class FragmentModule(private val fragment: BaseFragment<*>) {
 
     @Provides
     fun provideLinearLayoutManager(): LinearLayoutManager = LinearLayoutManager(fragment.context)
+
+    @Provides
+    fun provideConsultingAdapter() = ConsultingAdapter(fragment.lifecycle, ArrayList())
 
     @Provides
     fun provideHomeViewModel(
@@ -93,6 +97,6 @@ class FragmentModule(private val fragment: BaseFragment<*>) {
     ) : ConsultingHistoryViewModel = ViewModelProvider(
         fragment, ViewModelProviderFactory(ConsultingHistoryViewModel::class){
             ConsultingHistoryViewModel(coroutineDispatchers, networkHelper, userRepository,
-            consultingRepository)
+            consultingRepository, ArrayList())
         })[ConsultingHistoryViewModel::class.java]
 }

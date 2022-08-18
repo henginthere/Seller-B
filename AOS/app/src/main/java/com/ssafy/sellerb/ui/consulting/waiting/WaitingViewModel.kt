@@ -96,7 +96,7 @@ class WaitingViewModel(
             consultingRepository.getConsultingState(user!!.id, user.accessToken)
                 .onStart { }
                 .collect {
-                    if (it.consultingState == "waiting") {
+                    if (it.consultingState == "waiting" || it.consultingState == "start") {
                         consultingInfo.postValue(it)
                     }
                 }
