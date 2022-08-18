@@ -14,5 +14,4 @@ public class EditConsultantDto {
     private String consultantTel;
     private Long productGroupSeq;
     private String consultantImageUrl;
-//    private MultipartFile consultantImageFile;
 }
