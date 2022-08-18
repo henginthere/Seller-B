@@ -32,7 +32,6 @@ function ManagerMyPageEdit() {
     console.log("useEffect:" + sessionStorage.getItem("seq"));
     getManagerInfoApi(managerSeq)
       .then((res) => {
-        // console.log(JSON.stringify(res.data));
         setManager(res.data);
         setBrandNameKor(res.data.brand.brandNameKor);
       })
@@ -44,7 +43,6 @@ function ManagerMyPageEdit() {
   const onHandleChange = (e) => {
     e.preventDefault();
     const { value, name } = e.target;
-    // console.log("[value, name] : " + " [" + value + ", " + name + "]");
     setManager({
       ...manager,
       [name]: value,
@@ -92,7 +90,7 @@ function ManagerMyPageEdit() {
               src={manager.managerImageUrl}
             />
           </div>
-          {/*  */}
+
           <div className='con-mypage-profile-left'>
             <div className='con-profile-element'>
               <p>아이디</p>
@@ -128,7 +126,6 @@ function ManagerMyPageEdit() {
             </div>
           </div>
 
-          {/*  */}
         </div>
       </div>
 

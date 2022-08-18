@@ -14,7 +14,6 @@ import Footer from "../../../components/Common/Footer/Footer";
 import "./ManagerMain.css";
 
 function ManagerMain() {
-  // const [list, setList] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
     if (sessionStorage.getItem("accessToken") === null) {
