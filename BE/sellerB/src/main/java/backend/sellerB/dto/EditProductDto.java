@@ -13,5 +13,4 @@ public class EditProductDto {
     private Integer productPrice;
     private String productManual;
     private String productThumbnailUrl;
-//    private MultipartFile productThumbnailFile;
 }

@@ -55,20 +55,9 @@ public class AwsS3Service {
 
     private Optional<File> convert(MultipartFile file) throws IOException {
         File convertFile = new File(file.getOriginalFilename());
-        System.out.println("1");
-        System.out.println(file.getOriginalFilename());
-//        try {
-//            convertFile.createNewFile();
-//        } catch (Exception e) {
-//            System.out.println(e);
-//        }
-//        if(convertFile.createNewFile()) {
-//            System.out.println("2");
         try (FileOutputStream fos = new FileOutputStream(convertFile)) {
-            System.out.println("3");
             fos.write(file.getBytes());
         }
-        System.out.println(convertFile.getAbsolutePath());
         return Optional.of(convertFile);
 //        }
 

@@ -13,5 +13,4 @@ public class EditManagerDto {
     private String managerTel;
     private String managerEmail;
     private String managerImageUrl;
-//    private MultipartFile managerImageFile;
 }

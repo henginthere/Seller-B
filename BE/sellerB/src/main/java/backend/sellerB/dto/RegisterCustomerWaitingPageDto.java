@@ -12,6 +12,5 @@ import org.springframework.web.multipart.MultipartFile;
 public class RegisterCustomerWaitingPageDto {
     private Long productSeq;
     private String customerWaitingPageMent;
-//    private MultipartFile customerWaitingPageImageFile;
     private String customerWaitingPageImage;
 }

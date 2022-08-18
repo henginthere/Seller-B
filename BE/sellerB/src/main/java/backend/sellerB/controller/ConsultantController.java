@@ -2,10 +2,7 @@ package backend.sellerB.controller;
 
 
 import backend.sellerB.dto.*;
-import backend.sellerB.entity.Consultant;
-import backend.sellerB.service.BrandService;
 import backend.sellerB.service.ConsultantService;
-import backend.sellerB.service.ManagerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -63,10 +60,6 @@ public class ConsultantController {
         return ResponseEntity.ok(consultantService.searchByBrandName(koreanbrandName));
     }
 
-//    @GetMapping("/list/brand/{brandName}")
-//    public ResponseEntity<List<ConsultantDto>> findByBrandName(@PathVariable Long brandName) {
-//        return ResponseEntity.ok(consultantService.searchByProductGroupSeq(productGroupSeq));
-//    }
 
     @PutMapping("/{consultantSeq}")
     public ResponseEntity<ConsultantDto> updateConsultantInfo(@Valid @RequestBody EditConsultantDto editConsultantDto, @PathVariable Long consultantSeq) throws IOException {
@@ -75,7 +68,6 @@ public class ConsultantController {
 
     @DeleteMapping("/{consultantSeq}")
     public ResponseEntity<ConsultantDto> deleteConsultant(@PathVariable Long consultantSeq) {
-        // Access the DB and delete the order
         return ResponseEntity.ok(consultantService.delete(consultantSeq));
     }
 }

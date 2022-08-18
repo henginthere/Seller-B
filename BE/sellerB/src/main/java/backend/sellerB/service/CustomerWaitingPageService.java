@@ -25,13 +25,11 @@ public class CustomerWaitingPageService {
     private final CustomerWaitingPageRepository customerWaitingPageRepository;
     private final ProductRepository productRepository;
 
-//    private final AwsS3Service awsS3Service;
     @PreUpdate
     public CustomerWaitingPageDto create(RegisterCustomerWaitingPageDto registerCustomerWaitingPageDto) throws IOException {
 
         Optional<CustomerWaitingPage> customerWaitingPageOptional = customerWaitingPageRepository.findByProduct_ProductSeq(registerCustomerWaitingPageDto.getProductSeq());
         if(!(customerWaitingPageOptional.isPresent())) {
-//        String customerWaitingPageImage = awsS3Service.upload(registerCustomerWaitingPageDto.getCustomerWaitingPageImageFile(), "static");
             Optional<Product> productOptional = productRepository.findById(registerCustomerWaitingPageDto.getProductSeq());
             Product product = productOptional.get();
 
@@ -51,11 +49,6 @@ public class CustomerWaitingPageService {
 
     public List<CustomerWaitingPageDto> getCustomerWaitingPageList() { return CustomerWaitingPageDto.fromList(customerWaitingPageRepository.findAll());}
 
-//    public CustomerWaitingPageDto getCustomerWaitingPageDetail(Long seq) {
-//        Optional<CustomerWaitingPage> customerWaitingPageOptional = customerWaitingPageRepository.findById(seq);
-//        CustomerWaitingPage customerWaitingPage = customerWaitingPageOptional.get();
-//        return CustomerWaitingPageDto.from(customerWaitingPage);
-//    }
 
     public CustomerWaitingPageDto getCustomerWaitingPageDetailByProductSeq(Long productSeq) {
         Optional<CustomerWaitingPage> customerWaitingPageOptional = customerWaitingPageRepository.findByProduct_ProductSeq(productSeq);
@@ -64,11 +57,8 @@ public class CustomerWaitingPageService {
     }
 
     public CustomerWaitingPageDto update(Long productSeq, RegisterCustomerWaitingPageDto registerCustomerWaitingPageDto) throws IOException {
-//        Optional<CustomerWaitingPage> customerWaitingPageOptional = customerWaitingPageRepository.findById(seq);
-//        CustomerWaitingPage customerWaitingPage = customerWaitingPageOptional.get();
         Optional<Product> productOptional = productRepository.findById(registerCustomerWaitingPageDto.getProductSeq());
         Product product = productOptional.get();
-//        String customerWaitingPageImage = awsS3Service.upload(registerCustomerWaitingPageDto.getCustomerWaitingPageImageFile(), "static");
         Optional<CustomerWaitingPage> customerWaitingPageOptional = customerWaitingPageRepository.findByProduct_ProductSeq(productSeq);
         CustomerWaitingPage customerWaitingPage = customerWaitingPageOptional.get();
         customerWaitingPage.setProduct(product);
@@ -77,10 +67,8 @@ public class CustomerWaitingPageService {
         return CustomerWaitingPageDto.from(customerWaitingPage);
     }
 
-    //deleteYn이 불필요해서 repo에서 삭제하고 삭제한 데이터 반환
+
     public CustomerWaitingPageDto deleteCustomerWaitingPage(Long productSeq) {
-//        Optional<Product> productOptional = productRepository.findById(productSeq);
-//        Product product = productOptional.get();
         Optional<CustomerWaitingPage> customerWaitingPageOptional = customerWaitingPageRepository.findByProduct_ProductSeq(productSeq);
         CustomerWaitingPage customerWaitingPage = customerWaitingPageOptional.get();
         customerWaitingPage.setCustomerWaitingPageDelYn(true);
