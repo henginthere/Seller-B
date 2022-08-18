@@ -47,7 +47,7 @@ function ManagerMainRight() {
   };
   const navigate = useNavigate();
 
-  const [groupList, setGroupList] = useState([]); // api에서 받아올 전~체 제품군 리스트
+  const [groupList, setGroupList] = useState([]);
   const [brandGroupList, setBrandGroupList] = useState([]);
   const [selectGroup, setSelectGroup] = useState("");
 
@@ -77,10 +77,8 @@ function ManagerMainRight() {
 
   const getBrandConsultantList = async () => {
     const name = sessionStorage.getItem("brandNameKor");
-    // console.log("LOADING");
     await brandConsultantListApi(name)
       .then((res) => {
-        // console.log("전체컨설턴트 :" + JSON.stringify(res.data));
         setConsultantList(res.data);
         setIsLoadedSecond(true);
       })
@@ -98,38 +96,14 @@ function ManagerMainRight() {
       .catch((err) => {
         console.log("err:" + err.data);
       });
-    // await productGroupListApi()
-    //   .then((res) => {
-    //     // const item = brandList.find((it) => it.brandNameKor === value)
-    //     setGroupList(res.data); // groupList
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
     console.log("setGroupList : " + groupList);
   };
 
-  // const getProductGroupList = async () => {
-  //   console.log("LOADING ProductGroupList");
-  //   await productGroupListApi()
-  //     .then((res) => {
-  //       // const item = brandList.find((it) => it.brandNameKor === value)
-  //       setGroupList(res.data); // groupList
-  //       setIsLoaded(isLoaded);
-  //       setIsLoaded(true);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
 
   useEffect(() => {
     getBrandConsultantList();
   }, [isLoaded, isLoadedSecond]);
 
-  // useEffect(()=> {
-  //   getProductGroupList();
-  // }, [isLoaded, isLoadedSecond])
 
   const onGroupChange = (e) => {
     e.preventDefault();
@@ -158,10 +132,7 @@ function ManagerMainRight() {
     if (searchName === "") {
       productGroupListApi()
         .then((res) => {
-          // const item = brandList.find((it) => it.brandNameKor === value)
-          setGroupList(res.data); // groupList
-
-          // console.log("찐 grouplist:" + groupList);
+          setGroupList(res.data);
         })
         .catch((err) => {
           console.log(err);
@@ -173,7 +144,6 @@ function ManagerMainRight() {
           if (res.data === null) {
             setSearchCon([]);
           } else {
-            // 받아온 해당 컨설턴트 출력하기
             setSearchCon(res.data);
             setListState(false);
           }
@@ -196,7 +166,6 @@ function ManagerMainRight() {
     brandConsultantListApi(name)
       .then((res) => {
         console.log("리셋 버튼 전체컨설턴트 :" + JSON.stringify(res.data));
-        // setConsultantList([]);
         setConsultantList(res.data);
       })
       .catch((err) => {
@@ -214,20 +183,7 @@ function ManagerMainRight() {
             value={searchName}
             onChange={onSearchNameChane}
           />
-          {/* <button onClick={(e) => onSearchBtn()}>검색하기</button> */}
           <SmallButton onClick={onSearchBtn} size="sm" label="검색" />
-          {/* <select onChange={onGroupChange} defaultValue={selectGroup}>
-            <option />
-            {groupList.map((option) =>
-              option.brandName === managerBrandKor ? ( 
-                <option value={option.productGroupName}>
-                  {option.productGroupName}
-                </option>
-              ) : (
-                ""
-              )
-            )}
-          </select> */}
           <div className="manager-main-right-reset-icon">
             <SyncOutlined
               style={{ fontSize: "20px", marginLeft: "5px", marginTop: "5px" }}
