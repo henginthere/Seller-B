@@ -162,22 +162,15 @@ function ManageRegister() {
 
         console.log("가입 완료")
         
-        // navigate("/");
       })
       .catch((err) => {
         console.log(err);
       });
 
-    // navigate("/main");
     navigate("/");
 
   };
 
-  // Axios
-  // const submit = async (values) => {
-  //   const { brand, managerName, id, password, phone, email } = values;
-  //   console.log(values.brand);
-  // };
 
   return (
     <div className="manage-register-page">
@@ -215,7 +208,6 @@ function ManageRegister() {
               </div>
               <div className="product-img-bottom-wrapper">
                 <input
-                  // className="img-btn"
                   multiple="multiple"
                   type="file"
                   id="file"
@@ -239,9 +231,7 @@ function ManageRegister() {
 
 
             <div className="signup-wrapper">
-              {/* <ToastContainer /> */}
               <form
-                // onSubmit={handleSubmit}
                 autoComplete="off"
                 className="login-form"
               >
@@ -261,7 +251,6 @@ function ManageRegister() {
                       </div>
                     </div>
                   </div>
-                  {/* </label> */}
                 </div>
 
                 <div className="signUp-row">
@@ -327,28 +316,6 @@ function ManageRegister() {
                   </div>
                 </div>
 
-                {/* <div className="signUp-row">
-                  <div className="row-left-label">
-                    <div className="left-label-text">비밀번호 확인</div>
-                  </div> */}
-                  {/* <div className="row-right">
-                    <div className="right-wrapper">
-                      <div className="right-content">
-                        <input
-                          value={password2}
-                          name="password2"
-                          type="text"
-                          variant="outlined"
-                          onChange={onHandleChange}
-                          placeholder="비밀번호 확인"
-                          className="size"
-                        />
-                      </div>
-                    </div>
-                  </div> */}
-                  {/*  */}
-                {/* </div> */}
-
                 <div className="signUp-row">
                   <div className="row-left-label">
                     <div className="left-label-text">Tel.</div>
@@ -400,10 +367,6 @@ function ManageRegister() {
                 >
                   회원가입
                 </Button>
-                {/* <MediButton 
-                  label="회원가입"
-                  // onClick={registerBtn(values)}
-                /> */}
               </form>
             </div>
      

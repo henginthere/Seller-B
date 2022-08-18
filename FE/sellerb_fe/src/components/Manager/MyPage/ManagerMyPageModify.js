@@ -12,7 +12,6 @@ import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 
 function ManagerMyPageMain(props) {
-  // console.log(props);
 
   return (
     <div id="wrapper">
