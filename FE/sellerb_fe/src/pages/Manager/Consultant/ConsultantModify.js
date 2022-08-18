@@ -11,6 +11,7 @@ import { DangerMediButton} from '../../../components/Common/DangerMediButton'
 import AttendanceLog from "../../../components/Log/AttendanceLog";
 import ConsultingLog from "../../../components/Log/ConsultingLog";
 import { productGroupListApi } from "../../../api/productApi";
+import axios from 'axios'
 import {
   modifyConsultantApi,
   detailConsultantApi,
@@ -102,22 +103,26 @@ function ConsultantModify() {
   const onEditCompleteBtn = async () => {
     const EditInfo = {
       consultantPass: editPass,
+      consultantEmail: consultant.consultantEmail,
       consultantTel: consultant.consultantTel,
-      productGroupSeq: consultant.consultantEmail,
+      productGroupSeq: consultant.productGroupSeq,
       consultantImageUrl: consultant.consultantImageUrl,
     };
 
-    modifyConsultantApi(seq, EditInfo)
-    .then((res)=>{
-      console.log(JSON.stringify(res.data));
-      console.log("success");
-    })
-    .catch((err)=>{
-
-      console.log("Error");
-    })
-
+    await axios
+      .put(`https://i7d105.p.ssafy.io/api/consultant/${id}`, EditInfo, {
+        header: {
+          "Content-Type": `multipart/form-data`,
+        },
+      })
+      .then((response) => {
+        console.log("success");
+      })
+      .catch((error) => {
+        console.log("Error!!!");
+      });
     navigate("/main");
+
   };
 
   const onHandleLogOption = (event) => {
@@ -191,7 +196,7 @@ function ConsultantModify() {
               />
           </div>
           <div className="con-profile-element">
-            <p>제품군</p>
+            <p>비밀번호</p>
             <input value={editPass} onChange={onChangePass} />
           </div>         
           <div style={{display:"flex", width:"300px"}}>
@@ -213,108 +218,8 @@ function ConsultantModify() {
             <ConsultantLog consultant_id={seq} />
           </div>
       </div>
-
-
       </div>
-      {/* <div className='wrapper'>
-        <div id='left'>
-          <div className='imageWrapper'>
-            <img src={consultant.consultantImageUrl} alt='NOIMAGE'></img>
-          </div>
-        </div>
-        <div id='right'>
-          <div className='topText'>
-            <h2>상담사 수정</h2>
-          </div>
-          <form className='InfoWrapper'>
-            <div className='registerField'>
-              <TextField
-                required
-                value={consultant.consultantId || ""}
-                fullWidth='true'
-                name='consultantId'
-                onChange={onChange}
-              />
-            </div>
-            <div className='registerField'>
-              <TextField
-                required
-                id='outlined-disabled'
-                value={consultant.consultantName || ""}
-                fullWidth='true'
-                name='consultantName'
-                onChange={onChange}
-              />
-            </div>
-            <div className='registerField'>
-              <TextField
-                required
-                value={consultant.consultantEmail || ""}
-                fullWidth='true'
-                name='consultantEmail'
-                onChange={onChange}
-                type='email'
-              />
-            </div>
-            <div className='registerField'>
-              <TextField
-                required
-                value={consultant.consultantPass || ""}
-                type='password'
-                onChange={onChange}
-                fullWidth='true'
-                name='consultantPass'
-                autocomplete='on'
-              />
-            </div>
 
-            <div className='registerField'>
-              <TextField
-                required
-                value={consultant.consultantTel || ""}
-                onChange={onChange}
-                fullWidth='true'
-                name='consultantTel'
-              />
-            </div>
-
-            <div className='registerField'>
-              <TextField
-                required
-                select
-                fullWidth='true'
-                name='productGroupSeq'
-                value={consultant.productGroupName}
-                selected={consultant.productGroupName}
-                SelectProps={{
-                  native: true,
-                }}
-                onChange={onChange}
-              >
-                {product_list.map((option) =>
-                  option.value === consultant.productGroupName ? (
-                    ""
-                  ) : (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ),
-                )}
-              </TextField> */}
-            {/* </div>
-            <div className='Button'>
-              <MediButton
-                label="수정완료"
-                onClick={onHandleSubmit}
-                className='registerBtn'
-                variant='contained'
-               />
-             
-              <DangerMediButton className='registerBtn' label="취소" variant='contained' color='error' />
-            </div>
-          </form>
-        </div>
-      </div> */}
       <Footer />
     </>
   );
