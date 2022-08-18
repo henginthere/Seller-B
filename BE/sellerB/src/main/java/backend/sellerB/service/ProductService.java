@@ -22,12 +22,10 @@ import java.util.Optional;
 public class ProductService {
     private final ProductRepository productRepository;
     private final ProductGroupRepository productGroupRepository;
-    private final AwsS3Service awsS3Service;
 
     public ProductDto create(RegisterProductDto registerProductDto) throws IOException {
         Optional<ProductGroup> productGroupOptional = productGroupRepository.findById(registerProductDto.getProductGroupSeq());
         ProductGroup productGroup = productGroupOptional.get();
-//        String productThumbnail = awsS3Service.upload(registerProductDto.getProductThumbnailFile(), "static");
         Product product = Product.builder()
                 .productSeq(registerProductDto.getProductSeq())
                 .productGroup(productGroup)
@@ -71,9 +69,6 @@ public class ProductService {
     public ProductDto update(Long seq, EditProductDto editProductDto) throws IOException {
         Optional<Product> productOptional = productRepository.findById(seq);
         Product product = productOptional.get();
-
-//        String productThumbnail = awsS3Service.upload(editProductDto.getProductThumbnailFile(), "static");
-
         ProductGroup productGroup = product.getProductGroup();
         product.setProductSeq(editProductDto.getProductSeq());
         product.setProductName(editProductDto.getProductName());
@@ -87,7 +82,6 @@ public class ProductService {
     public ProductDto deleteProduct(Long seq) {
         Optional<Product> productOptional = productRepository.findById(seq);
         Product product = productOptional.get();
-//        product.setProductDelYn(true);
         productRepository.deleteById(seq);
         return ProductDto.from(product);
     }
