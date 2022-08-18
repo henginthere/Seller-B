@@ -1,5 +1,6 @@
 package com.ssafy.sellerb.data.remote
 
+import com.ssafy.sellerb.data.model.Consulting
 import com.ssafy.sellerb.data.model.Product
 import com.ssafy.sellerb.data.model.Token
 import com.ssafy.sellerb.data.remote.request.*
@@ -70,6 +71,12 @@ interface NetworkService {
         @Path("customer-id") id: String,
         @Header(Networking.HEADER_ACCESS_TOKEN) accessToken: String
     ):List<ConsultingStateResponse>
+
+    @GET(Endpoints.GET_CONSULTING_DAY)
+    suspend fun getConsultingDay(
+        @Path("customer-id") id: String,
+        @Header(Networking.HEADER_ACCESS_TOKEN) accessToken: String
+    ):List<Consulting>
 
     @PUT(Endpoints.UPLOAD_TOKEN)
     suspend fun uploadToken(

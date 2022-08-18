@@ -99,4 +99,9 @@ class MainActivity : BaseActivity<MainViewModel>() {
         return navController.navigateUp() || super.onNavigateUp()
     }
 
+    override fun onBackPressed() {
+        if(navController.currentDestination!!.id != R.id.loginFragment) {
+            super.onBackPressed()
+        }
+    }
 }
