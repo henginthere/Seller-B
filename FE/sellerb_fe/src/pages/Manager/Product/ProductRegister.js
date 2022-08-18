@@ -162,10 +162,18 @@ function ProductRegister() {
         navigate("/manager/productList");
       })
       .catch((err) => {
-        toast.error("내용을 채워주세요!", {
-          autoClose: 1000,
-          position: toast.POSITION.TOP_CENTER,
-        });
+        if(resImg === "")
+        {
+          toast.error("이미지를 먼저 등록해주세요!", {
+            autoClose: 700,
+            position: toast.POSITION.TOP_CENTER,
+          });
+        }else{
+          toast.error("제품 정보를 모두 채워주세요!", {
+            autoClose: 700,
+            position: toast.POSITION.TOP_CENTER,
+          });
+        }
         console.log(err.data);
       });
   };
