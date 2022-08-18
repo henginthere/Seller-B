@@ -62,7 +62,6 @@ function NoticeList() {
   useEffect(() => {
     listNoticeApi()
       .then((res) => {
-        // console.log(res.data);
         setNoticeList(res.data.reverse());
       })
       .catch((err) => {
@@ -119,7 +118,6 @@ function NoticeList() {
             <SmallButton label='검색' onClick={submitBtnSearchByTitle} />
           </div>
           <br />
-          {/*  */}
           <table className='notice-table-list'>
             <thead className='notice-table-thead'>
               <tr className='notice-th-tr'>
@@ -153,7 +151,6 @@ function NoticeList() {
             </tbody>
           </table>
 
-          {/* <div className='notice-write-wrapper'> */}
             <div className='notice-list-bottom-wrapper'>
               <div className="notice-list-paginationBox">
               <PaginationBox>
@@ -170,14 +167,6 @@ function NoticeList() {
               <SmallButton onClick={goWriteBtn} size='sm' label='글작성하기' />
               </div>
             </div>  
-
-            {/* {isManager ? (
-              <Link to="/manager/noticeWrite">
-                <button className="write-btn">글작성</button>
-              </Link>
-            ) : null} */}
-          {/* </div> */}
-
 
         </div>
       </div>

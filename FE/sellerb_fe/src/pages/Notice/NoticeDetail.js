@@ -99,11 +99,9 @@ function NoticeDetail() {
               <pre
                 dangerouslySetInnerHTML={{ __html: noticeData.noticeContent }}
               >
-                {/* {noticeData.noticeContent} */}
               </pre>
             </div>
           </div>
-          {/* content하단 */}
           <div className='notice-detail-bottom'>
             <button
               className='detail-button'

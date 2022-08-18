@@ -9,7 +9,7 @@ import "./ProductOption.css";
 
 function ProductOption({ items }) {
   // 해당 제품군에 대한 상품들 -> 리스트로 받기
-  const [data, setData] =  useState(items); // 더미데이터로 셋팅
+  const [data, setData] =  useState(items);
   const [page, setPage] = useState(1);
   const [it, setIt] = useState(8);
   const navigate = useNavigate();
@@ -22,10 +22,7 @@ function ProductOption({ items }) {
   };
 
   useEffect(()=>{
-    // console.log(JSON.stringify(items))
     data.map((ele, i)=>{
-      // console.log(ele.productPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-      // ele.productPrice = ele.productPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     })
 
   })

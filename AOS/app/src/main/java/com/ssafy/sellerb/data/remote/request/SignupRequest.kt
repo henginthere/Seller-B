@@ -14,5 +14,5 @@ data class SignupRequest(
 
     @Expose
     @SerializedName("customerName")
-    private  val name : String,
+    private val name : String,
 )

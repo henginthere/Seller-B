@@ -13,8 +13,6 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         LOGIN: (state, action) => {
-            // console.log(state.isLoggedIn);
-            // console.log(action.payload.id);
 
             // axios 
             axios({
