@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "491941720865",
+    "firebase_url": "https://sellerb-28f08-default-rtdb.firebaseio.com",
     "project_id": "sellerb-28f08",
     "storage_bucket": "sellerb-28f08.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "491941720865-jsa8asdcvgsv4c7jbpb8evte401f5e5b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ssafy.sellerb",
+            "certificate_hash": "4185bdab32d1a52c31ecf5f21093515be8d1fd57"
+          }
+        },
         {
           "client_id": "491941720865-869tela9s5sfc205do15omjqdc1f65f8.apps.googleusercontent.com",
           "client_type": 3

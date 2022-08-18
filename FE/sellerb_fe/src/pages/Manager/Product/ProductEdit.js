@@ -63,7 +63,6 @@ function ProductEdit() {
         console.log(res.data);
         setProduct(res.data);
         setProductImg(res.data.productThumbnail);
-        // console.log("수정된 제품정보: " + pro);
       })
       .catch((err) => {
         console.log(err.data);
@@ -90,16 +89,8 @@ function ProductEdit() {
       productPrice: product.productPrice,
       productManual: product.productManual,
       productThumbnailUrl: resImg
-      // productGroupName: product.productGroupName,
     };
 
-    // await productEditApi(EditInfo)
-    //   .then((res) => {
-    //     console.log("수정 Edit API Success!!!!!");
-    //   })
-    //   .catch((err) => {
-    //     console.log(err.data);
-    //   });
 
     await axios
       .put(`https://i7d105.p.ssafy.io/api/product/${seq}` , EditInfo, {
@@ -153,8 +144,6 @@ function ProductEdit() {
     // -> FormData에 file이라는 이름의 파일 배열이 들어감
     Object.values(imgFile).forEach((file) => fd.append("data", file));
 
-    // fd.append(
-    //   "comment",)
     console.log("보낼 fd: " + fd);
 
     await axios
@@ -215,7 +204,6 @@ function ProductEdit() {
   return (
     <>
       <NavBar />
-      {/* <h4 className="page-title">제품 상세</h4> */}
       <div className="register-main-wrapper">
         <div className="register-sub-wrapper">
           <div className="register-area-wrapper">
@@ -251,17 +239,6 @@ function ProductEdit() {
               )
               
               }
-              {/* {imgBase64.map((item) => {
-                return (
-                  <div>
-                    <img
-                      className="product-register-img"
-                      src={item}
-                      alt="First Slide"
-                    />
-                  </div>
-                );
-              })} */}
               <div className="product-img-bottom-wrapper">
                 <input
                   className="img-btn"
@@ -281,7 +258,6 @@ function ProductEdit() {
 
             <div className="right-input">
               <div className="input-sub-content-wrapper">
-                {/*  */}
                 <div className="input-ele">
                   <p>품번</p>
                   <div className="product-id-input-wrapper">
@@ -294,7 +270,6 @@ function ProductEdit() {
                     />
                   </div>
                 </div>
-                {/*  */}
                 <div className="input-ele">
                   <p>제품명</p>
                   <div className="product-id-input-wrapper">
@@ -307,7 +282,6 @@ function ProductEdit() {
                     />
                   </div>
                 </div>
-                {/*  */}
                 <div className="input-ele">
                   <p>가격</p>
                   <div className="product-id-input-wrapper">
@@ -320,7 +294,6 @@ function ProductEdit() {
                     />
                   </div>
                 </div>
-                {/*  */}
                 <div className="input-ele">
                   <p>제품메뉴얼</p>
                   <div className="product-id-input-wrapper">
@@ -335,26 +308,8 @@ function ProductEdit() {
                 </div>
 
 
-                {/*  */}
                 <div className="input-ele">
                   <p>제품군</p>
-                  {/* <select
-                    onChange={onGroupChange}
-                    className="product-select-option"
-                    defaultValue={product.productGroupName}
-                    name="productGroupName"
-                  >
-                  <option>---제품군 선택--</option>
-                    {groupList.map((option) =>
-                      option.brandName === managerBrand ? (
-                        <option value={option.productGroupName}>
-                          {option.productGroupName}
-                        </option>
-                      ) : (
-                        ""
-                      )
-                    )}
-                  </select> */}
                   <div className="product-id-input-wrapper">
                     <input
                       className="product-id-input"
@@ -366,7 +321,6 @@ function ProductEdit() {
                     />
                   </div>
                 </div>
-              {/*  */}
               <div className="product-register-medi-btn">
                 <MediButton label="수정완료" onClick={onEditCompleteBtn} />
                 <MediButton label="대기화면 보기" onClick={goWaitingPage} />
@@ -378,77 +332,6 @@ function ProductEdit() {
           </div>
         </div>
       </div>
-
-      {/* 
-      <div className="mainContent-wrapper">
-        <div className="left-img">
-          { product.productThumbnail
-          ? <img className="img-wrapper" alt="#" src={`${product.productThumbnail}`} />
-            :   
-                imgFile === ""
-                ?  <img
-                className="preview-img" 
-                alt="#" src={previewUrl} />
-                : null
-            }
-          {imgBase64.map((item) => {
-            return (
-              <div className="img-wrapper">
-                <img src={item} alt="Frist Slide" />
-              </div>
-            );
-          })}
-        <button onClick={onResetFile}>
-            사진 초기화
-        </button>
-          <input
-          className="img-btn"
-          type="file"
-          accept="image/*"
-          id="file"
-          onChange={handleChangeFile}
-        />
-        </div>
-
-        <div className="right-input">
-          <div className="input-ele">
-            <p>품번</p>
-            <input
-              name="productId"
-              defaultValue={product.productId}
-              onChange={onChange}
-              variant="outlined"
-            />
-          </div>
-          <div className="input-ele">
-            <p>제품명</p>
-            <input
-              name="productName"
-              value={product.productName}
-              onChange={onChange}
-              variant="outlined"
-            />
-          </div>
-          <div className="input-ele">
-            <p>가격</p>
-            <input
-              name="productPrice"
-              value={product.productPrice}
-              onChange={onChange}
-              variant="outlined"
-            />
-          </div>
-          <div className="input-ele">
-            <p>제품군</p>
-            <input
-              name="productGroup"
-              // value={product.productGroup.productGroupName}
-              onChange={onChange}
-              variant="outlined"
-            />
-          </div>
-        </div>
-      </div> */}
 
       <Footer />
     </>

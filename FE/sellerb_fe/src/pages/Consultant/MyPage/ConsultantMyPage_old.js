@@ -51,7 +51,6 @@ function ConsultantMyPage() {
 
   function ConsultantLog(props) {
     if (logOption === "출결이력") {
-      // console.log(params.consultants
       return <AttendanceLog consultant_id={seq} />;
     } else {
       return <ConsultingLog consultant_id={consultant.consultantId} />;
@@ -111,8 +110,6 @@ function ConsultantMyPage() {
 
   const handleChange = (e) => {
     e.preventDefault();
-
-    // [e.target.name] = e.target.value;
   };
 
   const Main = () => {
@@ -170,9 +167,6 @@ function ConsultantMyPage() {
           </div>
           <div className='Button'>
             <MediButton label="수정하기" onClick={ChangeToModify} />
-            {/* <Button variant='contained' size='large' onClick={ChangeToModify}>
-              수정
-            </Button> */}
           </div>
         </div>
       </>
@@ -253,7 +247,6 @@ function ConsultantMyPage() {
         {/* 왼쪽 */}
         <div id='left'>
           <div className='topText'>
-            {/* <h2>My Page</h2> */}
           </div>
           {/* 상담사 이미지 */}
 

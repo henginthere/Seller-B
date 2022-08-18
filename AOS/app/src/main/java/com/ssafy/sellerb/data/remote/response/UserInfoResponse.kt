@@ -4,6 +4,10 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 data class UserInfoResponse (
+
+    @Expose
+    @SerializedName("customerId")
+    var id: String,
     @Expose
     @SerializedName("customerName")
     var name: String?,

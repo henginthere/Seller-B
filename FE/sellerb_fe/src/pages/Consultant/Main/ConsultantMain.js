@@ -24,10 +24,10 @@ function ConsultantMain() {
   const [conSeq, setConSeq] = useState(""); // 상담사 seq
   const [conName, setConName] = useState(""); // 상담사 이름
 
-  // const [today, setToday] = useState(new Date().getFullYear() + "-" + (new Date().getMonth()+1) + "-" + new Date().getDate());
+
   const [today, setToday] = useState(new Date());
   const [items, setItems] = useState([]);
-  const [noticeList, setNoticeList] = useState([]); //
+  const [noticeList, setNoticeList] = useState([]);
   var date = new Date();
   useEffect(() => {
     const val = sessionStorage.getItem("seq");
@@ -49,7 +49,6 @@ function ConsultantMain() {
       alert("접근 권한이 없습니다.");
       navigate("/");
     }
-    // console.log("Today : " + today);
     listNoticeApi()
       .then((res) => {
         setItems(res.data.reverse());

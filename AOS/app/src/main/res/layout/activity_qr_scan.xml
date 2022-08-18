@@ -29,7 +29,8 @@
         android:layout_marginBottom="30dp"
         android:text="QR 코드를 찍어 상담을 시작해 보세요!"
         android:textSize="20dp"
-        android:textColor="#A6C8C5C5"
+        android:textStyle="bold"
+        android:textColor="#A61D3992"
         android:gravity="center"
         />
 
@@ -51,6 +52,7 @@
         android:text="TEST"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
+        android:visibility="gone"
         />
 
 </RelativeLayout>

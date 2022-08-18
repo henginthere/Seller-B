@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 // accessToken 만료시간 처리 
-export const TOKEN_TIME_OUT = 600*1000; // 60초 ㄴ
+export const TOKEN_TIME_OUT = 600*1000;
 
 const initialState = {
     authenticated: false,

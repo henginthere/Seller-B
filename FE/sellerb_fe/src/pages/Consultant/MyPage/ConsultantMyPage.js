@@ -56,7 +56,6 @@ function ConsultantMyPage() {
   // 출결이력 or 상담이력
   function ConsultantLog(props) {
     if (logOption === "출결이력") {
-      // console.log(params.consultants
       return <AttendanceLog consultant_id={seq} />;
     } else {
       return <ConsultingLog consultant_id={consultant.consultantId} />;
@@ -113,7 +112,6 @@ function ConsultantMyPage() {
             />
           </div>
 
-          {/*  */}
           <div className='con-mypage-profile-left'>
             <div className='con-profile-element'>
               <p>사번</p>
@@ -139,7 +137,6 @@ function ConsultantMyPage() {
               <SmallButton label='수정하기' onClick={onMoveEditBtn} />
             </div>
           </div>
-          {/*  */}
         </div>
         <div className='profile-right'>
           <div className='consultant-detail-select-wrapper'>
