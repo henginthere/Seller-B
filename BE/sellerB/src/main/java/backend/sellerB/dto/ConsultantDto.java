@@ -38,7 +38,7 @@ public class ConsultantDto {
 
     private Set<AuthorityDto> authorityDtoSet;
 
-    //엔티티를 dto로
+
     public static ConsultantDto from(Consultant consultant) {
 
         if(consultant == null) return null;

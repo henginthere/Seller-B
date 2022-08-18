@@ -66,7 +66,6 @@ public class OrderDetailService {
     public OrderDetailDto deleteOrderDetail(Long seq) {
         Optional<Orderdetail> orderDetailOptional = orderDetailRepository.findById(seq);
         Orderdetail orderdetail = orderDetailOptional.get();
-//        orderdetail.setOrderDetailDelYn(true);
         orderDetailRepository.deleteById(seq);
         return OrderDetailDto.from(orderdetail);
     }

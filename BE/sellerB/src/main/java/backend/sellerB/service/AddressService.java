@@ -62,7 +62,6 @@ public class AddressService {
         Optional<Address> addressOptional = addressRepository.findById(seq);
         Address address = addressOptional.get();
         addressRepository.deleteById(seq);
-//        address.setAddrDelYn(true);
         return RegisterAddressDto.from(address);
     }
 }
