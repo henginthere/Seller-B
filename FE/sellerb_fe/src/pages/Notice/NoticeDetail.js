@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "./NoticeDetail.css";
 import { Footer, NavBar } from "../../components/index";
+import { BackMediButton } from "../../components/Common/BackMediButton";
 
 import {
   detailNoticeApi,
