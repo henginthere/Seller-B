@@ -9,10 +9,8 @@ import ConsultingLog from "../../../components/Log/ConsultingLog";
 import { SmallButton } from '../../../components/Common/SmallButton'
 import { DangerSmallButton } from '../../../components/Common/DangerSmallButton'
 
-
 import {
-  detailConsultantApi,
-  deleteConsultant,
+  detailConsultantApi
 } from "../../../api/consultantApi";
 
 function ConsultantDetail() {
@@ -25,11 +23,12 @@ function ConsultantDetail() {
 
   // useEffect - 상담사 프로필 정보 / 상담사 출결이력 정보
   const [consultant, setConsultant] = useState([]);
-
   const [attendance, setAttendance] = useState("");
 
   const [logOption, setLogOption] = useState("출결이력");
   const [groupName, setGroupName] = useState("");
+
+  const [modal, setModal] = useState(false);
 
   const onHandleLogOption = (event) => {
     setLogOption(event.currentTarget.value);
@@ -88,7 +87,7 @@ function ConsultantDetail() {
         {/*  */}
       <div className="consultant-profile-container">
         <div className="profile-wrapper">
-        <div className="con-mypage-left-wrapper">
+          <div className="con-mypage-left-wrapper">
             <img
               className="con-mypage-default-img"
               alt="#"
@@ -119,7 +118,7 @@ function ConsultantDetail() {
           </div>
           <div style={{display:"flex", width:"300px"}}>
             <SmallButton label="수정하기" onClick={onEditBtn} />
-            <DangerSmallButton label="삭제하기" onClick={onDeleteBtn} />
+            {/* <DangerSmallButton label="삭제하기" onClick={onDeleteBtn} /> */}
           </div>
         </div>
         {/*  */}
