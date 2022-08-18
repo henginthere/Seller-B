@@ -11,4 +11,5 @@ object Constants {
     const val NAVER_CLIENT_ID = "wQ_Bczxsj1ePRUghpI3f"
     const val NAVER_CLINET_SECRET = "945I6Irc7L"
     const val NAVER_CLINET_NAME ="SELLERB"
+    const val PAYMENT_APPLICATION_ID = "62fe4c20cf9f6d001b17a111"
 }

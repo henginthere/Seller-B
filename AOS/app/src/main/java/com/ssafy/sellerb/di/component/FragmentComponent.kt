@@ -7,6 +7,7 @@ import com.ssafy.sellerb.ui.consulting.waiting.WaitingFragment
 import com.ssafy.sellerb.ui.home.HomeFragment
 import com.ssafy.sellerb.ui.login.LoginFragment
 import com.ssafy.sellerb.ui.mypage.MyPageFragment
+import com.ssafy.sellerb.ui.product.ProductFragment
 import com.ssafy.sellerb.ui.signup.SignupFragment
 import dagger.Component
 
@@ -23,4 +24,6 @@ interface FragmentComponent {
     fun inject(fragment: WaitingFragment)
     fun inject(fragment: SignupFragment)
     fun inject(fragment: ConsultingHistoryFragment)
+    fun inject(fragment: ProductFragment)
+
 }
