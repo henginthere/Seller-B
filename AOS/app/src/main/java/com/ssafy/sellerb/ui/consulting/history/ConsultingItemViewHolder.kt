@@ -9,6 +9,7 @@ import com.ssafy.sellerb.data.model.Consulting
 import com.ssafy.sellerb.databinding.ItemViewConsultingBinding
 import com.ssafy.sellerb.di.component.ViewHolderComponent
 import com.ssafy.sellerb.ui.base.BaseItemViewHolder
+import java.text.DecimalFormat
 
 class ConsultingItemViewHolder(
     parent: ViewGroup,
@@ -62,9 +63,14 @@ class ConsultingItemViewHolder(
 
         viewModel.launchOrderFragment.observe(this) {
             if (it != null) {
-                val directions = ConsultingHistoryFragmentDirections.actionItemConsultingHistoryToHomeFragment()
+                val directions = ConsultingHistoryFragmentDirections.actionItemConsultingHistoryToProductFragment()
                 itemView.findNavController().navigate(directions)
             }
+        }
+
+        viewModel.productPrice.observe(this){
+            val dec = DecimalFormat("#,###")
+            binding.tvProductPrice.text = dec.format(it)+"원"
         }
     }
 }

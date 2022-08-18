@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:text="최근 상담 내역"
             android:textColor="@color/main_blue"
-            android:textSize="30sp"
+            android:textSize="24sp"
             android:layout_margin="8dp"
             android:textStyle="bold"
 

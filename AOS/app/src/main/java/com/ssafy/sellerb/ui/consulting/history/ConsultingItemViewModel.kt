@@ -29,11 +29,12 @@ class ConsultingItemViewModel @Inject constructor(
     val productName: LiveData<String> = Transformations.map(data) { it.product.name }
     val productSeq: LiveData<Long> = Transformations.map(data) { it.product.seq }
     val productThumbnail: LiveData<String> = Transformations.map(data) { it.product.thumbnail }
-    val consultingDate: LiveData<String> = Transformations.map(data){it.consultingDate}
+    val productPrice: LiveData<Int> = Transformations.map(data) { it.product.price }
+    val consultingDate: LiveData<String> = Transformations.map(data) { it.consultingDate }
 
-    val launchOrderFragment : MutableLiveData<Product> = MutableLiveData()
+    val launchOrderFragment: MutableLiveData<Product> = MutableLiveData()
 
-    fun onClick(){
+    fun onClick() {
         launchOrderFragment.postValue(data.value!!.product)
     }
 
