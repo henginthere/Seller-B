@@ -27,7 +27,6 @@ public class NoticeService {
         Optional<Brand> brandOptional = brandRepository.findById(noticeReq.getBrandSeq());
         Brand brand = brandOptional.get();
 
-        //dto를 엔티티로
         Notice notice = Notice.builder()
                 .brandSeq(brand)
                 .noticeTitle(noticeReq.getNoticeTitle())
@@ -46,7 +45,6 @@ public class NoticeService {
     }
 
     public NoticeDto getNoticeDetail(Long seq) {
-//        Notice notice = noticeRepository.findById(seq).orElseThrow();
         Optional<Notice> noticeOptional = noticeRepository.findById(seq);
         Notice notice = noticeOptional.get();
         return NoticeDto.from(notice);
@@ -62,29 +60,15 @@ public class NoticeService {
         return NoticeReq.from(notice);
     }
 
-//    public Long delete(Long seq) {
-//        Optional<Notice> noticeOptional = noticeRepository.findById(seq);
-//        if(!noticeOptional.isPresent()) throw new EntityNotFoundException();
-//        try {
-//            Notice deleteNotice = noticeOptional.get();
-//            noticeRepository.delete(deleteNotice);
-//        } catch (Exception e){
-//            e.printStackTrace();
-//        }
-//        return seq;
-//
-//
-//    }
+
     public NoticeDto deleteNotice(Long seq) {
         Optional<Notice> noticeOptional = noticeRepository.findById(seq);
         Notice notice = noticeOptional.get();
-//        notice.setNoticeDelYn(true);
         noticeRepository.deleteById(seq);
         return NoticeDto.from(notice);
     }
 
     public List<NoticeDto> search(String noticeTitle) {
-
        return NoticeDto.fromList(noticeRepository.findByNoticeTitleContaining(noticeTitle));
     }
 

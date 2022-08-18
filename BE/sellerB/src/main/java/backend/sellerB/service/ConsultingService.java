@@ -34,7 +34,7 @@ public class ConsultingService {
     private final CustomerRepository customerRepository;
     private final ProductRepository productRepository;
     private final ConsultantRepository consultantRepository;
-//    private final FCMService fcmService;
+
 
     // openvidu session create rest api 요청
     public OpenviduSessionDto requestToOpenviduCreate(String customerId) throws JsonProcessingException {
@@ -99,7 +99,7 @@ public class ConsultingService {
                 .consultingState(registerConsultingDto.getConsultingState())
                 .build();
         // openvidu session 만들기
-//        OpenviduSessionDto openviduSessionDto = requestToOpenviduCreate(customer.getCustomerId());
+        // OpenviduSessionDto openviduSessionDto = requestToOpenviduCreate(customer.getCustomerId());
 
         // fcm 메세지 보내기
         FcmUtil.send_FCM(customer.getCustomerToken(), "상담 시작 알림", "신청하신 상담이 시작되었습니다");
@@ -168,12 +168,9 @@ public class ConsultingService {
         } else if (consultingState.equals("start")) {
             consulting.setConsultingState("end");
         }
-//        consulting.setConsultingState(editConsultingStateDto.getConsultingState());
 
         // openvidu session delete
-//        HttpEntity<String> response = requestToOpenviduDelete(consulting.getCustomer().getCustomerId());
-
-        // fcm으로 고객에게 종료 알림?
+        // HttpEntity<String> response = requestToOpenviduDelete(consulting.getCustomer().getCustomerId());
 
         return RegisterConsultingDto.from(consulting);
     }

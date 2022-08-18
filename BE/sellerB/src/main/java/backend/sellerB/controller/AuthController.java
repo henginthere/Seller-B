@@ -52,9 +52,6 @@ public class AuthController {
 
     @GetMapping("/test")
     public String test(@Valid @RequestBody LoginDto loginDto) {
-//        logger.debug(loginDto.getId());
-//        console.log()
-
         return loginDto.getId()+loginDto.getPass();
     }
 
