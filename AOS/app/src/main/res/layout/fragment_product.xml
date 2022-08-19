@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_gray">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/ll_product_title"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/white"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="상품 결제"
+            android:textColor="@color/main_blue"
+            android:textSize="26sp"
+            android:textStyle="bold">
+
+        </TextView>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_product_info"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/ll_product_title">
+
+        <ImageView
+            android:id="@+id/iv_product_thumbnail"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:text="product Name"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            app:layout_constraintStart_toEndOf="@id/iv_product_thumbnail"
+            app:layout_constraintTop_toTopOf="@id/iv_product_thumbnail" />
+
+        <TextView
+            android:id="@+id/tv_product_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="productPrice"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/tv_product_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_product_name" />
+
+        <TextView
+            android:id="@+id/tv_product_num_sub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="수량"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_product_name" />
+
+        <ImageButton
+            android:id="@+id/ib_num_minus"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="20dp"
+            android:background="@color/white"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_outline_indeterminate_check_box_24"
+            app:layout_constraintBottom_toBottomOf="@id/tv_product_num_sub"
+            app:layout_constraintStart_toEndOf="@id/tv_product_num_sub"
+            app:layout_constraintTop_toTopOf="@id/tv_product_num_sub" />
+
+        <TextView
+            android:id="@+id/tv_product_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:text="1"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/tv_product_num_sub"
+            app:layout_constraintStart_toEndOf="@id/ib_num_minus"
+            app:layout_constraintTop_toTopOf="@id/tv_product_num_sub" />
+
+        <ImageButton
+            android:id="@+id/ib_num_add"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="12dp"
+            android:background="@color/white"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_outline_add_box"
+            app:layout_constraintBottom_toBottomOf="@id/tv_product_num_sub"
+            app:layout_constraintStart_toEndOf="@id/tv_product_num"
+            app:layout_constraintTop_toTopOf="@id/tv_product_num_sub" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_payment_type"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/white"
+        android:gravity="left|center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cl_product_info">
+
+        <TextView
+            android:id="@+id/tv_adr_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="택배"
+            android:textColor="@color/black"
+            android:textSize="23sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="로 받을게요.!"
+            android:textSize="16sp"></TextView>
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_product_price"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_payment_type">
+
+        <TextView
+            android:id="@+id/tv_adr_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="베송지 | 이기덕"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_adr_content"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="대구광역시 북구 대학로17길 17 스카이빌 303호(산격동)"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/tv_adr_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_adr_name" />
+
+        <TextView
+            android:id="@+id/tv_adr_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="휴대폰: 010-3173-9579"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/tv_adr_name"
+            app:layout_constraintTop_toBottomOf="@id/tv_adr_content" />
+
+        <TextView
+            android:id="@+id/tv_adr_select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:text="기본 배송지"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toStartOf="@+id/cb_adr_check"
+            app:layout_constraintTop_toTopOf="@id/cb_adr_check" />
+
+        <CheckBox
+            android:id="@+id/cb_adr_check"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="3dp"
+            android:textColor="@color/main_blue"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="20dp"
+            android:background="@color/white"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_btn_right"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_adr_req"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="요청사항: 부재 시 문앞에 두고 가주세요."
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_adr_name" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/btn_payment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="60dp"
+        android:padding="8dp"
+        android:text="결제하기"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cl_product_price" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
