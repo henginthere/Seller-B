@@ -15,7 +15,7 @@ android {
 
     defaultConfig {
         applicationId "com.ssafy.sellerb"
-        minSdk 21
+        minSdk 23
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -106,6 +106,10 @@ dependencies {
 
     // Naver
     implementation 'com.navercorp.nid:oauth-jdk8:5.1.1'
+
+    //bootpay
+    implementation 'io.github.bootpay:android:+'
+    implementation 'io.github.bootpay:android-bio:+'
 
     implementation project(":webrtc")
 }
