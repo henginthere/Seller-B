@@ -33,7 +33,7 @@ CREATE TABLE `t_consultant_attendance` (
   PRIMARY KEY (`consultant_attendance_seq`),
   KEY `FKtm2qdpsqfvg1hmr7aqukerkbn` (`consultant_seq`),
   CONSTRAINT `FKtm2qdpsqfvg1hmr7aqukerkbn` FOREIGN KEY (`consultant_seq`) REFERENCES `t_consultant` (`consultant_seq`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -51,7 +51,8 @@ INSERT INTO `t_consultant_attendance` VALUES
 (9,'custom2','custom2',0,'2022-08-16 13:36:47.391732','2022-08-16 13:36:47.391732',2),
 (10,'custom3','custom3',0,'2022-08-16 13:38:21.034924','2022-08-16 13:38:21.034924',5),
 (11,'1234','1234',0,'2022-08-16 13:41:01.636448','2022-08-16 13:41:01.636448',3),
-(12,'비회원','비회원',1,'2022-08-17 02:04:46.236729','2022-08-17 10:51:52.876781',1);
+(12,'비회원','비회원',1,'2022-08-17 02:04:46.236729','2022-08-17 10:51:52.876781',1),
+(13,'비회원','비회원',0,'2022-08-18 07:57:23.887539','2022-08-18 07:57:23.887539',1);
 /*!40000 ALTER TABLE `t_consultant_attendance` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -64,4 +65,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-17 23:43:46
+-- Dump completed on 2022-08-19 11:21:20

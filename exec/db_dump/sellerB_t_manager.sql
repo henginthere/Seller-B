@@ -42,7 +42,7 @@ CREATE TABLE `t_manager` (
   UNIQUE KEY `UK_a6qvk8fjgyfgn5jhecsvtpu1s` (`manager_id`),
   KEY `FK20uvfgrwtvervjto77l1xpj3r` (`brand_seq`),
   CONSTRAINT `FK20uvfgrwtvervjto77l1xpj3r` FOREIGN KEY (`brand_seq`) REFERENCES `t_brand` (`brand_seq`)
-) ENGINE=InnoDB AUTO_INCREMENT=179 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=182 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -152,30 +152,13 @@ INSERT INTO `t_manager` VALUES
 (148,0,'manager48@apple.com','a_manager48','a_manager_img48','2022-08-11 00:17:34.000000','a_manager48','애플매니저48','1234','2022-08-11 00:17:34.000000','a_manager48','123-34548',2,NULL,NULL),
 (149,0,'manager49@apple.com','a_manager49','a_manager_img49','2022-08-11 00:17:34.000000','a_manager49','애플매니저49','1234','2022-08-11 00:17:34.000000','a_manager49','123-34549',2,NULL,NULL),
 (150,0,'manager50@apple.com','a_manager50','a_manager_img50','2022-08-11 00:17:34.000000','a_manager50','애플매니저50','1234','2022-08-11 00:17:34.000000','a_manager50','123-34550',2,NULL,NULL),
-(151,0,'manager@samsung.com','s_manager',NULL,'2022-08-17 02:07:03.574320','비회원','삼성매니저','$2a$10$Jwrm8/vycaD.e2xP/V/NLu3M9tvT./Vl2.9Prxxy0RZkNelNRLmcu','2022-08-11 00:25:30.191767','비회원','010-1234-3456',1,NULL,NULL),
-(152,0,'manager@apple.com','a_manager',NULL,'2022-08-11 00:28:15.914603','비회원','애플매니저','$2a$10$f1UtWtsTnk/xklyIO6U0XOpFvIRUF0ei9AMsE3cLamhipf6F1hllW','2022-08-11 00:28:15.914603','비회원','010-1234-5678',2,NULL,NULL),
-(153,0,'manager@lg.com','l_manager',NULL,'2022-08-11 00:28:51.966607','비회원','엘지매니저','$2a$10$l4GWEeH8QKOC8lg1vwF7gObga1PSHiOQhAv49TvsKpwqO/mIj0r7C','2022-08-11 00:28:51.966607','비회원','010-1234-5678',3,NULL,NULL),
+(151,0,'manager@samsung.com','s_manager','https://sellerb.s3.ap-northeast-2.amazonaws.com/consultant/pcody8dxi.png','2022-08-17 02:07:03.574320','비회원','삼성매니저','$2a$10$Jwrm8/vycaD.e2xP/V/NLu3M9tvT./Vl2.9Prxxy0RZkNelNRLmcu','2022-08-11 00:25:30.191767','비회원','010-1234-3456',1,NULL,NULL),
+(152,0,'manager@apple.com','a_manager','https://sellerb.s3.ap-northeast-2.amazonaws.com/consultant/pcody8dxi.png','2022-08-11 00:28:15.914603','비회원','애플매니저','$2a$10$f1UtWtsTnk/xklyIO6U0XOpFvIRUF0ei9AMsE3cLamhipf6F1hllW','2022-08-11 00:28:15.914603','비회원','010-1234-5678',2,NULL,NULL),
+(153,0,'manager@lg.com','l_manager','https://sellerb.s3.ap-northeast-2.amazonaws.com/consultant/pcody8dxi.png','2022-08-11 00:28:51.966607','비회원','엘지매니저','$2a$10$l4GWEeH8QKOC8lg1vwF7gObga1PSHiOQhAv49TvsKpwqO/mIj0r7C','2022-08-11 00:28:51.966607','비회원','010-1234-5678',3,NULL,NULL),
 (154,0,'sam@sam.com','s_test','https://sellerb.s3.ap-northeast-2.amazonaws.com/product/image.%EA%B3%A0%EC%96%91%EC%9D%B4%EC%9D%B4%EB%AF%B8%EC%A7%80_1660627589033.jpg','2022-08-16 05:27:01.824664','비회원','','$2a$10$/IqoLZcCZwZvoepY9dDFh.qlXQuGuPhHFB5y1qWfikNobeA6GntG.','2022-08-16 05:27:01.824664','비회원','010-0000-0000',1,NULL,NULL),
 (155,0,'수정test@test.com','s_test_2','https://sellerb.s3.ap-northeast-2.amazonaws.com/product/image.%EA%B3%A0%EC%B0%BD%EC%84%9D%EA%B3%A0%EC%96%91%EC%9D%B4_1660627789136.jpg','2022-08-16 05:44:53.422972','비회원','박삼성','$2a$10$CcCfE1XJ.m8uAKQ10TWEKuhjT3fVsXq.VOtV9/N2f53PJopwcqble','2022-08-16 05:30:15.343297','비회원','010-3333-3333',1,NULL,NULL),
-(156,0,'','goyang','https://sellerb.s3.ap-northeast-2.amazonaws.com/product/image.%EA%B3%A0%EC%B0%BD%EC%84%9D%EA%B3%A0%EC%96%91%EC%9D%B4_1660633664683.jpg','2022-08-16 07:08:09.007100','s_test','강호동고양이','$2a$10$zYjh1AcZwDi6mV2iyC7izuifkBFd8b1fuH4sMdKCYx/MUMXOtm0CK','2022-08-16 07:08:09.007100','s_test','',1,NULL,NULL),
-(158,0,'','강호동고양이','https://sellerb.s3.ap-northeast-2.amazonaws.com/product/image.%EA%B3%A0%EC%B0%BD%EC%84%9D%EA%B3%A0%EC%96%91%EC%9D%B4_1660633719954.jpg','2022-08-16 07:08:52.489012','s_test','강호동고양이','$2a$10$ZIx3jfZfuUS3ShrcY4yJyOx1VzRv9r/E8/FxbagFRWog74fr2PmZW','2022-08-16 07:08:52.489012','s_test','',1,NULL,NULL),
-(160,0,'','삼성고양이','https://sellerb.s3.ap-northeast-2.amazonaws.com/manager/image.%EA%B3%A0%EC%B0%BD%EC%84%9D%EA%B3%A0%EC%96%91%EC%9D%B4_1660634280954.jpg','2022-08-16 07:18:13.462578','s_test','삼성고양이','$2a$10$m7PQwdceCSW2l6Of2TBUEe0Rhy5d4WcifrA531ifeUEOZFF6J7ufK','2022-08-16 07:18:13.462578','s_test','',1,NULL,NULL),
-(162,0,'','삼성이여','https://sellerb.s3.ap-northeast-2.amazonaws.com/manager/image.%EA%B3%A0%EC%B0%BD%EC%84%9D%EA%B3%A0%EC%96%91%EC%9D%B4_1660634515298.jpg','2022-08-16 07:22:08.819629','비회원','삼성이여','$2a$10$lECpS8B0KePRL.p7/kRXTuHK.5ISAnrcucdbBLFXP65xc4SBE91yG','2022-08-16 07:22:08.819629','비회원','',1,NULL,NULL),
-(164,0,'test@test.com','고양이테스트','https://sellerb.s3.ap-northeast-2.amazonaws.com/manager/image.%EA%B3%A0%EC%B0%BD%EC%84%9D%EA%B3%A0%EC%96%91%EC%9D%B4_1660635100742.jpg','2022-08-16 07:32:03.153346','비회원','고양이테스트','$2a$10$Oli.tAWMmnEYjNPDamAXauWWH1aZDdXOOmxfz95bN0dCVB4BvBnwm','2022-08-16 07:32:03.153346','비회원','010-0000-0000',1,NULL,NULL),
-(165,1,NULL,NULL,NULL,'2022-08-16 16:42:47.203242','비회원',NULL,NULL,'2022-08-16 15:48:25.574616','비회원',NULL,1,NULL,NULL),
-(166,0,'ddd@com.com','test_0817','https://sellerb.s3.ap-northeast-2.amazonaws.com/manager/image.%EA%B3%A0%EC%B0%BD%EC%84%9D%EA%B3%A0%EC%96%91%EC%9D%B4_1660673098674.jpg','2022-08-17 00:02:59.671023','비회원','0817테스트','$2a$10$I/f6uQ4gpPd5vd4VPwzhvO3.SFMsJAE1EbnDbPfUyGMZ4b1TblMem','2022-08-16 18:05:56.555099','비회원','010-0000-1111',1,NULL,NULL),
-(167,0,'ss@ss.com','ss','https://sellerb.s3.ap-northeast-2.amazonaws.com/manager/image.%EA%B3%A0%EC%B0%BD%EC%84%9D%EA%B3%A0%EC%96%91%EC%9D%B4_1660673215142.jpg','2022-08-16 18:07:17.243043','비회원','ss','$2a$10$TxETEoR1leGBTdJGRl74aO2TwIemu0QiG3XFs2mKDgieigSeOSsvi','2022-08-16 18:07:17.243043','비회원','010-0000-0000',1,NULL,NULL),
-(168,0,'sss@sss.com','sss','https://sellerb.s3.ap-northeast-2.amazonaws.com/manager/image.%EA%B3%A0%EC%96%91%EC%9D%B4%EC%9D%B4%EB%AF%B8%EC%A7%80_1660673357144.jpg','2022-08-16 18:09:36.476112','비회원','sss','$2a$10$0TUBHY0sOZxNBAfa/m7utOULLyzqxDjkg4R8BjI1Fb2rqH4CjFihi','2022-08-16 18:09:36.476112','비회원','010-0000-0000',1,NULL,NULL),
-(169,0,'ssss@s.com','ssss','https://sellerb.s3.ap-northeast-2.amazonaws.com/manager/image.%EA%B3%A0%EC%B0%BD%EC%84%9D%EA%B3%A0%EC%96%91%EC%9D%B4_1660673483892.jpg','2022-08-16 18:11:40.635147','비회원','ssss','$2a$10$PlDBoxZnsv7BU3D6urt/xOdpCGuldh14HWRkQ6/Gl9UToXPL/UW.e','2022-08-16 18:11:40.635147','비회원','010-0000-0000',1,NULL,NULL),
-(170,0,'test_2@test.com','test_2','https://sellerb.s3.ap-northeast-2.amazonaws.com/manager/image.%EA%B3%A0%EC%B0%BD%EC%84%9D%EA%B3%A0%EC%96%91%EC%9D%B4_1660709752735.jpg','2022-08-17 04:16:23.625886','비회원','삼성t','$2a$10$isrZWN92CuHl/hEglB1OB.M0zuJhyoqaqqbZq9W6WaA0D2AQa.sTi','2022-08-17 04:16:23.625886','비회원','010-0000-0000',1,NULL,NULL),
-(171,0,'test_3@test.com','test_3','https://sellerb.s3.ap-northeast-2.amazonaws.com/manager/image.%EA%B3%A0%EC%B0%BD%EC%84%9D%EA%B3%A0%EC%96%91%EC%9D%B4_1660709859020.jpg','2022-08-17 04:18:00.951095','비회원','삼삼','$2a$10$PJXtpCChxRvwUQqRFoRo7OWJorgKCPpScY35GLVaWtpyslDtljAG.','2022-08-17 04:18:00.951095','비회원','010-0000-0000',1,NULL,NULL),
-(172,0,'sam@sam.com','sam','https://sellerb.s3.ap-northeast-2.amazonaws.com/manager/image.%EB%B0%B1%ED%98%B8%EB%B0%B1%ED%98%B8_1660716734771.jpg','2022-08-17 06:12:32.310528','비회원','삼성삼성','$2a$10$sI17D0dqUQZBruKkpz640ORpftyc6U6cMJsLKjJ8bDr6dYei7.R/W','2022-08-17 06:12:32.310528','비회원','010-0000-0000',1,NULL,NULL),
-(173,0,'zz@zz.com','zz','https://sellerb.s3.ap-northeast-2.amazonaws.com/manager/image.%EA%B3%A0%EC%96%91%EC%9D%B4%EC%9D%B4%EB%AF%B8%EC%A7%80_1660716980912.jpg','2022-08-17 06:16:37.271896','비회원','zz','$2a$10$ST.xQfs1Qx3fO9Bg7J0yteRJUaxfIH4UR4fh5v5oQDbeqYpc42I0y','2022-08-17 06:16:37.271896','비회원','010-0000-0000',1,NULL,NULL),
-(174,0,'aa@aa.com','aa','https://sellerb.s3.ap-northeast-2.amazonaws.com/manager/image.%EA%B3%A0%EC%96%91%EC%9D%B4%EC%9D%B4%EB%AF%B8%EC%A7%80_1660717051047.jpg','2022-08-17 06:17:50.627558','비회원','aa','$2a$10$.80bebV9IAvcgo5ayH9CFudoEfShlGoPRj3O/3oX6ZeWHBPn3n.9m','2022-08-17 06:17:50.627558','비회원','010-0000-0000',1,NULL,NULL),
-(175,0,'ㅋㅋ@ㅋㅋ.com','ㅋㅋ','https://sellerb.s3.ap-northeast-2.amazonaws.com/manager/image.%EA%B3%A0%EC%B0%BD%EC%84%9D%EA%B3%A0%EC%96%91%EC%9D%B4_1660717574865.jpg','2022-08-17 06:26:47.485171','비회원','ㅋㅋ','$2a$10$BrkqI/YetRR2wE1GaQ/.O.XHPMmbCkvsoIa4iie0DVKcINe4agh8C','2022-08-17 06:26:47.485171','비회원','010-0000-0000',1,NULL,NULL),
-(176,0,'e@e.com','ㅎㅎ','','2022-08-17 06:33:56.074151','비회원','ㅎㅎ','$2a$10$tTbsKBLIJL36GSp5I5teCuwlWv5NIWRIodUGudF7tN3T3fqLER/Wq','2022-08-17 06:33:56.074151','비회원','010-0000-0000',1,NULL,NULL),
-(177,0,'uu@u.com ','uu','https://sellerb.s3.ap-northeast-2.amazonaws.com/manager/image.%EA%B3%A0%EC%B0%BD%EC%84%9D%EA%B3%A0%EC%96%91%EC%9D%B4_1660718377425.jpg','2022-08-17 06:39:58.068042','비회원','테스트','$2a$10$kA8N3ohdl9qD.7DCYOuF.uz3ub20GI92pB4kGLsezDpSIjwqpT.xG','2022-08-17 06:39:58.068042','비회원','010-0000-0000',1,NULL,NULL),
-(178,0,'sss@sss.com','sss333','https://sellerb.s3.ap-northeast-2.amazonaws.com/manager/image.%EA%B3%A0%EC%96%91%EC%9D%B4%EC%9D%B4%EB%AF%B8%EC%A7%80_1660719005922.jpg','2022-08-17 11:47:21.549590','비회원','삼성삼성','$2a$10$jx9gRPHsdx4MCvpqVvA2p.3DQ4pAJ1vvQdjWbXOGrEV0cj9NGmfAW','2022-08-17 06:50:29.909513','비회원','010-0000-0000',1,NULL,NULL);
+(180,0,'test1234@gmail.com','test1234','https://sellerb.s3.ap-northeast-2.amazonaws.com/manager/image.%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C%20%282%29_1660831115582.jfif','2022-08-18 13:59:03.099525','비회원','구경하러옴','$2a$10$T0g49RdCmm.2/MajZwOg8Oq5FlfnVrculPnJMo3i6WoLNecK4obCe','2022-08-18 13:59:03.099525','비회원','01011111111',1,NULL,NULL),
+(181,0,'','siryeong','','2022-08-18 16:36:54.610648','비회원','시령','$2a$10$8Igi/2gQ4feL4IeTbm2K8uNkXYC2hzidZPvqGgwSVo.gY4p///U1G','2022-08-18 16:36:54.610648','비회원','01000000000',1,NULL,NULL);
 /*!40000 ALTER TABLE `t_manager` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -188,4 +171,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-17 23:43:41
+-- Dump completed on 2022-08-19 11:21:15
