@@ -4,8 +4,11 @@ import backend.sellerB.entity.Notice;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import net.bytebuddy.asm.Advice;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,15 +16,24 @@ import java.util.stream.Collectors;
 @Builder
 @AllArgsConstructor
 public class NoticeDto {
+
+    private Long noticeSeq;
     private String noticeTitle;
     private String noticeContent;
+    private LocalDateTime noticeRegDate;
+    private LocalDateTime noticeModDate;
+    private Boolean noticeDelYn;
 
-    //엔티티를 dto로
+
     public static NoticeDto from(Notice notice) {
         if(notice == null) return null;
         return NoticeDto.builder()
+                .noticeSeq(notice.getNoticeSeq())
                 .noticeTitle(notice.getNoticeTitle())
                 .noticeContent(notice.getNoticeContent())
+                .noticeRegDate(notice.getNoticeRegDate())
+                .noticeModDate(notice.getNoticeModDate())
+                .noticeDelYn(notice.getNoticeDelYn())
                 .build();
     }
 
@@ -30,8 +42,12 @@ public class NoticeDto {
         int i = 0;
         while(i < noticeList.size()){
             NoticeDto noticeDto = NoticeDto.builder()
+                    .noticeSeq(noticeList.get(i).getNoticeSeq())
                     .noticeTitle(noticeList.get(i).getNoticeTitle())
                     .noticeContent(noticeList.get(i).getNoticeContent())
+                    .noticeRegDate(noticeList.get(i).getNoticeRegDate())
+                    .noticeModDate(noticeList.get(i).getNoticeModDate())
+                    .noticeDelYn(noticeList.get(i).getNoticeDelYn())
                     .build();
             listNoticeDto.add(noticeDto);
             i++;
@@ -39,9 +55,4 @@ public class NoticeDto {
         return listNoticeDto;
     }
 
-
-
-//    public Notice toEntity(){
-//        return new Notice();
-//    }
 }

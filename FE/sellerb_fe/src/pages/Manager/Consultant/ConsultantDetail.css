@@ -1,0 +1,70 @@
+.profile-wrapper {
+    display: flex;
+    
+}
+
+.profile-left {
+    margin: 0px 20px 30px 150px; /* 상 우 하 좌*/
+    padding: 15px;
+
+    /* border-left: thick solid #F8F0DE; */
+    border-right: 2px solid grey;
+    width: 30%;
+    justify-content: left;
+    height : 400px;
+}
+
+.profile-right {
+    margin-right: 150px;
+    width: 50%;
+    justify-content: right;
+    /* display: block; */
+
+}
+
+.profile-right > select {
+    
+}
+
+.profile-element {
+
+}
+
+.profile-element > div {
+    /* border: 1px solid red; */
+    background-color:#f0f0f0;
+
+    border-radius: 5px;
+
+    height: 35px;
+
+    /* line-height: 5px; */
+    padding-top: 7px;
+    padding-left: 10px;
+
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    margin-right: 20px;
+    
+}
+
+/* 출결이력, 상담이력 부분 */
+.consultant-detail-select-wrapper {
+    width: 150px;
+
+    margin-left: 50px;
+}
+
+.consultant-detail-select-wrapper > select {
+    width:100%;
+    height: 30px;
+}
+
+.consultant-detail-select-wrapper > option {
+    width:100%;
+    height: 30px;
+}
+
+
+/* 수정하기, 삭제하기 부분 */

@@ -1,0 +1,42 @@
+.notice-write-two-wrapper {
+
+}
+
+.notice-write-two-header {
+
+
+}
+
+.write-two-input-title {
+    width: 50%;
+    /* margin-left: 25%; */
+}
+
+.write-two-input-title > input {
+    width: 100%;
+    height: 50px;
+    /* margin-left: 10%;
+    margin-right: 10%; */
+}
+
+.ckeditor-wrapper {
+    width: 50%;
+
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-bottom: 20px;
+}
+
+/* .ckeditor-wrapper .ckeditor {
+    width:75%;
+} */
+
+.ck .ck-editor__editable:not(.ck-editor__nested-editable){
+    min-height: 400px;
+}
+
+.notice-write-bottom-wrapper {
+    display: flex;
+
+    margin-bottom: 50px;
+}

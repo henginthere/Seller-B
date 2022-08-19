@@ -1,0 +1,72 @@
+.con-table-list {
+    width: 100%;
+    border-bottom: 1px solid rgb(244, 244, 244);
+}
+
+.con-table-list .con-table-thead {
+    border-bottom: 1px solid #333;
+}
+
+.con-th-tr {
+    width: 100%;
+    table-layout: fixed;
+    border-bottom: 1px solid #333;
+    border-top: 2px solid #333;
+}
+
+.con-th-tr .con-th-tr-name {
+    width: 50px;
+    padding: 20px 0;
+    text-align: center;
+    line-height: 20px;
+    font-weight: 400;
+    color: #333;
+    font-size: 12px;
+}
+
+.con-th-tr .con-th-tr-id {
+    padding: 20px 0;
+    text-align: center;
+    line-height: 20px;
+    font-weight: 400;
+    color: #333;
+    font-size: 12px;
+}
+
+.con-th-tr .con-th-tr-group{
+    width: 100px;
+    padding: 20px 0;
+    text-align: center;
+    line-height: 20px;
+    font-weight: 400;
+    color: #333;
+    font-size: 12px;
+}
+
+.con-list-body {
+    position: relative;
+}
+
+.con-tbody-tr {
+    height: 30px;
+    border-bottom: 1px solid rgb(244, 244, 244);
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.manager-main-right-bottom-wrapper {
+    display: flex;
+}
+
+.manager-main-right-pagination {
+    width: 50%;
+    margin-left: 7%;
+}
+
+.manager-main-right-reset-icon {
+
+}
+
+.manager-main-right-reset-icon:hover {
+    background-color: rgb(244, 244, 244);
+}

@@ -1,0 +1,92 @@
+
+.page-title {
+    font-size: 25px;
+    font-family: twayair;
+    color: #324E66;
+    padding: 1.5rem;
+}
+
+.product-list {
+    margin-top: 5%;
+}
+
+.page-navi-wrapper{
+    height: 30%;
+    /* background-color: #f6efec; */
+
+    display: flex;
+}
+
+.navi-left {
+    justify-content: start;
+    width: 30%;
+
+    margin-left: 10%;
+}
+
+.navi-left > select {
+    width: 150px;
+    height: 35px;
+}
+
+.navi-center {
+    width: 30%;
+    display: flex;
+    margin-left: 55px;
+}
+
+.navi-center .navi-center-search-word {
+    font-size: 25px;
+    color: #324E66;
+    margin-right: 5px;
+}
+
+.navi-center .navi-center-result-word {
+    font-size: 15px;
+    margin-top: 8px;
+}
+
+/* navi 오른쪽 영역 */
+.navi-right {
+    justify-content: end;
+    display: flex;
+    width: 30%;
+
+    margin-right: 10%;
+}
+
+.navi-right > input {
+    border-radius: 10px;
+    border: none;
+    background-color: #eef0f0;
+}
+
+.navi-right .navi-prod-register-btn {
+    margin-left: 15px;
+    margin-top: 5px;
+}
+
+#search-icon-btn {
+    font-size: 20px;
+    /* margin-left: 10px; */
+    margin-right: 10px;
+}
+
+#prod-create-btn {
+    font-size: 20px;
+    margin-left: 20px;
+    margin-right: 10px;
+}
+
+
+.product-list-wrapper {
+    margin-left: 100px;
+    margin-right: 100px;
+
+    /* background-color:beige; */
+    max-width: 100%;
+    flex-wrap: nowrap;
+    align-content: stretch;
+    height: auto; 
+    background-color: yello;
+}

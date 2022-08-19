@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.consulting.ConsultingActivity">
+
+    <RelativeLayout
+        android:id="@+id/views_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@id/peer_container"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <FrameLayout
+            android:id="@+id/peer_container_remote"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:translationZ="90dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <org.webrtc.SurfaceViewRenderer
+                android:id="@+id/remote_gl_surface_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible" />
+        </FrameLayout>
+
+
+    </RelativeLayout>
+
+
+    <FrameLayout
+        android:id="@+id/peer_container"
+        android:layout_width="155dp"
+        android:layout_height="200dp"
+        android:layout_margin="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <org.webrtc.SurfaceViewRenderer
+            android:id="@+id/local_gl_surface_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/shape_btn_round"
+        android:layout_margin="8dp"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:padding="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/peer_container"
+        app:layout_constraintTop_toTopOf="@id/peer_container"
+        app:layout_constraintBottom_toTopOf="@id/btn_speaker_mode">
+        <TextView
+            android:id="@+id/tv_consultant_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="상담원 : "
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/main_blue"
+            android:layout_gravity="left"/>
+        <TextView
+            android:id="@+id/tv_product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="제품 명: "
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/main_blue"
+            android:layout_gravity="left"/>
+        <TextView
+            android:id="@+id/tv_product_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="가격:  "
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/main_blue"
+            android:layout_gravity="left"/>
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/btn_switch_camera"
+        android:layout_width="45dp"
+        android:layout_height="38dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/shape_btn_round"
+        android:padding="5dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_camera_switch"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_speaker_mode"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btn_speaker_mode"
+        android:layout_width="45dp"
+        android:layout_height="38dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/shape_btn_round"
+        android:padding="5dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/selector_btn_speaker"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_exit"
+        app:layout_constraintStart_toEndOf="@id/btn_switch_camera" />
+
+    <ImageButton
+        android:id="@+id/btn_exit"
+        android:layout_width="45dp"
+        android:layout_height="38dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/shape_btn_round_red"
+        android:padding="5dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_logout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/peer_container"
+        app:layout_constraintStart_toEndOf="@id/btn_speaker_mode"
+        app:tint="@color/red" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

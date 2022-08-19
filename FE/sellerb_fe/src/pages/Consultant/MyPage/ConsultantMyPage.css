@@ -1,0 +1,156 @@
+.wrapper {
+  display: flex;
+  margin: 10px;
+  width: 100%;
+  flex-direction: row;
+  min-height: 800px;
+}
+* {
+  font-family: "twayair", cursive;
+}
+
+#left {
+  display: flex;
+  flex-direction: column;
+  width: 35%;
+  padding: 20px;
+  display: flex;
+  border-style: none solid none solid;
+  border-width: 0px 1px 0px 1px;
+}
+
+#consultant-mypage-right {
+  display: flex;
+  width: 65%;
+  margin: 10px;
+  min-height: 500px;
+  padding: 30px;
+  justify-content: flex-start;
+  border: 2px solid gray;
+  border-radius: 10px;
+  flex-direction: column;
+}
+
+.imageWrapper {
+  width: 150px;
+  height: 150px;
+}
+
+.imageWrapper img {
+  max-width: 100%;
+  max-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Button {
+  display: flex;
+  justify-content: flex-start;
+  margin: 20px;
+  min-width: 50px;
+}
+
+.InfoWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.InfoTextField {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 20px;
+  margin-left: 20px;
+  width: 200px;
+  height: 50px;
+}
+
+.topText {
+  display: flex;
+  margin: 5px;
+  align-items: flex-start;
+}
+
+/* 혜연 */
+/* 전체 */
+
+.consultant-profile-container {
+  display: flex;
+}
+
+
+.profile-wrapper {
+  display: flex;
+  width: 35%;
+  min-height: 500px;
+
+  margin-left: 10%;
+
+  padding: 20px;
+
+  border: 1px solid grey;
+}
+
+
+.con-mypage-profile-left {
+  /* 상 우 하 좌*/
+  /* margin: 0px 20px 30px 50px;  */
+  padding: 15px;
+
+  /* border-left: thick solid #F8F0DE; */
+  /* border-right: 2px solid grey; */
+  margin-left: 15%;
+  width: 30%;
+  justify-content: left;
+  height : 400px;
+}
+
+
+.con-profile-element {
+
+}
+
+.con-profile-element > div {
+    /* border: 1px solid red; */
+    background-color:#f0f0f0;
+
+    border-radius: 5px;
+
+    width: 200px;
+    height: 35px;
+
+    /* line-height: 5px; */
+    padding-top: 7px;
+    padding-left: 10px;
+
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    margin-right: 20px;
+    
+}
+
+.con-mypage-wrapper {
+  width: 80%;
+}
+
+.con-mypage-left-wrapper {
+  width: 40%;
+}
+
+.con-mypage-left-wrapper .con-mypage-default-img {
+  width: 200px;
+  height: auto;
+  border-radius: 45%;
+
+  margin-top: 50%;
+  
+}
+.profile-right {
+  width: 100%;
+}
+
+.select-wrapper {
+  margin-left: 30px;
+}

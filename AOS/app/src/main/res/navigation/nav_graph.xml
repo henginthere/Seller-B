@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/item_home">
+
+    <fragment
+        android:id="@+id/item_home"
+        android:name="com.ssafy.sellerb.ui.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_myPageFragment"
+            app:destination="@id/item_my_page"/>
+        <action
+            android:id="@+id/action_homeFragment_to_loginFragment"
+            app:destination="@+id/loginFragment"/>
+        <action
+            android:id="@+id/action_homeFragment_to_WaitingFragment"
+            app:destination="@+id/waitingFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/item_my_page"
+        android:name="com.ssafy.sellerb.ui.mypage.MyPageFragment"
+        android:label="fragment_my_page"
+        tools:layout="@layout/fragment_my_page">
+        <action
+            android:id="@+id/action_myPageFragment_to_HomeFragment"
+            app:destination="@id/item_home" />
+        <action
+            android:id="@+id/action_myPageFragment_to_LoginFragment"
+            app:destination="@+id/loginFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.ssafy.sellerb.ui.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_LoginFragment_to_HomeFragment"
+            app:destination="@+id/item_home" />
+        <action
+            android:id="@+id/action_LoginFragment_to_SignupFragment"
+            app:destination="@+id/signupFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/signupFragment"
+        android:name="com.ssafy.sellerb.ui.signup.SignupFragment"
+        android:label="fragment_signup"
+        tools:layout="@layout/fragment_signup">
+        <action
+            android:id="@+id/action_SignupFragment_to_LoginFragment"
+            app:destination="@+id/loginFragment"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/waitingFragment"
+        android:name="com.ssafy.sellerb.ui.consulting.waiting.WaitingFragment"
+        android:label="fragment_waiting"
+        tools:layout="@layout/fragment_waiting">
+        <action
+            android:id="@+id/action_WaitingFragment_to_HomeFragment"
+            app:destination="@+id/item_home"/>
+        <action
+            android:id="@+id/action_WaitingFragment_to_ConsultingReviewDialog"
+            app:destination="@+id/consultingReviewDialog"/>
+    </fragment>
+
+    <dialog
+        android:id="@+id/consultingReviewDialog"
+        android:name="com.ssafy.sellerb.ui.consulting.review.ConsultingReviewDialog"
+        android:label="ConsultingReviewDialog"
+        tools:layout="@layout/dialog_consulting_review"
+        >
+        <action
+            android:id="@+id/action_ConsultingReviewDialog_to_HomeFragment"
+            app:destination="@id/item_home"/>
+    </dialog>
+
+    <fragment
+        android:id="@+id/item_consulting_history"
+        android:name="com.ssafy.sellerb.ui.consulting.history.ConsultingHistoryFragment"
+        android:label="fragment_consulting_history"
+        tools:layout="@layout/fragment_consulting_history">
+
+        <action
+            android:id="@+id/action_itemConsultingHistory_to_ProductFragment"
+            app:destination="@+id/productFragment"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/productFragment"
+        android:name="com.ssafy.sellerb.ui.product.ProductFragment"
+        android:label="ProductFragment"
+        tools:layout="@layout/fragment_product">
+        <action
+            android:id="@+id/action_productFragment_to_homeFragment"
+            app:destination="@+id/item_home"/>
+    </fragment>
+
+</navigation>
