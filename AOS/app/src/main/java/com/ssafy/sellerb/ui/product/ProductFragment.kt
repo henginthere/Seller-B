@@ -2,6 +2,7 @@ package com.ssafy.sellerb.ui.product
 
 import android.util.Log
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.navercorp.nid.NaverIdLoginSDK.applicationContext
 import com.ssafy.sellerb.R
@@ -10,6 +11,7 @@ import com.ssafy.sellerb.databinding.FragmentProductBinding
 import com.ssafy.sellerb.di.component.FragmentComponent
 import com.ssafy.sellerb.ui.base.BaseFragment
 import com.ssafy.sellerb.util.Constants.PAYMENT_APPLICATION_ID
+import com.ssafy.sellerb.util.display.Toaster
 import kr.co.bootpay.android.Bootpay
 import kr.co.bootpay.android.events.BootpayEventListener
 import kr.co.bootpay.android.models.BootExtra
@@ -26,6 +28,7 @@ class ProductFragment : BaseFragment<ProductViewModel>() {
     private val binding get() = _binding!!
 
     override fun provideLayoutId(): Int = R.layout.fragment_product
+    private var toggle = true
 
     override fun injectDependencies(fragmentComponent: FragmentComponent) =
         fragmentComponent.inject(this)
@@ -50,6 +53,16 @@ class ProductFragment : BaseFragment<ProductViewModel>() {
                 setPrice(num - 1)
             }
         }
+
+        binding.tvAdrType.setOnClickListener {
+            if(toggle){
+                binding.tvAdrType.text = "택배"
+            }else{
+                binding.tvAdrType.text = "매장수령"
+            }
+            toggle = !toggle
+        }
+
     }
 
     fun setPrice(num: Int) {
@@ -73,6 +86,9 @@ class ProductFragment : BaseFragment<ProductViewModel>() {
             }
         }
 
+        viewModel.loading.observe(this){
+            binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
+        }
     }
 
     override fun onDestroyView() {
@@ -113,7 +129,8 @@ class ProductFragment : BaseFragment<ProductViewModel>() {
             .setEventListener(object : BootpayEventListener {
                 override fun onCancel(data: String) {
                     Log.d("bootpay", "cancel: $data")
-
+//                    findNavController().navigate(R.id.action_productFragment_to_homeFragment)
+//                    Toaster.show(context!!,"결제가 취소되었습니다.")
                 }
 
                 override fun onError(data: String) {
