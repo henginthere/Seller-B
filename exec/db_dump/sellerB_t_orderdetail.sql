@@ -37,7 +37,7 @@ CREATE TABLE `t_orderdetail` (
   KEY `FKaqkdh58foqhn5s3fq9ntalc1r` (`product_seq`),
   CONSTRAINT `FK1vuypobad4ngm52klyo3ekvr1` FOREIGN KEY (`order_seq`) REFERENCES `t_order` (`order_seq`),
   CONSTRAINT `FKaqkdh58foqhn5s3fq9ntalc1r` FOREIGN KEY (`product_seq`) REFERENCES `t_product` (`product_seq`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,6 +46,13 @@ CREATE TABLE `t_orderdetail` (
 
 LOCK TABLES `t_orderdetail` WRITE;
 /*!40000 ALTER TABLE `t_orderdetail` DISABLE KEYS */;
+INSERT INTO `t_orderdetail` VALUES
+(1,1,0,'2022-08-18 08:37:05.651375','비회원','2022-08-18 08:37:05.651375','비회원',2,1),
+(2,2,0,'2022-08-18 08:37:05.656187','비회원','2022-08-18 08:37:05.656187','비회원',2,2),
+(3,2,0,'2022-08-18 08:38:11.542437','비회원','2022-08-18 08:38:11.542437','비회원',3,1),
+(4,1,0,'2022-08-18 08:38:11.546526','비회원','2022-08-18 08:38:11.546526','비회원',3,2),
+(5,2,0,'2022-08-18 08:39:09.911305','비회원','2022-08-18 08:39:09.911305','비회원',4,1),
+(6,1,0,'2022-08-18 08:39:09.914902','비회원','2022-08-18 08:39:09.914902','비회원',4,2);
 /*!40000 ALTER TABLE `t_orderdetail` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -58,4 +65,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-17 23:43:37
+-- Dump completed on 2022-08-19 11:21:11

@@ -35,7 +35,7 @@ CREATE TABLE `t_address` (
   PRIMARY KEY (`addr_seq`),
   KEY `FKsprqbf91k3y39c0ndg4ajos2d` (`customer_seq`),
   CONSTRAINT `FKsprqbf91k3y39c0ndg4ajos2d` FOREIGN KEY (`customer_seq`) REFERENCES `t_customer` (`customer_seq`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,6 +44,9 @@ CREATE TABLE `t_address` (
 
 LOCK TABLES `t_address` WRITE;
 /*!40000 ALTER TABLE `t_address` DISABLE KEYS */;
+INSERT INTO `t_address` VALUES
+(1,'우리집',0,'2022-08-18 08:31:13.997771','비회원','2022-08-18 08:31:13.997771','비회원','문앞에 두고 가주세요.!',6),
+(2,'경북 구미시 3공단 3로 302 삼성전자 구미 사업장',0,'2022-08-18 08:32:57.989782','비회원','2022-08-18 08:32:57.989782','비회원','부재 시 게이트에 맡겨주세요!',6);
 /*!40000 ALTER TABLE `t_address` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-17 23:43:45
+-- Dump completed on 2022-08-19 11:21:19

@@ -40,7 +40,7 @@ CREATE TABLE `t_product` (
   PRIMARY KEY (`product_seq`),
   KEY `FKh8xpb634d67lq1y2wwidjqfgt` (`product_group_seq`),
   CONSTRAINT `FKh8xpb634d67lq1y2wwidjqfgt` FOREIGN KEY (`product_group_seq`) REFERENCES `t_product_group` (`product_group_seq`)
-) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -52,8 +52,8 @@ LOCK TABLES `t_product` WRITE;
 INSERT INTO `t_product` VALUES
 (1,0,'KU85UA7000FXKR','https://www.samsung.com/sec/tvs/uhd-ua7000fxkr-d2c/KU85UA7000FXKR/','2022-08-11 11:52:14.000000','s_manager','UHD 214 cm 스탠드형',4190000,'2022-08-11 11:52:14.000000','s_manager','https://sellerb.s3.ap-northeast-2.amazonaws.com/product/image.1_1660279015671.png',1,NULL,NULL),
 (2,0,'KQ75QB65AFXKR','https://www.samsung.com/sec/tvs/qled-qb65afxkr-d2c/KQ75QB65AFXKR/','2022-08-11 12:03:16.000000','s_manager','2022 QLED 4K 189 cm 스탠드형\n',3690000,'2022-08-11 12:03:16.000000','s_manager','https://sellerb.s3.ap-northeast-2.amazonaws.com/product/image.2_1660279246834.png',1,NULL,NULL),
-(3,0,'KQ65QNB700FXKR','https://www.samsung.com/sec/tvs/neo-qled-8k-qnb700fxkr-d2c/KQ65QNB700FXKR/','2022-08-11 13:08:37.000000','s_manager','2022 Neo QLED 8K 163cm 스탠드형',5290000,'2022-08-11 13:08:37.000000','s_manager','https://sellerb.s3.ap-northeast-2.amazonaws.com/product/image.3_1660279285647.png',1,NULL,NULL),
-(4,0,'RF85A92413Y','https://www.samsung.com/sec/refrigerators/french-door-rf85a92413y-d2c/RF85A92413Y/','2022-08-11 13:13:05.000000','s_manager','BESPOKE 냉장고 4도어 프리스탠딩 866 L',2299000,'2022-08-11 13:13:05.000000','s_manager','https://sellerb.s3.ap-northeast-2.amazonaws.com/product/image.3_1660279285647.png',2,NULL,NULL),
+(3,1,'KQ65QNB700FXKR','https://www.samsung.com/sec/tvs/neo-qled-8k-qnb700fxkr-d2c/KQ65QNB700FXKR/','2022-08-11 13:08:37.000000','s_manager','2022 Neo QLED 8K 163cm 스탠드형',5290000,'2022-08-11 13:08:37.000000','s_manager','https://sellerb.s3.ap-northeast-2.amazonaws.com/product/image.3_1660279285647.png',1,NULL,NULL),
+(4,0,'RF85A92413Y','https://www.samsung.com/sec/refrigerators/french-door-rf85a92413y-d2c/RF85A92413Y/','2022-08-11 13:13:05.000000','s_manager','BESPOKE 냉장고 4도어 프리스탠딩 866 L',2299000,'2022-08-11 13:13:05.000000','s_manager','https://sellerb.s3.ap-northeast-2.amazonaws.com/product/image.4_1660823224072.png',2,NULL,NULL),
 (5,0,'RS84T50716C','https://www.samsung.com/sec/refrigerators/side-by-side-rs84t5071-d2c/RS84T50716C/','2022-08-17 11:44:31.145603','비회원','양문형 냉장고 846 Ld',2310000,'2022-08-11 13:14:22.000000','s_manager','https://sellerb.s3.ap-northeast-2.amazonaws.com/product/image.5_1660279323596.png',2,NULL,NULL),
 (6,0,'WF25B9600KE','https://www.samsung.com/sec/washing-machines/wf25b9600ke-d2c/WF25B9600KE/','2022-08-11 13:17:38.000000','s_manager','BESPOKE 그랑데 세탁기 AI 25 kg [올인원컨트롤]',1949000,'2022-08-11 13:17:38.000000','s_manager','https://sellerb.s3.ap-northeast-2.amazonaws.com/product/image.6_1660279351628.png',6,NULL,NULL),
 (7,0,'WF24T8000KP','https://www.samsung.com/sec/washing-machines/grande-wf24t8000kv-d2c3/WF24T8000KP/','2022-08-11 13:27:22.000000','s_manager','그랑데 세탁기 24 kg',910000,'2022-08-11 13:27:22.000000','s_manager','https://sellerb.s3.ap-northeast-2.amazonaws.com/product/image.7_1660279375578.png',6,NULL,NULL),
@@ -106,7 +106,9 @@ INSERT INTO `t_product` VALUES
 (72,1,'ttttt','test','2022-08-17 07:28:55.451773','s_manager','ttttt',11111,'2022-08-17 07:28:55.451773','s_manager','',1,NULL,NULL),
 (73,1,'제품 수정 이미지 보존 테스트용','ㅌㅌ','2022-08-17 12:00:49.417354','sss333','제품 수정 이미지 보존 테스트용',1000,'2022-08-17 12:00:49.417354','sss333','',6,NULL,NULL),
 (74,1,'제품 수정 이미지 보존 테스트용','000','2022-08-17 12:37:22.126039','비회원','제품 수정 이미지 보존 테스트용',2000,'2022-08-17 12:01:16.546875','sss333','',2,NULL,NULL),
-(75,1,'xx','xx','2022-08-17 12:37:44.709181','비회원','xx',10000,'2022-08-17 12:37:44.709181','비회원','',2,NULL,NULL);
+(75,1,'xx','xx','2022-08-17 12:37:44.709181','비회원','xx',10000,'2022-08-17 12:37:44.709181','비회원','',2,NULL,NULL),
+(76,1,'고','2222','2022-08-18 02:22:47.685498','비회원','고',2222,'2022-08-18 02:22:31.430891','sss333','https://sellerb.s3.ap-northeast-2.amazonaws.com/product/image.%EA%B0%95%EC%95%84%EC%A7%80%EC%9D%B4%EB%AF%B8%EC%A7%80_1660789362665.jpg',2,NULL,NULL),
+(77,0,'NOLARWATHERYO','','2022-08-18 16:43:08.573261','비회원','bonobono',10000,'2022-08-18 16:42:45.663334','siryeong','https://sellerb.s3.ap-northeast-2.amazonaws.com/product/image.%EB%B3%B4%EB%85%B8%EB%B3%B4%EB%85%B8_%EB%AA%A8%EC%98%81_1660840986079.png',8,NULL,NULL);
 /*!40000 ALTER TABLE `t_product` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -119,4 +121,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-17 23:43:42
+-- Dump completed on 2022-08-19 11:21:17
