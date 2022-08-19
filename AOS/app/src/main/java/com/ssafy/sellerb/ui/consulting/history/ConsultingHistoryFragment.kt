@@ -34,6 +34,8 @@ class ConsultingHistoryFragment : BaseFragment<ConsultingHistoryViewModel>() , O
             layoutManager = linearLayoutManager
             adapter = consultingAdapter
         }
+
+        viewModel.onFetchConsultingList()
     }
 
     override fun onClickConsulting() {
@@ -41,6 +43,11 @@ class ConsultingHistoryFragment : BaseFragment<ConsultingHistoryViewModel>() , O
 
     override fun setUpObserver() {
         super.setUpObserver()
+
+        viewModel.loading.observe(this) {
+            binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
+        }
+
 
         viewModel.consultings.observe(this){
             if(it.isNotEmpty()){

@@ -14,9 +14,9 @@ class MyPageViewModel(
     coroutineDispatchers: CoroutineDispatchers,
     networkHelper: NetworkHelper,
     userRepository: UserRepository
-) :BaseViewModel(coroutineDispatchers, networkHelper) {
+) : BaseViewModel(coroutineDispatchers, networkHelper) {
 
-    val launchLogin : MutableLiveData<Event<Map<String,String>>> = MutableLiveData()
+    val launchLogin: MutableLiveData<Event<Map<String, String>>> = MutableLiveData()
 
 
     private val userRepository = userRepository
@@ -31,10 +31,14 @@ class MyPageViewModel(
 
     }
 
-    fun doLogout(){
+    fun doLogout() {
         viewModelScope.launch(coroutineDispatchers.io()) {
-            userRepository.removeCurrentUser()
-            launchLogin.postValue(Event(mapOf()))
+            try {
+                userRepository.removeCurrentUser()
+                launchLogin.postValue(Event(mapOf()))
+            } catch (ex: Exception) {
+                handleNetworkError(ex)
+            }
         }
     }
 }

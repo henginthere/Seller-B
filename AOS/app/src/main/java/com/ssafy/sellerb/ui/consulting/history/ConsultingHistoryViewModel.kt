@@ -27,20 +27,24 @@ class ConsultingHistoryViewModel(
     val _consultings: MutableLiveData<List<Consulting>> = MutableLiveData()
     val consultings: LiveData<List<Consulting>> = _consultings
 
+    private val _loading: MutableLiveData<Boolean> = MutableLiveData()
+    val loading: LiveData<Boolean> = _loading
+
     override fun onCreate() {}
 
     init {
         if(user != null){
-            onFetchConsultingList()
+            //onFetchConsultingList()
         }
     }
 
-    private fun onFetchConsultingList(){
+    fun onFetchConsultingList(){
         viewModelScope.launch(coroutineDispatchers.io()){
             try {
                 consultingRepository.getConsultingDay(user!!.id, user.accessToken)
-                    .onStart {  }
+                    .onStart { _loading.postValue(true) }
                     .collect{
+                        _loading.postValue(false)
                         allConsultingList.addAll(it.toMutableList())
                         _consultings.postValue(it)
                     }

@@ -89,9 +89,19 @@
         tools:layout="@layout/fragment_consulting_history">
 
         <action
-            android:id="@+id/action_itemConsultingHistory_to_HomeFragment"
-            app:destination="@+id/item_home"/>
+            android:id="@+id/action_itemConsultingHistory_to_ProductFragment"
+            app:destination="@+id/productFragment"/>
 
+    </fragment>
+
+    <fragment
+        android:id="@+id/productFragment"
+        android:name="com.ssafy.sellerb.ui.product.ProductFragment"
+        android:label="ProductFragment"
+        tools:layout="@layout/fragment_product">
+        <action
+            android:id="@+id/action_productFragment_to_homeFragment"
+            app:destination="@+id/item_home"/>
     </fragment>
 
 </navigation>
