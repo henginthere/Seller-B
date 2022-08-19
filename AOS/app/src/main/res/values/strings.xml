@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">SellerB</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Menu Item -->
+    <string name="menu_home">Home</string>
+    <string name="menu_my_page">MyPage</string>
+    <string name="menu_product">Products</string>
+    <string name="menu_history">History</string>
+
+    <!-- -->
+    <string name="home_content">제품의 QR 코드를 스캔하여 상담을 시작해보세요!</string>
+    <string name="waiting_description">앱을 종료해도 상담이 시작되면 알림으로 알려 드려요!</string>
+    <string name="signup_content"> <u>SellerB 간단하게 가입하기</u></string>
+    <string name="network_connection_error">Internet connection lost, please retry again</string>
+    <string name="network_default_error">Something wrong happened, please retry again</string>
+    <string name="network_internal_error">Our systems got an error, please retry again</string>
+    <string name="network_server_not_available">
+        Our services are under maintenance,please retry after some time
+    </string>
+    <string name="server_connection_error">Not able to connect, please retry again</string>
+    <string name="try_again">Something went wrong Try Again</string>
+
+
+
 </resources>

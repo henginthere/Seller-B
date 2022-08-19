@@ -1,18 +1,17 @@
 server:
-  port: 8080
+  port: 5000
   servlet:
-    context-path: /
+    context-path: /api
     encoding:
       charset: UTF-8
       enabled: true
       force: true
 
 spring:
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/sellerB?serverTimezone=Asia/Seoul
-    username: root
-    password: hy1234
+  profiles:
+    include: oauth
+
+
 
   jpa:
     hibernate:
@@ -24,7 +23,7 @@ spring:
 
 jwt:
   header: Authorization
-  secret: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
+
   access-token-validity-in-seconds: 1800 # 초 단위
   refresh-token-validity-in-seconds: 604800
 
@@ -32,10 +31,25 @@ logging:
   file:
     path: C:\SSAFY\SellerB\BE\sellerB
   level:
-    root: info
+    root: debug
     org:
       hibernate:
         type:
           descriptor:
             sql: trace
 
+springdoc:
+#  swagger-ui:
+#    path: animal.html
+#  version: v1
+  paths-to-match:
+    - /**
+cloud:
+  aws:
+    # AWS S3 bucket Info (S3 버킷정보)
+    s3:
+      bucket: sellerb
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
