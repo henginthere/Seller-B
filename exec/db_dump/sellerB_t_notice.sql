@@ -37,7 +37,7 @@ CREATE TABLE `t_notice` (
   PRIMARY KEY (`notice_seq`),
   KEY `FK2obeh5qjjv99f38n955wvle8f` (`brand_seq`),
   CONSTRAINT `FK2obeh5qjjv99f38n955wvle8f` FOREIGN KEY (`brand_seq`) REFERENCES `t_brand` (`brand_seq`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,7 +91,11 @@ INSERT INTO `t_notice` VALUES
 (42,'<p>ㅇㅇㅇ</p>',1,'2022-08-16 17:41:40.229251','s_manager','2022-08-16 17:41:40.229251','s_manager','ㅇㅇㅇ',1,NULL,NULL),
 (43,'<p>내용을 작성해주세요!teststestaetaseetssetteteetaetaetaestaestaetaet</p>',1,'2022-08-17 07:30:58.004749','s_manager','2022-08-17 07:30:58.004749','s_manager','test',1,NULL,NULL),
 (44,'수정 두번째 테스트dd',0,'2022-08-17 11:44:14.742841','비회원','2022-08-17 17:25:46.759600','비회원','수정 두번째 테스트dd',1,NULL,NULL),
-(45,'새글새글',0,'2022-08-17 14:24:34.896761','비회원','2022-08-17 14:24:25.695990','sss333','새글',1,NULL,NULL);
+(45,'새글새글',0,'2022-08-17 14:24:34.896761','비회원','2022-08-17 14:24:25.695990','sss333','새글',1,NULL,NULL),
+(46,'<p>dd</p>',0,'2022-08-18 02:36:55.214537','sss333','2022-08-18 02:36:55.214537','sss333','d',1,NULL,NULL),
+(47,'<p>오늘의 공지사항입니다.</p>',1,'2022-08-18 08:33:34.789007','s_manager','2022-08-18 08:33:34.789007','s_manager','08/19 공지사항',1,NULL,NULL),
+(48,'<p>공지사항입니다.</p>',0,'2022-08-18 08:37:12.726460','s_manager','2022-08-18 08:37:12.726460','s_manager','공지사항입니다.',1,NULL,NULL),
+(49,'<p>오늘의 공지사항 입니다.</p>',0,'2022-08-18 08:54:20.369749','s_manager','2022-08-18 08:54:20.369749','s_manager','공지사항 입니다.',1,NULL,NULL);
 /*!40000 ALTER TABLE `t_notice` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -104,4 +108,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-17 23:43:38
+-- Dump completed on 2022-08-19 11:21:12

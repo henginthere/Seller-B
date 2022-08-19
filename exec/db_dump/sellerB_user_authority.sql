@@ -61,6 +61,7 @@ INSERT INTO `user_authority` VALUES
 ('l_manager','ROLE_ADMIN'),
 ('Nnaver','ROLE_CUSTOMER'),
 ('sam','ROLE_ADMIN'),
+('siryeong','ROLE_ADMIN'),
 ('ss','ROLE_ADMIN'),
 ('sss','ROLE_ADMIN'),
 ('sss333','ROLE_ADMIN'),
@@ -71,6 +72,7 @@ INSERT INTO `user_authority` VALUES
 ('s_manager','ROLE_ADMIN'),
 ('s_test','ROLE_ADMIN'),
 ('s_test_2','ROLE_ADMIN'),
+('test1234','ROLE_ADMIN'),
 ('test@kakao.com','ROLE_CUSTOMER'),
 ('test@naver.com','ROLE_CUSTOMER'),
 ('test_0817','ROLE_ADMIN'),
@@ -83,10 +85,11 @@ INSERT INTO `user_authority` VALUES
 ('ㅎㅎ','ROLE_ADMIN'),
 ('가가','ROLE_USER'),
 ('강호동고양이','ROLE_ADMIN'),
-('고양사원','ROLE_USER'),
 ('고양이테스트','ROLE_ADMIN'),
 ('나나','ROLE_USER'),
 ('다다','ROLE_USER'),
+('마지막상담원','ROLE_USER'),
+('민지','ROLE_ADMIN'),
 ('백호상담사','ROLE_USER'),
 ('삼성고양이','ROLE_ADMIN'),
 ('삼성이여','ROLE_ADMIN'),
@@ -111,4 +114,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-17 23:43:45
+-- Dump completed on 2022-08-19 11:21:19

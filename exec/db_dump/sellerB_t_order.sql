@@ -35,7 +35,7 @@ CREATE TABLE `t_order` (
   PRIMARY KEY (`order_seq`),
   KEY `FKie8s3tmfwm1qmn9r2gthno71v` (`addr_seq`),
   CONSTRAINT `FKie8s3tmfwm1qmn9r2gthno71v` FOREIGN KEY (`addr_seq`) REFERENCES `t_address` (`addr_seq`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,6 +44,10 @@ CREATE TABLE `t_order` (
 
 LOCK TABLES `t_order` WRITE;
 /*!40000 ALTER TABLE `t_order` DISABLE KEYS */;
+INSERT INTO `t_order` VALUES
+(2,0,'2022-08-18 08:37:05.639004','비회원','2022-08-18 08:37:05.639004','비회원',1,1,NULL),
+(3,0,'2022-08-18 08:38:11.535832','비회원','2022-08-18 08:38:11.535832','비회원',2,1,NULL),
+(4,0,'2022-08-18 08:39:09.904630','비회원','2022-08-18 08:39:09.904630','비회원',12,1,NULL);
 /*!40000 ALTER TABLE `t_order` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +60,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-17 23:43:38
+-- Dump completed on 2022-08-19 11:21:13
