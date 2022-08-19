@@ -35,7 +35,7 @@ CREATE TABLE `t_review` (
   PRIMARY KEY (`review_seq`),
   KEY `FKf96vrgacsg8fqwhgh56yvkw0s` (`consulting_seq`),
   CONSTRAINT `FKf96vrgacsg8fqwhgh56yvkw0s` FOREIGN KEY (`consulting_seq`) REFERENCES `t_consulting` (`consulting_seq`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -49,7 +49,8 @@ INSERT INTO `t_review` VALUES
 (2,'궁금함이 해소되었어요.',0,4.5,'2022-08-12 07:24:20.326359','비회원','2022-08-12 07:24:20.326359','비회원',2),
 (3,'감사합니다.',0,5,'2022-08-12 07:24:41.755956','비회원','2022-08-12 07:24:41.755956','비회원',4),
 (4,'상담사 목소리가 너무 작았어요.',0,3,'2022-08-12 07:25:02.216895','비회원','2022-08-12 07:25:02.216895','비회원',5),
-(5,'good~',0,4,'2022-08-12 12:14:56.217331','비회원','2022-08-12 12:14:56.217331','비회원',6);
+(5,'good~',0,4,'2022-08-12 12:14:56.217331','비회원','2022-08-12 12:14:56.217331','비회원',6),
+(6,'리뷰 테스트용',0,3.5,'2022-08-18 02:06:38.596993','비회원','2022-08-18 02:06:38.596993','비회원',1);
 /*!40000 ALTER TABLE `t_review` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -62,4 +63,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-17 23:43:43
+-- Dump completed on 2022-08-19 11:21:17
