@@ -56,6 +56,7 @@
 ## 주요 기능
 
 ## UCC
+[![SellerB UCC](http://img.youtube.com/vi/_2xRYUEkumY/0.jpg)](https://youtu.be/_2xRYUEkumY?t=0s)
 
 ## 프로젝트 기간
 
