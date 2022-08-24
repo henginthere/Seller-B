@@ -64,7 +64,7 @@
 ## :hammer: 기술 스택
 
 <details>
- <summary>기술 스택</summary>
+ <summary><h3>기술 스택</h3></summary>
  <div markdown="1">
   <table border="1">
 <thead>
@@ -222,7 +222,7 @@
 ### :mag: 파트별 사용 기술을 자세히 보려면?
 
 - [Back-End](BE)
-- [Front_End](FE)
+- [Front-End](FE)
 - [Android](AOS)
 
 <div id="4"></div>
@@ -243,6 +243,8 @@
 
 
 <div id="6"></div>
+
+## :clock1: 프로젝트 기간
 
 ### 22.07.11 ~ 22.08.19
 
