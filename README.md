@@ -6,15 +6,17 @@
   <br />
 </div>
 
-## 목차
+## :pushpin: 목차
 
-0. [팀원 소개](#:sparkling_heart:-팀원-소개)
-1. [서비스 소개](#서비스-소개)
-2. [기술 스택](#기술-스택)
-3. [시스템 아키텍처](#시스템-아키텍처)
-4. [주요 기능](#주요-기능)
-5. [프로젝트 기간](#프로젝트-기간)
-6. [프로젝트 산출물](#프로젝트-산출물)
+1. [팀원 소개](#1)
+2. [서비스 소개](#2)
+3. [기술 스택](#3)
+4. [시스템 아키텍처](#4)
+5. [주요 기능](#5)
+6. [프로젝트 기간](#6)
+7. [프로젝트 산출물](#7)
+
+<div id="1"></div>
 
 ## :sparkling_heart: 팀원 소개
 
@@ -40,7 +42,9 @@
     </tr>
 </table>
 
-## 서비스 소개
+<div id="2"></div>
+
+## :bulb: 서비스 소개
 
 ### SellerB는 비대면 화상 일대일 전자제품 맞춤 상담 서비스입니다.
 
@@ -51,13 +55,13 @@
     때로는 상담원과의 대면 상담이 부담스러운 고객이 있을 수도 있습니다.
     이러한 문제 상황들을 개선하기 위해 SellerB를 기획하였습니다.
 
-### SellerB 소개 영상
+### :clapper: SellerB 소개 영상
 
 [![SellerB UCC](http://img.youtube.com/vi/_2xRYUEkumY/0.jpg)](https://youtu.be/_2xRYUEkumY?t=0s)
 
-## 기술 스택
-
-### 여기에 기술스택을 나열해 주세요.
+<div id="3"></div>
+    
+## :hammer: 기술 스택
 
 <details>
  <summary>기술 스택</summary>
@@ -215,13 +219,15 @@
  </div> 
 </details>
 
-### 파트별 사용 기술을 자세히 보려면?
+### :mag: 파트별 사용 기술을 자세히 보려면?
 
 - [Back-End](BE)
 - [Front_End](FE)
 - [Android](AOS)
 
-## 시스템 아키텍처
+<div id="4"></div>
+
+## :computer: 시스템 아키텍처
 
 ### 시스템 구성
 
@@ -231,9 +237,12 @@
 
 <img src="./assets/CICD.jpg" alt="CI/CD">
 
-## 주요 기능
+<div id="5"></div>
+  
+## :star: 주요 기능
 
-## 프로젝트 기간
+
+<div id="6"></div>
 
 ### 22.07.11 ~ 22.08.19
 
@@ -241,8 +250,9 @@
 - 프로젝트 구현 : 22.07.25 ~ 22.08.15
 - 버그 수정 및 산출물 정리 : 22.08.15 ~ 22.08.18
 
-## 프로젝트 산출물
+<div id="7"></div>
 
+## :clipboard: 프로젝트 산출물
 - [와이어프레임](https://www.figma.com/file/TvetUR9WZYSJzDOtnD8qs8/%EC%85%80%EB%9F%AC%EB%B9%84?node-id=5%3A3)
 - [컨벤션 목록](https://www.notion.so/66fed91b5656473b93ef3e120bed1119)
 - [ERD](https://www.erdcloud.com/d/Dsw5aLs3sden8Kgsu)
