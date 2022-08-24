@@ -1,6 +1,7 @@
 # SellerB
 
 ## :sparkling_heart: 팀원 소개
+
 <table>
     <tr>
         <td height="140px" align="center"> <a href="https://github.com/MilanoBeer">
@@ -10,7 +11,7 @@
         <td height="140px" align="center"> <a href="https://github.com/henginthere">
             <img src="https://avatars.githubusercontent.com/u/58303100?v=4" width="140px" /> <br><br> 배해연 <br>(Back-End) </a> <br></td>
         <td height="140px" align="center"> <a href="https://github.com/ljhyung">
-            <img src="https://avatars.githubusercontent.com/u/97655625?v=4" width="140px" /> <br><br> 이주형 <br>(Back-End) </a> <br></td>>
+            <img src="https://avatars.githubusercontent.com/u/97655625?v=4" width="140px" /> <br><br> 이주형 <br>(Back-End) </a> <br></td>
         <td height="140px" align="center"> <a href="https://github.com/GideokLee">
             <img src="https://avatars.githubusercontent.com/u/76939190?v=4" width="140px" /> <br><br> 이기덕 <br>(AOS) </a> <br></td>
     </tr>
