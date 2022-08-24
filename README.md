@@ -53,15 +53,20 @@
 [![SellerB UCC](http://img.youtube.com/vi/_2xRYUEkumY/0.jpg)](https://youtu.be/_2xRYUEkumY?t=0s)
     
 ## 기술 스택
-
+  ### 여기에 기술스택을 나열해 주세요.
+  
+  ### 파트별 사용 기술을 자세히 보려면?
+  - [Back-End](BE)
+  - [Front_End](FE)
+  - [Android](AOS)
+  
 ## 시스템 아키텍처
-
 ### 시스템 구성
-
+    <img src="./assets/System_Architecture.png" alt="Architecture" width = "400"/>
 ### CI/CD 배포 흐름도
-
+  
 ## 주요 기능
-
+  
 ## 프로젝트 기간
-
+  
 ## 프로젝트 산출물
