@@ -231,11 +231,11 @@
 
 ### 시스템 구성
 
-<img src="./assets/System_Architecture.png" alt="Architecture" width = "750"/>
+<img src="./assets/System_Architecture.png" alt="Architecture" width = "800"/>
 
 ### CI/CD 배포 흐름도
 
-<img src="./assets/CICD.jpg" alt="CI/CD">
+<img src="./assets/CICD.jpg" alt="CI/CD" width = "800">
 
 <div id="5"></div>
   
