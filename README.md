@@ -21,11 +21,11 @@
 <table>
     <tr>
         <td height="140px" align="center"> <a href="https://github.com/MilanoBeer">
-            <img src="https://avatars.githubusercontent.com/u/86315623?v=4" width="140px" /> <br><br> 신해연 <br>(Front-End) </a> <br></td>
+            <img src="https://avatars.githubusercontent.com/u/86315623?v=4" width="140px" /> <br><br> 신혜연 <br>(Front-End) </a> <br></td>
         <td height="140px" align="center"> <a href="https://github.com/dlacogus5239">
             <img src="https://avatars.githubusercontent.com/u/71282435?v=4" width="140px" /> <br><br> 임채현 <br>(Front-End) </a> <br></td>
         <td height="140px" align="center"> <a href="https://github.com/henginthere">
-            <img src="https://avatars.githubusercontent.com/u/58303100?v=4" width="140px" /> <br><br> 배해연 <br>(Back-End) </a> <br></td>
+            <img src="https://avatars.githubusercontent.com/u/58303100?v=4" width="140px" /> <br><br> 배혜연 <br>(Back-End) </a> <br></td>
         <td height="140px" align="center"> <a href="https://github.com/ljhyung">
             <img src="https://avatars.githubusercontent.com/u/97655625?v=4" width="140px" /> <br><br> 이주형 <br>(Back-End) </a> <br></td>
         <td height="140px" align="center"> <a href="https://github.com/GideokLee">
@@ -62,7 +62,9 @@
   
 ## 시스템 아키텍처
 ### 시스템 구성
-    <img src="./assets/System_Architecture.png" alt="Architecture" width = "400"/>
+
+<img src="./assets/System_Architecture.png" alt="Architecture" width = "750"/>
+
 ### CI/CD 배포 흐름도
   
 ## 주요 기능
@@ -70,3 +72,9 @@
 ## 프로젝트 기간
   
 ## 프로젝트 산출물
+- [와이어프레임](https://www.figma.com/file/TvetUR9WZYSJzDOtnD8qs8/%EC%85%80%EB%9F%AC%EB%B9%84?node-id=5%3A3)
+- [컨벤션 목록](https://www.notion.so/66fed91b5656473b93ef3e120bed1119)
+- [ERD](https://www.erdcloud.com/d/Dsw5aLs3sden8Kgsu)
+- 시연 시나리오 -
+- 발표 자료 -
+- 포팅 매뉴얼 -
