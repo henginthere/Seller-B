@@ -243,11 +243,11 @@
 
 - 메인 화면 및 로그인
 
-<img src="./assets/사이트 메인 상담사 로그인.gif" alt="" width = "800">
+<img src="./assets/사이트 메인 매니저 로그인.gif" alt="" width = "800">
 
 - 공지사항 작성
 
-<img title="" src="assets/3cf0638a2171092d18ed2eb57484386f2e474b2a.gif" alt="" width = "800">
+<img title="" src="매니저 공지사항 작성.gif" alt="" width = "800">
 
 - 공지사항 수정
 
@@ -257,11 +257,21 @@
 
 <img src="./assets/매니저 마이페이지.gif" alt="" width = "800">
 
-- 제품 등록
+- 제품 조회
 
-<img src="./assets/제품 등록.gif" alt="" width = "800">
+<img src="./assets/제품 조회.gif" alt="" width = "800">
 
+- 제품 상세
 
+<img src="./assets/제품 상세.gif" alt="" width = "800">
+
+- 상담사 로그인 및 공지사항
+
+<img src="./assets/상담사 로그인 및 공지사항.gif" alt="" width = "800">
+
+- 상담사 마이페이지
+
+<img src="./assets/상담사 마이페이지.gif" alt="" width = "800">
 
 
 
