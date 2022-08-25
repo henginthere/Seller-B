@@ -246,15 +246,15 @@
 
 - 메인 화면 및 로그인
 
-<img src="./assets/사이트 메인 매니저 로그인.gif" alt="" width = "800">
+<img src="./assets/메인화면+로그인.gif" alt="" width = "800">
 
 - 제품 조회
 
-<img src="./assets/제품 조회.gif" alt="" width = "800">
+<img src="./assets/제품관리.gif" alt="" width = "800">
 
 - 제품 상세
 
-<img src="./assets/제품 상세.gif" alt="" width = "800">
+<img src="./assets/제품상세.gif" alt="" width = "800">
 
 - 상담사 로그인 및 공지사항
 
