@@ -256,14 +256,6 @@
 
 <img src="./assets/제품상세.gif" alt="" width = "800">
 
-- 상담사 로그인 및 공지사항
-
-<img src="./assets/상담사 로그인 및 공지사항.gif" alt="" width = "800">
-
-- 상담사 마이페이지
-
-<img src="./assets/상담사 마이페이지.gif" alt="" width = "800">
-
 <div id="6"></div>
 
 ## :clock1: 프로젝트 기간
