@@ -60,7 +60,7 @@
 [![SellerB UCC](http://img.youtube.com/vi/_2xRYUEkumY/0.jpg)](https://youtu.be/_2xRYUEkumY?t=0s)
 
 <div id="3"></div>
-    
+
 ## :hammer: 기술 스택
 
 <details>
@@ -238,11 +238,38 @@
 <img src="./assets/CICD.jpg" alt="CI/CD" width = "800">
 
 <div id="5"></div>
-  
+
 ## :star: 주요 기능
+
+- 메인 화면 및 로그인
+
+<img src="./assets/사이트 메인 상담사 로그인.gif" alt="">
+
+- 공지사항 작성
+
+<img title="" src="assets/3cf0638a2171092d18ed2eb57484386f2e474b2a.gif" alt="">
+
+- 공지사항 수정
+
+<img src="./assets/매니저 공지사항 수정.gif">
+
+- 매니저 마이페이지
+
+<img src="./assets/매니저 마이페이지.gif" alt="">
+
+- 제품 등록
+
+<img src="./assets/제품 등록.gif" alt="">
+
+
+
+
+
 
 
 <div id="6"></div>
+
+
 
 ## :clock1: 프로젝트 기간
 
@@ -255,9 +282,10 @@
 <div id="7"></div>
 
 ## :clipboard: 프로젝트 산출물
+
 - [와이어프레임](https://www.figma.com/file/TvetUR9WZYSJzDOtnD8qs8/%EC%85%80%EB%9F%AC%EB%B9%84?node-id=5%3A3)
 - [컨벤션 목록](https://www.notion.so/66fed91b5656473b93ef3e120bed1119)
 - [ERD](https://www.erdcloud.com/d/Dsw5aLs3sden8Kgsu)
-- 시연 시나리오 -
+- [시연 시나리오](./exec/SellerB 시연 시나리오.pdf)
 - 발표 자료 -
-- 포팅 매뉴얼 -
+- [포팅 매뉴얼](./exec/포팅매뉴얼 및 외부 서비스 정보.pdf)
