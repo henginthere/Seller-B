@@ -243,23 +243,23 @@
 
 - 메인 화면 및 로그인
 
-<img src="./assets/사이트 메인 상담사 로그인.gif" alt="">
+<img src="./assets/사이트 메인 상담사 로그인.gif" alt="" width = "800">
 
 - 공지사항 작성
 
-<img title="" src="assets/3cf0638a2171092d18ed2eb57484386f2e474b2a.gif" alt="">
+<img title="" src="assets/3cf0638a2171092d18ed2eb57484386f2e474b2a.gif" alt="" width = "800">
 
 - 공지사항 수정
 
-<img src="./assets/매니저 공지사항 수정.gif">
+<img src="./assets/매니저 공지사항 수정.gif" width = "800">
 
 - 매니저 마이페이지
 
-<img src="./assets/매니저 마이페이지.gif" alt="">
+<img src="./assets/매니저 마이페이지.gif" alt="" width = "800">
 
 - 제품 등록
 
-<img src="./assets/제품 등록.gif" alt="">
+<img src="./assets/제품 등록.gif" alt="" width = "800">
 
 
 
