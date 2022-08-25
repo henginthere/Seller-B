@@ -2,7 +2,7 @@
   <br />
   <img src="./assets/SellerB_logo.png" alt="SellerB" width = "250"/>
   <br />
-  <h1>비대면 제품 상담 서비스 SellerB</h1>
+  <h1>비대면 전자제품 상담 서비스 SellerB</h1>
   <br />
 </div>
 
@@ -16,7 +16,9 @@
 6. [프로젝트 기간](#6)
 7. [프로젝트 산출물](#7)
 
-<div id="1"></div>
+<div id="1">
+<br><br>
+</div>
 
 ## :sparkling_heart: 팀원 소개
 
@@ -34,31 +36,56 @@
             <img src="https://avatars.githubusercontent.com/u/76939190?v=4" width="140px" /> <br><br> 이기덕 <br>(AOS) </a> <br></td>
     </tr>
     <tr>
-        <td align="center">UI/UX
-        <td align="center">UI/UX
-        <td align="center">REST API
-        <td align="center">REST API
-        <td align="center">Android
+        <td align="center"> 👑팀장 <br> UI/UX <br> 주요 화면 UI구현 <br> API 연결
+        <td align="center">UI/UX <br> WebRTC <br> API연결 
+        <td align="center">REST API <br> JWT <br> 서버관리 및 배포 <br> UCC 제작 
+        <td align="center">REST API <br> WebRTC <br> 서버관리 및 배포 
+        <td align="center">Android <br> 앱개발 <br> WebRTC <br> 인프라 구축
     </tr>
 </table>
 
-<div id="2"></div>
+<div id="2">
+<br><br>
+</div>
 
 ## :bulb: 서비스 소개
 
-### SellerB는 비대면 화상 일대일 전자제품 맞춤 상담 서비스입니다.
+### SellerB는 비대면 화상으로 일대일 전자제품 맞춤 상담 서비스를 제공합니다.
 
-- 고객은 QR코드 스캔으로 해당 제품 상담을 신청할 수 있습니다.
-- 매장 내 직원이 모두 상담중이어도 차례를 기다리지 않아도 됩니다.
-- 상담원은 어디서나 상담이 가능하기에 하나의 매장에 소속되지 않아도 됩니다.
-- 대면 상담이 부담스러운 고객은 바로 QR코드 스캔을 하여 비대면 상담을 할 수 있습니다.
+> 전자제품을 판매하는 기업들은 가까이에서 소비자들을 만나기 위해 전국에 오프라인 매장을 운영하고 있습니다. 
+하지만 고객이 많이 몰리는 매장에서는 인력 부족 현상, 반대 상황의 매장에서는 인력이 낭비되는 현상이 발생합니다. 
+ 가까이에서 소비자들을 만나지만, 고객들에게 아직 제품의 정보는 멀기만 합니다. 고객이 사전지식 없이 방문한다면, 매장의 직원이 모두 상담중이라면, 대면 상담이 부담스럽다면? 
+>
+> **💡 저희는 이런 문제상황들을 인식하고, 기업과 고객 모두에게 솔루션을 제공하기 위해 SellerB를 기획하였습니다.**
+>
 
+<div id="3">
+<br><br>
+</div>
+
+## ✨ SellerB와 함께라면
+
+✔️ 고객은 QR코드 스캔으로 간단하게 궁금한 제품에 대해 상담을 신청할 수 있습니다.
+
+✔️ 매장 내 직원이 모두 상담중이라도, 기약없이 기다리지 않아도 됩니다. 
+
+✔️ 상담원은 어디서나 근무 가능! 매장에 구애받지 않고 일할 수 있습니다. 
+
+✔️ 대면 상담이 부담스럽다면 바로 비대면 상담을 신청할 수 있습니다.
+
+<div id="4">
+<br><br>
+</div>
 
 ### :clapper: SellerB 소개 영상
 
 [![SellerB UCC](http://img.youtube.com/vi/_2xRYUEkumY/0.jpg)](https://youtu.be/_2xRYUEkumY?t=0s)
 
-<div id="3"></div>
+
+<div id="5">
+<br><br>
+</div>
+
 
 ## :hammer: 기술 스택
 
@@ -224,7 +251,9 @@
 - [Front-End](FE)
 - [Android](AOS)
 
-<div id="4"></div>
+<div id="6">
+<br><br>
+</div>
 
 ## :computer: 시스템 아키텍처
 
@@ -236,35 +265,31 @@
 
 <img src="./assets/CICD.jpg" alt="CI/CD" width = "800">
 
-<div id="5"></div>
+<div id="7">
+<br><br>
+</div>
 
 ## :star: 주요 기능
 
-- 관리자, 상담사 전체회의
+📍 관리자는 상담사들과 전체 회의를 진행하면서 소통할 수 있습니다. 
 
 <img src="./assets/전체회의최신본.gif" alt="" width = "800">
 
-- 메인 화면 및 로그인
+📍 메인 화면에서 전환 후, 괸리자 혹은 상담사가 로그인합니다. 
 
-<img src="./assets/사이트 메인 매니저 로그인.gif" alt="" width = "800">
+<img src="./assets/메인화면+로그인.gif" alt="" width = "800">
 
-- 제품 조회
+📍 등록해둔 제품 전체 목록을 조회하고, 제품군 분류 및 검색어로도 조회가 가능합니다.
 
-<img src="./assets/제품 조회.gif" alt="" width = "800">
+<img src="./assets/제품관리.gif" alt="" width = "800">
 
-- 제품 상세
+📍 제품 상세 정보를 조회하는 페이지입니다. 
 
-<img src="./assets/제품 상세.gif" alt="" width = "800">
+<img src="./assets/제품상세.gif" alt="" width = "800">
 
-- 상담사 로그인 및 공지사항
-
-<img src="./assets/상담사 로그인 및 공지사항.gif" alt="" width = "800">
-
-- 상담사 마이페이지
-
-<img src="./assets/상담사 마이페이지.gif" alt="" width = "800">
-
-<div id="6"></div>
+<div id="8">
+<br><br>
+</div>
 
 ## :clock1: 프로젝트 기간
 
@@ -274,7 +299,9 @@
 - 프로젝트 구현 : 22.07.25 ~ 22.08.15
 - 버그 수정 및 산출물 정리 : 22.08.15 ~ 22.08.18
 
-<div id="7"></div>
+<div id="9">
+<br>
+</div>
 
 ## :clipboard: 프로젝트 산출물
 
