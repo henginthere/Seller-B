@@ -240,21 +240,13 @@
 
 ## :star: 주요 기능
 
+- 관리자, 상담사 전체회의
+
+<img src="./assets/전체회의최신본.gif" alt="" width = "800">
+
 - 메인 화면 및 로그인
 
 <img src="./assets/사이트 메인 매니저 로그인.gif" alt="" width = "800">
-
-- 공지사항 작성
-
-<img title="" src="./assets/매니저 공지사항 작성.gif" alt="" width = "800">
-
-- 공지사항 수정
-
-<img src="./assets/매니저 공지사항 수정.gif" width = "800">
-
-- 매니저 마이페이지
-
-<img src="./assets/매니저 마이페이지.gif" alt="" width = "800">
 
 - 제품 조회
 
@@ -272,13 +264,7 @@
 
 <img src="./assets/상담사 마이페이지.gif" alt="" width = "800">
 
-
-
-
-
 <div id="6"></div>
-
-
 
 ## :clock1: 프로젝트 기간
 
