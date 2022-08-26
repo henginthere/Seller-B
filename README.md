@@ -326,5 +326,5 @@
 - [컨벤션 목록](https://www.notion.so/66fed91b5656473b93ef3e120bed1119)
 - [ERD](https://www.erdcloud.com/d/Dsw5aLs3sden8Kgsu)
 - [시연 시나리오](./exec/SellerB%20%EC%8B%9C%EC%97%B0%20%EC%8B%9C%EB%82%98%EB%A6%AC%EC%98%A4.pdf)
-- 발표 자료 -
+- [발표 자료](https://github.com/henginthere/Seller-B/blob/1da504ce2b8b09a79a285324feb0e8aa9a531a68/assets/SellerB%EC%B5%9C%EC%A2%85%EB%B0%9C%ED%91%9C_%EC%B5%9C%EC%A2%85_PDF.pdf)
 - [포팅 매뉴얼](./exec/%ED%8F%AC%ED%8C%85%EB%A7%A4%EB%89%B4%EC%96%BC%20%EB%B0%8F%20%EC%99%B8%EB%B6%80%20%EC%84%9C%EB%B9%84%EC%8A%A4%20%EC%A0%95%EB%B3%B4.pdf)
